@@ -66,7 +66,7 @@
             <div class="col-md-7 col-md-offset-5  col-sm-3 col-sm-offset-1  col-xs-12">
                 <div class="header-half header-social">
                 		<ul class="list-inline header-loginbar">
-                			<li><a href="#">로그인</a></li>
+                			<li><a href="user/login">로그인</a></li>
                 			<li><a href="#">회원가입</a></li>
                 			<li><a href="#">고객센터</a></li>
                 		</ul>
@@ -84,6 +84,7 @@
     </div>
 </div>        
 <!--End top header -->
+
 <nav class="navbar navbar-default ">
  <div class="container">
      <!-- Brand and toggle get grouped for better mobile display -->
