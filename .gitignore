@@ -1,4 +1,5 @@
 /Undefined.war
 /.settings/
 /.project/
-/.classpath/
+/target/
+/.classpath
