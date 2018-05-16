@@ -66,7 +66,7 @@
             <div class="col-md-7 col-md-offset-5  col-sm-3 col-sm-offset-1  col-xs-12">
                 <div class="header-half header-social">
                 		<ul class="list-inline header-loginbar">
-                			<li><a href="user/login">로그인</a></li>
+                			<li><a href="/user/login">로그인</a></li>
                 			<li><a href="#">회원가입</a></li>
                 			<li><a href="#">고객센터</a></li>
                 		</ul>
@@ -105,10 +105,27 @@
              <button class="navbar-btn nav-button wow fadeInRight" onclick=" window.open('submit-property.html')" data-wow-delay="0.48s">Submit</button>
          </div> -->
          <ul class="main-nav nav navbar-nav navbar-right">
-             <li class="dropdown ymm-sw " data-wow-delay="0.1s"><a class="" href="index.html">HOME</a></li>
+             <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="index.html">HOME</a></li>
              <li class="wow fadeInDown" data-wow-delay="0.2s"><a class="" href="properties.html">경매</a></li>
-             <li class="wow fadeInDown" data-wow-delay="0.3s"><a class="" href="property.html">업체정보</a></li>
-             <li class="dropdown yamm-fw" data-wow-delay="0.4s"><a class="" href="#">자유게시판</a></li>
+             <li class="dropdown ymm-sw " data-wow-delay="0.3s">
+               <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">업체정보<b class="caret"></b></a>
+               <ul class="dropdown-menu navbar-nav">
+                   <li>
+                       <a href="/company/listmap">업체 찾기</a>
+                   </li>
+                   <li>
+                       <a href="index-3.html">Home Style 3</a>
+                   </li>
+                   <li>
+                       <a href="index-4.html">Home Style 4</a>
+                   </li>
+                   <li>
+                       <a href="index-5.html">Home Style 5</a>
+                   </li>
+               
+               </ul>
+             </li>
+             <li class="wow fadeInDown" data-wow-delay="0.4s"><a class="" href="property.html">업체정보</a></li>
              <li class="wow fadeInDown" data-wow-delay="0.5s"><a href="contact.html">공지사항</a></li>
          </ul>
      </div><!-- /.navbar-collapse -->
