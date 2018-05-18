@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=utf-8"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
 
 <!DOCTYPE html>
 <html>
@@ -7,6 +7,8 @@
 <title></title>
 </head>
 <body>
+<%@include file="../include/top.jsp" %>
 입찰 중인 경매 리스트 뿌려주는 페이지입니당.
+<%@include file="../include/bottom.jsp" %>
 </body>
 </html>
