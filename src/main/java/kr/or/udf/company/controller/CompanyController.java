@@ -10,6 +10,16 @@ public class CompanyController {
 	
 	@RequestMapping(value="/listmap", method=RequestMethod.GET)
 	public void listmapGET() {
+	
+	}
+	
+	@RequestMapping(value="/detail", method=RequestMethod.GET)
+	public void detailGET() {
+
+	}
+	
+	@RequestMapping(value="/compare", method=RequestMethod.GET)
+	public void compareGET() {
 		
 	}
 
