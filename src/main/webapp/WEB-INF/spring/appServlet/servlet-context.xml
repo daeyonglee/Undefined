@@ -45,22 +45,14 @@
 	<aop:aspectj-autoproxy />
 	
 	<!-- interceptor -->
-	<!-- <beans:bean id="loginInterceptor" class="kr.or.kosta.springmvc.interceptor.LoginInterceptor"></beans:bean>
-	<beans:bean id="authInterceptor" class="kr.or.kosta.springmvc.interceptor.AuthInterceptor"></beans:bean>
+	<beans:bean id="loginInterceptor" class="kr.co.udf.interceptor.LoginInterceptor"></beans:bean>
 	
 	<interceptors>
 		<interceptor>
-			<mapping path="/user/loginPost"/>
+			<mapping path="/user/login"/>
 			<beans:ref bean="loginInterceptor" />
 		</interceptor>
-		
-		<interceptor>
-			<mapping path="/sboard/create"/>
-			<mapping path="/sboard/update"/>
-			<mapping path="/sboard/delete"/>
-			<beans:ref bean="authInterceptor" />
-		</interceptor>
-	</interceptors> -->
+	</interceptors>
 	
 	<context:component-scan base-package="kr.co.udf" />
 </beans:beans>

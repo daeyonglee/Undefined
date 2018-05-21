@@ -22,15 +22,22 @@
 					<div class="box-for overflow">                         
 						<div class="col-md-12 col-xs-12 login-blocks">
 							<h2>Login : </h2> 
-							<form action="" method="post">
+							<form action="/user/login" method="post">
 								<div class="form-group">
 									<label for="email">Email</label>
-									<input type="text" class="form-control" id="email">
+									<input type="text" name="email" class="form-control" id="email">
 								</div>
 								<div class="form-group">
-									<label for="password">Password</label>
-									<input type="password" class="form-control" id="password">
+									<label for="pw">Password</label>
+									<input type="password" name="pw" class="form-control" id="pw">
 								</div>
+                <div class="row">
+                  <div class="checkbox icheck">
+                    <label>
+                      <input type="checkbox" name="useCookie"> 자동 로그인
+                    </label>
+                  </div>                        
+                </div>
 								<div class="text-center">
 									<button type="submit" class="btn btn-default btn-login"> Log in</button>
 								</div>
@@ -70,19 +77,19 @@
 				console.log(naverLogin);
 				
 				naverLogin.getLoginStatus(function (status) {
-				if (status) {
-					var email = naverLogin.user.getEmail(); 
-					var nickName = naverLogin.user.getNickName(); 
-					var name = naverLogin.user.getName(); 
-					var profileImage = naverLogin.user.getProfileImage(); 
-					var birthday = naverLogin.user.getBirthday(); 
-					var uniqId = naverLogin.user.getId(); 
-					var age = naverLogin.user.getAge(); 
-				} else {
-					console.log("AccessToken이 올바르지 않습니다.");
-				}
-			});
- 		});
+  				if (status) {
+  					var email = naverLogin.user.getEmail(); 
+  					var nickName = naverLogin.user.getNickName(); 
+  					var name = naverLogin.user.getName(); 
+  					var profileImage = naverLogin.user.getProfileImage(); 
+  					var birthday = naverLogin.user.getBirthday(); 
+  					var uniqId = naverLogin.user.getId(); 
+  					var age = naverLogin.user.getAge(); 
+  				} else {
+  					console.log("AccessToken이 올바르지 않습니다.");
+  				}
+				});
+ 			});
   		
   		// 카카오 로그인
 	  	$('#kakao').on('click', function(e){
@@ -105,6 +112,13 @@
 	 	        }
 	 	      });
 	  	});
+  		
+  		// icheck
+	  	$('input').iCheck({
+        checkboxClass: 'icheckbox_square-blue',
+        radioClass: 'iradio_square-blue',
+        increaseArea: '20%' // optional
+      });
   	});
   </script>
   
