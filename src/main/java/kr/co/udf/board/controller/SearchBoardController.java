@@ -1,4 +1,4 @@
-package kr.or.udf.board.controller;
+package kr.co.udf.board.controller;
 
 
 import org.slf4j.Logger;

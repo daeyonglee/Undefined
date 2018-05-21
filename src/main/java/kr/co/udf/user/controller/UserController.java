@@ -1,4 +1,4 @@
-package kr.or.udf.user.controller;
+package kr.co.udf.user.controller;
 
 import javax.inject.Inject;
 

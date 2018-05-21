@@ -1,4 +1,4 @@
-package kr.or.udf.recommend.controller;
+package kr.co.udf.recommend.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

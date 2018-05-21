@@ -1,4 +1,4 @@
-package kr.or.udf.mysql;
+package kr.co.udf.mysql;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;

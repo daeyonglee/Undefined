@@ -105,7 +105,7 @@
              <button class="navbar-btn nav-button wow fadeInRight" onclick=" window.open('submit-property.html')" data-wow-delay="0.48s">Submit</button>
          </div> -->
          <ul class="main-nav nav navbar-nav navbar-right">
-             <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="index.html">HOME</a></li>
+             <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="/index">HOME</a></li>
              <li class="dropdown ymm-sw " data-wow-delay="0.2s">
                <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">역경매<b class="caret"></b></a>
                <ul class="dropdown-menu navbar-nav">

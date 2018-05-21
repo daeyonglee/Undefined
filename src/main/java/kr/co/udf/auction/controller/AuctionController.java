@@ -1,4 +1,4 @@
-package kr.or.udf.auction.controller;
+package kr.co.udf.auction.controller;
 
 
 import org.springframework.stereotype.Controller;

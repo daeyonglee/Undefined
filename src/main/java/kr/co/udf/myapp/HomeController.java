@@ -1,4 +1,4 @@
-package kr.or.udf.myapp;
+package kr.co.udf.myapp;
 
 import java.text.DateFormat;
 import java.util.Date;
