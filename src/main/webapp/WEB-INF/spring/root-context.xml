@@ -6,33 +6,14 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-	
-	<!-- DB정보 암호화를 위한 설정 -->
-	<bean id="encryptorConfig" class="org.jasypt.encryption.pbe.config.EnvironmentStringPBEConfig">
-	    <property name="algorithm" value="PBEWithMD5AndDES" />
-	    <property name="password" value="udf" />
-	</bean>
-	 
-	<bean id="encryptor" class="org.jasypt.encryption.pbe.StandardPBEStringEncryptor">
-	    <property name="config" ref="encryptorConfig" />
-	</bean>
-	 
-	<bean class="org.jasypt.spring.properties.EncryptablePropertyPlaceholderConfigurer">
-	    <constructor-arg ref="encryptor" />
-	    <property name="locations">
-	        <list>
-	            <value>classpath:/config/jdbc.properties</value>
-	        </list>
-	    </property>
-	</bean>
  
  	<!-- Spring Container에 DataSource 설정 -->
  	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="${jdbc.driverClass}" />
-        <property name="url" value="${jdbc.url}" />
-        <property name="username" value="${jdbc.username}" />
-        <property name="password" value="${jdbc.password}" />
-    </bean>	
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"></property>
+		<property name="username" value="hr"></property>
+		<property name="password" value="1234"></property>
+	</bean>
 	
 	<!-- MyBatis SqlSessionFactory 설정 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">

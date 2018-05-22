@@ -1,0 +1,22 @@
+.btn-main-start {
+	width:100%;
+	background-color: #FF5A5F;
+	opacity:1;
+	font-size: 20px;
+	-webkit-transition: all 0.4s ease;
+}
+.btn-main-start:hover {
+	background-color: #FDC600;
+}
+.slider-content-left {
+	display:inline-block;
+	width:40%;
+	height:50%;
+	float:left;
+}
+.slider-content-right {
+	display:inline-block;
+	width:60%;
+	height:50%;
+	float:right;
+}

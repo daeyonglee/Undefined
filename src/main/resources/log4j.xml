@@ -22,7 +22,7 @@
 	</appender>
 	
 	<!-- 개발 기간중 패키지별 로그 설정 -->
-	<logger name="kr.or.udf"><!-- 하위 패키지까지 적용 -->
+	<logger name="kr.co.udf"><!-- 하위 패키지까지 적용 -->
 		<level value="debug" />
 	</logger>
 	
