@@ -3,25 +3,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="css/bootstrap.min.css" rel="stylesheet">
- <style>
-  table, th, td {
-    border: 1px solid #bcbcbc;
-  }
-  table {
-    width: 400px;
-    height: 200px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-</style>
 <title>역경매 메인 페이지</title>
 </head>
 <body>
+
   <%@include file="../include/top.jsp"%>
-
-
   <!-- Count area -->
   <div class="count-area">
     <div class="container">
@@ -77,43 +63,43 @@
   <div class="container">
     <h4 align="center">스드메 역경매 입찰 현황</h4>
   </div>
-  <div class="container" >
-    <table border="1">
-    <tr>
-    <td>입찰중</td>
-    <td>일종찬</td>
-    <td>서울특별시 금천구</td>
-    <td>D-21일</td>
-    <td>접수중</td>
-    </tr>
-    <tr>
-    <td>입찰중</td>
-    <td>일종찬</td>
-    <td>서울특별시 금천구</td>
-    <td>D-21일</td>
-    <td>접수중</td>
-    </tr>
-    <tr>
-    <td>입찰중</td>
-    <td>일종찬</td>
-    <td>서울특별시 금천구</td>
-    <td>D-21일</td>
-    <td>접수중</td>
-    </tr>
-    <tr>
-    <td>입찰중</td>
-    <td>일종찬</td>
-    <td>서울특별시 금천구</td>
-    <td>D-21일</td>
-    <td>접수중</td>
-    </tr>
-    <tr>
-    <td>입찰중</td>
-    <td>일종찬</td>
-    <td>서울특별시 금천구</td>
-    <td>D-21일</td>
-    <td>접수중</td>
-    </tr>
+  <div class="container">
+    <table class="table">
+      <tr class="success">
+        <td>입찰중</td>
+        <td>일종찬</td>
+        <td>서울특별시 금천구</td>
+        <td>D-21일</td>
+        <td>접수중</td>
+      </tr>
+      <tr class="danger">
+        <td>입찰중</td>
+        <td>일종찬</td>
+        <td>서울특별시 금천구</td>
+        <td>D-21일</td>
+        <td>접수중</td>
+      </tr>
+      <tr class="info">
+        <td>입찰중</td>
+        <td>일종찬</td>
+        <td>서울특별시 금천구</td>
+        <td>D-21일</td>
+        <td>접수중</td>
+      </tr>
+      <tr class="warning">
+        <td>입찰중</td>
+        <td>일종찬</td>
+        <td>서울특별시 금천구</td>
+        <td>D-21일</td>
+        <td>접수중</td>
+      </tr>
+      <tr class="active">
+        <td>입찰중</td>
+        <td>일종찬</td>
+        <td>서울특별시 금천구</td>
+        <td>D-21일</td>
+        <td>접수중</td>
+      </tr>
     </table>
 
   </div>
