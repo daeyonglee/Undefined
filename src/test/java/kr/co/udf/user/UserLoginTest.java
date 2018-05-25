@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import kr.co.udf.user.dao.MybatisUserDao;
 import kr.co.udf.user.dao.UserDao;
+import kr.co.udf.user.domain.Login;
 import kr.co.udf.user.domain.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -24,7 +25,7 @@ public class UserLoginTest {
 	
 	@Test
 	public void test() {
-		dao.login(new User(null, "admin@undefined.com", "q1w2e3r4", null, null, 0, 0, null, null));
+		dao.login(new Login("admin@undefined.com",  "q1w2e3r4", false));
 	}
 
 }

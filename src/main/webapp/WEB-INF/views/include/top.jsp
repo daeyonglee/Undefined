@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -66,6 +67,7 @@
             <div class="col-md-7 col-md-offset-5  col-sm-3 col-sm-offset-1  col-xs-12">
                 <div class="header-half header-social">
                 		<ul class="list-inline header-loginbar">
+                      <!-- 로그인 여부에 따라 li 변경 -->
                 			<li><a href="/user/login">로그인</a></li>
                 			<li><a href="#">회원가입</a></li>
                 			<li><a href="#">고객센터</a></li>

@@ -1,8 +1,10 @@
 package kr.co.udf.user.domain;
 
+import java.math.BigDecimal;
+
 public class User {
 
-	private String no;
+	private BigDecimal no;
 	private String email;
 	private String pw;
 	private String birthday;
@@ -14,7 +16,7 @@ public class User {
 	
 	public User() {}
 
-	public User(String no, String email, String pw, String birthday, String addr, Integer tel, Integer point,
+	public User(BigDecimal no, String email, String pw, String birthday, String addr, Integer tel, Integer point,
 			String regdate, String updatedate) {
 		super();
 		this.no = no;
@@ -28,11 +30,11 @@ public class User {
 		this.updatedate = updatedate;
 	}
 
-	public String getNo() {
+	public BigDecimal getNo() {
 		return no;
 	}
 
-	public void setNo(String no) {
+	public void setNo(BigDecimal no) {
 		this.no = no;
 	}
 
@@ -102,7 +104,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "Users [no=" + no + ", email=" + email + ", pw=" + pw + ", birthday=" + birthday + ", addr=" + addr
+		return "User [no=" + no + ", email=" + email + ", pw=" + pw + ", birthday=" + birthday + ", addr=" + addr
 				+ ", tel=" + tel + ", point=" + point + ", regdate=" + regdate + ", updatedate=" + updatedate + "]";
 	}
 }
