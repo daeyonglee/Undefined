@@ -1,6 +1,7 @@
 package kr.co.udf.auction.dao;
 
 import kr.co.udf.auction.domain.Auction;
+import kr.co.udf.auction.domain.AuctionCount;
 
 public interface AuctionDao {
 	
@@ -11,5 +12,7 @@ public interface AuctionDao {
 	public void update(Auction auction) throws Exception;
 	
 	public void delete(int no) throws Exception;
+	
+	public AuctionCount count();
 	
 }
