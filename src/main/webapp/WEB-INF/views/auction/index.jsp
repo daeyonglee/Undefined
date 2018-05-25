@@ -10,7 +10,7 @@
   <%@include file="../include/top.jsp"%>
   <!-- Count area -->
   <div class="count-area">
-    <div class="container">
+    <div class="container"> 
       <div class="row">
         <div
           class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
@@ -40,7 +40,7 @@
                 </div>
                 <div class="chart" data-percent="12000">
                   <h2 class="percent" id="counter1">0</h2>
-                  <h5>스드메 제휴 업체</h5>
+                  <h5>스드메 제휴 업체</h5> 
                 </div>
               </div>
             </div>
@@ -61,10 +61,49 @@
     </div>
   </div>
   <div class="container">
-    <h4 align="center">스드메 역경매 입찰 현황</h4>
+    <h4 align="center">스드메 역경매 입찰 현황</h4> <select><option>스튜디오</option><option>드레스</option><option>메이크업</option></select>
   </div>
   <div class="container">
-    <table class="table">
+    <table class="table" style="width: 40%; display: inline-block;">
+    <tr class = "active"><td colspan = "5" align = "center"><a href = "bid">입찰중 역경매</a></td></tr>
+      <tr class="success">
+        <td>입찰중</td>
+        <td>일종찬</td>
+        <td>서울특별시 금천구</td>
+        <td>D-21일</td>
+        <td>접수중</td>
+      </tr>
+      <tr class="danger">
+        <td>입찰중</td>
+        <td>일종찬</td>
+        <td>서울특별시 금천구</td>
+        <td>D-21일</td>
+        <td>접수중</td>
+      </tr>
+      <tr class="info">
+        <td>입찰중</td>
+        <td>일종찬</td>
+        <td>서울특별시 금천구</td>
+        <td>D-21일</td>
+        <td>접수중</td>
+      </tr>
+      <tr class="warning">
+        <td>입찰중</td>
+        <td>일종찬</td>
+        <td>서울특별시 금천구</td>
+        <td>D-21일</td>
+        <td>접수중</td>
+      </tr>
+      <tr class="active">
+        <td>입찰중</td>
+        <td>일종찬</td>
+        <td>서울특별시 금천구</td>
+        <td>D-21일</td>
+        <td>접수중</td>
+      </tr>
+    </table>
+    <table class="table" style="width: 40%; display: inline-block;">
+    <tr class = "active"><td colspan = "5" align = "center"><a href = "bid">낙찰된 역경매</a></td></tr>
       <tr class="success">
         <td>입찰중</td>
         <td>일종찬</td>
