@@ -72,7 +72,18 @@ td, th {
                     <th style="width: 100px">입찰마감일</th>
                     <th style="width: 200px">제출된 입찰서</th>
                   </tr>
-                  <tr>
+                  
+                  <c:forEach items="${bid}" var="apply">
+                   <tr>
+                    <td>${apply.regdate }</td>
+                    <td>${apply.day }</td>
+                    <td>조형팔</td>
+                    <td>${apply.loc }</td>
+                    <td>2018/05/23</td>
+                    <td>미공개</td>
+                   </tr>
+                  </c:forEach>
+<!--                   <tr>
                     <td>2018-05-14</td>
                     <td>2019-05-14</td>
                     <td>조형팔</td>
@@ -111,7 +122,7 @@ td, th {
                     <td>경기도 의정부시</td>
                     <td>2018-06-05</td>
                     <td>1건</td>
-                  </tr>
+                  </tr> -->
 
                 </table>
               </div>

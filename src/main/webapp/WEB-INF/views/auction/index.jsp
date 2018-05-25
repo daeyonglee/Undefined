@@ -10,7 +10,7 @@
   <%@include file="../include/top.jsp"%>
   <!-- Count area -->
   <div class="count-area">
-    <div class="container"> 
+    <div class="container">
       <div class="row">
         <div
           class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
@@ -64,44 +64,7 @@
     <h4 align="center">스드메 역경매 입찰 현황</h4>
   </div>
   <div class="container">
-    <table class="table" style="width: 40%; display: inline-block;">
-      <tr class="success">
-        <td>입찰중</td>
-        <td>일종찬</td>
-        <td>서울특별시 금천구</td>
-        <td>D-21일</td>
-        <td>접수중</td>
-      </tr>
-      <tr class="danger">
-        <td>입찰중</td>
-        <td>일종찬</td>
-        <td>서울특별시 금천구</td>
-        <td>D-21일</td>
-        <td>접수중</td>
-      </tr>
-      <tr class="info">
-        <td>입찰중</td>
-        <td>일종찬</td>
-        <td>서울특별시 금천구</td>
-        <td>D-21일</td>
-        <td>접수중</td>
-      </tr>
-      <tr class="warning">
-        <td>입찰중</td>
-        <td>일종찬</td>
-        <td>서울특별시 금천구</td>
-        <td>D-21일</td>
-        <td>접수중</td>
-      </tr>
-      <tr class="active">
-        <td>입찰중</td>
-        <td>일종찬</td>
-        <td>서울특별시 금천구</td>
-        <td>D-21일</td>
-        <td>접수중</td>
-      </tr>
-    </table>
-    <table class="table" style="width: 40%; display: inline-block;">
+    <table class="table">
       <tr class="success">
         <td>입찰중</td>
         <td>일종찬</td>

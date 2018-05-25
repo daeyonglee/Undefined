@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.udf.auction.dao.MyBatisAuctionDao">
+
+<select id="listAll" resultType="Auction">
+SELECT daa_no           AS "no"
+     , user_no          AS "userNo"
+     , daa_loc          AS "loc"  
+     , SUBSTR(to_char(daa_date, 'YYYY-MM-DD HH24:MI'),0,10) AS "day"
+     , SUBSTR(to_char(daa_date, 'YYYY-MM-DD HH24:MI'),12,7) AS "time"
+     , daa_memo         AS "memo"
+     ,'dress'           AS "type"
+  FROM dress_auction_apply
+UNION
+SELECT maa_no           AS "no"
+     , user_no          AS "userNo"
+     , maa_loc          AS "loc"
+     , SUBSTR(to_char(maa_date, 'YYYY-MM-DD HH24:MI'),0,10) AS "day"
+     , SUBSTR(to_char(maa_date, 'YYYY-MM-DD HH24:MI'),12,7) AS "time"
+     , maa_memo         AS "memo"
+     ,'makeup'          AS "type"
+  FROM makeup_auction_apply
+UNION
+SELECT saa_no           AS "no"
+     , user_no          AS "userNo"
+     , saa_loc          AS "loc" 
+     , SUBSTR(to_char(saa_date, 'YYYY-MM-DD HH24:MI'),0,10) AS "day"
+     , SUBSTR(to_char(saa_date, 'YYYY-MM-DD HH24:MI'),12,7) AS "time"
+     , saa_memo         AS "memo"
+     , 'studio'         AS "type"
+  FROM studio_auction_apply
+</select>
+
+<insert id="create" parameterType="Auction">
+<choose>
+<when test="type == 'makeup'">
+INSERT INTO makeup_auction_apply 
+            (maa_no, 
+             user_no, 
+             maa_loc, 
+             maa_date, 
+             maa_memo, 
+             updatedate) 
+VALUES      (makeup_auction_apply_seq.NEXTVAL, 
+             #{userNo}, 
+             #{loc}, 
+             TO_DATE(#{date}, 'YYYY/MM/DD HH24:MI'), 
+             #{memo}, 
+             SYSDATE)
+</when>
+<when test="type == 'studio'">
+INSERT INTO studio_auction_apply 
+            (saa_no, 
+             user_no, 
+             saa_loc, 
+             saa_date, 
+             saa_memo, 
+             updatedate) 
+VALUES      (studio_auction_apply_seq.NEXTVAL, 
+             #{userNo}, 
+             #{loc}, 
+             TO_DATE(#{date}, 'YYYY/MM/DD HH24:MI'), 
+             #{memo}, 
+             SYSDATE)
+</when>
+<when test="type == 'dress'">              
+INSERT INTO dress_auction_apply 
+            (daa_no, 
+             user_no, 
+             daa_loc, 
+             daa_date, 
+             daa_memo, 
+             updatedate) 
+VALUES      (dress_auction_apply_seq.NEXTVAL, 
+             #{userNo}, 
+             #{loc}, 
+             TO_DATE(#{date}, 'YYYY/MM/DD HH24:MI'), 
+             #{memo}, 
+             SYSDATE) 
+</when>
+</choose>
+</insert>
+
+</mapper>

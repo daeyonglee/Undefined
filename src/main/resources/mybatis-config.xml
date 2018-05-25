@@ -5,4 +5,8 @@
 
 <configuration>
 
+	<typeAliases>
+		<typeAlias type="kr.co.udf.auction.domain.Auction" alias="Auction"/>
+	</typeAliases>
+
 </configuration>
