@@ -1,6 +1,8 @@
 package kr.co.udf.user.controller;
 
+import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashMap;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import kr.co.udf.user.domain.Login;
 import kr.co.udf.user.domain.User;
 import kr.co.udf.user.service.UserLoginService;
 
@@ -34,32 +37,43 @@ public class UserLoginController {
 	 * @param model 
 	 * @return
 	 */
-	@RequestMapping(value="login", method=RequestMethod.POST)
-	public void loginPOST(User user, @RequestParam("useCookie") boolean isUseCookie,
-			              HttpSession session, Model model) {
+	@RequestMapping(value="loginp", method=RequestMethod.POST)
+	public void loginPOST(Login login, HttpSession session, Model model) {
 		
 		logger.info("##### loginPOST start #####");
-		
+		logger.info(login);
 		// 회원 여부 확인
-		User isUser = loginService.login(user);
+		HashMap<String, Object> rMap = loginService.login(login);
 		
-		if (isUser == null) {
+		if (rMap == null || rMap.isEmpty()) {
 			return;
 		}
 		
-		model.addAttribute("user", isUser);
+		logger.info(rMap);
 		
-		if (isUseCookie) {
+		User user = new User();
+		
+		user.setEmail((String)rMap.get("EMAIL"));
+		user.setNo((BigDecimal)rMap.get("NO"));
+		user.setPw((String)rMap.get("PW"));
+		
+		model.addAttribute("user", user);
+		model.addAttribute("role", (String)rMap.get("ROLE"));
+		
+		if (login.isUseCookie()) {
+			
+			if (((String)rMap.get("ROLE")).equals("admin")) {
+				return;
+			}
 			
 			int amount = 60 * 60 * 24 * 7;
 			
 			Date sessionlimit = new Date(System.currentTimeMillis()+(1000*amount));
 			
-			loginService.keepLogin(isUser.getNo(), session.getId(), sessionlimit);
+			loginService.keepLogin(user.getNo(), session.getId(), sessionlimit, (String)rMap.get("ROLE"));
 		}
 		
 		logger.info("##### loginPOST end #####");
 		
 	} 
-	
 }

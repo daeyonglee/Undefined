@@ -22,7 +22,7 @@
 					<div class="box-for overflow">                         
 						<div class="col-md-12 col-xs-12 login-blocks">
 							<h2>Login : </h2> 
-							<form action="/user/login" method="post">
+							<form action="/user/loginp" method="post">
 								<div class="form-group">
 									<label for="email">Email</label>
 									<input type="text" name="email" class="form-control" id="email">

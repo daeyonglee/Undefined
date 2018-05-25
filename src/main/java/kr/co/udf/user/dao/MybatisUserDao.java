@@ -1,5 +1,6 @@
 package kr.co.udf.user.dao;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,6 +10,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import kr.co.udf.user.domain.Login;
 import kr.co.udf.user.domain.User;
 
 @Repository
@@ -20,16 +22,17 @@ public class MybatisUserDao implements UserDao {
 	private SqlSession sqlSession;
 	
 	@Override
-	public User login(User user) {
-		return sqlSession.selectOne(NAMESPACE+".login", user);
+	public HashMap<String, Object> login(Login login) {
+		return sqlSession.selectOne(NAMESPACE+".login", login);
 	}
 
 	@Override
-	public void keepLogin(String no, String sessionId, Date next) {
+	public void keepLogin(BigDecimal no, String sessionId, Date next, String role) {
 		Map<String, Object> paramMap = new HashMap<>();
 		paramMap.put("no", no);
 		paramMap.put("sessionId", sessionId);
 		paramMap.put("next", next);
+		paramMap.put("role", role);
 		
 		sqlSession.update(NAMESPACE+".keepLogin", paramMap);
 	}

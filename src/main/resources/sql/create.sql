@@ -1,11 +1,36 @@
 -- drop seq
+DROP SEQUENCE studio_interest_product_seq;
+DROP SEQUENCE makeup_auction_apply_seq;
+DROP SEQUENCE studio_interest_company_seq;
+DROP SEQUENCE makeup_interest_product_seq;
+DROP SEQUENCE makeup_product_seq;
+DROP SEQUENCE article_seq;
+DROP SEQUENCE dress_interest_product_seq;
+DROP SEQUENCE makeup_bid_seq;
+DROP SEQUENCE makeup_interest_company_seq;
+DROP SEQUENCE studio_auction_apply_seq;
 DROP SEQUENCE studio_company_seq;
 DROP SEQUENCE admin_seq;
 DROP SEQUENCE board_seq;
+DROP SEQUENCE dress_interest_company_seq;
 DROP SEQUENCE dress_company_seq;
 DROP SEQUENCE makeup_company_seq;
+DROP SEQUENCE dress_auction_apply_seq;
+DROP SEQUENCE dress_bid_seq;
+DROP SEQUENCE studio_product_seq;
+DROP SEQUENCE dress_product_seq;
+DROP SEQUENCE studio_bid_seq;
 DROP SEQUENCE users_seq;
 DROP SEQUENCE point_product_seq;
+DROP SEQUENCE point_use_hist_seq;
+DROP SEQUENCE point_add_hist_seq;
+DROP SEQUENCE question_hist_seq;
+DROP SEQUENCE makeup_cvst_list_seq;
+DROP SEQUENCE studio_cvst_list_seq;
+DROP SEQUENCE dress_cvst_list_seq;
+DROP SEQUENCE makeup_bid_product_list_seq;
+DROP SEQUENCE studio_bid_product_list_seq;
+DROP SEQUENCE dress_bid_product_list_seq;
 
 -- drop table
 DROP TABLE studio_interest_product CASCADE CONSTRAINTS;
@@ -37,15 +62,41 @@ DROP TABLE question_hist CASCADE CONSTRAINTS;
 DROP TABLE makeup_cvst_list CASCADE CONSTRAINTS;
 DROP TABLE studio_cvst_list CASCADE CONSTRAINTS;
 DROP TABLE dress_cvst_list CASCADE CONSTRAINTS;
+DROP TABLE dress_bid_product_list CASCADE CONSTRAINTS;
+DROP TABLE studio_bid_product_list CASCADE CONSTRAINTS;
+DROP TABLE makeup_bid_product_list CASCADE CONSTRAINTS;
 
 -- create seq
+CREATE SEQUENCE studio_interest_product_seq;
+CREATE SEQUENCE makeup_auction_apply_seq;
+CREATE SEQUENCE studio_interest_company_seq;
+CREATE SEQUENCE makeup_interest_product_seq;
+CREATE SEQUENCE makeup_product_seq;
+CREATE SEQUENCE article_seq;
+CREATE SEQUENCE dress_interest_product_seq;
+CREATE SEQUENCE makeup_bid_seq;
+CREATE SEQUENCE makeup_interest_company_seq;
+CREATE SEQUENCE studio_auction_apply_seq;
 CREATE SEQUENCE studio_company_seq;
 CREATE SEQUENCE admin_seq;
 CREATE SEQUENCE board_seq;
+CREATE SEQUENCE dress_interest_company_seq;
 CREATE SEQUENCE dress_company_seq;
 CREATE SEQUENCE makeup_company_seq;
+CREATE SEQUENCE dress_auction_apply_seq;
+CREATE SEQUENCE dress_bid_seq;
+CREATE SEQUENCE studio_product_seq;
+CREATE SEQUENCE dress_product_seq;
+CREATE SEQUENCE studio_bid_seq;
 CREATE SEQUENCE users_seq;
 CREATE SEQUENCE point_product_seq;
+CREATE SEQUENCE point_use_hist_seq;
+CREATE SEQUENCE point_add_hist_seq;
+CREATE SEQUENCE question_hist_seq;
+CREATE SEQUENCE makeup_cvst_list_seq;
+CREATE SEQUENCE studio_cvst_list_seq;
+CREATE SEQUENCE dress_cvst_list_seq;
+
 
 -- create table
 CREATE TABLE studio_interest_product (
@@ -372,6 +423,45 @@ dp_no number(10),
 regdate date DEFAULT sysdate NOT NULL,
 updatedate date DEFAULT sysdate NOT NULL,
 PRIMARY KEY (dcl_no, user_no, dc_no)
+);
+
+CREATE TABLE dress_bid_product_list (
+dbpl_no number(10) NOT NULL,
+db_no number(10) NOT NULL,
+user_no number(10) NOT NULL,
+daa_no number(10) NOT NULL,
+dc_no number(10) NOT NULL,
+dp_no number(10) NOT NULL,
+dbpl_discount number(3),
+dbpl_meet_date date,
+regdate date DEFAULT sysdate NOT NULL,
+updatedate date DEFAULT sysdate NOT NULL
+);
+
+CREATE TABLE studio_bid_product_list (
+sbpl_no number(10) NOT NULL,
+sb_no number(10) NOT NULL,
+saa_no number(10) NOT NULL,
+user_no number(10) NOT NULL,
+sc_no number(10) NOT NULL,
+sp_no number(10) NOT NULL,
+sbpl_discount number(3),
+sbpl_meet_date date,
+regdate date DEFAULT sysdate NOT NULL,
+updatedate date DEFAULT sysdate NOT NULL
+);
+
+CREATE TABLE makeup_bid_product_list (
+mbpl_no number(10) NOT NULL,
+mb_no number(10) NOT NULL,
+mc_no number(10) NOT NULL,
+maa_no number(10) NOT NULL,
+user_no number(10) NOT NULL,
+mp_no number(10) NOT NULL,
+mbpl_discount number(3),
+mbpl_meet_date date,
+regdate date DEFAULT sysdate NOT NULL,
+updatedate date DEFAULT sysdate NOT NULL
 );
 
 -- constraint
