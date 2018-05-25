@@ -556,7 +556,8 @@ CREATE TABLE users
   ( 
      user_no       NUMBER(10) NOT NULL, 
      user_email    VARCHAR2(50) NOT NULL, 
-     user_pw       VARCHAR2(20) NOT NULL, 
+     user_pw       VARCHAR2(20) NOT NULL,
+     user_nm       VARCHAR2(30) NOT NULL,
      user_birthday DATE NOT NULL, 
      user_addr     VARCHAR2(100) NOT NULL, 
      user_tel      NUMBER(20) NOT NULL, 
@@ -780,7 +781,7 @@ INSERT INTO ADMIN
              admin_pw) 
 VALUES      (admin_seq.NEXTVAL, 
              'admin@undefined.com', 
-             '愿�由ъ옄1', 
+             '관리자1', 
              'q1w2e3r4'); 
 
 INSERT INTO ADMIN 
@@ -790,7 +791,7 @@ INSERT INTO ADMIN
              admin_pw) 
 VALUES      (admin_seq.NEXTVAL, 
              'admin2@undefined.com', 
-             '愿�由ъ옄2', 
+             '관리자2', 
              '1234'); 
 
 INSERT INTO ADMIN 
@@ -800,7 +801,7 @@ INSERT INTO ADMIN
              admin_pw) 
 VALUES      (admin_seq.NEXTVAL, 
              'admin3@undefined.com', 
-             '愿�由ъ옄3', 
+             '관리자3', 
              '1q2w3e4r'); 
 
 SELECT * 
@@ -811,33 +812,36 @@ desc users;
 INSERT INTO users 
             (user_no, 
              user_email, 
-             user_pw, 
+             user_pw,
+             user_nm,
              user_birthday, 
              user_addr, 
              user_tel, 
              user_point) 
 VALUES      (users_seq.NEXTVAL, 
              'kosta@naver.com', 
-             '1234', 
+             '1234',
+             '임꺽정'
              TO_DATE('1990-01-11'), 
-             '�꽌�슱�듅蹂꾩떆 湲덉쿇援� 媛��궛�뵒吏��꽭1濡� 151 �씠�끂�뵆�젆�뒪 1李� 2痢�' 
-             , 
+             '경기도 성남시 분당구 판교역로 241번길 20 미래에셋 벤처타워 1층',
              07050395805, 
              0); 
 
 INSERT INTO users 
             (user_no, 
              user_email, 
-             user_pw, 
+             user_pw,
+             user_nm,
              user_birthday, 
              user_addr, 
              user_tel, 
              user_point) 
 VALUES      (users_seq.NEXTVAL, 
              'dleo200@naver.com', 
-             '1q2w3e4r', 
+             '1q2w3e4r',
+             '홍길동'
              TO_DATE('1990-01-11'), 
-             '寃쎄린�룄 怨좎뼇�떆 �뜒�뼇援� 愿��궛�룞', 
+             ' 경기도 성남시 분당구 정자동 불정로 6 NAVER 그린팩토리 1층', 
              01083768171, 
              0); 
 
@@ -850,13 +854,13 @@ INSERT INTO board
             (board_no, 
              board_nm) 
 VALUES      (board_seq.NEXTVAL, 
-             '怨듭��궗�빆'); 
+             '공지사항'); 
 
 INSERT INTO board 
             (board_no, 
              board_nm) 
 VALUES      (board_seq.NEXTVAL, 
-             '�옄�쑀寃뚯떆�뙋'); 
+             '자유게시판'); 
 
 SELECT * 
 FROM   board; 
