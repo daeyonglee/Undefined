@@ -821,7 +821,7 @@ INSERT INTO users
 VALUES      (users_seq.NEXTVAL, 
              'kosta@naver.com', 
              '1234',
-             '임꺽정'
+             '임꺽정',
              TO_DATE('1990-01-11'), 
              '경기도 성남시 분당구 판교역로 241번길 20 미래에셋 벤처타워 1층',
              07050395805, 
@@ -839,7 +839,7 @@ INSERT INTO users
 VALUES      (users_seq.NEXTVAL, 
              'dleo200@naver.com', 
              '1q2w3e4r',
-             '홍길동'
+             '홍길동',
              TO_DATE('1990-01-11'), 
              ' 경기도 성남시 분당구 정자동 불정로 6 NAVER 그린팩토리 1층', 
              01083768171, 
