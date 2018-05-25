@@ -195,23 +195,23 @@ CREATE SEQUENCE makeup_cvst_list_seq;
 
 -- create table 
 
--- @@¼ø¼­@@
--- ÀüÃ¼ »óÇ°
--- ÀüÃ¼ ¾÷Ã¼
--- °ü½É »óÇ°
--- °ü½É ¾÷Ã¼
--- °í°´ ¿ª°æ¸Å ½ÅÃ»
--- °í°´ ¿ª°æ¸Å¿¡ ´ëÇÑ ÀÔÂû ¾÷Ã¼
--- ÀÔÂû ¾÷Ã¼ÀÇ »óÇ° ¸ñ·Ï
--- °Ô½ÃÆÇ & °Ô½Ã¹°
--- È¸¿ø(ÀÏ¹Ý»ç¿ëÀÚ & °ü¸®ÀÚ)
--- Æ÷ÀÎÆ® °ü·Ã
--- ÂÊÁö Á¤º¸
+-- @@ìˆœì„œ@@
+-- ì „ì²´ ìƒí’ˆ
+-- ì „ì²´ ì—…ì²´
+-- ê´€ì‹¬ ìƒí’ˆ
+-- ê´€ì‹¬ ì—…ì²´
+-- ê³ ê° ì—­ê²½ë§¤ ì‹ ì²­
+-- ê³ ê° ì—­ê²½ë§¤ì— ëŒ€í•œ ìž…ì°° ì—…ì²´
+-- ìž…ì°° ì—…ì²´ì˜ ìƒí’ˆ ëª©ë¡
+-- ê²Œì‹œíŒ & ê²Œì‹œë¬¼
+-- íšŒì›(ì¼ë°˜ì‚¬ìš©ìž & ê´€ë¦¬ìž)
+-- í¬ì¸íŠ¸ ê´€ë ¨
+-- ìª½ì§€ ì •ë³´
 
 
 
--- ÀüÃ¼ »óÇ° 
--- ÀüÃ¼ »óÇ°(½ºÆ©µð¿À) 
+-- ì „ì²´ ìƒí’ˆ 
+-- ì „ì²´ ìƒí’ˆ(ìŠ¤íŠœë””ì˜¤) 
 CREATE TABLE studio_product 
   ( 
      sp_no         NUMBER(10) NOT NULL, 
@@ -224,9 +224,9 @@ CREATE TABLE studio_product
      regdate       DATE DEFAULT SYSDATE NOT NULL, 
      updatedate    DATE DEFAULT SYSDATE NOT NULL, 
      PRIMARY KEY (sp_no, sc_no) 
-  ); 
+  );
 
--- ÀüÃ¼ »óÇ°(µå·¹½º) 
+-- ì „ì²´ ìƒí’ˆ(ë“œë ˆìŠ¤) 
 CREATE TABLE dress_product 
   ( 
      dp_no      NUMBER(10) NOT NULL, 
@@ -239,7 +239,7 @@ CREATE TABLE dress_product
      PRIMARY KEY (dp_no, dc_no) 
   ); 
 
--- ÀüÃ¼ »óÇ°(¸ÞÀÌÅ©¾÷) 
+-- ì „ì²´ ìƒí’ˆ(ë©”ì´í¬ì—…) 
 CREATE TABLE makeup_product 
   ( 
      mp_no        NUMBER(10) NOT NULL, 
@@ -256,8 +256,8 @@ CREATE TABLE makeup_product
 
 
 
--- ÀüÃ¼ ¾÷Ã¼ 
--- ÀüÃ¼ ¾÷Ã¼(½ºÆ©µð¿À) 
+-- ì „ì²´ ì—…ì²´ 
+-- ì „ì²´ ì—…ì²´(ìŠ¤íŠœë””ì˜¤) 
 CREATE TABLE studio_company 
   ( 
      sc_no         NUMBER(10) NOT NULL, 
@@ -277,7 +277,7 @@ CREATE TABLE studio_company
      PRIMARY KEY (sc_no) 
   ); 
 
--- ÀüÃ¼ ¾÷Ã¼(µå·¹½º) 
+-- ì „ì²´ ì—…ì²´(ë“œë ˆìŠ¤) 
 CREATE TABLE dress_company 
   ( 
      dc_no         NUMBER(10) NOT NULL, 
@@ -297,7 +297,7 @@ CREATE TABLE dress_company
      PRIMARY KEY (dc_no) 
   ); 
 
--- ÀüÃ¼ ¾÷Ã¼(¸ÞÀÌÅ©¾÷) 
+-- ì „ì²´ ì—…ì²´(ë©”ì´í¬ì—…) 
 CREATE TABLE makeup_company 
   ( 
      mc_no         NUMBER(10) NOT NULL, 
@@ -319,8 +319,8 @@ CREATE TABLE makeup_company
 
 
 
--- °ü½É»óÇ° 
--- °ü½É »óÇ°(½ºÆ©µð¿À) 
+-- ê´€ì‹¬ìƒí’ˆ 
+-- ê´€ì‹¬ ìƒí’ˆ(ìŠ¤íŠœë””ì˜¤) 
 CREATE TABLE studio_interest_product 
   ( 
      sip_no     NUMBER(10) NOT NULL, 
@@ -331,7 +331,7 @@ CREATE TABLE studio_interest_product
      PRIMARY KEY (sip_no, user_no, sc_no) 
   ); 
 
--- °ü½É »óÇ°(µå·¹½º) 
+-- ê´€ì‹¬ ìƒí’ˆ(ë“œë ˆìŠ¤) 
 CREATE TABLE dress_interest_product 
   ( 
      dip_no     NUMBER(10) NOT NULL, 
@@ -343,7 +343,7 @@ CREATE TABLE dress_interest_product
      PRIMARY KEY (dip_no, user_no, dp_no, dc_no) 
   ); 
 
--- °ü½É »óÇ°(¸ÞÀÌÅ©¾÷) 
+-- ê´€ì‹¬ ìƒí’ˆ(ë©”ì´í¬ì—…) 
 CREATE TABLE makeup_interest_product 
   ( 
      mip_no     NUMBER(10) NOT NULL, 
@@ -356,8 +356,8 @@ CREATE TABLE makeup_interest_product
 
 
 
--- °ü½É ¾÷Ã¼ 
--- °ü½É ¾÷Ã¼(½ºÆ©µð¿À) 
+-- ê´€ì‹¬ ì—…ì²´ 
+-- ê´€ì‹¬ ì—…ì²´(ìŠ¤íŠœë””ì˜¤) 
 CREATE TABLE studio_interest_company 
   ( 
      sic_no     NUMBER(10) NOT NULL, 
@@ -368,7 +368,7 @@ CREATE TABLE studio_interest_company
      PRIMARY KEY (sic_no, user_no, sc_no) 
   ); 
 
--- °ü½Ê ¾÷Ã¼(µå·¹½º) 
+-- ê´€ì‹­ ì—…ì²´(ë“œë ˆìŠ¤) 
 CREATE TABLE dress_interest_company 
   ( 
      dic_no     NUMBER(10) NOT NULL, 
@@ -379,7 +379,7 @@ CREATE TABLE dress_interest_company
      PRIMARY KEY (dic_no, user_no, dc_no) 
   ); 
 
--- °ü½É ¾÷Ã¼(¸ÞÀÌÅ©¾÷) 
+-- ê´€ì‹¬ ì—…ì²´(ë©”ì´í¬ì—…) 
 CREATE TABLE makeup_interest_company 
   ( 
      mic_no     NUMBER(10) NOT NULL, 
@@ -392,8 +392,8 @@ CREATE TABLE makeup_interest_company
 
 
 
--- °í°´ ¿ª°æ¸Å ½ÅÃ» 
--- °í°´ ¿ª°æ¸Å ½ÅÃ»(½ºÆ©µð¿À) 
+-- ê³ ê° ì—­ê²½ë§¤ ì‹ ì²­ 
+-- ê³ ê° ì—­ê²½ë§¤ ì‹ ì²­(ìŠ¤íŠœë””ì˜¤) 
 CREATE TABLE studio_auction_apply 
   ( 
      saa_no     NUMBER(10) NOT NULL, 
@@ -406,7 +406,7 @@ CREATE TABLE studio_auction_apply
      PRIMARY KEY (saa_no, user_no) 
   ); 
 
--- °í°´ ¿ª°æ¸Å ½ÅÃ»(µå·¹½º) 
+-- ê³ ê° ì—­ê²½ë§¤ ì‹ ì²­(ë“œë ˆìŠ¤) 
 CREATE TABLE dress_auction_apply 
   ( 
      daa_no     NUMBER(10) NOT NULL, 
@@ -419,7 +419,7 @@ CREATE TABLE dress_auction_apply
      PRIMARY KEY (daa_no, user_no) 
   ); 
 
--- °í°´ ¿ª°æ¸Å ½ÅÃ»(¸ÞÀÌÅ©¾÷) 
+-- ê³ ê° ì—­ê²½ë§¤ ì‹ ì²­(ë©”ì´í¬ì—…) 
 CREATE TABLE makeup_auction_apply 
   ( 
      maa_no     NUMBER(10) NOT NULL, 
@@ -434,8 +434,8 @@ CREATE TABLE makeup_auction_apply
 
 
 
--- °í°´ ¿ª°æ¸Å¿¡ ´ëÇÑ ÀÔÂû ¾÷Ã¼ 
--- °í°´ ¿ª°æ¸Å¿¡ ´ëÇÑ ÀÔÂû ¾÷Ã¼(½ºÆ©µð¿À) 
+-- ê³ ê° ì—­ê²½ë§¤ì— ëŒ€í•œ ìž…ì°° ì—…ì²´ 
+-- ê³ ê° ì—­ê²½ë§¤ì— ëŒ€í•œ ìž…ì°° ì—…ì²´(ìŠ¤íŠœë””ì˜¤) 
 CREATE TABLE studio_bid 
   ( 
      sb_no      NUMBER(10) NOT NULL, 
@@ -447,7 +447,7 @@ CREATE TABLE studio_bid
      PRIMARY KEY (sb_no, saa_no, user_no, sc_no) 
   ); 
 
--- °í°´ ¿ª°æ¸Å¿¡ ´ëÇÑ ÀÔÂû ¾÷Ã¼(µå·¹½º) 
+-- ê³ ê° ì—­ê²½ë§¤ì— ëŒ€í•œ ìž…ì°° ì—…ì²´(ë“œë ˆìŠ¤) 
 CREATE TABLE dress_bid 
   ( 
      db_no      NUMBER(10) NOT NULL, 
@@ -459,7 +459,7 @@ CREATE TABLE dress_bid
      PRIMARY KEY (db_no, user_no, daa_no, dc_no) 
   ); 
 
--- °í°´ ¿ª°æ¸Å¿¡ ´ëÇÑ ÀÔÂû ¾÷Ã¼(¸ÞÀÌÅ©¾÷) 
+-- ê³ ê° ì—­ê²½ë§¤ì— ëŒ€í•œ ìž…ì°° ì—…ì²´(ë©”ì´í¬ì—…) 
 CREATE TABLE makeup_bid 
   ( 
      mb_no      NUMBER(10) NOT NULL, 
@@ -473,8 +473,8 @@ CREATE TABLE makeup_bid
 
 
 
--- ÀÔÂû ¾÷Ã¼ÀÇ ÀÔÂû »óÇ° ¸ñ·Ï 
--- ÀÔÂû ¾÷Ã¼ÀÇ ÀÔÂû »óÇ° ¸ñ·Ï(½ºÆ©µð¿À) 
+-- ìž…ì°° ì—…ì²´ì˜ ìž…ì°° ìƒí’ˆ ëª©ë¡ 
+-- ìž…ì°° ì—…ì²´ì˜ ìž…ì°° ìƒí’ˆ ëª©ë¡(ìŠ¤íŠœë””ì˜¤) 
 CREATE TABLE studio_bid_product_list 
   ( 
      sbpl_no        NUMBER(10) NOT NULL, 
@@ -489,7 +489,7 @@ CREATE TABLE studio_bid_product_list
      updatedate     DATE DEFAULT SYSDATE NOT NULL 
   ); 
 
--- ÀÔÂû ¾÷Ã¼ÀÇ ÀÔÂû »óÇ° ¸ñ·Ï(µå·¹½º) 
+-- ìž…ì°° ì—…ì²´ì˜ ìž…ì°° ìƒí’ˆ ëª©ë¡(ë“œë ˆìŠ¤) 
 CREATE TABLE dress_bid_product_list 
   ( 
      dbpl_no        NUMBER(10) NOT NULL, 
@@ -504,7 +504,7 @@ CREATE TABLE dress_bid_product_list
      updatedate     DATE DEFAULT SYSDATE NOT NULL 
   ); 
 
--- ÀÔÂû ¾÷Ã¼ÀÇ ÀÔÂû »óÇ° ¸ñ·Ï(¸ÞÀÌÅ©¾÷) 
+-- ìž…ì°° ì—…ì²´ì˜ ìž…ì°° ìƒí’ˆ ëª©ë¡(ë©”ì´í¬ì—…) 
 CREATE TABLE makeup_bid_product_list 
   ( 
      mbpl_no        NUMBER(10) NOT NULL, 
@@ -521,8 +521,8 @@ CREATE TABLE makeup_bid_product_list
 
 
 
--- °Ô½ÃÆÇ & °Ô½Ã¹° 
--- °Ô½ÃÆÇ 
+-- ê²Œì‹œíŒ & ê²Œì‹œë¬¼ 
+-- ê²Œì‹œíŒ 
 CREATE TABLE board 
   ( 
      board_no   NUMBER(10) NOT NULL, 
@@ -532,7 +532,7 @@ CREATE TABLE board
      PRIMARY KEY (board_no) 
   ); 
 
--- °Ô½Ã¹° 
+-- ê²Œì‹œë¬¼ 
 CREATE TABLE article 
   ( 
      article_no      NUMBER(10) NOT NULL, 
@@ -550,8 +550,8 @@ CREATE TABLE article
 
 
 
--- È¸¿ø 
--- ÀÏ¹Ý»ç¿ëÀÚ 
+-- íšŒì› 
+-- ì¼ë°˜ì‚¬ìš©ìž 
 CREATE TABLE users 
   ( 
      user_no       NUMBER(10) NOT NULL, 
@@ -568,7 +568,7 @@ CREATE TABLE users
      PRIMARY KEY (user_no) 
   ); 
 
--- °ü¸®ÀÚ 
+-- ê´€ë¦¬ìž 
 CREATE TABLE ADMIN 
   ( 
      admin_no    NUMBER(10) NOT NULL, 
@@ -582,8 +582,8 @@ CREATE TABLE ADMIN
 
 
 
--- Æ÷ÀÎÆ® °ü·Ã 
--- Æ÷ÀÎÆ®»óÁ¡ »óÇ° 
+-- í¬ì¸íŠ¸ ê´€ë ¨ 
+-- í¬ì¸íŠ¸ìƒì  ìƒí’ˆ 
 CREATE TABLE point_product 
   ( 
      pp_no      NUMBER(10) NOT NULL, 
@@ -595,7 +595,7 @@ CREATE TABLE point_product
      PRIMARY KEY (pp_no) 
   ); 
 
--- Æ÷ÀÎÆ® »ç¿ë³»¿ª 
+-- í¬ì¸íŠ¸ ì‚¬ìš©ë‚´ì—­ 
 CREATE TABLE point_use_hist 
   ( 
      pah_no     NUMBER(10) NOT NULL, 
@@ -606,7 +606,7 @@ CREATE TABLE point_use_hist
      PRIMARY KEY (pah_no, user_no, pp_no) 
   ); 
 
--- Æ÷ÀÎÆ® Àû¸³ ³»¿ª 
+-- í¬ì¸íŠ¸ ì ë¦½ ë‚´ì—­ 
 CREATE TABLE point_add_hist 
   ( 
      pah_no      NUMBER(10) NOT NULL, 
@@ -617,7 +617,7 @@ CREATE TABLE point_add_hist
      PRIMARY KEY (pah_no, user_no) 
   ); 
 
--- Áú¹® ³»¿ª 
+-- ì§ˆë¬¸ ë‚´ì—­ 
 CREATE TABLE question_hist 
   ( 
      qh_no      NUMBER(10) NOT NULL, 
@@ -630,8 +630,8 @@ CREATE TABLE question_hist
 
 
 
--- ÂÊÁö Á¤º¸ 
--- ½ºÆ©µð¿À¿¡ °üÇÑ ÂÊÁö 
+-- ìª½ì§€ ì •ë³´ 
+-- ìŠ¤íŠœë””ì˜¤ì— ê´€í•œ ìª½ì§€ 
 CREATE TABLE studio_cvst_list 
   ( 
      mcl_no      NUMBER(10) NOT NULL, 
@@ -644,7 +644,7 @@ CREATE TABLE studio_cvst_list
      PRIMARY KEY (mcl_no, user_no, sc_no) 
   ); 
 
--- µå·¹½º¿¡ °üÇÑ ÂÊÁö Á¤º¸ 
+-- ë“œë ˆìŠ¤ì— ê´€í•œ ìª½ì§€ ì •ë³´ 
 CREATE TABLE dress_cvst_list 
   ( 
      dcl_no      NUMBER(10) NOT NULL, 
@@ -657,7 +657,7 @@ CREATE TABLE dress_cvst_list
      PRIMARY KEY (dcl_no, user_no, dc_no) 
   ); 
 
--- ¸ÞÀÌÅ©¾÷¿¡ °üÇÑ ÂÊÁö 
+-- ë©”ì´í¬ì—…ì— ê´€í•œ ìª½ì§€ 
 CREATE TABLE makeup_cvst_list 
   ( 
      mcl_no      NUMBER(10) NOT NULL, 
@@ -780,7 +780,7 @@ INSERT INTO ADMIN
              admin_pw) 
 VALUES      (admin_seq.NEXTVAL, 
              'admin@undefined.com', 
-             'ê´?ë¦¬ìž1', 
+             'æ„¿ï¿½ç”±ÑŠì˜„1', 
              'q1w2e3r4'); 
 
 INSERT INTO ADMIN 
@@ -790,7 +790,7 @@ INSERT INTO ADMIN
              admin_pw) 
 VALUES      (admin_seq.NEXTVAL, 
              'admin2@undefined.com', 
-             'ê´?ë¦¬ìž2', 
+             'æ„¿ï¿½ç”±ÑŠì˜„2', 
              '1234'); 
 
 INSERT INTO ADMIN 
@@ -800,7 +800,7 @@ INSERT INTO ADMIN
              admin_pw) 
 VALUES      (admin_seq.NEXTVAL, 
              'admin3@undefined.com', 
-             'ê´?ë¦¬ìž3', 
+             'æ„¿ï¿½ç”±ÑŠì˜„3', 
              '1q2w3e4r'); 
 
 SELECT * 
@@ -820,7 +820,7 @@ VALUES      (users_seq.NEXTVAL,
              'kosta@naver.com', 
              '1234', 
              TO_DATE('1990-01-11'), 
-             '?„œ?š¸?Š¹ë³„ì‹œ ê¸ˆì²œêµ? ê°??‚°?””ì§??„¸1ë¡? 151 ?´?…¸?”Œ? ‰?Š¤ 1ì°? 2ì¸?' 
+             'ï¿½ê½Œï¿½ìŠ±ï¿½ë“…è¹‚ê¾©ë–† æ¹²ë‰ì¿‡æ´ï¿½ åª›ï¿½ï¿½ê¶›ï¿½ëµ’ï§žï¿½ï¿½ê½­1æ¿¡ï¿½ 151 ï¿½ì” ï¿½ë‚ï¿½ëµ†ï¿½ì †ï¿½ë’ª 1ï§¡ï¿½ 2ï§¥ï¿½' 
              , 
              07050395805, 
              0); 
@@ -837,7 +837,7 @@ VALUES      (users_seq.NEXTVAL,
              'dleo200@naver.com', 
              '1q2w3e4r', 
              TO_DATE('1990-01-11'), 
-             'ê²½ê¸°?„ ê³ ì–‘?‹œ ?•?–‘êµ? ê´??‚°?™', 
+             'å¯ƒìŽ„ë¦°ï¿½ë£„ æ€¨ì¢Žë¼‡ï¿½ë–† ï¿½ëœ’ï¿½ë¼‡æ´ï¿½ æ„¿ï¿½ï¿½ê¶›ï¿½ë£ž', 
              01083768171, 
              0); 
 
@@ -850,13 +850,13 @@ INSERT INTO board
             (board_no, 
              board_nm) 
 VALUES      (board_seq.NEXTVAL, 
-             'ê³µì??‚¬?•­'); 
+             'æ€¨ë“­ï¿½ï¿½ê¶—ï¿½ë¹†'); 
 
 INSERT INTO board 
             (board_no, 
              board_nm) 
 VALUES      (board_seq.NEXTVAL, 
-             '?ž?œ ê²Œì‹œ?Œ'); 
+             'ï¿½ì˜„ï¿½ì‘€å¯ƒëš¯ë–†ï¿½ë™‹'); 
 
 SELECT * 
 FROM   board; 
