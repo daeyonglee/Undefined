@@ -3,6 +3,7 @@ package kr.co.udf.auction.dao;
 import java.util.List;
 
 import kr.co.udf.auction.domain.Auction;
+import kr.co.udf.common.web.Params;
 
 public interface AuctionApplyDao {
 	
@@ -15,5 +16,7 @@ public interface AuctionApplyDao {
 	public void delete(int no) throws Exception;
 	
 	public List<Auction> listAll() throws Exception;
+	
+	public List<Auction> listParams(Params params) throws Exception;
 	
 }

@@ -8,11 +8,12 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import kr.co.udf.auction.domain.Auction;
+import kr.co.udf.common.web.Params;
 
 @Repository
 public class MyBatisAuctionApplyDao implements AuctionApplyDao {
 	
-	private static final String NAMESPACE = "kr.co.udf.auction.dao.MyBatisAuctionDao";
+	private static final String NAMESPACE = "kr.co.udf.auction.dao.MyBatisAuctionApplyDao";
 	
 	@Inject
 	private SqlSession session;
@@ -44,6 +45,11 @@ public class MyBatisAuctionApplyDao implements AuctionApplyDao {
 	@Override
 	public List<Auction> listAll() throws Exception {
 		return session.selectList(NAMESPACE + ".listAll");
+	}
+
+	@Override
+	public List<Auction> listParams(Params params) throws Exception {
+		return null;
 	}
 
 }

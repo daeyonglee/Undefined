@@ -2,35 +2,50 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="kr.co.udf.auction.dao.MyBatisAuctionDao">
+<mapper namespace="kr.co.udf.auction.dao.MyBatisAuctionApplyDao">
 
 <select id="listAll" resultType="Auction">
-SELECT daa_no           AS "no"
-     , user_no          AS "userNo"
-     , daa_loc          AS "loc"  
-     , SUBSTR(to_char(daa_date, 'YYYY-MM-DD HH24:MI'),0,10) AS "day"
-     , SUBSTR(to_char(daa_date, 'YYYY-MM-DD HH24:MI'),12,7) AS "time"
-     , daa_memo         AS "memo"
-     ,'dress'           AS "type"
-  FROM dress_auction_apply
+SELECT  d.daa_no  no
+      , u.user_no userNo
+      , u.user_nm writer
+      , d.daa_loc loc
+      , SUBSTR(to_char(d.daa_date, 'YYYY-MM-DD HH24:MI'),0,10) day
+      , SUBSTR(to_char(d.daa_date, 'YYYY-MM-DD HH24:MI'),12,7) time
+      , TO_CHAR(d.daa_deadline, 'YYYY-MM-DD') deadline
+      , d.daa_memo memo
+      , TO_CHAR(d.regdate, 'YYYY-MM-DD') regdate
+      ,'dress' type
+FROM   dress_auction_apply d
+       JOIN users u 
+         ON d.user_no = u.user_no
 UNION
-SELECT maa_no           AS "no"
-     , user_no          AS "userNo"
-     , maa_loc          AS "loc"
-     , SUBSTR(to_char(maa_date, 'YYYY-MM-DD HH24:MI'),0,10) AS "day"
-     , SUBSTR(to_char(maa_date, 'YYYY-MM-DD HH24:MI'),12,7) AS "time"
-     , maa_memo         AS "memo"
-     ,'makeup'          AS "type"
-  FROM makeup_auction_apply
+SELECT m.maa_no  no
+     , u.user_no userNo
+     , u.user_nm writer   
+     , m.maa_loc loc
+     , SUBSTR(to_char(m.maa_date, 'YYYY-MM-DD HH24:MI'),0,10) day
+     , SUBSTR(to_char(m.maa_date, 'YYYY-MM-DD HH24:MI'),12,7) time
+     , SUBSTR(TO_CHAR(m.maa_deadline, 'YYYY-MM-DD HH24:MI'),0,10) deadline
+     , m.maa_memo memo
+     , TO_CHAR(m.regdate, 'YYYY-MM-DD') regdate
+     ,'makeup' type
+  FROM makeup_auction_apply m
+       JOIN users u 
+         ON m.user_no = u.user_no
 UNION
-SELECT saa_no           AS "no"
-     , user_no          AS "userNo"
-     , saa_loc          AS "loc" 
-     , SUBSTR(to_char(saa_date, 'YYYY-MM-DD HH24:MI'),0,10) AS "day"
-     , SUBSTR(to_char(saa_date, 'YYYY-MM-DD HH24:MI'),12,7) AS "time"
-     , saa_memo         AS "memo"
-     , 'studio'         AS "type"
-  FROM studio_auction_apply
+SELECT s.saa_no  no
+     , u.user_no userNo
+     , u.user_nm writer
+     , s.saa_loc loc
+     , SUBSTR(to_char(s.saa_date, 'YYYY-MM-DD HH24:MI'),0,10) day
+     , SUBSTR(to_char(s.saa_date, 'YYYY-MM-DD HH24:MI'),12,7) time
+     , SUBSTR(TO_CHAR(s.saa_deadline, 'YYYY-MM-DD HH24:MI'),0,10) deadline
+     , s.saa_memo memo
+     , TO_CHAR(s.regdate, 'YYYY-MM-DD') regdate
+     , 'studio' type
+  FROM studio_auction_apply s
+       JOIN users u
+         ON s.user_no = u.user_no
 </select>
 
 <insert id="create" parameterType="Auction">
@@ -39,14 +54,18 @@ SELECT saa_no           AS "no"
 INSERT INTO makeup_auction_apply 
             (maa_no, 
              user_no, 
+             user_nm
              maa_loc, 
-             maa_date, 
+             maa_date,
+             maa_deadline, 
              maa_memo, 
-             updatedate) 
+             regdate) 
 VALUES      (makeup_auction_apply_seq.NEXTVAL, 
-             #{userNo}, 
+             #{userNo},
+             #{writer} 
              #{loc}, 
-             TO_DATE(#{date}, 'YYYY/MM/DD HH24:MI'), 
+             TO_DATE(#{date}, 'YYYY/MM/DD HH24:MI'),
+             TO_DATE(#{deadline}, 'YYYY/MM/DD'), 
              #{memo}, 
              SYSDATE)
 </when>
@@ -54,29 +73,35 @@ VALUES      (makeup_auction_apply_seq.NEXTVAL,
 INSERT INTO studio_auction_apply 
             (saa_no, 
              user_no, 
+             user_nm,
              saa_loc, 
              saa_date, 
              saa_memo, 
-             updatedate) 
+             regdate) 
 VALUES      (studio_auction_apply_seq.NEXTVAL, 
              #{userNo}, 
+             #{writer}
              #{loc}, 
              TO_DATE(#{date}, 'YYYY/MM/DD HH24:MI'), 
+             TO_DATE(#{deadline}, 'YYYY/MM/DD'), 
              #{memo}, 
              SYSDATE)
 </when>
 <when test="type == 'dress'">              
 INSERT INTO dress_auction_apply 
             (daa_no, 
-             user_no, 
+             user_no,
+             user_nm, 
              daa_loc, 
-             daa_date, 
+             daa_date,
+             daa_deadline,
              daa_memo, 
-             updatedate) 
+             regdate) 
 VALUES      (dress_auction_apply_seq.NEXTVAL, 
              #{userNo}, 
              #{loc}, 
              TO_DATE(#{date}, 'YYYY/MM/DD HH24:MI'), 
+             TO_DATE(#{deadline}, 'YYYY/MM/DD'), 
              #{memo}, 
              SYSDATE) 
 </when>

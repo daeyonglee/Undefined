@@ -14,7 +14,7 @@ body {
 	background: #F5F5F5;
 }
 
-#count #newBtn #basic{
+#count #newBtn #basic {
 	text-align: center;
 }
 
@@ -25,7 +25,6 @@ td, th {
 .form-group {
 	margin: 15px auto;
 }
-
 </style>
 </head>
 <body>
@@ -43,15 +42,16 @@ td, th {
             <!-- general form elements -->
             <div class="box" style="text-align: center;">
               <div class="box-header with-border">
-              <h3 class="box-title">스드메 역경매</h3>
-              <a href="#" style="float: right">>> 역경매 신청하기</a>
+                <h3 class="box-title">스드메 역경매</h3>
+                <a href="#" style="float: right">>> 역경매 신청하기</a>
                 <ul class="nav nav-tabs nav-justified">
                   <li class="active"><a href="#">입찰 중인 경매</a></li>
                   <li><a href="win">낙찰된 경매</a></li>
                 </ul>
               </div>
               <div class="form-group">
-                <select id="basic" class="selectpicker show-tick form-control">
+                <select id="basic"
+                  class="selectpicker show-tick form-control">
                   <option>전체</option>
                   <option>스튜디오</option>
                   <option>드레스</option>
@@ -72,18 +72,18 @@ td, th {
                     <th style="width: 100px">입찰마감일</th>
                     <th style="width: 200px">제출된 입찰서</th>
                   </tr>
-                  
+
                   <c:forEach items="${bid}" var="apply">
-                   <tr>
-                    <td>${apply.regdate }</td>
-                    <td>${apply.day }</td>
-                    <td>조형팔</td>
-                    <td>${apply.loc }</td>
-                    <td>2018/05/23</td>
-                    <td>미공개</td>
-                   </tr>
+                    <tr>
+                      <td>${apply.regdate }</td>
+                      <td>${apply.day }</td>
+                      <td>${apply.writer }</td>
+                      <td>${apply.loc }</td>
+                      <td>${apply.deadline }</td>
+                      <td>미공개</td>
+                    </tr>
                   </c:forEach>
-<!--                   <tr>
+                  <!--                   <tr>
                     <td>2018-05-14</td>
                     <td>2019-05-14</td>
                     <td>조형팔</td>
@@ -130,78 +130,42 @@ td, th {
             <!-- /.box-body -->
 
 
-            <%--         <div class="box-footer">
+            <div class="box-footer">
 
-          <div class="text-center">
-            <ul class="pagination">
+              <div class="col-md-12">
+                <div class="pull-center">
+                  <div class="pagination">
+                    <ul>
+                      <c:if test="${pageMaker.prev}">
+                        <li><a
+                          href="listPage${pageMaker.makeQuery(pageMaker.startPage - 1) }">&laquo;</a></li>
+                      </c:if>
 
-              <c:if test="${pageMaker.prev}">
-                <li><a
-                  href="listPage${pageMaker.makeQuery(pageMaker.startPage - 1) }">&laquo;</a></li>
-              </c:if>
+                      <c:forEach begin="${pageMaker.startPage }"
+                        end="${pageMaker.endPage }" var="idx">
+                        <li
+                          <c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
+                          <a href="listPage${pageMaker.makeQuery(idx)}">${idx}</a>
+                        </li>
+                      </c:forEach>
 
-              <c:forEach begin="${pageMaker.startPage }"
-                end="${pageMaker.endPage }" var="idx">
-                <li
-                  <c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
-                  <a href="listPage${pageMaker.makeQuery(idx)}">${idx}</a>
-                </li>
-              </c:forEach>
+                      <c:if
+                        test="${pageMaker.next && pageMaker.endPage > 0}">
+                        <li><a
+                          href="listPage${pageMaker.makeQuery(pageMaker.endPage +1) }">&raquo;</a></li>
+                      </c:if>
 
-              <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-                <li><a
-                  href="listPage${pageMaker.makeQuery(pageMaker.endPage +1) }">&raquo;</a></li>
-              </c:if>
-
-            </ul>
-          </div> --%>
-
-
-            <%--           <div class="text-center">
-            <ul class="pagination">
-
-              <c:if test="${pageMaker.prev}">
-                <li><a href="${pageMaker.startPage - 1}">&laquo;</a></li>
-              </c:if>
-
-              <c:forEach begin="${pageMaker.startPage }"
-                end="${pageMaker.endPage }" var="idx">
-                <li
-                  <c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
-                  <a href="${idx}">${idx}</a>
-                </li>
-              </c:forEach>
-
-              <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-                <li><a href="${pageMaker.endPage +1}">&raquo;</a></li>
-              </c:if>
-
-            </ul>
-          </div>
-           --%>
-            <div class="col-md-12">
-              <div class="pull-center">
-                <div class="pagination">
-                  <ul>
-                    <li><a href="#">Prev</a></li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">Next</a></li>
-                  </ul>
+                    </ul>
+                  </div>
                 </div>
               </div>
+              <!-- /.box-footer-->
             </div>
-            <button id='newBtn' style="float: right">역경매 신청하기</button>
           </div>
-          <!-- /.box-footer-->
-        </div>
-      </div>
-      <!--/.col (left) -->
+          <!--/.col (left) -->
 
-    </div>
-    <!-- /.row -->
+        </div>
+        <!-- /.row -->
   </section>
   <!-- /.content -->
 

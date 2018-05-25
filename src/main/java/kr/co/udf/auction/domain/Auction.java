@@ -10,6 +10,7 @@ public class Auction {
 	private String memo;
 	private String type;
 	private String writer;
+	private String deadline;
 	private String regdate;
 	private String updatedate;
 	
@@ -17,8 +18,9 @@ public class Auction {
 
 	public Auction() {}
 
+
 	public Auction(int no, int userNo, String loc, String day, String time, String memo, String type, String writer,
-			String regdate, String updatedate, String date) {
+			String deadline, String regdate, String updatedate, String date) {
 		super();
 		this.no = no;
 		this.userNo = userNo;
@@ -28,10 +30,12 @@ public class Auction {
 		this.memo = memo;
 		this.type = type;
 		this.writer = writer;
+		this.deadline = deadline;
 		this.regdate = regdate;
 		this.updatedate = updatedate;
 		this.date = date;
 	}
+
 
 	public int getNo() {
 		return no;
@@ -121,16 +125,23 @@ public class Auction {
 		this.date = date;
 	}
 
+
+	public String getDeadline() {
+		return deadline;
+	}
+
+
+	public void setDeadline(String deadline) {
+		this.deadline = deadline;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Auction [no=" + no + ", userNo=" + userNo + ", loc=" + loc + ", day=" + day + ", time=" + time
-				+ ", memo=" + memo + ", type=" + type + ", writer=" + writer + ", regdate=" + regdate + ", updatedate="
-				+ updatedate + ", date=" + date + "]";
+				+ ", memo=" + memo + ", type=" + type + ", writer=" + writer + ", deadline=" + deadline + ", regdate="
+				+ regdate + ", updatedate=" + updatedate + ", date=" + date + "]";
 	}
-	
-	
-	
-	
-	
+
 
 }
