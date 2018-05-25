@@ -79,7 +79,7 @@
                         </c:when>
                         <c:otherwise>
                           <li><a href="/user/login">로그인</a></li>
-                          <li><a href="#">회원가입</a></li>
+                          <li><a href="/user/join">회원가입</a></li>
                           <li><a href="#">고객센터</a></li>
                         </c:otherwise>
                       </c:choose>
