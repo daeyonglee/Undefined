@@ -9,7 +9,7 @@
 
 <div class="container">
   <h2 class="text-center">스드메 통합추천</h2>
-  <form>
+  <form action="/recommend/list">
     <ul class="list-group">
       <li class="list-group-item">
         <label>항목</label>
@@ -75,7 +75,7 @@
     </div>
   </div>
   
-  <button class="btn search-btn" type="submit"><i class="fa fa-search"></i></button>
+  <button class="btn search-btn" type="submit" style="float: right"><i class="fa fa-search"></i></button>
   
 </div>
 
