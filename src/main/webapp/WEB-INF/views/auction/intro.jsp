@@ -66,6 +66,8 @@ text-align: center;
 					</div>
 				</div>
 			</div>
+      <button id="bidListBtn">입찰 리스트</button>
+      <button id="winListBtn">낙찰 리스트</button>
 		</div>
 	</div>
 		<div class="client-text">
@@ -75,5 +77,25 @@ text-align: center;
 			<p>*웨딩 역경매 신청은 무료이며, 어떠한 경우에도 별도 비용이 발생하지 않습니다.</p>
 		</div>
 	<%@include file="../include/bottom.jsp"%>
+  
+  <script>
+  $(document).ready(
+      function() {
+
+        $('#bidListBtn').on("click", function(evt) {
+
+          self.location = "bid";
+
+        });
+        
+        $('#winListBtn').on("click", function(evt) {
+
+            self.location = "win";
+
+          });
+
+
+      });
+</script>
 </body>
 </html>
