@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("recommend")
 public class RecommendController {
 
-	@RequestMapping(value="index", method=RequestMethod.GET)
+	@RequestMapping("index")
 	public void recommendIndex() {
 		
 	}

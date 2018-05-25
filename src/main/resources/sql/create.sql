@@ -216,14 +216,14 @@ CREATE TABLE studio_product
   ( 
      sp_no         NUMBER(10) NOT NULL, 
      sc_no         NUMBER(10) NOT NULL, 
-     sp_price      NUMBER(20) NOT NULL, 
-     sp_apv_yn     VARCHAR2(1) NOT NULL, 
+     sp_price      NUMBER(20) NOT NULL,  
+     sp_apv_yn     VARCHAR2(1) DEFAULT 'N' NOT NULL,  -- 액자/앨범/비디오 여부
+     sp_total_yn   VARCHAR2(1) DEFAULT 'N' NOT NULL,  -- 토탈샵 여부
+     sp_shoot_type VARCHAR2(10) NOT NULL, -- 실/내외 촬영
      sp_image      VARCHAR2(300), 
-     sp_total_yn   VARCHAR2(1) NOT NULL, 
-     sp_shoot_type VARCHAR2(10) NOT NULL, 
      regdate       DATE DEFAULT SYSDATE NOT NULL, 
      updatedate    DATE DEFAULT SYSDATE NOT NULL, 
-     PRIMARY KEY (sp_no, sc_no) 
+     PRIMARY KEY (sp_no) 
   );
 
 -- 전체 상품(드레스) 
@@ -231,27 +231,27 @@ CREATE TABLE dress_product
   ( 
      dp_no      NUMBER(10) NOT NULL, 
      dc_no      NUMBER(10) NOT NULL, 
-     dp_style   VARCHAR2(20) NOT NULL, 
-     dp_image   VARCHAR2(200), 
+     dp_style   VARCHAR2(20) NOT NULL, -- 드레스 스타일
      dp_price   NUMBER(20) DEFAULT 0 NOT NULL, 
+     dp_image   VARCHAR2(200), 
      regdate    DATE DEFAULT SYSDATE NOT NULL, 
      updatedate DATE DEFAULT SYSDATE NOT NULL, 
-     PRIMARY KEY (dp_no, dc_no) 
+     PRIMARY KEY (dp_no) 
   ); 
 
 -- 전체 상품(메이크업) 
 CREATE TABLE makeup_product 
   ( 
      mp_no        NUMBER(10) NOT NULL, 
-     mc_no        NUMBER(10) NOT NULL, 
-     mp_image     VARCHAR2(300), 
+     mc_no        NUMBER(10) NOT NULL,  
      mp_price     NUMBER(20) DEFAULT 0 NOT NULL, 
-     mp_acc_yn    VARCHAR2(1) DEFAULT 'N' NOT NULL, 
-     mp_family_yn VARCHAR2(1) DEFAULT 'N' NOT NULL, 
-     mp_hair_yn   VARCHAR2(1) DEFAULT 'N' NOT NULL, 
+     mp_image     VARCHAR2(300),
+     mp_acc_yn    VARCHAR2(1) DEFAULT 'N' NOT NULL, -- 악세사리 여부
+     mp_family_yn VARCHAR2(1) DEFAULT 'N' NOT NULL, -- 가족 포함 여부
+     mp_hair_yn   VARCHAR2(1) DEFAULT 'N' NOT NULL, -- 헤어 여부
      regdate      DATE DEFAULT SYSDATE NOT NULL, 
      updatedate   DATE DEFAULT SYSDATE NOT NULL, 
-     PRIMARY KEY (mp_no, mc_no) 
+     PRIMARY KEY (mp_no) 
   ); 
 
 
@@ -262,7 +262,7 @@ CREATE TABLE studio_company
   ( 
      sc_no         NUMBER(10) NOT NULL, 
      sc_nm         VARCHAR2(30) NOT NULL, 
-     sc_company_no NUMBER(20) NOT NULL, 
+     sc_company_no NUMBER(20) NOT NULL,   -- 사업자번호
      sc_main_nm    VARCHAR2(30) NOT NULL, 
      sc_addr       VARCHAR2(100) NOT NULL, 
      sc_main_image VARCHAR2(300) NOT NULL, 
