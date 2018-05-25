@@ -71,9 +71,18 @@
                 <div class="header-half header-social">
                 		<ul class="list-inline header-loginbar">
                       <!-- 로그인 여부에 따라 li 변경 -->
-                			<li><a href="/user/login">로그인</a></li>
-                			<li><a href="#">회원가입</a></li>
-                			<li><a href="#">고객센터</a></li>
+                      <c:choose>
+                        <c:when test="${null ne sessionScope.login || null ne cookie.loginCookie.value}">
+                          <li><a href="/user/logout">로그아웃</a></li>
+                          <li><a href="#">마이페이지</a></li>
+                          <li><a href="#">고객센터</a></li>
+                        </c:when>
+                        <c:otherwise>
+                          <li><a href="/user/login">로그인</a></li>
+                          <li><a href="#">회원가입</a></li>
+                          <li><a href="#">고객센터</a></li>
+                        </c:otherwise>
+                      </c:choose>
                 		</ul>
                     <!-- <ul class="list-inline">
                         <li><a href="#"><i class="fa fa-facebook"></i></a></li>
