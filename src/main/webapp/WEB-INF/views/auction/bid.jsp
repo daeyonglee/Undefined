@@ -166,6 +166,8 @@ td, th {
 
         </div>
         <!-- /.row -->
+      </div>
+    </div>
   </section>
   <!-- /.content -->
 

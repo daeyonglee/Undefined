@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import kr.co.udf.auction.dao.AuctionApplyDao;
 import kr.co.udf.auction.domain.Auction;
+import kr.co.udf.common.web.SearchParams;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/spring/**/root-context.xml", "file:src/main/webapp/WEB-INF/spring/**/servlet-context.xml"})
@@ -24,7 +25,7 @@ public class MyBatisAuctionDaoTest {
 
 	private Logger logger = Logger.getLogger(MyBatisAuctionDaoTest.class);
 	
-	@Test
+	//@Test
 	public void listAllTest() throws Exception {
 		List<Auction> list = new ArrayList<Auction>();
 		list = dao.listAll();
@@ -60,6 +61,18 @@ public class MyBatisAuctionDaoTest {
 		
 		dao.create(auction);
 		logger.info(auction);
+	}
+	
+	@Test
+	public void listParamsTest() throws Exception {
+		SearchParams params = new SearchParams();
+		params.setPage(1);
+		params.setPerPageNum(15);
+		
+		List<Auction> list = dao.listParams(params);
+		logger.info(list);
+		
+		
 	}
 
 }

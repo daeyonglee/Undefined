@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -16,6 +17,8 @@ import kr.co.udf.auction.domain.Auction;
 import kr.co.udf.auction.domain.AuctionCount;
 import kr.co.udf.auction.service.AuctionApplyService;
 import kr.co.udf.auction.service.AuctionCountService;
+import kr.co.udf.common.web.PageMaker;
+import kr.co.udf.common.web.SearchParams;
 
 @Controller
 @RequestMapping("/auction/*")
@@ -49,13 +52,25 @@ public class AuctionController {
 		return "redirect:/auction/bid"; 
 		
 	} 
-
+	
+	/*@RequestMapping(value="/bid",method=RequestMethod.GET)
+	public void bid(SearchParams params, Model model) throws Exception {
+		logger.info("listPage get....");
+		model.addAttribute("bid", service.listParams(params));
+	}*/
 	
 	@RequestMapping(value="/bid",method=RequestMethod.GET)
-	public void bid(Model model) throws Exception {
-		logger.info("list get....");
-		model.addAttribute("bid", service.listAll());
+	public void bid(SearchParams params, Model model) throws Exception {
+		logger.info("listParams get...." + params.toString());
+		
+		model.addAttribute("bid", service.listParams(params));
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setParams(params);
+		model.addAttribute("pageMaker", pageMaker);
 	}
+	
+	
 	
 	@RequestMapping(value="/intro",method=RequestMethod.GET)
 	public String intro() {

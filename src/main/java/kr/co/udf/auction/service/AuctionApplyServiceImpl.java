@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import kr.co.udf.auction.dao.AuctionApplyDao;
 import kr.co.udf.auction.domain.Auction;
+import kr.co.udf.common.web.SearchParams;
 
 @Service
 public class AuctionApplyServiceImpl implements AuctionApplyService {
@@ -43,6 +44,11 @@ public class AuctionApplyServiceImpl implements AuctionApplyService {
 	@Override
 	public List<Auction> listAll() throws Exception {
 		return dao.listAll();
+	}
+
+	@Override
+	public List<Auction> listParams(SearchParams params) throws Exception {
+		return dao.listParams(params);
 	}
 
 }

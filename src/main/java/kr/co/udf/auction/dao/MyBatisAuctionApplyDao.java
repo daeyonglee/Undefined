@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.udf.auction.domain.Auction;
 import kr.co.udf.common.web.Params;
+import kr.co.udf.common.web.SearchParams;
 
 @Repository
 public class MyBatisAuctionApplyDao implements AuctionApplyDao {
@@ -48,8 +49,14 @@ public class MyBatisAuctionApplyDao implements AuctionApplyDao {
 	}
 
 	@Override
-	public List<Auction> listParams(Params params) throws Exception {
-		return null;
+	public List<Auction> listParams(SearchParams params) throws Exception {
+		return session.selectList(NAMESPACE + ".listParams", params);
+	}
+
+	@Override
+	public int countPage(Params params) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

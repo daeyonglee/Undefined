@@ -62,7 +62,9 @@ INSERT INTO makeup_auction_apply
              regdate) 
 VALUES      (makeup_auction_apply_seq.NEXTVAL, 
              #{userNo},
-             #{writer} 
+             (SELECT user_nm writer
+             FROM users
+             WHERE user_no = #{userNo}),
              #{loc}, 
              TO_DATE(#{date}, 'YYYY/MM/DD HH24:MI'),
              TO_DATE(#{deadline}, 'YYYY/MM/DD'), 
@@ -80,7 +82,9 @@ INSERT INTO studio_auction_apply
              regdate) 
 VALUES      (studio_auction_apply_seq.NEXTVAL, 
              #{userNo}, 
-             #{writer}
+             (SELECT user_nm writer
+             FROM users
+             WHERE user_no = #{userNo}),
              #{loc}, 
              TO_DATE(#{date}, 'YYYY/MM/DD HH24:MI'), 
              TO_DATE(#{deadline}, 'YYYY/MM/DD'), 
@@ -99,6 +103,9 @@ INSERT INTO dress_auction_apply
              regdate) 
 VALUES      (dress_auction_apply_seq.NEXTVAL, 
              #{userNo}, 
+            (SELECT user_nm writer
+             FROM users
+             WHERE user_no = #{userNo}),
              #{loc}, 
              TO_DATE(#{date}, 'YYYY/MM/DD HH24:MI'), 
              TO_DATE(#{deadline}, 'YYYY/MM/DD'), 
@@ -107,5 +114,54 @@ VALUES      (dress_auction_apply_seq.NEXTVAL,
 </when>
 </choose>
 </insert>
+
+<select id="listParams" parameterType="SearchParams" resultType="Auction">
+SELECT M.*
+  FROM (SELECT CEIL(rownum / #{perPageNum}) page 
+             , S.*
+          FROM ( SELECT  d.daa_no  no
+                      , u.user_no userNo
+                      , u.user_nm writer
+                      , d.daa_loc loc
+                      , SUBSTR(to_char(d.daa_date, 'YYYY-MM-DD HH24:MI'),0,10) day
+                      , SUBSTR(to_char(d.daa_date, 'YYYY-MM-DD HH24:MI'),12,7) time
+                      , TO_CHAR(d.daa_deadline, 'YYYY-MM-DD') deadline
+                      , d.daa_memo memo
+                      , TO_CHAR(d.regdate, 'YYYY-MM-DD') regdate
+                      ,'dress' type
+                FROM   dress_auction_apply d
+                       JOIN users u 
+                         ON d.user_no = u.user_no
+                UNION
+                SELECT m.maa_no  no
+                     , u.user_no userNo
+                     , u.user_nm writer   
+                     , m.maa_loc loc
+                     , SUBSTR(to_char(m.maa_date, 'YYYY-MM-DD HH24:MI'),0,10) day
+                     , SUBSTR(to_char(m.maa_date, 'YYYY-MM-DD HH24:MI'),12,7) time
+                     , SUBSTR(TO_CHAR(m.maa_deadline, 'YYYY-MM-DD HH24:MI'),0,10) deadline
+                     , m.maa_memo memo
+                     , TO_CHAR(m.regdate, 'YYYY-MM-DD') regdate
+                     ,'makeup' type
+                  FROM makeup_auction_apply m
+                       JOIN users u 
+                         ON m.user_no = u.user_no
+                UNION
+                SELECT s.saa_no  no
+                     , u.user_no userNo
+                     , u.user_nm writer
+                     , s.saa_loc loc
+                     , SUBSTR(to_char(s.saa_date, 'YYYY-MM-DD HH24:MI'),0,10) day
+                     , SUBSTR(to_char(s.saa_date, 'YYYY-MM-DD HH24:MI'),12,7) time
+                     , SUBSTR(TO_CHAR(s.saa_deadline, 'YYYY-MM-DD HH24:MI'),0,10) deadline
+                     , s.saa_memo memo
+                     , TO_CHAR(s.regdate, 'YYYY-MM-DD') regdate
+                     , 'studio' type
+                  FROM studio_auction_apply s
+                       JOIN users u
+                         ON s.user_no = u.user_no) S
+        ) M
+ WHERE page = #{page}
+</select>
 
 </mapper>

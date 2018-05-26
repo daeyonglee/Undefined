@@ -4,6 +4,7 @@ import java.util.List;
 
 import kr.co.udf.auction.domain.Auction;
 import kr.co.udf.common.web.Params;
+import kr.co.udf.common.web.SearchParams;
 
 public interface AuctionApplyDao {
 	
@@ -17,6 +18,10 @@ public interface AuctionApplyDao {
 	
 	public List<Auction> listAll() throws Exception;
 	
-	public List<Auction> listParams(Params params) throws Exception;
+	// 전체 게시물 페이징 처리
+	public List<Auction> listParams(SearchParams params) throws Exception;
+	
+	// 전체 게시물 수 조회
+	public int countPage(Params params) throws Exception;
 	
 }
