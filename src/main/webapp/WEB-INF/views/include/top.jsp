@@ -48,9 +48,8 @@
 		<script src="/resources/assets/js/price-range.js"></script>
 		
 		<script src="/resources/assets/js/main.js"></script>
-    
-        <!-- customize js file -->
-        <script src="/resources/js/auction.js"></script>
+    <script src="/resources/assets/js/jquery.bootstrap.wizard.js" type="text/javascript"></script>
+    <script src="/resources/assets/js/jquery.validate.min.js"></script>
 </head>
 <body>
 <div id="preloader">

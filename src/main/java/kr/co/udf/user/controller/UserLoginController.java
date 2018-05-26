@@ -5,6 +5,9 @@ import java.util.Date;
 import java.util.HashMap;
 
 import javax.inject.Inject;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -13,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.util.WebUtils;
 
 import kr.co.udf.user.domain.Login;
 import kr.co.udf.user.domain.User;
@@ -75,5 +79,29 @@ public class UserLoginController {
 		
 		logger.info("##### loginPOST end #####");
 		
-	} 
+	}
+	
+	@RequestMapping(value="/logout", method=RequestMethod.GET)
+	public String logout(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
+		
+		Object obj = session.getAttribute("login");
+		Object obj2 = session.getAttribute("role");
+		
+		if (obj != null) {
+			User user = (User)obj;
+			
+			session.removeAttribute("login");
+			session.invalidate();
+			
+			Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
+			
+			if (loginCookie != null) {
+				loginCookie.setPath("/");
+				loginCookie.setMaxAge(0);
+				response.addCookie(loginCookie);
+				loginService.keepLogin(user.getNo(), session.getId(), new Date(), (String)obj2);
+			}
+		}
+		return "redirect:/";
+	}
 }
