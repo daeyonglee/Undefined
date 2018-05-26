@@ -167,7 +167,13 @@ CREATE SEQUENCE studio_bid_seq;
 
 CREATE SEQUENCE dress_bid_seq; 
 
-CREATE SEQUENCE makeup_bid_seq; 
+CREATE SEQUENCE makeup_bid_seq;
+
+CREATE SEQUENCE studio_bid_product_seq;
+
+CREATE SEQUENCE dress_bid_product_seq;
+
+CREATE SEQUENCE makeup_bid_product_seq;
 
 CREATE SEQUENCE board_seq; 
 
@@ -223,7 +229,7 @@ CREATE TABLE studio_product
      sp_image      VARCHAR2(300), 
      regdate       DATE DEFAULT SYSDATE NOT NULL, 
      updatedate    DATE DEFAULT SYSDATE NOT NULL, 
-     PRIMARY KEY (sp_no) 
+     PRIMARY KEY (sp_no, sc_no) 
   );
 
 -- 전체 상품(드레스) 
@@ -236,7 +242,7 @@ CREATE TABLE dress_product
      dp_image   VARCHAR2(200), 
      regdate    DATE DEFAULT SYSDATE NOT NULL, 
      updatedate DATE DEFAULT SYSDATE NOT NULL, 
-     PRIMARY KEY (dp_no) 
+     PRIMARY KEY (dp_no, dc_no) 
   ); 
 
 -- 전체 상품(메이크업) 
@@ -251,7 +257,7 @@ CREATE TABLE makeup_product
      mp_hair_yn   VARCHAR2(1) DEFAULT 'N' NOT NULL, -- 헤어 여부
      regdate      DATE DEFAULT SYSDATE NOT NULL, 
      updatedate   DATE DEFAULT SYSDATE NOT NULL, 
-     PRIMARY KEY (mp_no) 
+     PRIMARY KEY (mp_no, mc_no) 
   ); 
 
 
@@ -399,7 +405,8 @@ CREATE TABLE studio_auction_apply
      saa_no     NUMBER(10) NOT NULL, 
      user_no    NUMBER(10) NOT NULL, 
      saa_loc    VARCHAR2(100) NOT NULL, 
-     saa_date   DATE NOT NULL, 
+     saa_date   DATE NOT NULL,
+     saa_deadline DATE NOT NULL,
      saa_memo   VARCHAR2(3000), 
      regdate    DATE DEFAULT SYSDATE NOT NULL, 
      updatedate DATE DEFAULT SYSDATE NOT NULL, 
@@ -412,7 +419,8 @@ CREATE TABLE dress_auction_apply
      daa_no     NUMBER(10) NOT NULL, 
      user_no    NUMBER(10) NOT NULL, 
      daa_loc    VARCHAR2(100) NOT NULL, 
-     daa_date   DATE NOT NULL, 
+     daa_date   DATE NOT NULL,
+     daa_deadline DATE NOT NULL,
      daa_memo   VARCHAR2(3000), 
      regdate    DATE DEFAULT SYSDATE NOT NULL, 
      updatedate DATE NOT NULL, 
@@ -425,7 +433,8 @@ CREATE TABLE makeup_auction_apply
      maa_no     NUMBER(10) NOT NULL, 
      user_no    NUMBER(10) NOT NULL, 
      maa_loc    VARCHAR2(100) NOT NULL, 
-     maa_date   DATE NOT NULL, 
+     maa_date   DATE NOT NULL,
+     maa_deadline DATE NOT NULL,
      maa_memo   VARCHAR2(3000), 
      regdate    DATE DEFAULT SYSDATE NOT NULL, 
      updatedate DATE DEFAULT SYSDATE NOT NULL, 

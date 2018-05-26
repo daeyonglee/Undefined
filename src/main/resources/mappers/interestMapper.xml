@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="kr.co.udf.auction.dao.MyBatisAuctionDao">
+
+<!-- 1. 비교업체 추가 -->
+<insert id="insertInterest" parameterType="StudioCompany">
+<choose>
+
+<when test="type == 'studio'">
+INSERT INTO studio_interest_company (
+	sip_no, user_no, sc_no
+) VALUES (	
+	studio_interest_company_seq.NEXTVAL, #{userNo}, #{companyNo}
+)
+</when>
+
+<when test="type == 'dress'">
+INSERT INTO dress_interest_company (
+	sip_no, user_no, sc_no
+) VALUES (	
+	dress_interest_company_seq.NEXTVAL, #{userNo}, #{companyNo}	
+</when>
+
+<when test="type == 'makeup'">
+INSERT INTO makeup_interest_company (
+	mip_no, user_no, mc_no
+) VALUES (	
+	makeup_interest_company_seq.NEXTVAL, #{userNo}, #{companyNo}	
+</when>
+
+</choose>
+</insert>
+
+
+<!-- 관심업체 삭제 -->
+<delete id="deleteInterest">
+	DELETE FROM studio_interest_company
+	WHERE sip_no = #{sipNo} 
+</delete>
+
+<select id="countInterest" resultType="int">
+	SELECT COUNT(*)
+	FROM studio_interest_company
+	WHERE user_no = #{userNo}
+	AND sc_no = #{companyNo}
+</select>
+
+</mapper>
