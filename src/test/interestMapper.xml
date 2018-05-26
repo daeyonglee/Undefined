@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+
+<!-- 비교업체 추가 -->
+<insert id="insertInterest"></insert>
