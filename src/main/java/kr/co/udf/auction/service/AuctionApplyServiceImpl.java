@@ -51,4 +51,11 @@ public class AuctionApplyServiceImpl implements AuctionApplyService {
 		return dao.listParams(params);
 	}
 
+	@Override
+	public List<Auction> realtimelist(int count) throws Exception {
+		int start = (count*20)-20 + 1;
+		int end = start + 19;
+		
+		return dao.realtimelist(start, end);
+	}
 }

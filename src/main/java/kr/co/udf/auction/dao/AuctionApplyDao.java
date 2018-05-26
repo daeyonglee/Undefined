@@ -24,4 +24,6 @@ public interface AuctionApplyDao {
 	// 전체 게시물 수 조회
 	public int countPage(Params params) throws Exception;
 	
+	public List<Auction> realtimelist(int start, int end) throws Exception;
+	
 }

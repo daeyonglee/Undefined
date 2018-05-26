@@ -164,4 +164,34 @@ SELECT M.*
  WHERE page = #{page}
 </select>
 
+<select id="realtimelist" parameterType="map" resultType="Auction">
+<![CDATA[
+SELECT M.*
+     , (SELECT USER_NM FROM USERS u WHERE u.user_no = M.userNo) writer
+  FROM   (SELECT rownum rnum,
+               saa_no no,                      
+               user_no userNo,  
+               saa_loc loc,  
+               saa_date day, 
+               saa_memo memo,
+               saa_deadline deadline,
+               regdate ,
+               updatedate 
+        FROM   (SELECT 
+               saa_no ,                      
+               user_no ,  
+               saa_loc ,  
+               saa_date , 
+               saa_memo ,
+               saa_deadline,
+               regdate ,
+               updatedate
+                FROM   studio_auction_apply 
+                WHERE  saa_no > 0
+                ORDER  BY saa_no DESC, 
+                          regdate desc)) M
+ WHERE rnum between #{start} and #{end}              
+]]>
+</select>
+
 </mapper>

@@ -1,6 +1,8 @@
 package kr.co.udf.auction.dao;
 
-import java.util.List; 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -57,6 +59,17 @@ public class MyBatisAuctionApplyDao implements AuctionApplyDao {
 	public int countPage(Params params) throws Exception {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	@Override
+	public List<Auction> realtimelist(int start, int end) throws Exception {
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("start", start);
+		map.put("end", end);
+		
+		return session.selectList(NAMESPACE+ ".realtimelist", map);
 	}
 
 }

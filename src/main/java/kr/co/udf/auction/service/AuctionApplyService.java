@@ -25,4 +25,6 @@ public interface AuctionApplyService {
 	// 전체 회원의 역경매 리스트 페이징 처리
 	public List<Auction> listParams(SearchParams params) throws Exception;
 	
+	public List<Auction> realtimelist(int count) throws Exception;
+	
 }
