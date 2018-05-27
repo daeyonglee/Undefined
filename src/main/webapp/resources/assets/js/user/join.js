@@ -81,13 +81,104 @@ $(document).ready(function () {
     $height = $(document).height();
     $('.set-full-height').css('height', $height);
 
+    /**
+     * 주소 버튼 클릭 이벤트 처리
+     * @returns
+     */
+    $('#btnAddr').on('click', function(e){
+    	e.preventDefault();
+    	
+    	new daum.Postcode({
+             oncomplete: function(data) {
+                 // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
+                 // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                 // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                 var fullAddr = ''; // 최종 주소 변수
+                 var extraAddr = ''; // 조합형 주소 변수
+
+                 // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                 if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                     fullAddr = data.roadAddress;
+
+                 } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                     fullAddr = data.jibunAddress;
+                 }
+
+                 // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+                 if(data.userSelectedType === 'R'){
+                     //법정동명이 있을 경우 추가한다.
+                     if(data.bname !== ''){
+                         extraAddr += data.bname;
+                     }
+                     // 건물명이 있을 경우 추가한다.
+                     if(data.buildingName !== ''){
+                         extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                     }
+                     // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+                     fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+                 }
+
+                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                 document.getElementById('postcode').value = data.zonecode; //5자리 새우편번호 사용
+                 document.getElementById('addr').value = fullAddr;
+
+                 // 커서를 상세주소 필드로 이동한다.
+                 document.getElementById('addrdetail').focus();
+             }
+         }).open();
+    });  
 });
 
 function validateFirstStep() {
 
 	// 앞에서 일반 사용자를 선택했는지 업체를 선택했는지 확인
-	console.log( $(":input:radio[name=type]:checked").val());
+	var type = $(":input:radio[name=type]:checked").val();
+	
+	if (type == "users") {
+		
+		var html  = "<div class='form-group'>";
+		    html += "  <label>이메일 <small>(required)</small></label>";
+		    html += "  <input name='email' type='email' class='form-control'>";
+		    html += "</div>";
+		    html += "<div class='form-group'>";
+		    html += "  <label>비밀번호 <small>(required)</small></label>";
+		    html += "  <input name='pw' type='password' class='form-control'>";
+		    html += "</div>";
+		    html += "<div class='form-group'>";
+		    html += "  <label>비밀번호 확인<small>(required)</small></label>";
+		    html += "<input name='repw' type='password' class='form-control'>";
+		    html += "</div>";
+		$("#base-container").html(html);
+	}
+	
+	if (type == "company") {
+		
+		var html  = "<div class='form-group'>";
+		    html += "  <label>이메일 <small>(required)</small></label>";
+		    html += "  <input name='email' type='email' class='form-control'>";
+		    html += "</div>";
+		    html += "<div class='form-group'>";
+		    html += "  <label>비밀번호 <small>(required)</small></label>";
+		    html += "  <input name='pw' type='password' class='form-control'>";
+		    html += "</div>";
+		    html += "<div class='form-group'>";
+		    html += "  <label>비밀번호 확인<small>(required)</small></label>";
+		    html += "<input name='repw' type='password' class='form-control'>";
+		    html += "</div>";
+		    /*html += "<div class='form-group'>";
+		    html += "  <label>전화번호<small>(required)</small></label>";
+		    html += "  <input name='tel' type='tel' class='form-control'>";
+		    html += "</div>";
+		    html += "<div class='form-group'>";
+		    html += "  <label>주소<small>(required)</small></label>";
+		    html += "  <input name='addr' type='text' class='form-control'>";
+		    html += "</div>";*/
+	    $("#base-container").html(html);
+	}
+	// html 태그 구성
+	// 1. 일반 사용자 일시
+	var html = ""
 
     $(".wizard-card form").validate({
         rules: {
@@ -157,6 +248,37 @@ function validateFirstStep() {
 
 function validateSecondStep() {
 	
+	console.log( $(":input:radio[name=type]:checked").val());
+	
+	var type = $(":input:radio[name=type]:checked").val();
+	
+	if (type == "users") {
+		var html  = "<div class='row'>";
+		    html += "  <div class='container-fluid'>";
+		    html += "  <div class='col-sm-3'></div>";
+		    html += "  <div class='col-sm-6'>";
+		    html += "    <div class='form-group'>";
+		    html += "      <label>휴대폰 번호<small>(required)</small></label>";
+		    html += "      <input name='tel' type='tel' class='form-control'>";
+		    html += "    </div>";
+		    html += "    <div class='form-group'>";
+		    html += "      <label>생년월일<small>(required)</small></label>";
+		    html += "      <input name='birthday' type='date' class='form-control'>";
+		    html += "    </div>";
+		    html += "    <div class='form-group'>";
+		    html += "      <label class='dp-block'>주소<small>(required)</small></label>";
+		    html += "      <input id='postcode' name='postcode' type='text' class='form-control form-addr' placeholder='우편번호'>";
+		    html += "      <button id='btnAddr' class='btn btn-addr'>우편검색</button>";
+		    html += "      <input id='addr' name='addr' type='text' class='form-control' placeholder='주소'>";
+		    html += "      <input id='addrdetail' name='addrdetail' type='text' class='form-control' placeholder='상세주소'>";
+		    html += "    </div>";
+		    html += "  </div>";
+		    html += "  <div class='col-sm-3'></div>";
+		    html += "</div>";
+	    
+		$("#step3").html(html);
+	}
+                                          
     //code here for second step
     $(".wizard-card form").validate({
         rules: {
