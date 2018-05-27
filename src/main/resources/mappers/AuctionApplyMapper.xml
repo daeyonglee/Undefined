@@ -190,7 +190,6 @@ SELECT M.*
                 WHERE  saa_no > 0
                 ORDER  BY saa_no DESC, 
                           regdate desc)) M
- WHERE rnum between #{start} and #{end}              
 ]]>
 </select>
 

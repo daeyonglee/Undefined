@@ -43,7 +43,7 @@ public class AuctionCountTest {
 	
 	@Test
 	public void test2() throws Exception {
-		logger.info(applyDao.realtimelist(1, 20));
+		logger.info(applyDao.realtimelist());
 	}
 	
 }

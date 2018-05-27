@@ -62,14 +62,8 @@ public class MyBatisAuctionApplyDao implements AuctionApplyDao {
 	}
 	
 	@Override
-	public List<Auction> realtimelist(int start, int end) throws Exception {
-		
-		Map<String, Object> map = new HashMap<>();
-		
-		map.put("start", start);
-		map.put("end", end);
-		
-		return session.selectList(NAMESPACE+ ".realtimelist", map);
+	public List<Auction> realtimelist() throws Exception {
+		return session.selectList(NAMESPACE+ ".realtimelist");
 	}
 
 }
