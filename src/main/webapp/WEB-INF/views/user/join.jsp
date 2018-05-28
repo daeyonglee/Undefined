@@ -97,62 +97,9 @@
                                   <!--  End step 2 -->
                                   
                                   <div class="tab-pane" id="step3">
-                                    <div class="row">
-                                      <div class="col-sm-4 col-sm-offset-1">
-                                        <div class="picture-container">
-                                            <div class="picture">
-                                                <img class="picture-src" id="wizardPicturePreview" title=""/>
-                                                <input type="file" id="wizard-picture">
-                                            </div>
-                                            <div>
-                                              <label>대표 사진</label>
-                                            </div>
-                                        </div>
-                                      </div>
-                                      <div class="col-sm-6">
-                                        <div class="form-group">
-                                          <label class="dp-block">사업자번호<small>(required)</small></label>
-                                          <input class="form-control form-addr" type="text" placeholder="사업자번호">
-                                          <button class="btn btn-addr">검색</button>
-                                        </div>
-                                        <div class="form-group">
-                                          <label>회사명</label>
-                                          <input class="form-control" type="text" placeholder="회사명">
-                                        </div>
-                                        <div class="form-group">
-                                          <label>회사 주소</label>
-                                          <input class="form-control" type="text" placeholder="회사 주소">
-                                        </div>
-                                        <div class="form-group">
-                                          <label>전화 번호</label>
-                                          <input class="form-control" type="tel" placeholder="전화 번호">
-                                        </div>
-                                        <div class="form-group">
-                                          <label>업체 종류</label>
-                                          <div class="checkbox">
-                                            <label>
-                                                <input type="radio" name="company-type" value="dress" checked="checked" /> <strong>드레스</strong>
-                                            </label>
-                                            <label>
-                                                <input type="radio" name="company-type" value="studio" /> <strong>스튜디오</strong>
-                                            </label>
-                                            <label>
-                                              <input type="radio" name="company-type" value="makeup" /> <strong>메이크업</strong>
-                                            </label>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div class="row">
-                                      <div class="col-sm-12">
-                                        <div class="form-group">
-                                          <label>업체 소개</label>
-                                          <textarea class="tx-cp-memo" maxlength="1000"></textarea>
-                                        </div>
-                                      </div>
-                                    </div>
+                                    
                                   <!--  End step 3 -->
-                                  
+                                  </div>
                                 </div>
 
                                 <div class="wizard-footer">
@@ -175,17 +122,6 @@
         </div>
          
   <%@include file="../include/bottom.jsp" %> 
-  
-  <script>
-  	$(document).ready(function(){
-  		
-  		$('.wizard-card').bootstrapWizard({
-  			
-  			
-  		});
-  		
-  	});
-  </script>
   
 </body>
 </html>

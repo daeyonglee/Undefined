@@ -56,7 +56,7 @@ $(document).ready(function () {
     });
 
     // Prepare the preview for profile picture
-    $("#wizard-picture").change(function () {
+    $(document).on('change', '#wizard-picture', function (e) {
         readURL(this);
     });
 
@@ -85,7 +85,7 @@ $(document).ready(function () {
      * 주소 버튼 클릭 이벤트 처리
      * @returns
      */
-    $('#btnAddr').on('click', function(e){
+    $(document).on('click', '#btnAddr', function(e){
     	e.preventDefault();
     	
     	new daum.Postcode({
@@ -143,11 +143,11 @@ function validateFirstStep() {
 		    html += "</div>";
 		    html += "<div class='form-group'>";
 		    html += "  <label>비밀번호 <small>(required)</small></label>";
-		    html += "  <input name='pw' type='password' class='form-control'>";
+		    html += "  <input name='pw' id='pw' type='password' class='form-control'>";
 		    html += "</div>";
 		    html += "<div class='form-group'>";
 		    html += "  <label>비밀번호 확인<small>(required)</small></label>";
-		    html += "<input name='repw' type='password' class='form-control'>";
+		    html += "<input name='repw' id='repw' type='password' class='form-control'>";
 		    html += "</div>";
 		$("#base-container").html(html);
 	}
@@ -160,11 +160,11 @@ function validateFirstStep() {
 		    html += "</div>";
 		    html += "<div class='form-group'>";
 		    html += "  <label>비밀번호 <small>(required)</small></label>";
-		    html += "  <input name='pw' type='password' class='form-control'>";
+		    html += "  <input name='pw' id='pw' type='password' class='form-control'>";
 		    html += "</div>";
 		    html += "<div class='form-group'>";
 		    html += "  <label>비밀번호 확인<small>(required)</small></label>";
-		    html += "<input name='repw' type='password' class='form-control'>";
+		    html += "<input name='repw' id='repw' type='password' class='form-control'>";
 		    html += "</div>";
 		    /*html += "<div class='form-group'>";
 		    html += "  <label>전화번호<small>(required)</small></label>";
@@ -180,13 +180,20 @@ function validateFirstStep() {
 	// 1. 일반 사용자 일시
 	var html = ""
 
-    $(".wizard-card form").validate({
+    var $validator = $(".wizard-card form").validate({
         rules: {
-            firstname: "required",
-            lastname: "required",
             email: {
                 required: true,
                 email: true
+            },
+            pw: {
+            	required: true,
+            	minlength: 6,
+            	maxlength: 20
+            },
+            repw: {
+            	required: true,
+            	equalTo: "#pw"
             }
 
             /*  other possible input validations
@@ -213,9 +220,12 @@ function validateFirstStep() {
 
         },
         messages: {
-            firstname: "Please enter your First Name",
-            lastname: "Please enter your Last Name",
-            email: "Please enter a valid email address",
+            email: "이메일 형식이 유효하지 않습니다.",
+            pw: "6~20자 사이의 값을 입력해주세요.",
+            repw: {
+            	required: "비밀번호가 일치하지 않습니다.",
+            	equalTo: "비밀번호가 일치하지 않습니다."
+            }
             /*   other posible validation messages
              username: {
              required: "Please enter a username",
@@ -239,7 +249,8 @@ function validateFirstStep() {
     });
 
     if (!$(".wizard-card form").valid()) {
-        //form is invalid
+    	console.log($validator);
+    	$validator.focusInvalid();
         return false;
     }
 
@@ -259,18 +270,18 @@ function validateSecondStep() {
 		    html += "  <div class='col-sm-6'>";
 		    html += "    <div class='form-group'>";
 		    html += "      <label>휴대폰 번호<small>(required)</small></label>";
-		    html += "      <input name='tel' type='tel' class='form-control'>";
+		    html += "      <input name='tel' id='tel' type='tel' class='form-control'>";
 		    html += "    </div>";
 		    html += "    <div class='form-group'>";
 		    html += "      <label>생년월일<small>(required)</small></label>";
-		    html += "      <input name='birthday' type='date' class='form-control'>";
+		    html += "      <input name='birthday' id='birthday' type='date' class='form-control'>";
 		    html += "    </div>";
 		    html += "    <div class='form-group'>";
 		    html += "      <label class='dp-block'>주소<small>(required)</small></label>";
 		    html += "      <input id='postcode' name='postcode' type='text' class='form-control form-addr' placeholder='우편번호'>";
 		    html += "      <button id='btnAddr' class='btn btn-addr'>우편검색</button>";
 		    html += "      <input id='addr' name='addr' type='text' class='form-control' placeholder='주소'>";
-		    html += "      <input id='addrdetail' name='addrdetail' type='text' class='form-control' placeholder='상세주소'>";
+		    html += "      <input id='addrdetail'name='addrdetail' type='text' class='form-control' placeholder='상세주소'>";
 		    html += "    </div>";
 		    html += "  </div>";
 		    html += "  <div class='col-sm-3'></div>";
@@ -278,17 +289,92 @@ function validateSecondStep() {
 	    
 		$("#step3").html(html);
 	}
+	
+	if (type == 'company') {
+		var html  = "<div class='row'>";
+		    html += "  <div class='col-sm-4 col-sm-offset-1'>";
+		    html += "    <div class='picture-container'>";
+		    html += "	   <div class='picture'>";
+		    html += "        <img class='picture-src' id='wizardPicturePreview' title=''/>";
+		    html += "        <input type='file' id='wizard-picture'>";
+		    html += "      </div>";
+		    html += "      <div>";
+		    html += "        <label>대표 사진</label>";
+		    html += "      </div>";
+		    html += "    </div>";
+		    html += "  </div>";
+		    html += "  <div class='col-sm-6'>";
+		    html += "    <div class='form-group'>";
+		    html += "      <input class='form-control form-addr' type='text' placeholder='사업자번호'>";
+		    html += "      <button class='btn btn-addr'>검색</button>";
+		    html += "    </div>";
+		    html += "    <div class='form-group'>";
+		    html += "      <label>회사명</label>";
+		    html += "      <input class='form-control' type='text' placeholder='회사명'>";
+		    html += "    </div>";
+		    html += "    <div class='form-group'>";
+		    html += "      <label>회사 주소</label>";
+		    html += "      <input class='form-control' type='text' placeholder='회사 주소'>";
+		    html += "    </div>";
+		    html += "    <div class='form-group'>";
+		    html += "      <label>전화 번호</label>";
+		    html += "      <input class='form-control' type='tel' placeholder='전화 번호'>";
+		    html += "    </div>";
+		    html += "    <div class='form-group'>";
+		    html += "      <label>업체 종류</label>";
+		    html += "        <div class='checkbox'>";
+		    html += "          <label>";
+		    html += "            <input type='radio' name='company-type' value='dress' checked='checked' /> <strong>드레스</strong>";
+		    html += "          </label>";
+		    html += "          <label>";
+		    html += "            <input type='radio' name='company-type' value='studio' /> <strong>스튜디오</strong>";
+		    html += "          </label>";
+		    html += "          <label>";
+		    html += "            <input type='radio' name='company-type' value='makeup' /> <strong>메이크업</strong>";
+		    html += "          </label>";
+		    html += "        </div>";
+		    html += "    </div>";
+		    html += "  </div>";
+		    html += "</div>";
+		    html += "<div class='row'>";
+		    html += "  <div class='col-sm-12'>";
+		    html += "    <div class='form-group'>";
+		    html += "      <label>업체 소개</label>";
+		    html += "      <textarea class='tx-cp-memo' maxlength='1000'></textarea>";
+		    html += "    </div>";
+		    html += "  </div>";
+		    html += "</div>";
+		 
+	   $("#step3").html(html);    
+	   
+	   // 체크버튼 iCheck 활성화
+	   $('input').iCheck({
+	        checkboxClass: 'icheckbox_square-yellow',
+	        radioClass: 'iradio_square-yellow',
+	        increaseArea: '20%' // optional
+	   });
+	}
                                           
     //code here for second step
     $(".wizard-card form").validate({
         rules: {
+        	tel:{
+        		required: true,
+        		tel: true
+        	},
+        	birthday:{
+        		required: true,
+        		date: true
+        	},
+        	addrdetail: {
+        		required: "#postcode"
+        	}
         },
         messages: {
         }
     });
 
     if (!$(".wizard-card form").valid()) {
-        console.log('invalid');
         return false;
     }
     return true;
