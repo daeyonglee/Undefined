@@ -98,10 +98,10 @@
   	})
   	
   	function numOnly(){
-    	$("input:text[name='minCost']").keyup(function () { 
+    	$("input:text[name='minCost']").on("keyup", function () { 
     	    this.value = this.value.replace(/[^0-9]/g,'');
     	});
-    	$("input:text[name='maxCost']").keyup(function () { 
+    	$("input:text[name='maxCost']").on("keyup", function () { 
     	    this.value = this.value.replace(/[^0-9]/g,'');
     	});
     }
@@ -138,19 +138,6 @@
   	}
     
     function toggleForm(){
-    	$("input:checkbox[name='item']").each(function(){
-    		var form = '.' + $(this).val() + 'Form';
-    		$(form).toggle("slow");
-    		$('.message').html("");
-    	})
-    		
-    	$("input:checkbox[name='item']").on("click", function(){
-    		if($(this).is(":checked")){
-        		$('.searchBtn').show("slow");
-    		} else {
-        		$('.searchBtn').hide("slow");
-    		}
-    	})
 
     	/* $("input:checkbox[name='item']:checked").each(function(){
     		var form = '.' + $(this).val() + 'Form';
