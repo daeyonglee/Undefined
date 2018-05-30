@@ -68,6 +68,9 @@ text-align: center;
 			</div>
       <button id="bidListBtn">입찰 리스트</button>
       <button id="winListBtn">낙찰 리스트</button>
+      <button id="studioRegistBtn">스튜디오 역경매 신청하기</button>
+      <button id="dressRegistBtn">드레스 역경매 신청하기</button>
+      <button id="makeupRegistBtn">메이크업 역경매 신청하기</button>
 		</div>
 	</div>
 		<div class="client-text">
@@ -91,6 +94,24 @@ text-align: center;
         $('#winListBtn').on("click", function(evt) {
 
             self.location = "win";
+
+          });
+        
+        $('#studioRegistBtn').on("click", function(evt) {
+
+            self.location = "apply";
+
+          });
+        
+        $('#dressRegistBtn').on("click", function(evt) {
+
+            self.location = "apply";
+
+          });
+        
+        $('#makeupRegistBtn').on("click", function(evt) {
+
+            self.location = "apply";
 
           });
 

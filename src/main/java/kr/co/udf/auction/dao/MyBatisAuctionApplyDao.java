@@ -1,12 +1,11 @@
 package kr.co.udf.auction.dao;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.List; 
 
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
 import kr.co.udf.auction.domain.Auction;
@@ -18,14 +17,28 @@ public class MyBatisAuctionApplyDao implements AuctionApplyDao {
 	
 	private static final String NAMESPACE = "kr.co.udf.auction.dao.MyBatisAuctionApplyDao";
 	
+	Logger logger = Logger.getLogger(MyBatisAuctionApplyDao.class);
+	
 	@Inject
 	private SqlSession session;
 
+
 	@Override
-	public void create(Auction auction) throws Exception {
-		session.insert(NAMESPACE + ".create", auction);
+	public void createStudio(Auction auction) throws Exception {
+		session.insert(NAMESPACE + ".createStudio", auction);
 
 	}
+
+	@Override
+	public void createDress(Auction auction) throws Exception {
+		session.insert(NAMESPACE + ".createDress", auction);
+		
+	}
+
+	@Override
+	public void createMakeup(Auction auction) throws Exception {
+		session.insert(NAMESPACE + ".createMakeup", auction);
+	}		
 
 	@Override
 	public Auction read(int no) throws Exception {
@@ -56,14 +69,31 @@ public class MyBatisAuctionApplyDao implements AuctionApplyDao {
 	}
 
 	@Override
-	public int countPage(Params params) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+	public int countPage() throws Exception {
+		return session.selectOne(NAMESPACE + ".countPage");
 	}
 	
+
 	@Override
-	public List<Auction> realtimelist() throws Exception {
-		return session.selectList(NAMESPACE+ ".realtimelist");
+	public List<Auction> listByStudio(SearchParams params) throws Exception {
+		return session.selectList(NAMESPACE + ".listByStudio", params);
+	}
+
+	@Override
+	public List<Auction> listByDress(SearchParams params) throws Exception {
+		return session.selectList(NAMESPACE + ".listByDress", params);
+
+	}
+
+	@Override
+	public List<Auction> listByMakeup(SearchParams params) throws Exception {
+		return session.selectList(NAMESPACE + ".listByMakeup", params);
+
+	}
+
+	@Override
+	public int listByTypeCount() throws Exception {
+		return session.selectOne(NAMESPACE + ".listByTypeCount");
 	}
 
 }

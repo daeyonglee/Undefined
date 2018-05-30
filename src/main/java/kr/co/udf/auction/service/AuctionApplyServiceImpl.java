@@ -18,11 +18,34 @@ public class AuctionApplyServiceImpl implements AuctionApplyService {
 	
 
 	@Override
-	public void create(Auction auction) throws Exception {
-		dao.create(auction);
-
+	public void createDress(Auction auction) throws Exception {
+		dao.createDress(auction);
 	}
 
+	@Override
+	public void createStudio(Auction auction) throws Exception {
+		dao.createStudio(auction);
+	}
+
+	@Override
+	public void createMakeup(Auction auction) throws Exception {
+		dao.createMakeup(auction);
+	}
+	
+	@Override
+	public List<Auction> listByDress(SearchParams params) throws Exception {
+		return dao.listByDress(params);
+	}
+
+	@Override
+	public List<Auction> listByStudio(SearchParams params) throws Exception {
+		return dao.listByStudio(params);
+	}
+
+	@Override
+	public List<Auction> listByMakeup(SearchParams params) throws Exception {
+		return dao.listByMakeup(params);
+	}
 	@Override
 	public Auction read(int no) throws Exception {
 		// TODO Auto-generated method stub
@@ -52,7 +75,15 @@ public class AuctionApplyServiceImpl implements AuctionApplyService {
 	}
 
 	@Override
-	public List<Auction> realtimelist() throws Exception {
-		return dao.realtimelist();
+	public int countPage() throws Exception {
+		return dao.countPage();
 	}
+
+
+	@Override
+	public int listByTypeCount() throws Exception {
+		return dao.listByTypeCount();
+	}
+
+
 }
