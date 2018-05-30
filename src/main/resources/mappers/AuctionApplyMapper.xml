@@ -55,7 +55,7 @@ SELECT s.saa_no  no
 WHERE s.saa_stat = '입찰중' OR s.saa_stat = '낙찰대기중'
 </select>
 
-<!--  스드메 신청서 신규 작성 -->
+<!--  스드메 신청서 신규 작성 --> 
 <insert id="createMakeup" parameterType="Auction">
 INSERT INTO makeup_auction_apply 
             (maa_no, 

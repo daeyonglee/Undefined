@@ -31,15 +31,11 @@ public interface AuctionApplyDao {
 	// 전체 게시물 조회 + 페이징 처리
 	public List<Auction> listParams(SearchParams params) throws Exception;
 	
-<<<<<<< HEAD
 
 	// 카테고리별 게시물 조회 + 페이징 처리
 	public List<Auction> listByStudio(SearchParams params) throws Exception;
 	public List<Auction> listByDress(SearchParams params) throws Exception;
 	public List<Auction> listByMakeup(SearchParams params) throws Exception;
-=======
-	public List<Auction> realtimelist() throws Exception;
->>>>>>> 9e4792a23aafeaa381f021f00efd7e91d3b1a6c4
 	
 
 	// 카테고리별 게시물 수 조회 

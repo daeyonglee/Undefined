@@ -133,7 +133,7 @@ td, th {
  </form>
 
 
-  <script>
+  <script> 
 			var result = '${msg}';
 
 			if (result == 'SUCCESS') {

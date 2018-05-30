@@ -15,7 +15,7 @@ public class PageMaker {
 	private boolean next;
 	
 	private int displayPageNum = 10;
-	private SearchParams params;
+	private SearchParams params; 
 	
 	public void setParams(SearchParams params) {
 		this.params = params;

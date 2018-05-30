@@ -163,7 +163,7 @@ VALUES    (dress_auction_apply_seq.NEXTVAL
           , '결혼임박'
           , '낙찰'
           , sysdate);
-COMMIT;
+COMMIT; 
 
 
 SELECT *

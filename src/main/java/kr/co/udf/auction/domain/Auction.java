@@ -31,7 +31,7 @@ public class Auction {
 		this.type = type;
 		this.writer = writer;
 		this.deadline = deadline;
-		this.stat = stat;
+		this.stat = stat; 
 		this.regdate = regdate;
 		this.updatedate = updatedate;
 		this.date = date;

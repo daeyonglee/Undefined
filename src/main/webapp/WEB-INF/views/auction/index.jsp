@@ -5,7 +5,7 @@
 <head>
 <title>역경매 메인 페이지</title>
 </head>
-<body>
+<body> 
 
   <%@include file="../include/top.jsp"%>
   <!-- Count area -->

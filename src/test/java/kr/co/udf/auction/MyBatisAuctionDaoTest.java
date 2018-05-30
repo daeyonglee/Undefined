@@ -85,7 +85,7 @@ public class MyBatisAuctionDaoTest {
 	public void listByTypeTest() throws Exception{
 		String keyword = "dress";
 //		List<Auction> list = dao.listByType(keyword);
-//		logger.info(list);
+//		logger.info(list); 
 	}
 
 }

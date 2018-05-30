@@ -168,7 +168,7 @@ width: 20%;
     	  
       });
       
-      </script>
+      </script> 
 
   <%@include file="../include/bottom.jsp"%>
 

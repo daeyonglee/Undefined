@@ -37,13 +37,13 @@ public class AuctionCountTest {
 	
 //	@Test
 	public void test() {
-		logger.info(dao.count());
+		logger.info(dao.count()); 
 	}
 
 	
-	@Test
+	/*@Test
 	public void test2() throws Exception {
 		logger.info(applyDao.realtimelist());
-	}
+	}*/
 	
 }

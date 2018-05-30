@@ -44,7 +44,7 @@ public class SpareAuctionController {
 	@RequestMapping(value = "/apply", method = RequestMethod.POST)
 	public String apply(Auction auction, RedirectAttributes rttr) throws Exception {
 		logger.info("apply post..... 전달받은 인자 : " + auction);
-		service.create(auction);
+//		service.create(auction);
 
 		rttr.addFlashAttribute("msg", "SUCCESS");
 		return "redirect:/auction/bid";
@@ -89,21 +89,6 @@ public class SpareAuctionController {
 		return entity;
 	}
 
-	
-	@RequestMapping(value = "realtimelist", method = RequestMethod.GET)
-	public ResponseEntity<List<Auction>> realtimelist() {
-
-		ResponseEntity<List<Auction>> entity = null;
-		try {
-			entity = new ResponseEntity<>(service.realtimelist(), HttpStatus.OK);
-		} catch (Exception e) {
-			e.printStackTrace();
-			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}
-
-		return entity;
-
-	}
 	
 
 	
