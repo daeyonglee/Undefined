@@ -81,6 +81,66 @@ $(document).ready(function () {
     $height = $(document).height();
     $('.set-full-height').css('height', $height);
 
+    /**************************************************************
+     * 이벤트 등록 영역                                               *
+     **************************************************************/
+    
+    /**
+     * 가입하기 버튼에 대한 클릭 이벤트
+     */
+    $(document).on('click', 'input[name="finish"]', function(e){
+    	
+    	var type = $(":input:radio[name=type]:checked").val();
+    	var form = document.forms[0];
+    	
+    	if (type == 'users') {
+    		form.action = '/user/userjoin';
+    	}
+    	if (type == 'company') {
+    		form.action = '/user/companyjoin';
+    		form.enctype = 'multipart/form-data';
+    	}
+    	
+    	form.submit();
+    	
+    });
+    
+    /**
+     * 사업자번호에 해당하는 사업자 정보 조회하기
+     */
+    $(document).on('click', '#authCp', function(e){
+    	e.preventDefault();
+    	
+    	var bzowr_rgst_no = $('input[name="companyNo"]').val(); 
+    	var wkpl_nm = $('input[name="name"]').val();
+    	var url = 'http://apis.data.go.kr/B552015/NpsBplcInfoInqireService/getBassInfoSearch?serviceKey=0FwR7es8bXjf958cfwrKjsoU37Ylsl26vr9cInO9I%2FELaImq4zuqdCQNlnLKMp0kI4f4X6xS9T01iyFhoPOKXw%3D%3D&bzowr_rgst_no='+bzowr_rgst_no+"&wkpl_nm="+wkpl_nm;
+    	console.log(url);
+    	var yqlURL = [ "http://query.yahooapis.com/v1/public/yql", "?q=" + encodeURIComponent("select * from xml where url='" + url + "'"), "&format=xml&callback=?" ].join("");
+    	
+    	$.ajax({
+    		url: yqlURL,
+    		dataType: 'json',
+    		success:function(data){
+    			
+    			var companyNo = $(data.results[0]).find("bzowrRgstNo").text();
+    			var companyNm = $(data.results[0]).find("wkplNm").text();
+    			
+    			if (companyNo == "" || companyNm == "") {
+    				alert("인증 실패하였습니다.");
+    				$('input[name="companyNo"]').prop('disabled', false);
+        			$('input[name="name"]').prop('disabled', false);
+    			} else {
+    				alert("정상적으로 인증되었습니다.");
+    				$('input[name="cn"]').val($('input[name="companyNo"]').val());
+    				$('input[name="nm"]').val($('input[name="name"]').val());
+    				$('input[name="companyNo"]').prop('disabled', true);
+        			$('input[name="name"]').prop('disabled', true);
+        			$('#authCp').prop('disabled', true);
+    			}
+    		}
+    	});
+    });
+    
     /**
      * 주소 버튼 클릭 이벤트 처리
      * @returns
@@ -268,6 +328,10 @@ function validateSecondStep() {
 		    html += "  <div class='container-fluid'>";
 		    html += "  <div class='col-sm-3'></div>";
 		    html += "  <div class='col-sm-6'>";
+		    html += "    <div class='form-group'";
+		    html += "      <label>이름<small>(required)</small></label>";
+		    html += "      <input name='name' id='name' type='text' class='form-control'>";
+		    html += "    </div>";
 		    html += "    <div class='form-group'>";
 		    html += "      <label>휴대폰 번호<small>(required)</small></label>";
 		    html += "      <input name='tel' id='tel' type='tel' class='form-control'>";
@@ -296,7 +360,7 @@ function validateSecondStep() {
 		    html += "    <div class='picture-container'>";
 		    html += "	   <div class='picture'>";
 		    html += "        <img class='picture-src' id='wizardPicturePreview' title=''/>";
-		    html += "        <input type='file' id='wizard-picture'>";
+		    html += "        <input name='mainImg' type='file' id='wizard-picture'>";
 		    html += "      </div>";
 		    html += "      <div>";
 		    html += "        <label>대표 사진</label>";
@@ -305,32 +369,43 @@ function validateSecondStep() {
 		    html += "  </div>";
 		    html += "  <div class='col-sm-6'>";
 		    html += "    <div class='form-group'>";
-		    html += "      <input class='form-control form-addr' type='text' placeholder='사업자번호'>";
-		    html += "      <button class='btn btn-addr'>검색</button>";
+		    html += "      <label>사업자번호 앞자리 6자리</label>";
+		    html += "      <input name='companyNo' class='form-control' type='text' placeholder='사업자번호 앞 6자리'>";
+		    html += "      <input name='cn' type='hidden'>"
 		    html += "    </div>";
 		    html += "    <div class='form-group'>";
-		    html += "      <label>회사명</label>";
-		    html += "      <input class='form-control' type='text' placeholder='회사명'>";
+		    html += "      <label class='dp-block'>회사명</label>";
+		    html += "      <input name='name' class='form-control form-addr' type='text' placeholder='회사명'>";
+		    html += "      <input type='hidden' name='authChk' value='n'>";
+		    html += "      <input type='hidden' name='nm'>";
+		    html += "      <button id='authCp' class='btn btn-addr'>인증하기</button>";
 		    html += "    </div>";
 		    html += "    <div class='form-group'>";
-		    html += "      <label>회사 주소</label>";
-		    html += "      <input class='form-control' type='text' placeholder='회사 주소'>";
+		    html += "      <label>대표자명</label>";
+		    html += "      <input name='mainNm' type='text' class='form-control' placeholder='대표자명'>";
+		    html += "    </div>";
+		    html += "    <div class='form-group'>";
+		    html += "      <label class='dp-block'>회사 주소</label>";
+		    html += "      <input id='postcode' name='postcode' type='text' class='form-control form-addr' placeholder='우편번호'>";
+		    html += "      <button id='btnAddr' class='btn btn-addr'>우편검색</button>";
+		    html += "      <input id='addr' name='addr' type='text' class='form-control' placeholder='주소'>";
+		    html += "      <input id='addrdetail'name='addrdetail' type='text' class='form-control' placeholder='상세주소'>";
 		    html += "    </div>";
 		    html += "    <div class='form-group'>";
 		    html += "      <label>전화 번호</label>";
-		    html += "      <input class='form-control' type='tel' placeholder='전화 번호'>";
+		    html += "      <input name='tel' class='form-control' type='tel' placeholder='전화 번호'>";
 		    html += "    </div>";
 		    html += "    <div class='form-group'>";
 		    html += "      <label>업체 종류</label>";
 		    html += "        <div class='checkbox'>";
 		    html += "          <label>";
-		    html += "            <input type='radio' name='company-type' value='dress' checked='checked' /> <strong>드레스</strong>";
+		    html += "            <input type='radio' name='companyType' value='dress' checked='checked' /> <strong>드레스</strong>";
 		    html += "          </label>";
 		    html += "          <label>";
-		    html += "            <input type='radio' name='company-type' value='studio' /> <strong>스튜디오</strong>";
+		    html += "            <input type='radio' name='companyType' value='studio' /> <strong>스튜디오</strong>";
 		    html += "          </label>";
 		    html += "          <label>";
-		    html += "            <input type='radio' name='company-type' value='makeup' /> <strong>메이크업</strong>";
+		    html += "            <input type='radio' name='companyType' value='makeup' /> <strong>메이크업</strong>";
 		    html += "          </label>";
 		    html += "        </div>";
 		    html += "    </div>";
@@ -340,7 +415,7 @@ function validateSecondStep() {
 		    html += "  <div class='col-sm-12'>";
 		    html += "    <div class='form-group'>";
 		    html += "      <label>업체 소개</label>";
-		    html += "      <textarea class='tx-cp-memo' maxlength='1000'></textarea>";
+		    html += "      <textarea name='introduce' class='tx-cp-memo' maxlength='1000'></textarea>";
 		    html += "    </div>";
 		    html += "  </div>";
 		    html += "</div>";

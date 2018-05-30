@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+<mapper namespace="kr.co.udf.user.dao.UserJoinDao">
+	
+	<!-- 일반 사용자 회원가입 -->
+	<insert id="userjoin" parameterType="map">
+		INSERT INTO users
+		       (
+		         user_no
+		       , user_email
+		       , user_pw
+		       , user_nm
+		       , user_birthday
+		       , user_addr
+		       , user_tel
+		       ) VALUES (
+		         users_seq.nextval
+		       , #{user.email}
+		       , #{user.pw}
+		       , #{user.name}
+		       , to_date(#{user.birthday})
+		       , #{addr}
+		       , #{tel}
+		       )
+	</insert>
+	
+	<!-- 드레스 업체 회원가입 -->
+	<insert id="companyjoinDress" parameterType="map">
+			INSERT INTO dress_company
+			            (
+                     dc_no
+                   , dc_nm
+                   , dc_company_no
+                   , dc_main_nm
+                   , dc_addr
+                   , dc_main_image
+                   , dc_email
+                   , dc_pw
+                   , dc_tel
+                   , dc_introduce
+                   ) VALUES (
+                     dress_company_seq.nextval
+                   , #{company.nm}
+                   , #{company.cn}
+                   , #{company.mainNm}
+                   , #{addr}
+                   , #{image}
+                   , #{company.email}
+                   , #{company.pw}
+                   , #{company.tel}
+                   , #{company.introduce}
+                   )
+	</insert>
+	
+	<!-- 메이크업 업체 회원가입 -->
+	<insert id="companyjoinMakeup" parameterType="map">
+		INSERT INTO makeup_company
+		            (
+                    mc_no
+                  , mc_nm
+                  , mc_company_no
+                  , mc_main_nm
+                  , mc_addr
+                  , mc_main_image
+                  , mc_email
+                  , mc_pw
+                  , mc_tel
+                  , mc_introduce
+                  ) VALUES (
+                    makeup_company_seq.nextval
+                  , #{company.nm}
+                  , #{company.cn}
+                  , #{company.mainNm}
+                  , #{addr}
+                  , #{image}
+                  , #{company.email}
+                  , #{company.pw}
+                  , #{company.tel}
+                  , #{company.introduce}
+                  )
+	</insert>
+	
+	<!-- 스튜디오 업체 회원 가입 -->
+	<insert id="companyjoinStudio" parameterType="map">
+		INSERT INTO studio_company
+		            (
+                    sc_no
+                  , sc_nm
+                  , sc_company_no
+                  , sc_main_nm
+                  , sc_addr
+                  , sc_main_image
+                  , sc_email
+                  , sc_pw
+                  , sc_tel
+                  , sc_introduce
+                  ) VALUES (
+                    studio_company_seq.nextval
+	                 , #{company.nm}
+	                 , #{company.cn}
+	                 , #{company.mainNm}
+	                 , #{addr}
+	                 , #{image}
+	                 , #{company.email}
+	                 , #{company.pw}
+	                 , #{company.tel}
+	                 , #{company.introduce}
+                  )
+	</insert>
+	
+</mapper>
