@@ -15,7 +15,7 @@ public interface ArticleService {
 
   public void remove(Integer article_no) throws Exception;
 
-  public List<Map<String, Object>> listAll() throws Exception;
+  public List<Map<String, Object>> listAll(Integer board_no) throws Exception;
 //
 //  public List<Article> listCriteria(Criteria cri) throws Exception;
 //

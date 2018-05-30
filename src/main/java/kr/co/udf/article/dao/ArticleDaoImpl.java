@@ -38,7 +38,7 @@ public class ArticleDaoImpl implements ArticleDao {
 	}
 
 	@Override
-	public List<Map<String, Object>> listAll() throws Exception {
-		return session.selectList(namespace + ".listAll");
+	public List<Map<String, Object>> listAll(Integer board_no) throws Exception {
+		return session.selectList(namespace + ".listAll",board_no);
 	}
 }

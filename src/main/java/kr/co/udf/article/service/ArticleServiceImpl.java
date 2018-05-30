@@ -37,8 +37,8 @@ public class ArticleServiceImpl implements ArticleService {
   }
 
   @Override
-  public List<Map<String, Object>> listAll() throws Exception{
-    return dao.listAll();
+  public List<Map<String, Object>> listAll(Integer board_no) throws Exception{
+    return dao.listAll(board_no);
   }
 
 //  @Override

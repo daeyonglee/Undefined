@@ -23,9 +23,9 @@ public class ArticleController {
 	private ArticleService service;
 	
 	@RequestMapping(value = "/listAll", method = RequestMethod.GET)
-	public void listAll(Model model) throws Exception {
+	public void listAll(Model model,Integer board_no) throws Exception {
 		logger.info("show all list......................");
-		model.addAttribute("listAll", service.listAll());
+		model.addAttribute("listAll", service.listAll(board_no));
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
@@ -41,7 +41,7 @@ public class ArticleController {
 		service.regist(article);
 
 		rttr.addFlashAttribute("msg", "success");
-		return "redirect:/article/listAll";
+		return "redirect:/article/listAll?board_no=1";
 	}
 
 	@RequestMapping(value = "/read", method = RequestMethod.GET)
@@ -53,7 +53,7 @@ public class ArticleController {
 	public String remove(@RequestParam("article_no") int article_no, RedirectAttributes rttr) throws Exception {
 		service.remove(article_no);
 		rttr.addFlashAttribute("msg", "success");
-		return "redirect:/article/listAll";
+		return "redirect:/article/listAll?board_no=1";
 	}
 	
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
@@ -68,7 +68,7 @@ public class ArticleController {
 		service.modify(article);
 		rttr.addFlashAttribute("msg", "success");
 
-		return "redirect:/article/listAll";
+		return "redirect:/article/listAll?board_no=1";
 	}
 	
 	

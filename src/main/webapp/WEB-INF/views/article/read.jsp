@@ -13,7 +13,7 @@
       <!-- general form elements -->
       <div class="box box-primary">
         <div class="box-header">
-          <h3 class="box-title">${read.article_nm} 읽기</h3>
+          <h3 class="box-title">${read.board_nm} 읽기</h3>
         </div>
       </div>
       
@@ -102,7 +102,7 @@
 				});
 
 			$(".btn-primary").on("click",function() {
-				self.location = "/article/listAll";
+				self.location = "/article/listAll?board_no=${read.board_no}";
 			});
 		}); 
 	</script>

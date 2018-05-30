@@ -81,10 +81,10 @@ public class ArticleDaoTest {
     dao.delete(2);
   }
 
-//  @Test
+// @Test
   public void testListAll() throws Exception {
 		logger.debug("==================== 부서명 포함 전체사원 조회(조인) ========================");
-		List<Map<String, Object>> list = dao.listAll();
+		List<Map<String, Object>> list = dao.listAll(1);
 		for (Map<String, Object> row : list) {
 			// 숫자형은 BigDecimal로 받음
 			BigDecimal article_no = (BigDecimal) row.get("article_no");

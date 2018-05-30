@@ -23,16 +23,16 @@
 	</insert>
 
 	<select id="read" parameterType="Integer" resultType="map">
-		SELECT a.article_no 									"article_no", 
-		       a.article_head 									"article_head",
-		       a.article_title 									"article_title", 
-		       a.article_content 								"article_content", 
-		       a.user_no 										"user_no",
-		       To_char(a.regdate, 'YYYY-MM-DD') 				"regdate", 
-		       a.hitcount 										"hitcount", 
-		       a.board_no,
-          (SELECT user_nm FROM users WHERE user_no = a.user_no) "user_nm", 
-          (SELECT board_nm FROM board WHERE board_no = a.board_no) "board_nm"
+		SELECT a.article_no 										"article_no", 
+		       a.article_head 										"article_head",
+		       a.article_title 										"article_title", 
+		       a.article_content 									"article_content", 
+		       a.user_no 											"user_no",
+		       To_char(a.regdate, 'YYYY-MM-DD') 					"regdate", 
+		       a.hitcount 											"hitcount", 
+		       a.board_no 											"board_no",
+          (SELECT user_nm FROM users WHERE user_no = a.user_no) 	"user_nm", 
+          (SELECT board_nm FROM board WHERE board_no = a.board_no) 	"board_nm"
 		FROM article a
 		WHERE article_no = #{article_no}
 	</select>
@@ -52,17 +52,18 @@
 	</delete>
 	
 	<select id="listAll" resultType="map">
-	<![CDATA[
-		SELECT a.article_no 					"article_no", 
-		       a.article_head 					"head",
-		       a.article_title 					"article_title", 
-		       a.article_content 				"article_content", 
-		       u.user_nm 						"user_nm",
-		       To_char(a.regdate, 'YYYY-MM-DD') "regdate", 
-		       a.hitcount 						"hitcount"
+		SELECT a.article_no 											"article_no", 
+		       a.article_head 											"head",
+		       a.article_title 											"article_title", 
+		       a.article_content 										"article_content", 
+		       u.user_nm 												"user_nm",
+		       To_char(a.regdate, 'YYYY-MM-DD') 						"regdate", 
+		       a.hitcount 												"hitcount",
+		       a.board_no 												"board_no",
+		       (SELECT board_nm FROM board WHERE board_no = a.board_no) "board_nm"
 		FROM   article a JOIN  users u
 		ON a.user_no=u.user_no
-	]]>		   
+		WHERE a.board_no=#{board_no}  
 	</select>
 
 	 	<!-- 

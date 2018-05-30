@@ -15,7 +15,7 @@ public interface ArticleDao {
 
   public void delete(Integer article_no) throws Exception;
 
-  public List<Map<String, Object>> listAll() throws Exception;
+  public List<Map<String, Object>> listAll(Integer board_no) throws Exception;
   
 //  public List<Article> listPage(int page) throws Exception;
 //

@@ -14,10 +14,29 @@
       <!-- general form elements -->
       <div class="box">
         <div class="box-header with-border">
-          <h3 class="box-article_title">${read.board_nm}</h3>
+        <!-- 게시글 출력하기 -->
+        <%
+        if(Integer.parseInt(request.getParameter("board_no"))==1){
+        %>
+            <h3 class="box-article_title">공지사항</h3>
+        <%    
+        }else if(Integer.parseInt(request.getParameter("board_no"))==2){
+        %>
+            <h3 class="box-article_title">자유게시판</h3>
+        <%
+        }else if(Integer.parseInt(request.getParameter("board_no"))==3){
+        %>
+	       <h3 class="box-article_title">쪽지함</h3>
+        <%
+        }else{
+        %>
+	       <h3 class="box-article_title">List All 입니다.</h3>
+        <%         
+        }
+        %>
+        
         </div>
         <div class="box-body">
-
           <table class="table table-bordered">
             <tr>
               <th style="width: 60px">번호</th>
@@ -32,7 +51,7 @@
               <tr>
                 <td>${listAll.article_no}</td>
                 <td><a
-                  href='/article/read?board_no=${listAll.board_no}&article_no=${listAll.article_no}&article_nm=1'>${listAll.article_title}</a></td>
+                  href='/article/read?board_no=${listAll.board_no}&article_no=${listAll.article_no}'>${listAll.article_title}</a></td>
                 <td>${listAll.user_nm}</td>
                 <td>${listAll.regdate}</td>
                 <td><span class="badge bg-red">${listAll.hitcount }</span></td>
