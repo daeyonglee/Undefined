@@ -30,8 +30,6 @@ public interface AuctionApplyService {
 	// 전체 게시물 수
 	public int countPage() throws Exception;
 
-	public List<Auction> realtimelist() throws Exception;
-	
 	// 스.드.메 카테고리 별 게시물 조회
 	public List<Auction> listByDress(SearchParams params) throws Exception;
 	public List<Auction> listByStudio(SearchParams params) throws Exception;

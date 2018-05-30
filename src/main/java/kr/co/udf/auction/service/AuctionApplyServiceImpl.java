@@ -83,6 +83,4 @@ public class AuctionApplyServiceImpl implements AuctionApplyService {
 	public int listByTypeCount() throws Exception {
 		return dao.listByTypeCount();
 	}
-
-
 }
