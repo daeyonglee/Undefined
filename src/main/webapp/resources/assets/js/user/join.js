@@ -2,6 +2,113 @@ searchVisible = 0;
 transparent = true;
 
 $(document).ready(function () {
+	//code here for second step
+	var $validator = $(".wizard-card form").validate({
+        rules: {
+            email: {
+                required: true,
+                email: true
+            },
+            pw: {
+            	required: true,
+            	minlength: 6,
+            	maxlength: 20
+            },
+            repw: {
+            	required: true,
+            	equalTo: "#pw"
+            },
+            tel:{
+        		required: true,
+        	},
+        	/*birthday:{
+        		required: true,
+        		date: true
+        	},
+        	addrdetail: {
+        	}*/
+
+            /*  other possible input validations
+             ,username: {
+             required: true,
+             minlength: 2
+             },
+             password: {
+             required: true,
+             minlength: 5
+             },
+             confirm_password: {
+             required: true,
+             minlength: 5,
+             equalTo: "#password"
+             },
+             
+             topic: {
+             required: "#newsletter:checked",
+             minlength: 2
+             },
+             agree: "required"
+             */
+
+        },
+        messages: {
+            email: "이메일 형식이 유효하지 않습니다.",
+            pw: "6~20자 사이의 값을 입력해주세요.",
+            repw: {
+            	required: "비밀번호가 일치하지 않습니다.",
+            	equalTo: "비밀번호가 일치하지 않습니다."
+            },
+            tel: "전화번호 형식이 유효하지 않습니다. ex)xxx-xxxx-xxxx",
+        	birthday: "2345",
+        	addrdetail: "3456"
+            /*   other posible validation messages
+             username: {
+             required: "Please enter a username",
+             minlength: "Your username must consist of at least 2 characters"
+             },
+             password: {
+             required: "Please provide a password",
+             minlength: "Your password must be at least 5 characters long"
+             },
+             confirm_password: {
+             required: "Please provide a password",
+             minlength: "Your password must be at least 5 characters long",
+             equalTo: "Please enter the same password as above"
+             },
+             email: "Please enter a valid email address",
+             agree: "Please accept our policy",
+             topic: "Please select at least 2 topics"
+             */
+
+        }
+    });
+
+	/**
+	 * Finish 버튼에 대한 클릭 이벤트
+	 */
+	$('.btn-finish').click(function(){
+		
+		if (!$(".wizard-card form").valid()) {
+    		$validator.focusInvalid();
+            return false;
+        }
+		
+		var type = $(":input:radio[name=type]:checked").val();
+		var formobj = document.forms[0];
+		
+		if (type == "users") {
+			formobj.action = "/user/userjoin"
+			
+		}
+		
+		if (type == "company") {
+			formobj.action = "/user/companyjoin"
+		}
+		
+		formobj.submit();
+		
+	});
+	
     /*  Activate the tooltips      */
     $('[rel="tooltip"]').tooltip();
 
@@ -9,6 +116,7 @@ $(document).ready(function () {
         'tabClass': 'nav nav-pills',
         'nextSelector': '.btn-next',
         'previousSelector': '.btn-previous',
+        'lastSelector': '.btn-finish',
         onInit: function (tab, navigation, index) {
 
             //check number of tabs and fill the entire row
@@ -25,7 +133,13 @@ $(document).ready(function () {
 
         },
         onNext: function (tab, navigation, index) {
-            if (index == 1) {
+            
+        	if (!$(".wizard-card form").valid()) {
+        		$validator.focusInvalid();
+                return false;
+            }
+            
+        	if (index == 1) {
                 return validateFirstStep();
             } else if (index == 2) {
                 return validateSecondStep();
@@ -33,6 +147,7 @@ $(document).ready(function () {
                 return validateThirdStep();
             } //etc. 
 
+        	return true;
         },
         onTabClick: function (tab, navigation, index) {
             // Disable the posibility to click on tabs
@@ -54,7 +169,14 @@ $(document).ready(function () {
             }
         }
     });
-
+    
+    $('.wizard-card .btn-finish').click(function(e){
+    	if (!$(".wizard-card form").valid()) {
+    		$validator.focusInvalid();
+            return false;
+        }
+    });
+    
     // Prepare the preview for profile picture
     $(document).on('change', '#wizard-picture', function (e) {
         readURL(this);
@@ -176,85 +298,6 @@ function validateFirstStep() {
 		    html += "</div>";*/
 	    $("#base-container").html(html);
 	}
-	// html 태그 구성
-	// 1. 일반 사용자 일시
-	var html = ""
-
-    var $validator = $(".wizard-card form").validate({
-        rules: {
-            email: {
-                required: true,
-                email: true
-            },
-            pw: {
-            	required: true,
-            	minlength: 6,
-            	maxlength: 20
-            },
-            repw: {
-            	required: true,
-            	equalTo: "#pw"
-            }
-
-            /*  other possible input validations
-             ,username: {
-             required: true,
-             minlength: 2
-             },
-             password: {
-             required: true,
-             minlength: 5
-             },
-             confirm_password: {
-             required: true,
-             minlength: 5,
-             equalTo: "#password"
-             },
-             
-             topic: {
-             required: "#newsletter:checked",
-             minlength: 2
-             },
-             agree: "required"
-             */
-
-        },
-        messages: {
-            email: "이메일 형식이 유효하지 않습니다.",
-            pw: "6~20자 사이의 값을 입력해주세요.",
-            repw: {
-            	required: "비밀번호가 일치하지 않습니다.",
-            	equalTo: "비밀번호가 일치하지 않습니다."
-            }
-            /*   other posible validation messages
-             username: {
-             required: "Please enter a username",
-             minlength: "Your username must consist of at least 2 characters"
-             },
-             password: {
-             required: "Please provide a password",
-             minlength: "Your password must be at least 5 characters long"
-             },
-             confirm_password: {
-             required: "Please provide a password",
-             minlength: "Your password must be at least 5 characters long",
-             equalTo: "Please enter the same password as above"
-             },
-             email: "Please enter a valid email address",
-             agree: "Please accept our policy",
-             topic: "Please select at least 2 topics"
-             */
-
-        }
-    });
-
-    if (!$(".wizard-card form").valid()) {
-    	console.log($validator);
-    	$validator.focusInvalid();
-        return false;
-    }
-
-    return true;
 }
 
 function validateSecondStep() {
@@ -268,6 +311,10 @@ function validateSecondStep() {
 		    html += "  <div class='container-fluid'>";
 		    html += "  <div class='col-sm-3'></div>";
 		    html += "  <div class='col-sm-6'>";
+		    html += "    <div class='form-group'>";
+		    html += "      <label>이름<small>(required)</small></label>";
+		    html += "      <input name='name' id='name' type='text' class='form-control'>";
+		    html += "    </div>";
 		    html += "    <div class='form-group'>";
 		    html += "      <label>휴대폰 번호<small>(required)</small></label>";
 		    html += "      <input name='tel' id='tel' type='tel' class='form-control'>";
@@ -296,7 +343,7 @@ function validateSecondStep() {
 		    html += "    <div class='picture-container'>";
 		    html += "	   <div class='picture'>";
 		    html += "        <img class='picture-src' id='wizardPicturePreview' title=''/>";
-		    html += "        <input type='file' id='wizard-picture'>";
+		    html += "        <input type='file' name='file' id='wizard-picture'>";
 		    html += "      </div>";
 		    html += "      <div>";
 		    html += "        <label>대표 사진</label>";
@@ -305,32 +352,36 @@ function validateSecondStep() {
 		    html += "  </div>";
 		    html += "  <div class='col-sm-6'>";
 		    html += "    <div class='form-group'>";
-		    html += "      <input class='form-control form-addr' type='text' placeholder='사업자번호'>";
-		    html += "      <button class='btn btn-addr'>검색</button>";
+		    html += "      <label class='dp-block'>사업자 번호</label>";
+		    html += "      <input class='form-control form-addr' name='companyNo' type='text' placeholder='사업자번호'>";
+		    html += "      <button class='btn btn-addr'>인증하기</button>";
 		    html += "    </div>";
 		    html += "    <div class='form-group'>";
+		    html += "      <label>대표자명</label>";
+		    html += "      <input class='form-control' name='mainName' type='text' placeholder='대표자명'";
+		    html += "    <div class='form-group'>";
 		    html += "      <label>회사명</label>";
-		    html += "      <input class='form-control' type='text' placeholder='회사명'>";
+		    html += "      <input class='form-control' name='name' type='text' placeholder='회사명'>";
 		    html += "    </div>";
 		    html += "    <div class='form-group'>";
 		    html += "      <label>회사 주소</label>";
-		    html += "      <input class='form-control' type='text' placeholder='회사 주소'>";
+		    html += "      <input class='form-control' name='addr' type='text' placeholder='회사 주소'>";
 		    html += "    </div>";
 		    html += "    <div class='form-group'>";
 		    html += "      <label>전화 번호</label>";
-		    html += "      <input class='form-control' type='tel' placeholder='전화 번호'>";
+		    html += "      <input class='form-control' name='tel' type='tel' placeholder='전화 번호'>";
 		    html += "    </div>";
 		    html += "    <div class='form-group'>";
 		    html += "      <label>업체 종류</label>";
 		    html += "        <div class='checkbox'>";
 		    html += "          <label>";
-		    html += "            <input type='radio' name='company-type' value='dress' checked='checked' /> <strong>드레스</strong>";
+		    html += "            <input type='radio' name='companyType' value='dress' checked='checked' /> <strong>드레스</strong>";
 		    html += "          </label>";
 		    html += "          <label>";
-		    html += "            <input type='radio' name='company-type' value='studio' /> <strong>스튜디오</strong>";
+		    html += "            <input type='radio' name='companyType' value='studio' /> <strong>스튜디오</strong>";
 		    html += "          </label>";
 		    html += "          <label>";
-		    html += "            <input type='radio' name='company-type' value='makeup' /> <strong>메이크업</strong>";
+		    html += "            <input type='radio' name='companyType' value='makeup' /> <strong>메이크업</strong>";
 		    html += "          </label>";
 		    html += "        </div>";
 		    html += "    </div>";
@@ -340,7 +391,7 @@ function validateSecondStep() {
 		    html += "  <div class='col-sm-12'>";
 		    html += "    <div class='form-group'>";
 		    html += "      <label>업체 소개</label>";
-		    html += "      <textarea class='tx-cp-memo' maxlength='1000'></textarea>";
+		    html += "      <textarea class='tx-cp-memo' name='introduce' maxlength='1000'></textarea>";
 		    html += "    </div>";
 		    html += "  </div>";
 		    html += "</div>";
@@ -354,37 +405,9 @@ function validateSecondStep() {
 	        increaseArea: '20%' // optional
 	   });
 	}
-                                          
-    //code here for second step
-    $(".wizard-card form").validate({
-        rules: {
-        	tel:{
-        		required: true,
-        		tel: true
-        	},
-        	birthday:{
-        		required: true,
-        		date: true
-        	},
-        	addrdetail: {
-        		required: "#postcode"
-        	}
-        },
-        messages: {
-        }
-    });
-
-    if (!$(".wizard-card form").valid()) {
-        return false;
-    }
-    return true;
-
 }
 
 function validateThirdStep() {
-    //code here for third step
-
-
 }
 
 //Function to show image before upload

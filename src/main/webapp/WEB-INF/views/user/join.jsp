@@ -38,7 +38,7 @@
                     <div class="wizard-container"> 
 
                         <div class="wizard-card ct-wizard-orange" id="wizardProperty">
-                            <form action="">                        
+                            <form method="post" enctype="multipart/form-data">                        
                                 <div class="wizard-header">
                                     <!-- <h3>
                                         <b>약관 동의</b><br>
@@ -50,7 +50,7 @@
                                     <li><a href="#step1" data-toggle="tab">회원 분류</a></li>
                                     <li><a href="#step2" data-toggle="tab">기본 정보</a></li>
                                     <li><a href="#step3" data-toggle="tab">추가 정보</a></li>
-                                </ul>
+                                </ul> 
 
                                 <div class="tab-content">
                                   
@@ -111,7 +111,7 @@
                                     <div class="pull-left">
                                         <input type='button' class='btn btn-previous btn-primary' name='previous' value='Previous' />
                                     </div>
-                                    <div class="clearfix"></div>                                            
+                                    <div class="clearfix"></div>                                         
                                 </div>	
                             </form>
                         </div>
