@@ -2,117 +2,161 @@ package kr.co.udf.common.company.domain;
 
 public class DressCompany {
 
-	private int companyNo;
-	private String nm;
-	private int regNo; // 사업자번호
-	private String headName; // 회사대표 이름
-	private String addr;
-	private String mainImage;
-	private String email;
-	private String pw;
-	private int tel;
-	private String introduce;
+	private int dc_no;
+	private String dc_nm;
+	private int dc_company_no; // 사업자번호
+	private String dc_main_nm; // 회사대표 이름
+	private String dc_addr;
+	private String dc_main_image;
+	private String dc_email;
+	private String dc_pw;
+	private int dc_tel;
+	private String dc_introduce;
+	private String sessionKey;
+	private String sessionLimit;
 	private String regdate;
 	private String updatedate;
 
-	
 	/** 생성자 */
 	public DressCompany() {
 		super();
 	}
 
 	/** Getter & Setter */
-	public int getCompanyNo() {
-		return companyNo;
+	public int getDc_no() {
+		return dc_no;
 	}
 
-	public void setCompanyNo(int companyNo) {
-		this.companyNo = companyNo;
+
+	public void setDc_no(int dc_no) {
+		this.dc_no = dc_no;
 	}
 
-	public String getNm() {
-		return nm;
+
+	public String getDc_nm() {
+		return dc_nm;
 	}
 
-	public void setNm(String nm) {
-		this.nm = nm;
+
+	public void setDc_nm(String dc_nm) {
+		this.dc_nm = dc_nm;
 	}
 
-	public int getRegNo() {
-		return regNo;
+
+	public int getDc_company_no() {
+		return dc_company_no;
 	}
 
-	public void setRegNo(int regNo) {
-		this.regNo = regNo;
+
+	public void setDc_company_no(int dc_company_no) {
+		this.dc_company_no = dc_company_no;
 	}
 
-	public String getHeadName() {
-		return headName;
+
+	public String getDc_main_nm() {
+		return dc_main_nm;
 	}
 
-	public void setHeadName(String headName) {
-		this.headName = headName;
+
+	public void setDc_main_nm(String dc_main_nm) {
+		this.dc_main_nm = dc_main_nm;
 	}
 
-	public String getAddr() {
-		return addr;
+
+	public String getDc_addr() {
+		return dc_addr;
 	}
 
-	public void setAddr(String addr) {
-		this.addr = addr;
+
+	public void setDc_addr(String dc_addr) {
+		this.dc_addr = dc_addr;
 	}
 
-	public String getMainImage() {
-		return mainImage;
+
+	public String getDc_main_image() {
+		return dc_main_image;
 	}
 
-	public void setMainImage(String mainImage) {
-		this.mainImage = mainImage;
+
+	public void setDc_main_image(String dc_main_image) {
+		this.dc_main_image = dc_main_image;
 	}
 
-	public String getEmail() {
-		return email;
+
+	public String getDc_email() {
+		return dc_email;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+
+	public void setDc_email(String dc_email) {
+		this.dc_email = dc_email;
 	}
 
-	public String getPw() {
-		return pw;
+
+	public String getDc_pw() {
+		return dc_pw;
 	}
 
-	public void setPw(String pw) {
-		this.pw = pw;
+
+	public void setDc_pw(String dc_pw) {
+		this.dc_pw = dc_pw;
 	}
 
-	public int getTel() {
-		return tel;
+
+	public int getDc_tel() {
+		return dc_tel;
 	}
 
-	public void setTel(int tel) {
-		this.tel = tel;
+
+	public void setDc_tel(int dc_tel) {
+		this.dc_tel = dc_tel;
 	}
 
-	public String getIntroduce() {
-		return introduce;
+
+	public String getDc_introduce() {
+		return dc_introduce;
 	}
 
-	public void setIntroduce(String introduce) {
-		this.introduce = introduce;
+
+	public void setDc_introduce(String dc_introduce) {
+		this.dc_introduce = dc_introduce;
 	}
+
+
+	public String getSessionKey() {
+		return sessionKey;
+	}
+
+
+	public void setSessionKey(String sessionKey) {
+		this.sessionKey = sessionKey;
+	}
+
+
+	public String getSessionLimit() {
+		return sessionLimit;
+	}
+
+
+	public void setSessionLimit(String sessionLimit) {
+		this.sessionLimit = sessionLimit;
+	}
+
 
 	public String getRegdate() {
 		return regdate;
 	}
 
+
 	public void setRegdate(String regdate) {
 		this.regdate = regdate;
 	}
 
+
 	public String getUpdatedate() {
 		return updatedate;
 	}
+
 
 	public void setUpdatedate(String updatedate) {
 		this.updatedate = updatedate;
@@ -121,9 +165,10 @@ public class DressCompany {
 	/** toString */
 	@Override
 	public String toString() {
-		return "StudioCompany [companyNo=" + companyNo + ", nm=" + nm + ", regNo=" + regNo + ", headName=" + headName
-				+ ", addr=" + addr + ", mainImage=" + mainImage + ", email=" + email + ", pw=" + pw + ", tel=" + tel
-				+ ", introduce=" + introduce + ", regdate=" + regdate + ", updatedate=" + updatedate + "]";
+		return "DressCompany [dc_no=" + dc_no + ", dc_nm=" + dc_nm + ", dc_company_no=" + dc_company_no
+				+ ", dc_main_nm=" + dc_main_nm + ", dc_addr=" + dc_addr + ", dc_main_image=" + dc_main_image
+				+ ", dc_email=" + dc_email + ", dc_pw=" + dc_pw + ", dc_tel=" + dc_tel + ", dc_introduce="
+				+ dc_introduce + ", sessionKey=" + sessionKey + ", sessionLimit=" + sessionLimit + ", regdate="
+				+ regdate + ", updatedate=" + updatedate + "]";
 	}
-
 }

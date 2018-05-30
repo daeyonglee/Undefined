@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.udf.recommend.dao.RecommendDao">
+
+	<select id="recommendStudio" parameterType="String" resultType="kr.co.udf.common.product.domain.StudioProduct">
+		SELECT * 
+		FROM   studio_product
+		WHERE
+		<foreach collection="list" item="item" separator=" AND ">
+			<if test='item.toLowerCase().equals("in") || item.toLowerCase().equals("out") || item.toLowerCase().equals("both")'>
+			   sp_shoot_type = LOWER(#{item})
+			</if>
+			   
+			   ${item} = 'y'
+		</foreach>
+	</select>
+	
+	<select id="recommendDress" parameterType="String" resultType="kr.co.udf.common.product.domain.DressProduct">
+		SELECT * 
+		FROM   dress_product
+		WHERE  LOWER(dp_style) IN
+		<foreach collection="list" item="item" open="(" close=")" separator=", ">
+			   LOWER(#{item})
+		</foreach>
+	</select>
+	
+	<select id="recommendMakeup" parameterType="String" resultType="kr.co.udf.common.product.domain.MakeupProduct">
+		SELECT * 
+		FROM   makeup_product
+		WHERE
+		<foreach collection="list" item="item" separator=" AND ">
+			   LOWER(${item}) = 'y'
+		</foreach>
+	</select>
+
+</mapper>

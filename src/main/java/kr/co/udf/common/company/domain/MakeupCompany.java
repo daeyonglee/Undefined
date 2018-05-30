@@ -2,104 +2,121 @@ package kr.co.udf.common.company.domain;
 
 public class MakeupCompany {
 
-	private int companyNo;
-	private String nm;
-	private int regNo; // 사업자번호
-	private String headName; // 회사대표 이름
-	private String addr;
-	private String mainImage;
-	private String email;
-	private String pw;
-	private int tel;
-	private String introduce;
+	private int mc_no;
+	private String mc_nm;
+	private int mc_company_no; // 사업자번호
+	private String mc_main_nm; // 회사대표 이름
+	private String mc_addr;
+	private String mc_main_image;
+	private String mc_email;
+	private String mc_pw;
+	private int mc_tel;
+	private String mc_introduce;
+	private String sessionKey;
+	private String sessionLimit;
 	private String regdate;
 	private String updatedate;
 
-	
 	/** 생성자 */
 	public MakeupCompany() {
 		super();
 	}
 
 	/** Getter & Setter */
-	public int getCompanyNo() {
-		return companyNo;
+	public int getMc_no() {
+		return mc_no;
 	}
 
-	public void setCompanyNo(int companyNo) {
-		this.companyNo = companyNo;
+	public void setMc_no(int mc_no) {
+		this.mc_no = mc_no;
 	}
 
-	public String getNm() {
-		return nm;
+	public String getMc_nm() {
+		return mc_nm;
 	}
 
-	public void setNm(String nm) {
-		this.nm = nm;
+	public void setMc_nm(String mc_nm) {
+		this.mc_nm = mc_nm;
 	}
 
-	public int getRegNo() {
-		return regNo;
+	public int getMc_company_no() {
+		return mc_company_no;
 	}
 
-	public void setRegNo(int regNo) {
-		this.regNo = regNo;
+	public void setMc_company_no(int mc_company_no) {
+		this.mc_company_no = mc_company_no;
 	}
 
-	public String getHeadName() {
-		return headName;
+	public String getMc_main_nm() {
+		return mc_main_nm;
 	}
 
-	public void setHeadName(String headName) {
-		this.headName = headName;
+	public void setMc_main_nm(String mc_main_nm) {
+		this.mc_main_nm = mc_main_nm;
 	}
 
-	public String getAddr() {
-		return addr;
+	public String getMc_addr() {
+		return mc_addr;
 	}
 
-	public void setAddr(String addr) {
-		this.addr = addr;
+	public void setMc_addr(String mc_addr) {
+		this.mc_addr = mc_addr;
 	}
 
-	public String getMainImage() {
-		return mainImage;
+	public String getMc_main_image() {
+		return mc_main_image;
 	}
 
-	public void setMainImage(String mainImage) {
-		this.mainImage = mainImage;
+	public void setMc_main_image(String mc_main_image) {
+		this.mc_main_image = mc_main_image;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getMc_email() {
+		return mc_email;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setMc_email(String mc_email) {
+		this.mc_email = mc_email;
 	}
 
-	public String getPw() {
-		return pw;
+	public String getMc_pw() {
+		return mc_pw;
 	}
 
-	public void setPw(String pw) {
-		this.pw = pw;
+	public void setMc_pw(String mc_pw) {
+		this.mc_pw = mc_pw;
 	}
 
-	public int getTel() {
-		return tel;
+	public int getMc_tel() {
+		return mc_tel;
 	}
 
-	public void setTel(int tel) {
-		this.tel = tel;
+	public void setMc_tel(int mc_tel) {
+		this.mc_tel = mc_tel;
 	}
 
-	public String getIntroduce() {
-		return introduce;
+	public String getMc_introduce() {
+		return mc_introduce;
 	}
 
-	public void setIntroduce(String introduce) {
-		this.introduce = introduce;
+	public void setMc_introduce(String mc_introduce) {
+		this.mc_introduce = mc_introduce;
+	}
+
+	public String getSessionKey() {
+		return sessionKey;
+	}
+
+	public void setSessionKey(String sessionKey) {
+		this.sessionKey = sessionKey;
+	}
+
+	public String getSessionLimit() {
+		return sessionLimit;
+	}
+
+	public void setSessionLimit(String sessionLimit) {
+		this.sessionLimit = sessionLimit;
 	}
 
 	public String getRegdate() {
@@ -121,9 +138,10 @@ public class MakeupCompany {
 	/** toString */
 	@Override
 	public String toString() {
-		return "StudioCompany [companyNo=" + companyNo + ", nm=" + nm + ", regNo=" + regNo + ", headName=" + headName
-				+ ", addr=" + addr + ", mainImage=" + mainImage + ", email=" + email + ", pw=" + pw + ", tel=" + tel
-				+ ", introduce=" + introduce + ", regdate=" + regdate + ", updatedate=" + updatedate + "]";
+		return "MakeupCompany [mc_no=" + mc_no + ", mc_nm=" + mc_nm + ", mc_company_no=" + mc_company_no
+				+ ", mc_main_nm=" + mc_main_nm + ", mc_addr=" + mc_addr + ", mc_main_image=" + mc_main_image
+				+ ", mc_email=" + mc_email + ", mc_pw=" + mc_pw + ", mc_tel=" + mc_tel + ", mc_introduce="
+				+ mc_introduce + ", sessionKey=" + sessionKey + ", sessionLimit=" + sessionLimit + ", regdate="
+				+ regdate + ", updatedate=" + updatedate + "]";
 	}
-
 }

@@ -1,16 +1,16 @@
 package kr.co.udf.common.product.domain;
 
 public class DressProduct {
-	
-	private int productNo;
-	private int companyNo;
-	private int price;
-	private String style;		//드레스 스타일
-	private String image;
+
+	private int dp_no;
+	private int dc_no;
+	private String dp_name;
+	private int dp_price;
+	private String dp_style; // 드레스 스타일
+	private String dp_image;
 	private String regdate;
 	private String updatedate;
 
-	
 	/** 생성자 */
 	public DressProduct() {
 		super();
@@ -18,44 +18,52 @@ public class DressProduct {
 	}
 
 	/** Getter & Setter */
-	public int getProductNo() {
-		return productNo;
+	public int getDp_no() {
+		return dp_no;
 	}
 
-	public void setProductNo(int productNo) {
-		this.productNo = productNo;
+	public void setDp_no(int dp_no) {
+		this.dp_no = dp_no;
 	}
 
-	public int getCompanyNo() {
-		return companyNo;
+	public int getDc_no() {
+		return dc_no;
 	}
 
-	public void setCompanyNo(int companyNo) {
-		this.companyNo = companyNo;
+	public void setDc_no(int dc_no) {
+		this.dc_no = dc_no;
 	}
 
-	public String getStyle() {
-		return style;
+	public String getDp_name() {
+		return dp_name;
 	}
 
-	public void setStyle(String style) {
-		this.style = style;
+	public void setDp_name(String dp_name) {
+		this.dp_name = dp_name;
 	}
 
-	public int getPrice() {
-		return price;
+	public int getDp_price() {
+		return dp_price;
 	}
 
-	public void setPrice(int price) {
-		this.price = price;
+	public void setDp_price(int dp_price) {
+		this.dp_price = dp_price;
 	}
 
-	public String getImage() {
-		return image;
+	public String getDp_style() {
+		return dp_style;
 	}
 
-	public void setImage(String image) {
-		this.image = image;
+	public void setDp_style(String dp_style) {
+		this.dp_style = dp_style;
+	}
+
+	public String getDp_image() {
+		return dp_image;
+	}
+
+	public void setDp_image(String dp_image) {
+		this.dp_image = dp_image;
 	}
 
 	public String getRegdate() {
@@ -77,8 +85,8 @@ public class DressProduct {
 	/** toString */
 	@Override
 	public String toString() {
-		return "DressProduct [productNo=" + productNo + ", companyNo=" + companyNo + ", style=" + style + ", price="
-				+ price + ", image=" + image + ", regdate=" + regdate + ", updatedate=" + updatedate + "]";
+		return "DressProduct [dp_no=" + dp_no + ", dc_no=" + dc_no + ", dp_name=" + dp_name + ", dp_price=" + dp_price
+				+ ", dp_style=" + dp_style + ", dp_image=" + dp_image + ", regdate=" + regdate + ", updatedate="
+				+ updatedate + "]";
 	}
-
 }
