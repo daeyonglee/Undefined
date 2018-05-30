@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@include file="../include/top.jsp"%>
+<%@include file="../../include/top.jsp"%>
 <!DOCTYPE html>
 
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -18,15 +18,6 @@
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript" src="/resources/assets/js/user/join.js"></script>
-<script>
-$(document).ready(function() {
-	$("#submit").click(function() {
-		alert(2);
-	})
-});
-
-</script>
-
 
 <style type="text/css">
 #col {
@@ -66,7 +57,7 @@ width: 20%;
         <div class="wizard-container">
 
           <div class="wizard-card ct-wizard-orange" id="wizardProperty">
-            <form id="applyForm" method="post">
+            <form action="">
               <div class="wizard-header"></div>
               <ul>
                 <li><a href="#step1" data-toggle="tab">역경매 신청하기</a></li>
@@ -83,9 +74,9 @@ width: 20%;
                           <label>업체 종류</label></div>
                           <div  class="col-lg-10">
                            <div class="checkbox">
-                            <label> <input type="radio" name="type" value="studio" checked="checked" /> <strong>스튜디오</strong></label> 
-                            <label> <input type="radio" name="type" value="dress" /> <strong>드레스</strong></label> 
-                            <label> <input type="radio" name="type" value="makeup" /> <strong>메이크업</strong></label>
+                            <label> <input type="radio" name="type" value="company"  /> <strong>스튜디오</strong></label> 
+                            <label> <input type="radio" name="type" value="company" /> <strong>드레스</strong></label> 
+                            <label> <input type="radio" name="type" value="company" checked="checked" /> <strong>메이크업</strong></label>
                           </div></div>
                          </div>
                         
@@ -128,7 +119,7 @@ width: 20%;
                            </div>
                            
                            
-                          </div> 
+                          </div>
                         </div>
                         <div class="col-lg-4"></div>
                       </div>
@@ -156,21 +147,8 @@ width: 20%;
         alert("처리가 완료되었습니다.");
       }
       </script>
-      
-      <script>
-      $("#applyForm").submit(function(event){
-    	  event.preventDefault();
-    	  
-    	  var that = $(this);
-    	  alert(that);
-    	  
-    	  
-    	  
-      });
-      
-      </script>
 
-  <%@include file="../include/bottom.jsp"%>
+  <%@include file="../../include/bottom.jsp"%>
 
 </body>
 </html>

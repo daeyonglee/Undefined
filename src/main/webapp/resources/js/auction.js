@@ -2,6 +2,33 @@
  * 
  */
 
+$.fn.extend({
+  animateCss: function(animationName, callback) {
+    var animationEnd = (function(el) {
+      var animations = {
+        animation: 'animationend',
+        OAnimation: 'oAnimationEnd',
+        MozAnimation: 'mozAnimationEnd',
+        WebkitAnimation: 'webkitAnimationEnd',
+      };
+
+      for (var t in animations) {
+        if (el.style[t] !== undefined) {
+          return animations[t];
+        }
+      }
+    })(document.createElement('div'));
+
+    this.addClass('animated ' + animationName).one(animationEnd, function() {
+      $(this).removeClass('animated ' + animationName);
+
+      if (typeof callback === 'function') callback();
+    });
+
+    return this;
+  },
+});
+
 $(document).ready(function(){
 
 	var realTimeList = [];
@@ -42,17 +69,14 @@ $(document).ready(function(){
 	});
 	
 	// 데이터를 20개씩 조회한다.
-	function selectRealTimeList(count) {
+	function selectRealTimeList() {
 		$.ajax({
 			async : true,
 			type : "get",
-			data: {count:count},
 			url : "/auction/realtimelist",
 			success : function(data) {
 				// 수신한 데이터 body에 추가
-				
 				updateRealTimeList(data);
-				
 			}
 		});
 	}
@@ -60,7 +84,7 @@ $(document).ready(function(){
 	selectRealTimeList(count);
 	
 	function updateRealTimeList(data) {
-		
+		console.log(data.length);
 		if (data.length < 0) {
 			return;
 		}
@@ -80,64 +104,35 @@ $(document).ready(function(){
 		
 		$("#realtimelist > tbody:last").append(html);
 		
-		var index = 6;
-		
-		// remove ㅇ나되고 5개씩 추가되지
-		
-		
+		var index = 5;
+		var classIndex = 0;
 		setInterval(function(){
 			
-			if (index == 20) {
-				selectRealTimeList(++count);
-			}
-			
-			/*$("#realtimelist > tbody:first > tr:first").fadeOut(function(){
-				$(this).remove();
-			});*/
-			
-			$('#realtimelist').animateCss('fadeOutUp', function() {
-				$(this).remove();
-			});
-			
-			var appendTag  = "<tr class='' style='position: relative;'>";
+			$('#realtimelist > tbody:first > tr:first').animateCss('fadeOutUp', function() {
+				$('#realtimelist > tbody:first > tr:first').remove();
+				
+				var appendTag  = "<tr class='" + arr[classIndex] + "' style='position: relative;'>";
 			    appendTag += "<td>입찰중</td>";
 			    appendTag += "<td>" + data[index].writer + "</td>";
 			    appendTag += "<td>" + data[index].loc +"</td>";
 			    appendTag += "<td>" + data[index].deadline + "</td>";
 			    appendTag += "<td>접수중</td>";
 			
-			$("#realtimelist > tbody:first").append(appendTag);
+			    $("#realtimelist > tbody:first").append(appendTag);
+			    $("#realtimelist > tbody:first > tr:last").animateCss('fadeInUp');
+			});
 			
 			index++;
 			
+			if (classIndex == 4) {
+				classIndex = 0;
+			} else {
+				classIndex++;
+			}
+			
+			if (index == data.length-6) {
+				index = 0;
+			}
 		}, 3000);
-		
-		// 6 ~ 20 까지 1번째 tr을 제거하고 5번째 tr을 추가한다.
-		// 1
-		// 만약에 realTimeList이 마지막이라면 다시 재 조회
-		
-		/*
-		
-		var html = "";
-		
-		for (var i in data) {
-			html += "<tr class=" + arr[i] + " style='position: relative;'>";
-			html += "<td>입찰중</td>";
-			html += "<td>" + data[i].writer + "</td>";
-			html += "<td>" + data[i].loc +"</td>";
-			html += "<td>" + data[i].deadline + "</td>";
-			html += "<td>접수중</td>";
-			html += "</tr>";
-			console.log(html);
-		}
-		
-		console.log($("#realtimelist"));
-		$("#realtimelist > tbody:last").slideUp(300).append(html);*/
-		
 	}
-	
-	// 실시간으로 역경매 현황을 조회한다. 2초마다.
-	/*setInterval(function(){
-		console.log($("#realtimelist > tbody:last").length);
-	}, 3000);*/
 });

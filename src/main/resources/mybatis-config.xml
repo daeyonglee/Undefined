@@ -8,6 +8,7 @@
 	<typeAliases>
 		<typeAlias type="kr.co.udf.auction.domain.Auction" alias="Auction"/>
 		<typeAlias type="kr.co.udf.common.web.SearchParams" alias="SearchParams"/>
+		<typeAlias type="kr.co.udf.common.company.domain.StudioCompany" alias="StudioCompany"/>
 	</typeAliases>
 
 </configuration>

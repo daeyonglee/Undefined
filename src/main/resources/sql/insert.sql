@@ -125,3 +125,131 @@ sysdate
 );
 
 commit;
+
+-- 테스트를 위한 신청서 리스트(dress)
+-- 테스트를 위한 신청서 리스트(dress)
+INSERT INTO dress_auction_apply  (
+            daa_no
+          , user_no
+          , daa_loc
+          , daa_date
+          , daa_deadline
+          , daa_memo
+          , daa_stat
+          , updatedate)
+VALUES    (dress_auction_apply_seq.NEXTVAL
+          , 1
+          , '인천시 부평구2'
+          , '2019-01-01'
+          , '2018-05-31' 
+          , '샤랄라~~~~22'
+          , '낙찰'
+          , sysdate);
+          
+INSERT INTO dress_auction_apply  (
+            daa_no
+          , user_no
+          , daa_loc
+          , daa_date
+          , daa_deadline
+          , daa_memo
+          , daa_stat
+          , updatedate)
+VALUES    (dress_auction_apply_seq.NEXTVAL
+          , 2
+          , '서울시 성동구'
+          , '2019-01-01'
+          , '2018-06-01' 
+          , '결혼임박'
+          , '낙찰'
+          , sysdate);
+COMMIT;
+
+
+SELECT *
+FROM dress_auction_apply;
+
+
+-- 테스트를 위한 신청서 리스트(studio)
+INSERT INTO studio_auction_apply (
+            saa_no
+          , user_no
+          , saa_loc
+          , saa_date
+          , saa_deadline
+          , saa_memo
+          , saa_stat
+          , updatedate)
+VALUES    (studio_auction_apply_seq.NEXTVAL
+          , 1
+          , '인천광역시 중구2'
+          , '2019-10-28'
+          , '2018-05-26' 
+          , '가까운 스튜디오 선호요^^'
+          , sysdate);
+
+INSERT INTO studio_auction_apply (
+            saa_no
+          , user_no
+          , saa_loc
+          , saa_date
+          , saa_deadline
+          , saa_memo
+          , updatedate)
+VALUES    (studio_auction_apply_seq.NEXTVAL
+          , 1
+          , '서울시 강남구4'
+          , '2019-10-28'
+          , '2018-05-26' 
+          , '자연스러운 거 원함요'
+          , '낙찰대기중'
+          , sysdate);
+
+COMMIT;
+
+SELECT *
+FROM studio_auction_apply;
+
+-- 테스트를 위한 신청서 리스트(makeup)
+
+INSERT INTO makeup_auction_apply(
+            maa_no
+          , user_no
+          , maa_loc
+          , maa_date
+          , maa_deadline
+          , maa_memo
+          , maa_stat
+          , updatedate)
+VALUES    (makeup_auction_apply_seq.NEXTVAL
+          , 1
+          , '인천광역시 중구10'
+          , '2019-10-28'
+          , '2018-05-26' 
+          , '원장님 플리즈'
+          , '낙찰'
+          , sysdate);
+
+INSERT INTO makeup_auction_apply(
+            maa_no
+          , user_no
+          , maa_loc
+          , maa_date
+          , maa_deadline
+          , maa_memo
+          , maa_stat
+          , updatedate)
+VALUES    (makeup_auction_apply_seq.NEXTVAL
+          , 2
+          , '서울시 서대문구3'
+          , '2019-10-28'
+          , '2018-05-26' 
+          , '아몰랑'
+          , '낙찰'
+          , sysdate);
+
+COMMIT;
+
+
+COMMIT;
+

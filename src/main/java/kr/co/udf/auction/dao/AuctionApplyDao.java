@@ -37,7 +37,7 @@ public interface AuctionApplyDao {
 	public List<Auction> listByDress(SearchParams params) throws Exception;
 	public List<Auction> listByMakeup(SearchParams params) throws Exception;
 	
+
 	// 카테고리별 게시물 수 조회 
 	public int listByTypeCount() throws Exception;
-	
 }

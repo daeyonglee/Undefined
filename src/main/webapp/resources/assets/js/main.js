@@ -95,7 +95,6 @@ $(document).ready(function () {
 
         return r;
     }
-
 })
 
 // Initializing WOW.JS

@@ -33,7 +33,13 @@ DROP SEQUENCE studio_bid_seq;
 
 DROP SEQUENCE dress_bid_seq; 
 
-DROP SEQUENCE makeup_bid_seq; 
+DROP SEQUENCE makeup_bid_seq;
+
+DROP SEQUENCE studio_bid_product_seq;
+
+DROP SEQUENCE dress_bid_product_seq;
+
+DROP SEQUENCE makeup_bid_product_seq;
 
 DROP SEQUENCE studio_bid_product_list_seq; 
 
@@ -175,6 +181,12 @@ CREATE SEQUENCE dress_bid_product_seq;
 
 CREATE SEQUENCE makeup_bid_product_seq;
 
+CREATE SEQUENCE studio_bid_product_list_seq;
+
+CREATE SEQUENCE dress_bid_product_list_seq;
+
+CREATE SEQUENCE makeup_bid_product_list_seq;
+
 CREATE SEQUENCE board_seq; 
 
 CREATE SEQUENCE article_seq; 
@@ -222,6 +234,7 @@ CREATE TABLE studio_product
   ( 
      sp_no         NUMBER(10) NOT NULL, 
      sc_no         NUMBER(10) NOT NULL, 
+     sc_nm         VARCHAR2(100),
      sp_price      NUMBER(20) NOT NULL,  
      sp_apv_yn     VARCHAR2(1) DEFAULT 'N' NOT NULL,  -- 액자/앨범/비디오 여부
      sp_total_yn   VARCHAR2(1) DEFAULT 'N' NOT NULL,  -- 토탈샵 여부
@@ -236,9 +249,10 @@ CREATE TABLE studio_product
 CREATE TABLE dress_product 
   ( 
      dp_no      NUMBER(10) NOT NULL, 
-     dc_no      NUMBER(10) NOT NULL, 
-     dp_style   VARCHAR2(20) NOT NULL, -- 드레스 스타일
+     dc_no      NUMBER(10) NOT NULL,
+     dp_nm      VARCHAR2(100),
      dp_price   NUMBER(20) DEFAULT 0 NOT NULL, 
+     dp_style   VARCHAR2(20) NOT NULL, -- 드레스 스타일
      dp_image   VARCHAR2(200), 
      regdate    DATE DEFAULT SYSDATE NOT NULL, 
      updatedate DATE DEFAULT SYSDATE NOT NULL, 
@@ -249,12 +263,13 @@ CREATE TABLE dress_product
 CREATE TABLE makeup_product 
   ( 
      mp_no        NUMBER(10) NOT NULL, 
-     mc_no        NUMBER(10) NOT NULL,  
+     mc_no        NUMBER(10) NOT NULL,
+     mp_nm        VARCHAR2(100),
      mp_price     NUMBER(20) DEFAULT 0 NOT NULL, 
-     mp_image     VARCHAR2(300),
      mp_acc_yn    VARCHAR2(1) DEFAULT 'N' NOT NULL, -- 악세사리 여부
      mp_family_yn VARCHAR2(1) DEFAULT 'N' NOT NULL, -- 가족 포함 여부
      mp_hair_yn   VARCHAR2(1) DEFAULT 'N' NOT NULL, -- 헤어 여부
+     mp_image     VARCHAR2(300),
      regdate      DATE DEFAULT SYSDATE NOT NULL, 
      updatedate   DATE DEFAULT SYSDATE NOT NULL, 
      PRIMARY KEY (mp_no, mc_no) 
@@ -407,7 +422,8 @@ CREATE TABLE studio_auction_apply
      saa_loc    VARCHAR2(100) NOT NULL, 
      saa_date   DATE NOT NULL,
      saa_deadline DATE NOT NULL,
-     saa_memo   VARCHAR2(3000), 
+     saa_memo   VARCHAR2(3000),
+     saa_stat   VARCHAR2(20) DEFAULT '입찰중' NOT NULL,
      regdate    DATE DEFAULT SYSDATE NOT NULL, 
      updatedate DATE DEFAULT SYSDATE NOT NULL, 
      PRIMARY KEY (saa_no, user_no) 
@@ -421,7 +437,8 @@ CREATE TABLE dress_auction_apply
      daa_loc    VARCHAR2(100) NOT NULL, 
      daa_date   DATE NOT NULL,
      daa_deadline DATE NOT NULL,
-     daa_memo   VARCHAR2(3000), 
+     daa_memo   VARCHAR2(3000),
+     daa_stat   VARCHAR2(20) DEFAULT '입찰중' NOT NULL,
      regdate    DATE DEFAULT SYSDATE NOT NULL, 
      updatedate DATE NOT NULL, 
      PRIMARY KEY (daa_no, user_no) 
@@ -435,7 +452,8 @@ CREATE TABLE makeup_auction_apply
      maa_loc    VARCHAR2(100) NOT NULL, 
      maa_date   DATE NOT NULL,
      maa_deadline DATE NOT NULL,
-     maa_memo   VARCHAR2(3000), 
+     maa_memo   VARCHAR2(3000),
+     maa_stat   VARCHAR2(20) DEFAULT '입찰중' NOT NULL,
      regdate    DATE DEFAULT SYSDATE NOT NULL, 
      updatedate DATE DEFAULT SYSDATE NOT NULL, 
      PRIMARY KEY (maa_no, user_no) 
