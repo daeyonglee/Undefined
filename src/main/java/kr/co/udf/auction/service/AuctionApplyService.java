@@ -27,8 +27,12 @@ public interface AuctionApplyService {
 	// 전체 회원의 역경매 리스트 페이징 처리
 	public List<Auction> listParams(SearchParams params) throws Exception;
 	
+<<<<<<< HEAD
 	// 전체 게시물 수
 	public int countPage() throws Exception;
+=======
+	public List<Auction> realtimelist() throws Exception;
+>>>>>>> 9e4792a23aafeaa381f021f00efd7e91d3b1a6c4
 	
 	// 스.드.메 카테고리 별 게시물 조회
 	public List<Auction> listByDress(SearchParams params) throws Exception;

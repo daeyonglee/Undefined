@@ -75,8 +75,13 @@ public class AuctionApplyServiceImpl implements AuctionApplyService {
 	}
 
 	@Override
+<<<<<<< HEAD
 	public int countPage() throws Exception {
 		return dao.countPage();
+=======
+	public List<Auction> realtimelist() throws Exception {
+		return dao.realtimelist();
+>>>>>>> 9e4792a23aafeaa381f021f00efd7e91d3b1a6c4
 	}
 
 

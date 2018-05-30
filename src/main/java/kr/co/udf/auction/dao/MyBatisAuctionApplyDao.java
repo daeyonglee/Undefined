@@ -75,6 +75,7 @@ public class MyBatisAuctionApplyDao implements AuctionApplyDao {
 	
 
 	@Override
+<<<<<<< HEAD
 	public List<Auction> listByStudio(SearchParams params) throws Exception {
 		return session.selectList(NAMESPACE + ".listByStudio", params);
 	}
@@ -94,6 +95,10 @@ public class MyBatisAuctionApplyDao implements AuctionApplyDao {
 	@Override
 	public int listByTypeCount() throws Exception {
 		return session.selectOne(NAMESPACE + ".listByTypeCount");
+=======
+	public List<Auction> realtimelist() throws Exception {
+		return session.selectList(NAMESPACE+ ".realtimelist");
+>>>>>>> 9e4792a23aafeaa381f021f00efd7e91d3b1a6c4
 	}
 
 }

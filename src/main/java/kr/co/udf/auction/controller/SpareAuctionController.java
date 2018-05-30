@@ -91,11 +91,11 @@ public class SpareAuctionController {
 
 	
 	@RequestMapping(value = "realtimelist", method = RequestMethod.GET)
-	public ResponseEntity<List<Auction>> realtimelist(@RequestParam("count")int count) {
+	public ResponseEntity<List<Auction>> realtimelist() {
 
 		ResponseEntity<List<Auction>> entity = null;
 		try {
-			entity = new ResponseEntity<>(service.realtimelist(count), HttpStatus.OK);
+			entity = new ResponseEntity<>(service.realtimelist(), HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
