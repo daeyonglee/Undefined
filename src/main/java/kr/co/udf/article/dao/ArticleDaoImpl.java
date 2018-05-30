@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import kr.co.udf.article.domain.Article;
+import kr.co.udf.article.domain.Criteria;
 
 @Repository
 public class ArticleDaoImpl implements ArticleDao {
@@ -44,11 +45,21 @@ public class ArticleDaoImpl implements ArticleDao {
 	}
 
 	@Override
-	public  List<Map<String, Map<String, Object>>> listPage(Integer board_no, Integer page) throws Exception {
+	public  List<Map<String, Object>> listPage(Integer board_no, Integer page) throws Exception {
+		if(page<=0) {
+			page=1;
+		}
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("board_no", board_no);
 		map.put("page", page);
-		return session.selectList(namespace + ".listAll", map);
+
+		return session.selectList(namespace + ".listPage", map);
 	}
+
+	@Override
+	public List<Map<String, Object>> listCriteria(Criteria cri) throws Exception {
+		return session.selectList(namespace + ".listPage", cri);
+	}
+	
 	
 }

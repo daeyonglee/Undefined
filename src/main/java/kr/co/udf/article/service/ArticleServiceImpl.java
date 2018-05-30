@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import kr.co.udf.article.dao.ArticleDao;
 import kr.co.udf.article.domain.Article;
+import kr.co.udf.article.domain.Criteria;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
@@ -41,11 +42,10 @@ public class ArticleServiceImpl implements ArticleService {
     return dao.listAll(board_no);
   }
 
-//  @Override
-//  public List<Article> listCriteria(Criteria cri) throws Exception {
-//
-//    return articleDao.listCriteria(cri);
-//  }
+  @Override
+  public List<Map<String, Object>> listCriteria(Criteria cri) throws Exception {
+    return dao.listCriteria(cri);
+  }
 //
 //  @Override
 //  public int listCountCriteria(Criteria cri) throws Exception {

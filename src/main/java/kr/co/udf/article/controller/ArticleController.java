@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.udf.article.domain.Article;
+import kr.co.udf.article.domain.Criteria;
 import kr.co.udf.article.service.ArticleService;
 
 @Controller
@@ -27,6 +28,12 @@ public class ArticleController {
 		logger.info("show all list......................");
 		model.addAttribute("listAll", service.listAll(board_no));
 	}
+	
+    @RequestMapping(value = "/listCri", method = RequestMethod.GET)
+    public void listAll(Criteria cri, Model model) throws Exception {
+      logger.info("show list Page with Criteria......................");
+      model.addAttribute("listCri", service.listCriteria(cri));
+    }
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public void registerGET(Article article, Model model) throws Exception {

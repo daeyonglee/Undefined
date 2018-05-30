@@ -15,7 +15,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import kr.co.udf.article.dao.ArticleDao;
 import kr.co.udf.article.domain.Article;
+import kr.co.udf.article.domain.Criteria;
 import kr.co.udf.board.BoardDaoTest;
+import kr.co.udf.board.domain.Board;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -102,30 +104,47 @@ public class ArticleDaoTest {
   
 
 //  @Test
-//  public void testListPage() throws Exception {
-//
-//    int page = 3;
-//
-//    List<Board> list = dao.listPage(page);
-//
-//    for (Board board : list) {
-//      logger.info(board.getBno() + ":" + board.getTitle());
-//    }
-//  }
+  public void testListPage() throws Exception {
+    int board_no=1;
+    int page = 2;
+    
+    List<Map<String, Object>> list = dao.listPage(board_no,page);
+    logger.info(list);
+    
+    for (Map<String, Object> row : list) {
+		// 숫자형은 BigDecimal로 받음
+		BigDecimal article_no = (BigDecimal) row.get("ARTICLE_NO");
+		String article_head = (String) row.get("ARTICLE_HEAD");
+		String article_title = (String) row.get("ARTICLE_TITLE");
+		String article_content = (String) row.get("ARTICLE_CONTENT");
+		String user_nm = (String) row.get("USER_NM");
+		String regdate = (String) row.get("REGIDATE");
+		BigDecimal hitcount = (BigDecimal) row.get("HITCOUNT");
+		logger.debug(article_no + "\t" + article_head + "\t" + article_title +  "\t" + article_content+ "\t" + user_nm+ "\t" + hitcount);
+	}
+  }
 
 //  @Test
-//  public void testListCriteria() throws Exception {
-//
-//    Criteria cri = new Criteria();
-//    cri.setPage(2);
-//    cri.setPerPageNum(20);
-//
-//    List<Board> list = dao.listCriteria(cri);
-//
-//    for (Board board : list) {
-//      logger.info(board.getBno() + ":" + board.getTitle());
-//    }
-//  }
+  public void testListCriteria() throws Exception {
+    Criteria cri = new Criteria();
+    cri.setPage(2);
+    cri.setPerPageNum(20);
+    cri.setBoard_no(1);
+
+    List<Map<String, Object>> list = dao.listCriteria(cri);
+
+    for (Map<String, Object> row : list) {
+		// 숫자형은 BigDecimal로 받음
+		BigDecimal article_no = (BigDecimal) row.get("ARTICLE_NO");
+		String article_head = (String) row.get("ARTICLE_HEAD");
+		String article_title = (String) row.get("ARTICLE_TITLE");
+		String article_content = (String) row.get("ARTICLE_CONTENT");
+		String user_nm = (String) row.get("USER_NM");
+		String regdate = (String) row.get("REGIDATE");
+		BigDecimal hitcount = (BigDecimal) row.get("HITCOUNT");
+		logger.debug(article_no + "\t" + article_head + "\t" + article_title +  "\t" + article_content+ "\t" + user_nm+ "\t" + hitcount);
+	}
+  }
 
 //  @Test
 //  public void testURI() throws Exception {

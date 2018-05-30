@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import kr.co.udf.article.domain.Article;
+import kr.co.udf.article.domain.Criteria;
 
 public interface ArticleDao {
 
@@ -17,7 +18,9 @@ public interface ArticleDao {
 
   public List<Map<String, Object>> listAll(Integer board_no) throws Exception;
   
-  public List<Map<String, Map<String, Object>>> listPage(Integer board_no,Integer page) throws Exception;
+  public List<Map<String, Object>> listPage(Integer board_no,Integer page) throws Exception;
+  
+  public List<Map<String, Object>> listCriteria(Criteria cri) throws Exception;
 
   // List<Map<String, Map<String, Object>>>
   
