@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import kr.co.udf.common.company.domain.StudioCompany;
 import kr.co.udf.company.dao.StudioDao;
 import kr.co.udf.company.domain.Criteria;
+import kr.co.udf.company.domain.SearchCriteria;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -57,4 +58,22 @@ public class StudioTest {
 		Criteria cri = new Criteria();
 		logger.info(dao.countPaging(cri));
 	}
+	
+	@Test
+	public void testSearch() throws Exception {
+		
+		SearchCriteria cri = new SearchCriteria();
+		cri.setPage(1);
+		cri.setKeyword("이마트");
+		cri.setSearchType("name");
+	
+		List<StudioCompany> list = dao.listSearch(cri);
+		for (StudioCompany studio : list) {
+			logger.info(studio.getCompanyNo() + ":" + studio.getNm());
+		}
+		logger.info("개수 :" + dao.listSearchCount(cri));
+	}
+	
+	
+	
 	}

@@ -27,7 +27,7 @@
 		<select id="listPage" resultType="kr.co.udf.common.company.domain.StudioCompany">
 	 <![CDATA[
 SELECT *
-FROM (SELECT CEIL (rownum / 10) page,
+FROM (SELECT CEIL (rownum / 12) page,
 	sc_no companyNo, 
 	sc_nm nm, 
 	sc_company_no regNo, 
@@ -84,5 +84,64 @@ FROM (SELECT *
 	]]>
 	</select>
 	
+	
+	
+<sql id="search">
+<if test="searchType == null" > 
+
+</if>
+
+ <if test="searchType != null" >
+   <if test="searchType == 'name'.toString()">
+     and sc_nm like '%'|| #{keyword}||'%'
+   </if>
+   <if test="searchType == 'addr'.toString()">
+     and sc_addr like '%'|| #{keyword}||'%'
+   </if>
+ </if>
+</sql>
+
+	
+	<select id="listSearch" resultType="kr.co.udf.common.company.domain.StudioCompany">
+<![CDATA[
+	select *
+	from
+ 	 (
+ 	SELECT rownum rn,
+ 	sc_no companyNo, 
+	sc_nm nm, 
+	sc_company_no regNo, 
+	sc_main_nm headName, 
+	sc_addr addr, 
+	sc_main_image mainImage, 
+	sc_email email, 
+	sc_pw pw, 
+	sc_tel tel, 
+	sc_introduce introduce, 
+	sessionkey, 
+	regdate, 
+	updatedate
+ 	FROM studio_company
+ 	 where 1=1
+ 	 ]]>
+ 	   <include refid="search"></include>
+<![CDATA[ 
+ 	 and rownum <= #{page} * #{perPageNum}
+ 	 and sc_no > 0
+     order by sc_no DESC
+ 	 )
+	where rn > (#{page} -1) * #{perPageNum}
+ 	]]>
+ 		
+	</select>
+ 	
+ 		<select id="listSearchCount" resultType="int">
+	 <![CDATA[
+	select count(sc_no)
+	from studio_company
+	where sc_no > 0
+	]]>
+	   <include refid="search"></include>
+	</select>	
 	
 </mapper>

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import kr.co.udf.common.company.domain.StudioCompany;
 import kr.co.udf.company.dao.StudioDao;
 import kr.co.udf.company.domain.Criteria;
+import kr.co.udf.company.domain.SearchCriteria;
 
 @Service
 public class StudioServiceImpl implements StudioService {
@@ -34,6 +35,16 @@ public class StudioServiceImpl implements StudioService {
 	@Override
 	public int countPaging(Criteria cri) throws Exception {
 		return dao.countPaging(cri);
+	}
+
+	@Override
+	public List<StudioCompany> listSearchCriteria(SearchCriteria cri) throws Exception {
+		return dao.listSearch(cri);
+	}
+
+	@Override
+	public int listSearchCount(SearchCriteria cri) throws Exception {
+		return dao.listSearchCount(cri);
 	}
 	 
 	 

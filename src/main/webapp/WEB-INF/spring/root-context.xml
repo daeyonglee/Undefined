@@ -9,10 +9,10 @@
  
     <!-- Spring Container에 DataSource 설정 -->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-      <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
-      <property name="url" value="jdbc:oracle:thin:@undefined.cmtky8lc57qw.ap-northeast-2.rds.amazonaws.com:1521:orcl"></property>
-      <property name="username" value="undefined"></property>
-      <property name="password" value="12341234"></property>
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"></property>
+		<property name="username" value="hr"></property>
+		<property name="password" value="hr"></property>
    </bean>
    
    <!-- MyBatis SqlSessionFactory 설정 -->

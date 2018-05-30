@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.udf.common.company.domain.StudioCompany;
 import kr.co.udf.company.domain.Criteria;
+import kr.co.udf.company.domain.SearchCriteria;
 
 @Repository
 public class MybatisStudioDao implements StudioDao {
@@ -37,4 +38,16 @@ public class MybatisStudioDao implements StudioDao {
 	public int countPaging(Criteria cri) throws Exception {
 		return session.selectOne(namespace+".countPaging", cri);
 	}
+
+	@Override
+	public List<StudioCompany> listSearch(SearchCriteria cri) throws Exception {
+		return session.selectList(namespace+".listSearch", cri);
+	}
+
+	@Override
+	public int listSearchCount(SearchCriteria cri) throws Exception {
+		return session.selectOne(namespace+".listSearchCount", cri);
+	}
+	
+	
 }
