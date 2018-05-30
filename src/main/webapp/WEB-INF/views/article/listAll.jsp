@@ -10,10 +10,11 @@
   <div class="row">
     <!-- left column -->
     <div class="col-md-12">
+     
       <!-- general form elements -->
       <div class="box">
         <div class="box-header with-border">
-          <h3 class="box-article_title">${listAll.board_nm}</h3>
+          <h3 class="box-article_title">${read.board_nm}</h3>
         </div>
         <div class="box-body">
 
@@ -26,12 +27,12 @@
               <th style="width: 60px">조회수</th>
             </tr>
 
-            <!-- 게시글 출력하기 -->
+           <!-- 게시글 출력하기 -->
             <c:forEach items="${listAll}" var="listAll">
               <tr>
                 <td>${listAll.article_no}</td>
                 <td><a
-                  href='/article/read?article_no=${listAll.article_no}&article_nm=1'>${listAll.article_title}</a></td>
+                  href='/article/read?board_no=${listAll.board_no}&article_no=${listAll.article_no}&article_nm=1'>${listAll.article_title}</a></td>
                 <td>${listAll.user_nm}</td>
                 <td>${listAll.regdate}</td>
                 <td><span class="badge bg-red">${listAll.hitcount }</span></td>

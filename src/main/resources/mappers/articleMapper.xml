@@ -30,7 +30,9 @@
 		       a.user_no 										"user_no",
 		       To_char(a.regdate, 'YYYY-MM-DD') 				"regdate", 
 		       a.hitcount 										"hitcount", 
-          (SELECT user_nm FROM users WHERE user_no = a.user_no) "user_nm"
+		       a.board_no,
+          (SELECT user_nm FROM users WHERE user_no = a.user_no) "user_nm", 
+          (SELECT board_nm FROM board WHERE board_no = a.board_no) "board_nm"
 		FROM article a
 		WHERE article_no = #{article_no}
 	</select>
