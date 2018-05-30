@@ -1,5 +1,6 @@
 package kr.co.udf.article.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -41,4 +42,13 @@ public class ArticleDaoImpl implements ArticleDao {
 	public List<Map<String, Object>> listAll(Integer board_no) throws Exception {
 		return session.selectList(namespace + ".listAll",board_no);
 	}
+
+	@Override
+	public  List<Map<String, Map<String, Object>>> listPage(Integer board_no, Integer page) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("board_no", board_no);
+		map.put("page", page);
+		return session.selectList(namespace + ".listAll", map);
+	}
+	
 }

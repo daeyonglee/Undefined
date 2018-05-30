@@ -17,8 +17,11 @@ public interface ArticleDao {
 
   public List<Map<String, Object>> listAll(Integer board_no) throws Exception;
   
-//  public List<Article> listPage(int page) throws Exception;
-//
+  public List<Map<String, Map<String, Object>>> listPage(Integer board_no,Integer page) throws Exception;
+
+  // List<Map<String, Map<String, Object>>>
+  
+  
 //  public List<Article> listCriteria(Criteria cri) throws Exception;
 //
 //  public int countPaging(Criteria cri) throws Exception;
