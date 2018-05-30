@@ -2,125 +2,127 @@ package kr.co.udf.company.domain;
 
 public class Studio {
 
-	private Integer no;
-	private String nm;
-	private Integer companyNo;
-	private String mainNm;
-	private String addr;
-	private String mainImage;
-	private String email;
-	private String pw;
-	private Integer tel;
-	private String introduce;
-	private String regdate;
-	private String updatedate;
+	private Integer sc_no;
+	private String sc_nm;
+	private Integer sCompanyno;
+	private String sMainnm;
+	private String sAddr;
+	private String sMainimage;
+	private String sEmail;
+	private String sPw;
+	private Integer sTel;
+	private String sIntroduce;
+	private String sRegdate;
+	private String sUpdatedate;
 	
 	public Studio() {
 	
 	}
 
-	public Integer getNo() {
-		return no;
+	public Integer getsc_no() {
+		return sc_no;
 	}
 
-	public void setNo(Integer no) {
-		this.no = no;
+	public void setsMo(Integer sc_no) {
+		this.sc_no = sc_no;
 	}
 
-	public String getNm() {
-		return nm;
+	public String getsc_nm() {
+		return sc_nm;
 	}
 
-	public void setNm(String nm) {
-		this.nm = nm;
+	public void setsc_nm(String sc_nm) {
+		this.sc_nm = sc_nm;
 	}
 
-	public Integer getCompanyNo() {
-		return companyNo;
+	public Integer getsCompanyno() {
+		return sCompanyno;
 	}
 
-	public void setCompanyNo(Integer companyNo) {
-		this.companyNo = companyNo;
+	public void setsCompanyno(Integer sCompanyno) {
+		this.sCompanyno = sCompanyno;
 	}
 
-	public String getMainNm() {
-		return mainNm;
+	public String getsMainnm() {
+		return sMainnm;
 	}
 
-	public void setMainNm(String mainNm) {
-		this.mainNm = mainNm;
+	public void setsMainnm(String sMainnm) {
+		this.sMainnm = sMainnm;
 	}
 
-	public String getAddr() {
-		return addr;
+	public String getsAddr() {
+		return sAddr;
 	}
 
-	public void setAddr(String addr) {
-		this.addr = addr;
+	public void setsAddr(String sAddr) {
+		this.sAddr = sAddr;
 	}
 
-	public String getMainImage() {
-		return mainImage;
+	public String getsMainimage() {
+		return sMainimage;
 	}
 
-	public void setMainImage(String mainImage) {
-		this.mainImage = mainImage;
+	public void setsMainimage(String sMainimage) {
+		this.sMainimage = sMainimage;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getsEmail() {
+		return sEmail;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setsEmail(String sEmail) {
+		this.sEmail = sEmail;
 	}
 
-	public String getPw() {
-		return pw;
+	public String getsPw() {
+		return sPw;
 	}
 
-	public void setPw(String pw) {
-		this.pw = pw;
+	public void setsPw(String sPw) {
+		this.sPw = sPw;
 	}
 
-	public Integer getTel() {
-		return tel;
+	public Integer getsTel() {
+		return sTel;
 	}
 
-	public void setTel(Integer tel) {
-		this.tel = tel;
+	public void setsTel(Integer sTel) {
+		this.sTel = sTel;
 	}
 
-	public String getIntroduce() {
-		return introduce;
+	public String getsIntroduce() {
+		return sIntroduce;
 	}
 
-	public void setIntroduce(String introduce) {
-		this.introduce = introduce;
+	public void setsIntroduce(String sIntroduce) {
+		this.sIntroduce = sIntroduce;
 	}
 
-	public String getRegdate() {
-		return regdate;
+	public String getsRegdate() {
+		return sRegdate;
 	}
 
-	public void setRegdate(String regdate) {
-		this.regdate = regdate;
+	public void setsRegdate(String sRegdate) {
+		this.sRegdate = sRegdate;
 	}
 
-	public String getUpdatedate() {
-		return updatedate;
+	public String getsUpdatedate() {
+		return sUpdatedate;
 	}
 
-	public void setUpdatedate(String updatedate) {
-		this.updatedate = updatedate;
+	public void setsUpdatedate(String sUpdatedate) {
+		this.sUpdatedate = sUpdatedate;
 	}
 
 	@Override
 	public String toString() {
-		return "Studio [no=" + no + ", nm=" + nm + ", companyNo=" + companyNo + ", mainNm=" + mainNm + ", addr=" + addr
-				+ ", mainImage=" + mainImage + ", email=" + email + ", pw=" + pw + ", tel=" + tel + ", introduce="
-				+ introduce + ", regdate=" + regdate + ", updatedate=" + updatedate + "]";
+		return "Studio [sMo=" + sc_no + ", sNm=" + sc_nm + ", sCompanyno=" + sCompanyno + ", sMainnm=" + sMainnm
+				+ ", sAddr=" + sAddr + ", sMainimage=" + sMainimage + ", sEmail=" + sEmail + ", sPw=" + sPw + ", sTel="
+				+ sTel + ", sIntroduce=" + sIntroduce + ", sRegdate=" + sRegdate + ", sUpdatedate=" + sUpdatedate + "]";
 	}
+
+
 	
 	
 	

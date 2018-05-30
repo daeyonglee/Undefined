@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8"> 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/resources/assets/css/lightslider.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -218,6 +218,7 @@ body {
                                                 <li><i class="pe-7s-call strong"> </i>02)518-9628</li>
                                             </ul>
                                             <p style="color:black">우리 강남힐스튜디오는 33년의 깊은 전통을 가지고 있습니다. 또한, 좋은 조명과 시설 그리고 경륜있는 포토그래퍼가 삼위일체 되어 고객님의 웨딩모습을 촬영해드립니다. </p>
+                                        <input type='button' class='btn btn-next btn-primary' name='next' value='비교업체 등록' />
                                         </div>
 
                                     </div>
@@ -235,8 +236,6 @@ body {
                                             <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
                                                 <a href="single.html"><img src="assets/img/demo/small-property-2.jpg"></a>
                                                 <span class="property-seeker">
-                                                    <b class="b-1">A</b>
-                                                    <b class="b-2">S</b>
                                                 </span>
                                             </div>
                                             <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
@@ -248,8 +247,6 @@ body {
                                             <div class="col-md-3 col-sm-3  col-xs-3 blg-thumb p0">
                                                 <a href="single.html"><img src="assets/img/demo/small-property-1.jpg"></a>
                                                 <span class="property-seeker">
-                                                    <b class="b-1">A</b>
-                                                    <b class="b-2">S</b>
                                                 </span>
                                             </div>
                                             <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
@@ -261,8 +258,6 @@ body {
                                             <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
                                                 <a href="single.html"><img src="assets/img/demo/small-property-3.jpg"></a>
                                                 <span class="property-seeker">
-                                                    <b class="b-1">A</b>
-                                                    <b class="b-2">S</b>
                                                 </span>
                                             </div>
                                             <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
@@ -275,8 +270,6 @@ body {
                                             <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
                                                 <a href="single.html"><img src="assets/img/demo/small-property-2.jpg"></a>
                                                 <span class="property-seeker">
-                                                    <b class="b-1">A</b>
-                                                    <b class="b-2">S</b>
                                                 </span>
                                             </div>
                                             <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
@@ -355,19 +348,19 @@ function closeNav() {
      
         
    <!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">비교하기</h4>
       </div>
       <div class="modal-body">
-        ...
+        
+  
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
