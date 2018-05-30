@@ -33,6 +33,7 @@ $(document).ready(function () {
 
 });
 $(document).ready(function () {
+	
     $("#bg-slider").owlCarousel({
         navigation: false, // Show next and prev buttons
         slideSpeed: 100,
@@ -82,31 +83,6 @@ $(document).ready(function () {
         $SearchToggle.slideToggle(300);
     });
 
-    setTimeout(function () {
-        $('#counter').text('0');
-        $('#counter1').text('0');
-        $('#counter2').text('0');
-        $('#counter3').text('0');
-        setInterval(function () {
-            var curval = parseInt($('#counter').text());
-            var curval1 = parseInt($('#counter1').text().replace(' ', ''));
-            var curval2 = parseInt($('#counter2').text());
-            var curval3 = parseInt($('#counter3').text());
-            if (curval <= 1200) {
-                $('#counter').text(curval + 1);
-            }
-            if (curval1 <= 1280) {
-                $('#counter1').text(sdf_FTS((curval1 + 1), 0, ''));
-            }
-            if (curval2 <= 145) {
-                $('#counter2').text(curval2 + 1);
-            }
-            if (curval3 <= 1022) {
-                $('#counter3').text(curval3 + 1);
-            }
-        }, 1);
-    }, 10); 
-
     function sdf_FTS(_number, _decimal, _separator) {
         var decimal = (typeof (_decimal) != 'undefined') ? _decimal : 2;
         var separator = (typeof (_separator) != 'undefined') ? _separator : '';
@@ -119,7 +95,6 @@ $(document).ready(function () {
 
         return r;
     }
-
 })
 
 // Initializing WOW.JS

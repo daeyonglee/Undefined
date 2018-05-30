@@ -12,8 +12,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800' rel='stylesheet' type='text/css'>
 		<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-		<link rel="icon" href="favicon.ico" type="image/x-icon">
+		<!-- <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+		<link rel="icon" href="favicon.ico" type="image/x-icon"> -->
 		
 		<link rel="stylesheet" href="/resources/assets/css/normalize.css">
 		<link rel="stylesheet" href="/resources/assets/css/font-awesome.min.css">
@@ -48,6 +48,8 @@
 		<script src="/resources/assets/js/price-range.js"></script>
 		
 		<script src="/resources/assets/js/main.js"></script>
+    <script src="/resources/assets/js/jquery.bootstrap.wizard.js" type="text/javascript"></script>
+    <script src="/resources/assets/js/jquery.validate.min.js"></script>
 </head>
 <body>
 <div id="preloader">
@@ -68,9 +70,18 @@
                 <div class="header-half header-social">
                 		<ul class="list-inline header-loginbar">
                       <!-- 로그인 여부에 따라 li 변경 -->
-                			<li><a href="/user/login">로그인</a></li>
-                			<li><a href="#">회원가입</a></li>
-                			<li><a href="#">고객센터</a></li>
+                      <c:choose>
+                        <c:when test="${null ne sessionScope.login || null ne cookie.loginCookie.value}">
+                          <li><a href="/user/logout">로그아웃</a></li>
+                          <li><a href="#">마이페이지</a></li>
+                          <li><a href="#">고객센터</a></li>
+                        </c:when>
+                        <c:otherwise>
+                          <li><a href="/user/login">로그인</a></li>
+                          <li><a href="/user/join">회원가입</a></li>
+                          <li><a href="#">고객센터</a></li>
+                        </c:otherwise>
+                      </c:choose>
                 		</ul>
                     <!-- <ul class="list-inline">
                         <li><a href="#"><i class="fa fa-facebook"></i></a></li>

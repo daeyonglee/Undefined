@@ -13,41 +13,103 @@
       예산~~~     /장소~~~<br>
       스튜디오 + 드레스 + 메이크업/ 스튜디오 조건: ~~~ / 드레스 조건: ~~~~
     </div>
-    <div class="custom-select" style="width: 200px;">
-      <select>
-        <option value="0">Select car:</option>
-        <option value="1">Audi</option>
-        <option value="2">BMW</option>
-        <option value="3">Citroen</option>
-        <option value="4">Ford</option>
-        <option value="5">Honda</option>
-        <option value="6">Jaguar</option>
-        <option value="7">Land Rover</option>
-        <option value="8">Mercedes</option>
-        <option value="9">Mini</option>
-        <option value="10">Nissan</option>
-        <option value="11">Toyota</option>
-        <option value="12">Volvo</option>
-      </select>
-    </div>
-    <div class="card" style="width:500px">
-      <img class="card-img-top" src="img_avatar1.png" alt="Card image">
-      <div class="card-img-overlay">
-        <h4 class="card-title">John Doe</h4>
-        <p class="card-text">Some example text.</p>
-        <a href="#" class="btn btn-primary">See Profile</a>
+    
+    <!-- 패키지 list -->
+    <div class="row" style="border: 1px solid #dddddd; margin: 1em auto;">
+      <div class="col-sm-10">
+        <div class="col-sm-4">
+          <div>
+            place for picture
+          </div>
+          <div>
+            place for description          
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div>
+            place for picture
+          </div>
+          <div>
+            place for description          
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div>
+            place for picture
+          </div>
+          <div>
+            place for description          
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <button class="btn btn-success"></button>
       </div>
     </div>
     
+    <div class="row" style="border: 1px solid #dddddd; margin: 1em auto;">
+      <div class="col-sm-10">
+        <div class="col-sm-4">
+          <div>
+            place for picture
+          </div>
+          <div>
+            place for description          
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div>
+            place for picture
+          </div>
+          <div>
+            place for description          
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div>
+            place for picture
+          </div>
+          <div>
+            place for description          
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <button class="btn btn-success"></button>
+      </div>
+    </div>
     
-    
-    
-    
-    
-    
-    
-    
-    
+    <div class="row" style="border: 1px solid #dddddd; margin: 1em auto;">
+      <div class="col-sm-10">
+        <div class="col-sm-4">
+          <div>
+            place for picture
+          </div>
+          <div>
+            place for description          
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div>
+            place for picture
+          </div>
+          <div>
+            place for description          
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div>
+            place for picture
+          </div>
+          <div>
+            place for description          
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <button class="btn btn-success"></button>
+      </div>
+    </div>
     
   </div>
 

@@ -1,6 +1,6 @@
 package kr.co.udf.common.web;
 
-public class Params { 
+public class Params {
 	private int page;
 	private int perPageNum;
 	

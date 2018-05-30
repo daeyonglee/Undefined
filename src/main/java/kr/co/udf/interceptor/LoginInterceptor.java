@@ -30,6 +30,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		if (user != null) {
 			logger.info("new Login success");
 			session.setAttribute(LOGIN, user);
+			session.setAttribute("role", role);
 
 			if (request.getParameter("useCookie") != null  && role != "admin") {
 				logger.info("remember me......");

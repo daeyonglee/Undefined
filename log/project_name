@@ -1,0 +1,3 @@
+2018-05-29 10:53:08 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: INSERT INTO users ( user_no , user_email , user_pw , user_nm , user_birthday , user_addr , user_tel ) VALUES ( users_seq.nextval , ? , ? , ? , ? , ? , ? )  
+2018-05-29 10:53:09 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters: lee@naver.com(String), 1234(String), 미스터 리(String), 2022-02-21(String), 06097^^서울 강남구 봉은사로 403 (삼성동, 하모니 빌딩)^^지하수로(String), 141371684(Integer) 
+2018-05-29 10:53:09 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==    Updates: 1 

@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.udf.auction.dao.MyBatisAuctionApplyDao">
+
+<!--  (페이징 처리 없이) 전체 신청 리스트 조회 -->
+<select id="listAll" resultType="Auction">
+SELECT  d.daa_no  no
+      , u.user_no userNo
+      , u.user_nm writer
+      , d.daa_loc loc
+      , SUBSTR(to_char(d.daa_date, 'YYYY-MM-DD HH24:MI'),0,10) day
+      , SUBSTR(to_char(d.daa_date, 'YYYY-MM-DD HH24:MI'),12,7) time
+      , TO_CHAR(d.daa_deadline, 'YYYY-MM-DD') deadline
+      , d.daa_memo memo
+      , d.daa_stat stat
+      , TO_CHAR(d.regdate, 'YYYY-MM-DD') regdate
+      ,'dress' type
+FROM   dress_auction_apply d
+       JOIN users u 
+         ON d.user_no = u.user_no
+WHERE d.daa_stat = '입찰중' OR  d.daa_stat = '낙찰대기중'
+UNION
+SELECT m.maa_no  no
+     , u.user_no userNo
+     , u.user_nm writer   
+     , m.maa_loc loc
+     , SUBSTR(to_char(m.maa_date, 'YYYY-MM-DD HH24:MI'),0,10) day
+     , SUBSTR(to_char(m.maa_date, 'YYYY-MM-DD HH24:MI'),12,7) time
+     , SUBSTR(TO_CHAR(m.maa_deadline, 'YYYY-MM-DD HH24:MI'),0,10) deadline
+     , m.maa_memo memo
+     , m.maa_stat stat
+     , TO_CHAR(m.regdate, 'YYYY-MM-DD') regdate
+     ,'makeup' type
+  FROM makeup_auction_apply m
+       JOIN users u 
+         ON m.user_no = u.user_no
+WHERE m.maa_stat = '입찰중' OR  m.maa_stat =  '낙찰대기중'
+UNION
+SELECT s.saa_no  no
+     , u.user_no userNo
+     , u.user_nm writer
+     , s.saa_loc loc
+     , SUBSTR(to_char(s.saa_date, 'YYYY-MM-DD HH24:MI'),0,10) day
+     , SUBSTR(to_char(s.saa_date, 'YYYY-MM-DD HH24:MI'),12,7) time
+     , SUBSTR(TO_CHAR(s.saa_deadline, 'YYYY-MM-DD HH24:MI'),0,10) deadline
+     , s.saa_memo memo
+     , s.saa_stat stat
+     , TO_CHAR(s.regdate, 'YYYY-MM-DD') regdate
+     , 'studio' type
+  FROM studio_auction_apply s
+       JOIN users u
+         ON s.user_no = u.user_no
+WHERE s.saa_stat = '입찰중' OR s.saa_stat = '낙찰대기중'
+</select>
+
+<!--  스드메 신청서 신규 작성 --> 
+<insert id="createMakeup" parameterType="Auction">
+INSERT INTO makeup_auction_apply 
+            (maa_no, 
+             user_no, 
+             user_nm
+             maa_loc, 
+             maa_date,
+             maa_deadline, 
+             maa_memo,
+             maa_stat,
+             regdate) 
+VALUES      (makeup_auction_apply_seq.NEXTVAL, 
+             #{userNo},
+             (SELECT user_nm writer
+             FROM users
+             WHERE user_no = #{userNo}),
+             #{loc}, 
+             TO_DATE(#{date}, 'YYYY/MM/DD HH24:MI'),
+             TO_DATE(#{deadline}, 'YYYY/MM/DD'), 
+             #{memo},
+             '입찰중', 
+             SYSDATE)
+</insert>
+
+<insert id="createStudio" parameterType="Auction">
+INSERT INTO studio_auction_apply 
+            (saa_no, 
+             user_no, 
+             user_nm,
+             saa_loc, 
+             saa_date, 
+             saa_memo,
+             saa_stat, 
+             regdate) 
+VALUES      (studio_auction_apply_seq.NEXTVAL, 
+             #{userNo}, 
+             (SELECT user_nm writer
+             FROM users
+             WHERE user_no = #{userNo}),
+             #{loc}, 
+             TO_DATE(#{date}, 'YYYY/MM/DD HH24:MI'), 
+             TO_DATE(#{deadline}, 'YYYY/MM/DD'), 
+             #{memo},
+             '입찰중', 
+             SYSDATE)
+</insert>
+
+
+<insert id="createDress" parameterType="Auction">
+INSERT INTO dress_auction_apply 
+            (daa_no, 
+             user_no,
+             user_nm, 
+             daa_loc, 
+             daa_date,
+             daa_deadline,
+             daa_memo,
+             daa_stat, 
+             regdate) 
+VALUES      (dress_auction_apply_seq.NEXTVAL, 
+             #{userNo}, 
+            (SELECT user_nm writer
+             FROM users
+             WHERE user_no = #{userNo}),
+             #{loc}, 
+             TO_DATE(#{date}, 'YYYY/MM/DD HH24:MI'), 
+             TO_DATE(#{deadline}, 'YYYY/MM/DD'), 
+             #{memo}, 
+             '입찰중',
+             SYSDATE) 
+</insert>
+
+<!--  신청서 전체 리스트 페이징 처리 -->
+<select id="listParams" parameterType="SearchParams" resultType="Auction">
+SELECT M.*
+  FROM (SELECT CEIL(rownum / #{perPageNum}) page 
+             , S.*
+          FROM ( SELECT  d.daa_no  no
+      , u.user_no userNo
+      , u.user_nm writer
+      , d.daa_loc loc
+      , SUBSTR(to_char(d.daa_date, 'YYYY-MM-DD HH24:MI'),0,10) day
+      , SUBSTR(to_char(d.daa_date, 'YYYY-MM-DD HH24:MI'),12,7) time
+      , TO_CHAR(d.daa_deadline, 'YYYY-MM-DD') deadline
+      , d.daa_memo memo
+      , d.daa_stat stat
+      , TO_CHAR(d.regdate, 'YYYY-MM-DD') regdate
+      ,'dress' type
+FROM   dress_auction_apply d
+       JOIN users u 
+         ON d.user_no = u.user_no
+WHERE d.daa_stat = '입찰중' OR  d.daa_stat = '낙찰대기중'
+UNION
+SELECT m.maa_no  no
+     , u.user_no userNo
+     , u.user_nm writer   
+     , m.maa_loc loc
+     , SUBSTR(to_char(m.maa_date, 'YYYY-MM-DD HH24:MI'),0,10) day
+     , SUBSTR(to_char(m.maa_date, 'YYYY-MM-DD HH24:MI'),12,7) time
+     , SUBSTR(TO_CHAR(m.maa_deadline, 'YYYY-MM-DD HH24:MI'),0,10) deadline
+     , m.maa_memo memo
+     , m.maa_stat stat
+     , TO_CHAR(m.regdate, 'YYYY-MM-DD') regdate
+     ,'makeup' type
+  FROM makeup_auction_apply m
+       JOIN users u 
+         ON m.user_no = u.user_no
+WHERE m.maa_stat = '입찰중' OR  m.maa_stat =  '낙찰대기중'
+UNION
+SELECT s.saa_no  no
+     , u.user_no userNo
+     , u.user_nm writer
+     , s.saa_loc loc
+     , SUBSTR(to_char(s.saa_date, 'YYYY-MM-DD HH24:MI'),0,10) day
+     , SUBSTR(to_char(s.saa_date, 'YYYY-MM-DD HH24:MI'),12,7) time
+     , SUBSTR(TO_CHAR(s.saa_deadline, 'YYYY-MM-DD HH24:MI'),0,10) deadline
+     , s.saa_memo memo
+     , s.saa_stat stat
+     , TO_CHAR(s.regdate, 'YYYY-MM-DD') regdate
+     , 'studio' type
+  FROM studio_auction_apply s
+       JOIN users u
+         ON s.user_no = u.user_no
+WHERE s.saa_stat = '입찰중' OR s.saa_stat = '낙찰대기중') S
+        ) M
+ WHERE page = #{page}
+</select>
+
+<select id="countPage" resultType="int">
+SELECT count(*) 
+  FROM    (SELECT *
+           FROM dress_auction_apply 
+          WHERE daa_stat = '입찰중' OR daa_stat = '낙찰대기중'
+          UNION ALL 
+         SELECT * 
+           FROM studio_auction_apply
+          WHERE saa_stat = '입찰중' OR saa_stat = '낙찰대기중' 
+          UNION ALL 
+         SELECT * 
+           FROM makeup_auction_apply
+          WHERE maa_stat = '입찰중' OR maa_stat = '낙찰대기중'
+)
+</select>
+
+<!--  스드메 별 전체 리스트 조회 + 페이징 처리 -->
+<select id="listByDress" parameterType="SearchParams" resultType="Auction">
+ SELECT M.*
+  FROM (SELECT CEIL(rownum / #{perPageNum}) page 
+             , S.*
+          FROM ( SELECT  d.daa_no  no
+                      , u.user_no userNo
+                      , u.user_nm writer
+                      , d.daa_loc loc
+                      , SUBSTR(to_char(d.daa_date, 'YYYY-MM-DD HH24:MI'),0,10) day
+                      , SUBSTR(to_char(d.daa_date, 'YYYY-MM-DD HH24:MI'),12,7) time
+                      , TO_CHAR(d.daa_deadline, 'YYYY-MM-DD') deadline
+                      , d.daa_memo memo
+                      , d.daa_stat stat
+                      , TO_CHAR(d.regdate, 'YYYY-MM-DD') regdate
+                      ,'dress' type
+                FROM   dress_auction_apply d
+                       JOIN users u 
+                       
+                         ON d.user_no = u.user_no
+               WHERE d.daa_stat = '입찰중' OR  d.daa_stat = '낙찰대기중') S
+        ) M
+
+</select>
+<select id="listByMakeup" parameterType="SearchParams" resultType="Auction">
+ SELECT M.*
+    FROM (SELECT CEIL(rownum / #{perPageNum}) page 
+             , S.*
+          FROM (SELECT m.maa_no  no
+                     , u.user_no userNo
+                     , u.user_nm writer   
+                     , m.maa_loc loc
+                     , SUBSTR(to_char(m.maa_date, 'YYYY-MM-DD HH24:MI'),0,10) day
+                     , SUBSTR(to_char(m.maa_date, 'YYYY-MM-DD HH24:MI'),12,7) time
+                     , SUBSTR(TO_CHAR(m.maa_deadline, 'YYYY-MM-DD HH24:MI'),0,10) deadline
+                     , m.maa_memo memo
+                     , m.maa_stat stat
+                     , TO_CHAR(m.regdate, 'YYYY-MM-DD') regdate
+                     ,'makeup' type
+                  FROM makeup_auction_apply m
+                       JOIN users u 
+                         ON m.user_no = u.user_no
+                WHERE m.maa_stat = '입찰중' OR  m.maa_stat = '낙찰대기중') S
+        ) M
+</select>
+<select id="listByStudio" parameterType="SearchParams" resultType="Auction">
+ SELECT M.*
+  FROM (SELECT CEIL(rownum / #{perPageNum}) page 
+             , S.*
+          FROM ( SELECT  s.saa_no  no
+                      , u.user_no userNo
+                      , u.user_nm writer
+                      , ds.saa_loc loc
+                      , SUBSTR(to_char(s.saa_date, 'YYYY-MM-DD HH24:MI'),0,10) day
+                      , SUBSTR(to_char(s.saa_date, 'YYYY-MM-DD HH24:MI'),12,7) time
+                      , TO_CHAR(s.saa_deadline, 'YYYY-MM-DD') deadline
+                      , s.saa_memo memo
+                      , s.saa_stat stat
+                      , TO_CHAR(s.regdate, 'YYYY-MM-DD') regdate
+                      ,'studio' type
+                FROM   studio_auction_apply s
+                       JOIN users u 
+                         ON s.user_no = u.user_no
+               WHERE s.saa_stat = '입찰중' OR  s.saa_stat = '낙찰대기중') S
+        ) M
+
+</select>
+
+<select id="listByTypeCount" parameterType="SearchParams" resultType="int">
+<choose>
+<when test="searchType == 'dress'">
+  SELECT count(*) count 
+   FROM dress_auction_apply 
+  WHERE daa_stat = '입찰중' OR daa_stat = '낙찰대기중'
+ </when>
+ <when test="searchType == 'studio'">
+  SELECT count(*) count 
+   FROM studio_auction_apply
+  WHERE saa_stat = '입찰중' OR saa_stat = '낙찰대기중' 
+ </when>
+ <when test="searchType == 'makeup'">
+  SELECT count(*) count 
+    FROM makeup_auction_apply
+   WHERE maa_stat = '입찰중' OR maa_stat = '낙찰대기중'
+ </when>
+ <otherwise>
+ SELECT count(*) count
+  FROM    (SELECT *
+           FROM dress_auction_apply 
+          WHERE daa_stat = '입찰중' OR daa_stat = '낙찰대기중'
+          UNION ALL 
+         SELECT * 
+           FROM studio_auction_apply
+          WHERE saa_stat = '입찰중' OR saa_stat = '낙찰대기중' 
+          UNION ALL 
+         SELECT * 
+           FROM makeup_auction_apply
+          WHERE maa_stat = '입찰중' OR maa_stat = '낙찰대기중'
+)
+ </otherwise>
+ </choose>
+</select>
+
+</mapper>

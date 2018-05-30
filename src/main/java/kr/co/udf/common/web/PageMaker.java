@@ -5,8 +5,7 @@ import java.net.URLEncoder;
 
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
-
-public class PageMaker { 
+public class PageMaker {
 	
 	private int totalCount;
 	private int startPage;
@@ -15,9 +14,9 @@ public class PageMaker {
 	private boolean next;
 	
 	private int displayPageNum = 10;
-	private Params params;
+	private SearchParams params; 
 	
-	public void setParams(Params params) {
+	public void setParams(SearchParams params) {
 		this.params = params;
 	}
 	

@@ -1,6 +1,6 @@
 package kr.co.udf.common.web;
 
-public class SearchParams extends Params { 
+public class SearchParams extends Params {
 	
 	private String searchType;
 	private String keyword;

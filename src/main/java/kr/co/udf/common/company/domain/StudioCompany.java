@@ -1,6 +1,6 @@
 package kr.co.udf.common.company.domain;
 
-public class StudioCompany { 
+public class StudioCompany {
 
 	private int companyNo;
 	private String nm;

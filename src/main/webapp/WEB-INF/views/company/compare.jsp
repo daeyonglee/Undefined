@@ -258,6 +258,8 @@ body {
                                             <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
                                                 <a href="single.html"><img src="assets/img/demo/small-property-3.jpg"></a>
                                                 <span class="property-seeker">
+                                                    <b class="b-1">A</b>
+                                                    <b class="b-2">S</b>
                                                 </span>
                                             </div>
                                             <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
@@ -270,6 +272,8 @@ body {
                                             <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
                                                 <a href="single.html"><img src="assets/img/demo/small-property-2.jpg"></a>
                                                 <span class="property-seeker">
+                                                    <b class="b-1">A</b>
+                                                    <b class="b-2">S</b>
                                                 </span>
                                             </div>
                                             <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
@@ -356,11 +360,11 @@ function closeNav() {
         <h4 class="modal-title" id="myModalLabel">비교하기</h4>
       </div>
       <div class="modal-body">
-        
-  
+        ...
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
