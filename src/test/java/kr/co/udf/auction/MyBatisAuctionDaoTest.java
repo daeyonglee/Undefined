@@ -63,7 +63,7 @@ public class MyBatisAuctionDaoTest {
 		logger.info(auction);
 	}
 	
-	@Test
+	//@Test
 	public void listParamsTest() throws Exception {
 		SearchParams params = new SearchParams();
 		params.setPage(1);

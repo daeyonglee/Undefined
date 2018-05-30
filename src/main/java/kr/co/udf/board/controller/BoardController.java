@@ -1,70 +1,75 @@
 package kr.co.udf.board.controller;
 
 
+import javax.inject.Inject;
+
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+
+import kr.co.udf.board.BoardDaoTest;
+import kr.co.udf.board.service.BoardService;
 
 
 @Controller
 @RequestMapping("/board/*")
 public class BoardController {
 
-  //private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
-  	
-  	@RequestMapping(value="/listAll", method=RequestMethod.GET)
-  	public void listAll() {
-  		
-  		//return "/board/listAll";
-  	}
-
-	@RequestMapping(value="/listAll1", method=RequestMethod.GET)
-  	public String listAll1() {
-  		
-  		return "/board/listAll1";
-  	}
-	
-	@RequestMapping(value="/register", method=RequestMethod.GET)
-  	public String register() {
-  		
-  		return "/board/register";
-  	}
+private static final Logger logger = Logger.getLogger(BoardController.class);  	
+  @Inject
+  private BoardService service;
   
-	@RequestMapping(value="/success", method=RequestMethod.GET)
-  	public String success() {
-  		
-  		return "/board/success";
-  	}
-	
-	@RequestMapping(value="/read", method=RequestMethod.GET)
-  	public String read() {
-  		
-  		return "/board/read";
-  	}
-	
-	@RequestMapping(value="/modify", method=RequestMethod.GET)
-  	public String modify() {
-  		
-  		return "/board/modify";
-  	}
-	
-	@RequestMapping(value="/modifyPage", method=RequestMethod.GET)
-  	public String modifyPage() {
-  		
-  		return "/board/modifyPage";
-  	}
-	
-  @RequestMapping(value = "/listCri", method = RequestMethod.GET)
-	public String listAllcri() throws Exception {
-		
-		return "/board/listAllcri";
-	}
-
-  @RequestMapping(value = "/listPage", method = RequestMethod.GET)
-  public String listPage() throws Exception {
-		
-		return "/board/listPage";
-  }
+//  	@RequestMapping(value="/listAll", method=RequestMethod.GET)
+//  	public void listAll() {
+//  		//return "/board/listAll";
+//  	}
+//
+//	@RequestMapping(value="/listAll1", method=RequestMethod.GET)
+//  	public String listAll1() {
+//  		return "/board/listAll1";
+//  	}
+//	
+//	@RequestMapping(value="/register", method=RequestMethod.GET)
+//  	public String register() {
+//  		
+//  		return "/board/register";
+//  	}
+//  
+//	@RequestMapping(value="/success", method=RequestMethod.GET)
+//  	public String success() {
+//  		
+//  		return "/board/success";
+//  	}
+//	
+//	@RequestMapping(value="/read", method=RequestMethod.GET)
+//  	public String read() {
+//  		
+//  		return "/board/read";
+//  	}
+//	
+//	@RequestMapping(value="/modify", method=RequestMethod.GET)
+//  	public String modify() {
+//  		
+//  		return "/board/modify";
+//  	}
+//	
+//	@RequestMapping(value="/modifyPage", method=RequestMethod.GET)
+//  	public String modifyPage() {
+//  		
+//  		return "/board/modifyPage";
+//  	}
+//	
+//  @RequestMapping(value = "/listCri", method = RequestMethod.GET)
+//	public String listAllcri() throws Exception {
+//		
+//		return "/board/listAllcri";
+//	}
+//
+//  @RequestMapping(value = "/listPage", method = RequestMethod.GET)
+//  public String listPage() throws Exception {
+//		
+//		return "/board/listPage";
+//  }
 	
 //  @Inject
 //  private BoardService service;
