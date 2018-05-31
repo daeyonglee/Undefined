@@ -150,7 +150,7 @@
              </li>
              <li class="wow fadeInDown" data-wow-delay="0.4s"><a class="" href="property.html">업체정보</a></li>
              <li class="wow fadeInDown" data-wow-delay="0.5s"><a 
-             href="<%=request.getContextPath()%>/article/listAll?board_no=1">공지사항</a></li>
+             href="<%=request.getContextPath()%>/article/listPage?board_no=1">공지사항</a></li>
          </ul>
      </div><!-- /.navbar-collapse -->
  </div><!-- /.container-fluid -->

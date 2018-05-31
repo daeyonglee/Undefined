@@ -56,7 +56,30 @@
                 <td>${listAll.regdate}</td>
                 <td><span class="badge bg-red">${listAll.hitcount }</span></td>
               </tr>
-            </c:forEach>
+            </c:forEach> 
+
+          <!--페이지 네이션  -->
+            <div class="text-center">
+              <ul class="pagination">
+                <c:if test="${pageMaker.prev}">
+                  <li><a
+                    href="listPage${pageMaker.makeQuery(pageMaker.startPage - 1) }&board_no=<%=request.getParameter("board_no")%>">&laquo;</a></li>
+                </c:if>
+          
+                <c:forEach begin="${pageMaker.startPage }"
+                  end="${pageMaker.endPage }" var="idx">
+                  <li
+                    <c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
+                    <a href="listPage${pageMaker.makeQuery(idx)}&board_no=<%=request.getParameter("board_no")%>">${idx}</a>
+                  </li>
+                </c:forEach>
+          
+                <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+                  <li><a
+                    href="listPage${pageMaker.makeQuery(pageMaker.endPage +1) }&board_no=<%=request.getParameter("board_no")%>">&raquo;</a></li>
+                </c:if>
+              </ul>
+            </div>    
 
           </table>
         </div>

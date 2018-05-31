@@ -143,12 +143,11 @@
 	</select>
 	
 	<select id="countPaging" resultType="int">
-	<![CDATA[
 		SELECT Count(article_no) 
 		FROM   article 
-		WHERE  article_no > 0 
-	]]>		   
+		WHERE  article_no > 0 and board_no= #{board_no}  
 	</select>
+	
 	 	<!-- 		
 	<select id="listSearch" resultType="kr.co.kosta.springmvc.board.domain.Board">
 	<![CDATA[

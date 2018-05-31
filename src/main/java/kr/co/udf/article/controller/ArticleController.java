@@ -50,12 +50,18 @@ public class ArticleController {
 		service.regist(article);
 
 		rttr.addFlashAttribute("msg", "success");
-		return "redirect:/article/listAll?board_no=1";
+		return "redirect:/article/listPage?board_no=1";
 	}
 
 	@RequestMapping(value = "/read", method = RequestMethod.GET)
 	public void read(@RequestParam("article_no") int article_no, Model model) throws Exception {
 		model.addAttribute("read", service.read(article_no));
+	}
+	
+	@RequestMapping(value = "/readPage", method = RequestMethod.GET)
+	public void read(@RequestParam("article_no") int article_no, @ModelAttribute("cri") Criteria cri, Model model) throws Exception {
+	
+		model.addAttribute("read",service.read(article_no));
 	}
   
 	@RequestMapping(value = "/remove", method = RequestMethod.POST)
@@ -63,6 +69,17 @@ public class ArticleController {
 		service.remove(article_no);
 		rttr.addFlashAttribute("msg", "success");
 		return "redirect:/article/listAll?board_no=1";
+	}
+	
+	@RequestMapping(value = "/removePage", method = RequestMethod.POST)
+	public String remove(@RequestParam("article_no") int article_no, Criteria cri, RedirectAttributes rttr) throws Exception {
+	    service.remove(article_no);
+
+	    rttr.addAttribute("page", cri.getPage());
+	    rttr.addAttribute("perPageNum", cri.getPerPageNum());
+	    rttr.addFlashAttribute("msg", "success");
+	
+	    return "redirect:/article/listPage";
 	}
 	
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
@@ -80,6 +97,26 @@ public class ArticleController {
 		return "redirect:/article/listAll?board_no=1";
 	}
 	
+	@RequestMapping(value = "/modifyPage", method = RequestMethod.GET)
+	  public void modifyPagingGET(@RequestParam("article_no") int article_no, @ModelAttribute("cri") Criteria cri, Model model)
+	      throws Exception {
+	    model.addAttribute("read",service.read(article_no));
+	}
+	
+	@RequestMapping(value="/modifyPage", method=RequestMethod.POST)
+	public String modifyPagingPost(Article article, 
+			Criteria cri,RedirectAttributes rttr)throws Exception{
+		service.modify(article);
+		
+		rttr.addAttribute("page",cri.getPage());
+		rttr.addAttribute("perPageNum",cri.getPerPageNum());
+		rttr.addAttribute("board_no",cri.getBoard_no());
+		
+		rttr.addFlashAttribute("msg","success");
+		
+		return "redirect:/article/listPage";
+	}
+	
 	@RequestMapping(value = "/listPage", method = RequestMethod.GET)
 	public void listPage(@ModelAttribute("cri") Criteria cri, Model model) throws Exception {
 	    logger.info(cri.toString());
@@ -92,7 +129,6 @@ public class ArticleController {
 	    pageMaker.setTotalCount(service.listCountCriteria(cri));
 	    model.addAttribute("pageMaker", pageMaker);
 	}
-	
 	
 
 }
