@@ -71,18 +71,18 @@ public class CompanyController {
    @RequestMapping(value="/detail", method=RequestMethod.GET)
    public void detailGET() {
 
-   }
-   
-   @RequestMapping(value="/compare", method=RequestMethod.GET)
-   public void compareGET() {
-      
-   }
-   
-   @RequestMapping(value="/submit", method=RequestMethod.GET)
-   public void submitGET() {
-      
-   }
+	}
+	
+	@RequestMapping(value="/compare", method=RequestMethod.GET)
+	public void compareGET() {
+		
+	}
+	
+	@RequestMapping(value="/submit", method=RequestMethod.GET)
+	public void submitGET() {
+		
+	}
 
-   
-   
+	
+	
 }

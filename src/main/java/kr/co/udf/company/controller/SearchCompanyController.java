@@ -21,27 +21,27 @@ import kr.co.udf.company.service.StudioService;
 @RequestMapping("/company/*")
 public class SearchCompanyController {
 
-   private static final Logger logger = LoggerFactory.getLogger(SearchCompanyController.class);
+	private static final Logger logger = LoggerFactory.getLogger(SearchCompanyController.class);
 
-   @Inject
-   private StudioService ss;
-   private DressService ds;
-   private MakeupService ms;
-   
-   //스튜디오 검색 페이징
-   @RequestMapping(value = "/slist", method = RequestMethod.GET)
-     public void listPage(@ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
+	@Inject
+	private StudioService ss;
+	private DressService ds;
+	private MakeupService ms;
+	
+	//스튜디오 검색 페이징
+	@RequestMapping(value = "/slist", method = RequestMethod.GET)
+	  public void listPage(@ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
 
-       logger.info(cri.toString());
+	    logger.info(cri.toString());
 
-       model.addAttribute("list", ss.listSearchCriteria(cri));
+	    model.addAttribute("list", ss.listSearchCriteria(cri));
 
-       PageMaker pageMaker = new PageMaker();
-       pageMaker.setCri(cri);
-       pageMaker.setTotalCount(ss.listSearchCount(cri));
+	    PageMaker pageMaker = new PageMaker();
+	    pageMaker.setCri(cri);
+	    pageMaker.setTotalCount(ss.listSearchCount(cri));
 
-       model.addAttribute("pageMaker", pageMaker);
-     }
-   
+	    model.addAttribute("pageMaker", pageMaker);
+	  }
+	
 
 }
