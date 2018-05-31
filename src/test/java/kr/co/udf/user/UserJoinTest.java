@@ -27,7 +27,6 @@ public class UserJoinTest {
 	
 	@Test
 	public void test() {
-		dao.userJoin(new UserDTO(null, "lee@naver.com", "1234", "2022-02-21", "미스터 리", "06097", "서울 강남구 봉은사로 403 (삼성동, 하모니 빌딩)", "지하수로", 01033224444, 0, null, null));
 	}
 
 }

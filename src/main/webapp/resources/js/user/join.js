@@ -376,10 +376,6 @@ function validateSecondStep() {
 		    html += "      <input name='name' id='name' type='text' class='form-control'>";
 		    html += "    </div>";
 		    html += "    <div class='form-group'>";
-		    html += "      <label>이름<small>(required)</small></label>";
-		    html += "      <input name='name' id='name' type='text' class='form-control'>";
-		    html += "    </div>";
-		    html += "    <div class='form-group'>";
 		    html += "      <label>휴대폰 번호<small>(required)</small></label>";
 		    html += "      <input name='tel' id='tel' type='tel' class='form-control'>";
 		    html += "    </div>";
