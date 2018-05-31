@@ -1,13 +1,16 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@include file="../include/top.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+        <script src="/resources/js/auction.js"></script>
 <title>역경매 메인 페이지</title>
 </head>
-<body> 
+<body>
 
-  <%@include file="../include/top.jsp"%>
   <!-- Count area -->
   <div class="count-area">
     <div class="container"> 

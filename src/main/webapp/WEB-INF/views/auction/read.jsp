@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="/resources/assets/css/user/join.css">
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script type="text/javascript" src="/resources/assets/js/user/join.js"></script>
+<script type="text/javascript" src="/resources/js/user/join.js"></script>
 
 </head>
 <body>
@@ -191,24 +191,24 @@
 
 
   <script>
-			$(document).ready(function() {
-				var formObj = $("form[role='form']");
+         $(document).ready(function() {
+            var formObj = $("form[role='form']");
 
-				$(".btn-warning").on("click", function() {
-					formObj.attr("action", "modify");
-					formObj.attr("method", "get");
-					formObj.submit();
-				});
-				$(".btn-danger").on("click", function() {
-					formObj.attr("action", "remove");
-					formObj.submit();
-				});
+            $(".btn-warning").on("click", function() {
+               formObj.attr("action", "modify");
+               formObj.attr("method", "get");
+               formObj.submit();
+            });
+            $(".btn-danger").on("click", function() {
+               formObj.attr("action", "remove");
+               formObj.submit();
+            });
 
-				$(".btn-primary").on("click", function() {
-					self.location = "bid";
-				});
-			});
-		</script>
+            $(".btn-primary").on("click", function() {
+               self.location = "bid";
+            });
+         });
+      </script>
 
 
 

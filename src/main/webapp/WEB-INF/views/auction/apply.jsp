@@ -17,13 +17,13 @@
 <link rel="stylesheet" href="/resources/assets/css/user/join.css">
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script type="text/javascript" src="/resources/assets/js/user/join.js"></script>
+<script type="text/javascript" src="/resources/js/user/join.js"></script>
 <script>
 
 $(document).ready(function() {
  
     $('#submitBtn').click(function () {
-    	alert("신청 버튼 클릭");
+       alert("신청 버튼 클릭");
         $("#applyForm").submit();
     });
   
@@ -39,16 +39,16 @@ $(document).ready(function() {
 </script>
 <style type="text/css">
 #col {
-	padding-top: 5px;
-	padding-bottom: 5px;
+   padding-top: 5px;
+   padding-bottom: 5px;
 }
 
 #wizardProperty {
-	height: 500px;
+   height: 500px;
 }
 
 #button {
-	width: 20%;
+   width: 20%;
 }
 </style>
 </head>
@@ -80,6 +80,7 @@ $(document).ready(function() {
               <ul>
                 <li><a href="#step1" data-toggle="tab">역경매 신청하기</a></li>
               </ul>
+  
             <form id="applyForm" method="post">
               <div class="tab-content">
                 <div class="tab-pane" id="step1">
