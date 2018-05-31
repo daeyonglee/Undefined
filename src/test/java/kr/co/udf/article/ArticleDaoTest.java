@@ -12,12 +12,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import kr.co.udf.article.dao.ArticleDao;
 import kr.co.udf.article.domain.Article;
 import kr.co.udf.article.domain.Criteria;
 import kr.co.udf.board.BoardDaoTest;
-import kr.co.udf.board.domain.Board;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -147,25 +148,31 @@ public class ArticleDaoTest {
   }
 
 //  @Test
-//  public void testURI() throws Exception {
-//
-//    UriComponents uriComponents = UriComponentsBuilder.newInstance().path("/board/read").queryParam("bno", 12)
-//        .queryParam("perPageNum", 20).build();
-//
-//    logger.info("/board/read?bno=12&perPageNum=20");
-//    logger.info(uriComponents.toString());
-//
-//  }
-//
-//  @Test
-//  public void testURI2() throws Exception {
-//
-//    UriComponents uriComponents = UriComponentsBuilder.newInstance().path("/{module}/{page}").queryParam("bno", 12)
-//        .queryParam("perPageNum", 20).build().expand("board", "read").encode();
-//
-//    logger.info("/board/read?bno=12&perPageNum=20");
-//    logger.info(uriComponents.toString());
-//  }
+  public void testURI() throws Exception {
+    UriComponents uriComponents = 
+    		UriComponentsBuilder.newInstance()
+    		.path("/article/read")
+    		.queryParam("article_no", 12)
+    		.queryParam("perPageNum", 10).build();
+
+    logger.info("/article/read?article_no=12&perPageNum=10");
+    logger.info(uriComponents.toString());
+  }
+
+  @Test
+  public void testURI2() throws Exception {
+    UriComponents uriComponents = 
+    		UriComponentsBuilder.newInstance()
+    		.path("/{module}/{page}")
+    		.queryParam("article_no", 12)
+	        .queryParam("perPageNum", 10)
+	        .build()
+	        .expand("article", "read")
+	        .encode();
+
+    logger.info("/article/read?article_no=12&perPageNum=10");
+    logger.info(uriComponents.toString());
+  }
 //
 //  @Test
 //  public void testDynamic1() throws Exception {

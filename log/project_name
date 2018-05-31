@@ -1,11 +1,4 @@
-2018-05-30 09:52:08 [DEBUG] [kr.co.udf.article.ArticleDaoTest:86] ==================== 부서명 포함 전체사원 조회(조인) ======================== 
-2018-05-30 09:52:46 [DEBUG] [kr.co.udf.article.ArticleDaoTest:86] ==================== 부서명 포함 전체사원 조회(조인) ======================== 
-2018-05-30 09:52:47 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: SELECT a.article_no "article_no", a.article_head "head", a.article_title "article_title", a.article_content "article_content", u.user_nm "user_nm", To_char(a.regdate, 'YYYY-MM-DD') "regdate", a.hitcount "hitcount", a.board_no "board_no", (SELECT board_nm FROM board WHERE board_no = a.board_no) "board_nm" FROM article a JOIN users u ON a.user_no=u.user_no WHERE a.board_no=?  
-2018-05-30 09:52:47 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters: 1(Integer) 
-2018-05-30 09:52:47 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 6 
-2018-05-30 09:52:47 [DEBUG] [kr.co.udf.article.ArticleDaoTest:98] 1	Dress	게시글 제목333	게시글 내용3	임꺽정	0 
-2018-05-30 09:52:47 [DEBUG] [kr.co.udf.article.ArticleDaoTest:98] 2	Dress	게시글 제목1	게시글 내용1	임꺽정	0 
-2018-05-30 09:52:47 [DEBUG] [kr.co.udf.article.ArticleDaoTest:98] 21	Makeup	게시글 제목3	게시글 내용3	임꺽정	0 
-2018-05-30 09:52:47 [DEBUG] [kr.co.udf.article.ArticleDaoTest:98] 23	Dress	새로운 글입니다.	새로운 내용	임꺽정	0 
-2018-05-30 09:52:47 [DEBUG] [kr.co.udf.article.ArticleDaoTest:98] 24	Makeup	1111112121222	11111	임꺽정	0 
-2018-05-30 09:52:47 [DEBUG] [kr.co.udf.article.ArticleDaoTest:98] 25	Dress	22222	2222	임꺽정	0 
+2018-05-31 09:12:04 [INFO ] [kr.co.udf.article.ArticleDaoTest:158] /article/read?article_no=12&perPageNum=10 
+2018-05-31 09:12:04 [INFO ] [kr.co.udf.article.ArticleDaoTest:159] /article/read?article_no=12&perPageNum=10 
+2018-05-31 09:15:04 [INFO ] [kr.co.udf.article.ArticleDaoTest:173] /article/read?article_no=12&perPageNum=10 
+2018-05-31 09:15:04 [INFO ] [kr.co.udf.article.ArticleDaoTest:174] /article/read?article_no=12&perPageNum=10 

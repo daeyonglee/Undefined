@@ -46,12 +46,11 @@ public class ArticleServiceImpl implements ArticleService {
   public List<Map<String, Object>> listCriteria(Criteria cri) throws Exception {
     return dao.listCriteria(cri);
   }
-//
-//  @Override
-//  public int listCountCriteria(Criteria cri) throws Exception {
-//
-//    return articleDao.countPaging(cri);
-//  }
+
+  @Override
+  public int listCountCriteria(Criteria cri) throws Exception {
+    return dao.countPaging(cri);
+  }
 //
 //  @Override
 //  public List<Article> listSearchCriteria(SearchCriteria cri) throws Exception {
@@ -64,5 +63,6 @@ public class ArticleServiceImpl implements ArticleService {
 //
 //    return articleDao.listSearchCount(cri);
 //  }
+
 
 }

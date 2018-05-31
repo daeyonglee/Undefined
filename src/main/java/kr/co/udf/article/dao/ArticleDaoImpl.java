@@ -60,6 +60,11 @@ public class ArticleDaoImpl implements ArticleDao {
 	public List<Map<String, Object>> listCriteria(Criteria cri) throws Exception {
 		return session.selectList(namespace + ".listPage", cri);
 	}
+
+	@Override
+	public int countPaging(Criteria cri) throws Exception {
+		return session.selectOne(namespace + ".countPaging", cri);
+	}
 	
 	
 }

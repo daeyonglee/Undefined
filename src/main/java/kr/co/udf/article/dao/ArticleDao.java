@@ -22,12 +22,7 @@ public interface ArticleDao {
   
   public List<Map<String, Object>> listCriteria(Criteria cri) throws Exception;
 
-  // List<Map<String, Map<String, Object>>>
-  
-  
-//  public List<Article> listCriteria(Criteria cri) throws Exception;
-//
-//  public int countPaging(Criteria cri) throws Exception;
+  public int countPaging(Criteria cri) throws Exception;
 //  
 //  //use for dynamic sql
 //  

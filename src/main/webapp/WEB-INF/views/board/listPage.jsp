@@ -33,6 +33,7 @@
                     		<th style="width: 200px">게시날짜</th>
                     		<th style="width: 60px">조회수</th>
 						</tr> 
+            
 						<c:forEach items="${list}" var="board">
 
 							<tr>

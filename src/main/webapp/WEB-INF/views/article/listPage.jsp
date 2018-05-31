@@ -1,126 +1,54 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page session="false"%>
-
 <%@include file="../include/top.jsp"%>
 
-<!-- Main content -->
-<section class="content">
-	<div class="row">
-		<!-- left column -->
-		<div class="col-md-12">
-			<!-- general form elements -->
-			<div class='box'>
-				<div class="box-header with-border">
-					<h3 class="box-title">Board List</h3>
-				</div>
-				<div class='box-body'>
-					<button id='newBtn'>New Board</button>
-				</div>
-			</div>
-			<div class="box">
-				<div class="box-header with-border">
-					<h3 class="box-title">LIST PAGING</h3>
-				</div>
-				<div class="box-body">
-					<table class="table table-bordered">
-						<tr>
-                    		<th style="width: 60px">번호</th>
-                    		<th>제목</th>
-                    		<th style="width: 140px">작성자</th>
-                    		<th style="width: 200px">게시날짜</th>
-                    		<th style="width: 60px">조회수</th>
-						</tr> 
-						<c:forEach items="${list}" var="board">
-							<tr>
-								<td>${board.bno}</td>
-								<td><a
-									href='/board/readPage${pageMaker.makeQuery(pageMaker.cri.page) }&bno=${board.bno}'>
-										${board.title}</a></td>
-								<td>${board.writer}</td>
-								<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
-										value="${board.regdate}" /></td>
-								<td><span class="badge bg-red">${board.viewcnt }</span></td>
-							</tr>
-
-						</c:forEach>
-
-					</table>
-				</div>
-				<!-- /.box-body -->
+<!-- 리스트 보여주기  -->
+<c:forEach items="${list}" var="article">
+  <tr>
+    <td>${article.article_no}</td>
+    <td><a
+      href='/article/readPage${pageMaker.makeQuery(pageMaker.cri.page) }&article_no=${article.article_no}'>
+        ${article.article_title}</a></td>
+    <td>${article.user_nm}</td>
+    <td>${article.regdate}"</td>
+    <td><span class="badge bg-red">${article.hitcount }</span></td>
+  </tr>
+</c:forEach>
 
 
-				<div class="box-footer">
-
-					<div class="text-center">
-						<ul class="pagination">
-
-							<c:if test="${pageMaker.prev}">
-								<li><a
-									href="listPage${pageMaker.makeQuery(pageMaker.startPage - 1) }">&laquo;</a></li>
-							</c:if>
-
-							<c:forEach begin="${pageMaker.startPage }"
-								end="${pageMaker.endPage }" var="idx">
-								<li
-									<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
-									<a href="listPage${pageMaker.makeQuery(idx)}">${idx}</a>
-								</li>
-							</c:forEach>
-
-							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-								<li><a
-									href="listPage${pageMaker.makeQuery(pageMaker.endPage +1) }">&raquo;</a></li>
-							</c:if>
-
-						</ul>
-					</div>
 
 
-					<div class="text-center">
-						<ul class="pagination">
-
-							<c:if test="${pageMaker.prev}">
-								<li><a href="${pageMaker.startPage - 1}">&laquo;</a></li>
-							</c:if>
-
-							<c:forEach begin="${pageMaker.startPage }"
-								end="${pageMaker.endPage }" var="idx">
-								<li
-									<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
-									<a href="${idx}">${idx}</a>
-								</li>
-							</c:forEach>
-
-							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-								<li><a
-									href="${pageMaker.endPage +1}">&raquo;</a></li>
-							</c:if>
-
-						</ul>
-					</div>
 
 
-				</div>
-				<!-- /.box-footer-->
-			</div>
-		</div>
-		<!--/.col (left) -->
 
+
+
+
+<!--페이지 네이션  -->
+	<div class="text-center">
+		<ul class="pagination">
+			<c:if test="${pageMaker.prev}">
+				<li><a href="${pageMaker.startPage - 1}">&laquo;</a></li>
+			</c:if>
+
+			<c:forEach begin="${pageMaker.startPage }"
+				end="${pageMaker.endPage }" var="idx">
+				<li
+					<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
+					<a href="${idx}">${idx}</a>
+				</li>
+			</c:forEach>
+
+			<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+				<li><a
+					href="${pageMaker.endPage +1}">&raquo;</a></li>
+			</c:if>
+		</ul>
 	</div>
-	<!-- /.row -->
-</section>
-<!-- /.content -->
-
-<form id="jobForm">
-  <input type='hidden' name="page" value=${pageMaker.cri.perPageNum}>
-  <input type='hidden' name="perPageNum" value=${pageMaker.cri.perPageNum}>
-</form>
-
-
 <script>
+
 	var result = '${msg}';
 
 	if (result == 'SUCCESS') {

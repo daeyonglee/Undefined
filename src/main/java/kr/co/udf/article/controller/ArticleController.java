@@ -6,6 +6,7 @@ import javax.inject.Inject;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.udf.article.domain.Article;
 import kr.co.udf.article.domain.Criteria;
+import kr.co.udf.article.domain.PageMaker;
 import kr.co.udf.article.service.ArticleService;
 
 @Controller
@@ -76,6 +78,19 @@ public class ArticleController {
 		rttr.addFlashAttribute("msg", "success");
 
 		return "redirect:/article/listAll?board_no=1";
+	}
+	
+	@RequestMapping(value = "/listPage", method = RequestMethod.GET)
+	public void listPage(@ModelAttribute("cri") Criteria cri, Model model) throws Exception {
+	    logger.info(cri.toString());
+	
+	    model.addAttribute("list", service.listCriteria(cri));
+	    PageMaker pageMaker = new PageMaker();
+	    pageMaker.setCri(cri);
+//	    pageMaker.setTotalCount(131);
+	
+	    pageMaker.setTotalCount(service.listCountCriteria(cri));
+	    model.addAttribute("pageMaker", pageMaker);
 	}
 	
 	
