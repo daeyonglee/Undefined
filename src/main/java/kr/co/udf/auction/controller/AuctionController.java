@@ -308,6 +308,6 @@ public class AuctionController {
 		}
 
 		return entity;
-
+ 
 	}
 }
