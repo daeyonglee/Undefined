@@ -15,13 +15,11 @@ public class SearchBoardController {
 
   @RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String listPage() throws Exception {
-	
 	  return "/sboard/list";
 	}
   
   @RequestMapping(value = "/readPage", method = RequestMethod.GET)
 	public String readPage() throws Exception {
-	
 	  return "/sboard/readPage";
 	}
   

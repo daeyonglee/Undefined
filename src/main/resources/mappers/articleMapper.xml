@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.cog//DTD Mapper 3.0//EN"
+                        "http://mybatis.cog/dtd/mybatis-3-mapper.dtd">
+   
+
+<mapper namespace="kr.co.udf.article.dao.ArticleDao">
+	<insert id="create">
+		INSERT INTO article 
+		            (article_no, 
+		             board_no,
+		             user_no,
+		             article_head,
+		             article_title,
+		             article_content       
+		             ) 
+		VALUES  (article_seq.NEXTVAL,
+		              #{board_no},
+		              #{user_no},
+		              #{article_head},
+		              #{article_title},
+		              #{article_content}
+		             )
+	</insert>
+
+	<select id="read" parameterType="Integer" resultType="map">
+		SELECT a.article_no 										"article_no", 
+		       a.article_head 										"article_head",
+		       a.article_title 										"article_title", 
+		       a.article_content 									"article_content", 
+		       a.user_no 											"user_no",
+		       To_char(a.regdate, 'YYYY-MM-DD') 					"regdate", 
+		       a.hitcount 											"hitcount", 
+		       a.board_no 											"board_no",
+          (SELECT user_nm FROM users WHERE user_no = a.user_no) 	"user_nm", 
+          (SELECT board_nm FROM board WHERE board_no = a.board_no) 	"board_nm"
+		FROM article a
+		WHERE article_no = #{article_no}
+	</select>
+
+	<update id="update">
+		UPDATE article 
+		SET   
+			article_head=#{article_head},
+			article_title = #{article_title},
+			article_content=#{article_content}
+		WHERE  article_no = #{article_no}
+	</update>
+
+	<delete id="delete">
+		DELETE FROM article 
+		WHERE  article_no =#{article_no}
+	</delete>
+	
+	<select id="listAll" resultType="map">
+		SELECT a.article_no 											"article_no", 
+		       a.article_head 											"head",
+		       a.article_title 											"article_title", 
+		       a.article_content 										"article_content", 
+		       u.user_nm 												"user_nm",
+		       To_char(a.regdate, 'YYYY-MM-DD') 						"regdate", 
+		       a.hitcount 												"hitcount",
+		       a.board_no 												"board_no",
+		       (SELECT board_nm FROM board WHERE board_no = a.board_no) "board_nm"
+		FROM   article a JOIN  users u
+		ON a.user_no=u.user_no
+		WHERE a.board_no=#{board_no}  
+	</select>
+
+	<select id="listPage" resultType="map">
+		SELECT article_no, 
+		       article_head, 
+		       article_title, 
+		       article_content, 
+		       regdate,
+		       hitcount, 
+		       board_no, 
+		       board_nm,  
+		       user_nm 
+		FROM   (SELECT Ceil(rownum / 10) page, 
+		               article_no, 
+		               article_head, 
+		               article_title, 
+		               article_content, 
+		               hitcount, 
+		               regdate,
+		               board_no, 
+		               board_nm, 
+		               user_nm 
+		        FROM   (SELECT article_no, 
+		                       article_head, 
+		                       article_title, 
+		                       article_content, 
+		                       To_char(article.regdate, 'YYYY-MM-DD') regdate, 
+		                       hitcount, 
+		                       board_no, 
+		                       (SELECT board_nm 
+		                        FROM   board 
+		                        WHERE  board_no = article.board_no)   board_nm, 
+		                       (SELECT user_nm 
+		                        FROM   users 
+		                        WHERE  user_no = article.user_no)  user_nm 
+		                FROM   article 
+		                ORDER  BY article_no DESC)) 
+		WHERE  page = #{page} and board_no= #{board_no}   
+	</select>
+	
+	<select id="listCriteria" resultType="map">
+		SELECT article_no, 
+		       article_head, 
+		       article_title, 
+		       article_content article_content, 
+		       regdate regdate,
+		       hitcount hitcount, 
+		       board_no board_no, 
+		       board_nm board_nm,  
+		       user_nm user_nm
+		FROM   (SELECT Ceil(rownum / #{perPageNum}) page, 
+		               article_no, 
+		               article_head, 
+		               article_title, 
+		               article_content, 
+		               hitcount, 
+		               regdate,
+		               board_no, 
+		               board_nm, 
+		               user_nm 
+		        FROM   (SELECT article_no, 
+		                       article_head, 
+		                       article_title, 
+		                       article_content, 
+		                       To_char(article.regdate, 'YYYY-MM-DD') regdate, 
+		                       hitcount, 
+		                       board_no, 
+		                       (SELECT board_nm 
+		                        FROM   board 
+		                        WHERE  board_no = article.board_no)   board_nm, 
+		                       (SELECT user_nm 
+		                        FROM   users 
+		                        WHERE  user_no = article.user_no)  user_nm 
+		                FROM   article 
+		                ORDER  BY article_no DESC)) 
+		WHERE  page = #{page} and board_no= #{board_no}   
+	</select>
+	
+	<select id="countPaging" resultType="int">
+	<![CDATA[
+		SELECT Count(article_no) 
+		FROM   article 
+		WHERE  article_no > 0 
+	]]>		   
+	</select>
+	 	<!-- 		
+	<select id="listSearch" resultType="kr.co.kosta.springmvc.board.domain.Board">
+	<![CDATA[
+		SELECT bno, 
+		       title, 
+		       content, 
+		       writer, 
+		       regdate, 
+		       viewcnt,kind 
+		FROM   (SELECT Ceil(rownum / #{perPageNum}) request_page, 
+		               bno, 
+		               title, 
+		               content, 
+		               writer, 
+		               regdate, 
+		               viewcnt,kind 
+		        FROM   (SELECT bno, 
+		                       title, 
+		                       content, 
+		                       writer, 
+		                       To_char(regdate, 'YYYY-MM-DD HH24:MI') regdate, 
+		                       viewcnt,kind 
+		                FROM   article 
+		                ORDER  BY bno DESC)) 
+		WHERE  request_page = #{page} 
+	]]>		
+		<include refid="search"></include>
+	</select>
+	
+	<sql id="search">
+		<if test="searchType !=null">
+			<if test="searchType == 't'.toString()">
+				and title like
+				'%'||#{keyword}||'%'
+			</if>
+			<if test="searchType == 'c'.toString()">
+				and content like
+				'%'||#{keyword}||'%'
+			</if>
+			<if test="searchType == 'w'.toString()">
+				and writer like
+				'%'||#{keyword}||'%'
+			</if>
+			<if test="searchType == 'tc'.toString()">
+				and (title like
+				'%'||#{keyword}||'%' Or content like 
+				'%'||#{keyword}||'%')
+			</if>
+			<if test="searchType== 'cw'.toString()" >
+				and (content like
+				'%'||#{keyword}||'%' Or writer like 
+				'%'||#{keyword}||'%')
+			</if>
+			<if test="searchType== 'tcw'.toString()" >
+				and (title like '%'||#{keyword}||'%' 
+					Or content like '%'||#{keyword}||'%'
+					Or writer like '%'||#{keyword}||'%')
+			</if>
+		</if>
+	</sql>
+	
+	
+	<select id="listSearchCount" resultType="int">
+	<![CDATA[
+		SELECT Count(bno) 
+		FROM   article 
+		WHERE  bno > 0 
+	]]>		   
+		<include refid="search"></include>
+	</select>  -->
+	
+	
+</mapper>	
+
