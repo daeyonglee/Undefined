@@ -245,8 +245,8 @@
                       <div class="item-entry overflow">
                         <h5>
                           <a
-                            href="/company/compare?companyNo=${studio.companyNo}">
-                            ${studio.nm} </a>
+                            href="/company/compare?companyNo=${studio.sc_no}">
+                            ${studio.sc_nm} </a>
                         </h5>
                         
              
@@ -255,12 +255,12 @@
                         <span class="proerty-price pull-left">
                           ★★★ </span> 3.0/5.0 (20명) <br>
             
-            <c:choose>
-           <c:when test="${fn:length(studio.introduce) > 40}">
-                        <div class=""><c:out value="${fn:substring(studio.introduce,0,39)}"/> ... </div>
+          <c:choose>
+           <c:when test="${fn:length(studio.sc_introduce) > 40}">
+                        <div class=""><c:out value="${fn:substring(studio.sc_introduce,0,39)}"/> ... </div>
                           </c:when>
                              <c:otherwise>
-                              <c:out value="${studio.introduce}"/>
+                              <c:out value="${studio.sc_introduce}"/>
                                </c:otherwise> 
                                     </c:choose>   
                       </div>
@@ -270,6 +270,7 @@
 </c:forEach>
               </div>
             </div>
+
           <!-- 페이징 처리 -->
             <div class="section">
               <div class="pull-left">
@@ -310,16 +311,17 @@
               <div class="panel panel-default sidebar-menu wow fadeInRight animated">
 
               <!-- 업체검색 -->
-                <select name="searchType">
+               <div class="search">
+                 <select name="searchType">
                   <option value="name"
-                    <c:out value="${cri.searchType eq 'name'?'selected':''}"></c:out>>
+                    <c:out value="${cri.searchType eq 'name'?'selected':''}"/>>
                     업체명</option>
                   <option value="addr"
-                  <c:out value="${cri.searchType eq 'addr'?'selected':''}"></c:out>>
+                  <c:out value="${cri.searchType eq 'addr'?'selected':''}"/>>
                     장소</option>
                  </select>
                  
-                <div class="search">            
+                           
                  <form role="search">
                    <div class="input-group">
                       <input class="form-control" name='keyword' id="keywordInput" placeholder="Search" type="text"
@@ -434,8 +436,8 @@
                value= "
                  <c:forEach items="${list}" var="studio" varStatus="index">
                     <c:choose>
-                      <c:when test="${index.last}">${studio.addr}</c:when>
-                      <c:otherwise>${studio.addr},</c:otherwise>
+                      <c:when test="${index.last}">${studio.sc_addr}</c:when>
+                      <c:otherwise>${studio.sc_addr},</c:otherwise>
                     </c:choose>
                  </c:forEach>
                " />
@@ -445,8 +447,8 @@
                value= "
                  <c:forEach items="${list}" var="studio" varStatus="index">
                     <c:choose>
-                      <c:when test="${index.last}">${studio.nm}</c:when>
-                      <c:otherwise>${studio.nm},</c:otherwise>
+                      <c:when test="${index.last}">${studio.sc_nm}</c:when>
+                      <c:otherwise>${studio.sc_nm},</c:otherwise>
                     </c:choose>
                  </c:forEach>
                " />
@@ -476,8 +478,7 @@
 
               self.location = "list"
                   + '${pageMaker.makeQuery(1)}'
-                  + "&searchType="
-                  + $("select option:selected").val()
+                  + "&searchType=" + $("select option:selected").val()
                   + "&keyword=" + $('#keywordInput').val();
 
             });

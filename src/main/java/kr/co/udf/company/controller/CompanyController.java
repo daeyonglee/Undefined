@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.co.udf.company.domain.Criteria;
 import kr.co.udf.company.domain.PageMaker;
-import kr.co.udf.company.domain.SearchCriteria;
 import kr.co.udf.company.service.DressService;
 import kr.co.udf.company.service.MakeupService;
 import kr.co.udf.company.service.StudioService;
@@ -83,25 +82,7 @@ public class CompanyController {
 	public void submitGET() {
 		
 	}
-	
-	//검색 페이징
-	@RequestMapping(value = "/slist", method = RequestMethod.GET)
-	  public void listPage(@ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
 
-	    logger.info(cri.toString());
-
-	    model.addAttribute("list", ss.listSearchCriteria(cri));
-
-	    PageMaker pageMaker = new PageMaker();
-	    pageMaker.setCri(cri);
-
-	    pageMaker.setTotalCount(ss.listSearchCount(cri));
-
-	    model.addAttribute("pageMaker", pageMaker);
-	  }
-	
-
-	
 	
 	
 }
