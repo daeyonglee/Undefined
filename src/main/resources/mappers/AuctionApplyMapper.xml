@@ -4,6 +4,77 @@
 
 <mapper namespace="kr.co.udf.auction.dao.MyBatisAuctionApplyDao">
 
+  <!-- 스드메 삭제 -->  
+   <delete id = "deleteDress">
+   		DELETE 
+   		  FROM dress_auction_apply
+   		 WHERE daa_no = #{value}
+   </delete>
+   <delete id = "deleteMakeup">
+   		DELETE 
+   		  FROM makeup_auction_apply 
+   		 WHERE maa_no = #{value}
+   </delete>
+   <delete id = "deleteStudio">
+   		DELETE 
+   		  FROM studio_auction_apply 
+   		 WHERE saa_no = #{value}
+   </delete>
+   
+   <!-- 게시물 조회 -->
+	<select id="read" resultType="Auction">
+		select d.*
+from (SELECT  d.daa_no  no
+      , u.user_no userNo
+      , u.user_nm writer
+      , NVL(u.user_tel, null) tel
+      , d.daa_loc loc
+      , SUBSTR(to_char(d.daa_date, 'YYYY-MM-DD HH24:MI'),0,10) day
+      , SUBSTR(to_char(d.daa_date, 'YYYY-MM-DD HH24:MI'),12,7) time
+      , TO_CHAR(d.daa_deadline, 'YYYY-MM-DD') deadline
+      , d.daa_memo memo
+      , d.daa_stat stat
+      , TO_CHAR(d.regdate, 'YYYY-MM-DD') regdate
+      ,'dress' type
+FROM   dress_auction_apply d
+       JOIN users u 
+         ON d.user_no = u.user_no
+UNION
+SELECT m.maa_no  no
+     , u.user_no userNo
+     , u.user_nm writer   
+     , NVL(u.user_tel, null) tel
+     , m.maa_loc loc
+     , SUBSTR(to_char(m.maa_date, 'YYYY-MM-DD HH24:MI'),0,10) day
+     , SUBSTR(to_char(m.maa_date, 'YYYY-MM-DD HH24:MI'),12,7) time
+     , SUBSTR(TO_CHAR(m.maa_deadline, 'YYYY-MM-DD HH24:MI'),0,10) deadline
+     , m.maa_memo memo
+     , m.maa_stat stat
+     , TO_CHAR(m.regdate, 'YYYY-MM-DD') regdate
+     ,'makeup' type
+  FROM makeup_auction_apply m
+       JOIN users u 
+         ON m.user_no = u.user_no
+UNION
+SELECT s.saa_no  no
+     , u.user_no userNo
+     , u.user_nm writer
+     , NVL(u.user_tel, null) tel
+     , s.saa_loc loc
+     , SUBSTR(to_char(s.saa_date, 'YYYY-MM-DD HH24:MI'),0,10) day
+     , SUBSTR(to_char(s.saa_date, 'YYYY-MM-DD HH24:MI'),12,7) time
+     , SUBSTR(TO_CHAR(s.saa_deadline, 'YYYY-MM-DD HH24:MI'),0,10) deadline
+     , s.saa_memo memo
+     , s.saa_stat stat
+     , TO_CHAR(s.regdate, 'YYYY-MM-DD') regdate
+     , 'studio' type
+  FROM studio_auction_apply s
+       JOIN users u
+         ON s.user_no = u.user_no) d
+WHERE no = #{no} and type = #{type}
+	</select>
+
+
 <!--  (페이징 처리 없이) 전체 신청 리스트 조회 -->
 <select id="listAll" resultType="Auction">
 SELECT  d.daa_no  no
@@ -304,6 +375,207 @@ SELECT count(*)
 )
  </otherwise>
  </choose>
+</select>
+
+<!-- 스튜디오 입찰 실시간 조회  -->
+<select id="realtimelist" parameterType="map" resultType="Auction">
+<![CDATA[
+SELECT M.*
+     , (SELECT USER_NM FROM USERS u WHERE u.user_no = M.userNo) writer
+  FROM   (SELECT rownum rnum,
+               saa_no no,                      
+               user_no userNo,  
+               saa_loc loc,  
+               saa_date day, 
+               saa_memo memo,
+               saa_deadline deadline,
+               regdate ,
+               updatedate,
+               saa_stat stat
+        FROM   (SELECT 
+               saa_no ,                      
+               user_no ,  
+               saa_loc ,  
+               saa_date , 
+               saa_memo ,
+               saa_deadline,
+               regdate ,
+               updatedate,
+               saa_stat
+                FROM   studio_auction_apply 
+                WHERE  saa_no > 0
+                ORDER  BY saa_no DESC, 
+                          regdate desc)) M
+                where stat = '입찰중' or stat ='낙찰대기중'
+]]>
+</select>
+
+<!-- 스튜디오 낙찰 실시간 조회  -->
+<select id="winrealtimelist" parameterType="map" resultType="Auction">
+<![CDATA[
+SELECT M.*
+     , (SELECT USER_NM FROM USERS u WHERE u.user_no = M.userNo) writer
+  FROM   (SELECT rownum rnum,
+               saa_no no,                      
+               user_no userNo,  
+               saa_loc loc,  
+               saa_date day, 
+               saa_memo memo,
+               saa_deadline deadline,
+               regdate ,
+               updatedate,
+               saa_stat stat
+        FROM   (SELECT 
+               saa_no ,                      
+               user_no ,  
+               saa_loc ,  
+               saa_date , 
+               saa_memo ,
+               saa_deadline,
+               regdate ,
+               updatedate,
+               saa_stat
+                FROM   studio_auction_apply 
+                WHERE  saa_no > 0
+                ORDER  BY saa_no DESC, 
+                          regdate desc)) M
+                where stat = '낙찰'
+]]>
+</select>
+
+
+<!-- 드레스 입찰 실시간 조회  -->
+<select id="dressrealtimelist" parameterType="map" resultType="Auction">
+<![CDATA[
+SELECT M.*
+     , (SELECT USER_NM FROM USERS u WHERE u.user_no = M.userNo) writer
+  FROM   (SELECT rownum rnum,
+               daa_no no,                      
+               user_no userNo,  
+               daa_loc loc,  
+               daa_date day, 
+               daa_memo memo,
+               daa_deadline deadline,
+               regdate ,
+               updatedate,
+               daa_stat stat
+        FROM   (SELECT 
+               daa_no ,                      
+               user_no ,  
+               daa_loc ,  
+               daa_date , 
+               daa_memo ,
+               daa_deadline,
+               regdate ,
+               updatedate,
+               daa_stat
+                FROM   dress_auction_apply 
+                WHERE  daa_no > 0
+                ORDER  BY daa_no DESC, 
+                          regdate desc)) M
+                where stat = '입찰중' or stat ='낙찰대기중'
+]]>
+</select>
+
+<!-- 드레스 낙찰 실시간 조회  -->
+<select id="dresswinrealtimelist" parameterType="map" resultType="Auction">
+<![CDATA[
+SELECT M.*
+     , (SELECT USER_NM FROM USERS u WHERE u.user_no = M.userNo) writer
+  FROM   (SELECT rownum rnum,
+               daa_no no,                      
+               user_no userNo,  
+               daa_loc loc,  
+               daa_date day, 
+               daa_memo memo,
+               daa_deadline deadline,
+               regdate ,
+               updatedate,
+               daa_stat stat
+        FROM   (SELECT 
+               daa_no ,                      
+               user_no ,  
+               daa_loc ,  
+               daa_date , 
+               daa_memo ,
+               daa_deadline,
+               regdate ,
+               updatedate,
+               daa_stat
+                FROM   dress_auction_apply 
+                WHERE  daa_no > 0
+                ORDER  BY daa_no DESC, 
+                          regdate desc)) M
+                where stat = '낙찰'
+]]>
+</select>
+
+
+<!-- 메이크업 입찰 실시간 조회  -->
+<select id="makeuprealtimelist" parameterType="map" resultType="Auction">
+<![CDATA[
+SELECT M.*
+     , (SELECT USER_NM FROM USERS u WHERE u.user_no = M.userNo) writer
+  FROM   (SELECT rownum rnum,
+               maa_no no,                      
+               user_no userNo,  
+               maa_loc loc,  
+               maa_date day, 
+               maa_memo memo,
+               maa_deadline deadline,
+               regdate ,
+               updatedate,
+               maa_stat stat
+        FROM   (SELECT 
+               maa_no ,                      
+               user_no ,  
+               maa_loc ,  
+               maa_date , 
+               maa_memo ,
+               maa_deadline,
+               regdate ,
+               updatedate,
+               maa_stat
+                FROM   makeup_auction_apply 
+                WHERE  maa_no > 0
+                ORDER  BY maa_no DESC, 
+                          regdate desc)) M
+                where stat = '입찰중' or stat ='낙찰대기중'
+]]>
+</select>
+
+
+<!-- 메이크업 낙찰 실시간 조회  -->
+<select id="makeupwinrealtimelist" parameterType="map" resultType="Auction">
+<![CDATA[
+SELECT M.*
+     , (SELECT USER_NM FROM USERS u WHERE u.user_no = M.userNo) writer
+  FROM   (SELECT rownum rnum,
+               maa_no no,                      
+               user_no userNo,  
+               maa_loc loc,  
+               maa_date day, 
+               maa_memo memo,
+               maa_deadline deadline,
+               regdate ,
+               updatedate,
+               maa_stat stat
+        FROM   (SELECT 
+               maa_no ,                      
+               user_no ,  
+               maa_loc ,  
+               maa_date , 
+               maa_memo ,
+               maa_deadline,
+               regdate ,
+               updatedate,
+               maa_stat
+                FROM   makeup_auction_apply 
+                WHERE  maa_no > 0
+                ORDER  BY maa_no DESC, 
+                          regdate desc)) M
+                where stat = '낙찰'
+]]>
 </select>
 
 </mapper>

@@ -47,9 +47,16 @@ public class AuctionApplyServiceImpl implements AuctionApplyService {
 		return dao.listByMakeup(params);
 	}
 	@Override
-	public Auction read(int no) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public Auction read(int no ,String type) throws Exception {
+		Auction	auction = dao.read(no,type);
+			
+		String[] arr = auction.getLoc().split("\\|\\|");
+		auction.setLocFirst(arr[0]);
+		auction.setLocSecond(arr[1]);	
+		auction.setLocThird(arr[2]);
+	
+	  return auction;
+		 
 	}
 
 	@Override
@@ -59,9 +66,8 @@ public class AuctionApplyServiceImpl implements AuctionApplyService {
 	}
 
 	@Override
-	public void delete(int no) throws Exception {
-		// TODO Auto-generated method stub
-
+	public void delete(int no, String type) throws Exception {
+          dao.delete(no, type);
 	}
 
 	@Override
@@ -83,6 +89,36 @@ public class AuctionApplyServiceImpl implements AuctionApplyService {
 	@Override
 	public int listByTypeCount() throws Exception {
 		return dao.listByTypeCount();
+	}
+	
+	@Override
+	public List<Auction> realtimelist() throws Exception {
+		return dao.realtimelist();
+	}
+
+	@Override
+	public List<Auction> winrealtimelist() throws Exception {
+		return dao.winrealtimelist();
+	}
+
+	@Override
+	public List<Auction> dressrealtimelist() throws Exception {
+		return dao.dressrealtimelist();
+	}
+
+	@Override
+	public List<Auction> dresswinrealtimelist() throws Exception {
+		return dao.dresswinrealtimelist();
+	}
+
+	@Override
+	public List<Auction> makeuprealtimelist() throws Exception {
+		return dao.makeuprealtimelist();
+	}
+
+	@Override
+	public List<Auction> makeupwinrealtimelist() throws Exception {
+		return dao.makeupwinrealtimelist();
 	}
 
 

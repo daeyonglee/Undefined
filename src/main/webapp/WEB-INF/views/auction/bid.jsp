@@ -74,7 +74,7 @@ td, th {
                     <tr>
                       <td>${bid.regdate }</td>
                       <td>${bid.day }</td>
-                      <td>${bid.writer }</td>
+                      <td><a href = "read?no=${bid.no}&type=${bid.type}">${bid.writer }</a></td>
                       <td>${bid.loc }</td>
                       <td>${bid.deadline }</td>
                       <td>미공개</td>

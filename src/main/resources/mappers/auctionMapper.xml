@@ -21,13 +21,13 @@
 		               )) companyCnt
 		     , (select count(*)
 		          from (select *
-		                  from studio_bid
+		                  from studio_auction_apply
 		                UNION
 		                select *
-		                  from dress_bid
+		                  from dress_auction_apply
 		                UNION
 		                select *
-		                  from makeup_bid
+		                  from makeup_auction_apply
 		               )) bidCnt
 		  from dual
 	</select>

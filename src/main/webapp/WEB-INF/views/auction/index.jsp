@@ -1,13 +1,16 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@include file="../include/top.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+        <script src="/resources/js/auction.js"></script>
 <title>역경매 메인 페이지</title>
 </head>
 <body>
 
-  <%@include file="../include/top.jsp"%>
   <!-- Count area -->
   <div class="count-area">
     <div class="container"> 
@@ -61,89 +64,53 @@
     </div>
   </div>
   <div class="container">
-    <h4 align="center">스드메 역경매 입찰 현황</h4> <select><option>스튜디오</option><option>드레스</option><option>메이크업</option></select>
+    <h4 align="center">스튜디오 실시간 입낙찰 현황</h4>
   </div>
-  <div class="container">
-    <table class="table" style="width: 40%; display: inline-block;">
-    <tr class = "active"><td colspan = "5" align = "center"><a href = "bid">입찰중 역경매</a></td></tr>
-      <tr class="success">
-        <td>입찰중</td>
-        <td>일종찬</td>
-        <td>서울특별시 금천구</td>
-        <td>D-21일</td>
-        <td>접수중</td>
-      </tr>
-      <tr class="danger">
-        <td>입찰중</td>
-        <td>일종찬</td>
-        <td>서울특별시 금천구</td>
-        <td>D-21일</td>
-        <td>접수중</td>
-      </tr>
-      <tr class="info">
-        <td>입찰중</td>
-        <td>일종찬</td>
-        <td>서울특별시 금천구</td>
-        <td>D-21일</td>
-        <td>접수중</td>
-      </tr>
-      <tr class="warning">
-        <td>입찰중</td>
-        <td>일종찬</td>
-        <td>서울특별시 금천구</td>
-        <td>D-21일</td>
-        <td>접수중</td>
-      </tr>
-      <tr class="active">
-        <td>입찰중</td>
-        <td>일종찬</td>
-        <td>서울특별시 금천구</td>
-        <td>D-21일</td>
-        <td>접수중</td>
-      </tr>
+  <div class="container"  style = "position : relative; overflow : hidden;">
+    <table id="realtimelist" class="table" style="width: 45%; display: inline-block;  transition-duration: 0.2s; position : relative; " >
+    <thead><tr class = "active"><td colspan = "5" align = "center"><a href = "bid">입찰중 역경매</a></td></tr></thead>
+    <tbody></tbody>     
     </table>
-    <table class="table" style="width: 40%; display: inline-block;">
-    <tr class = "active"><td colspan = "5" align = "center"><a href = "bid">낙찰된 역경매</a></td></tr>
-      <tr class="success">
-        <td>입찰중</td>
-        <td>일종찬</td>
-        <td>서울특별시 금천구</td>
-        <td>D-21일</td>
-        <td>접수중</td>
-      </tr>
-      <tr class="danger">
-        <td>입찰중</td>
-        <td>일종찬</td>
-        <td>서울특별시 금천구</td>
-        <td>D-21일</td>
-        <td>접수중</td>
-      </tr>
-      <tr class="info">
-        <td>입찰중</td>
-        <td>일종찬</td>
-        <td>서울특별시 금천구</td>
-        <td>D-21일</td>
-        <td>접수중</td>
-      </tr>
-      <tr class="warning">
-        <td>입찰중</td>
-        <td>일종찬</td>
-        <td>서울특별시 금천구</td>
-        <td>D-21일</td>
-        <td>접수중</td>
-      </tr>
-      <tr class="active">
-        <td>입찰중</td>
-        <td>일종찬</td>
-        <td>서울특별시 금천구</td>
-        <td>D-21일</td>
-        <td>접수중</td>
-      </tr>
+    
+    <table id="winrealtimelist" class="table" style="width: 45%; display: inline-block;  transition-duration: 0.2s; position : relative; " >
+    <thead><tr class = "active"><td colspan = "5" align = "center"><a href = "win">낙찰된 역경매</a></td></tr></thead>
+    <tbody></tbody>     
     </table>
+    
+    <div class="container">
+    <h4 align="center">드레스 실시간 입낙찰 현황</h4>
+    </div>
+    
+    <table id="dressrealtimelist" class="table" style="width: 45%; display: inline-block;  transition-duration: 0.2s; position : relative; " >
+    <thead><tr class = "active"><td colspan = "5" align = "center"><a href = "bid">입찰중 역경매</a></td></tr></thead>
+    <tbody></tbody>     
+    </table>
+    
+    <table id="dresswinrealtimelist" class="table" style="width: 45%; display: inline-block;  transition-duration: 0.2s; position : relative; " >
+    <thead><tr class = "active"><td colspan = "5" align = "center"><a href = "win">낙찰된 역경매</a></td></tr></thead>
+    <tbody></tbody>     
+    </table>
+    
+    <div class="container">
+    <h4 align="center">메이크업 실시간 입낙찰 현황</h4>
+    </div>
+    
+    <table id="makeuprealtimelist" class="table" style="width: 45%; display: inline-block;  transition-duration: 0.2s; position : relative; " >
+    <thead><tr class = "active"><td colspan = "5" align = "center"><a href = "bid">입찰중 역경매</a></td></tr></thead>
+    <tbody></tbody>     
+    </table>
+       
+    <table id="makeupwinrealtimelist" class="table" style="width: 45%; display: inline-block;  transition-duration: 0.2s; position : relative; " >
+    <thead><tr class = "active"><td colspan = "5" align = "center"><a href = "win">낙찰된 역경매</a></td></tr></thead>
+    <tbody></tbody>     
+    </table>           
+    
+      <div class="form-group text-center">
+           <a href="apply" class="btn btn-info">역경매 신청하기<i class="fa fa-check spaceLeft"></i></a>
+      </div>
+    </div>
 
-  </div>
-
-
-  <%@include file="../include/bottom.jsp"%>
+    <%@include file="../include/bottom.jsp"%>
+    
 </body>
 </html>

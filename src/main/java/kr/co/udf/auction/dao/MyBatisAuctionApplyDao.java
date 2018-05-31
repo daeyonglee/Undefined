@@ -1,6 +1,8 @@
 package kr.co.udf.auction.dao;
 
-import java.util.List; 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -9,7 +11,6 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
 import kr.co.udf.auction.domain.Auction;
-import kr.co.udf.common.web.Params;
 import kr.co.udf.common.web.SearchParams;
 
 @Repository
@@ -41,9 +42,15 @@ public class MyBatisAuctionApplyDao implements AuctionApplyDao {
 	}		
 
 	@Override
-	public Auction read(int no) throws Exception {
-		// TODO Auto-generated method stub
-		return null; 
+	public Auction read(int no , String type) throws Exception {
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("no", no);
+		map.put("type", type);
+		
+		Auction list = session.selectOne(NAMESPACE+".read", map);
+		
+		return list;
 	}
 
 	@Override
@@ -53,9 +60,15 @@ public class MyBatisAuctionApplyDao implements AuctionApplyDao {
 	}
 
 	@Override
-	public void delete(int no) throws Exception {
-		// TODO Auto-generated method stub
-
+	public void delete(int no, String type) throws Exception {
+		
+		if (type.equals("dress")) {
+			session.delete(NAMESPACE+".deleteDress", no);
+		} else if(type.equals("makeup")) {
+			session.delete(NAMESPACE+".deleteMakeup", no);
+		} else if(type.equals("studio")) {
+			session.delete(NAMESPACE+".deleteStudio", no);
+		}
 	}
 
 	@Override
@@ -94,6 +107,36 @@ public class MyBatisAuctionApplyDao implements AuctionApplyDao {
 	@Override
 	public int listByTypeCount() throws Exception {
 		return session.selectOne(NAMESPACE + ".listByTypeCount");
+	}
+	
+	@Override
+	public List<Auction> realtimelist() throws Exception {
+		return session.selectList(NAMESPACE+ ".realtimelist");
+	}
+
+	@Override
+	public List<Auction> winrealtimelist() throws Exception {
+		return session.selectList(NAMESPACE+ ".winrealtimelist");
+	}
+
+	@Override
+	public List<Auction> dressrealtimelist() throws Exception {
+		return session.selectList(NAMESPACE+ ".dressrealtimelist");
+	}
+
+	@Override
+	public List<Auction> dresswinrealtimelist() throws Exception {
+		return session.selectList(NAMESPACE+ ".dresswinrealtimelist");
+	}
+
+	@Override
+	public List<Auction> makeuprealtimelist() throws Exception {
+		return session.selectList(NAMESPACE+ ".makeuprealtimelist");
+	}
+
+	@Override
+	public List<Auction> makeupwinrealtimelist() throws Exception {
+		return session.selectList(NAMESPACE+ ".makeupwinrealtimelist");
 	}
 
 }

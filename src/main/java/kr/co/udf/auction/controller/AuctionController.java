@@ -53,6 +53,26 @@ public class AuctionController {
 		logger.info("apply form.....");
 	}
 	
+	// 상세보기	
+	@RequestMapping(value = "/read", method = RequestMethod.GET)
+	public void read(@RequestParam("no") int no, @RequestParam("type")String type, Model model) throws Exception {
+				
+		model.addAttribute("Auction",service.read(no,type));				
+		
+	}
+	
+	// 삭제
+	@RequestMapping(value = "/remove", method = RequestMethod.POST)
+	public String delete(@RequestParam("no") int no, @RequestParam("type") String type, RedirectAttributes rttr) throws Exception {
+				
+		service.delete(no, type);
+		
+		rttr.addFlashAttribute("");
+		
+		return "redirect:/auction/bid";
+		
+	}
+	
 	/** 스드메 카테고리 별로 신청서 등록하기*/
 
 	@RequestMapping(value = "/apply", method = RequestMethod.POST)
@@ -199,5 +219,95 @@ public class AuctionController {
 			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		return entity;
+	}
+	
+	@RequestMapping(value = "realtimelist", method = RequestMethod.GET)
+	public ResponseEntity<List<Auction>> realtimelist() {
+
+		ResponseEntity<List<Auction>> entity = null;
+		try {
+			entity = new ResponseEntity<>(service.realtimelist(), HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+
+		return entity;
+
+	}
+	
+	@RequestMapping(value = "winrealtimelist", method = RequestMethod.GET)
+	public ResponseEntity<List<Auction>> winrealtimelist() {
+
+		ResponseEntity<List<Auction>> entity = null;
+		try {
+			entity = new ResponseEntity<>(service.winrealtimelist(), HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+
+		return entity;
+
+	}
+	
+	@RequestMapping(value = "dressrealtimelist", method = RequestMethod.GET)
+	public ResponseEntity<List<Auction>> dressrealtimelist() {
+
+		ResponseEntity<List<Auction>> entity = null;
+		try {
+			entity = new ResponseEntity<>(service.dressrealtimelist(), HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+
+		return entity;
+
+	}
+	
+	@RequestMapping(value = "dresswinrealtimelist", method = RequestMethod.GET)
+	public ResponseEntity<List<Auction>> dresswinrealtimelist() {
+
+		ResponseEntity<List<Auction>> entity = null;
+		try {
+			entity = new ResponseEntity<>(service.dresswinrealtimelist(), HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+
+		return entity;
+
+	}
+	
+	@RequestMapping(value = "makeuprealtimelist", method = RequestMethod.GET)
+	public ResponseEntity<List<Auction>> makuprealtimelist() {
+
+		ResponseEntity<List<Auction>> entity = null;
+		try {
+			entity = new ResponseEntity<>(service.makeuprealtimelist(), HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+
+		return entity;
+
+	}
+	
+	@RequestMapping(value = "makeupwinrealtimelist", method = RequestMethod.GET)
+	public ResponseEntity<List<Auction>> makeupwinrealtimelist() {
+
+		ResponseEntity<List<Auction>> entity = null;
+		try {
+			entity = new ResponseEntity<>(service.makeupwinrealtimelist(), HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+
+		return entity;
+
 	}
 }
