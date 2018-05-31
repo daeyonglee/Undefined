@@ -1,25 +1,23 @@
 package kr.co.udf.auction.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.swing.text.html.parser.Entity;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
-import org.aspectj.org.eclipse.jdt.internal.compiler.ast.ArrayAllocationExpression;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.databind.util.JSONPObject;
@@ -30,6 +28,8 @@ import kr.co.udf.auction.service.AuctionApplyService;
 import kr.co.udf.auction.service.AuctionCountService;
 import kr.co.udf.common.web.PageMaker;
 import kr.co.udf.common.web.SearchParams;
+import kr.co.udf.user.domain.Login;
+import kr.co.udf.user.domain.User;
 
 @Controller
 @RequestMapping("/auction/*")
@@ -56,7 +56,15 @@ public class AuctionController {
 	/** 스드메 카테고리 별로 신청서 등록하기*/
 
 	@RequestMapping(value = "/apply", method = RequestMethod.POST)
-	public String apply(String type, Auction auction, RedirectAttributes rttr) throws Exception {
+	public String apply(@RequestParam("type") String type, Auction auction, HttpSession session, RedirectAttributes rttr) throws Exception {
+		
+		logger.info("apply post 진입");
+		User user = (User)session.getAttribute("login");
+		logger.info(user);
+		
+		auction.setUserNo(user.getNo());
+		auction.setDate(auction.getDay() + " " + auction.getTime());
+		auction.setLoc(auction.getLocFirst() + "||" + auction.getLocSecond() + "||" +  auction.getLocThird());
 
 		if (type.equals("dress")) {
 
@@ -77,7 +85,6 @@ public class AuctionController {
 		rttr.addFlashAttribute("msg", "SUCCESS");
 		return "redirect:/auction/bid";
 
-
 	} 
 	/*
 	 * @RequestMapping(value="/bid",method=RequestMethod.GET) public void
@@ -95,6 +102,7 @@ public class AuctionController {
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setParams(params);
 		pageMaker.setTotalCount(service.listByTypeCount());
+		logger.info(pageMaker.toString());
 
 		model.addAttribute("pageMaker", pageMaker);
 	}

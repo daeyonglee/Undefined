@@ -19,12 +19,23 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript" src="/resources/assets/js/user/join.js"></script>
 <script>
+
 $(document).ready(function() {
-	$("#submitBtn").click(function() {
-		$("#applyForm").attr
-		alert("클릭햇슈");
-	});
+ 
+    $('#submitBtn').click(function () {
+    	alert("신청 버튼 클릭");
+        $("#applyForm").submit();
+    });
+  
 });
+
+</script>
+<script>
+      var result = '${msg}';
+
+      if (result == 'SUCCESS') {
+        alert("처리가 완료되었습니다.");
+      }
 </script>
 <style type="text/css">
 #col {
@@ -65,14 +76,13 @@ $(document).ready(function() {
         <div class="wizard-container">
 
           <div class="wizard-card ct-wizard-orange" id="wizardProperty">
-            <form id="applyForm" method="post">
               <div class="wizard-header"></div>
               <ul>
                 <li><a href="#step1" data-toggle="tab">역경매 신청하기</a></li>
               </ul>
-
+  
+            <form id="applyForm" method="post">
               <div class="tab-content">
-
                 <div class="tab-pane" id="step1">
                   <div class="col-lg-12">
 
@@ -99,36 +109,31 @@ $(document).ready(function() {
                     </div>
                     <div class="col-lg-10" id="col">
                       <div class="col-lg-6">
-                        <input class='form-control' type="text"
-                          placeholder='ex. 홍길동'>
+                        <input class='form-control' type="text" name="writer" id="name" placeholder='ex. 홍길동'>
                       </div>
                     </div>
 
-                    <div class="col-lg-2" id="col">
+<!--                     <div class="col-lg-2" id="col">
                       <label>연락처</label>
                     </div>
                     <div class="col-lg-10" id="col">
                       <div class="col-lg-6">
-                        <input class='form-control' type="tel"
-                          placeholder='ex. 010-5555-6666'>
+                        <input class='form-control' type="tel" placeholder='ex. 010-5555-6666'>
                       </div>
-                    </div>
+                    </div> -->
 
                     <div class="col-lg-2" id="col">
                       <label>예식 희망 지역</label>
                     </div>
                     <div class="col-lg-10" id="col">
                       <div class="col-lg-3">
-                        <input class='form-control' type="text"
-                          placeholder='ex. 1지망'>
+                        <input class='form-control' type="text" name="locFirst" id="locFirst" placeholder='ex. 1지망'>
                       </div>
                       <div class="col-lg-3">
-                        <input class='form-control' type="text"
-                          placeholder='ex. 2지망'>
+                        <input class='form-control' type="text" name="locSecond" id="locSecond" placeholder='ex. 2지망'>
                       </div>
                       <div class="col-lg-3">
-                        <input class='form-control' type="text"
-                          placeholder='ex. 3지망'>
+                        <input class='form-control' type="text" name="locThird" id="locThird" placeholder='ex. 3지망'>
                       </div>
                     </div>
 
@@ -137,8 +142,7 @@ $(document).ready(function() {
                     </div>
                     <div class="col-lg-10" id="col">
                       <div class="col-lg-3">
-                        <input class='form-control' type="text"
-                          placeholder='ex. 1지망'>
+                        <input class='form-control' type="text" name="day"  placeholder='ex. 1지망'>
                       </div>
                       <div class="col-lg-3">
                         <input class='form-control' type="text"
@@ -155,8 +159,7 @@ $(document).ready(function() {
                     </div>
                     <div class="col-lg-10" id="col">
                       <div class="col-lg-3">
-                        <input class='form-control' type="text"
-                          placeholder='ex. 1지망'>
+                        <input class='form-control' type="text" name="time" placeholder='ex. 1지망'>
                       </div>
                       <div class="col-lg-3">
                         <input class='form-control' type="text"
@@ -167,15 +170,22 @@ $(document).ready(function() {
                           placeholder='ex. 3지망'>
                       </div>
                     </div>
+                    
+                     <div class="col-lg-2" id="col">
+                      <label>입찰 마감일</label>
+                    </div>
+                    <div class="col-lg-10" id="col">
+                      <div class="col-lg-3">
+                        <input class='form-control' type="text" name="deadline" placeholder='ex. 2018-06-30'>
+                      </div>
+                    </div>
 
                     <div class="col-lg-2" id="col">
                       <label>기타 희망 사항</label>
                     </div>
                     <div class="col-lg-10" id="col">
-                      <textarea class='form-control' maxlength='1000'></textarea>
+                      <textarea class='form-control' name="memo" maxlength='1000'></textarea>
                     </div>
-
-
                   </div>
                 </div>
                 <div class="col-lg-4"></div>
@@ -184,29 +194,18 @@ $(document).ready(function() {
           </div>
 
           <!--  submit 버튼   -->
-          <span id=button> <input type='button'
-            class='btn-primary' id="submitBtn" name='submit' value='신청' />
-            <input type='button' class='btn-primary' id="cancel"
-            name='cancel' value='취소' />
-          </span>
+          <div class="form-group text-center">
+          <span id=button> 
+            <input type='button' class='btn-primary' id="submitBtn" name='submit' value='신청' style="width: 140px"/>
+            <input type='button' class='btn-primary' id="cancelBtn" name='cancel' value='취소' style="width: 140px" />
+          </span></div>
           <div class="clearfix"></div>
-
-
         </div>
       </div>
     </div>
   </div>
 
   <!-- End submit form -->
-  <script>
-      var result = '${msg}';
-
-      if (result == 'SUCCESS') {
-        alert("처리가 완료되었습니다.");
-      }
-      </script>
-
-
 
   <%@include file="../include/bottom.jsp"%>
 

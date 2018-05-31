@@ -94,20 +94,20 @@ td, th {
                     <ul>
                       <c:if test="${pageMaker.prev}">
                         <li><a
-                          href="bid${pageMaker.makeQuery(pageMaker.startPage - 1) }">&laquo;</a></li>
+                          href="${pageMaker.makeQuery(pageMaker.startPage - 1) }">&laquo;</a></li>
                       </c:if>
 
                       <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
                         <li
                           <c:out value="${pageMaker.params.page == idx?'class =active':''}"/>>
-                          <a href="bid${pageMaker.makeQuery(idx)}">${idx}</a>
+                          <a href="${pageMaker.makeQuery(idx)}">${idx}</a>
                         </li>
                       </c:forEach>
 
                       <c:if
                         test="${pageMaker.next && pageMaker.endPage > 0}">
                         <li><a
-                          href="bid${pageMaker.makeQuery(pageMaker.endPage +1) }">&raquo;</a></li>
+                          href="${pageMaker.makeQuery(pageMaker.endPage +1) }">&raquo;</a></li>
                       </c:if>
 
                     </ul>
@@ -137,18 +137,6 @@ td, th {
 			if (result == 'SUCCESS') {
 				alert("처리가 완료되었습니다.");
 			}
-			
-			$(".pagination li a").on("click", function(event) {
-
-				event.preventDefault();
-
-				var targetPage = $(this).attr("href");
-
-				var jobForm = $("#jobForm");
-				jobForm.find("[name='page']").val(targetPage);
-				jobForm.attr("action", "/auction/bid").attr("method", "get");
-				jobForm.submit();
-			});
  </script>
  
   <%@include file="../include/bottom.jsp"%>
