@@ -77,6 +77,16 @@
             <h4><strong>포인트관리</strong></h4>
           </div>
         </div>
+        <c:if test="${login.role ne 'users'}">
+        <div class="col-xs-3 m-padding">
+          <div id="point" class="welcome-estate">
+            <div class="welcome-icon">
+              <i class="pe-7s-wallet pe-4x"></i>
+            </div>
+            <h4><strong>나의 상품보기</strong></h4>
+          </div>
+        </div>
+        </c:if>
       </div>
     </div>
   </div>

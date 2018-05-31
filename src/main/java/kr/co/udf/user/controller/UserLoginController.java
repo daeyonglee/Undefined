@@ -54,14 +54,11 @@ public class UserLoginController {
 		}
 		
 		logger.info(rMap);
+
+		login.setNo((BigDecimal)rMap.get("NO"));
+		login.setRole((String)rMap.get("ROLE"));
 		
-		User user = new User();
-		
-		user.setEmail((String)rMap.get("EMAIL"));
-		user.setNo((BigDecimal)rMap.get("NO"));
-		user.setPw((String)rMap.get("PW"));
-		
-		model.addAttribute("user", user);
+		model.addAttribute("login", login);
 		model.addAttribute("role", (String)rMap.get("ROLE"));
 		
 		if (login.isUseCookie()) {
@@ -74,7 +71,7 @@ public class UserLoginController {
 			
 			Date sessionlimit = new Date(System.currentTimeMillis()+(1000*amount));
 			
-			loginService.keepLogin(user.getNo(), session.getId(), sessionlimit, (String)rMap.get("ROLE"));
+			loginService.keepLogin(login.getNo(), session.getId(), sessionlimit, (String)rMap.get("ROLE"));
 		}
 		
 		logger.info("##### loginPOST end #####");
@@ -87,20 +84,26 @@ public class UserLoginController {
 		Object obj = session.getAttribute("login");
 		Object obj2 = session.getAttribute("role");
 		
+		logger.info(obj);
+		logger.info(obj2);
+		
+		Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
+		
 		if (obj != null) {
-			User user = (User)obj;
-			
+			Login login = (Login)obj;
 			session.removeAttribute("login");
 			session.invalidate();
 			
-			Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
+			logger.info(loginCookie);
 			
-			if (loginCookie != null) {
-				loginCookie.setPath("/");
-				loginCookie.setMaxAge(0);
-				response.addCookie(loginCookie);
-				loginService.keepLogin(user.getNo(), session.getId(), new Date(), (String)obj2);
-			}
+			loginService.keepLogin(login.getNo(), session.getId(), new Date(), (String)obj2);
+			
+		}
+		
+		if (loginCookie != null) {
+			loginCookie.setPath("/");
+			loginCookie.setMaxAge(0);
+			response.addCookie(loginCookie);
 		}
 		return "redirect:/";
 	}

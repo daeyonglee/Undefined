@@ -69,7 +69,11 @@ DROP SEQUENCE dress_cvst_list_seq;
 
 DROP SEQUENCE makeup_cvst_list_seq; 
 
+DROP SEQUENCE dress_review_seq;
 
+DROP SEQUENCE studio_review_seq;
+
+DROP SEQUENCE makeup_review_seq;
 
 -- drop table 
 DROP TABLE studio_product CASCADE CONSTRAINTS; 
@@ -136,7 +140,11 @@ DROP TABLE dress_bid_product_list CASCADE CONSTRAINTS;
 
 DROP TABLE makeup_bid_product_list CASCADE CONSTRAINTS; 
 
+DROP TABLE dress_review CASCADE CONSTRAINTS;
 
+DROP TABLE studio_review CASCADE CONSTRAINTS;
+
+DROP TABLE makeup_review CASCADE CONSTRAINTS;
 
 -- create seq 
 CREATE SEQUENCE studio_product_seq; 
@@ -209,7 +217,11 @@ CREATE SEQUENCE dress_cvst_list_seq;
 
 CREATE SEQUENCE makeup_cvst_list_seq; 
 
+CREATE SEQUENCE dress_review_seq;
 
+CREATE SEQUENCE studio_review_seq;
+
+CREATE SEQUENCE makeup_review_seq;
 
 -- create table 
 
@@ -225,7 +237,7 @@ CREATE SEQUENCE makeup_cvst_list_seq;
 -- 회원(일반사용자 & 관리자)
 -- 포인트 관련
 -- 쪽지 정보
-
+-- 후기 정보
 
 
 -- 전체 상품 
@@ -234,7 +246,7 @@ CREATE TABLE studio_product
   ( 
      sp_no         NUMBER(10) NOT NULL, 
      sc_no         NUMBER(10) NOT NULL, 
-     sc_nm         VARCHAR2(100),
+     sp_nm         VARCHAR2(100),
      sp_price      NUMBER(20) NOT NULL,  
      sp_apv_yn     VARCHAR2(1) DEFAULT 'N' NOT NULL,  -- 액자/앨범/비디오 여부
      sp_total_yn   VARCHAR2(1) DEFAULT 'N' NOT NULL,  -- 토탈샵 여부
@@ -285,12 +297,13 @@ CREATE TABLE studio_company
      sc_nm         VARCHAR2(30) NOT NULL, 
      sc_company_no NUMBER(20) NOT NULL,   -- 사업자번호
      sc_main_nm    VARCHAR2(30) NOT NULL, 
-     sc_addr       VARCHAR2(100) NOT NULL, 
+     sc_addr       VARCHAR2(600) NOT NULL, 
      sc_main_image VARCHAR2(300) NOT NULL, 
      sc_email      VARCHAR2(50) NOT NULL, 
      sc_pw         VARCHAR2(20) NOT NULL, 
-     sc_tel        NUMBER(20) NOT NULL, 
-     sc_introduce  VARCHAR2(300), 
+     sc_tel        NUMBER(20) NOT NULL,
+     sc_smy_intro  VARCHAR2(300),
+     sc_introduce  VARCHAR2(3000), 
      sessionkey    VARCHAR2(50) DEFAULT 'none' NOT NULL, 
      sessionlimit  DATE, 
      regdate       DATE DEFAULT SYSDATE NOT NULL, 
@@ -305,11 +318,12 @@ CREATE TABLE dress_company
      dc_nm         VARCHAR2(30) NOT NULL, 
      dc_company_no NUMBER(20) NOT NULL, 
      dc_main_nm    VARCHAR2(30) NOT NULL, 
-     dc_addr       VARCHAR2(100) NOT NULL, 
+     dc_addr       VARCHAR2(600) NOT NULL, 
      dc_main_image VARCHAR2(300), 
      dc_email      VARCHAR2(50) NOT NULL, 
      dc_pw         VARCHAR2(20) NOT NULL, 
-     dc_tel        NUMBER(20) NOT NULL, 
+     dc_tel        NUMBER(20) NOT NULL,
+     dc_smy_intro  VARCHAR2(300),
      dc_introduce  VARCHAR2(3000), 
      sessionkey    VARCHAR2(50) DEFAULT 'none' NOT NULL, 
      sessionlimit  DATE, 
@@ -325,11 +339,12 @@ CREATE TABLE makeup_company
      mc_nm         VARCHAR2(30) NOT NULL, 
      mc_company_no NUMBER(20) NOT NULL, 
      mc_main_nm    VARCHAR2(30) NOT NULL, 
-     mc_addr       VARCHAR2(100) NOT NULL, 
+     mc_addr       VARCHAR2(600) NOT NULL, 
      mc_main_image VARCHAR2(300), 
      mc_email      VARCHAR2(50) NOT NULL, 
      mc_pw         VARCHAR2(20) NOT NULL, 
-     mc_tel        NUMBER(20) NOT NULL, 
+     mc_tel        NUMBER(20) NOT NULL,
+     mc_smy_intro  VARCHAR2(300),
      mc_introduce  VARCHAR2(3000), 
      sessionkey    VARCHAR2(50) DEFAULT 'none' NOT NULL, 
      sessionlimit  DATE, 
@@ -698,7 +713,37 @@ CREATE TABLE makeup_cvst_list
      PRIMARY KEY (mcl_no, user_no, mc_no) 
   ); 
 
-
+--후기 정보
+--후기 정보(드레스)
+CREATE TABLE dress_review 
+  (
+    dr_no number(10) NOT NULL,
+    dc_no number(10) NOT NULL,
+    dr_content varchar2(3000) NOT NULL,
+    dr_point number(3, 2) NOT NULL,
+    regdate date DEFAULT sysdate NOT NULL,
+    updatedate date DEFAULT sysdate NOT NULL
+  );
+--후기 정보(스튜디오)
+CREATE TABLE studio_review 
+  (
+    dr_no number(10) NOT NULL,
+    sc_no number(10) NOT NULL,
+    dr_content varchar2(3000) NOT NULL,
+    dr_point number(3, 2) NOT NULL,
+    regdate date DEFAULT sysdate NOT NULL,
+    updatedate date DEFAULT sysdate NOT NULL
+  );
+--후기 정보(메이크업)
+CREATE TABLE makeup_review 
+  (
+    mr_no number(10) NOT NULL,
+    mc_no number(10) NOT NULL,
+    mr_content varchar2(3000) NOT NULL,
+    mr_point number(3, 2) NOT NULL,
+    regdate date DEFAULT sysdate NOT NULL,
+    updatedate date DEFAULT sysdate NOT NULL
+  );
 
 -- constraint 
 ALTER TABLE studio_product 
@@ -794,9 +839,15 @@ ALTER TABLE dress_cvst_list
   ADD( CONSTRAINT dcl_users_fk FOREIGN KEY (user_no) REFERENCES users (user_no), 
   CONSTRAINT dcl_dc_fk FOREIGN KEY (dc_no) REFERENCES dress_company (dc_no), 
   CONSTRAINT dcl_dp FOREIGN KEY (dp_no, dc_no) REFERENCES dress_product (dp_no, 
-  dc_no)); 
+  dc_no));
+  
+ALTER TABLE dress_review ADD PRIMARY KEY (dr_no, dc_no);
+ALTER TABLE studio_review ADD PRIMARY KEY (dr_no, sc_no);
+ALTER TABLE makeup_review ADD PRIMARY KEY (mr_no, mc_no);
 
-
+ALTER TABLE dress_review ADD CONSTRAINT dr_dc_fk FOREIGN KEY (dc_no) REFERENCES dress_company (dc_no);
+ALTER TABLE studio_review ADD CONSTRAINT sr_sc_fk FOREIGN KEY (sc_no) REFERENCES studio_company (sc_no);
+ALTER TABLE makeup_review ADD CONSTRAINT mr_mc_fk FOREIGN KEY (mc_no) REFERENCES makeup_company (mc_no);
 
 -- insert data 
 -- admin 

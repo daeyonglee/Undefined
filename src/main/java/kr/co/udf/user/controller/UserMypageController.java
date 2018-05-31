@@ -1,21 +1,36 @@
 package kr.co.udf.user.controller;
 
+import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
+
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import kr.co.udf.user.domain.Login;
+import kr.co.udf.user.domain.User;
 
 @Controller
 @RequestMapping("/user/mypage/*")
 public class UserMypageController {
+	
 	private static Logger logger = Logger.getLogger(UserMypageController.class);
 	
 	/**
 	 * 마이페이지 index
 	 */
 	@RequestMapping(value="index", method=RequestMethod.GET)
-	public String index() {
-		logger.info("마이페이지 오픈!");
+	public String index(HttpSession session, Model model) {
+		
+		Login login = (Login)session.getAttribute("login");
+		
+		logger.info(login);
+		
+		model.addAttribute("login", login);
+		
 		return "/user/mypageindex";
 		
 	}
