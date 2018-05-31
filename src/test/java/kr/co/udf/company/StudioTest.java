@@ -48,7 +48,7 @@ public class StudioTest {
 		 List<StudioCompany> list = dao.listCriteria(cri);
 		 
 		 for (StudioCompany studio : list) {
-			 logger.info(studio.getCompanyNo() + ":" + studio.getHeadName());
+			 //logger.info(studio.getCompanyNo() + ":" + studio.getHeadName());
 		 }
 	 }
 	 
