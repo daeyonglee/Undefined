@@ -2,104 +2,121 @@ package kr.co.udf.common.company.domain;
 
 public class StudioCompany {
 
-	private int companyNo;
-	private String nm;
-	private int regNo; // 사업자번호
-	private String headName; // 회사대표 이름
-	private String addr;
-	private String mainImage;
-	private String email;
-	private String pw;
-	private int tel;
-	private String introduce;
+	private int sc_no;
+	private String sc_nm;
+	private int sc_company_no; // 사업자번호
+	private String sc_main_nm; // 회사대표 이름
+	private String sc_addr;
+	private String sc_main_mage;
+	private String sc_email;
+	private String sc_pw;
+	private int sc_tel;
+	private String sc_introduce;
+	private String sessionKey;
+	private String sessionLimit;
 	private String regdate;
 	private String updatedate;
 
-	
 	/** 생성자 */
 	public StudioCompany() {
 		super();
 	}
 
 	/** Getter & Setter */
-	public int getCompanyNo() {
-		return companyNo;
+	public int getSc_no() {
+		return sc_no;
 	}
 
-	public void setCompanyNo(int companyNo) {
-		this.companyNo = companyNo;
+	public void setSc_no(int sc_no) {
+		this.sc_no = sc_no;
 	}
 
-	public String getNm() {
-		return nm;
+	public String getSc_nm() {
+		return sc_nm;
 	}
 
-	public void setNm(String nm) {
-		this.nm = nm;
+	public void setSc_nm(String sc_nm) {
+		this.sc_nm = sc_nm;
 	}
 
-	public int getRegNo() {
-		return regNo;
+	public int getSc_company_no() {
+		return sc_company_no;
 	}
 
-	public void setRegNo(int regNo) {
-		this.regNo = regNo;
+	public void setSc_company_no(int sc_company_no) {
+		this.sc_company_no = sc_company_no;
 	}
 
-	public String getHeadName() {
-		return headName;
+	public String getSc_main_nm() {
+		return sc_main_nm;
 	}
 
-	public void setHeadName(String headName) {
-		this.headName = headName;
+	public void setSc_main_nm(String sc_main_nm) {
+		this.sc_main_nm = sc_main_nm;
 	}
 
-	public String getAddr() {
-		return addr;
+	public String getSc_addr() {
+		return sc_addr;
 	}
 
-	public void setAddr(String addr) {
-		this.addr = addr;
+	public void setSc_addr(String sc_addr) {
+		this.sc_addr = sc_addr;
 	}
 
-	public String getMainImage() {
-		return mainImage;
+	public String getSc_main_mage() {
+		return sc_main_mage;
 	}
 
-	public void setMainImage(String mainImage) {
-		this.mainImage = mainImage;
+	public void setSc_main_mage(String sc_main_mage) {
+		this.sc_main_mage = sc_main_mage;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getSc_email() {
+		return sc_email;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setSc_email(String sc_email) {
+		this.sc_email = sc_email;
 	}
 
-	public String getPw() {
-		return pw;
+	public String getSc_pw() {
+		return sc_pw;
 	}
 
-	public void setPw(String pw) {
-		this.pw = pw;
+	public void setSc_pw(String sc_pw) {
+		this.sc_pw = sc_pw;
 	}
 
-	public int getTel() {
-		return tel;
+	public int getSc_tel() {
+		return sc_tel;
 	}
 
-	public void setTel(int tel) {
-		this.tel = tel;
+	public void setSc_tel(int sc_tel) {
+		this.sc_tel = sc_tel;
 	}
 
-	public String getIntroduce() {
-		return introduce;
+	public String getSc_introduce() {
+		return sc_introduce;
 	}
 
-	public void setIntroduce(String introduce) {
-		this.introduce = introduce;
+	public void setSc_introduce(String sc_introduce) {
+		this.sc_introduce = sc_introduce;
+	}
+
+	public String getSessionKey() {
+		return sessionKey;
+	}
+
+	public void setSessionKey(String sessionKey) {
+		this.sessionKey = sessionKey;
+	}
+
+	public String getSessionLimit() {
+		return sessionLimit;
+	}
+
+	public void setSessionLimit(String sessionLimit) {
+		this.sessionLimit = sessionLimit;
 	}
 
 	public String getRegdate() {
@@ -121,9 +138,11 @@ public class StudioCompany {
 	/** toString */
 	@Override
 	public String toString() {
-		return "StudioCompany [companyNo=" + companyNo + ", nm=" + nm + ", regNo=" + regNo + ", headName=" + headName
-				+ ", addr=" + addr + ", mainImage=" + mainImage + ", email=" + email + ", pw=" + pw + ", tel=" + tel
-				+ ", introduce=" + introduce + ", regdate=" + regdate + ", updatedate=" + updatedate + "]";
+		return "StudioCompany [sc_no=" + sc_no + ", sc_nm=" + sc_nm + ", sc_company_no=" + sc_company_no
+				+ ", sc_main_nm=" + sc_main_nm + ", sc_addr=" + sc_addr + ", sc_main_mage=" + sc_main_mage
+				+ ", sc_email=" + sc_email + ", sc_pw=" + sc_pw + ", sc_tel=" + sc_tel + ", sc_introduce="
+				+ sc_introduce + ", sessionKey=" + sessionKey + ", sessionLimit=" + sessionLimit + ", regdate="
+				+ regdate + ", updatedate=" + updatedate + "]";
 	}
 
 }
