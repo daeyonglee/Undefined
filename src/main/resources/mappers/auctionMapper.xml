@@ -9,7 +9,7 @@
 	<select id="count" resultType="kr.co.udf.auction.domain.AuctionCount">
 		select (select count(*)
 		          from users) userCnt
-		     , (select count(*)
+		     , (select count(*)s
 		          from (select *
 		                  from studio_company
 		                UNION
