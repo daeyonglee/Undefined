@@ -12,7 +12,7 @@ import kr.co.udf.user.domain.CompanyDTO;
 import kr.co.udf.user.domain.UserDTO;
 
 @Repository
-public class MybatisUserJoinDao implements UserJoinDao{
+public class MybatisUserJoinDao implements UserJoinDao {
 
 	@Inject
 	private SqlSession session;
@@ -20,34 +20,32 @@ public class MybatisUserJoinDao implements UserJoinDao{
 	private static final String NAMESPACE = "kr.co.udf.user.dao.UserJoinDao";
 	
 	@Override
-	public void userJoin(UserDTO user) {
-		
-		String fullAddr = user.getPostcode() + "^^" + user.getAddr() + "^^" + user.getAddrdetail();
+	public void userjoin(UserDTO dto) {
 		
 		Map<String, Object> map = new HashMap<>();
 		
-		map.put("user", user);
-		map.put("fullAddr", fullAddr);
+		map.put("user", dto);
+		map.put("tel", dto.getTel());
+		map.put("addr", dto.getPostcode()+"^^"+dto.getAddr()+"^^"+dto.getAddrdetail());
 		
 		session.insert(NAMESPACE+".userjoin", map);
-		
 	}
 
 	@Override
-	public void companyJoin(CompanyDTO company) {
-		
+	public void companyjoin(CompanyDTO dto) {
 		Map<String, Object> map = new HashMap<>();
 		
-		map.put("company", company);
-		map.put("image", company.getFile().getOriginalFilename());
+		map.put("company", dto);
+		map.put("image", dto.getMainImg().getOriginalFilename());
+		map.put("addr", dto.getPostcode()+"^^"+dto.getAddr()+"^^"+dto.getAddrdetail());
 		
-		if (company.getCompanyType().equals("dress")) {
+		if (dto.getCompanyType().equals("dress")) {
 			session.insert(NAMESPACE+".companyjoinDress", map);
 		}
-		if (company.getCompanyType().equals("makeup")) {
+		if (dto.getCompanyType().equals("makeup")) {
 			session.insert(NAMESPACE+".companyjoinMakeup", map);
 		}
-		if (company.getCompanyType().equals("studio")) {
+		if (dto.getCompanyType().equals("studio")) {
 			session.insert(NAMESPACE+".companyjoinStudio", map);
 		}
 	}

@@ -16,14 +16,24 @@
       <link rel="stylesheet" href="/resources/assets/css/user/join.css">
       
       <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+      <script type="text/javascript" src="/resources/js/user/join.js"></script>
       
+      <script>
+      	$(function(){
+      		
+      		$("#home").on('click', function(e){
+      			window.location.href = '/';
+      		})
+      		
+      	});
+      </script>
     </head>
     <body>
         <div class="page-head"> 
             <div class="container">
                 <div class="row">
                     <div class="page-head-content">
-                        <h1 class="page-title"><span>회원 가입</span></h1>               
+                        <h1 class="page-title"><span>회원 가입 완료</span></h1>               
                     </div>
                 </div>
             </div> 
@@ -36,40 +46,28 @@
                 <div class="clearfix" > 
                     <div class="wizard-container"> 
 
-                        <div class="wizard-card ct-wizard-orange" id="wizardProperty">
-                            <form>                        
-                                <div class="wizard-header">
-                                    <!-- <h3>
-                                        <b>약관 동의</b><br>
-                                        <small>Lorem ipsum dolor sit amet, consectetur adipisicing.</small>
-                                    </h3> -->
-                                </div>
-                                
+                        <div class="wizard-card ct-wizard-orange" id="wizardProperty">               
+                                <div class="tab-content">
                                     <h4 class="info-text">회원가입을 축하드립니다.</h4>
                                       <div class="row">  
                                         <div class="col-lg-12">
                                           <div>
                                             <p>
-                                                <label><strong>최선을 다하는 원터치스드메가 되겠습니다. 감사합니다.</strong></label>
+                                                                                  항상 최고의 서비스를 제공하는 원터치 스드메가 되겠습니다. 감사합니다.
                                             </p>
                                           </div>
-                                          <div class="col-lg-4"></div>
-                                          <div class="col-lg-4 chkbx-mg-lt">
-                                          </div>
-                                          <div class="col-lg-4"></div>
                                         </div>
                                       </div>
                                   <!--  End step 1 -->
+                                  
+                                </div>
+
                                 <div class="wizard-footer">
                                     <div class="pull-right">
-                                        <input type='button' onclick="location.href='/'" class='btn btn-next btn-primary' name='home' value='홈으로 가기' id='' />
+                                        <input id='home' type='button' class='btn btn-primary ' value='홈으로 가기' />
                                     </div>
-
-                                    <div class="pull-left">
-                                    </div>
-                                    <div class="clearfix"></div>                                         
+                                    <div class="clearfix"></div>                                            
                                 </div>	
-                            </form>
                         </div>
                         <!-- End submit form -->
                     </div> 

@@ -16,7 +16,7 @@
       <link rel="stylesheet" href="/resources/assets/css/user/join.css">
       
       <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-      <script type="text/javascript" src="/resources/assets/js/user/join.js"></script>
+      <script type="text/javascript" src="/resources/js/user/join.js"></script>
       
     </head>
     <body>
@@ -38,7 +38,7 @@
                     <div class="wizard-container"> 
 
                         <div class="wizard-card ct-wizard-orange" id="wizardProperty">
-                            <form method="post" enctype="multipart/form-data">                        
+                            <form id="form" action="" method="post">                        
                                 <div class="wizard-header">
                                     <!-- <h3>
                                         <b>약관 동의</b><br>
@@ -105,7 +105,7 @@
                                 <div class="wizard-footer">
                                     <div class="pull-right">
                                         <input type='button' class='btn btn-next btn-primary' name='next' value='Next' id='' />
-                                        <input type='button' class='btn btn-finish btn-primary ' name='finish' value='Finish' />
+                                        <input type='button' class='btn btn-finish btn-primary ' name='finish' value='가입하기' />
                                     </div>
 
                                     <div class="pull-left">

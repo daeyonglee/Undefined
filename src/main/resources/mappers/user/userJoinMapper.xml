@@ -8,25 +8,26 @@
 	
 	<!-- 일반 사용자 회원가입 -->
 	<insert id="userjoin" parameterType="map">
-		INSERT INTO 
-		       users (
-                   user_no
-                 , user_email
-                 , user_pw
-                 , user_nm
-                 , user_birthday
-                 , user_addr
-                 , user_tel
-                 ) VALUES (
-                   users_seq.nextval
-                 , #{user.email}
-                 , #{user.pw}
-                 , #{user.name}
-                 , #{user.birthday}
-                 , #{fullAddr}
-                 , #{user.tel}
-                 )
+		INSERT INTO users
+		       (
+		         user_no
+		       , user_email
+		       , user_pw
+		       , user_nm
+		       , user_birthday
+		       , user_addr
+		       , user_tel
+		       ) VALUES (
+		         users_seq.nextval
+		       , #{user.email}
+		       , #{user.pw}
+		       , #{user.name}
+		       , to_date(#{user.birthday})
+		       , #{addr}
+		       , #{tel}
+		       )
 	</insert>
+	
 	<!-- 드레스 업체 회원가입 -->
 	<insert id="companyjoinDress" parameterType="map">
 			INSERT INTO dress_company
@@ -43,10 +44,10 @@
                    , dc_introduce
                    ) VALUES (
                      dress_company_seq.nextval
-                   , #{company.name}
-                   , #{company.companyNo}
-                   , #{company.mainName}
-                   , #{company.addr}
+                   , #{company.nm}
+                   , #{company.cn}
+                   , #{company.mainNm}
+                   , #{addr}
                    , #{image}
                    , #{company.email}
                    , #{company.pw}
@@ -71,10 +72,10 @@
                   , mc_introduce
                   ) VALUES (
                     makeup_company_seq.nextval
-                  , #{company.name}
-                  , #{company.companyNo}
-                  , #{company.mainName}
-                  , #{company.addr}
+                  , #{company.nm}
+                  , #{company.cn}
+                  , #{company.mainNm}
+                  , #{addr}
                   , #{image}
                   , #{company.email}
                   , #{company.pw}
@@ -99,15 +100,16 @@
                   , sc_introduce
                   ) VALUES (
                     studio_company_seq.nextval
-                  , #{company.name}
-                  , #{company.companyNo}
-                  , #{company.mainName}
-                  , #{company.addr}
-                  , #{image}
-                  , #{company.email}
-                  , #{company.pw}
-                  , #{company.tel}
-                  , #{company.introduce}
+	                 , #{company.nm}
+	                 , #{company.cn}
+	                 , #{company.mainNm}
+	                 , #{addr}
+	                 , #{image}
+	                 , #{company.email}
+	                 , #{company.pw}
+	                 , #{company.tel}
+	                 , #{company.introduce}
                   )
 	</insert>
+	
 </mapper>

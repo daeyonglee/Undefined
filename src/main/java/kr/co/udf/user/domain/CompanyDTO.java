@@ -1,52 +1,41 @@
 package kr.co.udf.user.domain;
 
-import java.math.BigDecimal;
-
 import org.springframework.web.multipart.MultipartFile;
 
-/**
- * 회원가입을 위한 DTO 객체
- * @author ldy
- *
- */
 public class CompanyDTO {
 	
-	private BigDecimal no;
 	private String email;
 	private String pw;
-	private MultipartFile file;
-	private Integer companyNo;
-	private String name;
-	private String mainName;
+	private MultipartFile mainImg;
+	private String cn;
+	private String nm;
+	private String mainNm;
+	private String postcode;
 	private String addr;
-	private Integer tel;
+	private String addrdetail;
+	private String tel;
 	private String companyType;
 	private String introduce;
 	
-	public CompanyDTO() {}
+	public CompanyDTO() {
+		// TODO Auto-generated constructor stub
+	}
 
-	public CompanyDTO(BigDecimal no, String email, String pw, MultipartFile file, Integer companyNo, String name,
-			String mainName, String addr, Integer tel, String companyType, String introduce) {
+	public CompanyDTO(String email, String pw, MultipartFile mainImg, String cn, String nm, String mainNm,
+			String postcode, String addr, String addrdetail, String tel, String companyType, String introduce) {
 		super();
-		this.no = no;
 		this.email = email;
 		this.pw = pw;
-		this.file = file;
-		this.companyNo = companyNo;
-		this.name = name;
-		this.mainName = mainName;
+		this.mainImg = mainImg;
+		this.cn = cn;
+		this.nm = nm;
+		this.mainNm = mainNm;
+		this.postcode = postcode;
 		this.addr = addr;
+		this.addrdetail = addrdetail;
 		this.tel = tel;
 		this.companyType = companyType;
 		this.introduce = introduce;
-	}
-
-	public BigDecimal getNo() {
-		return no;
-	}
-
-	public void setNo(BigDecimal no) {
-		this.no = no;
 	}
 
 	public String getEmail() {
@@ -65,36 +54,44 @@ public class CompanyDTO {
 		this.pw = pw;
 	}
 
-	public MultipartFile getFile() {
-		return file;
+	public MultipartFile getMainImg() {
+		return mainImg;
 	}
 
-	public void setFile(MultipartFile file) {
-		this.file = file;
+	public void setMainImg(MultipartFile mainImg) {
+		this.mainImg = mainImg;
 	}
 
-	public Integer getCompanyNo() {
-		return companyNo;
+	public String getCn() {
+		return cn;
 	}
 
-	public void setCompanyNo(Integer companyNo) {
-		this.companyNo = companyNo;
+	public void setCn(String cn) {
+		this.cn = cn;
 	}
 
-	public String getName() {
-		return name;
+	public String getNm() {
+		return nm;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNm(String nm) {
+		this.nm = nm;
 	}
 
-	public String getMainName() {
-		return mainName;
+	public String getMainNm() {
+		return mainNm;
 	}
 
-	public void setMainName(String mainName) {
-		this.mainName = mainName;
+	public void setMainNm(String mainNm) {
+		this.mainNm = mainNm;
+	}
+
+	public String getPostcode() {
+		return postcode;
+	}
+
+	public void setPostcode(String postcode) {
+		this.postcode = postcode;
 	}
 
 	public String getAddr() {
@@ -105,11 +102,19 @@ public class CompanyDTO {
 		this.addr = addr;
 	}
 
-	public Integer getTel() {
+	public String getAddrdetail() {
+		return addrdetail;
+	}
+
+	public void setAddrdetail(String addrdetail) {
+		this.addrdetail = addrdetail;
+	}
+
+	public String getTel() {
 		return tel;
 	}
 
-	public void setTel(Integer tel) {
+	public void setTel(String tel) {
 		this.tel = tel;
 	}
 
@@ -131,9 +136,8 @@ public class CompanyDTO {
 
 	@Override
 	public String toString() {
-		return "CompanyDTO [no=" + no + ", email=" + email + ", pw=" + pw + ", file=" + file + ", companyNo="
-				+ companyNo + ", name=" + name + ", mainName=" + mainName + ", addr=" + addr + ", tel=" + tel
-				+ ", companyType=" + companyType + ", introduce=" + introduce + "]";
+		return "CompanyDTO [email=" + email + ", pw=" + pw + ", mainImg=" + mainImg + ", cn=" + cn + ", nm=" + nm
+				+ ", mainNm=" + mainNm + ", postcode=" + postcode + ", addr=" + addr + ", addrdetail=" + addrdetail
+				+ ", tel=" + tel + ", companyType=" + companyType + ", introduce=" + introduce + "]";
 	}
-	
 }

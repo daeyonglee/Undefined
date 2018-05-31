@@ -14,37 +14,41 @@ import kr.co.udf.user.domain.CompanyDTO;
 import kr.co.udf.user.domain.UserDTO;
 
 @Service
-public class UserJoinServiceImpl implements UserJoinService {
+public class UserJoinServiceImpl implements UserJoinService{
 
+	@Inject
+	private UserJoinDao joinDao;
+	
 	private static final Logger logger = Logger.getLogger(UserJoinServiceImpl.class);
 	
-	@Inject
-	private UserJoinDao dao;
+	@Resource(name="cpMainImgPath")
+	private String cpMainImgPath;
 	
-	@Resource(name="companyImgPath")
-	private String companyImgPath;
-	
+	/**
+	 * 일반 사용자 회원가입
+	 */
 	@Override
-	public void userJoin(UserDTO user) {
-		dao.userJoin(user);
+	public void userjoin(UserDTO dto) {
+		joinDao.userjoin(dto);
 	}
 
+	/**
+	 * 업체 회원가입
+	 * @throws Exception 
+	 * @throws IOException 
+	 */
 	@Override
-	public void companyJoin(CompanyDTO company) throws IOException, Exception {
+	public void companyjoin(CompanyDTO dto) throws IOException, Exception {
+		joinDao.companyjoin(dto);
 		
-		dao.companyJoin(company);
-		
-		if(company.getFile().isEmpty() == false){
+		if(dto.getMainImg().isEmpty() == false){
 		 	logger.debug("------------- file start -------------");
-            logger.debug("name : "+company.getFile().getName());
-            logger.debug("filename : "+company.getFile().getOriginalFilename());
-            logger.debug("size : "+company.getFile().getSize());
+            logger.debug("name : "+dto.getMainImg().getName());
+            logger.debug("filename : "+dto.getMainImg().getOriginalFilename());
+            logger.debug("size : "+dto.getMainImg().getSize());
             logger.debug("-------------- file end --------------\n");
             
-            UploadFileUtils.uploadFile(companyImgPath, company.getFile().getOriginalFilename(), company.getFile().getBytes());
+            UploadFileUtils.uploadFile(cpMainImgPath, dto.getMainImg().getOriginalFilename(), dto.getMainImg().getBytes());
 		}
-		
-		
 	}
-
 }

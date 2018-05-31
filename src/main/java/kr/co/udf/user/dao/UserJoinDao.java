@@ -5,8 +5,15 @@ import kr.co.udf.user.domain.UserDTO;
 
 public interface UserJoinDao {
 
-	public void userJoin(UserDTO user);
+	/**
+	 * 일반 사용자 회원가입 
+	 * @param dto
+	 */
+	public void userjoin(UserDTO dto);
 	
-	public void companyJoin(CompanyDTO company);
-	
+	/**
+	 * 업체 회원가입
+	 * @param dto
+	 */
+	public void companyjoin(CompanyDTO dto);
 }

@@ -26,7 +26,7 @@
       <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
    </bean>
    
-   <bean id="companyImgPath" class="java.lang.String">
-      <constructor-arg value="C:\\undefeind\\company_image" />
+   <bean id="cpMainImgPath" class="java.lang.String">
+      <constructor-arg value="C:\\undefined\\company_main_image" />
    </bean>
 </beans>

@@ -23,44 +23,31 @@ import kr.co.udf.user.service.UserJoinService;
 public class UserJoinController {
 
 	@Inject
-	private UserJoinService service;
+	private UserJoinService joinService;
 	
 	private static final Logger logger = Logger.getLogger(UserJoinController.class);
 	
 	@RequestMapping(value="/join", method=RequestMethod.GET)
 	public void join() {}
 	
-	/**
-	 * 일반 사용자 회원가입
-	 * @param user
-	 */
 	@RequestMapping(value="/userjoin", method=RequestMethod.POST)
-	public void userjoin(UserDTO user) {
+	public String userjoin(UserDTO dto) {
+		logger.info("userjoin..................");
+		logger.info(dto);
 		
-		logger.info("userjoin.........");
-		logger.info(user.toString());
-		
-		service.userJoin(user);
-	}
-	
-	/**
-	 * 업체 회원가입
-	 * @param company
-	 * @throws Exception 
-	 * @throws IOException 
-	 */
-	@RequestMapping(value="/companyjoin", method=RequestMethod.POST)
-	public String companyjoin(CompanyDTO company) throws IOException, Exception{
-		logger.info("companyjoin........");
-		logger.info(company);
-		
-		service.companyJoin(company);
+		joinService.userjoin(dto);
 		
 		return "/user/success";
+		
 	}
 	
-	@RequestMapping(value="/success", method=RequestMethod.GET)
-	public void success() {
+	@RequestMapping(value="/companyjoin", method=RequestMethod.POST)
+	public String companyjoin(CompanyDTO dto) throws IOException, Exception {
+		logger.info("companyjoin...................");
+		logger.info(dto);
 		
+		joinService.companyjoin(dto);
+		
+		return "/user/success";
 	}
 }

@@ -8,13 +8,14 @@ import kr.co.udf.user.domain.UserDTO;
 public interface UserJoinService {
 
 	/**
-	 * 일반 회원가입
+	 * 일반 사용자 회원가입
+	 * @param dto
 	 */
-	public void userJoin(UserDTO user);
+	public void userjoin(UserDTO dto);
 	
 	/**
 	 * 업체 회원가입
+	 * @param dto
 	 */
-	public void companyJoin(CompanyDTO company) throws IOException, Exception;
-	
+	public void companyjoin(CompanyDTO dto) throws IOException, Exception;
 }

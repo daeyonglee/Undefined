@@ -73,7 +73,7 @@
                       <c:choose>
                         <c:when test="${null ne sessionScope.login || null ne cookie.loginCookie.value}">
                           <li><a href="/user/logout">로그아웃</a></li>
-                          <li><a href="#">마이페이지</a></li>
+                          <li><a href="/user/mypage/index">마이페이지</a></li>
                           <li><a href="#">고객센터</a></li>
                         </c:when>
                         <c:otherwise>
