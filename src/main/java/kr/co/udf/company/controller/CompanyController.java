@@ -5,13 +5,13 @@ import javax.inject.Inject;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import kr.co.udf.common.company.domain.DressCompany;
-import kr.co.udf.common.company.domain.StudioCompany;
 import kr.co.udf.company.domain.Criteria;
 import kr.co.udf.company.domain.PageMaker;
+import kr.co.udf.company.domain.SearchCriteria;
 import kr.co.udf.company.service.DressService;
 import kr.co.udf.company.service.MakeupService;
 import kr.co.udf.company.service.StudioService;
@@ -44,12 +44,10 @@ public class CompanyController {
 		model.addAttribute("pageMaker", pagemaker);
 	}
 	
-	
-	
 	@RequestMapping(value="/dress", method=RequestMethod.GET)
 	public void dress(Criteria cri, Model model) throws Exception {
 		logger.info("드레스 페이징 ");
-		model.addAttribute("list", ds.listCriteria(cri));
+		model.addAttribute("dresslist", ds.listCriteria(cri));
 		PageMaker pagemaker = new PageMaker();
 		pagemaker.setCri(cri);
 		pagemaker.setTotalCount(ds.countPaging(cri));
@@ -60,14 +58,13 @@ public class CompanyController {
 	@RequestMapping(value="/makeup", method=RequestMethod.GET)
 	public void makeup(Criteria cri, Model model) throws Exception {
 		logger.info("메이크업 페이징 ");
-		model.addAttribute("list", ms.listCriteria(cri));
+		model.addAttribute("makeuplist", ss.listCriteria(cri));
 		PageMaker pagemaker = new PageMaker();
 		pagemaker.setCri(cri);
 		pagemaker.setTotalCount(ms.countPaging(cri));
 		
 		model.addAttribute("pageMaker", pagemaker);
 	}
-	
 	
 	@RequestMapping(value="/detail", method=RequestMethod.GET)
 	public void detailGET() {
@@ -83,8 +80,20 @@ public class CompanyController {
 	public void submitGET() {
 		
 	}
+	
+	//검색 페이징
+	@RequestMapping(value = "/slist", method = RequestMethod.GET)
+	  public void listPage(@ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
 
-	
-	
-	
+	    logger.info(cri.toString());
+
+	    model.addAttribute("list", ss.listSearchCriteria(cri));
+
+	    PageMaker pageMaker = new PageMaker();
+	    pageMaker.setCri(cri);
+
+	    pageMaker.setTotalCount(ss.listSearchCount(cri));
+
+	    model.addAttribute("pageMaker", pageMaker);
+	  }
 }

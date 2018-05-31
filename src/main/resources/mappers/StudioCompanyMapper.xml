@@ -5,7 +5,7 @@
 
 
 <mapper namespace="kr.co.udf.company.dao.StudioDao"> 
-	<select id="listStudio" resultType="kr.co.udf.common.company.domain.StudioCompany">
+	<select id="listAll" resultType="kr.co.udf.common.company.domain.StudioCompany">
 	<![CDATA[
 	SELECT sc_no companyNo, 
 	sc_nm nm, 
@@ -24,10 +24,10 @@
 	]]> 
 	</select>
 
-		<select id="StudioPage" resultType="kr.co.udf.common.company.domain.StudioCompany">
+	<select id="listPage" resultType="kr.co.udf.common.company.domain.StudioCompany">
 	 <![CDATA[
-SELECT *
-FROM (SELECT CEIL (rownum / 10) page,
+	SELECT *
+	FROM (SELECT CEIL (rownum / 12) page,
 	sc_no companyNo, 
 	sc_nm nm, 
 	sc_company_no regNo, 
@@ -47,7 +47,7 @@ FROM (SELECT *
  	]]>
 	</select>
 	
-		<select id="StudioCri" resultType="kr.co.udf.common.company.domain.StudioCompany">
+	<select id="listCriteria" resultType="kr.co.udf.common.company.domain.StudioCompany">
 	 <![CDATA[
 	SELECT
   	*
@@ -76,7 +76,7 @@ FROM (SELECT *
  	]]>
 	</select>
 	
-	<select id="StudioCount" resultType="int">
+	<select id="countPaging" resultType="int">
 	 <![CDATA[
 	SELECT count(sc_no)
 	FROM studio_company
@@ -84,5 +84,55 @@ FROM (SELECT *
 	]]>
 	</select>
 	
+<sql id="search">
+   <if test="searchType == 'name'.toString()">
+     and sc_nm like '%'|| #{keyword}||'%'
+   </if>
+   <if test="searchType == 'addr'.toString()">
+     and sc_addr like '%'|| #{keyword}||'%'
+   </if>
+</sql>
+
 	
+	<select id="listSearch" resultType="kr.co.udf.common.company.domain.StudioCompany">
+<![CDATA[
+	select *
+	from
+ 	 (
+ 	SELECT rownum rn,
+ 	sc_no companyNo, 
+	sc_nm nm, 
+	sc_company_no regNo, 
+	sc_main_nm headName, 
+	sc_addr addr, 
+	sc_main_image mainImage, 
+	sc_email email, 
+	sc_pw pw, 
+	sc_tel tel, 
+	sc_introduce introduce, 
+	sessionkey, 
+	regdate, 
+	updatedate
+ 	FROM studio_company
+ 	 where 1=1
+ 	 ]]>
+ 	   <include refid="search"></include>
+<![CDATA[ 
+ 	 and rownum <= #{page} * #{perPageNum}
+ 	 and sc_no > 0
+     order by sc_no DESC
+ 	 )
+	where rn > (#{page} -1) * #{perPageNum}
+ 	]]>
+ 		
+	</select>
+ 	
+ 		<select id="listSearchCount" resultType="int">
+	 <![CDATA[
+	select count(sc_no)
+	from studio_company
+	where sc_no > 0
+	]]>
+	   <include refid="search"></include>
+	</select>	
 </mapper>

@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <!DOCTYPE html>
 <html>
@@ -160,8 +161,8 @@
           <div class="col-md-9 padding-top-40 properties-page">
             <div class="section clear">
               <div class="col-xs-10 page-subheader sorting pl0">
-                 <a href="studio"><button type="button">STUDIO</button></a>   
-              <button type="button" disabled>DRESS</button>
+                 <a href="studio"><button type="button">STUDIO</button></a>
+                 <button type="button" disabled>DRESS</button>
                  <a href="makeup"><button type="button">MAKEUP</button></a>   
                  
 
@@ -179,21 +180,21 @@
 
   
             </div>
-         
-
+            <!-- 왼쪽 컨테이너 -->
             <div class="section clear">
               <div id="list-type" class="proerty-th">
 
-                <c:forEach items="${list}" var="studio">
+                 
+         <c:forEach items="${dresslist}" var="studio" varStatus="status">
+
                   <div class="col-sm-6 col-md-4 p0">
                     <div class="box-two proerty-item">
                       <div class="item-thumb">
-                        <!-- 사진 리스트 -->
 
 
+                
                         <div id="myCarousel" class="carousel slide"
                           data-ride="carousel">
-                          <!-- Indicators -->
                           <ol class="carousel-indicators">
                             <li data-target="#myCarousel"
                               data-slide-to="0" class="active"></li>
@@ -202,8 +203,6 @@
                             <li data-target="#myCarousel"
                               data-slide-to="2"></li>
                           </ol>
-
-                          <!-- Wrapper for slides -->
                           <div class="carousel-inner">
                             <div class="item active">
                               <img
@@ -221,8 +220,6 @@
                                 style="width: 100%;">
                             </div>
                           </div>
-
-                          <!-- Left and right controls -->
                           <a class="left carousel-control"
                             href="#myCarousel" data-slide="prev"> <span
                             class="glyphicon glyphicon-chevron-left"></span>
@@ -234,8 +231,6 @@
                           </a>
                         </div>
                       </div>
-
-
                       <div class="item-entry overflow">
                         <h5>
                           <a
@@ -245,16 +240,22 @@
                         <div class="dot-hr"></div>
                         <span class="proerty-price pull-left">
                           ★★★ </span> 3.0/5.0 (20명) <br>
-                        <div class="">${studio.introduce}</div>
+            
+            <c:choose>
+           <c:when test="${fn:length(studio.introduce) > 40}">
+                        <div class=""><c:out value="${fn:substring(studio.introduce,0,39)}"/> ... </div>
+                          </c:when>
+                             <c:otherwise>
+                              <c:out value="${studio.introduce}"/>
+                               </c:otherwise> 
+                                    </c:choose>   
                       </div>
-
                     </div>
                   </div>
-                </c:forEach>
-
+            
+</c:forEach>
               </div>
             </div>
-            
           <!-- 페이징 처리 -->
             <div class="section">
               <div class="pull-legt">
@@ -394,7 +395,7 @@
     
            <input type="hidden" id="mapList"
                value= "
-                 <c:forEach items="${list}" var="studio" varStatus="index">
+                 <c:forEach items="${dresslist}" var="studio" varStatus="index">
                     <c:choose>
                       <c:when test="${index.last}">${studio.addr}</c:when>
                       <c:otherwise>${studio.addr},</c:otherwise>
@@ -405,7 +406,7 @@
   
                     <input type="hidden" id="nameList"
                value= "
-                 <c:forEach items="${list}" var="studio" varStatus="index">
+                 <c:forEach items="${dresslistlist}" var="studio" varStatus="index">
                     <c:choose>
                       <c:when test="${index.last}">${studio.nm}</c:when>
                       <c:otherwise>${studio.nm},</c:otherwise>

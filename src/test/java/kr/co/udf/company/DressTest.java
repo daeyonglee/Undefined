@@ -1,5 +1,7 @@
 package kr.co.udf.company;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -10,8 +12,11 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import kr.co.udf.common.company.domain.DressCompany;
+import kr.co.udf.common.company.domain.StudioCompany;
 import kr.co.udf.company.dao.DressDao;
 import kr.co.udf.company.dao.StudioDao;
+import kr.co.udf.company.domain.Criteria;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -25,8 +30,28 @@ public class DressTest {
 	private DressDao dao;
 	SqlSessionFactory sqlFactory;
 	
-	@Test
+	//@Test
 	public void testList() throws Exception {
 		logger.info(dao.listAll());
+	}
+	
+	  @Test
+	 public void testListCriteria() throws Exception {
+		 
+		 Criteria cri = new Criteria();
+		 cri.setPage(1);
+		 cri.setPerPageNum(10);
+		 
+		 List<DressCompany> list = dao.listCriteria(cri);
+		 
+		 for (DressCompany studio : list) {
+			 //logger.info(studio.getCompanyNo() + ":" + studio.getHeadName());
+		 }
+	 }
+	 
+	@Test
+	public void testPageint() throws Exception {
+		Criteria cri = new Criteria();
+		logger.info(dao.countPaging(cri));
 	}
 }

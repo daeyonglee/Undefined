@@ -12,17 +12,28 @@
 2018-05-27 12:30:39 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters:  
 2018-05-27 12:30:39 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 30 
 2018-05-27 12:30:39 [INFO ] [kr.co.udf.auction.AuctionCountTest:46] [Auction [no=30, userNo=2, loc=서울시 강남구4, day=2019-10-28 00:00:00, time=null, memo=자연스러운 거 원함요, type=null, writer=홍길동, deadline=2018-05-26 00:00:00, regdate=2018-05-26 03:25:27, updatedate=2018-05-26 03:25:27, date=null null], Auction [no=29, userNo=2, loc=서울시 강남구4, day=2019-10-28 00:00:00, time=null, memo=자연스러운 거 원함요, type=null, writer=홍길동, deadline=2018-05-26 00:00:00, regdate=2018-05-26 03:25:27, updatedate=2018-05-26 03:25:27, date=null null], Auction [no=28, userNo=2, loc=서울시 강남구4, day=2019-10-28 00:00:00, time=null, memo=자연스러운 거 원함요, type=null, writer=홍길동, deadline=2018-05-26 00:00:00, regdate=2018-05-26 03:25:26, updatedate=2018-05-26 03:25:26, date=null null], Auction [no=27, userNo=2, loc=서울시 강남구4, day=2019-10-28 00:00:00, time=null, memo=자연스러운 거 원함요, type=null, writer=홍길동, deadline=2018-05-26 00:00:00, regdate=2018-05-26 03:25:26, updatedate=2018-05-26 03:25:26, date=null null], Auction [no=26, userNo=2, loc=서울시 강남구4, day=2019-10-28 00:00:00, time=null, memo=자연스러운 거 원함요, type=null, writer=홍길동, deadline=2018-05-26 00:00:00, regdate=2018-05-26 03:25:26, updatedate=2018-05-26 03:25:26, date=null null], Auction [no=25, userNo=2, loc=서울시 강남구4, day=2019-10-28 00:00:00, time=null, memo=자연스러운 거 원함요, type=null, writer=홍길동, deadline=2018-05-26 00:00:00, regdate=2018-05-26 03:25:25, updatedate=2018-05-26 03:25:25, date=null null], Auction [no=24, userNo=2, loc=서울시 강남구4, day=2019-10-28 00:00:00, time=null, memo=자연스러운 거 원함요, type=null, writer=홍길동, deadline=2018-05-26 00:00:00, regdate=2018-05-26 03:25:25, updatedate=2018-05-26 03:25:25, date=null null], Auction [no=23, userNo=2, loc=서울시 강남구4, day=2019-10-28 00:00:00, time=null, memo=자연스러운 거 원함요, type=null, writer=홍길동, deadline=2018-05-26 00:00:00, regdate=2018-05-26 03:25:24, updatedate=2018-05-26 03:25:24, date=null null], Auction [no=22, userNo=2, loc=서울시 강남구4, day=2019-10-28 00:00:00, time=null, memo=자연스러운 거 원함요, type=null, writer=홍길동, deadline=2018-05-26 00:00:00, regdate=2018-05-26 03:25:24, updatedate=2018-05-26 03:25:24, date=null null], Auction [no=21, userNo=2, loc=서울시 강남구4, day=2019-10-28 00:00:00, time=null, memo=자연스러운 거 원함요, type=null, writer=홍길동, deadline=2018-05-26 00:00:00, regdate=2018-05-26 03:25:23, updatedate=2018-05-26 03:25:23, date=null null], Auction [no=20, userNo=2, loc=서울시 강남구4, day=2019-10-28 00:00:00, time=null, memo=자연스러운 거 원함요, type=null, writer=홍길동, deadline=2018-05-26 00:00:00, regdate=2018-05-26 03:25:23, updatedate=2018-05-26 03:25:23, date=null null], Auction [no=19, userNo=2, loc=서울시 강남구4, day=2019-10-28 00:00:00, time=null, memo=자연스러운 거 원함요, type=null, writer=홍길동, deadline=2018-05-26 00:00:00, regdate=2018-05-26 03:25:22, updatedate=2018-05-26 03:25:22, date=null null], Auction [no=18, userNo=1, loc=인천광역시 중구2, day=2019-10-28 00:00:00, time=null, memo=가까운 스튜디오 선호요^^, type=null, writer=임꺽정, deadline=2018-05-26 00:00:00, regdate=2018-05-26 03:25:21, updatedate=2018-05-26 03:25:21, date=null null], Auction [no=17, userNo=1, loc=인천광역시 중구2, day=2019-10-28 00:00:00, time=null, memo=가까운 스튜디오 선호요^^, type=null, writer=임꺽정, deadline=2018-05-26 00:00:00, regdate=2018-05-26 03:25:20, updatedate=2018-05-26 03:25:20, date=null null], Auction [no=16, userNo=1, loc=인천광역시 중구2, day=2019-10-28 00:00:00, time=null, memo=가까운 스튜디오 선호요^^, type=null, writer=임꺽정, deadline=2018-05-26 00:00:00, regdate=2018-05-26 03:25:20, updatedate=2018-05-26 03:25:20, date=null null], Auction [no=15, userNo=1, loc=인천광역시 중구2, day=2019-10-28 00:00:00, time=null, memo=가까운 스튜디오 선호요^^, type=null, writer=임꺽정, deadline=2018-05-26 00:00:00, regdate=2018-05-26 03:25:19, updatedate=2018-05-26 03:25:19, date=null null], Auction [no=14, userNo=1, loc=인천광역시 중구2, day=2019-10-28 00:00:00, time=null, memo=가까운 스튜디오 선호요^^, type=null, writer=임꺽정, deadline=2018-05-26 00:00:00, regdate=2018-05-26 03:25:19, updatedate=2018-05-26 03:25:19, date=null null], Auction [no=13, userNo=1, loc=인천광역시 중구2, day=2019-10-28 00:00:00, time=null, memo=가까운 스튜디오 선호요^^, type=null, writer=임꺽정, deadline=2018-05-26 00:00:00, regdate=2018-05-26 03:25:18, updatedate=2018-05-26 03:25:18, date=null null], Auction [no=12, userNo=1, loc=인천광역시 중구2, day=2019-10-28 00:00:00, time=null, memo=가까운 스튜디오 선호요^^, type=null, writer=임꺽정, deadline=2018-05-26 00:00:00, regdate=2018-05-26 03:25:18, updatedate=2018-05-26 03:25:18, date=null null], Auction [no=11, userNo=1, loc=인천광역시 중구2, day=2019-10-28 00:00:00, time=null, memo=가까운 스튜디오 선호요^^, type=null, writer=임꺽정, deadline=2018-05-26 00:00:00, regdate=2018-05-26 03:25:17, updatedate=2018-05-26 03:25:17, date=null null], Auction [no=10, userNo=1, loc=인천광역시 중구2, day=2019-10-28 00:00:00, time=null, memo=가까운 스튜디오 선호요^^, type=null, writer=임꺽정, deadline=2018-05-26 00:00:00, regdate=2018-05-26 03:25:17, updatedate=2018-05-26 03:25:17, date=null null], Auction [no=9, userNo=1, loc=인천광역시 중구2, day=2019-10-28 00:00:00, time=null, memo=가까운 스튜디오 선호요^^, type=null, writer=임꺽정, deadline=2018-05-26 00:00:00, regdate=2018-05-26 03:25:16, updatedate=2018-05-26 03:25:16, date=null null], Auction [no=8, userNo=1, loc=인천광역시 중구2, day=2019-10-28 00:00:00, time=null, memo=가까운 스튜디오 선호요^^, type=null, writer=임꺽정, deadline=2018-05-26 00:00:00, regdate=2018-05-26 03:25:16, updatedate=2018-05-26 03:25:16, date=null null], Auction [no=7, userNo=1, loc=인천광역시 중구2, day=2019-10-28 00:00:00, time=null, memo=가까운 스튜디오 선호요^^, type=null, writer=임꺽정, deadline=2018-05-26 00:00:00, regdate=2018-05-26 03:25:15, updatedate=2018-05-26 03:25:15, date=null null], Auction [no=6, userNo=1, loc=인천광역시 중구2, day=2019-10-28 00:00:00, time=null, memo=가까운 스튜디오 선호요^^, type=null, writer=임꺽정, deadline=2018-05-26 00:00:00, regdate=2018-05-26 03:25:15, updatedate=2018-05-26 03:25:15, date=null null], Auction [no=5, userNo=1, loc=인천광역시 중구2, day=2019-10-28 00:00:00, time=null, memo=가까운 스튜디오 선호요^^, type=null, writer=임꺽정, deadline=2018-05-26 00:00:00, regdate=2018-05-26 03:25:14, updatedate=2018-05-26 03:25:14, date=null null], Auction [no=4, userNo=1, loc=인천광역시 중구2, day=2019-10-28 00:00:00, time=null, memo=가까운 스튜디오 선호요^^, type=null, writer=임꺽정, deadline=2018-05-26 00:00:00, regdate=2018-05-26 03:25:14, updatedate=2018-05-26 03:25:14, date=null null], Auction [no=3, userNo=1, loc=인천광역시 중구2, day=2019-10-28 00:00:00, time=null, memo=가까운 스튜디오 선호요^^, type=null, writer=임꺽정, deadline=2018-05-26 00:00:00, regdate=2018-05-26 03:25:13, updatedate=2018-05-26 03:25:13, date=null null], Auction [no=2, userNo=1, loc=인천광역시 중구2, day=2019-10-28 00:00:00, time=null, memo=가까운 스튜디오 선호요^^, type=null, writer=임꺽정, deadline=2018-05-26 00:00:00, regdate=2018-05-26 03:25:12, updatedate=2018-05-26 03:25:12, date=null null], Auction [no=1, userNo=1, loc=인천광역시 중구2, day=2019-10-28 00:00:00, time=null, memo=가까운 스튜디오 선호요^^, type=null, writer=임꺽정, deadline=2018-05-26 00:00:00, regdate=2018-05-26 03:25:12, updatedate=2018-05-26 03:25:12, date=null null]] 
+<<<<<<< HEAD
 2018-05-28 16:15:23 [WARN ] [org.springframework.context.support.AbstractApplicationContext:487] Exception encountered during context initialization - cancelling refresh attempt 
 org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'auctionController': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private kr.co.udf.auction.service.AuctionApplyService kr.co.udf.auction.controller.AuctionController.service; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'auctionApplyServiceImpl': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private kr.co.udf.auction.dao.AuctionApplyDao kr.co.udf.auction.service.AuctionApplyServiceImpl.dao; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'myBatisAuctionApplyDao': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private org.apache.ibatis.session.SqlSession kr.co.udf.auction.dao.MyBatisAuctionApplyDao.session; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSession' defined in file [C:\Users\spani\eclipse-workspace-web\Undefined\src\main\webapp\WEB-INF\spring\root-context.xml]: Cannot resolve reference to bean 'sqlSessionFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in file [C:\Users\spani\eclipse-workspace-web\Undefined\src\main\webapp\WEB-INF\spring\root-context.xml]: Invocation of init method failed; nested exception is java.lang.NoClassDefFoundError: kr/co/udf/auction/dao/MyBatisAuctionDao (wrong name: kr/co/udf/auction/dao/MybatisAuctionDao)
 	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:334)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1210)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
+=======
+2018-05-30 15:00:51 [WARN ] [org.springframework.context.support.AbstractApplicationContext:487] Exception encountered during context initialization - cancelling refresh attempt 
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in file [C:\KOSTA178\workspace_web\Undefined\src\main\webapp\WEB-INF\spring\root-context.xml]: Invocation of init method failed; nested exception is java.lang.NoClassDefFoundError: kr/co/udf/auction/dao/MyBatisAuctionDao (wrong name: kr/co/udf/auction/dao/MybatisAuctionDao)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1574)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:539)
+>>>>>>> soojin
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
 	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
 	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+<<<<<<< HEAD
 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:755)
+=======
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:736)
+>>>>>>> soojin
 	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
 	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
 	at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:125)
@@ -56,6 +67,7 @@ org.springframework.beans.factory.BeanCreationException: Error creating bean wit
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:760)
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:460)
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:206)
+<<<<<<< HEAD
 Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire field: private kr.co.udf.auction.service.AuctionApplyService kr.co.udf.auction.controller.AuctionController.service; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'auctionApplyServiceImpl': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private kr.co.udf.auction.dao.AuctionApplyDao kr.co.udf.auction.service.AuctionApplyServiceImpl.dao; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'myBatisAuctionApplyDao': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private org.apache.ibatis.session.SqlSession kr.co.udf.auction.dao.MyBatisAuctionApplyDao.session; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSession' defined in file [C:\Users\spani\eclipse-workspace-web\Undefined\src\main\webapp\WEB-INF\spring\root-context.xml]: Cannot resolve reference to bean 'sqlSessionFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in file [C:\Users\spani\eclipse-workspace-web\Undefined\src\main\webapp\WEB-INF\spring\root-context.xml]: Invocation of init method failed; nested exception is java.lang.NoClassDefFoundError: kr/co/udf/auction/dao/MyBatisAuctionDao (wrong name: kr/co/udf/auction/dao/MybatisAuctionDao)
 	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:561)
 	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88)
@@ -107,26 +119,7 @@ Caused by: org.springframework.beans.factory.BeanCreationException: Error creati
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1139)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1042)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:504)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.findAutowireCandidates(DefaultListableBeanFactory.java:1120)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1044)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:942)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:533)
-	... 69 more
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in file [C:\Users\spani\eclipse-workspace-web\Undefined\src\main\webapp\WEB-INF\spring\root-context.xml]: Invocation of init method failed; nested exception is java.lang.NoClassDefFoundError: kr/co/udf/auction/dao/MyBatisAuctionDao (wrong name: kr/co/udf/auction/dao/MybatisAuctionDao)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1574)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:539)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:351)
-	... 84 more
+=======
 Caused by: java.lang.NoClassDefFoundError: kr/co/udf/auction/dao/MyBatisAuctionDao (wrong name: kr/co/udf/auction/dao/MybatisAuctionDao)
 	at java.lang.ClassLoader.defineClass1(Native Method)
 	at java.lang.ClassLoader.defineClass(Unknown Source)
@@ -151,8 +144,8 @@ Caused by: java.lang.NoClassDefFoundError: kr/co/udf/auction/dao/MyBatisAuctionD
 	at org.mybatis.spring.SqlSessionFactoryBean.afterPropertiesSet(SqlSessionFactoryBean.java:381)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1633)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1570)
-	... 91 more
-2018-05-28 16:15:23 [ERROR] [org.springframework.test.context.TestContextManager:215] Caught exception while allowing TestExecutionListener [org.springframework.test.context.support.DependencyInjectionTestExecutionListener@31aa3ca5] to prepare test instance [kr.co.udf.recommend.RecommendDaoTest@45905bff] 
+	... 40 more
+2018-05-30 15:00:51 [ERROR] [org.springframework.test.context.TestContextManager:215] Caught exception while allowing TestExecutionListener [org.springframework.test.context.support.DependencyInjectionTestExecutionListener@74287ea3] to prepare test instance [kr.co.udf.company.DressTest@7d7758be] 
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:94)
 	at org.springframework.test.context.DefaultTestContext.getApplicationContext(DefaultTestContext.java:72)
@@ -180,16 +173,24 @@ java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:760)
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:460)
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:206)
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'auctionController': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private kr.co.udf.auction.service.AuctionApplyService kr.co.udf.auction.controller.AuctionController.service; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'auctionApplyServiceImpl': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private kr.co.udf.auction.dao.AuctionApplyDao kr.co.udf.auction.service.AuctionApplyServiceImpl.dao; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'myBatisAuctionApplyDao': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private org.apache.ibatis.session.SqlSession kr.co.udf.auction.dao.MyBatisAuctionApplyDao.session; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSession' defined in file [C:\Users\spani\eclipse-workspace-web\Undefined\src\main\webapp\WEB-INF\spring\root-context.xml]: Cannot resolve reference to bean 'sqlSessionFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in file [C:\Users\spani\eclipse-workspace-web\Undefined\src\main\webapp\WEB-INF\spring\root-context.xml]: Invocation of init method failed; nested exception is java.lang.NoClassDefFoundError: kr/co/udf/auction/dao/MyBatisAuctionDao (wrong name: kr/co/udf/auction/dao/MybatisAuctionDao)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:334)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1210)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in file [C:\KOSTA178\workspace_web\Undefined\src\main\webapp\WEB-INF\spring\root-context.xml]: Invocation of init method failed; nested exception is java.lang.NoClassDefFoundError: kr/co/udf/auction/dao/MyBatisAuctionDao (wrong name: kr/co/udf/auction/dao/MybatisAuctionDao)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1574)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:539)
+>>>>>>> soojin
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
 	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
 	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:755)
+<<<<<<< HEAD
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.findAutowireCandidates(DefaultListableBeanFactory.java:1120)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1044)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:942)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:533)
+	... 69 more
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in file [C:\Users\spani\eclipse-workspace-web\Undefined\src\main\webapp\WEB-INF\spring\root-context.xml]: Invocation of init method failed; nested exception is java.lang.NoClassDefFoundError: kr/co/udf/auction/dao/MyBatisAuctionDao (wrong name: kr/co/udf/auction/dao/MybatisAuctionDao)
+=======
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:736)
 	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
 	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
 	at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:125)
@@ -199,77 +200,6 @@ Caused by: org.springframework.beans.factory.BeanCreationException: Error creati
 	at org.springframework.test.context.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:68)
 	at org.springframework.test.context.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:86)
 	... 25 more
-Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire field: private kr.co.udf.auction.service.AuctionApplyService kr.co.udf.auction.controller.AuctionController.service; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'auctionApplyServiceImpl': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private kr.co.udf.auction.dao.AuctionApplyDao kr.co.udf.auction.service.AuctionApplyServiceImpl.dao; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'myBatisAuctionApplyDao': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private org.apache.ibatis.session.SqlSession kr.co.udf.auction.dao.MyBatisAuctionApplyDao.session; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSession' defined in file [C:\Users\spani\eclipse-workspace-web\Undefined\src\main\webapp\WEB-INF\spring\root-context.xml]: Cannot resolve reference to bean 'sqlSessionFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in file [C:\Users\spani\eclipse-workspace-web\Undefined\src\main\webapp\WEB-INF\spring\root-context.xml]: Invocation of init method failed; nested exception is java.lang.NoClassDefFoundError: kr/co/udf/auction/dao/MyBatisAuctionDao (wrong name: kr/co/udf/auction/dao/MybatisAuctionDao)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:561)
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:331)
-	... 41 more
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'auctionApplyServiceImpl': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private kr.co.udf.auction.dao.AuctionApplyDao kr.co.udf.auction.service.AuctionApplyServiceImpl.dao; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'myBatisAuctionApplyDao': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private org.apache.ibatis.session.SqlSession kr.co.udf.auction.dao.MyBatisAuctionApplyDao.session; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSession' defined in file [C:\Users\spani\eclipse-workspace-web\Undefined\src\main\webapp\WEB-INF\spring\root-context.xml]: Cannot resolve reference to bean 'sqlSessionFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in file [C:\Users\spani\eclipse-workspace-web\Undefined\src\main\webapp\WEB-INF\spring\root-context.xml]: Invocation of init method failed; nested exception is java.lang.NoClassDefFoundError: kr/co/udf/auction/dao/MyBatisAuctionDao (wrong name: kr/co/udf/auction/dao/MybatisAuctionDao)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:334)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1210)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.findAutowireCandidates(DefaultListableBeanFactory.java:1120)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1044)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:942)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:533)
-	... 43 more
-Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire field: private kr.co.udf.auction.dao.AuctionApplyDao kr.co.udf.auction.service.AuctionApplyServiceImpl.dao; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'myBatisAuctionApplyDao': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private org.apache.ibatis.session.SqlSession kr.co.udf.auction.dao.MyBatisAuctionApplyDao.session; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSession' defined in file [C:\Users\spani\eclipse-workspace-web\Undefined\src\main\webapp\WEB-INF\spring\root-context.xml]: Cannot resolve reference to bean 'sqlSessionFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in file [C:\Users\spani\eclipse-workspace-web\Undefined\src\main\webapp\WEB-INF\spring\root-context.xml]: Invocation of init method failed; nested exception is java.lang.NoClassDefFoundError: kr/co/udf/auction/dao/MyBatisAuctionDao (wrong name: kr/co/udf/auction/dao/MybatisAuctionDao)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:561)
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:331)
-	... 54 more
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'myBatisAuctionApplyDao': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private org.apache.ibatis.session.SqlSession kr.co.udf.auction.dao.MyBatisAuctionApplyDao.session; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSession' defined in file [C:\Users\spani\eclipse-workspace-web\Undefined\src\main\webapp\WEB-INF\spring\root-context.xml]: Cannot resolve reference to bean 'sqlSessionFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in file [C:\Users\spani\eclipse-workspace-web\Undefined\src\main\webapp\WEB-INF\spring\root-context.xml]: Invocation of init method failed; nested exception is java.lang.NoClassDefFoundError: kr/co/udf/auction/dao/MyBatisAuctionDao (wrong name: kr/co/udf/auction/dao/MybatisAuctionDao)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:334)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1210)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.findAutowireCandidates(DefaultListableBeanFactory.java:1120)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1044)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:942)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:533)
-	... 56 more
-Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire field: private org.apache.ibatis.session.SqlSession kr.co.udf.auction.dao.MyBatisAuctionApplyDao.session; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSession' defined in file [C:\Users\spani\eclipse-workspace-web\Undefined\src\main\webapp\WEB-INF\spring\root-context.xml]: Cannot resolve reference to bean 'sqlSessionFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in file [C:\Users\spani\eclipse-workspace-web\Undefined\src\main\webapp\WEB-INF\spring\root-context.xml]: Invocation of init method failed; nested exception is java.lang.NoClassDefFoundError: kr/co/udf/auction/dao/MyBatisAuctionDao (wrong name: kr/co/udf/auction/dao/MybatisAuctionDao)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:561)
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:331)
-	... 67 more
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSession' defined in file [C:\Users\spani\eclipse-workspace-web\Undefined\src\main\webapp\WEB-INF\spring\root-context.xml]: Cannot resolve reference to bean 'sqlSessionFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in file [C:\Users\spani\eclipse-workspace-web\Undefined\src\main\webapp\WEB-INF\spring\root-context.xml]: Invocation of init method failed; nested exception is java.lang.NoClassDefFoundError: kr/co/udf/auction/dao/MyBatisAuctionDao (wrong name: kr/co/udf/auction/dao/MybatisAuctionDao)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:359)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:108)
-	at org.springframework.beans.factory.support.ConstructorResolver.resolveConstructorArguments(ConstructorResolver.java:648)
-	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:140)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1139)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1042)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:504)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.findAutowireCandidates(DefaultListableBeanFactory.java:1120)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1044)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:942)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:533)
-	... 69 more
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in file [C:\Users\spani\eclipse-workspace-web\Undefined\src\main\webapp\WEB-INF\spring\root-context.xml]: Invocation of init method failed; nested exception is java.lang.NoClassDefFoundError: kr/co/udf/auction/dao/MyBatisAuctionDao (wrong name: kr/co/udf/auction/dao/MybatisAuctionDao)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1574)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:539)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
-	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:351)
-	... 84 more
 Caused by: java.lang.NoClassDefFoundError: kr/co/udf/auction/dao/MyBatisAuctionDao (wrong name: kr/co/udf/auction/dao/MybatisAuctionDao)
 	at java.lang.ClassLoader.defineClass1(Native Method)
 	at java.lang.ClassLoader.defineClass(Unknown Source)
@@ -294,56 +224,575 @@ Caused by: java.lang.NoClassDefFoundError: kr/co/udf/auction/dao/MyBatisAuctionD
 	at org.mybatis.spring.SqlSessionFactoryBean.afterPropertiesSet(SqlSessionFactoryBean.java:381)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1633)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1570)
+	... 40 more
+2018-05-30 15:03:06 [WARN ] [org.springframework.context.support.AbstractApplicationContext:487] Exception encountered during context initialization - cancelling refresh attempt 
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in file [C:\KOSTA178\workspace_web\Undefined\src\main\webapp\WEB-INF\spring\root-context.xml]: Invocation of init method failed; nested exception is java.lang.NoClassDefFoundError: kr/co/udf/auction/dao/MyBatisAuctionDao (wrong name: kr/co/udf/auction/dao/MybatisAuctionDao)
+>>>>>>> soojin
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1574)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:539)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+<<<<<<< HEAD
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:351)
+	... 84 more
+=======
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:736)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+	at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:125)
+	at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:60)
+	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.delegateLoading(AbstractDelegatingSmartContextLoader.java:109)
+	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.loadContext(AbstractDelegatingSmartContextLoader.java:261)
+	at org.springframework.test.context.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:68)
+	at org.springframework.test.context.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:86)
+	at org.springframework.test.context.DefaultTestContext.getApplicationContext(DefaultTestContext.java:72)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:117)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:83)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:212)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:200)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:259)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:261)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:219)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:83)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:68)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:163)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:538)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:760)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:460)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:206)
+>>>>>>> soojin
+Caused by: java.lang.NoClassDefFoundError: kr/co/udf/auction/dao/MyBatisAuctionDao (wrong name: kr/co/udf/auction/dao/MybatisAuctionDao)
+	at java.lang.ClassLoader.defineClass1(Native Method)
+	at java.lang.ClassLoader.defineClass(Unknown Source)
+	at java.security.SecureClassLoader.defineClass(Unknown Source)
+	at java.net.URLClassLoader.defineClass(Unknown Source)
+	at java.net.URLClassLoader.access$100(Unknown Source)
+	at java.net.URLClassLoader$1.run(Unknown Source)
+	at java.net.URLClassLoader$1.run(Unknown Source)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.net.URLClassLoader.findClass(Unknown Source)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	at sun.misc.Launcher$AppClassLoader.loadClass(Unknown Source)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	at java.lang.Class.forName0(Native Method)
+	at java.lang.Class.forName(Unknown Source)
+	at org.apache.ibatis.io.ClassLoaderWrapper.classForName(ClassLoaderWrapper.java:186)
+	at org.apache.ibatis.io.ClassLoaderWrapper.classForName(ClassLoaderWrapper.java:89)
+	at org.apache.ibatis.io.Resources.classForName(Resources.java:261)
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.bindMapperForNamespace(XMLMapperBuilder.java:403)
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.parse(XMLMapperBuilder.java:94)
+	at org.mybatis.spring.SqlSessionFactoryBean.buildSqlSessionFactory(SqlSessionFactoryBean.java:520)
+	at org.mybatis.spring.SqlSessionFactoryBean.afterPropertiesSet(SqlSessionFactoryBean.java:381)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1633)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1570)
+<<<<<<< HEAD
 	... 91 more
-2018-05-28 16:16:34 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: SELECT * FROM studio_product  
-2018-05-28 16:16:34 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters:  
-2018-05-28 16:16:34 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 10 
-2018-05-28 16:16:34 [INFO ] [kr.co.udf.recommend.RecommendDaoTest:32] StudioProduct [sp_no=2, sc_no=2, sp_nm=null, sp_price=10000, sp_apv_yn=y, sp_total_yn=y, sp_shoot_type=실, sp_image=studio image-2, regdate=2018-05-28 06:00:44, updatedate=2018-05-28 06:00:44] 
-2018-05-28 16:16:34 [INFO ] [kr.co.udf.recommend.RecommendDaoTest:32] StudioProduct [sp_no=3, sc_no=3, sp_nm=null, sp_price=10000, sp_apv_yn=y, sp_total_yn=y, sp_shoot_type=실, sp_image=studio image-3, regdate=2018-05-28 06:00:44, updatedate=2018-05-28 06:00:44] 
-2018-05-28 16:16:34 [INFO ] [kr.co.udf.recommend.RecommendDaoTest:32] StudioProduct [sp_no=4, sc_no=4, sp_nm=null, sp_price=10000, sp_apv_yn=y, sp_total_yn=y, sp_shoot_type=실, sp_image=studio image-4, regdate=2018-05-28 06:00:45, updatedate=2018-05-28 06:00:45] 
-2018-05-28 16:16:34 [INFO ] [kr.co.udf.recommend.RecommendDaoTest:32] StudioProduct [sp_no=5, sc_no=5, sp_nm=null, sp_price=10000, sp_apv_yn=y, sp_total_yn=y, sp_shoot_type=실, sp_image=studio image-5, regdate=2018-05-28 06:00:45, updatedate=2018-05-28 06:00:45] 
-2018-05-28 16:16:34 [INFO ] [kr.co.udf.recommend.RecommendDaoTest:32] StudioProduct [sp_no=6, sc_no=6, sp_nm=null, sp_price=10000, sp_apv_yn=y, sp_total_yn=y, sp_shoot_type=실, sp_image=studio image-6, regdate=2018-05-28 06:00:45, updatedate=2018-05-28 06:00:45] 
-2018-05-28 16:16:34 [INFO ] [kr.co.udf.recommend.RecommendDaoTest:32] StudioProduct [sp_no=7, sc_no=7, sp_nm=null, sp_price=10000, sp_apv_yn=y, sp_total_yn=y, sp_shoot_type=실, sp_image=studio image-7, regdate=2018-05-28 06:00:46, updatedate=2018-05-28 06:00:46] 
-2018-05-28 16:16:34 [INFO ] [kr.co.udf.recommend.RecommendDaoTest:32] StudioProduct [sp_no=8, sc_no=8, sp_nm=null, sp_price=10000, sp_apv_yn=y, sp_total_yn=y, sp_shoot_type=실, sp_image=studio image-8, regdate=2018-05-28 06:00:46, updatedate=2018-05-28 06:00:46] 
-2018-05-28 16:16:34 [INFO ] [kr.co.udf.recommend.RecommendDaoTest:32] StudioProduct [sp_no=9, sc_no=9, sp_nm=null, sp_price=10000, sp_apv_yn=y, sp_total_yn=y, sp_shoot_type=실, sp_image=studio image-9, regdate=2018-05-28 06:00:46, updatedate=2018-05-28 06:00:46] 
-2018-05-28 16:16:34 [INFO ] [kr.co.udf.recommend.RecommendDaoTest:32] StudioProduct [sp_no=10, sc_no=10, sp_nm=null, sp_price=10000, sp_apv_yn=y, sp_total_yn=y, sp_shoot_type=실, sp_image=studio image-10, regdate=2018-05-28 06:00:46, updatedate=2018-05-28 06:00:46] 
-2018-05-28 16:16:34 [INFO ] [kr.co.udf.recommend.RecommendDaoTest:32] StudioProduct [sp_no=1, sc_no=1, sp_nm=null, sp_price=10000, sp_apv_yn=y, sp_total_yn=y, sp_shoot_type=실, sp_image=studio image-1, regdate=2018-05-28 06:01:32, updatedate=2018-05-28 06:01:32] 
-2018-05-28 16:18:14 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: SELECT * FROM studio_product  
-2018-05-28 16:18:14 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters:  
-2018-05-28 16:18:14 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 10 
-2018-05-28 16:18:14 [INFO ] [kr.co.udf.recommend.RecommendDaoTest:32] StudioProduct [sp_no=2, sc_no=2, sp_nm=null, sp_price=10000, sp_apv_yn=y, sp_total_yn=y, sp_shoot_type=실내, sp_image=studio image-2, regdate=2018-05-28 06:00:44, updatedate=2018-05-28 06:00:44] 
-2018-05-28 16:18:14 [INFO ] [kr.co.udf.recommend.RecommendDaoTest:32] StudioProduct [sp_no=3, sc_no=3, sp_nm=null, sp_price=10000, sp_apv_yn=y, sp_total_yn=y, sp_shoot_type=실내, sp_image=studio image-3, regdate=2018-05-28 06:00:44, updatedate=2018-05-28 06:00:44] 
-2018-05-28 16:18:14 [INFO ] [kr.co.udf.recommend.RecommendDaoTest:32] StudioProduct [sp_no=4, sc_no=4, sp_nm=null, sp_price=10000, sp_apv_yn=y, sp_total_yn=y, sp_shoot_type=실내, sp_image=studio image-4, regdate=2018-05-28 06:00:45, updatedate=2018-05-28 06:00:45] 
-2018-05-28 16:18:14 [INFO ] [kr.co.udf.recommend.RecommendDaoTest:32] StudioProduct [sp_no=5, sc_no=5, sp_nm=null, sp_price=10000, sp_apv_yn=y, sp_total_yn=y, sp_shoot_type=실내, sp_image=studio image-5, regdate=2018-05-28 06:00:45, updatedate=2018-05-28 06:00:45] 
-2018-05-28 16:18:14 [INFO ] [kr.co.udf.recommend.RecommendDaoTest:32] StudioProduct [sp_no=6, sc_no=6, sp_nm=null, sp_price=10000, sp_apv_yn=y, sp_total_yn=y, sp_shoot_type=실내, sp_image=studio image-6, regdate=2018-05-28 06:00:45, updatedate=2018-05-28 06:00:45] 
-2018-05-28 16:18:14 [INFO ] [kr.co.udf.recommend.RecommendDaoTest:32] StudioProduct [sp_no=7, sc_no=7, sp_nm=null, sp_price=10000, sp_apv_yn=y, sp_total_yn=y, sp_shoot_type=실내, sp_image=studio image-7, regdate=2018-05-28 06:00:46, updatedate=2018-05-28 06:00:46] 
-2018-05-28 16:18:14 [INFO ] [kr.co.udf.recommend.RecommendDaoTest:32] StudioProduct [sp_no=8, sc_no=8, sp_nm=null, sp_price=10000, sp_apv_yn=y, sp_total_yn=y, sp_shoot_type=실내, sp_image=studio image-8, regdate=2018-05-28 06:00:46, updatedate=2018-05-28 06:00:46] 
-2018-05-28 16:18:14 [INFO ] [kr.co.udf.recommend.RecommendDaoTest:32] StudioProduct [sp_no=9, sc_no=9, sp_nm=null, sp_price=10000, sp_apv_yn=y, sp_total_yn=y, sp_shoot_type=실내, sp_image=studio image-9, regdate=2018-05-28 06:00:46, updatedate=2018-05-28 06:00:46] 
-2018-05-28 16:18:14 [INFO ] [kr.co.udf.recommend.RecommendDaoTest:32] StudioProduct [sp_no=10, sc_no=10, sp_nm=null, sp_price=10000, sp_apv_yn=y, sp_total_yn=y, sp_shoot_type=실내, sp_image=studio image-10, regdate=2018-05-28 06:00:46, updatedate=2018-05-28 06:00:46] 
-2018-05-28 16:18:14 [INFO ] [kr.co.udf.recommend.RecommendDaoTest:32] StudioProduct [sp_no=1, sc_no=1, sp_nm=null, sp_price=10000, sp_apv_yn=y, sp_total_yn=y, sp_shoot_type=실내, sp_image=studio image-1, regdate=2018-05-28 06:01:32, updatedate=2018-05-28 06:01:32] 
-2018-05-28 16:19:11 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: SELECT * FROM dress_product  
-2018-05-28 16:19:11 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters:  
-2018-05-28 16:19:11 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 10 
-2018-05-28 16:19:11 [INFO ] [kr.co.udf.recommend.RecommendDaoTest:40] DressProduct [dp_no=1, dc_no=1, dp_name=null, dp_price=5000, dp_style=머메이드, dp_image=dress image-1, regdate=2018-05-28 06:03:21, updatedate=2018-05-28 06:03:21] 
-2018-05-28 16:19:11 [INFO ] [kr.co.udf.recommend.RecommendDaoTest:40] DressProduct [dp_no=2, dc_no=2, dp_name=null, dp_price=5000, dp_style=머메이드, dp_image=dress image-2, regdate=2018-05-28 06:03:22, updatedate=2018-05-28 06:03:22] 
-2018-05-28 16:19:11 [INFO ] [kr.co.udf.recommend.RecommendDaoTest:40] DressProduct [dp_no=3, dc_no=3, dp_name=null, dp_price=5000, dp_style=머메이드, dp_image=dress image-3, regdate=2018-05-28 06:03:22, updatedate=2018-05-28 06:03:22] 
-2018-05-28 16:19:11 [INFO ] [kr.co.udf.recommend.RecommendDaoTest:40] DressProduct [dp_no=4, dc_no=4, dp_name=null, dp_price=5000, dp_style=머메이드, dp_image=dress image-4, regdate=2018-05-28 06:03:22, updatedate=2018-05-28 06:03:22] 
-2018-05-28 16:19:11 [INFO ] [kr.co.udf.recommend.RecommendDaoTest:40] DressProduct [dp_no=5, dc_no=5, dp_name=null, dp_price=5000, dp_style=머메이드, dp_image=dress image-5, regdate=2018-05-28 06:03:23, updatedate=2018-05-28 06:03:23] 
-2018-05-28 16:19:11 [INFO ] [kr.co.udf.recommend.RecommendDaoTest:40] DressProduct [dp_no=6, dc_no=6, dp_name=null, dp_price=5000, dp_style=머메이드, dp_image=dress image-6, regdate=2018-05-28 06:03:23, updatedate=2018-05-28 06:03:23] 
-2018-05-28 16:19:11 [INFO ] [kr.co.udf.recommend.RecommendDaoTest:40] DressProduct [dp_no=7, dc_no=7, dp_name=null, dp_price=5000, dp_style=머메이드, dp_image=dress image-7, regdate=2018-05-28 06:03:23, updatedate=2018-05-28 06:03:23] 
-2018-05-28 16:19:11 [INFO ] [kr.co.udf.recommend.RecommendDaoTest:40] DressProduct [dp_no=8, dc_no=8, dp_name=null, dp_price=5000, dp_style=머메이드, dp_image=dress image-8, regdate=2018-05-28 06:03:23, updatedate=2018-05-28 06:03:23] 
-2018-05-28 16:19:11 [INFO ] [kr.co.udf.recommend.RecommendDaoTest:40] DressProduct [dp_no=9, dc_no=9, dp_name=null, dp_price=5000, dp_style=머메이드, dp_image=dress image-9, regdate=2018-05-28 06:03:24, updatedate=2018-05-28 06:03:24] 
-2018-05-28 16:19:11 [INFO ] [kr.co.udf.recommend.RecommendDaoTest:40] DressProduct [dp_no=10, dc_no=10, dp_name=null, dp_price=5000, dp_style=머메이드, dp_image=dress image-10, regdate=2018-05-28 06:03:24, updatedate=2018-05-28 06:03:24] 
-2018-05-28 16:19:28 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: SELECT * FROM makeup_product  
-2018-05-28 16:19:28 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters:  
-2018-05-28 16:19:28 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 10 
-2018-05-28 16:19:28 [INFO ] [kr.co.udf.recommend.RecommendDaoTest:48] MakeupProduct [mp_no=1, mc_no=1, mp_nm=makeup name-1, mp_price=9000, mp_acc_yn=y, mp_family_yn=y, mp_hair_yn=y, mp_image=dress image-10, regdate=2018-05-28 06:08:14, updatedate=2018-05-28 06:08:14] 
-2018-05-28 16:19:28 [INFO ] [kr.co.udf.recommend.RecommendDaoTest:48] MakeupProduct [mp_no=2, mc_no=2, mp_nm=makeup name-2, mp_price=9000, mp_acc_yn=y, mp_family_yn=y, mp_hair_yn=y, mp_image=dress image-10, regdate=2018-05-28 06:08:14, updatedate=2018-05-28 06:08:14] 
-2018-05-28 16:19:28 [INFO ] [kr.co.udf.recommend.RecommendDaoTest:48] MakeupProduct [mp_no=3, mc_no=3, mp_nm=makeup name-3, mp_price=9000, mp_acc_yn=y, mp_family_yn=y, mp_hair_yn=y, mp_image=dress image-10, regdate=2018-05-28 06:08:15, updatedate=2018-05-28 06:08:15] 
-2018-05-28 16:19:28 [INFO ] [kr.co.udf.recommend.RecommendDaoTest:48] MakeupProduct [mp_no=4, mc_no=4, mp_nm=makeup name-4, mp_price=9000, mp_acc_yn=y, mp_family_yn=y, mp_hair_yn=y, mp_image=dress image-10, regdate=2018-05-28 06:08:15, updatedate=2018-05-28 06:08:15] 
-2018-05-28 16:19:28 [INFO ] [kr.co.udf.recommend.RecommendDaoTest:48] MakeupProduct [mp_no=5, mc_no=5, mp_nm=makeup name-5, mp_price=9000, mp_acc_yn=y, mp_family_yn=y, mp_hair_yn=y, mp_image=dress image-10, regdate=2018-05-28 06:08:16, updatedate=2018-05-28 06:08:16] 
-2018-05-28 16:19:28 [INFO ] [kr.co.udf.recommend.RecommendDaoTest:48] MakeupProduct [mp_no=6, mc_no=6, mp_nm=makeup name-6, mp_price=9000, mp_acc_yn=y, mp_family_yn=y, mp_hair_yn=y, mp_image=dress image-10, regdate=2018-05-28 06:08:16, updatedate=2018-05-28 06:08:16] 
-2018-05-28 16:19:28 [INFO ] [kr.co.udf.recommend.RecommendDaoTest:48] MakeupProduct [mp_no=7, mc_no=7, mp_nm=makeup name-7, mp_price=9000, mp_acc_yn=y, mp_family_yn=y, mp_hair_yn=y, mp_image=dress image-10, regdate=2018-05-28 06:08:16, updatedate=2018-05-28 06:08:16] 
-2018-05-28 16:19:28 [INFO ] [kr.co.udf.recommend.RecommendDaoTest:48] MakeupProduct [mp_no=8, mc_no=8, mp_nm=makeup name-8, mp_price=9000, mp_acc_yn=y, mp_family_yn=y, mp_hair_yn=y, mp_image=dress image-10, regdate=2018-05-28 06:08:17, updatedate=2018-05-28 06:08:17] 
-2018-05-28 16:19:28 [INFO ] [kr.co.udf.recommend.RecommendDaoTest:48] MakeupProduct [mp_no=9, mc_no=9, mp_nm=makeup name-9, mp_price=9000, mp_acc_yn=y, mp_family_yn=y, mp_hair_yn=y, mp_image=dress image-10, regdate=2018-05-28 06:08:17, updatedate=2018-05-28 06:08:17] 
-2018-05-28 16:19:28 [INFO ] [kr.co.udf.recommend.RecommendDaoTest:48] MakeupProduct [mp_no=10, mc_no=10, mp_nm=makeup name-10, mp_price=9000, mp_acc_yn=y, mp_family_yn=y, mp_hair_yn=y, mp_image=dress image-10, regdate=2018-05-28 06:08:17, updatedate=2018-05-28 06:08:17] 
+2018-05-28 16:15:23 [ERROR] [org.springframework.test.context.TestContextManager:215] Caught exception while allowing TestExecutionListener [org.springframework.test.context.support.DependencyInjectionTestExecutionListener@31aa3ca5] to prepare test instance [kr.co.udf.recommend.RecommendDaoTest@45905bff] 
+=======
+	... 40 more
+2018-05-30 15:03:06 [ERROR] [org.springframework.test.context.TestContextManager:215] Caught exception while allowing TestExecutionListener [org.springframework.test.context.support.DependencyInjectionTestExecutionListener@74287ea3] to prepare test instance [kr.co.udf.company.DressTest@7d7758be] 
+>>>>>>> soojin
+java.lang.IllegalStateException: Failed to load ApplicationContext
+	at org.springframework.test.context.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:94)
+	at org.springframework.test.context.DefaultTestContext.getApplicationContext(DefaultTestContext.java:72)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:117)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:83)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:212)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:200)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:259)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:261)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:219)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:83)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:68)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:163)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:538)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:760)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:460)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:206)
+<<<<<<< HEAD
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'auctionController': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private kr.co.udf.auction.service.AuctionApplyService kr.co.udf.auction.controller.AuctionController.service; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'auctionApplyServiceImpl': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private kr.co.udf.auction.dao.AuctionApplyDao kr.co.udf.auction.service.AuctionApplyServiceImpl.dao; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'myBatisAuctionApplyDao': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private org.apache.ibatis.session.SqlSession kr.co.udf.auction.dao.MyBatisAuctionApplyDao.session; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSession' defined in file [C:\Users\spani\eclipse-workspace-web\Undefined\src\main\webapp\WEB-INF\spring\root-context.xml]: Cannot resolve reference to bean 'sqlSessionFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in file [C:\Users\spani\eclipse-workspace-web\Undefined\src\main\webapp\WEB-INF\spring\root-context.xml]: Invocation of init method failed; nested exception is java.lang.NoClassDefFoundError: kr/co/udf/auction/dao/MyBatisAuctionDao (wrong name: kr/co/udf/auction/dao/MybatisAuctionDao)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:334)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1210)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
+=======
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in file [C:\KOSTA178\workspace_web\Undefined\src\main\webapp\WEB-INF\spring\root-context.xml]: Invocation of init method failed; nested exception is java.lang.NoClassDefFoundError: kr/co/udf/auction/dao/MyBatisAuctionDao (wrong name: kr/co/udf/auction/dao/MybatisAuctionDao)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1574)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:539)
+>>>>>>> soojin
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+<<<<<<< HEAD
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:755)
+=======
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:736)
+>>>>>>> soojin
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+	at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:125)
+	at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:60)
+	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.delegateLoading(AbstractDelegatingSmartContextLoader.java:109)
+	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.loadContext(AbstractDelegatingSmartContextLoader.java:261)
+	at org.springframework.test.context.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:68)
+	at org.springframework.test.context.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:86)
+	... 25 more
+<<<<<<< HEAD
+Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire field: private kr.co.udf.auction.service.AuctionApplyService kr.co.udf.auction.controller.AuctionController.service; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'auctionApplyServiceImpl': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private kr.co.udf.auction.dao.AuctionApplyDao kr.co.udf.auction.service.AuctionApplyServiceImpl.dao; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'myBatisAuctionApplyDao': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private org.apache.ibatis.session.SqlSession kr.co.udf.auction.dao.MyBatisAuctionApplyDao.session; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSession' defined in file [C:\Users\spani\eclipse-workspace-web\Undefined\src\main\webapp\WEB-INF\spring\root-context.xml]: Cannot resolve reference to bean 'sqlSessionFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in file [C:\Users\spani\eclipse-workspace-web\Undefined\src\main\webapp\WEB-INF\spring\root-context.xml]: Invocation of init method failed; nested exception is java.lang.NoClassDefFoundError: kr/co/udf/auction/dao/MyBatisAuctionDao (wrong name: kr/co/udf/auction/dao/MybatisAuctionDao)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:561)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:331)
+	... 41 more
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'auctionApplyServiceImpl': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private kr.co.udf.auction.dao.AuctionApplyDao kr.co.udf.auction.service.AuctionApplyServiceImpl.dao; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'myBatisAuctionApplyDao': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private org.apache.ibatis.session.SqlSession kr.co.udf.auction.dao.MyBatisAuctionApplyDao.session; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSession' defined in file [C:\Users\spani\eclipse-workspace-web\Undefined\src\main\webapp\WEB-INF\spring\root-context.xml]: Cannot resolve reference to bean 'sqlSessionFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in file [C:\Users\spani\eclipse-workspace-web\Undefined\src\main\webapp\WEB-INF\spring\root-context.xml]: Invocation of init method failed; nested exception is java.lang.NoClassDefFoundError: kr/co/udf/auction/dao/MyBatisAuctionDao (wrong name: kr/co/udf/auction/dao/MybatisAuctionDao)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:334)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1210)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
+=======
+Caused by: java.lang.NoClassDefFoundError: kr/co/udf/auction/dao/MyBatisAuctionDao (wrong name: kr/co/udf/auction/dao/MybatisAuctionDao)
+	at java.lang.ClassLoader.defineClass1(Native Method)
+	at java.lang.ClassLoader.defineClass(Unknown Source)
+	at java.security.SecureClassLoader.defineClass(Unknown Source)
+	at java.net.URLClassLoader.defineClass(Unknown Source)
+	at java.net.URLClassLoader.access$100(Unknown Source)
+	at java.net.URLClassLoader$1.run(Unknown Source)
+	at java.net.URLClassLoader$1.run(Unknown Source)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.net.URLClassLoader.findClass(Unknown Source)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	at sun.misc.Launcher$AppClassLoader.loadClass(Unknown Source)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	at java.lang.Class.forName0(Native Method)
+	at java.lang.Class.forName(Unknown Source)
+	at org.apache.ibatis.io.ClassLoaderWrapper.classForName(ClassLoaderWrapper.java:186)
+	at org.apache.ibatis.io.ClassLoaderWrapper.classForName(ClassLoaderWrapper.java:89)
+	at org.apache.ibatis.io.Resources.classForName(Resources.java:261)
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.bindMapperForNamespace(XMLMapperBuilder.java:403)
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.parse(XMLMapperBuilder.java:94)
+	at org.mybatis.spring.SqlSessionFactoryBean.buildSqlSessionFactory(SqlSessionFactoryBean.java:520)
+	at org.mybatis.spring.SqlSessionFactoryBean.afterPropertiesSet(SqlSessionFactoryBean.java:381)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1633)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1570)
+	... 40 more
+2018-05-30 15:07:19 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: SELECT dc_no companyNo, dc_nm nm, dc_company_no regNo, dc_main_nm headName, dc_addr addr, dc_main_image mainImage, dc_email email, dc_pw pw, dc_tel tel, dc_introduce introduce, sessionkey, regdate, updatedate FROM dress_company  
+2018-05-30 15:07:19 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters:  
+2018-05-30 15:07:19 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 5 
+2018-05-30 15:07:19 [INFO ] [kr.co.udf.company.DressTest:30] [StudioCompany [companyNo=1, nm=강남드레스, regNo=1, headName=김드레, addr=서울특별시 서초구 강남대로 375 서초현대타워빌딩, mainImage=메인사진, email=gangnamhill@naver.com, pw=1234, tel=1012345678, introduce=우리 강남힐스튜디오는 33년의 깊은 전통을 가지고 있습니다., regdate=2018-05-28 14:31:03, updatedate=2018-05-28 14:31:03], StudioCompany [companyNo=2, nm=벨에포크웨딩드레스, regNo=2, headName=김드레, addr=서울특별시 강남구 청담동 7-17, mainImage=메인사진, email=gangnamhill@naver.com, pw=1234, tel=1012345678, introduce=우리 강남힐스튜디오는 33년의 깊은 전통을 가지고 있습니다., regdate=2018-05-28 14:31:51, updatedate=2018-05-28 14:31:51], StudioCompany [companyNo=3, nm=아르하쿠튀르, regNo=3, headName=김드레, addr=서울특별시 용산구 소월로 38길 24 2층, mainImage=메인사진, email=gangnamhill@naver.com, pw=1234, tel=1012345678, introduce=우리 강남힐스튜디오는 33년의 깊은 전통을 가지고 있습니다., regdate=2018-05-28 14:33:04, updatedate=2018-05-28 14:33:04], StudioCompany [companyNo=4, nm=명동라루체 웨딩홀, regNo=4, headName=김드레, addr=서울특별시 중구 남산동1가 13-6, mainImage=http://doggebibride.com/web/product/big/201711/410_shop1_166365.jpg, email=gangnamhill@naver.com, pw=1234, tel=1012345678, introduce=우리 강남힐스튜디오는 33년의 깊은 전통을 가지고 있습니다., regdate=2018-05-28 14:34:24, updatedate=2018-05-28 14:34:24], StudioCompany [companyNo=5, nm=프리미엄 드레스, regNo=5, headName=김드레, addr=경기도 안산시 단원구 초지1로 78, mainImage=http://happypartyco.kr/web/product/big/201601/231_shop1_245001.jpg, email=gangnamhill@naver.com, pw=1234, tel=1012345678, introduce=우리 강남힐스튜디오는 33년의 깊은 전통을 가지고 있습니다., regdate=2018-05-28 14:34:59, updatedate=2018-05-28 14:34:59]] 
+2018-05-30 15:08:48 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: SELECT count(dc_no) FROM dress_company WHERE dc_no > 0  
+2018-05-30 15:08:48 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters:  
+2018-05-30 15:08:48 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 1 
+2018-05-30 15:08:48 [INFO ] [kr.co.udf.company.DressTest:55] 5 
+2018-05-30 15:08:48 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: SELECT * FROM ( SELECT rownum rn, dc_no companyNo, dc_nm nm, dc_company_no regNo, dc_main_nm headName, dc_addr addr, dc_main_image mainImage, dc_email email, dc_pw pw, dc_tel tel, dc_introduce introduce, sessionkey, regdate, updatedate FROM dress_company WHERE rownum <= ? * ? and dc_no > 0 order by dc_no desc ) where rn > (? -1) * ?  
+2018-05-30 15:08:48 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters: 1(Integer), 10(Integer), 1(Integer), 10(Integer) 
+2018-05-30 15:08:48 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 5 
+2018-05-30 15:08:48 [INFO ] [kr.co.udf.company.DressTest:48] 5:김드레 
+2018-05-30 15:08:48 [INFO ] [kr.co.udf.company.DressTest:48] 4:김드레 
+2018-05-30 15:08:48 [INFO ] [kr.co.udf.company.DressTest:48] 3:김드레 
+2018-05-30 15:08:48 [INFO ] [kr.co.udf.company.DressTest:48] 2:김드레 
+2018-05-30 15:08:48 [INFO ] [kr.co.udf.company.DressTest:48] 1:김드레 
+2018-05-30 15:09:12 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: SELECT count(dc_no) FROM dress_company WHERE dc_no > 0  
+2018-05-30 15:09:12 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters:  
+2018-05-30 15:09:12 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 1 
+2018-05-30 15:09:12 [INFO ] [kr.co.udf.company.DressTest:55] 5 
+2018-05-30 15:09:32 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: SELECT count(dc_no) FROM dress_company WHERE dc_no > 0  
+2018-05-30 15:09:32 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters:  
+2018-05-30 15:09:32 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 1 
+2018-05-30 15:09:32 [INFO ] [kr.co.udf.company.DressTest:55] 5 
+2018-05-30 15:09:32 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: SELECT * FROM ( SELECT rownum rn, dc_no companyNo, dc_nm nm, dc_company_no regNo, dc_main_nm headName, dc_addr addr, dc_main_image mainImage, dc_email email, dc_pw pw, dc_tel tel, dc_introduce introduce, sessionkey, regdate, updatedate FROM dress_company WHERE rownum <= ? * ? and dc_no > 0 order by dc_no desc ) where rn > (? -1) * ?  
+2018-05-30 15:09:32 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters: 1(Integer), 10(Integer), 1(Integer), 10(Integer) 
+2018-05-30 15:09:32 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 5 
+2018-05-30 15:09:32 [INFO ] [kr.co.udf.company.DressTest:48] 5:김드레 
+2018-05-30 15:09:32 [INFO ] [kr.co.udf.company.DressTest:48] 4:김드레 
+2018-05-30 15:09:32 [INFO ] [kr.co.udf.company.DressTest:48] 3:김드레 
+2018-05-30 15:09:32 [INFO ] [kr.co.udf.company.DressTest:48] 2:김드레 
+2018-05-30 15:09:32 [INFO ] [kr.co.udf.company.DressTest:48] 1:김드레 
+2018-05-30 17:53:11 [WARN ] [org.springframework.context.support.AbstractApplicationContext:487] Exception encountered during context initialization - cancelling refresh attempt 
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in file [C:\KOSTA178\workspace_web\Undefined\src\main\webapp\WEB-INF\spring\root-context.xml]: Invocation of init method failed; nested exception is org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [C:\KOSTA178\workspace_web\Undefined\target\classes\mappers\StudioCompanyMapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: org.apache.ibatis.builder.BuilderException: Error resolving class. Cause: org.apache.ibatis.type.TypeException: Could not resolve type alias 'kr.or.kosta.springmvc.board.domain.Board'.  Cause: java.lang.ClassNotFoundException: Cannot find class: kr.or.kosta.springmvc.board.domain.Board
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1574)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:539)
+>>>>>>> soojin
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:736)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+	at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:125)
+	at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:60)
+	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.delegateLoading(AbstractDelegatingSmartContextLoader.java:109)
+	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.loadContext(AbstractDelegatingSmartContextLoader.java:261)
+	at org.springframework.test.context.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:68)
+	at org.springframework.test.context.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:86)
+	at org.springframework.test.context.DefaultTestContext.getApplicationContext(DefaultTestContext.java:72)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:117)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:83)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:212)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:200)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:259)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:261)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:219)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:83)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:68)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:163)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:538)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:760)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:460)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:206)
+Caused by: org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [C:\KOSTA178\workspace_web\Undefined\target\classes\mappers\StudioCompanyMapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: org.apache.ibatis.builder.BuilderException: Error resolving class. Cause: org.apache.ibatis.type.TypeException: Could not resolve type alias 'kr.or.kosta.springmvc.board.domain.Board'.  Cause: java.lang.ClassNotFoundException: Cannot find class: kr.or.kosta.springmvc.board.domain.Board
+	at org.mybatis.spring.SqlSessionFactoryBean.buildSqlSessionFactory(SqlSessionFactoryBean.java:522)
+	at org.mybatis.spring.SqlSessionFactoryBean.afterPropertiesSet(SqlSessionFactoryBean.java:381)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1633)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1570)
+	... 40 more
+Caused by: org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: org.apache.ibatis.builder.BuilderException: Error resolving class. Cause: org.apache.ibatis.type.TypeException: Could not resolve type alias 'kr.or.kosta.springmvc.board.domain.Board'.  Cause: java.lang.ClassNotFoundException: Cannot find class: kr.or.kosta.springmvc.board.domain.Board
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.configurationElement(XMLMapperBuilder.java:120)
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.parse(XMLMapperBuilder.java:92)
+	at org.mybatis.spring.SqlSessionFactoryBean.buildSqlSessionFactory(SqlSessionFactoryBean.java:520)
+	... 43 more
+Caused by: org.apache.ibatis.builder.BuilderException: Error resolving class. Cause: org.apache.ibatis.type.TypeException: Could not resolve type alias 'kr.or.kosta.springmvc.board.domain.Board'.  Cause: java.lang.ClassNotFoundException: Cannot find class: kr.or.kosta.springmvc.board.domain.Board
+	at org.apache.ibatis.builder.BaseBuilder.resolveClass(BaseBuilder.java:118)
+	at org.apache.ibatis.builder.xml.XMLStatementBuilder.parseStatementNode(XMLStatementBuilder.java:74)
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.buildStatementFromContext(XMLMapperBuilder.java:135)
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.buildStatementFromContext(XMLMapperBuilder.java:128)
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.configurationElement(XMLMapperBuilder.java:118)
+	... 45 more
+Caused by: org.apache.ibatis.type.TypeException: Could not resolve type alias 'kr.or.kosta.springmvc.board.domain.Board'.  Cause: java.lang.ClassNotFoundException: Cannot find class: kr.or.kosta.springmvc.board.domain.Board
+	at org.apache.ibatis.type.TypeAliasRegistry.resolveAlias(TypeAliasRegistry.java:120)
+	at org.apache.ibatis.builder.BaseBuilder.resolveAlias(BaseBuilder.java:149)
+	at org.apache.ibatis.builder.BaseBuilder.resolveClass(BaseBuilder.java:116)
+	... 49 more
+Caused by: java.lang.ClassNotFoundException: Cannot find class: kr.or.kosta.springmvc.board.domain.Board
+	at org.apache.ibatis.io.ClassLoaderWrapper.classForName(ClassLoaderWrapper.java:200)
+	at org.apache.ibatis.io.ClassLoaderWrapper.classForName(ClassLoaderWrapper.java:89)
+	at org.apache.ibatis.io.Resources.classForName(Resources.java:261)
+	at org.apache.ibatis.type.TypeAliasRegistry.resolveAlias(TypeAliasRegistry.java:116)
+	... 51 more
+2018-05-30 17:53:11 [ERROR] [org.springframework.test.context.TestContextManager:215] Caught exception while allowing TestExecutionListener [org.springframework.test.context.support.DependencyInjectionTestExecutionListener@7ac296f6] to prepare test instance [kr.co.udf.company.StudioTest@7fd7a283] 
+java.lang.IllegalStateException: Failed to load ApplicationContext
+	at org.springframework.test.context.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:94)
+	at org.springframework.test.context.DefaultTestContext.getApplicationContext(DefaultTestContext.java:72)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:117)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:83)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:212)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:200)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:259)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:261)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:219)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:83)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:68)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:163)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:538)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:760)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:460)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:206)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in file [C:\KOSTA178\workspace_web\Undefined\src\main\webapp\WEB-INF\spring\root-context.xml]: Invocation of init method failed; nested exception is org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [C:\KOSTA178\workspace_web\Undefined\target\classes\mappers\StudioCompanyMapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: org.apache.ibatis.builder.BuilderException: Error resolving class. Cause: org.apache.ibatis.type.TypeException: Could not resolve type alias 'kr.or.kosta.springmvc.board.domain.Board'.  Cause: java.lang.ClassNotFoundException: Cannot find class: kr.or.kosta.springmvc.board.domain.Board
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1574)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:539)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:736)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+	at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:125)
+	at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:60)
+	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.delegateLoading(AbstractDelegatingSmartContextLoader.java:109)
+	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.loadContext(AbstractDelegatingSmartContextLoader.java:261)
+	at org.springframework.test.context.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:68)
+	at org.springframework.test.context.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:86)
+	... 25 more
+Caused by: org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [C:\KOSTA178\workspace_web\Undefined\target\classes\mappers\StudioCompanyMapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: org.apache.ibatis.builder.BuilderException: Error resolving class. Cause: org.apache.ibatis.type.TypeException: Could not resolve type alias 'kr.or.kosta.springmvc.board.domain.Board'.  Cause: java.lang.ClassNotFoundException: Cannot find class: kr.or.kosta.springmvc.board.domain.Board
+	at org.mybatis.spring.SqlSessionFactoryBean.buildSqlSessionFactory(SqlSessionFactoryBean.java:522)
+	at org.mybatis.spring.SqlSessionFactoryBean.afterPropertiesSet(SqlSessionFactoryBean.java:381)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1633)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1570)
+	... 40 more
+Caused by: org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: org.apache.ibatis.builder.BuilderException: Error resolving class. Cause: org.apache.ibatis.type.TypeException: Could not resolve type alias 'kr.or.kosta.springmvc.board.domain.Board'.  Cause: java.lang.ClassNotFoundException: Cannot find class: kr.or.kosta.springmvc.board.domain.Board
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.configurationElement(XMLMapperBuilder.java:120)
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.parse(XMLMapperBuilder.java:92)
+	at org.mybatis.spring.SqlSessionFactoryBean.buildSqlSessionFactory(SqlSessionFactoryBean.java:520)
+	... 43 more
+Caused by: org.apache.ibatis.builder.BuilderException: Error resolving class. Cause: org.apache.ibatis.type.TypeException: Could not resolve type alias 'kr.or.kosta.springmvc.board.domain.Board'.  Cause: java.lang.ClassNotFoundException: Cannot find class: kr.or.kosta.springmvc.board.domain.Board
+	at org.apache.ibatis.builder.BaseBuilder.resolveClass(BaseBuilder.java:118)
+	at org.apache.ibatis.builder.xml.XMLStatementBuilder.parseStatementNode(XMLStatementBuilder.java:74)
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.buildStatementFromContext(XMLMapperBuilder.java:135)
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.buildStatementFromContext(XMLMapperBuilder.java:128)
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.configurationElement(XMLMapperBuilder.java:118)
+	... 45 more
+Caused by: org.apache.ibatis.type.TypeException: Could not resolve type alias 'kr.or.kosta.springmvc.board.domain.Board'.  Cause: java.lang.ClassNotFoundException: Cannot find class: kr.or.kosta.springmvc.board.domain.Board
+	at org.apache.ibatis.type.TypeAliasRegistry.resolveAlias(TypeAliasRegistry.java:120)
+	at org.apache.ibatis.builder.BaseBuilder.resolveAlias(BaseBuilder.java:149)
+	at org.apache.ibatis.builder.BaseBuilder.resolveClass(BaseBuilder.java:116)
+	... 49 more
+Caused by: java.lang.ClassNotFoundException: Cannot find class: kr.or.kosta.springmvc.board.domain.Board
+	at org.apache.ibatis.io.ClassLoaderWrapper.classForName(ClassLoaderWrapper.java:200)
+	at org.apache.ibatis.io.ClassLoaderWrapper.classForName(ClassLoaderWrapper.java:89)
+	at org.apache.ibatis.io.Resources.classForName(Resources.java:261)
+	at org.apache.ibatis.type.TypeAliasRegistry.resolveAlias(TypeAliasRegistry.java:116)
+	... 51 more
+2018-05-30 17:53:11 [WARN ] [org.springframework.context.support.AbstractApplicationContext:487] Exception encountered during context initialization - cancelling refresh attempt 
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in file [C:\KOSTA178\workspace_web\Undefined\src\main\webapp\WEB-INF\spring\root-context.xml]: Invocation of init method failed; nested exception is org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [C:\KOSTA178\workspace_web\Undefined\target\classes\mappers\StudioCompanyMapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: org.apache.ibatis.builder.BuilderException: Error resolving class. Cause: org.apache.ibatis.type.TypeException: Could not resolve type alias 'kr.or.kosta.springmvc.board.domain.Board'.  Cause: java.lang.ClassNotFoundException: Cannot find class: kr.or.kosta.springmvc.board.domain.Board
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1574)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:539)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:736)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+	at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:125)
+	at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:60)
+	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.delegateLoading(AbstractDelegatingSmartContextLoader.java:109)
+	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.loadContext(AbstractDelegatingSmartContextLoader.java:261)
+	at org.springframework.test.context.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:68)
+	at org.springframework.test.context.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:86)
+	at org.springframework.test.context.DefaultTestContext.getApplicationContext(DefaultTestContext.java:72)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:117)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:83)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:212)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:200)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:259)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:261)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:219)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:83)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:68)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:163)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:538)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:760)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:460)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:206)
+Caused by: org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [C:\KOSTA178\workspace_web\Undefined\target\classes\mappers\StudioCompanyMapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: org.apache.ibatis.builder.BuilderException: Error resolving class. Cause: org.apache.ibatis.type.TypeException: Could not resolve type alias 'kr.or.kosta.springmvc.board.domain.Board'.  Cause: java.lang.ClassNotFoundException: Cannot find class: kr.or.kosta.springmvc.board.domain.Board
+	at org.mybatis.spring.SqlSessionFactoryBean.buildSqlSessionFactory(SqlSessionFactoryBean.java:522)
+	at org.mybatis.spring.SqlSessionFactoryBean.afterPropertiesSet(SqlSessionFactoryBean.java:381)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1633)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1570)
+	... 40 more
+Caused by: org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: org.apache.ibatis.builder.BuilderException: Error resolving class. Cause: org.apache.ibatis.type.TypeException: Could not resolve type alias 'kr.or.kosta.springmvc.board.domain.Board'.  Cause: java.lang.ClassNotFoundException: Cannot find class: kr.or.kosta.springmvc.board.domain.Board
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.configurationElement(XMLMapperBuilder.java:120)
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.parse(XMLMapperBuilder.java:92)
+	at org.mybatis.spring.SqlSessionFactoryBean.buildSqlSessionFactory(SqlSessionFactoryBean.java:520)
+	... 43 more
+Caused by: org.apache.ibatis.builder.BuilderException: Error resolving class. Cause: org.apache.ibatis.type.TypeException: Could not resolve type alias 'kr.or.kosta.springmvc.board.domain.Board'.  Cause: java.lang.ClassNotFoundException: Cannot find class: kr.or.kosta.springmvc.board.domain.Board
+	at org.apache.ibatis.builder.BaseBuilder.resolveClass(BaseBuilder.java:118)
+	at org.apache.ibatis.builder.xml.XMLStatementBuilder.parseStatementNode(XMLStatementBuilder.java:74)
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.buildStatementFromContext(XMLMapperBuilder.java:135)
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.buildStatementFromContext(XMLMapperBuilder.java:128)
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.configurationElement(XMLMapperBuilder.java:118)
+	... 45 more
+Caused by: org.apache.ibatis.type.TypeException: Could not resolve type alias 'kr.or.kosta.springmvc.board.domain.Board'.  Cause: java.lang.ClassNotFoundException: Cannot find class: kr.or.kosta.springmvc.board.domain.Board
+	at org.apache.ibatis.type.TypeAliasRegistry.resolveAlias(TypeAliasRegistry.java:120)
+	at org.apache.ibatis.builder.BaseBuilder.resolveAlias(BaseBuilder.java:149)
+	at org.apache.ibatis.builder.BaseBuilder.resolveClass(BaseBuilder.java:116)
+	... 49 more
+Caused by: java.lang.ClassNotFoundException: Cannot find class: kr.or.kosta.springmvc.board.domain.Board
+	at org.apache.ibatis.io.ClassLoaderWrapper.classForName(ClassLoaderWrapper.java:200)
+	at org.apache.ibatis.io.ClassLoaderWrapper.classForName(ClassLoaderWrapper.java:89)
+	at org.apache.ibatis.io.Resources.classForName(Resources.java:261)
+	at org.apache.ibatis.type.TypeAliasRegistry.resolveAlias(TypeAliasRegistry.java:116)
+	... 51 more
+2018-05-30 17:53:11 [ERROR] [org.springframework.test.context.TestContextManager:215] Caught exception while allowing TestExecutionListener [org.springframework.test.context.support.DependencyInjectionTestExecutionListener@7ac296f6] to prepare test instance [kr.co.udf.company.StudioTest@1e81f160] 
+java.lang.IllegalStateException: Failed to load ApplicationContext
+	at org.springframework.test.context.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:94)
+	at org.springframework.test.context.DefaultTestContext.getApplicationContext(DefaultTestContext.java:72)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:117)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:83)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:212)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:200)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:259)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:261)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:219)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:83)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:68)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:163)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:538)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:760)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:460)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:206)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in file [C:\KOSTA178\workspace_web\Undefined\src\main\webapp\WEB-INF\spring\root-context.xml]: Invocation of init method failed; nested exception is org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [C:\KOSTA178\workspace_web\Undefined\target\classes\mappers\StudioCompanyMapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: org.apache.ibatis.builder.BuilderException: Error resolving class. Cause: org.apache.ibatis.type.TypeException: Could not resolve type alias 'kr.or.kosta.springmvc.board.domain.Board'.  Cause: java.lang.ClassNotFoundException: Cannot find class: kr.or.kosta.springmvc.board.domain.Board
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1574)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:539)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:736)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+	at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:125)
+	at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:60)
+	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.delegateLoading(AbstractDelegatingSmartContextLoader.java:109)
+	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.loadContext(AbstractDelegatingSmartContextLoader.java:261)
+	at org.springframework.test.context.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:68)
+	at org.springframework.test.context.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:86)
+	... 25 more
+Caused by: org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [C:\KOSTA178\workspace_web\Undefined\target\classes\mappers\StudioCompanyMapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: org.apache.ibatis.builder.BuilderException: Error resolving class. Cause: org.apache.ibatis.type.TypeException: Could not resolve type alias 'kr.or.kosta.springmvc.board.domain.Board'.  Cause: java.lang.ClassNotFoundException: Cannot find class: kr.or.kosta.springmvc.board.domain.Board
+	at org.mybatis.spring.SqlSessionFactoryBean.buildSqlSessionFactory(SqlSessionFactoryBean.java:522)
+	at org.mybatis.spring.SqlSessionFactoryBean.afterPropertiesSet(SqlSessionFactoryBean.java:381)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1633)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1570)
+	... 40 more
+Caused by: org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: org.apache.ibatis.builder.BuilderException: Error resolving class. Cause: org.apache.ibatis.type.TypeException: Could not resolve type alias 'kr.or.kosta.springmvc.board.domain.Board'.  Cause: java.lang.ClassNotFoundException: Cannot find class: kr.or.kosta.springmvc.board.domain.Board
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.configurationElement(XMLMapperBuilder.java:120)
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.parse(XMLMapperBuilder.java:92)
+	at org.mybatis.spring.SqlSessionFactoryBean.buildSqlSessionFactory(SqlSessionFactoryBean.java:520)
+	... 43 more
+Caused by: org.apache.ibatis.builder.BuilderException: Error resolving class. Cause: org.apache.ibatis.type.TypeException: Could not resolve type alias 'kr.or.kosta.springmvc.board.domain.Board'.  Cause: java.lang.ClassNotFoundException: Cannot find class: kr.or.kosta.springmvc.board.domain.Board
+	at org.apache.ibatis.builder.BaseBuilder.resolveClass(BaseBuilder.java:118)
+	at org.apache.ibatis.builder.xml.XMLStatementBuilder.parseStatementNode(XMLStatementBuilder.java:74)
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.buildStatementFromContext(XMLMapperBuilder.java:135)
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.buildStatementFromContext(XMLMapperBuilder.java:128)
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.configurationElement(XMLMapperBuilder.java:118)
+	... 45 more
+Caused by: org.apache.ibatis.type.TypeException: Could not resolve type alias 'kr.or.kosta.springmvc.board.domain.Board'.  Cause: java.lang.ClassNotFoundException: Cannot find class: kr.or.kosta.springmvc.board.domain.Board
+	at org.apache.ibatis.type.TypeAliasRegistry.resolveAlias(TypeAliasRegistry.java:120)
+	at org.apache.ibatis.builder.BaseBuilder.resolveAlias(BaseBuilder.java:149)
+	at org.apache.ibatis.builder.BaseBuilder.resolveClass(BaseBuilder.java:116)
+	... 49 more
+Caused by: java.lang.ClassNotFoundException: Cannot find class: kr.or.kosta.springmvc.board.domain.Board
+	at org.apache.ibatis.io.ClassLoaderWrapper.classForName(ClassLoaderWrapper.java:200)
+	at org.apache.ibatis.io.ClassLoaderWrapper.classForName(ClassLoaderWrapper.java:89)
+	at org.apache.ibatis.io.Resources.classForName(Resources.java:261)
+	at org.apache.ibatis.type.TypeAliasRegistry.resolveAlias(TypeAliasRegistry.java:116)
+	... 51 more
+2018-05-30 18:01:07 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: SELECT count(sc_no) FROM studio_company WHERE sc_no > 0  
+2018-05-30 18:01:07 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters:  
+2018-05-30 18:01:07 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 1 
+2018-05-30 18:01:07 [INFO ] [kr.co.udf.company.StudioTest:59] 13 
+2018-05-30 18:01:07 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: SELECT * FROM studio_company WHERE sc_nm like '%?%'  
+2018-05-30 18:04:26 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: SELECT count(sc_no) FROM studio_company WHERE sc_no > 0  
+2018-05-30 18:04:26 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters:  
+2018-05-30 18:04:26 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 1 
+2018-05-30 18:04:26 [INFO ] [kr.co.udf.company.StudioTest:59] 13 
+2018-05-30 18:04:26 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: select * from ( SELECT rownum rn, sc_no companyNo, sc_nm nm, sc_company_no regNo, sc_main_nm headName, sc_addr addr, sc_main_image mainImage, sc_email email, sc_pw pw, sc_tel tel, sc_introduce introduce, sessionkey, regdate, updatedate FROM studio_company where 1=1 and rownum <= ? * ? and sc_no > 0 order by sc_no DESC ) where rn > (? -1) * ?  
+2018-05-30 18:04:26 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters: 1(Integer), 10(Integer), 1(Integer), 10(Integer) 
+2018-05-30 18:04:26 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 10 
+2018-05-30 18:04:26 [INFO ] [kr.co.udf.company.StudioTest:71] 50:이마트스튜디오 
+2018-05-30 18:04:26 [INFO ] [kr.co.udf.company.StudioTest:71] 49:의정부스튜디오 
+2018-05-30 18:04:26 [INFO ] [kr.co.udf.company.StudioTest:71] 48:고양시스튜디오 
+2018-05-30 18:04:26 [INFO ] [kr.co.udf.company.StudioTest:71] 47:종로구스튜디오 
+2018-05-30 18:04:26 [INFO ] [kr.co.udf.company.StudioTest:71] 46:양천구스튜디오 
+2018-05-30 18:04:26 [INFO ] [kr.co.udf.company.StudioTest:71] 45:마포구스튜디오 
+2018-05-30 18:04:26 [INFO ] [kr.co.udf.company.StudioTest:71] 44:금천구스튜디오 
+2018-05-30 18:04:26 [INFO ] [kr.co.udf.company.StudioTest:71] 43:삼성동스튜디오 
+2018-05-30 18:04:26 [INFO ] [kr.co.udf.company.StudioTest:71] 42:논현2동스튜디오 
+2018-05-30 18:04:26 [INFO ] [kr.co.udf.company.StudioTest:71] 41:논현동스튜디오 
+2018-05-30 18:04:26 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: select count(sc_no) from studio_company where sc_no > 0  
+2018-05-30 18:04:26 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters:  
+2018-05-30 18:04:26 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 1 
+2018-05-30 18:04:26 [INFO ] [kr.co.udf.company.StudioTest:73] 개수 :13 
+2018-05-30 18:04:56 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: SELECT count(sc_no) FROM studio_company WHERE sc_no > 0  
+2018-05-30 18:04:56 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters:  
+2018-05-30 18:04:56 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 1 
+2018-05-30 18:04:56 [INFO ] [kr.co.udf.company.StudioTest:59] 13 
+2018-05-30 18:04:56 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: select * from ( SELECT rownum rn, sc_no companyNo, sc_nm nm, sc_company_no regNo, sc_main_nm headName, sc_addr addr, sc_main_image mainImage, sc_email email, sc_pw pw, sc_tel tel, sc_introduce introduce, sessionkey, regdate, updatedate FROM studio_company where 1=1 and rownum <= ? * ? and sc_no > 0 order by sc_no DESC ) where rn > (? -1) * ?  
+2018-05-30 18:04:56 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters: 1(Integer), 10(Integer), 1(Integer), 10(Integer) 
+2018-05-30 18:04:56 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 10 
+2018-05-30 18:04:56 [INFO ] [kr.co.udf.company.StudioTest:72] 50:이마트스튜디오 
+2018-05-30 18:04:56 [INFO ] [kr.co.udf.company.StudioTest:72] 49:의정부스튜디오 
+2018-05-30 18:04:56 [INFO ] [kr.co.udf.company.StudioTest:72] 48:고양시스튜디오 
+2018-05-30 18:04:56 [INFO ] [kr.co.udf.company.StudioTest:72] 47:종로구스튜디오 
+2018-05-30 18:04:56 [INFO ] [kr.co.udf.company.StudioTest:72] 46:양천구스튜디오 
+2018-05-30 18:04:56 [INFO ] [kr.co.udf.company.StudioTest:72] 45:마포구스튜디오 
+2018-05-30 18:04:56 [INFO ] [kr.co.udf.company.StudioTest:72] 44:금천구스튜디오 
+2018-05-30 18:04:56 [INFO ] [kr.co.udf.company.StudioTest:72] 43:삼성동스튜디오 
+2018-05-30 18:04:56 [INFO ] [kr.co.udf.company.StudioTest:72] 42:논현2동스튜디오 
+2018-05-30 18:04:56 [INFO ] [kr.co.udf.company.StudioTest:72] 41:논현동스튜디오 
+2018-05-30 18:04:56 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: select count(sc_no) from studio_company where sc_no > 0  
+2018-05-30 18:04:56 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters:  
+2018-05-30 18:04:56 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 1 
+2018-05-30 18:04:56 [INFO ] [kr.co.udf.company.StudioTest:74] 개수 :13 
+2018-05-30 18:07:51 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: SELECT count(sc_no) FROM studio_company WHERE sc_no > 0  
+2018-05-30 18:07:51 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters:  
+2018-05-30 18:07:51 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 1 
+2018-05-30 18:07:51 [INFO ] [kr.co.udf.company.StudioTest:59] 13 
+2018-05-30 18:07:51 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: select * from ( SELECT rownum rn, sc_no companyNo, sc_nm nm, sc_company_no regNo, sc_main_nm headName, sc_addr addr, sc_main_image mainImage, sc_email email, sc_pw pw, sc_tel tel, sc_introduce introduce, sessionkey, regdate, updatedate FROM studio_company where 1=1 and sc_addr like '%'|| ?||'%' and rownum <= ? * ? and sc_no > 0 order by sc_no DESC ) where rn > (? -1) * ?  
+2018-05-30 18:07:51 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters: 이마트(String), 1(Integer), 10(Integer), 1(Integer), 10(Integer) 
+2018-05-30 18:07:51 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 1 
+2018-05-30 18:07:51 [INFO ] [kr.co.udf.company.StudioTest:72] 50:이마트스튜디오 
+2018-05-30 18:07:51 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: select count(sc_no) from studio_company where sc_no > 0 and sc_addr like '%'|| ?||'%'  
+2018-05-30 18:07:51 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters: 이마트(String) 
+2018-05-30 18:07:51 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 1 
+2018-05-30 18:07:51 [INFO ] [kr.co.udf.company.StudioTest:74] 개수 :1 
+2018-05-30 18:08:15 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: SELECT count(sc_no) FROM studio_company WHERE sc_no > 0  
+2018-05-30 18:08:15 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters:  
+2018-05-30 18:08:15 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 1 
+2018-05-30 18:08:15 [INFO ] [kr.co.udf.company.StudioTest:59] 13 
+2018-05-30 18:08:15 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: select * from ( SELECT rownum rn, sc_no companyNo, sc_nm nm, sc_company_no regNo, sc_main_nm headName, sc_addr addr, sc_main_image mainImage, sc_email email, sc_pw pw, sc_tel tel, sc_introduce introduce, sessionkey, regdate, updatedate FROM studio_company where 1=1 and sc_nm like '%'|| ?||'%' and rownum <= ? * ? and sc_no > 0 order by sc_no DESC ) where rn > (? -1) * ?  
+2018-05-30 18:08:15 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters: 이마트(String), 1(Integer), 10(Integer), 1(Integer), 10(Integer) 
+2018-05-30 18:08:15 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 1 
+2018-05-30 18:08:15 [INFO ] [kr.co.udf.company.StudioTest:72] 50:이마트스튜디오 
+2018-05-30 18:08:15 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: select count(sc_no) from studio_company where sc_no > 0 and sc_nm like '%'|| ?||'%'  
+2018-05-30 18:08:15 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters: 이마트(String) 
+2018-05-30 18:08:15 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 1 
+2018-05-30 18:08:15 [INFO ] [kr.co.udf.company.StudioTest:74] 개수 :1 
