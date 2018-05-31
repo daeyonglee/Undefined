@@ -1,10 +1,10 @@
 package kr.co.udf.auction.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.swing.text.html.parser.Entity;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.aspectj.org.eclipse.jdt.internal.compiler.ast.ArrayAllocationExpression;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.databind.util.JSONPObject;
@@ -30,6 +30,8 @@ import kr.co.udf.auction.service.AuctionApplyService;
 import kr.co.udf.auction.service.AuctionCountService;
 import kr.co.udf.common.web.PageMaker;
 import kr.co.udf.common.web.SearchParams;
+import kr.co.udf.user.domain.Login;
+import kr.co.udf.user.domain.User;
 
 @Controller
 @RequestMapping("/auction/*")
@@ -53,10 +55,38 @@ public class AuctionController {
 		logger.info("apply form.....");
 	}
 	
+	// 상세보기	
+	@RequestMapping(value = "/read", method = RequestMethod.GET)
+	public void read(@RequestParam("no") int no, @RequestParam("type")String type, Model model) throws Exception {
+				
+		model.addAttribute("Auction",service.read(no,type));				
+		
+	}
+	
+	// 삭제
+	@RequestMapping(value = "/remove", method = RequestMethod.POST)
+	public String delete(@RequestParam("no") int no, @RequestParam("type") String type, RedirectAttributes rttr) throws Exception {
+				
+		service.delete(no, type);
+		
+		rttr.addFlashAttribute("");
+		
+		return "redirect:/auction/bid";
+		
+	}
+	
 	/** 스드메 카테고리 별로 신청서 등록하기*/
 
 	@RequestMapping(value = "/apply", method = RequestMethod.POST)
-	public String apply(String type, Auction auction, RedirectAttributes rttr) throws Exception {
+	public String apply(@RequestParam("type") String type, Auction auction, HttpSession session, RedirectAttributes rttr) throws Exception {
+		
+		logger.info("apply post 진입");
+		User user = (User)session.getAttribute("login");
+		logger.info(user);
+		
+		auction.setUserNo(user.getNo());
+		auction.setDate(auction.getDay() + " " + auction.getTime());
+		auction.setLoc(auction.getLocFirst() + "||" + auction.getLocSecond() + "||" +  auction.getLocThird());
 
 		if (type.equals("dress")) {
 
@@ -76,8 +106,6 @@ public class AuctionController {
 
 		rttr.addFlashAttribute("msg", "SUCCESS");
 		return "redirect:/auction/bid";
-
-
 	} 
 	/*
 	 * @RequestMapping(value="/bid",method=RequestMethod.GET) public void
@@ -95,6 +123,7 @@ public class AuctionController {
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setParams(params);
 		pageMaker.setTotalCount(service.listByTypeCount());
+		logger.info(pageMaker.toString());
 
 		model.addAttribute("pageMaker", pageMaker);
 	}
@@ -191,5 +220,95 @@ public class AuctionController {
 			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		return entity;
+	}
+	
+	@RequestMapping(value = "realtimelist", method = RequestMethod.GET)
+	public ResponseEntity<List<Auction>> realtimelist() {
+
+		ResponseEntity<List<Auction>> entity = null;
+		try {
+			entity = new ResponseEntity<>(service.realtimelist(), HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+
+		return entity;
+
+	}
+	
+	@RequestMapping(value = "winrealtimelist", method = RequestMethod.GET)
+	public ResponseEntity<List<Auction>> winrealtimelist() {
+
+		ResponseEntity<List<Auction>> entity = null;
+		try {
+			entity = new ResponseEntity<>(service.winrealtimelist(), HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+
+		return entity;
+
+	}
+	
+	@RequestMapping(value = "dressrealtimelist", method = RequestMethod.GET)
+	public ResponseEntity<List<Auction>> dressrealtimelist() {
+
+		ResponseEntity<List<Auction>> entity = null;
+		try {
+			entity = new ResponseEntity<>(service.dressrealtimelist(), HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+
+		return entity;
+
+	}
+	
+	@RequestMapping(value = "dresswinrealtimelist", method = RequestMethod.GET)
+	public ResponseEntity<List<Auction>> dresswinrealtimelist() {
+
+		ResponseEntity<List<Auction>> entity = null;
+		try {
+			entity = new ResponseEntity<>(service.dresswinrealtimelist(), HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+
+		return entity;
+
+	}
+	
+	@RequestMapping(value = "makeuprealtimelist", method = RequestMethod.GET)
+	public ResponseEntity<List<Auction>> makuprealtimelist() {
+
+		ResponseEntity<List<Auction>> entity = null;
+		try {
+			entity = new ResponseEntity<>(service.makeuprealtimelist(), HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+
+		return entity;
+
+	}
+	
+	@RequestMapping(value = "makeupwinrealtimelist", method = RequestMethod.GET)
+	public ResponseEntity<List<Auction>> makeupwinrealtimelist() {
+
+		ResponseEntity<List<Auction>> entity = null;
+		try {
+			entity = new ResponseEntity<>(service.makeupwinrealtimelist(), HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+
+		return entity;
+ 
 	}
 }

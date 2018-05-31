@@ -2,8 +2,7 @@
   pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ page session="false"%> 
-
+<%@ page session="false"%>
 
 <!DOCTYPE html>
 <html>
@@ -159,10 +158,6 @@ td, th {
 		
 		 var data = [{ "key1":"value1", "key2":"value2" }] 
 		 alert( data[0].key1)
-
-
-		 출처: http://wonzopein.com/50 [wonzopein.com]
-		 
 		
      if($(this).val() == 'studio'){
  		alert($(this).val());

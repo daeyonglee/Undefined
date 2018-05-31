@@ -37,7 +37,7 @@ public class MyBatisAuctionDaoTest {
 	public void createTest() throws Exception{
 		Auction auction = new Auction();
 		auction.setType("makeup");
-		auction.setUserNo(1);
+//		auction.setUserNo(1);
 		auction.setLoc("제주시 제주읍");
 		auction.setDate("2020-08-25");
 		auction.setTime("15:00");	
@@ -51,7 +51,7 @@ public class MyBatisAuctionDaoTest {
 	public void createTest2() throws Exception{
 		Auction auction = new Auction();
 		auction.setType("dress");
-		auction.setUserNo(2);
+//		auction.setUserNo(2);
 		auction.setLoc("제주시 제주읍");
 		String day = "2020/08/25";
 		String time = "17:00";
@@ -85,7 +85,6 @@ public class MyBatisAuctionDaoTest {
 	public void listByTypeTest() throws Exception{
 		String keyword = "dress";
 //		List<Auction> list = dao.listByType(keyword);
-//		logger.info(list); 
 	}
 
 }

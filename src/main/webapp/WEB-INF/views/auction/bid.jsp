@@ -1,9 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-  pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page session="false"%>
-
 
 <!DOCTYPE html>
 <html>
@@ -76,7 +74,7 @@ td, th {
                     <tr>
                       <td>${bid.regdate }</td>
                       <td>${bid.day }</td>
-                      <td>${bid.writer }</td>
+                      <td><a href = "read?no=${bid.no}&type=${bid.type}">${bid.writer }</a></td>
                       <td>${bid.loc }</td>
                       <td>${bid.deadline }</td>
                       <td>미공개</td>
@@ -96,20 +94,20 @@ td, th {
                     <ul>
                       <c:if test="${pageMaker.prev}">
                         <li><a
-                          href="bid${pageMaker.makeQuery(pageMaker.startPage - 1) }">&laquo;</a></li>
+                          href="${pageMaker.makeQuery(pageMaker.startPage - 1) }">&laquo;</a></li>
                       </c:if>
 
                       <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
                         <li
                           <c:out value="${pageMaker.params.page == idx?'class =active':''}"/>>
-                          <a href="bid${pageMaker.makeQuery(idx)}">${idx}</a>
+                          <a href="${pageMaker.makeQuery(idx)}">${idx}</a>
                         </li>
                       </c:forEach>
 
                       <c:if
                         test="${pageMaker.next && pageMaker.endPage > 0}">
                         <li><a
-                          href="bid${pageMaker.makeQuery(pageMaker.endPage +1) }">&raquo;</a></li>
+                          href="${pageMaker.makeQuery(pageMaker.endPage +1) }">&raquo;</a></li>
                       </c:if>
 
                     </ul>
@@ -139,76 +137,8 @@ td, th {
 			if (result == 'SUCCESS') {
 				alert("처리가 완료되었습니다.");
 			}
-			
-			$(".pagination li a").on("click", function(event) {
-
-				event.preventDefault();
-
-				var targetPage = $(this).attr("href");
-
-				var jobForm = $("#jobForm");
-				jobForm.find("[name='page']").val(targetPage);
-				jobForm.attr("action", "/auction/bid").attr("method", "get");
-				jobForm.submit();
-			});
  </script>
  
- <script>
- $(document).ready(function(){
-	 $('#searchType').change(function() {
-		
-		 var data = [{ "key1":"value1", "key2":"value2" }] 
-		 alert( data[0].key1)
-
-
-		 출처: http://wonzopein.com/50 [wonzopein.com]
-		 
-		
-     if($(this).val() == 'studio'){
- 		alert($(this).val());
- 		
- 		$.ajax({
-	          type : 'GET',
-	          url  : '/auction/bid/studio',
-	      dataType : 'json',
-	          data : data,
-	       success : function(data){
-	    	   console.log(data);
-	       }
-	     
-	    });
-	  } else if ($(this).val() == 'dress') {
-			alert($(this).val());
-
-	 		$.ajax({
-		          type : 'GET',
-		          url  : '/auction/bid/dress',
-		      dataType : 'json',
-		          data : data,
-		       success : function(data){
-		    	   console.log(data);
-		       }
-		     
-		    });
-		  
-	  } else if ($(this).val() == 'makeup') {
-			alert($(this).val());
-
-	 		$.ajax({
-		          type : 'GET',
-		          url  : '/auction/bid/makeup',
-		      dataType : 'json',
-		          data : data,
-		       success : function(data){
-		    	   console.log(data);
-		       }
-		     
-		    });	
-	  }
-	}); 
- });
- </script>
-
   <%@include file="../include/bottom.jsp"%>
 </body>
 </html>

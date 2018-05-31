@@ -1,12 +1,23 @@
 package kr.co.udf.auction.domain;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+
 public class Auction {
-	
-	private int no;
-	private int userNo;
+
+	private BigDecimal no;
+	private BigDecimal userNo;
+	private BigDecimal tel;
+
 	private String loc;
+	private String locFirst;
+	private String locSecond;
+	private String locThird;
+
+	private String date;
 	private String day;
 	private String time;
+
 	private String memo;
 	private String type;
 	private String writer;
@@ -14,17 +25,22 @@ public class Auction {
 	private String stat;
 	private String regdate;
 	private String updatedate;
-	
-	private String date = day + " " + time;
 
-	public Auction() {}
+	public Auction() {
 
-	public Auction(int no, int userNo, String loc, String day, String time, String memo, String type, String writer,
-			String deadline, String stat, String regdate, String updatedate, String date) {
+	}
+
+	public Auction(BigDecimal no, BigDecimal userNo, BigDecimal tel, String loc, String locFirst, String locSecond,
+			String locThird, String day, String time, String memo, String type, String writer, String deadline,
+			String regdate, String updatedate, String date, String stat) {
 		super();
 		this.no = no;
 		this.userNo = userNo;
+		this.tel = tel;
 		this.loc = loc;
+		this.locFirst = locFirst;
+		this.locSecond = locSecond;
+		this.locThird = locThird;
 		this.day = day;
 		this.time = time;
 		this.memo = memo;
@@ -35,22 +51,31 @@ public class Auction {
 		this.regdate = regdate;
 		this.updatedate = updatedate;
 		this.date = date;
+		this.stat = stat;
 	}
 
-	public int getNo() {
+	public BigDecimal getNo() {
 		return no;
 	}
 
-	public void setNo(int no) {
+	public void setNo(BigDecimal no) {
 		this.no = no;
 	}
 
-	public int getUserNo() {
+	public BigDecimal getUserNo() {
 		return userNo;
 	}
 
-	public void setUserNo(int userNo) {
+	public void setUserNo(BigDecimal userNo) {
 		this.userNo = userNo;
+	}
+
+	public BigDecimal getTel() {
+		return tel;
+	}
+
+	public void setTel(BigDecimal tel) {
+		this.tel = tel;
 	}
 
 	public String getLoc() {
@@ -59,6 +84,30 @@ public class Auction {
 
 	public void setLoc(String loc) {
 		this.loc = loc;
+	}
+
+	public String getLocFirst() {
+		return locFirst;
+	}
+
+	public void setLocFirst(String locFirst) {
+		this.locFirst = locFirst;
+	}
+
+	public String getLocSecond() {
+		return locSecond;
+	}
+
+	public void setLocSecond(String locSecond) {
+		this.locSecond = locSecond;
+	}
+
+	public String getLocThird() {
+		return locThird;
+	}
+
+	public void setLocThird(String locThird) {
+		this.locThird = locThird;
 	}
 
 	public String getDay() {
@@ -109,14 +158,6 @@ public class Auction {
 		this.deadline = deadline;
 	}
 
-	public String getStat() {
-		return stat;
-	}
-
-	public void setStat(String stat) {
-		this.stat = stat;
-	}
-
 	public String getRegdate() {
 		return regdate;
 	}
@@ -141,13 +182,19 @@ public class Auction {
 		this.date = date;
 	}
 
+	public String getStat() {
+		return stat;
+	}
+
+	public void setStat(String stat) {
+		this.stat = stat;
+	}
+
 	@Override
 	public String toString() {
-		return "Auction [no=" + no + ", userNo=" + userNo + ", loc=" + loc + ", day=" + day + ", time=" + time
-				+ ", memo=" + memo + ", type=" + type + ", writer=" + writer + ", deadline=" + deadline + ", stat="
-				+ stat + ", regdate=" + regdate + ", updatedate=" + updatedate + ", date=" + date + "]";
+		return "Auction [no=" + no + ", userNo=" + userNo + ", tel=" + tel + ", loc=" + loc + ", locFirst=" + locFirst
+				+ ", locSecond=" + locSecond + ", locThird=" + locThird + ", day=" + day + ", time=" + time + ", memo="
+				+ memo + ", type=" + type + ", writer=" + writer + ", deadline=" + deadline + ", regdate=" + regdate
+				+ ", updatedate=" + updatedate + ", date=" + date + ", stat=" + stat + "]";
 	}
-	
-	
-
 }
