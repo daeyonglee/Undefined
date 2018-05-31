@@ -1,6 +1,7 @@
 package kr.co.udf.recommend.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -20,17 +21,17 @@ public class MybatisRecommendDao implements RecommendDao {
 	String namespace = "kr.co.udf.recommend.dao.RecommendDao";
 	
 	@Override
-	public List<StudioProduct> recommendStudio(List<String> studioOption) {
+	public List<StudioProduct> recommendStudio(Map<String, Object> studioOption) {
 		return session.selectList(namespace + ".recommendStudio");
 	}
 
 	@Override
-	public List<DressProduct> recommendDress(List<String> dressOption) {
+	public List<DressProduct> recommendDress(Map<String, Object> dressOption) {
 		return session.selectList(namespace + ".recommendDress");
 	}
 
 	@Override
-	public List<MakeupProduct> recommendMakeup(List<String> makeupOption) {
+	public List<MakeupProduct> recommendMakeup(Map<String, Object> makeupOption) {
 		return session.selectList(namespace + ".recommendMakeup");
 	}
 }

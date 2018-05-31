@@ -29,25 +29,43 @@ public class RecommendServiceImpl implements RecommendService {
 
 		Map<String, Object> result = new HashMap<String, Object>();
 
-		String location = (String) params.get("LOCATION");
-		int minCost = (int) params.get("MINCOST");
-		int maxCost = (int) params.get("MAXCOST");
+		String location = (String) params.get("location");
+		int minCost = (int) params.get("minCost");
+		int maxCost = (int) params.get("maxCost");
 		
-		if (params.containsKey("STUDIOOPTION")) {
+		if (params.containsKey("studioOption")) {
+			Map<String, Object> studioParams = new HashMap<String, Object>();
+			studioParams.put("studioOption", params.get("studioOption"));
+			studioParams.put("location", location);
+			studioParams.put("minCost", minCost);
+			studioParams.put("maxCost", maxCost);
+			
 			studioList = new ArrayList<StudioProduct>();
-			studioList = dao.recommendStudio((List<String>) params.get("STUDIOOPTION"));
+			studioList = dao.recommendStudio(studioParams);
 			result.put("studioList", studioList);
 		}
 
-		if (params.containsKey("DRESSOPTION")) {
+		if (params.containsKey("dressOption")) {
+			Map<String, Object> dressParams = new HashMap<String, Object>();
+			dressParams.put("dressOption", params.get("dressOption"));
+			dressParams.put("location", location);
+			dressParams.put("minCost", minCost);
+			dressParams.put("maxCost", maxCost);
+			
 			dressList = new ArrayList<DressProduct>();
-			dressList = dao.recommendDress((List<String>) params.get("DRESSOPTION"));
+			dressList = dao.recommendDress(dressParams);
 			result.put("dressList", dressList);
 		}
 
-		if (params.containsKey("MAKEUPOPTION")) {
+		if (params.containsKey("makeupOption")) {
+			Map<String, Object> makeupParams = new HashMap<String, Object>();
+			makeupParams.put("makeupOption", params.get("makeupOption"));
+			makeupParams.put("location", location);
+			makeupParams.put("minCost", minCost);
+			makeupParams.put("maxCost", maxCost);
+			
 			makeupList = new ArrayList<MakeupProduct>();
-			makeupList = dao.recommendMakeup((List<String>) params.get("MAKEUPOPTION"));
+			makeupList = dao.recommendMakeup(makeupParams);
 			result.put("makeupList", makeupList);
 		}
 
