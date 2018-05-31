@@ -45,6 +45,7 @@ public class RecommendController {
 		List<String> studioOption = null;
 		List<String> dressOption = null;
 		List<String> makeupOption = null;
+		
 		Map<String, Object> params = new HashMap<String, Object>();
 		Map<String, Object> result = new HashMap<String, Object>();
 
@@ -98,7 +99,6 @@ public class RecommendController {
 		if (makeupOption != null) {
 			params.put("makeupOption", makeupOption);
 		}
-		
 
 		result = service.recommend(params);
 

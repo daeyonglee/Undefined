@@ -134,30 +134,26 @@
 			$('.indexForm').toggle("slow", toggleForm())
     	})
   	} */
-    
+  	function toggleStudio(e){
+		$('.studioForm').toggle("slow");
+	}
+  	
+  	function toggleDress(){
+		$('.dressForm').toggle("slow");
+	}
+  	
+  	function toggleMakeup(){
+		$('.makeupForm').toggle("slow");
+	}
+  	
     function toggleForm(){
-    	$("input:checkbox[name='item']").each(function(){
-    		$(this).on('click', function(event){
-    			event.preventDefault();
-    			event.stopPropagation();
-    			var form = '.' + $(this).val() + 'Form';
-        		$(form).toggle("slow");
-        		$('.message').html("");
-    		})
-    	});
     	
-    	$('#studio').on("click", function toggleStudio(){
-    		$('.studioForm').toggle("slow");
-    	});
+    	$('#studio').on("click", toggleStudio);
     	 
-    	$('#dress').on("click", function toggleDress(){
-    		$('.dressForm').toggle("slow");
-    	});
+    	$('#dress').on("click", toggleDress);
     	
-    	$('#makeup').on("click", function toggleMakeup(){
-    		$('.makeupForm').toggle("slow");
-    	});
-    		
+    	$('#makeup').on("click", toggleMakeup);
+    	
     	/* $('#studio').on("click", function(){
     		if($("input:checkbox[value='studio']").is(":checked")){
 	    		$('.studioForm').show("slow");
