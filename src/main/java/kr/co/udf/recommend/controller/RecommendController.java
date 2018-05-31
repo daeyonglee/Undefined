@@ -102,16 +102,16 @@ public class RecommendController {
 
 		result = service.recommend(params);
 
-		if(result.containsKey("STUDIOLIST")) {
-			model.addAttribute("studioList", result.get("STUDIOLIST"));
+		if(result.containsKey("studioList")) {
+			model.addAttribute("studioList", result.get("studioList"));
 		}
 		
-		if(result.containsKey("DRESSLIST")) {
-			model.addAttribute("dressList", result.get("DRESSLIST"));
+		if(result.containsKey("dressList")) {
+			model.addAttribute("dressList", result.get("dressList"));
 		}
 		
-		if(result.containsKey("MAKEUPLIST")) {
-			model.addAttribute("makeupList", result.get("MAKEUPLIST"));
+		if(result.containsKey("makeupList")) {
+			model.addAttribute("makeupList", result.get("makeupList"));
 		}
 	}
 }
