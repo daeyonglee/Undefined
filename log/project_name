@@ -1,4 +1,6 @@
-2018-05-31 09:12:04 [INFO ] [kr.co.udf.article.ArticleDaoTest:158] /article/read?article_no=12&perPageNum=10 
-2018-05-31 09:12:04 [INFO ] [kr.co.udf.article.ArticleDaoTest:159] /article/read?article_no=12&perPageNum=10 
-2018-05-31 09:15:04 [INFO ] [kr.co.udf.article.ArticleDaoTest:173] /article/read?article_no=12&perPageNum=10 
-2018-05-31 09:15:04 [INFO ] [kr.co.udf.article.ArticleDaoTest:174] /article/read?article_no=12&perPageNum=10 
+2018-06-01 16:06:45 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: INSERT INTO reply (reply_no, article_no, reply_content, user_nm) VALUES(reply_seq.nextval, ?, ?, ?)  
+2018-06-01 16:06:46 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters: 1(Integer), reply_content(String), testUser(String) 
+2018-06-01 16:06:46 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==    Updates: 1 
+2018-06-01 16:09:55 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: INSERT INTO reply (reply_no, article_no, reply_content, user_nm) VALUES(reply_seq.nextval, ?, ?, ?)  
+2018-06-01 16:09:55 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters: 2(Integer), reply_content2(String), testUser22(String) 
+2018-06-01 16:09:55 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==    Updates: 1 

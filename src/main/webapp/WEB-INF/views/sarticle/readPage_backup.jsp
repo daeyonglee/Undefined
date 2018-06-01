@@ -14,11 +14,21 @@
       var formObj = $("form[role='form']");
       console.log(formObj);
       
+/*      $(".btn-warning").on("click",function() {
+        formObj.attr("action","/sarticle/modify");
+        formObj.attr("method","get");
+        formObj.submit();
+        }); */
+      
       $(".removeBtn").on("click",function() {
         formObj.attr("action","/sarticle/removePage");
         formObj.submit();
         });
 
+  /*    $(".btn-primary").on("click",function() {
+        self.location = "/article/listAll?board_no=${read.board_no}";
+      }); */
+      
       $(".goListBtn").on("click",function(){
         formObj.attr("method","get");
         formObj.attr("action","/sarticle/list");
@@ -46,7 +56,7 @@
   <div class="timeline-body">{{reply_content}} </div>
     <div class="timeline-footer">
      <a class="btn btn-primary btn-xs" 
-      data-toggle="modal" data-target="#modifyModal">댓글 수정</a>
+      data-toggle="modal" data-target="#modifyModal">Modify</a>
     </div>
   </div>      
 </li>
@@ -68,6 +78,137 @@
     $(".replyLi").remove();
     target.after(html);
   } 
+  
+  /* 특정한 게시물에 대한 페이징 처리를 위한 코드 */
+  var article_no=${read.article_no}
+  var replyPage=1;
+  
+  function getPage(pageInfo) {
+    $.getJSON(pageInfo, function(data) {
+      printData(data.list, $("#repliesDiv"), $('#template'));
+      //printPaging(data.pageMaker, $(".pagination"));
+
+      //$("#modifyModal").modal('hide');
+    });
+  }
+  
+  /*
+  var printPaging = function(pageMaker, target) {
+    var str = "";
+    if (pageMaker.prev) {
+      str += "<li><a href='" + (pageMaker.startPage - 1)
+          + "'> << </a></li>";
+    }
+
+    for (var i = pageMaker.startPage, len = pageMaker.endPage; i <= len; i++) {
+      var strClass = pageMaker.cri.page == i ? 'class=active' : '';
+      str += "<li "+strClass+"><a href='"+i+"'>" + i + "</a></li>";
+    }
+
+    if (pageMaker.next) {
+      str += "<li><a href='" + (pageMaker.endPage + 1)
+          + "'> >> </a></li>";
+    }
+    target.html(str);
+  };
+  */
+  
+  /*1페이지 댓글 목록을 가져오기 위한 코드  */
+  $("#repliesDiv").on("click", function() {
+    if ($(".timeline li").size() > 1) {
+      return;
+    }
+    getPage("/replies/" + article_no + "/1");
+
+  });
+  
+  /*댓글 페이징 처리 이벤트  */
+    $(".pagination").on("click", "li a", function(event){
+        //event.preventDefault();
+        replyPage = $(this).attr("href");
+        getPage("/replies/"+article_no+"/"+replyPage);
+        
+    });
+  
+  /*댓글 등록의 이벤트 처리  */
+    $("#replyAddBtn").on("click",function(){
+     var user_nmObj = $("#newReplyWriter");
+     var reply_contentObj = $("#newReplyText");
+     var user_nm = user_nmObj.val();
+     var reply_content = reply_contentObj.val();
+      
+      $.ajax({
+        type:'post',
+        url:'/replies/',
+        headers: { 
+              "Content-Type": "application/json",
+              "X-HTTP-Method-Override": "POST" },
+        dataType:'text',
+        data: JSON.stringify({article_no:article_no, user_nm:user_nm, reply_content:reply_content}),
+        success:function(result){
+          console.log("result: " + result);
+          if(result == 'success'){
+            alert("등록 되었습니다.");
+            replyPage = 1;
+            getPage("/replies/"+article_no+"/"+replyPage );
+            user_nmObj.val("");
+            reply_contentObj.val("");
+          }
+      }});
+  });
+  /* 각 댓글의 버튼 이벤트 처리  */
+  $(".timeline").on("click", ".replyLi", function(event){
+    
+    var reply = $(this);
+    
+    $("#reply_content").val(reply.find('.timeline-body').text());
+    $(".modal-title").html(reply.attr("data-reply_no"));
+    
+  });
+  /*댓글 수정 처리  */
+  $("#replyModBtn").on("click",function(){
+      var reply_no = $(".modal-title").html();
+      var reply_content = $("#reply_content").val();
+      
+      $.ajax({
+        type:'put',
+        url:'/replies/'+reply_no,
+        headers: { 
+              "Content-Type": "application/json",
+              "X-HTTP-Method-Override": "PUT" },
+        data:JSON.stringify({reply_content:reply_content}), 
+        dataType:'text', 
+        success:function(result){
+          console.log("result: " + result);
+          if(result == 'success'){
+            alert("수정 되었습니다.");
+            getPage("/replies/"+article_no+"/"+replyPage );
+          }
+      }});
+  });
+  
+  /*댓글 삭제 처리  */
+  $("#replyDelBtn").on("click",function(){
+      var reply_no = $(".modal-title").html();
+      var reply_content = $("#reply_content").val();
+      
+      $.ajax({
+        type:'delete',
+        url:'/replies/'+reply_no,
+        headers: { 
+              "Content-Type": "application/json",
+              "X-HTTP-Method-Override": "DELETE" },
+        dataType:'text', 
+        success:function(result){
+          console.log("result: " + result);
+          if(result == 'success'){
+            alert("삭제 되었습니다.");
+            alert("article_no"+article_no + "  replyPage: "+replyPage);
+            getPage("/replies/"+article_no+"/"+replyPage );
+            alert("삭제 된 후 article_no"+article_no + "  replyPage: "+replyPage);
+          }
+      }});
+  });
   </script> 
 </header>
 
@@ -157,20 +298,20 @@
       <!-- 댓글 등록에 필요한 div -->
       <div class="box box-success">
         <div class="box-header">
-          <h3 class="box-title">댓글 쓰기</h3>
+          <h3 class="box-title">ADD NEW REPLY</h3>
         </div>
         <div class="box-body">
-          <label for="exampleInputEmail1">작성자</label> 
-          <input class="form-control" type="text" placeholder="작성자"
+          <label for="exampleInputEmail1">Writer</label> 
+          <input class="form-control" type="text" placeholder="USER ID"
             id="newReplyWriter"> 
-           <label for="exampleInputEmail1">댓글 내용</label> 
+           <label for="exampleInputEmail1">Reply Text</label> 
            <input class="form-control" type="text"
-            placeholder="댓글 내용" id="newReplyText">
+            placeholder="REPLY TEXT" id="newReplyText">
         </div>
         
         <!-- /.box-body -->
         <div class="box-footer">
-          <button type="button" class="btn btn-primary" id="replyAddBtn">댓글 쓰기</button>
+          <button type="button" class="btn btn-primary" id="replyAddBtn">ADD REPLY</button>
         </div>
       </div>
 
@@ -178,7 +319,8 @@
       <!-- The time line -->
       <ul class="timeline">
         <!-- timeline time label -->
-        <li class="time-label" id="repliesDiv"><span class="bg-green">댓글 목록 </span></li>
+        <li class="time-label" id="repliesDiv">
+        <span class="bg-green">Replies List </span></li>
       </ul>
 
       <div class='text-center'>
@@ -216,9 +358,9 @@
             <p><input type="text" id="reply_content" class="form-control"></p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-info" id="replyModBtn">수정</button>
-            <button type="button" class="btn btn-danger" id="replyDelBtn">삭제</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+            <button type="button" class="btn btn-info" id="replyModBtn">Modify</button>
+            <button type="button" class="btn btn-danger" id="replyDelBtn">DELETE</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
@@ -230,128 +372,4 @@
 
 
 <%@include file="../include/bottom.jsp"%>
-
-<script type="text/javascript">
-/*1페이지 댓글 목록을 가져오기 위한 코드  */
-$("#repliesDiv").on("click", function() {
-  if ($(".timeline li").size() > 1) {
-    return;
-  }
-  getPage("/replies/" + article_no + "/1");
-});
-
-/*댓글 등록의 이벤트 처리  */
-$("#replyAddBtn").on("click",function(){
- var user_nmObj = $("#newReplyWriter");
- var reply_contentObj = $("#newReplyText");
- var user_nm = user_nmObj.val();
- var reply_content = reply_contentObj.val();
-  
-  $.ajax({
-    type:'post',
-    url:'/replies/',
-    headers: { 
-          "Content-Type": "application/json",
-          "X-HTTP-Method-Override": "POST" },
-    dataType:'text',
-    data: JSON.stringify({article_no:article_no, user_nm:user_nm, reply_content:reply_content}),
-    success:function(result){
-      console.log("result: " + result);
-      if(result == 'success'){
-        alert("등록 되었습니다.");
-        replyPage = 1;
-        getPage("/replies/"+article_no+"/"+replyPage );
-        user_nmObj.val("");
-        reply_contentObj.val("");
-      }
-  }});
-});
-
-/* 각 댓글의 버튼 이벤트 처리  */
-$(".timeline").on("click", ".replyLi", function(event){
-  
-  var reply = $(this);
-  
-  $("#reply_content").val(reply.find('.timeline-body').text());
-  $(".modal-title").html(reply.attr("data-reply_no"));
-  
-});
-
-/*댓글 수정 처리  */
-$("#replyModBtn").on("click",function(){
-    var reply_no = $(".modal-title").html();
-    var reply_content = $("#reply_content").val();
-    
-    $.ajax({
-      type:'put',
-      url:'/replies/'+reply_no,
-      headers: { 
-            "Content-Type": "application/json",
-            "X-HTTP-Method-Override": "PUT" },
-      data:JSON.stringify({reply_content:reply_content}), 
-      dataType:'text', 
-      success:function(result){
-        console.log("result: " + result);
-        if(result == 'success'){
-          alert("수정 되었습니다.");
-          getPage("/replies/"+article_no+"/"+replyPage );
-        }
-    }});
-});
-
-/*댓글 삭제 처리  */
-$("#replyDelBtn").on("click",function(){
-    var reply_no = $(".modal-title").html();
-    var reply_content = $("#reply_content").val();
-    
-    $.ajax({
-      type:'delete',
-      url:'/replies/'+reply_no,
-      headers: { 
-            "Content-Type": "application/json",
-            "X-HTTP-Method-Override": "DELETE" },
-      dataType:'text', 
-      success:function(result){
-        console.log("result: " + result);
-        if(result == 'success'){
-    	   alert("삭제 되었습니다.");
-           getPage("/replies/"+article_no+"/"+replyPage );
-        }
-    }});
-});
-
-
-/* 특정한 게시물에 대한 페이징 처리를 위한 코드 */
-var article_no=${read.article_no}
-var replyPage=1;
-
-function getPage(pageInfo) {
-  $.getJSON(pageInfo, function(data) {
-    printData(data.list, $("#repliesDiv"), $('#template'));
-    printPaging(data.pageMaker, $(".pagination"));
-	
-    $("#modifyModal").modal('hide');
-  });
-}
-
-var printPaging = function(pageMaker, target) {
-  var str = "";
-  if (pageMaker.prev) {
-    str += "<li><a href='" + (pageMaker.startPage - 1)
-        + "'> << </a></li>";
-  }
-
-  for (var i = pageMaker.startPage, len = pageMaker.endPage; i <= len; i++) {
-    var strClass = pageMaker.cri.page == i ? 'class=active' : '';
-    str += "<li "+strClass+"><a href='"+i+"'>" + i + "</a></li>";
-  }
-
-  if (pageMaker.next) {
-    str += "<li><a href='" + (pageMaker.endPage + 1)
-        + "'> >> </a></li>";
-  }
-  target.html(str);
-};
-
-</script>
 </html>
