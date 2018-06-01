@@ -5,6 +5,7 @@ import java.util.Map;
 
 import kr.co.udf.article.domain.Article;
 import kr.co.udf.article.domain.Criteria;
+import kr.co.udf.article.domain.SearchCriteria;
 
 public interface ArticleService {
 
@@ -22,9 +23,8 @@ public interface ArticleService {
 
   public int listCountCriteria(Criteria cri) throws Exception;
 
-//  public List<Article> listSearchCriteria(SearchCriteria cri) 
-//      throws Exception;
-//
-//  public int listSearchCount(SearchCriteria cri) throws Exception;
+  public List<Map<String, Object>> listSearchCriteria(SearchCriteria cri) throws Exception;
+
+  public int listSearchCount(SearchCriteria cri) throws Exception;
 
 }

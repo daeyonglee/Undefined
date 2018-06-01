@@ -5,6 +5,7 @@ import java.util.Map;
 
 import kr.co.udf.article.domain.Article;
 import kr.co.udf.article.domain.Criteria;
+import kr.co.udf.article.domain.SearchCriteria;
 
 public interface ArticleDao {
 
@@ -26,8 +27,8 @@ public interface ArticleDao {
 //  
 //  //use for dynamic sql
 //  
-//  public List<Article> listSearch(SearchCriteria cri)throws Exception;
-//  
-//  public int listSearchCount(SearchCriteria cri)throws Exception;
+  public List<Map<String, Object>> listSearch(SearchCriteria cri)throws Exception;
+  
+  public int listSearchCount(SearchCriteria cri)throws Exception;
 
 }

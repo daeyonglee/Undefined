@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import kr.co.udf.article.dao.ArticleDao;
 import kr.co.udf.article.domain.Article;
 import kr.co.udf.article.domain.Criteria;
+import kr.co.udf.article.domain.SearchCriteria;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
@@ -51,18 +52,15 @@ public class ArticleServiceImpl implements ArticleService {
   public int listCountCriteria(Criteria cri) throws Exception {
     return dao.countPaging(cri);
   }
-//
-//  @Override
-//  public List<Article> listSearchCriteria(SearchCriteria cri) throws Exception {
-//
-//    return articleDao.listSearch(cri);
-//  }
-//
-//  @Override
-//  public int listSearchCount(SearchCriteria cri) throws Exception {
-//
-//    return articleDao.listSearchCount(cri);
-//  }
 
+  @Override
+  public List<Map<String, Object>> listSearchCriteria(SearchCriteria cri) throws Exception {
+    return dao.listSearch(cri);
+  }
+
+  @Override
+  public int listSearchCount(SearchCriteria cri) throws Exception {
+    return dao.listSearchCount(cri);
+  }
 
 }

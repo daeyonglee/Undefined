@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.udf.article.domain.Article;
 import kr.co.udf.article.domain.Criteria;
+import kr.co.udf.article.domain.SearchCriteria;
 
 @Repository
 public class ArticleDaoImpl implements ArticleDao {
@@ -64,6 +65,16 @@ public class ArticleDaoImpl implements ArticleDao {
 	@Override
 	public int countPaging(Criteria cri) throws Exception {
 		return session.selectOne(namespace + ".countPaging", cri);
+	}
+
+	@Override
+	public List<Map<String, Object>> listSearch(SearchCriteria cri) throws Exception {
+		return session.selectList(namespace + ".listSearch", cri);
+	}
+
+	@Override
+	public int listSearchCount(SearchCriteria cri) throws Exception {
+		return session.selectOne(namespace + ".listSearchCount", cri);
 	}
 	
 	
