@@ -1,0 +1,21 @@
+package kr.co.udf.user.service;
+
+import kr.co.udf.user.domain.Login;
+import kr.co.udf.user.domain.UserDTO;
+
+public interface UserMypageService {
+
+	/**
+	 * 나의정보관리 비밀번호 확인
+	 * @param login
+	 * @return
+	 */
+	public Object myinfo(Login login);
+	
+	/**
+	 * 나의 정보관리 정보 수정하기 (일반 사용자)
+	 * @param user
+	 */
+	public void userupdate(UserDTO user);
+	
+}

@@ -20,6 +20,16 @@
 <script type="text/javascript">
 
 	$(function(){
+
+		var msg = "${msg}";
+		console.log(msg);
+		if (msg != null || msg != "") {
+			
+			if (msg == "update") {
+				alert("정상적으로 수정되었습니다.");
+			}
+		}
+		
   	$('#my').on('click',function(e){
   		self.location='/user/mypage/my';
   	});

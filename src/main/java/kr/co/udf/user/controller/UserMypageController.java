@@ -1,23 +1,42 @@
 package kr.co.udf.user.controller;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+
+import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import kr.co.udf.common.util.MediaUtils;
+import kr.co.udf.user.domain.Company;
 import kr.co.udf.user.domain.Login;
 import kr.co.udf.user.domain.User;
+import kr.co.udf.user.domain.UserDTO;
+import kr.co.udf.user.service.UserMypageService;
 
 @Controller
 @RequestMapping("/user/mypage/*")
 public class UserMypageController {
 	
 	private static Logger logger = Logger.getLogger(UserMypageController.class);
+	
+	@Resource(name="cpMainImgPath")
+	private String cpMainImgPath;
+	
+	@Inject
+	UserMypageService mypageService;
 	
 	/**
 	 * 마이페이지 index
@@ -42,9 +61,95 @@ public class UserMypageController {
 	public String my() {
 		logger.info("마이페이지-내정보관리!");
 		return "/user/mypage/my";
-		
 	}
 	
+	@RequestMapping(value="my", method=RequestMethod.POST)
+	public String my(@RequestParam("pw")String pw, HttpSession session, Model model) throws FileNotFoundException, UnsupportedEncodingException {
+		
+		logger.debug("/user/mypage/my POST start....");
+		
+		InputStream in = null;
+		Login login = (Login)session.getAttribute("login");
+		
+		logger.debug(login);
+		logger.debug(pw);
+		if (login != null) {
+			if (pw.equals(login.getPw())) {
+				Object obj = mypageService.myinfo(login);
+				String[] addrs = null;
+				
+				if ("users".equals(login.getRole())){
+					User user = (User)obj;
+					logger.debug(user);
+					
+					model.addAttribute("user", user);
+					
+					addrs = user.getAddr().split("\\^\\^");
+					
+					model.addAttribute("role", "user");
+				}  else {
+					Company company = (Company)obj;
+					logger.debug(company);
+					
+					addrs = company.getAddr().split("\\^\\^");
+					
+					if (company.getMainImg() != null) {
+						/*String fileName = company.getMainImg();
+						String formatName = fileName.substring(fileName.lastIndexOf(".")+1);
+						MediaType mType = MediaUtils.getMediaType(formatName);
+						
+						HttpHeaders headers = new HttpHeaders();
+						
+						in = new FileInputStream(cpMainImgPath+fileName);
+						
+						if (mType != null) {
+							headers.setContentType(mType);
+						} else {
+							fileName = fileName.substring(fileName.indexOf("_")+1);
+							headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+							headers.add("Content-Disposition", "attachment; filename=\"" + new String(fileName.getBytes("UTF-8"), "ISO-8859-1")+"\"");
+						}*/
+					}
+					
+					model.addAttribute("role", "company");
+				}
+				
+				if (addrs != null) {
+					model.addAttribute("postcode", addrs[0]);
+					model.addAttribute("addr", addrs[1]);
+					model.addAttribute("addrdetail", addrs[2]);
+				}
+			}
+			model.addAttribute("msg", "success");
+		}
+		
+		logger.debug("/user/mypage/my POST end....");
+		return "/user/mypage/my";
+	}
+	
+	/**
+	 * 마이페이지 >> 내정보관리 >> 정보 수정하기 (일반 사용자)
+	 * @param user
+	 * @return
+	 */
+	@RequestMapping(value="userupdate", method=RequestMethod.POST)
+	public String userupdate(UserDTO user, Model model, HttpSession session, RedirectAttributes rttr) {
+		logger.debug("/user/mypage/userupdate POST start......");
+		logger.debug(user);
+		
+		mypageService.userupdate(user);
+		
+		// 세션값 변경
+		Login login = (Login)session.getAttribute("login");
+		login.setPw(user.getPw());
+		
+		rttr.addFlashAttribute("msg", "update");
+		
+		session.setAttribute("login", login);
+		
+		logger.debug("/user/mypage/userupdate POST end........");
+		return "redirect:/user/mypage/index";
+	}
 	
 	/**
 	 * 마이페이지 >> 역경매신청현황

@@ -1,6 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
@@ -72,9 +71,16 @@
                       <!-- 로그인 여부에 따라 li 변경 -->
                       <c:choose>
                         <c:when test="${null ne sessionScope.login || null ne cookie.loginCookie.value}">
-                          <li><a href="/user/logout">로그아웃</a></li>
-                          <li><a href="/user/mypage/index">마이페이지</a></li>
-                          <li><a href="#">고객센터</a></li>
+                        		<c:if test="${sessionScope.login.role ne 'admin'}">
+	                          <li><a href="/user/logout">로그아웃</a></li>
+	                          <li><a href="/user/mypage/index">마이페이지</a></li>
+	                          <li><a href="#">고객센터</a></li>
+                        		</c:if>
+                        		<c:if test="${sessionScope.login.role eq 'admin'}">
+                        			<li><a href="/user/logout">로그아웃</a></li>
+	                          <li><a href="/user/mypage/index">관리자페이지</a></li>
+	                          <li><a href="#">고객센터</a></li>
+                        		</c:if>
                         </c:when>
                         <c:otherwise>
                           <li><a href="/user/login">로그인</a></li>
@@ -156,5 +162,4 @@
 </nav>
 <!-- End of nav bar -->
 </body>
-</html>
 

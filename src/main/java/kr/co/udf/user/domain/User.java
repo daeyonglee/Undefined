@@ -7,21 +7,23 @@ public class User {
 	private BigDecimal no;
 	private String email;
 	private String pw;
+	private String nm;
 	private String birthday;
 	private String addr;
-	private Integer tel;
+	private BigDecimal tel;
 	private Integer point;
 	private String regdate;
 	private String updatedate;
 	
 	public User() {}
 
-	public User(BigDecimal no, String email, String pw, String birthday, String addr, Integer tel, Integer point,
-			String regdate, String updatedate) {
+	public User(BigDecimal no, String email, String pw, String nm, String birthday, String addr, BigDecimal tel,
+			Integer point, String regdate, String updatedate) {
 		super();
 		this.no = no;
 		this.email = email;
 		this.pw = pw;
+		this.nm = nm;
 		this.birthday = birthday;
 		this.addr = addr;
 		this.tel = tel;
@@ -54,6 +56,14 @@ public class User {
 		this.pw = pw;
 	}
 
+	public String getNm() {
+		return nm;
+	}
+
+	public void setNm(String nm) {
+		this.nm = nm;
+	}
+
 	public String getBirthday() {
 		return birthday;
 	}
@@ -70,11 +80,11 @@ public class User {
 		this.addr = addr;
 	}
 
-	public Integer getTel() {
+	public BigDecimal getTel() {
 		return tel;
 	}
 
-	public void setTel(Integer tel) {
+	public void setTel(BigDecimal tel) {
 		this.tel = tel;
 	}
 
@@ -104,7 +114,8 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [no=" + no + ", email=" + email + ", pw=" + pw + ", birthday=" + birthday + ", addr=" + addr
-				+ ", tel=" + tel + ", point=" + point + ", regdate=" + regdate + ", updatedate=" + updatedate + "]";
+		return "User [no=" + no + ", email=" + email + ", pw=" + pw + ", nm=" + nm + ", birthday=" + birthday
+				+ ", addr=" + addr + ", tel=" + tel + ", point=" + point + ", regdate=" + regdate + ", updatedate="
+				+ updatedate + "]";
 	}
 }

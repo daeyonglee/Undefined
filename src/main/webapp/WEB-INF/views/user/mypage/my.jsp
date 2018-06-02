@@ -14,38 +14,161 @@
 <!--<![endif]-->
 <head>
 <meta charset="utf-8">
+<link rel="stylesheet" href="/resources/assets/css/user/join.css">
+<style>
+.mypage-content {
+	float: none;
+	margin: 0 auto;
+}
+</style>
 <title>마이페이지</title>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script src="/resources/js/user/mypage.js"></script>
 </head>
 <body>
   <div class="page-head">
     <div class="container">
       <div class="row">
         <div class="page-head-content">
-          <h1 class="page-title">
-            <span>마이페이지</span>
-          </h1>
+          <h1 class="page-title">내정보관리</h1>
         </div>
       </div>
     </div>
   </div>
   <!-- End page header -->
 
-  <!--TESTIMONIALS -->
-  <div class="testimonial-area recent-property"
-    style="background-color: #FCFCFC; padding-bottom: 15px;">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
-
+  <!-- register-area -->
+<div class="register-area" style="background-color: rgb(249, 249, 249);">
+	<div class="container">
+	<div class="box-for overflow">
+		<c:if test="${msg ne 'success'}">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="col-md-6 mypage-content">
+						<div class="col-md-12 col-xs-12">
+							<form action="/user/mypage/my" method="post">
+								<div class="form-group">
+									<label for="pw">비밀번호</label>
+									<input type="password" name="pw" class="form-control" id="pw">
+								</div>
+								<div class="text-center">
+									<button type="submit" class="btn btn-primary">확인</button>
+								</div>
+							</form>
+						</div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <h4>ddd</h4>
-        </div>
-      </div>
-    </div>
+				</div>
+			</div>
+		</c:if>
+		<c:if test="${msg eq 'success'}">
+			<c:if test="${role eq 'user'}">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="col-md-6 mypage-content">
+							<div class="col-md-12 col-xs-12">
+								<form action="/user/mypage/userupdate" method="post">
+									<input type="hidden" value="${user.no}" name="no">
+									<input type="hidden" value="${user.email}" name="email">
+									<div class="form-group">
+										<label for="email">이메일</label>
+										<p>${user.email}</p>
+									</div>
+									<div class="form-group">
+										<label for="pw">비밀번호</label>
+										<input type="password" name="pw" class="form-control" id="pw">
+									</div>
+									<div class="form-group">
+										<label for="repw">비밀번호 확인</label>
+										<input type="password" name="repw" class="form-control" id="repw">
+									</div>
+									<div class="form-group">
+										<label for="name">이름</label>
+										<input type="text" name="name" class="form-control" id="name" value="${user.nm}">
+									</div>
+									<div class="form-group">
+										<label for="birthday">생년월일</label>
+										<input type="date" name="birthday" class="form-control" id="birthday" value="${user.birthday}">
+									</div>
+									<div class="form-group">
+										<label for="tel">휴대폰 번호</label>
+										<input type="text" name="tel" class="form-control" id="tel" value="${user.tel}"> 
+									</div>
+									<div class="form-group">
+										<label class='dp-block'>주소</label>
+										<input id='postcode' name='postcode' type='text' class='form-control form-addr' value="${postcode}">
+										<button id='btnAddr' class='btn btn-addr'>우편검색</button>
+										<input id='addr' name='addr' type='text' class='form-control' value="${addr}">
+										<input id='addrdetail'name='addrdetail' type='text' class='form-control' value="${addrdetail}">
+									</div>
+									<div class="text-center">
+										<button type="submit" class="btn btn-primary">수정하기</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</c:if>
+			<c:if test="${role eq 'company'}">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="col-md-4 col-xs-4 col-sm-offset-1">
+							<div class="picture-container">
+								<div class="picture">
+									<img class="picture-src">
+									<input name="mainImg" type="file">
+								</div>
+								<div>
+									<label>대표 사진</label>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6 col-xs-6">
+							<div class="form-group">
+								<label class="dp-block">회사명</label>
+								<input name='name' class='form-control form-addr' type='text' placeholder='회사명'>
+								<input type='hidden' name='authChk' value='n'>
+								<input type='hidden' name='nm'>
+								<button id='authCp' class='btn btn-addr'>인증하기</button>
+							</div>
+							<div class="form-group">
+								<label>대표자명</label>
+								<input name='mainNm' type='text' class='form-control' placeholder='대표자명'>
+							</div>
+							<div class="form-group">
+								<label class='dp-block'>회사 주소</label>
+								<input id='postcode' name='postcode' type='text' class='form-control form-addr' placeholder='우편번호'>
+								<button id='btnAddr' class='btn btn-addr'>우편검색</button>
+								<input id='addr' name='addr' type='text' class='form-control' placeholder='주소'>
+								<input id='addrdetail'name='addrdetail' type='text' class='form-control' placeholder='상세주소'>
+							</div>
+							<div class="form-group">
+								<label>전화 번호</label>
+								<input name='tel' class='form-control' type='tel' placeholder='전화 번호'>
+							</div>
+						</div>
+						<div class="col-md-3 col-xs-3"></div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12 col-xs-12">
+						<div class="form-group">
+							<label>업체 소개</label>
+							<textarea name='introduce' class='tx-cp-memo' maxlength='1000'></textarea>
+						</div>
+						<div class="form-group">
+							<div class="text-center">
+								<button type="submit" class="btn btn-primary">수정하기</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</c:if>
+		</c:if>
+	</div>
   </div>
+</div>
+  
   <%@include file="../../include/bottom.jsp"%>
 </body>
 </html>
