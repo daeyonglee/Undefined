@@ -31,7 +31,7 @@ public class UserMypageController {
 		
 		model.addAttribute("login", login);
 		
-		return "/user/mypageindex";
+		return "/user/mypage/index";
 		
 	}
 	
@@ -41,7 +41,7 @@ public class UserMypageController {
 	@RequestMapping(value="my", method=RequestMethod.GET)
 	public String my() {
 		logger.info("마이페이지-내정보관리!");
-		return "/user/my";
+		return "/user/mypage/my";
 		
 	}
 	
