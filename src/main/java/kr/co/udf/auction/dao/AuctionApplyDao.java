@@ -3,7 +3,6 @@ package kr.co.udf.auction.dao;
 import java.util.List;
 
 import kr.co.udf.auction.domain.Auction;
-import kr.co.udf.common.web.Params;
 import kr.co.udf.common.web.SearchParams;
 
 public interface AuctionApplyDao {
@@ -17,7 +16,10 @@ public interface AuctionApplyDao {
 
 	// 게시물 상세조회
 	public Auction read(int no, String type) throws Exception;
-
+	
+	// 게시물 낙찰상세조회
+	public Auction winread(int no, String type) throws Exception;
+	
 	// 게시물 수정
 	public void update(Auction auction) throws Exception;
 
@@ -33,6 +35,9 @@ public interface AuctionApplyDao {
 	// 전체 게시물 조회 + 페이징 처리
 	public List<Auction> listParams(SearchParams params) throws Exception;
 
+	// 전체 게시물 조회 + 낙찰 페이징 처리
+	public List<Auction> winlistParams(SearchParams params) throws Exception;
+
 	// 카테고리별 게시물 조회 + 페이징 처리
 	public List<Auction> listByStudio(SearchParams params) throws Exception;
 
@@ -40,8 +45,18 @@ public interface AuctionApplyDao {
 
 	public List<Auction> listByMakeup(SearchParams params) throws Exception;
 
+	// 카테고리별 낙찰게시물 조회 + 페이징 처리
+	public List<Auction> winlistByStudio(SearchParams params) throws Exception;
+
+	public List<Auction> winlistByDress(SearchParams params) throws Exception;
+
+	public List<Auction> winlistByMakeup(SearchParams params) throws Exception;
+
 	// 카테고리별 게시물 수 조회
-	public int listByTypeCount() throws Exception;
+	public int listByTypeCount(SearchParams params) throws Exception;
+
+	// 낙찰 카테고리별 게시물 수 조회
+	public int winlistByTypeCount(SearchParams params) throws Exception;
 
 	// 스튜디오 입찰 실시간 화면 조회
 	public List<Auction> realtimelist() throws Exception;

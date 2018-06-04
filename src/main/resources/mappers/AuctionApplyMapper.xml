@@ -18,11 +18,30 @@
    <delete id = "deleteStudio">
    		DELETE 
    		  FROM studio_auction_apply 
-   		 WHERE saa_no = #{value}
+   		 WHERE saa_no = #{value} 
    </delete>
    
+   <!-- 스드메 수정 -->
+   <update id="updateDress">
+   update dress_auction_apply
+   set daa_date = to_date(#{date},'YYYY-MM-DD HH24:MI'), daa_loc = #{loc} , daa_memo = #{memo}    
+   where daa_no = #{no}
+   </update>
+   
+   <update id="updateMakeup">
+   update makeup_auction_apply
+   set maa_date = to_date(#{date},'YYYY-MM-DD HH24:MI'), maa_loc = #{loc} , maa_memo = #{memo}    
+   where maa_no = #{no}
+   </update>
+   
+   <update id="updateStudio">
+   update studio_auction_apply
+   set saa_date = to_date(#{date},'YYYY-MM-DD HH24:MI'), saa_loc = #{loc} , saa_memo = #{memo}    
+   where saa_no = #{no}
+   </update>
+   
    <!-- 게시물 조회 -->
-	<select id="read" resultType="Auction">
+<select id="read" resultType="Auction">
 		select d.*
 from (SELECT  d.daa_no  no
       , u.user_no userNo
@@ -73,6 +92,59 @@ SELECT s.saa_no  no
          ON s.user_no = u.user_no) d
 WHERE no = #{no} and type = #{type}
 	</select>
+	
+<!-- 게시물 조회 -->
+<select id="winread" resultType="Auction">
+		select d.*
+from (SELECT  d.daa_no  no
+      , u.user_no userNo
+      , u.user_nm writer
+      , NVL(u.user_tel, null) tel
+      , d.daa_loc loc
+      , SUBSTR(to_char(d.daa_date, 'YYYY-MM-DD HH24:MI'),0,10) day
+      , SUBSTR(to_char(d.daa_date, 'YYYY-MM-DD HH24:MI'),12,7) time
+      , TO_CHAR(d.daa_deadline, 'YYYY-MM-DD') deadline
+      , d.daa_memo memo
+      , d.daa_stat stat
+      , TO_CHAR(d.regdate, 'YYYY-MM-DD') regdate
+      ,'dress' type
+FROM   dress_auction_apply d
+       JOIN users u 
+         ON d.user_no = u.user_no
+UNION
+SELECT m.maa_no  no
+     , u.user_no userNo
+     , u.user_nm writer   
+     , NVL(u.user_tel, null) tel
+     , m.maa_loc loc
+     , SUBSTR(to_char(m.maa_date, 'YYYY-MM-DD HH24:MI'),0,10) day
+     , SUBSTR(to_char(m.maa_date, 'YYYY-MM-DD HH24:MI'),12,7) time
+     , SUBSTR(TO_CHAR(m.maa_deadline, 'YYYY-MM-DD HH24:MI'),0,10) deadline
+     , m.maa_memo memo
+     , m.maa_stat stat
+     , TO_CHAR(m.regdate, 'YYYY-MM-DD') regdate
+     ,'makeup' type
+  FROM makeup_auction_apply m
+       JOIN users u 
+         ON m.user_no = u.user_no
+UNION
+SELECT s.saa_no  no
+     , u.user_no userNo
+     , u.user_nm writer
+     , NVL(u.user_tel, null) tel
+     , s.saa_loc loc
+     , SUBSTR(to_char(s.saa_date, 'YYYY-MM-DD HH24:MI'),0,10) day
+     , SUBSTR(to_char(s.saa_date, 'YYYY-MM-DD HH24:MI'),12,7) time
+     , SUBSTR(TO_CHAR(s.saa_deadline, 'YYYY-MM-DD HH24:MI'),0,10) deadline
+     , s.saa_memo memo
+     , s.saa_stat stat
+     , TO_CHAR(s.regdate, 'YYYY-MM-DD') regdate
+     , 'studio' type
+  FROM studio_auction_apply s
+       JOIN users u
+         ON s.user_no = u.user_no) d
+WHERE no = #{no} and type = #{type}
+	</select>	
 
 
 <!--  (페이징 처리 없이) 전체 신청 리스트 조회 -->
@@ -192,7 +264,7 @@ VALUES      (dress_auction_apply_seq.NEXTVAL,
              '입찰중',
              SYSDATE,
              SYSDATE) 
-</insert>
+</insert>	
 
 <!--  신청서 전체 리스트 페이징 처리 -->
 <select id="listParams" parameterType="SearchParams" resultType="Auction">
@@ -251,8 +323,67 @@ FROM   (       SELECT Ceil(ROWNUM / 10) page ,
                                               WHERE  s.saa_stat = '입찰중' 
                                               OR     s.saa_stat = '낙찰대기중') s 
                               ORDER BY regdate DESC ) m ) a
-              WHERE  page = #{page}
-</select>
+              WHERE  1 = 1 and page = #{page}              
+             </select>
+             
+<!--  낙찰 전체 리스트 페이징 처리 -->
+<select id="winlistParams" parameterType="SearchParams" resultType="Auction">
+SELECT a.* 
+FROM   (       SELECT Ceil(ROWNUM / 10) page , 
+                     m.* 
+              FROM   (        SELECT   s.* 
+                              FROM     (      SELECT d.daa_no                                               no ,
+                                                     u.user_no                                              userno ,
+                                                     u.user_nm                                              writer ,
+                                                     d.daa_loc                                              loc ,
+                                                     Substr(To_char(d.daa_date, 'YYYY-MM-DD HH24:MI'),0,10) day , 
+                                                     Substr(To_char(d.daa_date, 'YYYY-MM-DD HH24:MI'),12,7) TIME , 
+                                                     To_char(d.daa_deadline, 'YYYY-MM-DD')                  deadline , 
+                                                     d.daa_memo                                             memo ,
+                                                     d.daa_stat                                             stat ,
+                                                     To_char(d.regdate, 'YYYY-MM-DD')                       regdate , 
+                                                     'dress'                                                TYPE
+                                              FROM   dress_auction_apply d 
+                                              join   users u 
+                                              ON     d.user_no = u.user_no 
+                                              WHERE  d.daa_stat = '낙찰' 
+                                              UNION 
+                                              SELECT m.maa_no                                                   no ,
+                                                     u.user_no                                                  userno ,
+                                                     u.user_nm                                                  writer ,
+                                                     m.maa_loc                                                  loc ,
+                                                     Substr(To_char(m.maa_date, 'YYYY-MM-DD HH24:MI'),0,10)     day , 
+                                                     Substr(To_char(m.maa_date, 'YYYY-MM-DD HH24:MI'),12,7)     TIME , 
+                                                     Substr(To_char(m.maa_deadline, 'YYYY-MM-DD HH24:MI'),0,10) deadline , 
+                                                     m.maa_memo                                                 memo ,
+                                                     m.maa_stat                                                 stat ,
+                                                     To_char(m.regdate, 'YYYY-MM-DD')                           regdate , 
+                                                     'makeup'                                                   TYPE
+                                              FROM   makeup_auction_apply m 
+                                              join   users u 
+                                              ON     m.user_no = u.user_no 
+                                              WHERE  m.maa_stat = '낙찰' 
+                                              UNION 
+                                              SELECT s.saa_no                                                   no ,
+                                                     u.user_no                                                  userno ,
+                                                     u.user_nm                                                  writer ,
+                                                     s.saa_loc                                                  loc ,
+                                                     Substr(To_char(s.saa_date, 'YYYY-MM-DD HH24:MI'),0,10)     day , 
+                                                     Substr(To_char(s.saa_date, 'YYYY-MM-DD HH24:MI'),12,7)     TIME , 
+                                                     Substr(To_char(s.saa_deadline, 'YYYY-MM-DD HH24:MI'),0,10) deadline , 
+                                                     s.saa_memo                                                 memo ,
+                                                     s.saa_stat                                                 stat ,
+                                                     To_char(s.regdate, 'YYYY-MM-DD')                           regdate , 
+                                                     'studio'                                                   TYPE
+                                              FROM   studio_auction_apply s 
+                                              join   users u 
+                                              ON     s.user_no = u.user_no 
+                                              WHERE  s.saa_stat = '낙찰' 
+                                              ) s 
+                              ORDER BY regdate DESC ) m ) a
+              WHERE  1 = 1 and page = #{page}              
+             </select>
+             
 
 <select id="countPage" resultType="int">
 SELECT count(*) 
@@ -292,8 +423,8 @@ SELECT count(*)
                          ON d.user_no = u.user_no
                WHERE d.daa_stat = '입찰중' OR  d.daa_stat = '낙찰대기중') S
         ) M
+ WHERE page = #{page}
  ORDER BY regdate DESC
-
 </select>
 <select id="listByMakeup" parameterType="SearchParams" resultType="Auction">
  SELECT M.*
@@ -315,6 +446,7 @@ SELECT count(*)
                          ON m.user_no = u.user_no
                 WHERE m.maa_stat = '입찰중' OR  m.maa_stat = '낙찰대기중') S
         ) M
+  WHERE page = #{page}
   ORDER BY regdate DESC
         
 </select>
@@ -325,7 +457,7 @@ SELECT count(*)
           FROM ( SELECT  s.saa_no  no
                       , u.user_no userNo
                       , u.user_nm writer
-                      , ds.saa_loc loc
+                      , s.saa_loc loc
                       , SUBSTR(to_char(s.saa_date, 'YYYY-MM-DD HH24:MI'),0,10) day
                       , SUBSTR(to_char(s.saa_date, 'YYYY-MM-DD HH24:MI'),12,7) time
                       , TO_CHAR(s.saa_deadline, 'YYYY-MM-DD') deadline
@@ -338,9 +470,86 @@ SELECT count(*)
                          ON s.user_no = u.user_no
                WHERE s.saa_stat = '입찰중' OR  s.saa_stat = '낙찰대기중') S
         ) M
+ WHERE page = #{page}
  ORDER BY regdate DESC
 
 </select>
+
+<!--  스드메 별 낙찰 리스트 조회 + 페이징 처리 -->
+<select id="winlistByDress" parameterType="SearchParams" resultType="Auction">
+ SELECT M.*
+  FROM (SELECT CEIL(rownum / #{perPageNum}) page 
+             , S.*
+          FROM ( SELECT  d.daa_no  no
+                      , u.user_no userNo
+                      , u.user_nm writer
+                      , d.daa_loc loc
+                      , SUBSTR(to_char(d.daa_date, 'YYYY-MM-DD HH24:MI'),0,10) day
+                      , SUBSTR(to_char(d.daa_date, 'YYYY-MM-DD HH24:MI'),12,7) time
+                      , TO_CHAR(d.daa_deadline, 'YYYY-MM-DD') deadline
+                      , d.daa_memo memo
+                      , d.daa_stat stat
+                      , TO_CHAR(d.regdate, 'YYYY-MM-DD') regdate
+                      ,'dress' type
+                FROM   dress_auction_apply d
+                       JOIN users u 
+                       
+                         ON d.user_no = u.user_no
+               WHERE d.daa_stat = '낙찰') S
+        ) M
+ WHERE page = #{page}
+ ORDER BY regdate DESC
+</select>
+<select id="winlistByMakeup" parameterType="SearchParams" resultType="Auction">
+ SELECT M.*
+    FROM (SELECT CEIL(rownum / #{perPageNum}) page 
+             , S.*
+          FROM (SELECT m.maa_no  no
+                     , u.user_no userNo
+                     , u.user_nm writer   
+                     , m.maa_loc loc
+                     , SUBSTR(to_char(m.maa_date, 'YYYY-MM-DD HH24:MI'),0,10) day
+                     , SUBSTR(to_char(m.maa_date, 'YYYY-MM-DD HH24:MI'),12,7) time
+                     , SUBSTR(TO_CHAR(m.maa_deadline, 'YYYY-MM-DD HH24:MI'),0,10) deadline
+                     , m.maa_memo memo
+                     , m.maa_stat stat
+                     , TO_CHAR(m.regdate, 'YYYY-MM-DD') regdate
+                     ,'makeup' type
+                  FROM makeup_auction_apply m
+                       JOIN users u 
+                         ON m.user_no = u.user_no
+                WHERE m.maa_stat = '낙찰') S
+        ) M
+  WHERE page = #{page}
+  ORDER BY regdate DESC
+        
+</select>
+<select id="winlistByStudio" parameterType="SearchParams" resultType="Auction">
+ SELECT M.*
+  FROM (SELECT CEIL(rownum / #{perPageNum}) page 
+             , S.*
+          FROM ( SELECT  s.saa_no  no
+                      , u.user_no userNo
+                      , u.user_nm writer
+                      , s.saa_loc loc
+                      , SUBSTR(to_char(s.saa_date, 'YYYY-MM-DD HH24:MI'),0,10) day
+                      , SUBSTR(to_char(s.saa_date, 'YYYY-MM-DD HH24:MI'),12,7) time
+                      , TO_CHAR(s.saa_deadline, 'YYYY-MM-DD') deadline
+                      , s.saa_memo memo
+                      , s.saa_stat stat
+                      , TO_CHAR(s.regdate, 'YYYY-MM-DD') regdate
+                      ,'studio' type
+                FROM   studio_auction_apply s
+                       JOIN users u 
+                         ON s.user_no = u.user_no
+               WHERE s.saa_stat = '낙찰') S
+        ) M
+ WHERE page = #{page}
+ ORDER BY regdate DESC
+
+</select>
+
+
 
 <select id="listByTypeCount" parameterType="SearchParams" resultType="int">
 <choose>
@@ -355,7 +564,7 @@ SELECT count(*)
   WHERE saa_stat = '입찰중' OR saa_stat = '낙찰대기중' 
  </when>
  <when test="searchType == 'makeup'">
-  SELECT count(*) count 
+  SELECT count(*) count 	
     FROM makeup_auction_apply
    WHERE maa_stat = '입찰중' OR maa_stat = '낙찰대기중'
  </when>
@@ -372,6 +581,41 @@ SELECT count(*)
          SELECT * 
            FROM makeup_auction_apply
           WHERE maa_stat = '입찰중' OR maa_stat = '낙찰대기중'
+)
+ </otherwise>
+ </choose>
+</select>
+
+<select id="winlistByTypeCount" parameterType="SearchParams" resultType="int">
+<choose>
+<when test="searchType == 'dress'">
+  SELECT count(*) count 
+   FROM dress_auction_apply 
+  WHERE daa_stat = '낙찰'
+ </when>
+ <when test="searchType == 'studio'">
+  SELECT count(*) count 
+   FROM studio_auction_apply
+  WHERE saa_stat = '낙찰' 
+ </when>
+ <when test="searchType == 'makeup'">
+  SELECT count(*) count 	
+    FROM makeup_auction_apply
+   WHERE maa_stat = '낙찰'
+ </when>
+ <otherwise>
+ SELECT count(*) count
+  FROM    (SELECT *
+           FROM dress_auction_apply 
+          WHERE daa_stat = '낙찰'
+          UNION ALL 
+         SELECT * 
+           FROM studio_auction_apply
+          WHERE saa_stat = '낙찰'  
+          UNION ALL 
+         SELECT * 
+           FROM makeup_auction_apply
+          WHERE maa_stat = '낙찰' 
 )
  </otherwise>
  </choose>

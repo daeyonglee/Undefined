@@ -18,7 +18,7 @@
       <div class="row">
         <div class="page-head-content">
           <h1 class="page-title">
-            <span>역경매 신청서</span>
+            <span>낙찰서</span>
           </h1>
         </div>
       </div>
@@ -47,8 +47,7 @@
               
                 <div class="wizard-header"></div>
                 <ul>
-                  <li><a href="#step1" data-toggle="tab">역경매
-                      신청서</a></li>
+                  <li><a href="#step1" data-toggle="tab">낙찰서</a></li>
                 </ul>
 
                 <div class="tab-content">
@@ -88,30 +87,31 @@
                             value="${Auction.tel}">
                         </div>
                       </div>
-
-                      <div class="col-lg-2" id="col">
-                        <label>예식 희망 지역</label>
+                      
+                       <div class="col-lg-2" id="col">
+                        <label>미팅날짜</label>
                       </div>
                       <div class="col-lg-10" id="col">
                         <div class="col-lg-3">
                           <input class='form-control' type="text"
-                            name="locFirst" readonly="readonly"
-                            value="${Auction.locFirst}">
-                        </div>
-                        <div class="col-lg-3">
-                          <input class='form-control' type="text"
-                            readonly="readonly" name="locSecond"
-                            value="${Auction.locSecond}">
-                        </div>
-                        <div class="col-lg-3">
-                          <input class='form-control' type="text"
-                            readonly="readonly" name="locThird"
-                            value="${Auction.locThird}">
+                            name="mdate" readonly="readonly"
+                            value="">
                         </div>
                       </div>
 
                       <div class="col-lg-2" id="col">
-                        <label>예식 희망 일자</label>
+                        <label>예식 지역</label>
+                      </div>
+                      <div class="col-lg-10" id="col">
+                        <div class="col-lg-3">
+                          <input class='form-control' type="text"
+                            name="loc" readonly="readonly"
+                            value="${Auction.loc}">
+                        </div>
+                      </div>
+
+                      <div class="col-lg-2" id="col">
+                        <label>예식 일자</label>
                       </div>
                       <div class="col-lg-10" id="col">
                         <div class="col-lg-3">
@@ -119,33 +119,28 @@
                             name="day" readonly="readonly"
                             value="${Auction.day}">
                         </div>
-                        <div class="col-lg-3">
-                          <input class='form-control' type="text"
-                            readonly="readonly">
-                        </div>
-                        <div class="col-lg-3">
-                          <input class='form-control' type="text"
-                            readonly="readonly">
-                        </div>
                       </div>
 
                       <div class="col-lg-2" id="col">
-                        <label>예식 희망 시간</label>
+                        <label>예식 시간</label>
                       </div>
                       <div class="col-lg-10" id="col">
                         <div class="col-lg-3">
                           <input class='form-control' type="text"
                             name="time" readonly="readonly"
                             value="${Auction.time}">
-                        </div>
+                      </div>
+                      </div>
+                      
+                      <div class="col-lg-2" id="col">
+                        <label>할인율</label>
+                      </div>
+                      <div class="col-lg-10" id="col">
                         <div class="col-lg-3">
                           <input class='form-control' type="text"
-                            readonly="readonly">
-                        </div>
-                        <div class="col-lg-3">
-                          <input class='form-control' type="text"
-                            readonly="readonly">
-                        </div>
+                            name="할인율" readonly="readonly"
+                            value="">
+                      </div>
                       </div>
 
                       <div class="col-lg-2" id="col">
@@ -157,7 +152,7 @@
                       </div>
 
 
-                    </div>
+                  </div>
                   </div>
                   <div class="col-lg-4"></div>
                 </div>
@@ -166,20 +161,10 @@
 
             <!--  submit 버튼   -->
             <div class="form-group text-center">
-              <span id=button>  <input
-                  type='button' class='btn-primary' id="list"
-                  name='list' value='글목록'
-                  style="width: 140px; padding-top: 5px; padding-bottom: 5px" />
-               <input type='button'
-                  class='btn-warning' id="submit" name='submit'
-                  value='수정' style="width: 140px; color: #f5f5f5;" />
-               <input type='button'
-                  class='btn-danger' id="submit" name='submit'
-                  value='삭제' style="width: 140px; color : #f5f5f5;" />
-                        <a href="bid?no=${Auction.no}&type=${Auction.type}"><input type="button" class="btn-primary" id="bid"  name="bid" value="입찰서 제출" style="width: 140px; padding-top: 5px; padding-bottom: 5px; float: right;"></a>
+              <span id=button>  
+              <input type='button' class='btn-primary' id="submit" name='submit' value='글목록' style="width: 140px; padding-top: 5px; padding-bottom: 5px" />              
               </span>
             </div>
-            <div class="clearfix"></div>
 
 
           </div>
@@ -196,18 +181,9 @@
 			$(document).ready(function() {
 				var formObj = $("form[role='form']");
 
-				$(".btn-warning").on("click", function() {
-					formObj.attr("action", "modify");
-					formObj.attr("method", "get");
-					formObj.submit();
-				});
-				$(".btn-danger").on("click", function() {
-					formObj.attr("action", "remove");
-					formObj.submit();
-				});
 
-				$("#list").on("click", function() {
-					self.location = "list";
+				$(".btn-primary").on("click", function() {
+					self.location = "win";
 				});
 			});
 		</script>

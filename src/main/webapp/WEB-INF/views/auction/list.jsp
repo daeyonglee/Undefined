@@ -1,9 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-  pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page session="false"%>
-
 
 <!DOCTYPE html>
 <html>
@@ -18,7 +16,11 @@ body {
 	text-align: center;
 }
 
-td, th {
+th{
+  text-align: center;
+}
+
+td {
 	text-align: center;
 }
 
@@ -28,7 +30,7 @@ td, th {
 </style>
 </head>
 <body>
-  <%@include file="../../include/top.jsp"%>
+  <%@include file="../include/top.jsp"%>
 
   <!-- Main content -->
   <section class="content">
@@ -51,18 +53,20 @@ td, th {
               </div>
               <div class="form-group">
                 <select name="searchType" id="searchType" class="selectpicker show-tick form-control">
-                  <option value="" selected="selected">종류를 선택하세요</option>
+                  <option value="all" selected="selected">종류를 선택하세요</option>
                   <option value="studio">스튜디오</option>
                   <option value="dress">드레스</option>
                   <option value="makeup">메이크업</option>
                 </select>
               </div>
 
-              <div class="box-body">
+              <div class="box-body" >
                 <table class="table table-bordered">
+                  <thead>
                   <tr>
                     <td colspan="6">역경매 신청 건수 : ${pageMaker.totalCount} 건</td>
                   </tr>
+                  
                   <tr>
                     <th style="width: 100px">신청일시</th>
                     <th style="width: 100px">예식일자</th>
@@ -71,13 +75,13 @@ td, th {
                     <th style="width: 100px">입찰마감일</th>
                     <th style="width: 200px">제출된 입찰서</th>
                   </tr>
-
+                  </thead>
                   <c:forEach items="${list}" var="bid">
-                    <tr>
+                    <tr id = "visible">
                       <td>${bid.regdate }</td>
                       <td>${bid.day }</td>
-                      <td>${bid.writer }</td>
-                      <td>${bid.loc }</td>
+                      <td><a href = "read?no=${bid.no}&type=${bid.type}">${bid.writer }</a></td>
+                      <td>${bid.loc}</td>
                       <td>${bid.deadline }</td>
                       <td>미공개</td>
                     </tr>
@@ -93,23 +97,20 @@ td, th {
               <div class="col-md-12">
                 <div class="pull-center">
                   <div class="pagination">
-                    <ul>
+                    <ul id = "visible2">
                       <c:if test="${pageMaker.prev}">
-                        <li><a
-                          href="bid${pageMaker.makeQuery(pageMaker.startPage - 1) }">&laquo;</a></li>
+                        <li><a href="${pageMaker.makeQuery(pageMaker.startPage - 1) }">&laquo;</a></li>
                       </c:if>
 
                       <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
                         <li
-                          <c:out value="${pageMaker.params.page == idx?'class =active':''}"/>>
-                          <a href="bid${pageMaker.makeQuery(idx)}">${idx}</a>
+                           <c:out value="${pageMaker.params.page == idx?'class =active':''}"/>>
+                          <a class="paging" href="#">${idx}</a>
                         </li>
                       </c:forEach>
 
-                      <c:if
-                        test="${pageMaker.next && pageMaker.endPage > 0}">
-                        <li><a
-                          href="bid${pageMaker.makeQuery(pageMaker.endPage +1) }">&raquo;</a></li>
+                      <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+                        <li><a href="${pageMaker.makeQuery(pageMaker.endPage +1) }">&raquo;</a></li>
                       </c:if>
 
                     </ul>
@@ -139,76 +140,95 @@ td, th {
 			if (result == 'SUCCESS') {
 				alert("처리가 완료되었습니다.");
 			}
-			
-			$(".pagination li a").on("click", function(event) {
-
-				event.preventDefault();
-
-				var targetPage = $(this).attr("href");
-
-				var jobForm = $("#jobForm");
-				jobForm.find("[name='page']").val(targetPage);
-				jobForm.attr("action", "/auction/bid").attr("method", "get");
-				jobForm.submit();
-			});
  </script>
  
- <script>
- $(document).ready(function(){
-	 $('#searchType').change(function() {
-		
-		 var data = [{ "key1":"value1", "key2":"value2" }] 
-		 alert( data[0].key1)
-
-
-		 출처: http://wonzopein.com/50 [wonzopein.com]
-		 
-		
-     if($(this).val() == 'studio'){
- 		alert($(this).val());
+    <script>
+ 	$(document).ready(function () {
  		
- 		$.ajax({
-	          type : 'GET',
-	          url  : '/auction/bid/studio',
-	      dataType : 'json',
-	          data : data,
-	       success : function(data){
-	    	   console.log(data);
-	       }
-	     
-	    });
-	  } else if ($(this).val() == 'dress') {
-			alert($(this).val());
-
-	 		$.ajax({
-		          type : 'GET',
-		          url  : '/auction/bid/dress',
-		      dataType : 'json',
-		          data : data,
-		       success : function(data){
-		    	   console.log(data);
-		       }
-		     
-		    });
-		  
-	  } else if ($(this).val() == 'makeup') {
-			alert($(this).val());
-
-	 		$.ajax({
-		          type : 'GET',
-		          url  : '/auction/bid/makeup',
-		      dataType : 'json',
-		          data : data,
-		       success : function(data){
-		    	   console.log(data);
-		       }
-		     
-		    });	
-	  }
-	}); 
- });
- </script>
-
-  <%@include file="../../include/bottom.jsp"%>
+ 	 // 화면 로드 시 searchType 값이 있다면 그 값으로 변경
+ 	 var searchType = "${pageMaker.params.searchType}";
+ 	 
+ 	 console.log(searchType);
+ 	 
+ 	 if (searchType != null) {
+ 		 $("#searchType").val(searchType);
+ 	 }
+ 	
+ 		
+	 $('#searchType').change(function () {
+		 
+		 var type = $('#searchType').val();
+		 var url;
+		 
+		 console.log(type);
+		 
+		 if (type == 'studio') {
+			 url = "bid/studio";
+		 } else if (type == 'dress'){
+			 url = "bid/dress";
+		 } else if (type == 'makeup'){
+			 url = "bid/makeup";
+		 }
+		 
+  		 $.ajax({
+			 type : 'get',
+			 url : url,
+			 dataType : "json",
+			 data : {searchType : type},
+			 success:function(searchList){
+				 console.log(searchList);
+				 $(".table.table-bordered tr#visible").remove();
+				 $(".pagination ul#visible2").remove();
+				 console.log($(".table.table-bordered tr#visible"));
+                 				 
+				 var text = "";
+				 
+				 for ( var i in searchList) {
+					 
+					 text += "<tr>";
+					 text += "<td>" +searchList[i].regdate+"</td>";
+					 text += "<td>" +searchList[i].day+"</td>";
+					 text += "<td> <a href = 'read?no="+searchList[i].no+"&type="+searchList[i].type+"'>"+searchList[i].writer+"</a></td>";
+					 text += "<td>" +searchList[i].loc+"</td>";
+					 text += "<td>" +searchList[i].deadline + "</td>";
+					 text += "<td>미공개</td>";
+					 text += "</tr>";
+				 	 
+					
+				}
+				$(".table.table-bordered > tbody").html(text); 
+			 },
+	         error:function(){
+	            console.log("오류");
+	         }
+		 }); 
+				
+	  });
+	 
+	 $("a.paging").click(function(e){
+		 e.preventDefault();
+		 
+		 var perPageNum = ${pageMaker.params.perPageNum};
+		 var searchType = $("#searchType").val();
+		 var url;
+		 
+		 if (searchType == null || searchType == undefined || searchType == "") {
+			 url = "/auction/list?page="+e.target.innerHTML+"&perPageNum="+perPageNum;
+		 } else {
+			 url = "/auction/list?page="+e.target.innerHTML+"&perPageNum="+perPageNum+"&searchType="+searchType;
+		 }
+		 
+		 self.location.href=url;
+	 });
+	 
+	 	
+	});	 
+ 
+ 
+ 
+	</script>
+ 
+ 
+  <%@include file="../include/bottom.jsp"%>
 </body>
 </html>

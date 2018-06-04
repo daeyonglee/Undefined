@@ -95,9 +95,9 @@ $(document).ready(function(){
 			html += "<tr class=" + arr[i] + " style='position: relative;'>";
 			html += "<td>입찰중</td>";
 			html += "<td>" + data[i].writer + "</td>";
-			html += "<td>" + data[i].loc +"</td>";
+			html += "<td style = 'width : 126px; height : 37px; table-layout:fixed;'>" + data[i].loc +"</td>";
 			html += "<td>" + data[i].deadline + "</td>";
-			html += "<td>" + data[i].stat +"</td>";
+			html += "<td style = 'width : 86px; height : 37px; table-layout:fixed;'>" + data[i].stat +"</td>";
 			html += "</tr>";
 		}
 		
@@ -113,9 +113,9 @@ $(document).ready(function(){
 				var appendTag  = "<tr class='" + arr[classIndex] + "' style='position: relative;'>";
 			    appendTag += "<td>입찰중</td>";
 			    appendTag += "<td>" + data[index].writer + "</td>";
-			    appendTag += "<td>" + data[index].loc +"</td>";
+			    appendTag += "<td style = 'width : 126px; height : 37px; table-layout:fixed;'>" + data[index].loc +"</td>";
 			    appendTag += "<td>" + data[index].deadline + "</td>";
-			    appendTag += "<td>" + data[index].stat +"</td>";
+			    appendTag += "<td style = 'width : 86px; height : 37px; table-layout:fixed;'>" + data[index].stat +"</td>";
 			
 			    $("#realtimelist > tbody:first").append(appendTag);
 			    $("#realtimelist > tbody:first > tr:last").animateCss('fadeInUp');
@@ -163,7 +163,7 @@ $(document).ready(function(){
 			html += "<td>" + data[i].writer + "</td>";
 			html += "<td>" + data[i].loc +"</td>";
 			html += "<td>" + data[i].deadline + "</td>";
-			html += "<td>할인율</td>";
+			html += "<td style = 'width : 126px; height : 37px; table-layout:fixed;'>할인율</td>";
 			html += "</tr>";
 		}
 		
@@ -181,7 +181,7 @@ $(document).ready(function(){
 			    appendTag += "<td>" + data[index].writer + "</td>";
 			    appendTag += "<td>" + data[index].loc +"</td>";
 			    appendTag += "<td>" + data[index].deadline + "</td>";
-			    appendTag += "<td>할인율</td>";
+			    appendTag += "<td style = 'width : 126px; height : 37px; table-layout:fixed;'>할인율</td>";
 			
 			    $("#winrealtimelist > tbody:first").append(appendTag);
 			    $("#winrealtimelist > tbody:first > tr:last").animateCss('fadeInUp');
@@ -230,7 +230,7 @@ $(document).ready(function(){
 			html += "<td>" + data[i].writer + "</td>";
 			html += "<td>" + data[i].loc +"</td>";
 			html += "<td>" + data[i].deadline + "</td>";
-			html += "<td>" + data[i].stat +"</td>";
+			html += "<td style = 'width : 86px; height : 37px; table-layout:fixed;'>" + data[i].stat +"</td>";
 			html += "</tr>";
 		}
 		
@@ -248,7 +248,7 @@ $(document).ready(function(){
 			    appendTag += "<td>" + data[index].writer + "</td>";
 			    appendTag += "<td>" + data[index].loc +"</td>";
 			    appendTag += "<td>" + data[index].deadline + "</td>";
-			    appendTag += "<td>" + data[index].stat +"</td>";
+			    appendTag += "<td style = 'width : 86px; height : 37px; table-layout:fixed;'>" + data[index].stat +"</td>";
 			
 			    $("#dressrealtimelist > tbody:first").append(appendTag);
 			    $("#dressrealtimelist > tbody:first > tr:last").animateCss('fadeInUp');
@@ -296,7 +296,7 @@ $(document).ready(function(){
 			html += "<td>" + data[i].writer + "</td>";
 			html += "<td>" + data[i].loc +"</td>";
 			html += "<td>" + data[i].deadline + "</td>";
-			html += "<td>할인율</td>";
+			html += "<td style = 'width : 126px; height : 37px; table-layout:fixed;'>할인율</td>";
 			html += "</tr>";
 		}
 		
@@ -314,7 +314,7 @@ $(document).ready(function(){
 			    appendTag += "<td>" + data[index].writer + "</td>";
 			    appendTag += "<td>" + data[index].loc +"</td>";
 			    appendTag += "<td>" + data[index].deadline + "</td>";
-			    appendTag += "<td>할인율</td>";
+			    appendTag += "<td style = 'width : 126px; height : 37px; table-layout:fixed;'>할인율</td>";
 			
 			    $("#dresswinrealtimelist > tbody:first").append(appendTag);
 			    $("#dresswinrealtimelist > tbody:first > tr:last").animateCss('fadeInUp');
@@ -361,9 +361,9 @@ $(document).ready(function(){
 			html += "<tr class=" + arr[i] + " style='position: relative;'>";
 			html += "<td>입찰중</td>";
 			html += "<td>" + data[i].writer + "</td>";
-			html += "<td>" + data[i].loc +"</td>";
+			html += "<td style = 'width : 126px; height : 37px; table-layout:fixed;'>" + data[i].loc +"</td>";
 			html += "<td>" + data[i].deadline + "</td>";
-			html += "<td>" + data[i].stat +"</td>";
+			html += "<td style = 'width : 86px; height : 37px; table-layout:fixed;'>" + data[i].stat +"</td>";
 			html += "</tr>";
 		}
 		
@@ -379,9 +379,9 @@ $(document).ready(function(){
 				var appendTag  = "<tr class='" + arr[classIndex] + "' style='position: relative;'>";
 			    appendTag += "<td>입찰중</td>";
 			    appendTag += "<td>" + data[index].writer + "</td>";
-			    appendTag += "<td>" + data[index].loc +"</td>";
+			    appendTag += "<td style = 'width : 126px; height : 37px; table-layout:fixed;'>" + data[index].loc +"</td>";
 			    appendTag += "<td>" + data[index].deadline + "</td>";
-			    appendTag += "<td>" + data[index].stat +"</td>";
+			    appendTag += "<td style = 'width : 86px; height : 37px; table-layout:fixed;'>" + data[index].stat +"</td>";
 			
 			    $("#makeuprealtimelist > tbody:first").append(appendTag);
 			    $("#makeuprealtimelist > tbody:first > tr:last").animateCss('fadeInUp');
@@ -427,9 +427,9 @@ $(document).ready(function(){
 			html += "<tr class=" + arr[i] + " style='position: relative;'>";
 			html += "<td>" + data[i].stat +"</td>";
 			html += "<td>" + data[i].writer + "</td>";
-			html += "<td>" + data[i].loc +"</td>";
+			html += "<td style = 'width : 126px; height : 37px; table-layout:fixed;'>" + data[i].loc +"</td>";
 			html += "<td>" + data[i].deadline + "</td>";
-			html += "<td>할인율</td>";
+			html += "<td style = 'width : 126px; height : 37px; table-layout:fixed;'>할인율</td>";
 			html += "</tr>";
 		}
 		
@@ -445,9 +445,9 @@ $(document).ready(function(){
 				var appendTag  = "<tr class='" + arr[classIndex] + "' style='position: relative;'>";
 			    appendTag += "<td>" + data[i].stat +"</td>";
 			    appendTag += "<td>" + data[index].writer + "</td>";
-			    appendTag += "<td>" + data[index].loc +"</td>";
+			    appendTag += "<td style = 'width : 126px; height : 37px; table-layout:fixed;'>" + data[index].loc +"</td>";
 			    appendTag += "<td>" + data[index].deadline + "</td>";
-			    appendTag += "<td>할인율</td>";
+			    appendTag += "<td style = 'width : 126px; height : 37px; table-layout:fixed;'>할인율</td>";
 			
 			    $("#makeupwinrealtimelist > tbody:first").append(appendTag);
 			    $("#makeupwinrealtimelist > tbody:first > tr:last").animateCss('fadeInUp');

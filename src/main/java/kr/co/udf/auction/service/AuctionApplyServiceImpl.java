@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import kr.co.udf.auction.dao.AuctionApplyDao;
 import kr.co.udf.auction.domain.Auction;
+import kr.co.udf.common.web.Params;
 import kr.co.udf.common.web.SearchParams;
 
 @Service
@@ -46,6 +47,22 @@ public class AuctionApplyServiceImpl implements AuctionApplyService {
 	public List<Auction> listByMakeup(SearchParams params) throws Exception {
 		return dao.listByMakeup(params);
 	}
+	
+	@Override
+	public List<Auction> winlistByStudio(SearchParams params) throws Exception {
+		return dao.winlistByDress(params);
+	}
+
+	@Override
+	public List<Auction> winlistByDress(SearchParams params) throws Exception {
+		return dao.winlistByDress(params);
+	}
+
+	@Override
+	public List<Auction> winlistByMakeup(SearchParams params) throws Exception {
+		return dao.winlistByMakeup(params);
+	}
+	
 	@Override
 	public Auction read(int no ,String type) throws Exception {
 		Auction	auction = dao.read(no,type);
@@ -58,10 +75,21 @@ public class AuctionApplyServiceImpl implements AuctionApplyService {
 	  return auction;
 		 
 	}
+	
+	@Override
+	public Auction winread(int no, String type) throws Exception {
+		return dao.winread(no, type);
+	}
 
 	@Override
-	public void update(Auction auction) throws Exception {
-		// TODO Auto-generated method stub
+	public void modify(Auction auction) throws Exception {
+		
+		String loc = auction.getLocFirst() + "||" + auction.getLocSecond() + "||" + auction.getLocThird();
+		auction.setLoc(loc);
+		
+		String date = auction.getDay() + " " + auction.getTime();
+		auction.setDate(date);
+		dao.update(auction);
 
 	}
 
@@ -79,6 +107,11 @@ public class AuctionApplyServiceImpl implements AuctionApplyService {
 	public List<Auction> listParams(SearchParams params) throws Exception {
 		return dao.listParams(params);
 	}
+	
+	@Override
+	public List<Auction> winlistParams(SearchParams params) throws Exception {
+		return dao.winlistParams(params);
+	}
 
 	@Override
 	public int countPage() throws Exception {
@@ -86,10 +119,6 @@ public class AuctionApplyServiceImpl implements AuctionApplyService {
 	}
 
 
-	@Override
-	public int listByTypeCount() throws Exception {
-		return dao.listByTypeCount();
-	}
 	
 	@Override
 	public List<Auction> realtimelist() throws Exception {
@@ -120,6 +149,22 @@ public class AuctionApplyServiceImpl implements AuctionApplyService {
 	public List<Auction> makeupwinrealtimelist() throws Exception {
 		return dao.makeupwinrealtimelist();
 	}
+
+	@Override
+	public int listByTypeCount(SearchParams params) throws Exception {
+		return dao.listByTypeCount(params);
+	}
+
+	@Override
+	public int winlistByTypeCount(SearchParams params) throws Exception {
+		return dao.winlistByTypeCount(params);
+	}
+
+	
+
+	
+
+
 
 
 }

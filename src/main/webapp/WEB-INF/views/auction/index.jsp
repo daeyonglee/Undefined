@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
         <script src="/resources/js/auction.js"></script>
 <title>역경매 메인 페이지</title>
+
 </head>
 <body>
 
@@ -63,16 +64,22 @@
       </div>
     </div>
   </div>
+  <br>
   <div class="container">
     <h4 align="center">스튜디오 실시간 입낙찰 현황</h4>
   </div>
-  <div class="container"  style = "position : relative; overflow : hidden;">
-    <table id="realtimelist" class="table" style="width: 45%; display: inline-block;  transition-duration: 0.2s; position : relative; " >
-    <thead><tr class = "active"><td colspan = "5" align = "center"><a href = "bid">입찰중 역경매</a></td></tr></thead>
+  <br>
+  
+  
+    <div class="container" >
+    <table id="realtimelist" class="table" style="width: 513px; height : 221px; display: inline-block;  transition-duration: 0.2s; text-align: center; " >
+    <thead><tr class = "active"><td colspan = "5" align = "center"><a href = "list">입찰중 역경매</a></td></tr></thead>
     <tbody></tbody>     
     </table>
     
-    <table id="winrealtimelist" class="table" style="width: 45%; display: inline-block;  transition-duration: 0.2s; position : relative; " >
+     &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+      
+    <table id="winrealtimelist" class="table" style="width: 513px; height : 221px; display: inline-block;  transition-duration: 0.2s; text-align: center; " >
     <thead><tr class = "active"><td colspan = "5" align = "center"><a href = "win">낙찰된 역경매</a></td></tr></thead>
     <tbody></tbody>     
     </table>
@@ -80,13 +87,15 @@
     <div class="container">
     <h4 align="center">드레스 실시간 입낙찰 현황</h4>
     </div>
-    
-    <table id="dressrealtimelist" class="table" style="width: 45%; display: inline-block;  transition-duration: 0.2s; position : relative; " >
-    <thead><tr class = "active"><td colspan = "5" align = "center"><a href = "bid">입찰중 역경매</a></td></tr></thead>
+    <br>
+    <table id="dressrealtimelist" class="table" style="width: 513px; height : 221px; display: inline-block;  transition-duration: 0.2s; text-align: center;" >
+    <thead><tr class = "active"><td colspan = "5" align = "center"><a href = "list">입찰중 역경매</a></td></tr></thead>
     <tbody></tbody>     
     </table>
     
-    <table id="dresswinrealtimelist" class="table" style="width: 45%; display: inline-block;  transition-duration: 0.2s; position : relative; " >
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+    
+    <table id="dresswinrealtimelist" class="table" style="width: 513px; height : 221px; display: inline-block;  transition-duration: 0.2s; text-align: center; " >
     <thead><tr class = "active"><td colspan = "5" align = "center"><a href = "win">낙찰된 역경매</a></td></tr></thead>
     <tbody></tbody>     
     </table>
@@ -94,19 +103,22 @@
     <div class="container">
     <h4 align="center">메이크업 실시간 입낙찰 현황</h4>
     </div>
-    
-    <table id="makeuprealtimelist" class="table" style="width: 45%; display: inline-block;  transition-duration: 0.2s; position : relative; " >
-    <thead><tr class = "active"><td colspan = "5" align = "center"><a href = "bid">입찰중 역경매</a></td></tr></thead>
+    <br>
+    <table id="makeuprealtimelist" class="table" style="width: 513px; height : 221px; display: inline-block;  transition-duration: 0.2s; text-align: center; " >
+    <thead><tr class = "active"><td colspan = "5" align = "center"><a href = "list">입찰중 역경매</a></td></tr></thead>
     <tbody></tbody>     
     </table>
+    
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+    
        
-    <table id="makeupwinrealtimelist" class="table" style="width: 45%; display: inline-block;  transition-duration: 0.2s; position : relative; " >
+    <table id="makeupwinrealtimelist" class="table" style="width: 513px; height : 221px; display: inline-block;  transition-duration: 0.2s; text-align: center; " >
     <thead><tr class = "active"><td colspan = "5" align = "center"><a href = "win">낙찰된 역경매</a></td></tr></thead>
     <tbody></tbody>     
     </table>           
     
       <div class="form-group text-center">
-           <a href="apply" class="btn btn-info">역경매 신청하기<i class="fa fa-check spaceLeft"></i></a>
+           <a href="apply" class="btn btn-primary">역경매 신청하기<i class="fa fa-check spaceLeft"></i></a>
       </div>
     </div>
 
