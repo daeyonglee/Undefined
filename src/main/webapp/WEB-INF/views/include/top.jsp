@@ -134,7 +134,7 @@
                <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">업체정보<b class="caret"></b></a>
                <ul class="dropdown-menu navbar-nav">
                    <li>
-                       <a href="/company/listmap">업체 찾기</a>
+                       <a href="/company/slist">업체 찾기</a>
                    </li>
                    <li>
                        <a href="index-3.html">Home Style 3</a>

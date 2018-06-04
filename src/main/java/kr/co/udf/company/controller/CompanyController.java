@@ -23,7 +23,9 @@ public class CompanyController {
 	
 	@Inject
 	private StudioService ss;
+	@Inject
 	private DressService ds;
+	@Inject
 	private MakeupService ms;
 	
 //	@RequestMapping(value="/studio", method=RequestMethod.GET)
@@ -48,10 +50,10 @@ public class CompanyController {
 	@RequestMapping(value="/dress", method=RequestMethod.GET)
 	public void dress(Criteria cri, Model model) throws Exception {
 		logger.info("드레스 페이징 ");
-		model.addAttribute("dresslist", ds.listCriteria(cri));
+		model.addAttribute("dresslist", ds.DressCri(cri));
 		PageMaker pagemaker = new PageMaker();
 		pagemaker.setCri(cri);
-		pagemaker.setTotalCount(ds.countPaging(cri));
+		pagemaker.setTotalCount(ds.DressCount(cri));
 		
 		model.addAttribute("pageMaker", pagemaker);
 	}
@@ -59,10 +61,10 @@ public class CompanyController {
 	@RequestMapping(value="/makeup", method=RequestMethod.GET)
 	public void makeup(Criteria cri, Model model) throws Exception {
 		logger.info("메이크업 페이징 ");
-		model.addAttribute("makeuplist", ss.listCriteria(cri));
+		model.addAttribute("makeuplist", ms.MakeupCri(cri));
 		PageMaker pagemaker = new PageMaker();
 		pagemaker.setCri(cri);
-		pagemaker.setTotalCount(ms.countPaging(cri));
+		pagemaker.setTotalCount(ms.MakeupCount(cri));
 		
 		model.addAttribute("pageMaker", pagemaker);
 	}

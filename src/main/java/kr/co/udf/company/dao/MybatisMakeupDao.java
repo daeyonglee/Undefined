@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.udf.common.company.domain.MakeupCompany;
 import kr.co.udf.company.domain.Criteria;
+import kr.co.udf.company.domain.SearchCriteria;
 
 @Repository
 public class MybatisMakeupDao implements MakeupDao {
@@ -19,25 +20,34 @@ public class MybatisMakeupDao implements MakeupDao {
 	private static String namespace = "kr.co.udf.company.dao.MakeupDao";
 
 	@Override
-	public List<MakeupCompany> listAll() throws Exception {
+	public List<MakeupCompany> listMakeup() throws Exception {
 		return session.selectList(namespace+".listMakeup");
 	}
 
 	@Override
-	public List<MakeupCompany> listPage(int page) throws Exception {
+	public List<MakeupCompany> MakeupPage(int page) throws Exception {
 		return session.selectList(namespace+".MakeupPage", page);
 	}
 
 	@Override
-	public List<MakeupCompany> listCriteria(Criteria cri) throws Exception {
+	public List<MakeupCompany> MakeupCri(Criteria cri) throws Exception {
 		return session.selectList(namespace+".MakeupCri", cri);
 	}
 
 	@Override
-	public int countPaging(Criteria cri) throws Exception {
+	public int MakeupCount(Criteria cri) throws Exception {
 		return session.selectOne(namespace+".MakeupCount", cri);
 	
-	
-}
+	}
+
+	@Override
+	public List<MakeupCompany> MakeupSearch(SearchCriteria cri) throws Exception {
+		return session.selectList(namespace+".MakeupSearch", cri);
+	}
+
+	@Override
+	public int MakeupSearchCount(MakeupCompany cri) throws Exception {
+		return session.selectOne(namespace+".MakeupSearchCount", cri);
+	}
 
 }

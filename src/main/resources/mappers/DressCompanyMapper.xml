@@ -53,7 +53,7 @@ FROM (SELECT *
   	*
 	FROM
  	 (
- 	SELECT rownum,
+ 	SELECT rownum rn,
     dc_no, 
 	dc_nm, 
 	dc_company_no, 
@@ -84,5 +84,57 @@ FROM (SELECT *
 	]]>
 	</select>
 	
+	
+<sql id="searchDress">
+   <if test="searchType == 'name'.toString()">
+     and dc_nm like '%'|| #{keyword}||'%'
+   </if>
+   <if test="searchType == 'addr'.toString()">
+     and dc_addr like '%'|| #{keyword}||'%'
+   </if>
+</sql>
+
+	
+	<select id="DressSearch" resultType="kr.co.udf.common.company.domain.DressCompany">
+<![CDATA[
+	select *
+	from
+ 	 (
+ 	SELECT rownum rn,
+ 	dc_no, 
+	dc_nm, 
+	dc_company_no, 
+	dc_main_nm, 
+	dc_addr, 
+	dc_main_image, 
+	dc_email, 
+	dc_pw, 
+	dc_tel, 
+	dc_introduce, 
+	sessionkey, 
+	regdate, 
+	updatedate
+ 	FROM dress_company
+ 	 where 1=1
+ 	 ]]>
+ 	   <include refid="searchDress"></include>
+<![CDATA[ 
+ 	 and rownum <= #{page} * #{perPageNum}
+ 	 and dc_no > 0
+     order by dc_no DESC
+ 	 )
+	where rn > (#{page} -1) * #{perPageNum}
+ 	]]>
+ 		
+	</select>
+ 	
+ 		<select id="DressSearchCount" resultType="int">
+	 <![CDATA[
+	select count(dc_no)
+	from dress_company
+	where dc_no > 0
+	]]>
+	   <include refid="searchDress"></include>
+	</select>	
 	
 </mapper>

@@ -130,13 +130,17 @@
   .hall_box{overflow:hidden}
 .hall_box img{float:left;width:170px;height:139px;margin-right:13px}
 .hall_box .hall_detail{float:left;height:100%}
-.hall_box .hall_detail dl{margin-bottom:25px;font-size:20px;color:#515151;font-weight:bold;}
-.hall_box .hall_detail dl dt a{font-size:15px;color:#2a2a2a;font-weight:bold}
-.hall_box .hall_detail dl dd{color:#FF7268;font-size:13px;margin-top:-15px}
-.hall_box .hall_detail li{color:#515151;font-size:15px;max-width:200px;margin-top:-10px}
+.hall_box .hall_detail dl{margin-bottom:25px;font-size:15px;color:#515151;font-weight:bold;}
+.hall_box .hall_detail dl dt a{font-size:10px;color:#2a2a2a;font-weight:bold}
+.hall_box .hall_detail dl dd{color:#FF7268;font-size:11px;margin-top:-15px}
+.hall_box .hall_detail li{color:#515151;font-size:11px;max-width:150px;margin-top:-10px}
 .hall_box .hall_detail li span{float:right}
   .load{position:relative}
   .load .loadimg{position:absolute;left:50%;top:50%;margin-left:-63px;margin-top:-63px}
+  </style>
+  
+  <style type="text/css">
+  .search{margin-bottom:20px;}
   </style>
 
 <body onload="initialize()">
@@ -162,11 +166,10 @@
           <div class="col-md-9 padding-top-40 properties-page">
             <div class="section clear">
               <div class="col-xs-10 page-subheader sorting pl0">
-                <a href="studio"> <button type="button">STUDIO</button></a>  
+                <a href="slist"> <button type="button">STUDIO</button></a>  
                  <a href="dress"><button type="button">DRESS</button></a>
                  <button type="button" disabled>MAKEUP</button>
                  
-
           <script type="text/javascript">
 //          $(document).ready(function() {
  //    			 $("button").click(function() {
@@ -186,7 +189,7 @@
               <div id="list-type" class="proerty-th">
 
                  
-         <c:forEach items="${list}" var="studio" varStatus="status">
+         <c:forEach items="${makeuplist}" var="makeup" varStatus="status">
 
                   <div class="col-sm-6 col-md-4 p0">
                     <div class="box-two proerty-item">
@@ -242,8 +245,8 @@
                       <div class="item-entry overflow">
                         <h5>
                           <a
-                            href="/company/compare?companyNo=${studio.companyNo}">
-                            ${studio.nm} </a>
+                            href="/company/compare?companyNo=${makeup.mc_no}">
+                            ${makeup.mc_nm} </a>
                         </h5>
                         
              
@@ -252,12 +255,12 @@
                         <span class="proerty-price pull-left">
                           ★★★ </span> 3.0/5.0 (20명) <br>
             
-            <c:choose>
-           <c:when test="${fn:length(studio.introduce) > 40}">
-                        <div class=""><c:out value="${fn:substring(studio.introduce,0,39)}"/> ... </div>
+          <c:choose>
+           <c:when test="${fn:length(makeup.mc_introduce) > 40}">
+                        <div class=""><c:out value="${fn:substring(makeup.mc_introduce,0,39)}"/> ... </div>
                           </c:when>
                              <c:otherwise>
-                              <c:out value="${studio.introduce}"/>
+                              <c:out value="${makeup.mc_introduce}"/>
                                </c:otherwise> 
                                     </c:choose>   
                       </div>
@@ -267,9 +270,10 @@
 </c:forEach>
               </div>
             </div>
+
           <!-- 페이징 처리 -->
             <div class="section">
-              <div class="pull-legt">
+              <div class="pull-left">
                 <div class="pagination">
                   <ul>
                 	<c:if test="${pageMaker.prev}">
@@ -279,7 +283,7 @@
 					<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
 								<li
 									<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
-									<a href="${idx}">${idx}</a>
+									<a href="makeup?page=${idx}">${idx}</a>
 								</li>
 							</c:forEach>
 
@@ -306,9 +310,52 @@
             <div class="blog-asside-right pl0">
               <div class="panel panel-default sidebar-menu wow fadeInRight animated">
 
+              <!-- 업체검색 -->
+               <div class="searchType">
+                   <select name="selectBox" id="selectBox">
+                     <option value="addr"
+                  <c:out value="${cri.searchType eq 'addr'?'selected':''}"/>>
+                    장소</option>
+                  <option value="name"
+                    <c:out value="${cri.searchType eq 'name'?'selected':''}"/>>
+                    업체명</option>
+                        </select>
+                           
+                   <div class="input-group">
+                      <input class="form-control" name='keyword' id="keywordInput" placeholder="Search" type="text"
+                         value='${cri.keyword}'>
+                           <span class="input-group-btn">
+                                <button id='searchBtn' class="btn btn-smal">
+                                     <i class="fa fa-search"></i>
+                                        </button>
+                                        </span>
+                                    </div>
+                                
+                                
+  <!-- 검색처리 -->
+<script>
+  $(document).ready(
+      function() {
+
+        $('#searchBtn').on(
+            "click",
+            function(event) {
+
+              self.location = "makeup"
+                  + '${pageMaker.makeQuery(1)}'
+                  + "&searchType=" + $("select option:selected").val()
+                  + "&keyword=" + $('#keywordInput').val();
+
+
+            });
+
+      });
+</script>
+
+
                 <!-- 지도시작 -->
 
-                <div id="map" style="width: 150%; height: 700px;"></div>
+                <div id="map" style="width: 100%; height: 650px;"></div>
 
 
                 <script>
@@ -335,10 +382,12 @@
 				var geocoder = new google.maps.Geocoder();
 
 				var region = document.getElementById("mapList").value.split(",");
+				var name = document.getElementById("nameList").value.split(",");
 				
 				//마커를 올릴 지역을 가져온다.
 				if (region.length > 0) {
 					for (var i = 0; i < region.length; i++) {
+						
 						geocoder.geocode(
 										{
 											'address' : region[i]
@@ -364,22 +413,19 @@
 													//마커를 만들어 준다.
 													//좌표를 알고 있을 경우   position: results[j].geometry.location 부분에 var latlng = new google.maps.LatLng(x, y); 
 													//와 같이 객체를 만들어서 position: latlng 를 넣어 준다.
-
+														for (var n = 0; n < name.length; n++) {
 													var infoWindow = new google.maps.InfoWindow;
-
-													var name = document.getElementById("nameList").value.split(",");
 													var address = "주소";
 													var image = "대표이미지";
-
 													var infowin = '';
 													infowin += '<div class="hall_box">';
 													infowin += '<img src = "http://iwedding.co.kr/center/website/brandplus/6285/721-N153_141014032549_1.jpg">'
 													infowin += '<div class="hall_detail">';
-													infowin += '<dl>'+name+'</dl>';
-													infowin += '<dl><dd>경기도 안산시 단원구 초지1로 78</dd></dl>';
+													infowin += '<dl>'+name[n]+'</dl>';
+													infowin += '<dl><dd>'+address+'</dd></dl>';
 													infowin += '<li class="clear_fix">느와르 블랑 스튜디오입니다. 사진찍는 것을 두려워 하지 마세요. 당신의 아름다운 모습을 찾아드립니다.</li>'
 													infowin += '</div>';
-									
+														
 													// 마커 클릭 이벤트
 													google.maps.event.addListener(
 																	marker,
@@ -389,42 +435,39 @@
 																		infoWindow.open(map,marker);
 																		maxWidth: 200
 																	});
+													}
 												}
 											} else {
-												alert("ERRER - region[" + i
-														+ "] : " + region[i]);
-												alert("Geocode was not successful for the following reason: "
-														+ status);
+												alert("검색 결과가 없습니다");
 											}
 										});
 					}
 				}
-			}
+				}
 		</script>
     
     <!-- 마커 장소 찍기 -->
     
            <input type="hidden" id="mapList"
                value= "
-                 <c:forEach items="${list}" var="studio" varStatus="index">
+                 <c:forEach items="${makeuplist}" var="makeup" varStatus="index">
                     <c:choose>
-                      <c:when test="${index.last}">${studio.addr}</c:when>
-                      <c:otherwise>${studio.addr},</c:otherwise>
+                      <c:when test="${index.last}">${makeup.mc_addr}</c:when>
+                      <c:otherwise>${makeup.mc_addr},</c:otherwise>
                     </c:choose>
                  </c:forEach>
                " />
                
-  
-                    <input type="hidden" id="nameList"
+   
+           <input type="hidden" id="nameList"
                value= "
-                 <c:forEach items="${list}" var="studio" varStatus="index">
+                 <c:forEach items="${makeuplist}" var="makeup" varStatus="index">
                     <c:choose>
-                      <c:when test="${index.last}">${studio.nm}</c:when>
-                      <c:otherwise>${studio.nm},</c:otherwise>
+                      <c:when test="${index.last}">${makeup.mc_nm}</c:when>
+                      <c:otherwise>${makeup.mc_nm},</c:otherwise>
                     </c:choose>
                  </c:forEach>
                " />
-            
 
 
                 <!-- 구글맵 key -->
@@ -439,7 +482,7 @@
       </div>
     </div>
   </div>
-
+  
 
 </body>
 </html>

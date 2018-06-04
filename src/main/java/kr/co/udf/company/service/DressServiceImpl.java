@@ -11,6 +11,7 @@ import kr.co.udf.common.company.domain.StudioCompany;
 import kr.co.udf.company.dao.DressDao;
 import kr.co.udf.company.dao.StudioDao;
 import kr.co.udf.company.domain.Criteria;
+import kr.co.udf.company.domain.SearchCriteria;
 
 @Service
 public class DressServiceImpl implements DressService {
@@ -19,23 +20,34 @@ public class DressServiceImpl implements DressService {
 	 private DressDao dao;
 
 	@Override
-	public List<DressCompany> listAll() throws Exception {
-		return dao.listAll();
+	public List<DressCompany> listDress() throws Exception {
+		return dao.listDress();
 	}
 	
 	@Override
-	public List<DressCompany> listPage(int page) throws Exception {
-		return dao.listPage(page);
+	public List<DressCompany> DressPage(int page) throws Exception {
+		return dao.DressPage(page);
 	}
 
 	@Override
-	public List<DressCompany> listCriteria(Criteria cri) throws Exception {
-		return dao.listCriteria(cri);
+	public List<DressCompany> DressCri(Criteria cri) throws Exception {
+		return dao.DressCri(cri);
 	}
 
 	@Override
-	public int countPaging(Criteria cri) throws Exception {
-		return dao.countPaging(cri);
+	public int DressCount(Criteria cri) throws Exception {
+		return dao.DressCount(cri);
+	}
+
+	@Override
+	public List<DressCompany> DressSearch(SearchCriteria cri) throws Exception {
+		return dao.DressSearch(cri);
+	}
+
+	@Override
+	public int DressSearchCount(SearchCriteria cri) throws Exception {
+		return dao.DressSearchCount(cri);
 	} 
 	 
+	
 }

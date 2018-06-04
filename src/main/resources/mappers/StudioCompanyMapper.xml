@@ -53,7 +53,7 @@ FROM (SELECT *
   	*
 	FROM
  	 (
- 	SELECT rownum,
+ 	SELECT rownum rn,
     sc_no, 
 	sc_nm, 
 	sc_company_no, 
