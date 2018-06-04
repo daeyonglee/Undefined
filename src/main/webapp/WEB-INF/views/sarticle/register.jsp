@@ -36,19 +36,19 @@
             <div class="form-group">
               <label for="title">제목</label> 
               <input type="text" name="article_title" class="form-control"
-                placeholder="Enter Title" id="article_title">
+                placeholder="제목을 입력하세요" id="article_title">
             </div>
 
             <div class="form-group">
               <label for="contents">내용</label>
               <textarea class="form-control" name="article_content" rows="3"
-                placeholder="Enter ..."  id ="article_content"></textarea>
+                placeholder="내용을 입력하세요"  id ="article_content"></textarea>
             </div>
             
             <!--로그인 시 로그인한 user_nm이 화면에 출력되도록 하여아 한다.  -->
             <!--글을 등록할 경우 작성자는 user_no가 들어간다. -->
             <div class="form-group">
-              <input type="hidden" for="writer" name ="user_no" id ="user_no" value="1">작성자</input> 
+              <input type="text" for="writer" name ="user_no" id ="user_no" value="1">작성자</input> 
             </div>
             
           </div>

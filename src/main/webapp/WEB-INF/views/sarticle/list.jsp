@@ -43,7 +43,10 @@
         }
         %>
         </div>
+   
         <!-- 목록 제목 리스트 보여주기  -->
+        
+        <label>총게시글수: ${pageMaker.getTotalCount()}</label>
         <div class="box-body">
           <table class="table table-bordered">
             <tr>
@@ -53,20 +56,37 @@
               <th style="width: 200px">게시날짜</th>
               <th style="width: 60px">조회수</th>
             </tr>
-
+          
+          <c:set var="i" value="0" />
+          <c:set var="TotalCount" value="${pageMaker.totalCount}" />
+          <c:set var="PageSize" value="${cri.perPageNum}" />
+          <c:set var="Page" value="${cri.page}" />
+          <!-- 전체 article 수 출력  -->
           <!-- 리스트 보여주기  -->
           <c:forEach items="${list}" var="article">
             <tr>
-              <td>${article.ARTICLE_NO}</td>
+<!--                            (indexnum - (selectedpage * params.getPageSize()) + params.getPageSize()) - i%> -->
+              <td><c:out value="${(TotalCount-(Page*PageSize)+PageSize)-i}"/></td>
               <td><a
-                href='/sarticle/readPage${pageMaker.makeSearch(pageMaker.cri.page) }&article_no=${article.ARTICLE_NO}'>
+                href='/sarticle/readPage${pageMaker.makeSearch(pageMaker.cri.page) }&article_no=${article.ARTICLE_NO}&board_no=<%=request.getParameter("board_no")%>'>
                   ${article.ARTICLE_TITLE}</a></td>
               <td>${article.USER_NM}</td>
               <td>${article.REGDATE}</td>
               <td><span class="badge bg-red">${article.HITCOUNT }</span></td>
             </tr>
+            <c:set var="i" value="${i+1}" />
           </c:forEach>
        </table>
+
+      <!-- 로그인 여부에 따라 글쓰기 버튼 생성 여부 -->
+      <c:choose>
+        <c:when test="${null ne sessionScope.login || null ne cookie.loginCookie.value}">
+          <button id = 'newBtn'>글쓰기</button>
+        </c:when>
+        <c:otherwise>
+          
+        </c:otherwise>
+      </c:choose>
           
             <!--페이지 네이션  -->
           <div class="text-center">
@@ -126,7 +146,6 @@
               
               <input type="text" name="keyword" id="keywordInput" value='${cri.keyword }'>
               <button id = 'searchBtn'>Search</button>
-              <button id = 'newBtn'>New Board</button>
           </div>
             
               
@@ -164,7 +183,14 @@
 			});
 		
 		$('#newBtn').on("click", function(evt){
-			self.location="register";
+			self.location="register"
+			+'${pageMaker.makeQuery(1)}'
+			+"&searchType="
+			+$("select option:selected").val()
+			+"&keyword="+encodeURIComponent($('#keywordInput').val())
+			+"&board_no="
+			+<%=request.getParameter("board_no")%>
+			;
 		});
 	});
 

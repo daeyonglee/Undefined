@@ -34,6 +34,7 @@
     }); 
   </script>
   
+<!--댓글 디자인을 위한 템플릿 코드  -->
 <script id="template" type="text/x-handlebars-template">
 {{#each .}}
 <li class="replyLi" data-reply_no={{reply_no}}>
@@ -103,7 +104,8 @@
 
         <div class="form-group">
           <div class="col-sm-3">
-            <label for="user_nm">작성자</label> <input type="text"
+            <label for="user_nm">작성자</label> 
+            <input type="text"
               name="user_nm" class="form-control"
               value="${read.user_nm}" readonly="readonly">
           </div>
@@ -154,6 +156,11 @@
 
   <div class="row">
     <div class="col-md-12">
+    
+    <%
+     if(request.getParameter("board_no")!=null){
+	 if(Integer.parseInt(request.getParameter("board_no"))==2){
+    %>
       <!-- 댓글 등록에 필요한 div -->
       <div class="box box-success">
         <div class="box-header">
@@ -184,7 +191,10 @@
       <div class='text-center'>
         <ul id="pagination" class="pagination pagination-sm no-margin "> </ul>
       </div>
-
+  <%
+	 }}
+ 
+ %>
 
 
       <!-- 추가 파라미터 처리를 위함 -->
@@ -351,6 +361,7 @@ var printPaging = function(pageMaker, target) {
         + "'> >> </a></li>";
   }
   target.html(str);
+  
 };
 
 </script>

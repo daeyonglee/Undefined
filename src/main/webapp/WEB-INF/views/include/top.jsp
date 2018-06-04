@@ -72,6 +72,7 @@
                       <!-- 로그인 여부에 따라 li 변경 -->
                       <c:choose>
                         <c:when test="${null ne sessionScope.login || null ne cookie.loginCookie.value}">
+                          <li><a href="<%=request.getContextPath()%>/sarticle/list?board_no=3">쪽지함</a></li>
                           <li><a href="/user/logout">로그아웃</a></li>
                           <li><a href="#">마이페이지</a></li>
                           <li><a href="#">고객센터</a></li>
@@ -150,7 +151,9 @@
              </li>
              <li class="wow fadeInDown" data-wow-delay="0.4s"><a class="" href="property.html">업체정보</a></li>
              <li class="wow fadeInDown" data-wow-delay="0.5s"><a 
-             href="<%=request.getContextPath()%>/article/listPage?board_no=1">공지사항</a></li>
+             href="<%=request.getContextPath()%>/sarticle/list?board_no=1">공지사항</a></li>
+               <li class="wow fadeInDown" data-wow-delay="0.5s"><a 
+             href="<%=request.getContextPath()%>/sarticle/list?board_no=2">자유게시판</a></li>
          </ul>
      </div><!-- /.navbar-collapse -->
  </div><!-- /.container-fluid -->
