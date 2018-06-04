@@ -14,6 +14,7 @@
 <!--<![endif]-->
 <head>
 <meta charset="utf-8">
+<link rel="stylesheet" href="/resources/assets/css/wizard.css">
 <link rel="stylesheet" href="/resources/assets/css/user/join.css">
 <style>
 .mypage-content {
@@ -41,8 +42,9 @@
 <div class="register-area" style="background-color: rgb(249, 249, 249);">
 	<div class="container">
 	<div class="box-for overflow">
+  <div class="wizard-container"> 
+  <div class="wizard-card ct-wizard-orange" id="wizardProperty">
 		<c:if test="${msg ne 'success'}">
-			<div class="row">
 				<div class="col-md-12">
 					<div class="col-md-6 mypage-content">
 						<div class="col-md-12 col-xs-12">
@@ -58,11 +60,9 @@
 						</div>
         </div>
 				</div>
-			</div>
 		</c:if>
 		<c:if test="${msg eq 'success'}">
 			<c:if test="${role eq 'user'}">
-				<div class="row">
 					<div class="col-md-12">
 						<div class="col-md-6 mypage-content">
 							<div class="col-md-12 col-xs-12">
@@ -107,10 +107,9 @@
 							</div>
 						</div>
 					</div>
-				</div>
 			</c:if>
 			<c:if test="${role eq 'company'}">
-				<div class="row">
+        <div class="tab-content">
 					<div class="col-md-12">
 						<div class="col-md-4 col-xs-4 col-sm-offset-1">
 							<div class="picture-container">
@@ -149,9 +148,7 @@
 						</div>
 						<div class="col-md-3 col-xs-3"></div>
 					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-12 col-xs-12">
+					<div class="col-sm-12">
 						<div class="form-group">
 							<label>업체 소개</label>
 							<textarea name='introduce' class='tx-cp-memo' maxlength='1000'></textarea>
@@ -161,10 +158,12 @@
 								<button type="submit" class="btn btn-primary">수정하기</button>
 							</div>
 						</div>
-					</div>
-				</div>
+          </div>
+         </div>
 			</c:if>
 		</c:if>
+  </div>
+  </div>
 	</div>
   </div>
 </div>

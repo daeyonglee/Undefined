@@ -16,13 +16,13 @@ public class CompanyDTO {
 	private String tel;
 	private String companyType;
 	private String introduce;
+	private String smyIntro;
 	
-	public CompanyDTO() {
-		// TODO Auto-generated constructor stub
-	}
+	public CompanyDTO() {}
 
 	public CompanyDTO(String email, String pw, MultipartFile mainImg, String cn, String nm, String mainNm,
-			String postcode, String addr, String addrdetail, String tel, String companyType, String introduce) {
+			String postcode, String addr, String addrdetail, String tel, String companyType, String introduce,
+			String smyIntro) {
 		super();
 		this.email = email;
 		this.pw = pw;
@@ -36,6 +36,7 @@ public class CompanyDTO {
 		this.tel = tel;
 		this.companyType = companyType;
 		this.introduce = introduce;
+		this.smyIntro = smyIntro;
 	}
 
 	public String getEmail() {
@@ -134,10 +135,19 @@ public class CompanyDTO {
 		this.introduce = introduce;
 	}
 
+	public String getSmyIntro() {
+		return smyIntro;
+	}
+
+	public void setSmyIntro(String smyIntro) {
+		this.smyIntro = smyIntro;
+	}
+
 	@Override
 	public String toString() {
 		return "CompanyDTO [email=" + email + ", pw=" + pw + ", mainImg=" + mainImg + ", cn=" + cn + ", nm=" + nm
 				+ ", mainNm=" + mainNm + ", postcode=" + postcode + ", addr=" + addr + ", addrdetail=" + addrdetail
-				+ ", tel=" + tel + ", companyType=" + companyType + ", introduce=" + introduce + "]";
+				+ ", tel=" + tel + ", companyType=" + companyType + ", introduce=" + introduce + ", smyIntro="
+				+ smyIntro + "]";
 	}
 }

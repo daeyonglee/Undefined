@@ -727,10 +727,10 @@ CREATE TABLE dress_review
 --후기 정보(스튜디오)
 CREATE TABLE studio_review 
   (
-    dr_no number(10) NOT NULL,
+    sr_no number(10) NOT NULL,
     sc_no number(10) NOT NULL,
-    dr_content varchar2(3000) NOT NULL,
-    dr_point number(3, 2) NOT NULL,
+    sr_content varchar2(3000) NOT NULL,
+    sr_point number(3, 2) NOT NULL,
     regdate date DEFAULT sysdate NOT NULL,
     updatedate date DEFAULT sysdate NOT NULL
   );

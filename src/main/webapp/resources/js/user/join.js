@@ -113,7 +113,7 @@ $(document).ready(function () {
     	
     	var bzowr_rgst_no = $('input[name="companyNo"]').val(); 
     	var wkpl_nm = $('input[name="name"]').val();
-    	var url = 'http://apis.data.go.kr/B552015/NpsBplcInfoInqireService/getBassInfoSearch?serviceKey=0FwR7es8bXjf958cfwrKjsoU37Ylsl26vr9cInO9I%2FELaImq4zuqdCQNlnLKMp0kI4f4X6xS9T01iyFhoPOKXw%3D%3D&bzowr_rgst_no='+bzowr_rgst_no+"&wkpl_nm="+wkpl_nm;
+    	var url = 'http://apis.data.go.kr/B552015/NpsBplcInfoInqireService/getBassInfoSearch?'+encodeURIComponent('ServiceKey')+'=0FwR7es8bXjf958cfwrKjsoU37Ylsl26vr9cInO9I%2FELaImq4zuqdCQNlnLKMp0kI4f4X6xS9T01iyFhoPOKXw%3D%3D&'+encodeURIComponent('bzowr_rgst_no')+'='+encodeURIComponent(bzowr_rgst_no)+'&'+encodeURIComponent('wkpl_nm')+'='+encodeURIComponent(wkpl_nm);
     	console.log(url);
     	var yqlURL = [ "http://query.yahooapis.com/v1/public/yql", "?q=" + encodeURIComponent("select * from xml where url='" + url + "'"), "&format=xml&callback=?" ].join("");
     	
@@ -124,6 +124,10 @@ $(document).ready(function () {
     			
     			var companyNo = $(data.results[0]).find("bzowrRgstNo").text();
     			var companyNm = $(data.results[0]).find("wkplNm").text();
+    			
+    			console.log(data);
+    			console.log(companyNo);
+    			console.log(companyNm);
     			
     			if (companyNo == "" || companyNm == "") {
     				alert("인증 실패하였습니다.");
@@ -414,6 +418,10 @@ function validateSecondStep() {
 		    html += "</div>";
 		    html += "<div class='row'>";
 		    html += "  <div class='col-sm-12'>";
+		    html += "  	 <div class='form-group>'";
+		    html += "      <label>한 줄 소개</label>";
+		    html += "      <input type='text' name='smyIntro' class='form-control' placeholder='간단하게 보여질 한 줄 소개'>";
+		    html += "    </div>";
 		    html += "    <div class='form-group'>";
 		    html += "      <label>업체 소개</label>";
 		    html += "      <textarea name='introduce' class='tx-cp-memo' maxlength='1000'></textarea>";
