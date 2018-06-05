@@ -9,7 +9,7 @@ import kr.co.udf.auction.domain.Auction;
 import kr.co.udf.auction.domain.AuctionCount;
 
 @Repository
-public class MybatisAuctionDao implements AuctionDao{
+public class MyBatisAuctionDao implements AuctionDao{
 
 	private static final String NAMESPACE = "kr.co.udf.auction.dao.AuctionDao";
 	
@@ -41,7 +41,7 @@ public class MybatisAuctionDao implements AuctionDao{
 	}
 
 	@Override
-	public AuctionCount count() {
+	public AuctionCount count() throws Exception {
 		return session.selectOne(NAMESPACE+".count");
 	}
 

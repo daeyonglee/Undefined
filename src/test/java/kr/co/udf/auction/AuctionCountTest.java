@@ -11,7 +11,6 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import kr.co.udf.auction.dao.AuctionApplyDao;
 import kr.co.udf.auction.dao.AuctionDao;
 import kr.co.udf.auction.domain.Auction;
 import kr.co.udf.user.dao.MybatisUserDao;
@@ -25,25 +24,13 @@ import kr.co.udf.user.domain.User;
 public class AuctionCountTest {
 
 	@Inject
-	SqlSession session;
-	
-	@Inject
 	AuctionDao dao;
-	
-	@Inject
-	AuctionApplyDao applyDao;
 	
 	private static final Logger logger = Logger.getLogger(AuctionCountTest.class);
 	
-//	@Test
-	public void test() {
+	@Test
+	public void test() throws Exception {
 		logger.info(dao.count());
 	}
 
-	
-	@Test
-	public void test2() throws Exception {
-		logger.info(applyDao.realtimelist());
-	}
-	
 }

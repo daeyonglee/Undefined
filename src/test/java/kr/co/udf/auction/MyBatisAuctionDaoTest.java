@@ -37,13 +37,13 @@ public class MyBatisAuctionDaoTest {
 	public void createTest() throws Exception{
 		Auction auction = new Auction();
 		auction.setType("makeup");
-		auction.setUserNo(1);
+//		auction.setUserNo(1);
 		auction.setLoc("제주시 제주읍");
 		auction.setDate("2020-08-25");
 		auction.setTime("15:00");	
 		auction.setMemo("많은 입찰 플리즈~");		
 		
-		dao.create(auction);
+//		dao.create(auction);
 		logger.info(auction);
 	}
 	
@@ -51,7 +51,7 @@ public class MyBatisAuctionDaoTest {
 	public void createTest2() throws Exception{
 		Auction auction = new Auction();
 		auction.setType("dress");
-		auction.setUserNo(2);
+//		auction.setUserNo(2);
 		auction.setLoc("제주시 제주읍");
 		String day = "2020/08/25";
 		String time = "17:00";
@@ -59,19 +59,41 @@ public class MyBatisAuctionDaoTest {
 	
 		auction.setMemo("많은 입찰 플리즈2222~");		
 		
-		dao.create(auction);
+//		dao.create(auction);
 		logger.info(auction);
 	}
 	
-	@Test
+	//@Test
 	public void listParamsTest() throws Exception {
 		SearchParams params = new SearchParams();
 		params.setPage(1);
-		params.setPerPageNum(15);
+		params.setPerPageNum(10);
 		
 		List<Auction> list = dao.listParams(params);
 		logger.info(list);
 		
+		
+	}
+	
+	//@Test
+	public void countPageTest() throws Exception{
+		 int count = dao.countPage();
+		 logger.info(count);
+	}
+	
+	@Test
+	public void listByTypeTest() throws Exception{
+		String keyword = "dress";
+//		List<Auction> list = dao.listByType(keyword);
+//		logger.info(list);
+	}
+	@Test
+	public void winListByStudio() throws Exception{
+		SearchParams params = new SearchParams();
+		params.setPage(1);
+		params.setPerPageNum(10);
+		
+		logger.info(dao.winlistByStudio(params));
 		
 	}
 

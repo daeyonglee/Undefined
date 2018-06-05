@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page session="false"%>
 
 <!DOCTYPE html>
 <html>
@@ -46,7 +47,7 @@ td {
                 <h3 class="box-title">스드메 역경매</h3>
                 <a href="apply" style="float: right">>> 역경매 신청하기</a>
                 <ul class="nav nav-tabs nav-justified">
-                  <li><a href="list">입찰 중인 경매</a></li>
+                  <li><a href="apply">입찰 중인 경매</a></li>
                   <li class="active"><a href="win">낙찰된 경매</a></li>
                 </ul>
               </div>
@@ -63,26 +64,26 @@ td {
                 <table class="table table-bordered">
                 <thead>
                   <tr>
-                    <td colspan="6">낙찰 된 역경매 신청 건수 : ${pageMaker.totalCount} 건</td>
+                    <td colspan="6">낙찰 된 역경매 신청 건수 : ******** 건</td>
                   </tr>
                   <tr>
                     <th style="width: 100px">신청일시</th>
                     <th style="width: 100px">예식일자</th>
-                    <th style="width: 100px">작성자</th>
                     <th style="width: 200px">희망지역</th>
-                    <th style="width: 100px">입찰마감일</th>
-                    <th style="width: 200px">할인 된 가격</th>
+                    <th style="width: 200px">선택 상품</th>
+                    <th style="width: 100px">할인율</th>
+                    <th style="width: 200px">상태</th>
                   </tr>
                  </thead>
 
-                  <c:forEach items="${winlist}" var="win">
+                  <c:forEach items="${winList}" var="win">
                     <tr id = "visible">
                       <td>${win.regdate }</td>
                       <td>${win.day }</td>
-                      <td><a href = "winread?no=${win.no}&type=${win.type}">${win.writer }</a></td>
                       <td>${win.loc}</td>
-                      <td>${win.deadline }</td>
-                      <td><fmt:formatNumber value ="${win.price * (win.discount*0.01)}" pattern="0"/>원</td> 
+                      <td>상품sssssss</td>
+                      <td>할인율</td>
+                      <td><a href="read?no=${win.no}&type=${win.type}">${win.stat }</a></td>
                     </tr>
                   </c:forEach>
                 </table>
@@ -143,7 +144,7 @@ td {
 			}
  </script>
  
-  <script>
+ <!--  <script>
   $(document).ready(function () {
     
    // 화면 로드 시 searchType 값이 있다면 그 값으로 변경
@@ -179,30 +180,25 @@ td {
        success:function(searchList){
          console.log(searchList);
          $(".table.table-bordered tr#visible").remove();
-         $(".pagination ul#visible2").remove(); 
+         $(".pagination ul#visible2").remove();
+         console.log($(".table.table-bordered tr#visible"));
                          
          var text = "";
          
-         for ( var i in searchList.list) {
+         for ( var i in searchList) {
            
            text += "<tr>";
-           text += "<td>" +searchList.list[i].regdate+"</td>";
-           text += "<td>" +searchList.list[i].day+"</td>";
-           text += "<td> <a href = 'winread?no="+searchList.list[i].no+"&type="+searchList.list[i].type+"'>"+searchList.list[i].writer+"</a></td>";
-           text += "<td>" +searchList.list[i].loc+"</td>";
-           text += "<td>" +searchList.list[i].deadline + "</td>";
+           text += "<td>" +searchList[i].regdate+"</td>";
+           text += "<td>" +searchList[i].day+"</td>";
+           text += "<td> <a href = 'winread?no="+searchList[i].no+"&type="+searchList[i].type+"'>"+searchList[i].writer+"</a></td>";
+           text += "<td>" +searchList[i].loc+"</td>";
+           text += "<td>" +searchList[i].deadline + "</td>";
            text += "<td>할인율</td>";
            text += "</tr>";
            
           
         }
         $(".table.table-bordered > tbody").html(text); 
-        
-        pagination(searchList.pageMaker);
-		
-		totalCount(searchList.pageMaker.totalCount);
-        
-        
        },
            error:function(){
               console.log("오류");
@@ -211,8 +207,7 @@ td {
         
     });
    
-   $(document).on('click' , 'a.paging',function(e){
-   
+   $("a.paging").click(function(e){
      e.preventDefault();
      
      var perPageNum = ${pageMaker.params.perPageNum};
@@ -228,47 +223,9 @@ td {
      self.location.href=url;
    });
    
-   function pagination(pageMaker) {
-		 
-		 console.log(pageMaker);
-		 
-		 var text2  = "<ul id = 'visible2'>";
-		 
-		 	if (pageMaker.prev) {
-		 		text2 +=  "<li><a href='#'>&laquo;</a></li>";
-		 	}
-		 	
-		 	for (var i=pageMaker.startPage; i<=pageMaker.endPage; i++){
-		 		text2 +=  "<li" + (pageMaker.params.page == i ? " class='active'>":'>');
-		 		text2 +=  "  <a class='paging' href='#'>" + i + "</a>";
-		 		text2 +=  "</li>";
-		 	}
-		 	
-		 	if (pageMaker.next && pageMaker.endPage > 0) {
-		 		text2 +=  "<li><a href='#'>&raquo;</a></li>";	
-		 	}
-		text2 += "</ul>";
-		
-		$(".pagination").html(text2); 
-		 
-		console.log(text2);
-	 }
-	 
-	 function totalCount(totalCount) {
-		 
-		 $(".table.table-bordered > thead > tr:first > td:first").remove();
-		 
-		 if (totalCount > 0) {
-			 var text2 = "<td colspan='6'>역경매 신청 건수 : " + totalCount + " 건</td>";
-			 
-			 $(".table.table-bordered > thead > tr:first").html(text2);
-		 }
-		 
-	 }
-   
     
   });  
- 
+  -->
  
  
   </script>

@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page session="false"%>
 
 <!DOCTYPE html>
 <html>
 <head>
-<title>낙찰 된 경매 리스트</title>
+<title>입찰 중인 경매 리스트</title>
 <style type="text/css">
 body {
 	background: #F5F5F5;
@@ -46,13 +47,13 @@ td {
                 <h3 class="box-title">스드메 역경매</h3>
                 <a href="apply" style="float: right">>> 역경매 신청하기</a>
                 <ul class="nav nav-tabs nav-justified">
-                  <li><a href="list">입찰 중인 경매</a></li>
-                  <li class="active"><a href="win">낙찰된 경매</a></li>
+                  <li class="active"><a href="#">입찰 중인 경매</a></li>
+                  <li><a href="win">낙찰된 경매</a></li>
                 </ul>
               </div>
               <div class="form-group">
                 <select name="searchType" id="searchType" class="selectpicker show-tick form-control">
-                  <option value="" selected="selected">종류를 선택하세요</option>
+                  <option value="all" selected="selected">종류를 선택하세요</option>
                   <option value="studio">스튜디오</option>
                   <option value="dress">드레스</option>
                   <option value="makeup">메이크업</option>
@@ -61,28 +62,28 @@ td {
 
               <div class="box-body" >
                 <table class="table table-bordered">
-                <thead>
-                  <tr>
-                    <td colspan="6">낙찰 된 역경매 신청 건수 : ${pageMaker.totalCount} 건</td>
-                  </tr>
+                  <thead>
+                    <tr>
+                      <td colspan="6">역경매 신청 건수 : ${pageMaker.totalCount} 건</td>
+                    </tr>
+                    
                   <tr>
                     <th style="width: 100px">신청일시</th>
                     <th style="width: 100px">예식일자</th>
                     <th style="width: 100px">작성자</th>
                     <th style="width: 200px">희망지역</th>
                     <th style="width: 100px">입찰마감일</th>
-                    <th style="width: 200px">할인 된 가격</th>
+                    <th style="width: 200px">제출된 입찰서</th>
                   </tr>
-                 </thead>
-
-                  <c:forEach items="${winlist}" var="win">
+                  </thead>
+                  <c:forEach items="${list}" var="bid">
                     <tr id = "visible">
-                      <td>${win.regdate }</td>
-                      <td>${win.day }</td>
-                      <td><a href = "winread?no=${win.no}&type=${win.type}">${win.writer }</a></td>
-                      <td>${win.loc}</td>
-                      <td>${win.deadline }</td>
-                      <td><fmt:formatNumber value ="${win.price * (win.discount*0.01)}" pattern="0"/>원</td> 
+                      <td>${bid.regdate }</td>
+                      <td>${bid.day }</td>
+                      <td><a href = "read?no=${bid.no}&type=${bid.type}">${bid.writer }</a></td>
+                      <td>${bid.loc}</td>
+                      <td>${bid.deadline }</td>
+                      <td>미공개</td>
                     </tr>
                   </c:forEach>
                 </table>
@@ -103,15 +104,13 @@ td {
 
                       <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
                         <li
-                          <c:out value="${pageMaker.params.page == idx?'class =active':''}"/>>
+                           <c:out value="${pageMaker.params.page == idx?'class =active':''}"/>>
                           <a class="paging" href="#">${idx}</a>
                         </li>
                       </c:forEach>
 
-                      <c:if
-                        test="${pageMaker.next && pageMaker.endPage > 0}">
-                        <li><a
-                          href="${pageMaker.makeQuery(pageMaker.endPage +1) }">&raquo;</a></li>
+                      <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+                        <li><a href="${pageMaker.makeQuery(pageMaker.endPage +1) }">&raquo;</a></li>
                       </c:if>
 
                     </ul>
@@ -143,92 +142,86 @@ td {
 			}
  </script>
  
-  <script>
-  $(document).ready(function () {
-    
-   // 화면 로드 시 searchType 값이 있다면 그 값으로 변경
-   var searchType = "${pageMaker.params.searchType}";
-   
-   console.log(searchType);
-   
-   if (searchType != null) {
-     $("#searchType").val(searchType);
-   }
-  
-    
-   $('#searchType').change(function () {
-     
-     var type = $('#searchType').val();
-     var url;
-     
-     console.log(type);
-     
-     if (type == 'studio') {
-       url = "win/studio";
-     } else if (type == 'dress'){
-       url = "win/dress";
-     } else if (type == 'makeup'){
-       url = "win/makeup";
-     }
-     
-       $.ajax({
-       type : 'get',
-       url : url,
-       dataType : "json",
-       data : {searchType : type},
-       success:function(searchList){
-         console.log(searchList);
-         $(".table.table-bordered tr#visible").remove();
-         $(".pagination ul#visible2").remove(); 
-                         
-         var text = "";
-         
-         for ( var i in searchList.list) {
-           
-           text += "<tr>";
-           text += "<td>" +searchList.list[i].regdate+"</td>";
-           text += "<td>" +searchList.list[i].day+"</td>";
-           text += "<td> <a href = 'winread?no="+searchList.list[i].no+"&type="+searchList.list[i].type+"'>"+searchList.list[i].writer+"</a></td>";
-           text += "<td>" +searchList.list[i].loc+"</td>";
-           text += "<td>" +searchList.list[i].deadline + "</td>";
-           text += "<td>할인율</td>";
-           text += "</tr>";
-           
-          
-        }
-        $(".table.table-bordered > tbody").html(text); 
-        
-        pagination(searchList.pageMaker);
-		
-		totalCount(searchList.pageMaker.totalCount);
-        
-        
-       },
-           error:function(){
-              console.log("오류");
-           }
-     }); 
-        
-    });
-   
-   $(document).on('click' , 'a.paging',function(e){
-   
-     e.preventDefault();
-     
-     var perPageNum = ${pageMaker.params.perPageNum};
-     var searchType = $("#searchType").val();
-     var url;
-     
-     if (searchType == null || searchType == undefined || searchType == "") {
-       url = "/auction/win?page="+e.target.innerHTML+"&perPageNum="+perPageNum;
-     } else {
-       url = "/auction/win?page="+e.target.innerHTML+"&perPageNum="+perPageNum+"&searchType="+searchType;
-     }
-     
-     self.location.href=url;
-   });
-   
-   function pagination(pageMaker) {
+    <script>
+ 	$(document).ready(function () {
+ 		
+ 	 // 화면 로드 시 searchType 값이 있다면 그 값으로 변경
+ 	 var searchType = "${pageMaker.params.searchType}";
+ 	 
+ 	 console.log(searchType);
+ 	 
+ 	 if (searchType != null) {
+ 		 $("#searchType").val(searchType);
+ 	 }
+ 	
+ 		
+	 $('#searchType').change(function () {
+		 
+		 var type = $('#searchType').val();
+		 var url;
+		 
+		 console.log(type);
+		 
+		 if (type == 'studio') {
+			 url = "bid/studio";
+		 } else if (type == 'dress'){
+			 url = "bid/dress";
+		 } else if (type == 'makeup'){
+			 url = "bid/makeup";
+		 }
+		 
+  		 $.ajax({
+			 type : 'get',
+			 url : url,
+			 dataType : "json",
+			 data : {searchType : type},
+			 success:function(searchList){
+				 $(".table.table-bordered tr#visible").remove();
+				 $(".pagination ul#visible2").remove();
+                 				 
+				 var text = "";
+				 
+				 for ( var i in searchList.list) {
+					 
+					 text += "<tr>";
+					 text += "<td>" +searchList.list[i].regdate+"</td>";
+					 text += "<td>" +searchList.list[i].day+"</td>";
+					 text += "<td> <a href = 'read?no="+searchList.list[i].no+"&type="+searchList.list[i].type+"'>"+searchList.list[i].writer+"</a></td>";
+					 text += "<td>" +searchList.list[i].loc+"</td>";
+					 text += "<td>" +searchList.list[i].deadline + "</td>";
+					 text += "<td>미공개</td>";
+					 text += "</tr>";
+				}
+				$(".table.table-bordered > tbody").html(text); 
+				
+				pagination(searchList.pageMaker);
+				
+				totalCount(searchList.pageMaker.totalCount);
+			 },
+	         error:function(){
+	            console.log("오류");
+	         }
+		 }); 
+				
+	  });
+	 
+	 $(document).on('click', 'a.paging', function(e){
+ 		e.preventDefault();
+		 
+		 var perPageNum = ${pageMaker.params.perPageNum};
+		 var searchType = $("#searchType").val();
+		 var url;
+		 
+		 if (searchType == null || searchType == undefined || searchType == "") {
+			 url = "/auction/list?page="+e.target.innerHTML+"&perPageNum="+perPageNum;
+		 } else {
+			 url = "/auction/list?page="+e.target.innerHTML+"&perPageNum="+perPageNum+"&searchType="+searchType;
+		 }
+		 
+		 self.location.href=url;
+	 });
+	 
+	 function pagination(pageMaker) {
 		 
 		 console.log(pageMaker);
 		 
@@ -265,14 +258,13 @@ td {
 		 }
 		 
 	 }
-   
-    
-  });  
+	 
+	 	
+	});	 
  
  
  
-  </script>
- 
+	</script>
  
  
   <%@include file="../include/bottom.jsp"%>

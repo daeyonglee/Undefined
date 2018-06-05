@@ -13,6 +13,6 @@ public interface AuctionDao {
 	
 	public void delete(int no) throws Exception;
 	
-	public AuctionCount count();
+	public AuctionCount count() throws Exception;
 	
 }

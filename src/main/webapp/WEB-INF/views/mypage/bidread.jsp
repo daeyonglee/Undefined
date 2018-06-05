@@ -18,18 +18,7 @@
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript" src="/resources/assets/js/user/join.js"></script>
-<script>
 
-$(document).ready(function() {
- 
-    $('#submitBtn').click(function () {
-    	alert("신청 버튼 클릭");
-        $("#applyForm").submit();
-    });
-  
-});
-
-</script>
 <script>
       var result = '${msg}';
 
@@ -44,7 +33,7 @@ $(document).ready(function() {
 }
 
 #wizardProperty {
-	height: 500px;
+	height: 600px;
 }
 
 #button {
@@ -58,7 +47,7 @@ $(document).ready(function() {
       <div class="row">
         <div class="page-head-content">
           <h1 class="page-title">
-            <span>역경매 신청서</span>
+            <span>역경매 입찰서</span>
           </h1>
         </div>
       </div>
@@ -78,106 +67,99 @@ $(document).ready(function() {
           <div class="wizard-card ct-wizard-orange" id="wizardProperty">
               <div class="wizard-header"></div>
               <ul>
-                <li><a href="#step1" data-toggle="tab">역경매 신청하기</a></li>
+                <li><a href="#step1" data-toggle="tab">역경매 입찰하기</a></li>
               </ul>
   
-            <form id="applyForm" method="post">
+            <form role="form" method="post">
               <div class="tab-content">
                 <div class="tab-pane" id="step1">
                   <div class="col-lg-12">
 
-                    <!--  업체 종류 체크 박스 -->
-                    <div class="div">
-                      <div class="col-lg-2">
-                        <label>업체 종류</label>
-                      </div>
-                      
-                      <div class="col-lg-10">
-                        <div class="checkbox">
-                          <label> <input type="radio" name="type" value="studio" checked="checked" /><strong>스튜디오</strong></label> 
-                            <label> <input type="radio" name="type" value="dress" /> <strong>드레스</strong></label>
-                          <label> <input type="radio" name="type" value="makeup" /> <strong>메이크업</strong></label>
-                        </div>
-                      </div>
-                    </div>
-
                     <!--  인적사항 기입란 -->
                     <div class="col-lg-2" id="col">
-                      <label>이름</label>
+                      <label>업체 종류</label>
+                    </div>
+                    <div class="col-lg-10" id="col">
+                      <div class="col-lg-3">
+                        <input class='form-control' type="text" name="locFirst" id="locFirst" value= "${bid.type }" readonly="readonly">
+                      </div>
+                    </div>
+                                        
+                     <div class="col-lg-2" id="col">
+                      <label>업체 이름</label>
+                    </div>
+                    <div class="col-lg-10" id="col">
+                      <div class="col-lg-3">
+                        <input class='form-control' type="text" name="company" id="company" value="${bid.name }" readonly="readonly">
+                      </div>
+                    </div>
+
+                    <div class="col-lg-2" id="col">
+                      <label>업체 전화번호</label>
+                    </div>
+                    <div class="col-lg-10" id="col">
+                      <div class="col-lg-3">
+                        <input class='form-control' type="tel" name="tel" id="tel" value="${bid.tel }" readonly="readonly">
+                      </div>
+                    </div>                    
+                    
+                    <div class="col-lg-2" id="col">
+                      <label>업체 주소</label>
                     </div>
                     <div class="col-lg-10" id="col">
                       <div class="col-lg-6">
-                        <input class='form-control' type="text" name="writer" id="name" placeholder='ex. 홍길동'>
+                        <input class='form-control' type="text" name="locFirst" id="locFirst" value="${bid.addr }" readonly="readonly">
                       </div>
-                    </div>
-
-<!--                     <div class="col-lg-2" id="col">
-                      <label>연락처</label>
-                    </div>
-                    <div class="col-lg-10" id="col">
-                      <div class="col-lg-6">
-                        <input class='form-control' type="tel" placeholder='ex. 010-5555-6666'>
-                      </div>
-                    </div> -->
-
+                    </div>                    
+                    
                     <div class="col-lg-2" id="col">
-                      <label>예식 희망 지역</label>
+                      <label>상품 리스트</label>
                     </div>
-                    <div class="col-lg-10" id="col">
+                    <div class="col-lg-10" id="col" style="height: 55px">
                       <div class="col-lg-3">
-                        <input class='form-control' type="text" name="locFirst" id="locFirst" placeholder='ex. 1지망'>
+                        <input class='form-control' type="checkbox" name="locFirst" id="locFirst" > image-1
                       </div>
                       <div class="col-lg-3">
-                        <input class='form-control' type="text" name="locSecond" id="locSecond" placeholder='ex. 2지망'>
+                        <input class='form-control' type="checkbox" name="locSecond" id="locSecond"> image-2
                       </div>
                       <div class="col-lg-3">
-                        <input class='form-control' type="text" name="locThird" id="locThird" placeholder='ex. 3지망'>
-                      </div>
-                    </div>
-
-                    <div class="col-lg-2" id="col">
-                      <label>예식 희망 일자</label>
-                    </div>
-                    <div class="col-lg-10" id="col">
-                      <div class="col-lg-3">
-                        <input class='form-control' type="text" name="day"  placeholder='ex. 1지망'>
-                      </div>
-                      <div class="col-lg-3">
-                        <input class='form-control' type="text"
-                          placeholder='ex. 2지망'>
-                      </div>
-                      <div class="col-lg-3">
-                        <input class='form-control' type="text"
-                          placeholder='ex. 3지망'>
-                      </div>
-                    </div>
-
-                    <div class="col-lg-2" id="col">
-                      <label>예식 희망 시간</label>
-                    </div>
-                    <div class="col-lg-10" id="col">
-                      <div class="col-lg-3">
-                        <input class='form-control' type="text" name="time" placeholder='ex. 1지망'>
-                      </div>
-                      <div class="col-lg-3">
-                        <input class='form-control' type="text"
-                          placeholder='ex. 2지망'>
-                      </div>
-                      <div class="col-lg-3">
-                        <input class='form-control' type="text"
-                          placeholder='ex. 3지망'>
+                        <input class='form-control' type="checkbox" name="locThird" id="locThird"> image-3
                       </div>
                     </div>
                     
-                     <div class="col-lg-2" id="col">
-                      <label>입찰 마감일</label>
+                    <div class="col-lg-2" id="col">
+                      <label></label>
                     </div>
-                    <div class="col-lg-10" id="col">
+                    <div class="col-lg-10" id="col" style="height: 55px">
                       <div class="col-lg-3">
-                        <input class='form-control' type="text" name="deadline" placeholder='ex. 2018-06-30'>
+                        <input class='form-control' type="checkbox" name="locFirst" id="locFirst" > image-1
+                      </div>
+                      <div class="col-lg-3">
+                        <input class='form-control' type="checkbox" name="locSecond" id="locSecond"> image-2
+                      </div>
+                      <div class="col-lg-3">
+                        <input class='form-control' type="checkbox" name="locThird" id="locThird"> image-3
                       </div>
                     </div>
-
+                    <div class="col-lg-2" id="col">
+                      <label>상담 날짜</label>
+                    </div>
+                    <div class="col-lg-10" id="col" style="height: 55px">
+                      <div class="col-lg-3">
+                        <input class='form-control' type="checkbox" name="locFirst" id="locFirst">${bid.day }
+                      </div>
+                      <div class="col-lg-3">
+                        <input class='form-control' type="checkbox" name="locSecond" id="locSecond"> 2018-06-02
+                      </div>
+                      <div class="col-lg-3">
+                        <input class='form-control' type="checkbox" name="locThird" id="locThird"> 2018-06-03
+                      </div>
+                      <div class="col-lg-3">
+                        <input class='form-control' type="date" name="locThird" id="locThird">  
+                      </div>                    
+                     </div>
+                                   
+                    
                     <div class="col-lg-2" id="col">
                       <label>기타 희망 사항</label>
                     </div>
@@ -202,6 +184,20 @@ $(document).ready(function() {
       </div>
     </div>
   </div>
+<script>
+      $(document).ready(function() {
+        var formObj = $("form[role='form']");
+
+        $("#submitBtn").on("click", function() {
+          formObj.submit();
+        });
+        $("#cancelbtn").on("click", function() {
+          self.location = "list";	
+        });
+
+      });
+    </script>
+
 
   <!-- End submit form -->
 
