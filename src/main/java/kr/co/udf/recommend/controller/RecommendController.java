@@ -11,12 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import kr.co.udf.common.product.domain.DressProduct;
-import kr.co.udf.common.product.domain.MakeupProduct;
-import kr.co.udf.common.product.domain.StudioProduct;
 import kr.co.udf.recommend.service.RecommendService;
 
 @Controller
@@ -33,10 +32,31 @@ public class RecommendController {
 		logger.info("successfully access [/recommend/index]");
 	}
 
+	@RequestMapping(value = "list", method = RequestMethod.GET)
+	public void recommendListTest(Model model) {
+
+		Map<String, Object> result = service.recommendTest();
+
+		if (result.containsKey("studioList")) {
+			model.addAttribute("studioList", result.get("studioList"));
+			logger.info("RecommendController - studioList: " + result.get("studioList").toString());
+		}
+
+		if (result.containsKey("dressList")) {
+			model.addAttribute("dressList", result.get("dressList"));
+			logger.info("RecommendController - dressList: " + result.get("dressList").toString());
+		}
+
+		if (result.containsKey("makeupList")) {
+			model.addAttribute("makeupList", result.get("makeupList"));
+			logger.info("RecommendController - makeupList: " + result.get("makeupList").toString());
+		}
+	}
+
 	@RequestMapping(value = "list", method = RequestMethod.POST)
 	public void recommendList(HttpServletRequest request, Model model) {
 
-		String[] items = request.getParameterValues("items");
+		String[] items = request.getParameterValues("item");
 
 		String location = request.getParameter("location");
 		String minCost = request.getParameter("minCost");
@@ -45,20 +65,15 @@ public class RecommendController {
 		List<String> studioOption = null;
 		List<String> dressOption = null;
 		List<String> makeupOption = null;
-		
+
 		Map<String, Object> params = new HashMap<String, Object>();
 		Map<String, Object> result = new HashMap<String, Object>();
-
-		List<StudioProduct> studioList = null;
-		List<DressProduct> dressList = null;
-		List<MakeupProduct> makeupList = null;
 
 		params.put("location", location);
 		params.put("minCost", minCost);
 		params.put("maxCost", maxCost);
-		
-		for (String item : items) {
 
+		for (String item : items) {
 			switch (item) {
 
 			case "studio":
@@ -66,6 +81,7 @@ public class RecommendController {
 				studioOption = new ArrayList<String>();
 				for (String option : studioTmp) {
 					studioOption.add(option);
+					logger.info("option");
 				}
 				break;
 
@@ -91,27 +107,57 @@ public class RecommendController {
 		if (studioOption != null) {
 			params.put("studioOption", studioOption);
 		}
-		
+
 		if (dressOption != null) {
 			params.put("dressOption", dressOption);
 		}
-		
+
 		if (makeupOption != null) {
 			params.put("makeupOption", makeupOption);
 		}
 
 		result = service.recommend(params);
 
-		if(result.containsKey("studioList")) {
+		if (result.containsKey("studioList")) {
 			model.addAttribute("studioList", result.get("studioList"));
+			logger.info("RecommendController - studioList: " + result.get("studioList").toString());
 		}
-		
-		if(result.containsKey("dressList")) {
+
+		if (result.containsKey("dressList")) {
 			model.addAttribute("dressList", result.get("dressList"));
+			logger.info("RecommendController - dressList: " + result.get("dressList").toString());
 		}
-		
-		if(result.containsKey("makeupList")) {
+
+		if (result.containsKey("makeupList")) {
 			model.addAttribute("makeupList", result.get("makeupList"));
+			logger.info("RecommendController - makeupList: " + result.get("makeupList").toString());
 		}
 	}
+
+	@ResponseBody
+	@RequestMapping(value = "addItem", method = RequestMethod.POST)
+	public Object addItem(@RequestBody Map<String, Object> param) {
+		int item_no = 0;
+		Object result = null;
+		if (param.containsKey("sp_no")) {
+			item_no = Integer.parseInt((String) param.get("sp_no"));
+			result = service.addStudio(item_no);
+		} else if (param.containsKey("dp_no")) {
+			item_no = Integer.parseInt((String) param.get("dp_no"));
+			result = service.addDress(item_no);
+		} else {
+			item_no = Integer.parseInt((String) param.get("mp_no"));
+			result = service.addMakeup(item_no);
+		}
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="addCart", method=RequestMethod.POST)
+	public String addCart(@RequestBody Map<String, Object> cart) {
+		service.addCart(cart);
+		
+		return "success";
+	}
+
 }

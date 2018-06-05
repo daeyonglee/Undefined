@@ -19,19 +19,60 @@ public class MybatisRecommendDao implements RecommendDao {
 	SqlSession session;
 
 	String namespace = "kr.co.udf.recommend.dao.RecommendDao";
+
+	/** 스튜디오 옵션을 받아 옵션을 만족하는 스튜디오 리스트 반환 */
+	@Override
+	public List<Map<String, Object>> recommendStudio(Map<String, Object> studioParams) {
+		return session.selectList(namespace + ".recommendStudio", studioParams);
+	}
+
+	/** 드레스 옵션을 받아 옵션을 만족하는 드레스 리스트 반환 */
+	@Override
+	public List<Map<String, Object>> recommendDress(Map<String, Object> dressParams) {
+		return session.selectList(namespace + ".recommendDress", dressParams);
+	}
+
+	/** 메이크업 옵션을 받아 옵션을 만족하는 메이크업 리스트 반환 */
+	@Override
+	public List<Map<String, Object>> recommendMakeup(Map<String, Object> makeupParams) {
+		return session.selectList(namespace + ".recommendMakeup", makeupParams);
+	}
+
+	@Override
+	public List<Map<String, Object>> studioListTest() {
+		return session.selectList(namespace + ".studioListTest");
+	}
+
+	@Override
+	public List<Map<String, Object>> dressListTest() {
+		return session.selectList(namespace + ".dressListTest");
+	}
+
+	@Override
+	public List<Map<String, Object>> makeupListTest() {
+		return session.selectList(namespace + ".makeupListTest");
+	}
+
+	/** 상품번호로 스튜디오 받아오기 */
+	@Override
+	public StudioProduct getStudio(int sp_no) {
+		return session.selectOne(namespace + ".getStudio", sp_no);
+	}
 	
+	/** 상품번호로 드레스 받아오기 */
 	@Override
-	public List<StudioProduct> recommendStudio(Map<String, Object> studioOption) {
-		return session.selectList(namespace + ".recommendStudio");
+	public DressProduct getDress(int dp_no) {
+		return session.selectOne(namespace + ".getDress", dp_no);
+	}
+	
+	/** 상품번호로 메이크업 받아오기 */
+	@Override
+	public MakeupProduct getMakeup(int mp_no) {
+		return session.selectOne(namespace + ".getMakeup", mp_no);
 	}
 
 	@Override
-	public List<DressProduct> recommendDress(Map<String, Object> dressOption) {
-		return session.selectList(namespace + ".recommendDress");
-	}
-
-	@Override
-	public List<MakeupProduct> recommendMakeup(Map<String, Object> makeupOption) {
-		return session.selectList(namespace + ".recommendMakeup");
+	public void createCart(Map<String, Object> cart) {
+		session.insert(namespace + ".createCart", cart);
 	}
 }

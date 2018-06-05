@@ -4,7 +4,7 @@ public class DressProduct {
 
 	private int dp_no;
 	private int dc_no;
-	private String dp_name;
+	private String dp_nm;
 	private int dp_price;
 	private String dp_style; // 드레스 스타일
 	private String dp_image;
@@ -34,12 +34,12 @@ public class DressProduct {
 		this.dc_no = dc_no;
 	}
 
-	public String getDp_name() {
-		return dp_name;
+	public String getDp_nm() {
+		return dp_nm;
 	}
 
-	public void setDp_name(String dp_name) {
-		this.dp_name = dp_name;
+	public void setDp_name(String dp_nm) {
+		this.dp_nm = dp_nm;
 	}
 
 	public int getDp_price() {
@@ -85,7 +85,7 @@ public class DressProduct {
 	/** toString */
 	@Override
 	public String toString() {
-		return "DressProduct [dp_no=" + dp_no + ", dc_no=" + dc_no + ", dp_name=" + dp_name + ", dp_price=" + dp_price
+		return "DressProduct [dp_no=" + dp_no + ", dc_no=" + dc_no + ", dp_nm=" + dp_nm+ ", dp_price=" + dp_price
 				+ ", dp_style=" + dp_style + ", dp_image=" + dp_image + ", regdate=" + regdate + ", updatedate="
 				+ updatedate + "]";
 	}

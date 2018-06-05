@@ -1,7 +1,5 @@
 package kr.co.udf.recommend;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
 import org.apache.log4j.Logger;
@@ -10,11 +8,9 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import kr.co.udf.common.product.domain.DressProduct;
-import kr.co.udf.common.product.domain.MakeupProduct;
-import kr.co.udf.common.product.domain.StudioProduct;
 import kr.co.udf.mysql.MySqlJdbcTest;
 import kr.co.udf.recommend.dao.RecommendDao;
+import kr.co.udf.recommend.service.RecommendService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"file:src/main/webapp/WEB-INF/spring/**/*.xml"})
@@ -24,6 +20,9 @@ public class RecommendDaoTest {
 	
 	@Inject
 	RecommendDao dao;
+	
+	@Inject
+	RecommendService service;
 	
 	/*//@Test
 	public void readStudioTest() {
@@ -48,4 +47,9 @@ public class RecommendDaoTest {
 			logger.info(sp.toString());
 		}
 	}*/
+	
+	//@Test
+	public void recommendServiceTest() {
+		
+	}
 }
