@@ -46,5 +46,25 @@ $(function(){
 	             document.getElementById('addrdetail').focus();
 	         }
 	     }).open();
-	}); 
+	});
+	
+	/*
+	 * 대표 사진에 대한 이벤트 처리
+	 */
+	// Prepare the preview for profile picture
+    $(document).on('change', '#wizard-picture', function (e) {
+        readURL(this);
+    });
+    
+    //Function to show image before upload
+     function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#wizardPicturePreview').attr('src', e.target.result).fadeIn('slow');
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
 });

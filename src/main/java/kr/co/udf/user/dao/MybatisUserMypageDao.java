@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import kr.co.udf.user.domain.CompanyDTO;
 import kr.co.udf.user.domain.Login;
 import kr.co.udf.user.domain.User;
 import kr.co.udf.user.domain.UserDTO;
@@ -57,6 +58,23 @@ public class MybatisUserMypageDao implements UserMypageDao{
 		map.put("user", user);
 		map.put("addr", user.getPostcode()+"^^"+user.getAddr()+"^^"+user.getAddrdetail());
 		session.update(NAMESPACE+".userupdate", map);
+	}
+
+	@Override
+	public void companyupdate(CompanyDTO company) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("company", company);
+		map.put("addr", company.getPostcode()+"^^"+company.getAddr()+"^^"+company.getAddrdetail());
+		
+		if ("dress".equals(company.getCompanyType())) {
+			session.update(NAMESPACE+".companyupdateDress", map);
+		}
+		if ("studio".equals(company.getCompanyType())) {
+			session.update(NAMESPACE+".companyupdateStudio", map);
+		}
+		if ("makeup".equals(company.getCompanyType())) {
+			session.update(NAMESPACE+".companyupdateMakeup", map);
+		}
 	}
 
 }

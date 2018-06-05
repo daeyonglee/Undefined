@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import kr.co.udf.user.dao.UserMypageDao;
+import kr.co.udf.user.domain.CompanyDTO;
 import kr.co.udf.user.domain.Login;
 import kr.co.udf.user.domain.UserDTO;
 
@@ -31,5 +32,14 @@ public class UserMypageServiceImpl implements UserMypageService{
 	@Override
 	public void userupdate(UserDTO user) {
 		dao.userupdate(user);
+	}
+
+	/**
+	 * 나의 정보관리 정보 수정하기 (업체)
+	 * @param company
+	 */
+	@Override
+	public void companyupdate(CompanyDTO company) {
+		dao.companyupdate(company);
 	}
 }

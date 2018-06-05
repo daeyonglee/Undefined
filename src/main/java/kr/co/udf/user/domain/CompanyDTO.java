@@ -1,11 +1,15 @@
 package kr.co.udf.user.domain;
 
+import java.math.BigDecimal;
+
 import org.springframework.web.multipart.MultipartFile;
 
 public class CompanyDTO {
 	
+	private BigDecimal no;
 	private String email;
 	private String pw;
+	private String companyNo;
 	private MultipartFile mainImg;
 	private String cn;
 	private String nm;
@@ -20,12 +24,14 @@ public class CompanyDTO {
 	
 	public CompanyDTO() {}
 
-	public CompanyDTO(String email, String pw, MultipartFile mainImg, String cn, String nm, String mainNm,
-			String postcode, String addr, String addrdetail, String tel, String companyType, String introduce,
-			String smyIntro) {
+	public CompanyDTO(BigDecimal no, String email, String pw, String companyNo, MultipartFile mainImg, String cn,
+			String nm, String mainNm, String postcode, String addr, String addrdetail, String tel, String companyType,
+			String introduce, String smyIntro) {
 		super();
+		this.no = no;
 		this.email = email;
 		this.pw = pw;
+		this.companyNo = companyNo;
 		this.mainImg = mainImg;
 		this.cn = cn;
 		this.nm = nm;
@@ -37,6 +43,14 @@ public class CompanyDTO {
 		this.companyType = companyType;
 		this.introduce = introduce;
 		this.smyIntro = smyIntro;
+	}
+
+	public BigDecimal getNo() {
+		return no;
+	}
+
+	public void setNo(BigDecimal no) {
+		this.no = no;
 	}
 
 	public String getEmail() {
@@ -53,6 +67,14 @@ public class CompanyDTO {
 
 	public void setPw(String pw) {
 		this.pw = pw;
+	}
+
+	public String getCompanyNo() {
+		return companyNo;
+	}
+
+	public void setCompanyNo(String companyNo) {
+		this.companyNo = companyNo;
 	}
 
 	public MultipartFile getMainImg() {
@@ -145,9 +167,9 @@ public class CompanyDTO {
 
 	@Override
 	public String toString() {
-		return "CompanyDTO [email=" + email + ", pw=" + pw + ", mainImg=" + mainImg + ", cn=" + cn + ", nm=" + nm
-				+ ", mainNm=" + mainNm + ", postcode=" + postcode + ", addr=" + addr + ", addrdetail=" + addrdetail
-				+ ", tel=" + tel + ", companyType=" + companyType + ", introduce=" + introduce + ", smyIntro="
-				+ smyIntro + "]";
+		return "CompanyDTO [no=" + no + ", email=" + email + ", pw=" + pw + ", companyNo=" + companyNo + ", mainImg="
+				+ mainImg + ", cn=" + cn + ", nm=" + nm + ", mainNm=" + mainNm + ", postcode=" + postcode + ", addr="
+				+ addr + ", addrdetail=" + addrdetail + ", tel=" + tel + ", companyType=" + companyType + ", introduce="
+				+ introduce + ", smyIntro=" + smyIntro + "]";
 	}
 }

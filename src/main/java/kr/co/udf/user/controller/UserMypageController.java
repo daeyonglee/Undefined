@@ -21,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.udf.common.util.MediaUtils;
 import kr.co.udf.user.domain.Company;
+import kr.co.udf.user.domain.CompanyDTO;
 import kr.co.udf.user.domain.Login;
 import kr.co.udf.user.domain.User;
 import kr.co.udf.user.domain.UserDTO;
@@ -91,6 +92,8 @@ public class UserMypageController {
 					Company company = (Company)obj;
 					logger.debug(company);
 					
+					model.addAttribute("company", company);
+					
 					addrs = company.getAddr().split("\\^\\^");
 					
 					if (company.getMainImg() != null) {
@@ -135,12 +138,18 @@ public class UserMypageController {
 	@RequestMapping(value="userupdate", method=RequestMethod.POST)
 	public String userupdate(UserDTO user, Model model, HttpSession session, RedirectAttributes rttr) {
 		logger.debug("/user/mypage/userupdate POST start......");
+		
+		// 세션값 변경
+		Login login = (Login)session.getAttribute("login");
+		
+		if ("".equals(user.getPw())) {
+			user.setPw(login.getPw());
+		}
+		
 		logger.debug(user);
 		
 		mypageService.userupdate(user);
 		
-		// 세션값 변경
-		Login login = (Login)session.getAttribute("login");
 		login.setPw(user.getPw());
 		
 		rttr.addFlashAttribute("msg", "update");
@@ -148,6 +157,28 @@ public class UserMypageController {
 		session.setAttribute("login", login);
 		
 		logger.debug("/user/mypage/userupdate POST end........");
+		return "redirect:/user/mypage/index";
+	}
+	
+	@RequestMapping(value="companyupdate", method=RequestMethod.POST)
+	public String companyupdate(CompanyDTO company, HttpSession session, RedirectAttributes rttr) {
+		
+		// 세션값 변경
+		Login login = (Login)session.getAttribute("login");
+		if ("".equals(company.getPw())) {
+			company.setPw(login.getPw());
+		}
+		
+		logger.debug(company);
+		
+		mypageService.companyupdate(company);
+		
+		login.setPw(company.getPw());
+		
+		rttr.addFlashAttribute("msg", "update");
+		
+		session.setAttribute("login", login);
+		
 		return "redirect:/user/mypage/index";
 	}
 	

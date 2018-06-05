@@ -35,6 +35,7 @@
 		     , dc_tel tel
 		     , dc_introduce introduce
 		     , dc_smy_intro smyIntro
+		     , 'dress' companyType
 		  FROM dress_company
 		 WHERE dc_no = #{no}
 		   AND dc_email = #{email}
@@ -53,6 +54,7 @@
 		     , sc_tel tel
 		     , sc_introduce introduce
 		     , sc_smy_intro smyIntro
+		     , 'studio' companyType
 		  FROM studio_company
 		 WHERE sc_no = #{no}
 		   AND sc_email = #{email}
@@ -72,6 +74,7 @@
 		     , mc_tel tel
 		     , mc_introduce introduce
 		     , mc_smy_intro smyIntro
+		     , 'makeup' companyType
 		  FROM makeup_company
 		 WHERE mc_no = #{no}
 		   AND mc_email = #{email}
@@ -87,5 +90,47 @@
 		     , user_addr = #{addr}
 		     , user_tel = #{user.tel}
 		 WHERE user_no = #{user.no}
+	</update>
+	
+	<!-- 나의 정보관리 정보 수정하기 (드레스) -->
+	<update id="companyupdateDress" parameterType="map">
+		UPDATE dress_company
+		   SET dc_pw = #{company.pw}
+		     , dc_addr = #{addr}
+		     , dc_main_nm = #{company.mainNm}
+		     , dc_tel = #{company.tel}
+		     , dc_introduce = #{company.introduce}
+		     , dc_smy_intro = #{company.smyIntro}
+		     , dc_nm = #{company.nm}
+		     , dc_company_no = #{company.companyNo}
+		 WHERE dc_no = #{company.no}
+	</update>
+	
+	<!-- 나의 정보관리 정보 수정하기 (메이크업) -->
+	<update id="companyupdateMakeup" parameterType="map">
+		UPDATE makeup_company
+		   SET mc_pw = #{company.pw}
+		     , mc_addr = #{addr}
+		     , mc_main_nm = #{company.mainNm}
+		     , mc_tel = #{company.tel}
+		     , mc_introduce = #{company.introduce}
+		     , mc_smy_intro = #{company.smyIntro}
+		     , mc_nm = #{company.nm}
+		     , mc_company_no = #{company.companyNo}
+		 WHERE mc_no = #{company.no}
+	</update>
+	
+	<!-- 나의 정보관리 정보 수정하기 (스튜디오) -->
+	<update id="companyupdateStudio" parameterType="map">
+		UPDATE studio_company
+		   SET c_pw = #{company.pw}
+		     , c_addr = #{addr}
+		     , c_main_nm = #{company.mainNm}
+		     , c_tel = #{company.tel}
+		     , c_introduce = #{company.introduce}
+		     , c_smy_intro = #{company.smyIntro}
+		     , c_nm = #{company.nm}
+		     , c_company_no = #{company.companyNo}
+		 WHERE c_no = #{company.no}
 	</update>
 </mapper>

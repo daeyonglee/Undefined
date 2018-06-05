@@ -1,5 +1,6 @@
 package kr.co.udf.user.dao;
 
+import kr.co.udf.user.domain.CompanyDTO;
 import kr.co.udf.user.domain.Login;
 import kr.co.udf.user.domain.UserDTO;
 
@@ -17,4 +18,10 @@ public interface UserMypageDao {
 	 * @param user
 	 */
 	public void userupdate(UserDTO user);
+	
+	/**
+	 * 나의 정보관리 정보 수정하기 (업체)
+	 * @param company
+	 */
+	public void companyupdate(CompanyDTO company);
 }

@@ -15,11 +15,12 @@ public class Company {
 	private String tel;
 	private String introduce;
 	private String smyIntro;
+	private String companyType;
 	
 	public Company() {}
-	
+
 	public Company(BigDecimal no, String nm, BigDecimal companyNo, String mainNm, String addr, String mainImg,
-			String email, String pw, String tel, String introduce, String smyIntro) {
+			String email, String pw, String tel, String introduce, String smyIntro, String companyType) {
 		super();
 		this.no = no;
 		this.nm = nm;
@@ -32,6 +33,7 @@ public class Company {
 		this.tel = tel;
 		this.introduce = introduce;
 		this.smyIntro = smyIntro;
+		this.companyType = companyType;
 	}
 
 	public BigDecimal getNo() {
@@ -122,10 +124,18 @@ public class Company {
 		this.smyIntro = smyIntro;
 	}
 
+	public String getCompanyType() {
+		return companyType;
+	}
+
+	public void setCompanyType(String companyType) {
+		this.companyType = companyType;
+	}
+
 	@Override
 	public String toString() {
 		return "Company [no=" + no + ", nm=" + nm + ", companyNo=" + companyNo + ", mainNm=" + mainNm + ", addr=" + addr
 				+ ", mainImg=" + mainImg + ", email=" + email + ", pw=" + pw + ", tel=" + tel + ", introduce="
-				+ introduce + ", smyIntro=" + smyIntro + "]";
+				+ introduce + ", smyIntro=" + smyIntro + ", companyType=" + companyType + "]";
 	}
 }
