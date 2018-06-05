@@ -35,6 +35,11 @@ import kr.co.udf.user.domain.User;
 @Controller
 @RequestMapping("/auction/*")
 public class AuctionController {
+	
+	
+	
+	
+	
 
 	Logger logger = Logger.getLogger(AuctionController.class);
 
@@ -68,9 +73,11 @@ public class AuctionController {
 	/** 낙찰서 상세보기 */
 	@RequestMapping(value = "/winread", method = RequestMethod.GET)
 	public void winread(@RequestParam("no") int no, @RequestParam("type")String type, Model model) throws Exception {
+				
 		model.addAttribute("Auction",bidService.winread(no,type));				
 		
 	}
+	
 	
 	
 	/** 삭제 */

@@ -92,10 +92,28 @@ $(document).ready(function(){
 		var html = "";
 		
 		for (var i=0; i<5; i++) {
+			
+			var arrLoc = data[i].loc.split("||");
+			var locCnt;
+			
+			console.log(arrLoc);
+			
+			if (arrLoc.length > 1) {
+				var locCnt = arrLoc.length-1;
+			}
+			
+			
 			html += "<tr class=" + arr[i] + " style='position: relative;'>";
 			html += "<td>입찰중</td>";
 			html += "<td>" + data[i].writer + "</td>";
-			html += "<td style = 'width : 126px; height : 37px; table-layout:fixed;'>" + data[i].loc +"</td>";
+			
+			if (arrLoc.length > 1) {
+				html += "<td style = 'width : 200px; height : 37px; table-layout:fixed;'>" + arrLoc[0] +" 외 "+ locCnt +" 곳</td>";
+			} else {
+				html += "<td style = 'width : 200px; height : 37px; table-layout:fixed;'>" + arrLoc[0] + "</td>";
+			}
+			
+			
 			html += "<td>" + data[i].deadline + "</td>";
 			html += "<td style = 'width : 86px; height : 37px; table-layout:fixed;'>" + data[i].stat +"</td>";
 			html += "</tr>";
@@ -113,7 +131,7 @@ $(document).ready(function(){
 				var appendTag  = "<tr class='" + arr[classIndex] + "' style='position: relative;'>";
 			    appendTag += "<td>입찰중</td>";
 			    appendTag += "<td>" + data[index].writer + "</td>";
-			    appendTag += "<td style = 'width : 126px; height : 37px; table-layout:fixed;'>" + data[index].loc +"</td>";
+			    appendTag += "<td style = 'width : 200px; height : 37px; table-layout:fixed;'>" + data[index].loc +"</td>";
 			    appendTag += "<td>" + data[index].deadline + "</td>";
 			    appendTag += "<td style = 'width : 86px; height : 37px; table-layout:fixed;'>" + data[index].stat +"</td>";
 			
@@ -225,10 +243,28 @@ $(document).ready(function(){
 		var html = "";
 		
 		for (var i=0; i<5; i++) {
+			
+			var arrLoc = data[i].loc.split("||");
+			var locCnt;
+			
+			console.log(arrLoc);
+			
+			if (arrLoc.length > 1) {
+				var locCnt = arrLoc.length-1;
+			}
+			
+			
 			html += "<tr class=" + arr[i] + " style='position: relative;'>";
 			html += "<td>입찰중</td>";
 			html += "<td>" + data[i].writer + "</td>";
-			html += "<td>" + data[i].loc +"</td>";
+			
+			if (arrLoc.length > 1) {
+				html += "<td style = 'width : 200px; height : 37px; table-layout:fixed;'>" + arrLoc[0] +" 외 "+ locCnt +" 곳</td>";
+			} else {
+				html += "<td style = 'width : 200px; height : 37px; table-layout:fixed;'>" + arrLoc[0] + "</td>";
+			}
+			
+			
 			html += "<td>" + data[i].deadline + "</td>";
 			html += "<td style = 'width : 86px; height : 37px; table-layout:fixed;'>" + data[i].stat +"</td>";
 			html += "</tr>";
@@ -358,10 +394,28 @@ $(document).ready(function(){
 		var html = "";
 		
 		for (var i=0; i<5; i++) {
+			
+			var arrLoc = data[i].loc.split("||");
+			var locCnt;
+			
+			console.log(arrLoc);
+			
+			if (arrLoc.length > 1) {
+				var locCnt = arrLoc.length-1;
+			}
+			
+			
 			html += "<tr class=" + arr[i] + " style='position: relative;'>";
 			html += "<td>입찰중</td>";
 			html += "<td>" + data[i].writer + "</td>";
-			html += "<td style = 'width : 126px; height : 37px; table-layout:fixed;'>" + data[i].loc +"</td>";
+			
+			if (arrLoc.length > 1) {
+				html += "<td style = 'width : 200px; height : 37px; table-layout:fixed;'>" + arrLoc[0] +" 외 "+ locCnt +" 곳</td>";
+			} else {
+				html += "<td style = 'width : 200px; height : 37px; table-layout:fixed;'>" + arrLoc[0] + "</td>";
+			}
+			
+			
 			html += "<td>" + data[i].deadline + "</td>";
 			html += "<td style = 'width : 86px; height : 37px; table-layout:fixed;'>" + data[i].stat +"</td>";
 			html += "</tr>";
