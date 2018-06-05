@@ -370,7 +370,6 @@
 
                 <script>
                 
-            var list = [];
 			var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/parking_lot_maps.png';
 			
 			function initialize() {
@@ -398,14 +397,16 @@
 
 				var region = document.getElementById("mapList").value.split(",");
 				var name = document.getElementById("nameList").value.split(",");
+				
+				var list = document.getElementById("list").value.split(",");
+				console.log(list);
 				/*
 					info : {region:name, region:name}
 				*/
 				//var myLatlng1 = new google.maps.LatLngBounds(37.4837121, 127.0324112);
 				//console.log(myLatlng1);
 				var currentInfoWindow = null;
-				var infoWindow = new google.maps.InfoWindow({ content: '' });
-															
+				
 				//마커를 올릴 지역을 가져온다.
 				if (region.length > 0) {
 					for (var i = 0; i < region.length; i++) {
@@ -413,7 +414,6 @@
 										function (results, status) {
 											if (status == google.maps.GeocoderStatus.OK) {
 												for (var j = 0; j < results.length; j++) {
-													for (var n = 0; n <name.length; n++) {
 													// 좌표값 받아오기
 													
 													var lat = results[j].geometry.location.lat();
@@ -426,35 +426,27 @@
 																title : results[j].formatted_address,
 																map : map,
 																bounds: true,
-																maxZoom: 17,
-																name: name[n]
+																maxZoom: 17
 																//center : {lat: -34, lng: 151}
 																//icon : iconBase
 															});
 														
 														bounds.extend(marker.position);
 														map.fitBounds(bounds);
-
 														
-													var image = "대표이미지";
-													//인포윈도우 만들기 
-													var infowin = '';
-													infowin += '<div class="hall_box">';
-													//infowin += '<img src = "http://iwedding.co.kr/center/website/brandplus/6285/721-N153_141014032549_1.jpg">'
-													infowin += '<div class="hall_detail">';
-													infowin += '<dl>'+marker.name+'</dl>';
-													infowin += '<dl><dd>'+marker.title+'</dd></dl>';
-													infowin += '</div>';
-													
 													//var address = region;
 													//console.log(name[n]);
 													
 													// 마커 클릭 이벤트
 													
-													console.log('이름 : ' + marker.name);
-													console.log('위치 : ' + marker.title);
+													//console.log('이름 : ' + marker.name);
+													//console.log('위치 : ' + marker.title);
 													
 													google.maps.event.addListener(marker,'click',function(e) {
+														
+														console.log(marker);
+														var infowin = searchName(marker);
+														var infoWindow = new google.maps.InfoWindow({ content: infowin });
 														
 														if(currentInfoWindow !=null){
 															currentInfoWindow.close();
@@ -465,16 +457,42 @@
 														console.log(marker);
 														currentInfoWindow = infoWindow;
 													});
-													
-												}
 											}
 												
 											} else {
 												alert("검색결과가 없습니다");
 											}
 										});
-					}
+					};
 					
+				}
+				
+				function searchName(marker) {
+					
+					var title = marker.title.replace("대한민국", "").trim();
+					var infowin = '';
+					var image = '';
+					//인포윈도우 만들기 
+					infowin += '<div class="hall_box">';
+					//infowin += '<img src = "http://iwedding.co.kr/center/website/brandplus/6285/721-N153_141014032549_1.jpg">'
+					infowin += '<div class="hall_detail">';
+					
+					$.each(list, function(index, value) {
+						
+						var arr = value.split(":");
+						var arrTitle = arr[1].trim();
+						var arrName = arr[0].trim();
+						
+						if (title == arrTitle) {
+							infowin += '<dl>'+arrName+'</dl>';
+						}
+						
+					});
+					
+					infowin += '<dl><dd>'+title+'</dd></dl>';
+					infowin += '</div></div>';
+					
+					return infowin;
 				}
 				
 			}
@@ -494,6 +512,16 @@
                  </c:forEach>
                " />
                
+          <input type="hidden" id="list"
+             value= "
+               <c:forEach items="${list}" var="studio" varStatus="index">
+                  <c:choose>
+                    <c:when test="${index.last}">${studio.sc_nm}:${studio.sc_addr}</c:when>
+                    <c:otherwise>${studio.sc_nm}:${studio.sc_addr},</c:otherwise>
+                  </c:choose>
+               </c:forEach>
+             " />
+   
    
            <input type="hidden" id="nameList"
                value= "
