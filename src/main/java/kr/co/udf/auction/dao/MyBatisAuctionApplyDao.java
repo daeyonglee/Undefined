@@ -53,18 +53,7 @@ public class MyBatisAuctionApplyDao implements AuctionApplyDao {
 		return list;
 	}
 	
-	@Override
-	public Auction winread(int no, String type) throws Exception {
-		
-		Map<String, Object> map = new HashMap<>();
-		map.put("no", no);
-		map.put("type", type);
-		
-		Auction list = session.selectOne(NAMESPACE+".read", map);
-		
-		return list;
-		
-	}
+	
 
 	@Override
 	public void update(Auction auction) throws Exception {

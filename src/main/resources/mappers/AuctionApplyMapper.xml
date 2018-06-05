@@ -329,7 +329,7 @@ FROM   (       SELECT Ceil(ROWNUM / 10) page ,
 <!--  낙찰 전체 리스트 페이징 처리 -->
 <select id="winlistParams" parameterType="SearchParams" resultType="Auction">
 SELECT a.* 
-FROM   (       SELECT Ceil(ROWNUM / 10) page , 
+FROM   (       SELECT Ceil(ROWNUM / #{perPageNum}) page , 
                      m.* 
               FROM   (        SELECT   s.* 
                               FROM     (      SELECT d.daa_no                                               no ,
@@ -342,10 +342,16 @@ FROM   (       SELECT Ceil(ROWNUM / 10) page ,
                                                      d.daa_memo                                             memo ,
                                                      d.daa_stat                                             stat ,
                                                      To_char(d.regdate, 'YYYY-MM-DD')                       regdate , 
+                                                     r.dp_price                                             price,
+                                                     b.dbpl_discount                                        discount,
                                                      'dress'                                                TYPE
                                               FROM   dress_auction_apply d 
                                               join   users u 
-                                              ON     d.user_no = u.user_no 
+                                              ON     d.user_no = u.user_no
+                                              Join   dress_BID_PRODUCT_LIST b
+                                                ON   u.user_no = b.user_no
+                                              join   dress_product r
+                                                on   b.dp_no = r.dp_no
                                               WHERE  d.daa_stat = '낙찰' 
                                               UNION 
                                               SELECT m.maa_no                                                   no ,
@@ -358,11 +364,17 @@ FROM   (       SELECT Ceil(ROWNUM / 10) page ,
                                                      m.maa_memo                                                 memo ,
                                                      m.maa_stat                                                 stat ,
                                                      To_char(m.regdate, 'YYYY-MM-DD')                           regdate , 
+                                                     r.mp_price                                                 price,
+                                                     b.mbpl_discount                                            discount,
                                                      'makeup'                                                   TYPE
                                               FROM   makeup_auction_apply m 
                                               join   users u 
                                               ON     m.user_no = u.user_no 
-                                              WHERE  m.maa_stat = '낙찰' 
+                                              Join   makeup_BID_PRODUCT_LIST b
+                                                ON   u.user_no = b.user_no
+                                              join   makeup_product r
+                                                on   b.mp_no = r.mp_no
+                                             WHERE  m.maa_stat = '낙찰' 
                                               UNION 
                                               SELECT s.saa_no                                                   no ,
                                                      u.user_no                                                  userno ,
@@ -374,14 +386,20 @@ FROM   (       SELECT Ceil(ROWNUM / 10) page ,
                                                      s.saa_memo                                                 memo ,
                                                      s.saa_stat                                                 stat ,
                                                      To_char(s.regdate, 'YYYY-MM-DD')                           regdate , 
+                                                     r.sp_price                                                 price,
+                                                     b.sbpl_discount                                            discount,
                                                      'studio'                                                   TYPE
                                               FROM   studio_auction_apply s 
                                               join   users u 
                                               ON     s.user_no = u.user_no 
-                                              WHERE  s.saa_stat = '낙찰' 
+                                              Join   studio_BID_PRODUCT_LIST b
+                                                ON   u.user_no = b.user_no
+                                              join   studio_product r
+                                                on   b.sp_no = r.sp_no
+                                             WHERE   s.saa_stat = '낙찰' 
                                               ) s 
                               ORDER BY regdate DESC ) m ) a
-              WHERE  1 = 1 and page = #{page}              
+              WHERE  1 = 1 and page = #{page}
              </select>
              
 
@@ -419,8 +437,7 @@ SELECT count(*)
                       ,'dress' type
                 FROM   dress_auction_apply d
                        JOIN users u 
-                       
-                         ON d.user_no = u.user_no
+                        ON d.user_no = u.user_no
                WHERE d.daa_stat = '입찰중' OR  d.daa_stat = '낙찰대기중') S
         ) M
  WHERE page = #{page}
@@ -477,7 +494,7 @@ SELECT count(*)
 
 <!--  스드메 별 낙찰 리스트 조회 + 페이징 처리 -->
 <select id="winlistByDress" parameterType="SearchParams" resultType="Auction">
- SELECT M.*
+SELECT M.*
   FROM (SELECT CEIL(rownum / #{perPageNum}) page 
              , S.*
           FROM ( SELECT  d.daa_no  no
@@ -490,12 +507,17 @@ SELECT count(*)
                       , d.daa_memo memo
                       , d.daa_stat stat
                       , TO_CHAR(d.regdate, 'YYYY-MM-DD') regdate
-                      ,'dress' type
-                FROM   dress_auction_apply d
-                       JOIN users u 
-                       
-                         ON d.user_no = u.user_no
-               WHERE d.daa_stat = '낙찰') S
+                      , r.dp_price                                             price
+                      , b.dbpl_discount                                        discount
+                      , 'dress'                                                TYPE
+                  FROM   dress_auction_apply d 
+                  join   users u 
+                  ON     d.user_no = u.user_no
+                  Join   dress_BID_PRODUCT_LIST b
+                  ON   u.user_no = b.user_no
+                  join   dress_product r
+                  on   b.dp_no = r.dp_no
+                  WHERE  d.daa_stat = '낙찰' ) S
         ) M
  WHERE page = #{page}
  ORDER BY regdate DESC
@@ -514,11 +536,17 @@ SELECT count(*)
                      , m.maa_memo memo
                      , m.maa_stat stat
                      , TO_CHAR(m.regdate, 'YYYY-MM-DD') regdate
-                     ,'makeup' type
-                  FROM makeup_auction_apply m
-                       JOIN users u 
-                         ON m.user_no = u.user_no
-                WHERE m.maa_stat = '낙찰') S
+                     , r.mp_price                                             price
+                     , b.mbpl_discount                                        discount
+                     , 'makeup'                                                TYPE
+                  FROM   makeup_auction_apply m 
+                  join   users u 
+                  ON     m.user_no = u.user_no
+                  Join   makeup_BID_PRODUCT_LIST b
+                  ON     u.user_no = b.user_no
+                  join   makeup_product r
+                  on     b.mp_no = r.mp_no
+                  WHERE  m.maa_stat = '낙찰' ) S
         ) M
   WHERE page = #{page}
   ORDER BY regdate DESC
@@ -538,15 +566,20 @@ SELECT count(*)
                       , s.saa_memo memo
                       , s.saa_stat stat
                       , TO_CHAR(s.regdate, 'YYYY-MM-DD') regdate
-                      ,'studio' type
-                FROM   studio_auction_apply s
-                       JOIN users u 
-                         ON s.user_no = u.user_no
-               WHERE s.saa_stat = '낙찰') S
+                      , r.sp_price                                             price
+                      , b.sbpl_discount                                        discount
+                      , 'studio'                                               TYPE
+                  FROM   studio_auction_apply s
+                  join   users u 
+                  ON     s.user_no = u.user_no
+                  Join   studio_BID_PRODUCT_LIST b
+                  ON     u.user_no = b.user_no
+                  join   studio_product r
+                  on     b.sp_no = r.sp_no
+                  WHERE  s.saa_stat = '낙찰') S
         ) M
  WHERE page = #{page}
  ORDER BY regdate DESC
-
 </select>
 
 

@@ -173,4 +173,5 @@ FROM  (select  mb_no    bidNo
 where user_no = #{userNo} and applyNo = #{applyNo}
 </select>
 
+
 </mapper>

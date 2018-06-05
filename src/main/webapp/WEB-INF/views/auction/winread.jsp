@@ -1,4 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@include file="../include/top.jsp"%>
 <!DOCTYPE html>
 
@@ -64,18 +66,25 @@
                           <input class='form-control' type="text" name="type" readonly="readonly" value="${Auction.type}">
                         </div>
                       </div>
-
-                      <!--  인적사항 기입란 -->
-                      <div class="col-lg-2" id="col">
-                        <label>이름</label>
+                      
+                       <div class="col-lg-2" id="col">
+                        <label>업체명</label>
                       </div>
                       <div class="col-lg-10" id="col">
                         <div class="col-lg-6">
-                          <input class='form-control' type="text"
-                            name="writer" readonly="readonly"
-                            value="${Auction.writer} ">
+                          <input class='form-control' type="text" name="type" readonly="readonly" value="${Auction.cnm }">
                         </div>
                       </div>
+                      
+                       <div class="col-lg-2" id="col">
+                        <label>상품명</label>
+                      </div>
+                      <div class="col-lg-10" id="col">
+                        <div class="col-lg-6">
+                          <input class='form-control' type="text" name="pnm" readonly="readonly" value="${Auction.pnm }">
+                        </div>
+                      </div>
+
 
                       <div class="col-lg-2" id="col">
                         <label>연락처</label>
@@ -83,8 +92,8 @@
                       <div class="col-lg-10" id="col">
                         <div class="col-lg-6">
                           <input class='form-control'
-                            readonly="readonly" type="tel" name="tel"
-                            value="${Auction.tel}">
+                            readonly="readonly" type="tel" name="ctel"
+                            value="${Auction.ctel}">
                         </div>
                       </div>
                       
@@ -94,8 +103,8 @@
                       <div class="col-lg-10" id="col">
                         <div class="col-lg-3">
                           <input class='form-control' type="text"
-                            name="mdate" readonly="readonly"
-                            value="">
+                            name="meetDate" readonly="readonly"
+                            value="${Auction.meetDate}">
                         </div>
                       </div>
 
@@ -139,9 +148,11 @@
                         <div class="col-lg-3">
                           <input class='form-control' type="text"
                             name="할인율" readonly="readonly"
-                            value="">
+                            value='<fmt:formatNumber value = '${Auction.price *(Auction.discount*0.01)}' pattern ='0'></fmt:formatNumber>원'>
                       </div>
                       </div>
+                      
+                      
 
                       <div class="col-lg-2" id="col">
                         <label>기타 희망 사항</label>
@@ -154,19 +165,13 @@
 
                   </div>
                   </div>
-                  <div class="col-lg-4"></div>
+                  <!--  submit 버튼   -->
+                  <div class="form-group text-center">
+                      <input type='button' class='btn-primary' id="submit" name='submit' value='글목록' style="width:20%; margin-top: 15px;"/>
+                  </div>
                 </div>
               </form>
             </div>
-
-            <!--  submit 버튼   -->
-            <div class="form-group text-center">
-              <span id=button>  
-              <input type='button' class='btn-primary' id="submit" name='submit' value='글목록' style="width: 140px; padding-top: 5px; padding-bottom: 5px" />              
-              </span>
-            </div>
-
-
           </div>
         </div>
       </div>

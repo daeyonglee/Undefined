@@ -17,9 +17,6 @@ public interface AuctionApplyService {
 	// 역경매 신청서 상세 조회
 	public Auction read(int no, String type) throws Exception;
 
-	// 게시물 낙찰상세조회
-	public Auction winread(int no, String type) throws Exception;
-
 	// 역경매 신청서 수정
 	public void modify(Auction auction) throws Exception;
 

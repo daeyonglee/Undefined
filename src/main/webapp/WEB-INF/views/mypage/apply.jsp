@@ -42,8 +42,8 @@ td, th {
               <div class="box-header with-border">
                 <h3 class="box-title">스드메 역경매</h3>
                 <ul class="nav nav-tabs nav-justified">
-                  <li class="active"><a href="#">입찰 중인 경매</a></li>
-                  <li><a href="win">낙찰된 경매</a></li>
+                  <li class="active"><a href="#">나의 역경매 신청서</a></li>
+                  <li><a href="win">낙찰 완료된 역경매</a></li>
                 </ul>
               </div>
               <div class="form-group">
@@ -58,28 +58,27 @@ td, th {
               <div class="box-body">
                 <table class="table table-bordered">
                   <tr>
-                    <td colspan="6">입찰 신청 건수 : 1000 건</td>
+                    <td colspan="6">입찰 신청 건수 : ******* 건</td>
                   </tr>
                   <tr>
-                    <th style="width: 100px">신청일시</th>
-                    <th style="width: 100px">예식일자</th>
-                    <th style="width: 100px">작성자</th>
-                    <th style="width: 200px">희망지역</th>
+                    <th style="width: 100px">번호</th>
+                    <th style="width: 100px">종류</th>
+                    <th style="width: 100px">예식희망지역</th>
+                    <th style="width: 200px">예식희망일자</th>
                     <th style="width: 100px">입찰마감일</th>
-                    <th style="width: 200px">제출된 입찰서</th>
+                    <th style="width: 200px">상태</th>
                   </tr>
-<%-- 
-                  <c:forEach items="${list}" var="bid">
-                    <tr>
-                      <td>${bid.regdate }</td>
-                      <td>${bid.day }</td>
-                      <td><a href = "read?no=${bid.no}&type=${bid.type}">${bid.writer }</a></td>
-                      <td>${bid.loc }</td>
-                      <td>${bid.deadline }</td>
-                      <td>미공개</td>
+                  <c:forEach items="${applyList}" var="apply">
+                    <tr id = "visible">
+                      <td>1</td>
+                      <td>${apply.type }</td>
+                      <td>${apply.loc }</td>
+                      <td>${apply.day}</td>
+                      <td>${apply.deadline }</td>
+                      <td><a href= "bidlist?applyNo=${apply.no}&type=${apply.type } ">${apply.stat }</a></td>
                     </tr>
                   </c:forEach>
- --%>                </table>
+               </table>
               </div>
             </div>
             <!-- /.box-body -->

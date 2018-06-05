@@ -87,6 +87,15 @@ public class MyBatisAuctionDaoTest {
 //		List<Auction> list = dao.listByType(keyword);
 //		logger.info(list);
 	}
+	@Test
+	public void winListByStudio() throws Exception{
+		SearchParams params = new SearchParams();
+		params.setPage(1);
+		params.setPerPageNum(10);
+		
+		logger.info(dao.winlistByStudio(params));
+		
+	}
 
 }
  

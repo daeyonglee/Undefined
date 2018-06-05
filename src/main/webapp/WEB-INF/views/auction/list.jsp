@@ -63,10 +63,10 @@ td {
               <div class="box-body" >
                 <table class="table table-bordered">
                   <thead>
-                  <tr>
-                    <td colspan="6">역경매 신청 건수 : ${pageMaker.totalCount} 건</td>
-                  </tr>
-                  
+                    <tr>
+                      <td colspan="6">역경매 신청 건수 : ${pageMaker.totalCount} 건</td>
+                    </tr>
+                    
                   <tr>
                     <th style="width: 100px">신청일시</th>
                     <th style="width: 100px">예식일자</th>
@@ -176,27 +176,27 @@ td {
 			 dataType : "json",
 			 data : {searchType : type},
 			 success:function(searchList){
-				 console.log(searchList);
 				 $(".table.table-bordered tr#visible").remove();
 				 $(".pagination ul#visible2").remove();
-				 console.log($(".table.table-bordered tr#visible"));
                  				 
 				 var text = "";
 				 
-				 for ( var i in searchList) {
+				 for ( var i in searchList.list) {
 					 
 					 text += "<tr>";
-					 text += "<td>" +searchList[i].regdate+"</td>";
-					 text += "<td>" +searchList[i].day+"</td>";
-					 text += "<td> <a href = 'read?no="+searchList[i].no+"&type="+searchList[i].type+"'>"+searchList[i].writer+"</a></td>";
-					 text += "<td>" +searchList[i].loc+"</td>";
-					 text += "<td>" +searchList[i].deadline + "</td>";
+					 text += "<td>" +searchList.list[i].regdate+"</td>";
+					 text += "<td>" +searchList.list[i].day+"</td>";
+					 text += "<td> <a href = 'read?no="+searchList.list[i].no+"&type="+searchList.list[i].type+"'>"+searchList.list[i].writer+"</a></td>";
+					 text += "<td>" +searchList.list[i].loc+"</td>";
+					 text += "<td>" +searchList.list[i].deadline + "</td>";
 					 text += "<td>미공개</td>";
 					 text += "</tr>";
-				 	 
-					
 				}
 				$(".table.table-bordered > tbody").html(text); 
+				
+				pagination(searchList.pageMaker);
+				
+				totalCount(searchList.pageMaker.totalCount);
 			 },
 	         error:function(){
 	            console.log("오류");
@@ -205,8 +205,8 @@ td {
 				
 	  });
 	 
-	 $("a.paging").click(function(e){
-		 e.preventDefault();
+	 $(document).on('click', 'a.paging', function(e){
+ 		e.preventDefault();
 		 
 		 var perPageNum = ${pageMaker.params.perPageNum};
 		 var searchType = $("#searchType").val();
@@ -220,6 +220,44 @@ td {
 		 
 		 self.location.href=url;
 	 });
+	 
+	 function pagination(pageMaker) {
+		 
+		 console.log(pageMaker);
+		 
+		 var text2  = "<ul id = 'visible2'>";
+		 
+		 	if (pageMaker.prev) {
+		 		text2 +=  "<li><a href='#'>&laquo;</a></li>";
+		 	}
+		 	
+		 	for (var i=pageMaker.startPage; i<=pageMaker.endPage; i++){
+		 		text2 +=  "<li" + (pageMaker.params.page == i ? " class='active'>":'>');
+		 		text2 +=  "  <a class='paging' href='#'>" + i + "</a>";
+		 		text2 +=  "</li>";
+		 	}
+		 	
+		 	if (pageMaker.next && pageMaker.endPage > 0) {
+		 		text2 +=  "<li><a href='#'>&raquo;</a></li>";	
+		 	}
+		text2 += "</ul>";
+		
+		$(".pagination").html(text2); 
+		 
+		console.log(text2);
+	 }
+	 
+	 function totalCount(totalCount) {
+		 
+		 $(".table.table-bordered > thead > tr:first > td:first").remove();
+		 
+		 if (totalCount > 0) {
+			 var text2 = "<td colspan='6'>역경매 신청 건수 : " + totalCount + " 건</td>";
+			 
+			 $(".table.table-bordered > thead > tr:first").html(text2);
+		 }
+		 
+	 }
 	 
 	 	
 	});	 

@@ -1,7 +1,6 @@
 package kr.co.udf.auction.domain;
 
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 
 public class Auction {
 
@@ -40,6 +39,9 @@ public class Auction {
 	private String stat;
 	private String regdate;
 	private String updatedate;
+	private Integer price;
+	private Integer discount;
+	private Integer discountPrice;
 
 	public Auction() {}
 
@@ -47,7 +49,7 @@ public class Auction {
 			String locThird, String date, String dateFirst, String dateSecond, String dateThird, String day,
 			String dayFirst, String daySecond, String dayThird, String time, String timeFirst, String timeSecond,
 			String timeThird, String memo, String type, String writer, String deadline, String stat, String regdate,
-			String updatedate) {
+			String updatedate, Integer price, Integer discount, Integer discountPrice) {
 		super();
 		this.no = no;
 		this.userNo = userNo;
@@ -75,6 +77,9 @@ public class Auction {
 		this.stat = stat;
 		this.regdate = regdate;
 		this.updatedate = updatedate;
+		this.price = price;
+		this.discount = discount;
+		this.discountPrice = discountPrice;
 	}
 
 	public BigDecimal getNo() {
@@ -285,6 +290,30 @@ public class Auction {
 		this.updatedate = updatedate;
 	}
 
+	public Integer getPrice() {
+		return price;
+	}
+
+	public void setPrice(Integer price) {
+		this.price = price;
+	}
+
+	public Integer getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(Integer discount) {
+		this.discount = discount;
+	}
+
+	public Integer getDiscountPrice() {
+		return discountPrice;
+	}
+
+	public void setDiscountPrice(Integer discountPrice) {
+		this.discountPrice = discountPrice;
+	}
+
 	@Override
 	public String toString() {
 		return "Auction [no=" + no + ", userNo=" + userNo + ", tel=" + tel + ", loc=" + loc + ", locFirst=" + locFirst
@@ -293,8 +322,10 @@ public class Auction {
 				+ ", daySecond=" + daySecond + ", dayThird=" + dayThird + ", time=" + time + ", timeFirst=" + timeFirst
 				+ ", timeSecond=" + timeSecond + ", timeThird=" + timeThird + ", memo=" + memo + ", type=" + type
 				+ ", writer=" + writer + ", deadline=" + deadline + ", stat=" + stat + ", regdate=" + regdate
-				+ ", updatedate=" + updatedate + "]";
+				+ ", updatedate=" + updatedate + ", price=" + price + ", discount=" + discount + ", discountPrice="
+				+ discountPrice + "]";
 	}
-	
+
+
 	
 }

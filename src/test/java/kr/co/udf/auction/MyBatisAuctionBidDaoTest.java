@@ -10,6 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import kr.co.udf.auction.dao.AuctionBidDao;
+import kr.co.udf.auction.dao.MypageBidDao;
 import kr.co.udf.auction.domain.AuctionBid;
 import kr.co.udf.auction.service.AuctionBidService;
 
@@ -22,6 +23,9 @@ public class MyBatisAuctionBidDaoTest {
 	
 	@Inject
 	private AuctionBidService service;
+	
+	@Inject
+	private MypageBidDao myDao;
 
 	private Logger logger = Logger.getLogger(MyBatisAuctionBidDaoTest.class);
 	
@@ -45,7 +49,7 @@ public class MyBatisAuctionBidDaoTest {
 		bid.setApplyNo(1);
 		bid.setUserNo(1);
 		
-		dao.createStudio(bid);
+//		dao.createStudio(bid);
 		logger.info("신규 등록된 [studio] 낙찰서 : " + bid);
 	}
 	
@@ -57,7 +61,7 @@ public class MyBatisAuctionBidDaoTest {
 		bid.setApplyNo(93);
 		bid.setUserNo(1);
 		
-		dao.createDress(bid);
+//		dao.createDress(bid);
 		logger.info("신규 등록된 [dress] 낙찰서 : " + bid);
 	}
 	
@@ -85,5 +89,44 @@ public class MyBatisAuctionBidDaoTest {
 		logger.info(dao.listByApplyNo(bid));
 	}
 
+	//@Test
+	public void ApplyListByUserTest() throws Exception{
+		logger.info(myDao.applyListByUser(1));
+		
+	}
+	
+	//@Test
+	public void winListByUserTest() throws Exception{
+		logger.info(myDao.winListByUser(1));
+	}
+	
+	//@Test
+	public void bidListByUserTest() throws Exception{
+		int applyNo = 2;
+		int userNo = 1;
+		String type = "makeup";
+		logger.info(myDao.bidListByUser(userNo, applyNo, type));
+	}
+	
+	//@Test
+	public void readBid() throws Exception{
+		int applyNo = 182;
+		int userNo = 1;
+		String type = "makeup";
+		
+		logger.info(myDao.readBid(userNo, applyNo, type));
+		
+	}
+
+	//@Test
+	public void updateMakeupBidTest() throws Exception{
+		int applyNo = 182;
+		int userNo = 1;
+		String stat = "낙찰대기중";
+		
+		myDao.updateMakeupStat(userNo, applyNo, stat);
+
+		
+	}
 }
  

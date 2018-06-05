@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import kr.co.udf.auction.dao.AuctionBidDao;
+import kr.co.udf.auction.domain.Auction;
 import kr.co.udf.auction.domain.AuctionBid;
 import kr.co.udf.common.company.domain.DressCompany;
 import kr.co.udf.common.company.domain.MakeupCompany;
@@ -57,5 +58,11 @@ public class AuctionBidServiceImpl implements AuctionBidService {
 		return dao.listByUser(userNo);
 		
 	}
+	
+	@Override
+	public AuctionBid winread(int no, String type) throws Exception {
+		return dao.winread(no, type);
+	}
+
 
 }

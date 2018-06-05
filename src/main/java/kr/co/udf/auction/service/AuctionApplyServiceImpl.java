@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.udf.auction.dao.AuctionApplyDao;
 import kr.co.udf.auction.domain.Auction;
@@ -76,11 +77,7 @@ public class AuctionApplyServiceImpl implements AuctionApplyService {
 		 
 	}
 	
-	@Override
-	public Auction winread(int no, String type) throws Exception {
-		return dao.winread(no, type);
-	}
-
+	
 	@Override
 	public void modify(Auction auction) throws Exception {
 		

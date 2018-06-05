@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import kr.co.udf.auction.domain.Auction;
 import kr.co.udf.auction.domain.AuctionBid;
 import kr.co.udf.common.company.domain.DressCompany;
 import kr.co.udf.common.company.domain.MakeupCompany;
@@ -43,6 +44,19 @@ public class MyBatisAuctionBidDao implements AuctionBidDao {
 	public AuctionBid read(AuctionBid bid) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@Override
+	public AuctionBid winread(int no, String type) throws Exception {
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("no", no);
+		map.put("type", type);
+		
+		AuctionBid list = session.selectOne(NAMESPACE+".winread", map);
+		
+		return list;
+		
 	}
 
 	@Override

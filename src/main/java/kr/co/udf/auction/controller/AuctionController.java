@@ -1,6 +1,8 @@
 package kr.co.udf.auction.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.fasterxml.jackson.databind.util.JSONPObject;
 
 import kr.co.udf.auction.domain.Auction;
 import kr.co.udf.auction.domain.AuctionBid;
@@ -31,7 +35,6 @@ import kr.co.udf.user.domain.User;
 @Controller
 @RequestMapping("/auction/*")
 public class AuctionController {
-	
 
 	Logger logger = Logger.getLogger(AuctionController.class);
 
@@ -41,11 +44,9 @@ public class AuctionController {
 	@Inject
 	private AuctionCountService countService;
 	
-	
 	@Inject
 	private AuctionBidService bidService;
-	
-	
+
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String index() {
 		return "auction/index";
@@ -67,11 +68,9 @@ public class AuctionController {
 	/** 낙찰서 상세보기 */
 	@RequestMapping(value = "/winread", method = RequestMethod.GET)
 	public void winread(@RequestParam("no") int no, @RequestParam("type")String type, Model model) throws Exception {
-				
-		model.addAttribute("Auction",service.winread(no,type));				
+		model.addAttribute("Auction",bidService.winread(no,type));				
 		
 	}
-	
 	
 	
 	/** 삭제 */
@@ -177,7 +176,7 @@ public class AuctionController {
 	}
 	
 	@RequestMapping(value = "/win", method = RequestMethod.GET)
-	public void win(SearchParams params, Model model) throws Exception {
+	public void win(AuctionBid bid,SearchParams params, Model model) throws Exception {
 
 		if (params.getSearchType() == null) {
 			params.setSearchType("all");
@@ -198,6 +197,9 @@ public class AuctionController {
 		pageMaker.setTotalCount(service.winlistByTypeCount(params));
 
 		model.addAttribute("pageMaker", pageMaker);
+		 int discountPrice = ((int)(bid.getPrice().intValue() * bid.getDiscount().intValue() * 0.01));
+		 logger.info(discountPrice);
+	     model.addAttribute("discountPrice", discountPrice);
 	}
 	
 	// 입찰서 신규 등록하기(bid)
@@ -308,92 +310,171 @@ public class AuctionController {
 
 	
 	@RequestMapping(value="/bid/studio", method=RequestMethod.GET)
-	public ResponseEntity<List<Auction>> studioApplyList(SearchParams params){
+	public ResponseEntity<List<Auction>> studioApplyList(SearchParams params) throws Exception{
 		
 		ResponseEntity<List<Auction>> entity = null;
 		
+
+		List<Auction> list = service.listByStudio(params);
+		
+		params.setSearchType("studio");
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setParams(params);
+		pageMaker.setTotalCount(service.listByTypeCount(params));
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("list", list);
+		map.put("pageMaker", pageMaker);
+		
 		try {
-			entity = new ResponseEntity<List<Auction>>(service.listByStudio(params), HttpStatus.OK);
+			entity = new ResponseEntity(map, HttpStatus.OK);
 		} catch(Exception e) {
 			e.printStackTrace();
-			entity = new ResponseEntity<List<Auction>>(HttpStatus.BAD_REQUEST);
+			entity = new ResponseEntity(HttpStatus.BAD_REQUEST);
 		}
 		
 		return entity;
 	}
 
 	@RequestMapping(value = "/bid/dress", method = RequestMethod.GET)
-	public ResponseEntity<List<Auction>> dressApplyList(SearchParams params) {
+	public ResponseEntity<List<Auction>> dressApplyList(SearchParams params)throws Exception{
 		
 		
 		ResponseEntity<List<Auction>> entity = null;
-
+		
+		params.setSearchType("dress");
+		
+		List<Auction> list = service.listByDress(params);
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setParams(params);
+		pageMaker.setTotalCount(service.listByTypeCount(params));
+		
+		Map<String,Object> map = new HashMap<>();
+		map.put("list", list);
+		map.put("pageMaker",pageMaker);
+				
 		try {
-			entity = new ResponseEntity<>(service.listByDress(params), HttpStatus.OK);
+			entity = new ResponseEntity(map,HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			entity = new ResponseEntity(HttpStatus.BAD_REQUEST);
 		}
 		return entity;
 	}
 
 	@RequestMapping(value = "/bid/makeup", method = RequestMethod.GET)
-	public ResponseEntity<List<Auction>> makeupApplyList(SearchParams params) {
+	public ResponseEntity<List<Auction>> makeupApplyList(SearchParams params)  throws Exception {
 
 		
-		ResponseEntity<List<Auction>> entity = null;
+	    ResponseEntity<List<Auction>> entity = null;
+		
 
+		List<Auction> list = service.listByMakeup(params);
+		
+		params.setSearchType("makeup");
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setParams(params);
+		pageMaker.setTotalCount(service.listByTypeCount(params));
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("list", list);
+		map.put("pageMaker", pageMaker);
+		
 		try {
-			entity = new ResponseEntity<>(service.listByMakeup(params), HttpStatus.OK);
-		} catch (Exception e) {
+			entity = new ResponseEntity(map, HttpStatus.OK);
+		} catch(Exception e) {
 			e.printStackTrace();
-			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			entity = new ResponseEntity(HttpStatus.BAD_REQUEST);
 		}
 		return entity;
 	}
 	
 	@RequestMapping(value="/win/studio", method=RequestMethod.GET)
-	public ResponseEntity<List<Auction>> winstudioApplyList(SearchParams params){
+	public ResponseEntity<List<Auction>> winstudioApplyList(SearchParams params)throws Exception{
 		
 		ResponseEntity<List<Auction>> entity = null;
 		
+
+		List<Auction> list = service.winlistByStudio(params);
+		
+		params.setSearchType("studio");
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setParams(params);
+		pageMaker.setTotalCount(service.winlistByTypeCount(params));
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("list", list);
+		map.put("pageMaker", pageMaker);
+		
 		try {
-			entity = new ResponseEntity<List<Auction>>(service.winlistByStudio(params), HttpStatus.OK);
+			entity = new ResponseEntity(map, HttpStatus.OK);
 		} catch(Exception e) {
 			e.printStackTrace();
-			entity = new ResponseEntity<List<Auction>>(HttpStatus.BAD_REQUEST);
+			entity = new ResponseEntity(HttpStatus.BAD_REQUEST);
 		}
 		
 		return entity;
 	}
 
 	@RequestMapping(value = "/win/dress", method = RequestMethod.GET)
-	public ResponseEntity<List<Auction>> windressApplyList(SearchParams params) {
+	public ResponseEntity<List<Auction>> windressApplyList(SearchParams params)throws Exception {
 		
 		
 		ResponseEntity<List<Auction>> entity = null;
+		
 
+		List<Auction> list = service.winlistByDress(params);
+		
+		params.setSearchType("dress");
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setParams(params);
+		pageMaker.setTotalCount(service.winlistByTypeCount(params));
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("list", list);
+		map.put("pageMaker", pageMaker);
+		
 		try {
-			entity = new ResponseEntity<>(service.winlistByDress(params), HttpStatus.OK);
-		} catch (Exception e) {
+			entity = new ResponseEntity(map, HttpStatus.OK);
+		} catch(Exception e) {
 			e.printStackTrace();
-			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			entity = new ResponseEntity(HttpStatus.BAD_REQUEST);
 		}
+		
 		return entity;
 	}
 
 	@RequestMapping(value = "/win/makeup", method = RequestMethod.GET)
-	public ResponseEntity<List<Auction>> winmakeupApplyList(SearchParams params) {
+	public ResponseEntity<List<Auction>> winmakeupApplyList(SearchParams params) throws Exception {
 
 		
 		ResponseEntity<List<Auction>> entity = null;
+		
 
+		List<Auction> list = service.winlistByMakeup(params);
+		
+		params.setSearchType("makeup");
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setParams(params);
+		pageMaker.setTotalCount(service.winlistByTypeCount(params));
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("list", list);
+		map.put("pageMaker", pageMaker);
+		
 		try {
-			entity = new ResponseEntity<>(service.winlistByMakeup(params), HttpStatus.OK);
-		} catch (Exception e) {
+			entity = new ResponseEntity(map, HttpStatus.OK);
+		} catch(Exception e) {
 			e.printStackTrace();
-			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			entity = new ResponseEntity(HttpStatus.BAD_REQUEST);
 		}
+		
 		return entity;
 	}
 

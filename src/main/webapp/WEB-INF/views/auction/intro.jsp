@@ -88,7 +88,7 @@ text-align: center;
     	  
         $('#mypageBidList').on("click", function(evt) {
 
-              self.location = "bidlist";
+              self.location = "/mypage/auction/apply";
 
           });
 

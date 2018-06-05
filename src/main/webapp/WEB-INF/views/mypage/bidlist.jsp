@@ -40,46 +40,36 @@ td, th {
             <!-- general form elements -->
             <div class="box" style="text-align: center;">
               <div class="box-header with-border">
-                <h3 class="box-title">스드메 역경매</h3>
-                <ul class="nav nav-tabs nav-justified">
-                  <li class="active"><a href="#">입찰 중인 경매</a></li>
-                  <li><a href="win">낙찰된 경매</a></li>
-                </ul>
+                <h3 class="box-title">입찰서 리스트</h3>
               </div>
-              <div class="form-group">
-                <select name="searchType" id="searchType" class="selectpicker show-tick form-control">
-                  <option value="" selected="selected">종류를 선택하세요</option>
-                  <option value="studio">스튜디오</option>
-                  <option value="dress">드레스</option>
-                  <option value="makeup">메이크업</option>
-                </select>
-              </div>
-
+                <div class="clearfix" style="height: 15px"></div>
+                <form role = "form" method="post">
+                    <input type="hidden" name="user" value="${bid.userNo}" />
+                </form>
               <div class="box-body">
                 <table class="table table-bordered">
                   <tr>
-                    <td colspan="6">입찰 신청 건수 : 1000 건</td>
+                    <td colspan="6">입찰 신청 건수 : ******* 건</td>
                   </tr>
                   <tr>
-                    <th style="width: 100px">신청일시</th>
-                    <th style="width: 100px">예식일자</th>
-                    <th style="width: 100px">작성자</th>
-                    <th style="width: 200px">희망지역</th>
+                    <th style="width: 100px">번호</th>
+                    <th style="width: 100px">종류</th>
+                    <th style="width: 100px">예식희망지역</th>
+                    <th style="width: 200px">예식희망일자</th>
                     <th style="width: 100px">입찰마감일</th>
-                    <th style="width: 200px">제출된 입찰서</th>
+                    <th style="width: 200px">상태</th>
                   </tr>
-<%-- 
-                  <c:forEach items="${list}" var="bid">
-                    <tr>
-                      <td>${bid.regdate }</td>
-                      <td>${bid.day }</td>
-                      <td><a href = "read?no=${bid.no}&type=${bid.type}">${bid.writer }</a></td>
+                  <c:forEach items="${bidList}" var="bid">
+                    <tr id = "visible">
+                      <td>1</td>
+                      <td>${bid.type }</td>
                       <td>${bid.loc }</td>
+                      <td>${bid.day}</td>
                       <td>${bid.deadline }</td>
-                      <td>미공개</td>
+                      <td><a href= "bid/read?applyNo=${bid.applyNo}&type=${bid.type }">${bid.stat }</a></td>
                     </tr>
                   </c:forEach>
- --%>                </table>
+               </table>
               </div>
             </div>
             <!-- /.box-body -->
@@ -88,24 +78,33 @@ td, th {
           <!--/.col (left) -->
 
         </div>
+            <!--  submit 버튼   -->
+            <div class="form-group text-center">
+              <span id=button>  
+              <input type='button' class='btn-primary' id="list" name='list' value='글목록' style="width: 140px; padding-top: 5px; padding-bottom: 5px" />
+              </span>
+            </div>
+            <div class="clearfix"></div>
         <!-- /.row -->
       </div>
     </div>
   </section>
   <!-- /.content -->
+
  <form id="jobForm">
   <input type='hidden' name="page" value="${pageMaker.params.page}" >
   <input type='hidden' name="perPageNum" value="${pageMaker.params.perPageNum}" >
  </form>
 
+ <script>
+      $(document).ready(function() {
 
-  <script>
-			var result = '${msg}';
+			$("#list").on("click", function() {
+              self.location = "apply";
+            });
+      });
+    </script>
 
-			if (result == 'SUCCESS') {
-				alert("처리가 완료되었습니다.");
-			}
- </script>
  
   <%@include file="../include/bottom.jsp"%>
 </body>

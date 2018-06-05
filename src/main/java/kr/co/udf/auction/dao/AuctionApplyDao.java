@@ -3,6 +3,7 @@ package kr.co.udf.auction.dao;
 import java.util.List;
 
 import kr.co.udf.auction.domain.Auction;
+import kr.co.udf.common.web.Params;
 import kr.co.udf.common.web.SearchParams;
 
 public interface AuctionApplyDao {
@@ -16,10 +17,7 @@ public interface AuctionApplyDao {
 
 	// 게시물 상세조회
 	public Auction read(int no, String type) throws Exception;
-	
-	// 게시물 낙찰상세조회
-	public Auction winread(int no, String type) throws Exception;
-	
+		
 	// 게시물 수정
 	public void update(Auction auction) throws Exception;
 
