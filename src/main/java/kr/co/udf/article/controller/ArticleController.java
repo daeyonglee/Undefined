@@ -53,10 +53,10 @@ public class ArticleController {
 		return "redirect:/article/listPage?board_no=1";
 	}
 
-	@RequestMapping(value = "/read", method = RequestMethod.GET)
-	public void read(@RequestParam("article_no") int article_no, Model model) throws Exception {
-		model.addAttribute("read", service.read(article_no));
-	}
+//	@RequestMapping(value = "/read", method = RequestMethod.GET)
+//	public void read(@RequestParam("article_no") int article_no, Model model) throws Exception {
+//		model.addAttribute("read", service.read(article_no));
+//	}
 	
 	@RequestMapping(value = "/readPage", method = RequestMethod.GET)
 	public void read(@RequestParam("article_no") int article_no, @ModelAttribute("cri") Criteria cri, Model model) throws Exception {

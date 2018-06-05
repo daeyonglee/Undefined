@@ -15,15 +15,13 @@
 				</div>
 				<!-- /.box-header -->
 
-<form role="form" action="modifyPage" method="post">
-
-	<input type='hidden' name='bno' value="${board.bno}"> <input
-		type='hidden' name='page' value="${cri.page}"> <input
-		type='hidden' name='perPageNum' value="${cri.perPageNum}">
-	<input type='hidden' name='searchType' value="${cri.searchType}">
-	<input type='hidden' name='keyword' value="${cri.keyword}">
-
-</form>
+              <form role="form" action="modifyPage" method="post">
+              	<input type='hidden' name='bno' value="${board.bno}"> <input
+              		type='hidden' name='page' value="${cri.page}"> <input
+              		type='hidden' name='perPageNum' value="${cri.perPageNum}">
+              	<input type='hidden' name='searchType' value="${cri.searchType}">
+              	<input type='hidden' name='keyword' value="${cri.keyword}">
+              </form>
 
 				<div class="box-body">
 					<div class="form-group">
@@ -42,55 +40,40 @@
 							readonly="readonly">
 					</div>
 				</div>
-				<!-- /.box-body -->
-
+        
+				<!--버튼들 -->
 				<div class="box-footer">
 					<button type="submit" class="btn btn-warning">수정</button>
 					<button type="submit" class="btn btn-danger">삭제</button>
 					<button type="submit" class="btn btn-primary">목록</button>
 				</div>
-
-
-<script>
-	$(document).ready(function() {
-
-		var formObj = $("form[role='form']");
-
-		console.log(formObj);
-
-		$(".btn-warning").on("click", function() {
-			formObj.attr("action", "/sboard/modifyPage");
-			formObj.attr("method", "get");
-			formObj.submit();
-		});
-
-		$(".btn-danger").on("click", function() {
-			formObj.attr("action", "/sboard/removePage");
-			formObj.submit();
-		});
-
-		$(".btn-primary").on("click", function() {
-			formObj.attr("method", "get");
-			formObj.attr("action", "/sboard/list");
-			formObj.submit();
-		});
-
-	});
-</script>
-
-
-
-
+        <script>
+        	$(document).ready(function() {
+        		var formObj = $("form[role='form']");
+        		console.log(formObj);
+        
+        		$(".btn-warning").on("click", function() {
+        			formObj.attr("action", "/sboard/modifyPage");
+        			formObj.attr("method", "get");
+        			formObj.submit();
+        		});
+        
+        		$(".btn-danger").on("click", function() {
+        			formObj.attr("action", "/sboard/removePage");
+        			formObj.submit();
+        		});
+        
+        		$(".btn-primary").on("click", function() {
+        			formObj.attr("method", "get");
+        			formObj.attr("action", "/sboard/list");
+        			formObj.submit();
+        		});
+        
+        	});
+        </script>
 			</div>
-			<!-- /.box -->
 		</div>
-		<!--/.col (left) -->
-
 	</div>
-	<!-- /.row -->
 </section>
-<!-- /.content -->
-</div>
-<!-- /.content-wrapper -->
 
 <%@include file="../include/bottom.jsp"%>

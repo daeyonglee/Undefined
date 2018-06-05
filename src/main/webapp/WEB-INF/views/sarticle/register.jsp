@@ -3,12 +3,16 @@
 
 <%@include file="../include/top.jsp"%>
 <%
+
 	//board_no 받아오기
 	int board_no = 1;
-	//board_no = Integer.parseInt(request.getParameter("board_no"));
+    if(request.getParameter("board_no")!=null){
+	board_no = Integer.parseInt(request.getParameter("board_no"));
+    }
 %>
 
 <!-- Main content -->
+<div class="container">
 <section class="content">
   <div class="row">
     <!-- left column -->
@@ -23,16 +27,40 @@
         <form role="form" method="post">
           <div class="box-body">
             <input id="board_no" type="hidden" name="board_no" value="<%=board_no%>"></input> 
-              
-<!--           <select name="article_head" onChange="getSelectValue(this.form);" id ="article_head">
- -->
-            <select name="article_head" id="article_head">
-              <option value="" selected="selected">선택하세요</option>
-              <option value="스튜디오">스튜디오</option>
-              <option value="드레스">드레스</option>
-              <option value="메이크업">메이크업</option>
-            </select>
-
+              <!--자유게시판일 경우에만 아래처럼 article_head선택을 할 수 있음  -->
+    <% 
+            if(Integer.parseInt(request.getParameter("board_no"))==2){
+        %>
+              <select class="selectpicker" name="article_head"
+                id="article_head" name="article_head">
+                <option value="Studio">스튜디오</option>
+                <option value="Dress">드레스</option>
+                <option value="Makeup">메이크업</option>
+              </select>
+            </div>
+        <%    
+            }else if(Integer.parseInt(request.getParameter("board_no"))==1){
+        %>
+             <!--공지사항이나 쪽지함의 경우 article_head에 기타로 입력이 됨-->
+              <input type="hidden" name="article_head" class="form-control"
+                id="article_head" value="공지사항">
+              </div>
+        <%
+            }else{
+        %>     
+             <!--공지사항이나 쪽지함의 경우 article_head에 기타로 입력이 됨-->
+              <input type="hidden" name="article_head" class="form-control"
+                id="article_head" value="쪽지">
+              </div>        
+        <%
+            }
+        %>
+             <!--로그인 시 로그인한 user_nm이 화면에 출력되도록 하여아 한다.  -->
+            <!--글을 등록할 경우 작성자는 user_no가 들어간다. -->
+            <div class="form-group">
+              <input type="hidden" name ="user_no" id ="user_no" value='1'></input> 
+            </div>
+            
             <div class="form-group">
               <label for="title">제목</label> 
               <input type="text" name="article_title" class="form-control"
@@ -45,27 +73,43 @@
                 placeholder="내용을 입력하세요"  id ="article_content"></textarea>
             </div>
             
-            <!--로그인 시 로그인한 user_nm이 화면에 출력되도록 하여아 한다.  -->
-            <!--글을 등록할 경우 작성자는 user_no가 들어간다. -->
-            <div class="form-group">
-              <input type="text" for="writer" name ="user_no" id ="user_no" value="1">작성자</input> 
-            </div>
-            
+
           </div>
-          <!-- /.box-body -->
-          <div class="box-footer">
-            <button type="submit" class="btn btn-primary">등록</button>
-            <button type="submit" class="btn btn-primary">취소</button>
-          </div>
-          
         </form>
-      </div>
+        
+        <!-- 버튼들 --> 
+          <div class="text-center">
+            <div class="col-md-12">
+              <div class="box-footer">
+                <button type="submit" class="btn btn-primary">등록</button>
+                <button type="submit" class="btn btn-warning">취소</button>
+              </div>
+            </div>
+          </div>
+
+  </div>
       <!-- /.box -->
     </div>
     <!--/.col (left) -->
-  </div>
-  <!-- /.row -->
 </section>
 <!-- /.content -->
+</div>
+        <script>
+          $(document).ready(function() {
+            var formObj = $("form[role='form']");
+            console.log(formObj);
+            
+                /*등록 버튼 이벤트  */
+              $(".btn-primary").on("click",function(){ 
+                formObj.submit();
+              });
+
+                /*취소버튼 이벤트*/
+           	 $(".btn-warning").on("click",function(){
+              parent.history.back();
+            });
+          
+          });
+    </script>
 
 <%@include file="../include/bottom.jsp"%>

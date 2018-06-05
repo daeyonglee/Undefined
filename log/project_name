@@ -1,6 +1,24 @@
-2018-06-01 16:06:45 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: INSERT INTO reply (reply_no, article_no, reply_content, user_nm) VALUES(reply_seq.nextval, ?, ?, ?)  
-2018-06-01 16:06:46 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters: 1(Integer), reply_content(String), testUser(String) 
-2018-06-01 16:06:46 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==    Updates: 1 
-2018-06-01 16:09:55 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: INSERT INTO reply (reply_no, article_no, reply_content, user_nm) VALUES(reply_seq.nextval, ?, ?, ?)  
-2018-06-01 16:09:55 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters: 2(Integer), reply_content2(String), testUser22(String) 
-2018-06-01 16:09:55 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==    Updates: 1 
+2018-06-04 09:30:07 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: SELECT Count(article_no) FROM article a JOIN users u ON a.user_no = u.user_no WHERE a.article_no > 0 AND board_no = 1 and user_nm like '%'||?||'%'  
+2018-06-04 09:30:08 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters: 임(String) 
+2018-06-04 09:30:08 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 1 
+2018-06-04 09:30:08 [INFO ] [kr.co.udf.article.ArticleDaoTest:214] 27 
+2018-06-04 09:49:39 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: SELECT Count(article_no) FROM article a JOIN users u ON a.user_no = u.user_no WHERE a.article_no > 0 AND board_no = 1 and user_nm like '%'||?||'%'  
+2018-06-04 09:49:39 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters: 임(String) 
+2018-06-04 09:49:39 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 1 
+2018-06-04 09:49:39 [INFO ] [kr.co.udf.article.ArticleDaoTest:214] 27 
+2018-06-04 10:01:05 [INFO ] [kr.co.udf.article.ArticleDaoTest:185] ===================================== 
+2018-06-04 10:01:07 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: SELECT article_no, article_head, article_title, article_content, regdate, hitcount, board_no, board_nm, user_nm FROM (SELECT Ceil(rownum / ?) page, article_no, article_head, article_title, article_content, hitcount, regdate, board_no, board_nm, user_nm FROM (SELECT article_no, article_head, article_title, article_content, To_char(article.regdate, 'YYYY-MM-DD') regdate, hitcount, board_no, (SELECT board_nm FROM board WHERE board_no = article.board_no) board_nm, (SELECT user_nm FROM users WHERE user_no = article.user_no) user_nm FROM article ORDER BY article_no DESC)) WHERE page = ? and board_no= ? and user_nm like '%'||?||'%'  
+2018-06-04 10:01:08 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters: 10(Integer), 1(Integer), 1(Integer), 임(String) 
+2018-06-04 10:01:08 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 3 
+2018-06-04 10:01:08 [DEBUG] [kr.co.udf.article.ArticleDaoTest:198] 82	스튜디오	sdvsdvsdvsdv	sdsdvsdv	임꺽정	0 
+2018-06-04 10:01:08 [DEBUG] [kr.co.udf.article.ArticleDaoTest:198] 72	스튜디오	232323	232323	임꺽정	0 
+2018-06-04 10:01:08 [DEBUG] [kr.co.udf.article.ArticleDaoTest:198] 71	드레스	121211313	121212	임꺽정	0 
+2018-06-04 10:01:08 [INFO ] [kr.co.udf.article.ArticleDaoTest:201] ===================================== 
+2018-06-04 10:01:08 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: SELECT Count(article_no) FROM article a JOIN users u ON a.user_no = u.user_no WHERE a.article_no > 0 AND board_no = 1 and user_nm like '%'||?||'%'  
+2018-06-04 10:01:08 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters: 임(String) 
+2018-06-04 10:01:08 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 1 
+2018-06-04 10:01:08 [INFO ] [kr.co.udf.article.ArticleDaoTest:203] COUNT: 27 
+2018-06-04 10:01:08 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: SELECT Count(article_no) FROM article a JOIN users u ON a.user_no = u.user_no WHERE a.article_no > 0 AND board_no = 1 and user_nm like '%'||?||'%'  
+2018-06-04 10:01:08 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters: 임(String) 
+2018-06-04 10:01:08 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 1 
+2018-06-04 10:01:08 [INFO ] [kr.co.udf.article.ArticleDaoTest:214] 27 

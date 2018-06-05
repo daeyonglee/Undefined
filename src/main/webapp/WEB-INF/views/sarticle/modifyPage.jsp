@@ -4,6 +4,7 @@
 <%@include file="../include/top.jsp"%>
 
 <!-- Main content -->
+<div class="container">
 <section class="content">
   <div class="row">
     <!-- left column -->
@@ -23,14 +24,13 @@
         <input type="hidden" name="keyword" value="${read.keyword }">
         <!-- 다중 게시판이므로 board_no를 추가해야 함 -->
         <input type="hidden" name="board_no" value="${read.board_no }">
-         
+        
         <div class="box-body">
-          <div class="col-sm-3">
             <div class="form-group">
-              <label for="article_no">번호</label> <input type="text"
+              <!-- 번호를 위한 코드 -->
+              <input type="hidden"
                 name='article_no' class="form-control"
                 value="${read.article_no}" readonly="readonly">
-            </div>
           </div>
 
           <div class="form-group">
@@ -88,25 +88,27 @@
           </div>
         </div>
       </div>
-
-        <script>
-        	$(document).ready(function() {
-        		var formObj = $("form[role='form']");
-        		console.log(formObj);
-        		
-        		$(".btn-warning").on("click",function(){
-        			self.location=
-        			"/sarticle/list?page='${read.page }&perPageNum=${read.perPageNum}&board_no=${read.board_no}"
-        					+"&searchType=${read.searchType}&keyword=${read.keyword}";
-        		});
-        		
-        		$(".btn-primary").on("click",function(){
-        			formObj.submit();
-        		});
-        	});
-		</script>
+      
     </div>
   </div>
 </section>
+</div>
 
+
+<script>
+  $(document).ready(function() {
+    var formObj = $("form[role='form']");
+    console.log(formObj);
+    
+        /*저장 버튼 이벤트  */
+      $(".btn-primary").on("click",function(){ 
+        formObj.submit();
+      });
+
+        /*취소버튼 이벤트*/
+    $(".btn-warning").on("click",function(){
+      parent.history.back();
+    });
+  });
+</script>
 <%@include file="../include/bottom.jsp"%>

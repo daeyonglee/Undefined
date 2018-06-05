@@ -221,13 +221,7 @@
 			</if>
 		</if>
 	</sql>
-	
-<!-- 	<select id="listSearchCount" resultType="int">
-		SELECT Count(article_no) 
-		FROM   article 
-		WHERE  article_no > 0 and board_no=${board_no}
-		<include refid="search"></include>
-	</select>  -->
+
 	<select id="listSearchCount" resultType="int">
 			SELECT Count(article_no) 
 			FROM   article a 
@@ -237,6 +231,14 @@
 			       AND board_no = ${board_no} 
 		<include refid="search"></include>
 	</select>  
+
+	<update id="hitCount">
+			UPDATE ARTICLE 	
+			SET  HITCOUNT = HITCOUNT + 1
+			WHERE article_no = #{article_no}
+	</update>
+
+
 
 </mapper>	
 

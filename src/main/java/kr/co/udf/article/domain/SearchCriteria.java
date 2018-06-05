@@ -4,6 +4,7 @@ public class SearchCriteria extends Criteria {
 
 	private String searchType;
 	private String keyword;
+	
 	public SearchCriteria() {
 		super();
 		// TODO Auto-generated constructor stub

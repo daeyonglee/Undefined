@@ -44,9 +44,6 @@ public class SearchArticleController {
 	
 	@RequestMapping(value = "/readPage", method = RequestMethod.GET)
 	public void read(@RequestParam("article_no") int article_no, @ModelAttribute("cri") Criteria cri, Model model) throws Exception {
-		Map<String, Object> map = service.read(article_no);
-		
-		logger.info(map);
 		
 		model.addAttribute("read",service.read(article_no));
 	}

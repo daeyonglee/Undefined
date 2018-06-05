@@ -7,17 +7,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
 </head>
-
-  
   
 <!-- 게시글 출력하기 -->
+<div class="container">
 <section class="content">
-  <div class="row">
     <!-- left column -->
     <div class="col-md-12">
-     
       <!-- general form elements -->
       <div class="box">
         <div class="box-header with-border">
@@ -44,44 +40,68 @@
         %>
         </div>
    
-        <!-- 목록 제목 리스트 보여주기  -->
-        
+        <!-- 총게시글수 보여주기  -->
+        <div class="text-right">
         <label>총게시글수: ${pageMaker.getTotalCount()}</label>
-        <div class="box-body">
-          <table class="table table-bordered">
-            <tr>
-              <th style="width: 60px">번호</th>
-              <th>제목</th>
-              <th style="width: 140px">작성자</th>
-              <th style="width: 200px">게시날짜</th>
-              <th style="width: 60px">조회수</th>
+        </div>
+  
+        <div class="text-center">
+          <table class="table table-bordered" align="center">
+            <tr align="center">
+              <th style="width: 60px" align="center">번호</th>
+              <th align="center">제목</th>
+              <th style="width: 140px" align="center" >작성자</th>
+              <th style="width: 200px" align="center">게시날짜</th>
+              <!--쪽지함의 경우에는 조회수가 나타나지 않도록 하기 위한 코드 -->
+                <%
+                 if(request.getParameter("board_no")!=null){
+                 if(Integer.parseInt(request.getParameter("board_no"))!=3){
+                %>
+                <th style="width: 60px">조회수</th>
+                 <%
+                 }}
+                %>
             </tr>
-          
+          <!--게시글 번호 내림차순 출력하기 위한 변수 처리-->
           <c:set var="i" value="0" />
           <c:set var="TotalCount" value="${pageMaker.totalCount}" />
           <c:set var="PageSize" value="${cri.perPageNum}" />
           <c:set var="Page" value="${cri.page}" />
-          <!-- 전체 article 수 출력  -->
+    
           <!-- 리스트 보여주기  -->
           <c:forEach items="${list}" var="article">
             <tr>
-<!--                            (indexnum - (selectedpage * params.getPageSize()) + params.getPageSize()) - i%> -->
+            <!--게시글 번호 내림차순 출력하는 계산식 (전체 글 수-(선택한 페이지 *페이지에 출력되는 article수)+페이지에 출력되는 article수)- i%> -->
               <td><c:out value="${(TotalCount-(Page*PageSize)+PageSize)-i}"/></td>
               <td><a
                 href='/sarticle/readPage${pageMaker.makeSearch(pageMaker.cri.page) }&article_no=${article.ARTICLE_NO}&board_no=<%=request.getParameter("board_no")%>'>
                   ${article.ARTICLE_TITLE}</a></td>
               <td>${article.USER_NM}</td>
               <td>${article.REGDATE}</td>
-              <td><span class="badge bg-red">${article.HITCOUNT }</span></td>
+               <!--쪽지함의 경우에는 조회수가 나타나지 않도록 하기 위한 코드 -->
+              <%
+                 if(request.getParameter("board_no")!=null){
+                 if(Integer.parseInt(request.getParameter("board_no"))!=3){
+                %>
+                <td><span class="badge bg-red">${article.HITCOUNT }</span></td>
+                 <%
+                 }}
+                %>
+
             </tr>
             <c:set var="i" value="${i+1}" />
           </c:forEach>
        </table>
-
+       </div>
+     </div>
+     </div>
       <!-- 로그인 여부에 따라 글쓰기 버튼 생성 여부 -->
+      <!-- admin계정의 경우에만 공지사항에 글쓰기가 가능하도록 하여야 함 -->
       <c:choose>
         <c:when test="${null ne sessionScope.login || null ne cookie.loginCookie.value}">
-          <button id = 'newBtn'>글쓰기</button>
+          <div class="text-right">
+             <button id = 'newBtn'>글쓰기</button>
+          </div>
         </c:when>
         <c:otherwise>
           
@@ -111,10 +131,9 @@
             </ul>
           </div>
 
-          <!--검색을 위한 코드  -->            
-            <div class='box-body'>
+          <!--검색을 위한 코드  -->  
+           <div class="col-md-4 text-center"> 
               <select name="searchType">
-              
               <option value="n"
               <c:out value="${cri.searchType==null?'selected':'' }"/>>
               ---</option>
@@ -143,25 +162,16 @@
               <c:out value="${cri.searchType eq 'tcw'?'selected':'' }"/>>
               Title Or Content Or Writer</option>
               </select>
-              
-              <input type="text" name="keyword" id="keywordInput" value='${cri.keyword }'>
-              <button id = 'searchBtn'>Search</button>
-          </div>
-            
-              
-        </div>
+
+              <input type="text" name="keyword" id="keywordInput" width="1px" value='${cri.keyword }'>
+              <button id = 'searchBtn'>검색</button>
         <!-- /.box-body -->
         <div class="box-footer">Footer</div>
         <!-- /.box-footer-->
       </div>
+       </section>
     </div>
-    <!--/.col (left) -->
-  </div>
-  <!-- /.row -->
-
-   
-  </section>
-<!-- /.content -->
+ 
   
 <script>
 	var result = '${msg}';
@@ -194,12 +204,6 @@
 		});
 	});
 
-	
-	
-	
-	
 </script>
-
 <%@include file="../include/bottom.jsp"%>
-
   </html>

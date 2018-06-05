@@ -20,7 +20,6 @@ import kr.co.udf.article.domain.Article;
 import kr.co.udf.article.domain.Criteria;
 import kr.co.udf.article.domain.SearchCriteria;
 import kr.co.udf.board.BoardDaoTest;
-import kr.co.udf.board.domain.Board;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -177,7 +176,7 @@ public class ArticleDaoTest {
   }
 
 //  @Test
-  public void testDynamic1() throws Exception {
+  public void testSearchList() throws Exception {
     SearchCriteria cri = new SearchCriteria();
     cri.setPage(1);
     cri.setKeyword("임");
@@ -203,5 +202,27 @@ public class ArticleDaoTest {
 
     logger.info("COUNT: " + dao.listSearchCount(cri));
   }
+  
+//  @Test
+  	public void TotalCountArticle() throws Exception {
+  	    SearchCriteria cri = new SearchCriteria();
+  	    cri.setPage(2);
+  	    cri.setKeyword("임");
+  	    cri.setSearchType("w");
+  		int CountArticles= dao.listSearchCount(cri);
+  		
+  		logger.info(CountArticles);
+  	}
+  	
+//  @Test
+//  	public void testHitCount() throws Exception {
+//  	    SearchCriteria cri = new SearchCriteria();
+//  	    cri.setPage(2);
+//  	    cri.setKeyword("임");
+//  	    cri.setSearchType("w");
+//  		int CountArticles= dao.listSearchCount(cri);
+//  		
+//  		logger.info(CountArticles);
+//  	}
 
 }

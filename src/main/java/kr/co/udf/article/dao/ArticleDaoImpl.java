@@ -27,6 +27,7 @@ public class ArticleDaoImpl implements ArticleDao {
 
 	@Override
 	public Map<String, Object> read(Integer article_no) throws Exception {
+		hitCount(article_no);
 	    return session.selectOne(namespace + ".read", article_no);
 	}
 
@@ -76,6 +77,10 @@ public class ArticleDaoImpl implements ArticleDao {
 	public int listSearchCount(SearchCriteria cri) throws Exception {
 		return session.selectOne(namespace + ".listSearchCount", cri);
 	}
-	
+
+	@Override
+	public void hitCount(int article_no) {
+	    session.update(namespace + ".hitCount", article_no);
+	}
 	
 }

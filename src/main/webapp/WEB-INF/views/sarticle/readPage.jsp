@@ -7,8 +7,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 
-<html>
-<header>
    <script>
     $(document).ready(function() {
       var formObj = $("form[role='form']");
@@ -70,10 +68,10 @@
     target.after(html);
   } 
   </script> 
-</header>
 
 
 <!-- Main content -->
+<div class="container">
 <section class="content">
   <div class="row">
     <!-- left column -->
@@ -153,47 +151,55 @@
           </div>
         </div>
       </div>
+      
+      
+    <%
+     if(request.getParameter("board_no")!=null){
+     if(Integer.parseInt(request.getParameter("board_no"))==2){
+    %>
 
   <div class="row">
     <div class="col-md-12">
-    
-    <%
-     if(request.getParameter("board_no")!=null){
-	 if(Integer.parseInt(request.getParameter("board_no"))==2){
-    %>
-      <!-- 댓글 등록에 필요한 div -->
-      <div class="box box-success">
-        <div class="box-header">
-          <h3 class="box-title">댓글 쓰기</h3>
-        </div>
-        <div class="box-body">
-          <label for="exampleInputEmail1">작성자</label> 
-          <input class="form-control" type="text" placeholder="작성자"
-            id="newReplyWriter"> 
-           <label for="exampleInputEmail1">댓글 내용</label> 
-           <input class="form-control" type="text"
-            placeholder="댓글 내용" id="newReplyText">
-        </div>
-        
-        <!-- /.box-body -->
-        <div class="box-footer">
-          <button type="button" class="btn btn-primary" id="replyAddBtn">댓글 쓰기</button>
-        </div>
-      </div>
+    <!--자유게시판에서만 댓글이 보이도록 하기 위한 조건문  -->
 
+    <!--로그인 한 사람에게만 댓글 쓰는 폼이 출력  -->
+    
+          <!-- 댓글 등록에 필요한 div -->
+          <div class="box box-success">
+            <div class="box-header">
+              <h3 class="box-title">댓글 쓰기</h3>
+            </div>
+            <div class="box-body">
+              <label for="exampleInputEmail1">작성자</label> 
+              <input class="form-control" type="text" placeholder="작성자"
+                id="newReplyWriter"> 
+               <label for="exampleInputEmail1">댓글 내용</label> 
+               <input class="form-control" type="text"
+                placeholder="댓글 내용" id="newReplyText">
+            </div>
+          
+            <!-- /.box-body -->
+            <div class="box-footer">
+              <button type="button" class="btn btn-primary" id="replyAddBtn">댓글 쓰기</button>
+            </div>
+          </div>
+          
       <!-- 댓글의 목록과 페이징 처리에 필요한 div-->
       <!-- The time line -->
       <ul class="timeline">
         <!-- timeline time label -->
-        <li class="time-label" id="repliesDiv"><span class="bg-green">댓글 목록 </span></li>
+        <li class="time-label" id="repliesDiv">
+        <span class="bg-green">댓글 목록</span></li>
       </ul>
-
+ 
+      <!--  댓글 페이징은 생략
       <div class='text-center'>
         <ul id="pagination" class="pagination pagination-sm no-margin "> </ul>
-      </div>
+      </div> -->
+
+
   <%
 	 }}
- 
  %>
 
 
@@ -237,7 +243,7 @@
     </div>     
      
 </section>
-
+</div>
 
 <%@include file="../include/bottom.jsp"%>
 
@@ -245,7 +251,8 @@
 /*1페이지 댓글 목록을 가져오기 위한 코드  */
 $("#repliesDiv").on("click", function() {
   if ($(".timeline li").size() > 1) {
-    return;
+	  alert("if");
+    //return;
   }
   getPage("/replies/" + article_no + "/1");
 });
@@ -365,4 +372,3 @@ var printPaging = function(pageMaker, target) {
 };
 
 </script>
-</html>

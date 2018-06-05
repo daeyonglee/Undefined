@@ -24,11 +24,12 @@ public interface ArticleDao {
   public List<Map<String, Object>> listCriteria(Criteria cri) throws Exception;
 
   public int countPaging(Criteria cri) throws Exception;
-//  
-//  //use for dynamic sql
-//  
+
   public List<Map<String, Object>> listSearch(SearchCriteria cri)throws Exception;
   
   public int listSearchCount(SearchCriteria cri)throws Exception;
+  
+  /* hitCount수 Update*/
+  public void hitCount(int article_no);
 
 }
