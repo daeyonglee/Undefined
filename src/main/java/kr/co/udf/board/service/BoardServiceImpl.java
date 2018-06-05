@@ -39,29 +39,4 @@ public class BoardServiceImpl implements BoardService {
   public List<Board> listAll() throws Exception {
     return dao.listAll();
   }
-
-//  @Override
-//  public List<Board> listCriteria(Criteria cri) throws Exception {
-//
-//    return boardDao.listCriteria(cri);
-//  }
-//
-//  @Override
-//  public int listCountCriteria(Criteria cri) throws Exception {
-//
-//    return boardDao.countPaging(cri);
-//  }
-//
-//  @Override
-//  public List<Board> listSearchCriteria(SearchCriteria cri) throws Exception {
-//
-//    return boardDao.listSearch(cri);
-//  }
-//
-//  @Override
-//  public int listSearchCount(SearchCriteria cri) throws Exception {
-//
-//    return boardDao.listSearchCount(cri);
-//  }
-
 }

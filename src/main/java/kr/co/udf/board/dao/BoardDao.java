@@ -16,17 +16,4 @@ public interface BoardDao {
   public void delete(Integer board_no) throws Exception;
 
   public List<Board> listAll() throws Exception;
-
-//  public List<Board> listPage(int page) throws Exception;
-//
-//  public List<Board> listCriteria(Criteria cri) throws Exception;
-//
-//  public int countPaging(Criteria cri) throws Exception;
-//  
-//  //use for dynamic sql
-//  
-//  public List<Board> listSearch(SearchCriteria cri)throws Exception;
-//  
-//  public int listSearchCount(SearchCriteria cri)throws Exception;
-
 }

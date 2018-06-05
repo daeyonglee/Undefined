@@ -7,68 +7,13 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 
-   <script>
-    $(document).ready(function() {
-      var formObj = $("form[role='form']");
-      console.log(formObj);
-      
-      $(".removeBtn").on("click",function() {
-        formObj.attr("action","/sarticle/removePage");
-        formObj.submit();
-        });
-
-      $(".goListBtn").on("click",function(){
-        formObj.attr("method","get");
-        formObj.attr("action","/sarticle/list");
-        formObj.submit();
-      });
-      
-      $(".modifyBtn").on("click", function(){
-        formObj.attr("action", "/sarticle/modifyPage");
-        formObj.attr("method","get");
-        formObj.submit();
-      });
-      
-    }); 
-  </script>
-  
-<!--댓글 디자인을 위한 템플릿 코드  -->
-<script id="template" type="text/x-handlebars-template">
-{{#each .}}
-<li class="replyLi" data-reply_no={{reply_no}}>
-<i class="fa fa-comments bg-blue"></i>
- <div class="timeline-item" >
-  <span class="time">
-    <i class="fa fa-clock-o"></i>{{prettifyDate regdate}}
-  </span>
-  <h3 class="timeline-header"><strong>{{reply_no}}</strong> -{{user_nm}}</h3>
-  <div class="timeline-body">{{reply_content}} </div>
-    <div class="timeline-footer">
-     <a class="btn btn-primary btn-xs" 
-      data-toggle="modal" data-target="#modifyModal">댓글 수정</a>
-    </div>
-  </div>      
-</li>
-{{/each}}
-</script>
-
-<script>
-   Handlebars.registerHelper("prettifyDate", function(timeValue) {
-    var dateObj = new Date(timeValue);
-    var year = dateObj.getFullYear();
-    var month = dateObj.getMonth() + 1;
-    var date = dateObj.getDate();
-    return year + "/" + month + "/" + date;
-  });
-
-  var printData = function(replyArr, target, templateObject) {
-    var template = Handlebars.compile(templateObject.html());
-    var html = template(replyArr);
-    $(".replyLi").remove();
-    target.after(html);
-  } 
-  </script> 
-
+<!-- Ionicons -->
+<link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+<!-- Theme style -->
+<link href="/resources/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
+<!-- AdminLTE Skins. Choose a skin from the css/skins 
+     folder instead of downloading all of them to reduce the load. -->
+<link href="/resources/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
 
 <!-- Main content -->
 <div class="container">
@@ -89,8 +34,6 @@
             value="${read.article_no}">
         </form>
 
-        <div class="box-body">
-
           <div class="form-group">
             <div class="col-sm-3">
               <label for="article_title">머리글</label> <input type="text"
@@ -98,7 +41,6 @@
                 value="${read.article_head}" readonly="readonly">
             </div>
           </div>
-        </div>
 
         <div class="form-group">
           <div class="col-sm-3">
@@ -152,7 +94,6 @@
         </div>
       </div>
       
-      
     <%
      if(request.getParameter("board_no")!=null){
      if(Integer.parseInt(request.getParameter("board_no"))==2){
@@ -161,9 +102,7 @@
   <div class="row">
     <div class="col-md-12">
     <!--자유게시판에서만 댓글이 보이도록 하기 위한 조건문  -->
-
     <!--로그인 한 사람에게만 댓글 쓰는 폼이 출력  -->
-    
           <!-- 댓글 등록에 필요한 div -->
           <div class="box box-success">
             <div class="box-header">
@@ -177,7 +116,6 @@
                <input class="form-control" type="text"
                 placeholder="댓글 내용" id="newReplyText">
             </div>
-          
             <!-- /.box-body -->
             <div class="box-footer">
               <button type="button" class="btn btn-primary" id="replyAddBtn">댓글 쓰기</button>
@@ -197,12 +135,9 @@
         <ul id="pagination" class="pagination pagination-sm no-margin "> </ul>
       </div> -->
 
-
   <%
 	 }}
  %>
-
-
       <!-- 추가 파라미터 처리를 위함 -->
       <form role="form" action="modifyPage" method="post">
         <input type="hidden" name="article_no" value="${read.article_no }"> 
@@ -226,7 +161,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title"></h4>
+            <h6 type="hidden" class="modal-title"></h6>
           </div>
           <div class="modal-body" data-reply_no>
             <p><input type="text" id="reply_content" class="form-control"></p>
@@ -249,12 +184,15 @@
 
 <script type="text/javascript">
 /*1페이지 댓글 목록을 가져오기 위한 코드  */
+/* 댓글목록 리스트버튼 클릭 시 댓글 보여주기/숨기기 */
 $("#repliesDiv").on("click", function() {
-  if ($(".timeline li").size() > 1) {
+   if ($(".timeline li").size() > 1) {
 	  alert("if");
-    //return;
-  }
-  getPage("/replies/" + article_no + "/1");
+	  $(".replyLi").remove();
+  }else{
+	  alert("else");
+	  getPage("/replies/" + article_no + "/1");
+  } 
 });
 
 /*댓글 등록의 이벤트 처리  */
@@ -288,7 +226,6 @@ $("#replyAddBtn").on("click",function(){
 $(".timeline").on("click", ".replyLi", function(event){
   
   var reply = $(this);
-  
   $("#reply_content").val(reply.find('.timeline-body').text());
   $(".modal-title").html(reply.attr("data-reply_no"));
   
@@ -372,3 +309,64 @@ var printPaging = function(pageMaker, target) {
 };
 
 </script>
+<script>
+   Handlebars.registerHelper("prettifyDate", function(timeValue) {
+    var dateObj = new Date(timeValue);
+    var year = dateObj.getFullYear();
+    var month = dateObj.getMonth() + 1;
+    var date = dateObj.getDate();
+    return year + "/" + month + "/" + date;
+  });
+
+  var printData = function(replyArr, target, templateObject) {
+    var template = Handlebars.compile(templateObject.html());
+    var html = template(replyArr);
+    $(".replyLi").remove();
+    target.after(html);
+  } 
+</script> 
+  
+<!--댓글 디자인을 위한 템플릿 코드  -->
+<script id="template" type="text/x-handlebars-template">
+{{#each .}}
+<li class="replyLi" data-reply_no={{reply_no}}>
+<i class="fa fa-comments bg-blue"></i>
+ <div class="timeline-item" >
+  <span class="time">
+  <h6 class="timeline-header"> 작성자: {{user_nm}}</h6>
+    <i class="fa fa-clock-o"></i>{{prettifyDate regdate}}
+  </span>
+  <div class="timeline-body">{{reply_content}} </div>
+    <div class="timeline-footer">
+     <a class="btn btn-primary btn-xs" 
+      data-toggle="modal" data-target="#modifyModal">댓글 수정</a>
+    </div>
+  </div>      
+</li>
+{{/each}}
+</script>
+
+   <script>
+    $(document).ready(function() {
+      var formObj = $("form[role='form']");
+      console.log(formObj);
+      
+      $(".removeBtn").on("click",function() {
+        formObj.attr("action","/sarticle/removePage");
+        formObj.submit();
+        });
+
+      $(".goListBtn").on("click",function(){
+        formObj.attr("method","get");
+        formObj.attr("action","/sarticle/list");
+        formObj.submit();
+      });
+      
+      $(".modifyBtn").on("click", function(){
+        formObj.attr("action", "/sarticle/modifyPage");
+        formObj.attr("method","get");
+        formObj.submit();
+      });
+      
+    }); 
+  </script>

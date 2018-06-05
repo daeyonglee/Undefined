@@ -1,9 +1,8 @@
 package kr.co.udf.article.controller;
 
 
-import java.util.Map;
-
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -44,7 +43,6 @@ public class SearchArticleController {
 	
 	@RequestMapping(value = "/readPage", method = RequestMethod.GET)
 	public void read(@RequestParam("article_no") int article_no, @ModelAttribute("cri") Criteria cri, Model model) throws Exception {
-		
 		model.addAttribute("read",service.read(article_no));
 	}
 	
@@ -96,79 +94,14 @@ public class SearchArticleController {
 	}
 	  
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String registPOST(Article article, RedirectAttributes rttr) throws Exception {
+	public String registPOST(Article article, RedirectAttributes rttr, @RequestParam("board_no") int board_no) throws Exception {
 		logger.info("regist post ...........");
 		logger.info(article.toString());
 
 		service.regist(article);
 
 		rttr.addFlashAttribute("msg", "success");
-		return "redirect:/sarticle/list?board_no=1";
+		return "redirect:/sarticle/list?board_no="+board_no;
 	}
-
-//	@RequestMapping(value = "/read", method = RequestMethod.GET)
-//	public void read(@RequestParam("article_no") int article_no, Model model) throws Exception {
-//		model.addAttribute("read", service.read(article_no));
-//	}
-//	
-//	@RequestMapping(value = "/readPage", method = RequestMethod.GET)
-//	public void read(@RequestParam("article_no") int article_no, @ModelAttribute("cri") Criteria cri, Model model) throws Exception {
-//	
-//		model.addAttribute("read",service.read(article_no));
-//	}
-//  
-//	@RequestMapping(value = "/remove", method = RequestMethod.POST)
-//	public String remove(@RequestParam("article_no") int article_no, RedirectAttributes rttr) throws Exception {
-//		service.remove(article_no);
-//		rttr.addFlashAttribute("msg", "success");
-//		return "redirect:/article/listAll?board_no=1";
-//	}
-//	
-//	@RequestMapping(value = "/removePage", method = RequestMethod.POST)
-//	public String remove(@RequestParam("article_no") int article_no, Criteria cri, RedirectAttributes rttr) throws Exception {
-//	    service.remove(article_no);
-//
-//	    rttr.addAttribute("page", cri.getPage());
-//	    rttr.addAttribute("perPageNum", cri.getPerPageNum());
-//	    rttr.addFlashAttribute("msg", "success");
-//	
-//	    return "redirect:/article/listPage";
-//	}
-//	
-//	@RequestMapping(value = "/modify", method = RequestMethod.GET)
-//	public void modifyGET(int article_no, Model model) throws Exception {
-//		model.addAttribute("read",service.read(article_no));
-//	}
-//	
-//	@RequestMapping(value = "/modify", method = RequestMethod.POST)
-//	public String modifyPOST(Article article, RedirectAttributes rttr) throws Exception {
-//		logger.info("mod post............");
-//		
-//		service.modify(article);
-//		rttr.addFlashAttribute("msg", "success");
-//
-//		return "redirect:/article/listAll?board_no=1";
-//	}
-//	
-//	@RequestMapping(value = "/modifyPage", method = RequestMethod.GET)
-//	  public void modifyPagingGET(@RequestParam("article_no") int article_no, @ModelAttribute("cri") Criteria cri, Model model)
-//	      throws Exception {
-//	    model.addAttribute("read",service.read(article_no));
-//	}
-//	
-//	@RequestMapping(value="/modifyPage", method=RequestMethod.POST)
-//	public String modifyPagingPost(Article article, 
-//			Criteria cri,RedirectAttributes rttr)throws Exception{
-//		service.modify(article);
-//		
-//		rttr.addAttribute("page",cri.getPage());
-//		rttr.addAttribute("perPageNum",cri.getPerPageNum());
-//		rttr.addAttribute("board_no",cri.getBoard_no());
-//		
-//		rttr.addFlashAttribute("msg","success");
-//		
-//		return "redirect:/article/listPage";
-//	}
-
 
 }

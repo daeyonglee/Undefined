@@ -11,6 +11,15 @@
     }
 %>
 
+<!-- Ionicons -->
+<link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+<!-- Theme style -->
+<link href="/resources/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
+<!-- AdminLTE Skins. Choose a skin from the css/skins 
+     folder instead of downloading all of them to reduce the load. -->
+<link href="/resources/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
+
+
 <!-- Main content -->
 <div class="container">
 <section class="content">
@@ -28,9 +37,10 @@
           <div class="box-body">
             <input id="board_no" type="hidden" name="board_no" value="<%=board_no%>"></input> 
               <!--자유게시판일 경우에만 아래처럼 article_head선택을 할 수 있음  -->
-    <% 
+        <% 
             if(Integer.parseInt(request.getParameter("board_no"))==2){
         %>
+              <label>머리글</label>
               <select class="selectpicker" name="article_head"
                 id="article_head" name="article_head">
                 <option value="Studio">스튜디오</option>
@@ -72,11 +82,10 @@
               <textarea class="form-control" name="article_content" rows="3"
                 placeholder="내용을 입력하세요"  id ="article_content"></textarea>
             </div>
-            
-
-          </div>
-        </form>
-        
+        </form>    
+      </div>
+     
+          
         <!-- 버튼들 --> 
           <div class="text-center">
             <div class="col-md-12">
@@ -86,14 +95,9 @@
               </div>
             </div>
           </div>
+</section>
 
   </div>
-      <!-- /.box -->
-    </div>
-    <!--/.col (left) -->
-</section>
-<!-- /.content -->
-</div>
         <script>
           $(document).ready(function() {
             var formObj = $("form[role='form']");

@@ -124,11 +124,8 @@ public class ArticleController {
 	    model.addAttribute("listPage", service.listCriteria(cri));
 	    PageMaker pageMaker = new PageMaker();
 	    pageMaker.setCri(cri);
-//	    pageMaker.setTotalCount(131);
 	
 	    pageMaker.setTotalCount(service.listCountCriteria(cri));
 	    model.addAttribute("pageMaker", pageMaker);
 	}
-	
-
 }

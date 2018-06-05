@@ -100,11 +100,10 @@
       <c:choose>
         <c:when test="${null ne sessionScope.login || null ne cookie.loginCookie.value}">
           <div class="text-right">
-             <button id = 'newBtn'>글쓰기</button>
+             <button id = 'newBtn'  class="btn btn-primary btn-sm">글쓰기</button>
           </div>
         </c:when>
         <c:otherwise>
-          
         </c:otherwise>
       </c:choose>
           
@@ -116,11 +115,10 @@
                   href="list${pageMaker.makeSearch(pageMaker.startPage-1) }&board_no=<%=request.getParameter("board_no")%>">&laquo;</a></li>
               </c:if>
 
-              <c:forEach begin="${pageMaker.startPage }"
-                end="${pageMaker.endPage }" var="idx">
+              <c:forEach begin="${pageMaker.startPage }"  end="${pageMaker.endPage }" var="idx">
                 <li
                   <c:out value="${pageMaker.cri.page==idx?'class=active':''}"/>>
-                  <a href="list${pageMaker.makeSearch(idx) }&board_no=<%=request.getParameter("board_no")%>">${idx }</a>
+                    <a href="list${pageMaker.makeSearch(idx) }&board_no=<%=request.getParameter("board_no")%>">${idx }</a>
                 </li>
               </c:forEach>
 
@@ -131,46 +129,61 @@
             </ul>
           </div>
 
-          <!--검색을 위한 코드  -->  
-           <div class="col-md-4 text-center"> 
-              <select name="searchType">
-              <option value="n"
-              <c:out value="${cri.searchType==null?'selected':'' }"/>>
-              ---</option>
-              
-              <option value="t" 
-              <c:out value="${cri.searchType eq 't'?'selected':'' }"/>>
-              Title</option>
-              
-              <option value="c" 
-              <c:out value="${cri.searchType eq 'c'?'selected':'' }"/>>
-              Content</option>
-              
-              <option value="w" 
-              <c:out value="${cri.searchType eq 'w'?'selected':'' }"/>>
-              Writer</option>
-              
-              <option value="tc" 
-              <c:out value="${cri.searchType eq 'tc'?'selected':'' }"/>>
-              Title OR Content</option>
-              
-              <option value="cw" 
-              <c:out value="${cri.searchType eq 'cw'?'selected':'' }"/>>
-              Content Or Writer</option>
-              
-              <option value="tcw" 
-              <c:out value="${cri.searchType eq 'tcw'?'selected':'' }"/>>
-              Title Or Content Or Writer</option>
-              </select>
+          <!--검색을 위한 코드  -->
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-6 col-xs-offset-2">
+                <div class="input-group">
+                  <div class="input-group-btn search-panel">
+                    <select name="searchType" class="selectpicker">
+                      <option value="n"
+                        <c:out value="${cri.searchType==null?'selected':'' }"/>>
+                        검색유형선택</option>
+      
+                      <option value="t"
+                        <c:out value="${cri.searchType eq 't'?'selected':'' }"/>>
+                        제목</option>
+      
+                      <option value="c"
+                        <c:out value="${cri.searchType eq 'c'?'selected':'' }"/>>
+                        내용</option>
+      
+                      <option value="w"
+                        <c:out value="${cri.searchType eq 'w'?'selected':'' }"/>>
+                        작성자</option>
+      
+                      <option value="tc"
+                        <c:out value="${cri.searchType eq 'tc'?'selected':'' }"/>>
+                        제목 Or 내용</option>
+      
+                      <option value="cw"
+                        <c:out value="${cri.searchType eq 'cw'?'selected':'' }"/>>
+                        내용 Or 작성자</option>
+      
+                      <option value="tcw"
+                        <c:out value="${cri.searchType eq 'tcw'?'selected':'' }"/>>
+                        전체</option>
+                    </select>
+                  </div>
+                  <!--검색어 입력 박스 -->
+                  <input type="text" class="form-control" name="keyword"
+                    id="keywordInput" width=".5px" value='${cri.keyword }'
+                    placeholder="검색어를 입력하세요">
+                  <!--검색버튼 -->
+                  <span class="input-group-btn">
+                    <button class="btn btn-primary btn-sm" id='searchBtn'>
+                      <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+      
+          <div></div>
 
-              <input type="text" name="keyword" id="keywordInput" width="1px" value='${cri.keyword }'>
-              <button id = 'searchBtn'>검색</button>
-        <!-- /.box-body -->
-        <div class="box-footer">Footer</div>
-        <!-- /.box-footer-->
-      </div>
-       </section>
-    </div>
+  </section>
+</div>
  
   
 <script>
@@ -179,18 +192,18 @@
 	if (result == 'success') {
 		alert("처리가 완료되었습니다.");
 	}
-	
-	$(document).ready(function(){
-		$('#searchBtn').on("click",function(event){
-				self.location="list"
-				+'${pageMaker.makeQuery(1)}'
-				+"&searchType="
-				+$("select option:selected").val()
-				+"&keyword="+encodeURIComponent($('#keywordInput').val())
-				+"&board_no="
-				+<%=request.getParameter("board_no")%>
-				;
-			});
+
+	$(document).ready(function() {
+		$('#searchBtn').on("click",function(event) {
+			self.location = "list"
+				+ '${pageMaker.makeQuery(1)}'
+				+ "&searchType="
+				+ $("select option:selected").val()
+				+ "&keyword="
+				+ encodeURIComponent($('#keywordInput')
+						.val()) + "&board_no="
+				+ <%=request.getParameter("board_no")%>;
+		});
 		
 		$('#newBtn').on("click", function(evt){
 			self.location="register"
