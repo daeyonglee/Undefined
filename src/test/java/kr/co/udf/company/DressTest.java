@@ -36,7 +36,7 @@ public class DressTest {
 		logger.info(dao.listDress());
 	}
 	
-	 @Test
+	// @Test
 	 public void testListCriteria() throws Exception {
 		 
 		 Criteria cri = new Criteria();
@@ -50,7 +50,7 @@ public class DressTest {
 		 }
 	 }
 	 
-	@Test
+	//@Test
 	public void testPageint() throws Exception {
 		Criteria cri = new Criteria();
 		logger.info(dao.DressCount(cri));
@@ -61,8 +61,8 @@ public class DressTest {
 		
 		SearchCriteria cri = new SearchCriteria();
 		cri.setPage(1);
-		cri.setKeyword("서울특별시");
-		cri.setSearchType("addr");
+		cri.setKeyword("아르하쿠튀르");
+		cri.setSearchType("name");
 	
 		List<DressCompany> list = dao.DressSearch(cri);
 		for (DressCompany dress : list) {

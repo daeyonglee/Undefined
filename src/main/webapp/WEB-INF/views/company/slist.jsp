@@ -137,11 +137,10 @@
   max-width:200px;
   max-height:175px;
   }
-  .hall_box{overflow:hidden;width:200px;height:100px;}
-  
+  .hall_box{overflow:hidden;width:200px;height:50px;}
   
 .hall_box img{float:left;width:80px;height:80px;margin-right:13px}
-.hall_box .hall_detail{float:left;height:100%}
+.hall_box .hall_detail{float:left;max-width:150x}
 .hall_box .hall_detail dl{margin-bottom:25px;font-size:15px;color:#515151;font-weight:bold;}
 .hall_box .hall_detail dl dt a{font-size:10px;color:#2a2a2a;font-weight:bold}
 .hall_box .hall_detail dl dd{color:#FF7268;font-size:11px;margin-top:-15px}
@@ -257,7 +256,7 @@
                       <div class="item-entry overflow">
                         <h5>
                           <a
-                            href="/company/compare?dc_company_no=${studio.sc_no}">
+                            href="/company/compare?sc_company_no=${studio.sc_no}">
                             ${studio.sc_nm} </a>
                         </h5>
                         
@@ -399,7 +398,7 @@
 				var name = document.getElementById("nameList").value.split(",");
 				
 				var list = document.getElementById("list").value.split(",");
-				console.log(list);
+				//console.log(list);
 				/*
 					info : {region:name, region:name}
 				*/
@@ -480,16 +479,17 @@
 					$.each(list, function(index, value) {
 						
 						var arr = value.split(":");
+						var arrNo = arr[2].trim();
 						var arrTitle = arr[1].trim();
 						var arrName = arr[0].trim();
 						
 						if (title == arrTitle) {
-							infowin += '<dl>'+arrName+'</dl>';
+							infowin += '<dl><a href="/company/compare?sc_company_no='+arrNo+'">'+arrName+'</a></dl>';
 						}
 						
 					});
 					
-					infowin += '<dl><dd>'+title+'</dd></dl>';
+					infowin += '<dl><dd>' +title+'</dd></dl>';
 					infowin += '</div></div>';
 					
 					return infowin;
@@ -516,12 +516,12 @@
              value= "
                <c:forEach items="${list}" var="studio" varStatus="index">
                   <c:choose>
-                    <c:when test="${index.last}">${studio.sc_nm}:${studio.sc_addr}</c:when>
-                    <c:otherwise>${studio.sc_nm}:${studio.sc_addr},</c:otherwise>
+                    <c:when test="${index.last}">${studio.sc_nm}:${studio.sc_addr}:${studio.sc_no }</c:when>
+                    <c:otherwise>${studio.sc_nm}:${studio.sc_addr}:${studio.sc_no },</c:otherwise>
                   </c:choose>
                </c:forEach>
              " />
-   
+             
    
            <input type="hidden" id="nameList"
                value= "

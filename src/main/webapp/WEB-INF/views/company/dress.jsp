@@ -283,7 +283,7 @@
 					<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
 								<li
 									<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
-									<a href="slist?page=${idx}">${idx}</a>
+									<a href="dress?page=${idx}">${idx}</a>
 								</li>
 							</c:forEach>
 

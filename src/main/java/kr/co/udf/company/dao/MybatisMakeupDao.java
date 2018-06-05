@@ -46,7 +46,7 @@ public class MybatisMakeupDao implements MakeupDao {
 	}
 
 	@Override
-	public int MakeupSearchCount(MakeupCompany cri) throws Exception {
+	public int MakeupSearchCount(SearchCriteria cri) throws Exception {
 		return session.selectOne(namespace+".MakeupSearchCount", cri);
 	}
 

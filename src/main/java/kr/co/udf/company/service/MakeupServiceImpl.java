@@ -47,7 +47,7 @@ public class MakeupServiceImpl implements MakeupService {
 	}
 
 	@Override
-	public int MakeupSearchCount(MakeupCompany cri) throws Exception {
+	public int MakeupSearchCount(SearchCriteria cri) throws Exception {
 		return dao.MakeupSearchCount(cri);
 	}
 

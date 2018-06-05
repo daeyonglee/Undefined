@@ -20,6 +20,6 @@ public interface MakeupService {
 	
 	public List<MakeupCompany> MakeupSearch(SearchCriteria cri) throws Exception;
 
-	public int MakeupSearchCount(MakeupCompany cri) throws Exception;
+	public int MakeupSearchCount(SearchCriteria cri) throws Exception;
 	
 }

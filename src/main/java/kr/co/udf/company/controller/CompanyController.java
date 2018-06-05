@@ -34,7 +34,7 @@ public class CompanyController {
 //		model.addAttribute("list", service.listAll());
 //	}
 	
-	@RequestMapping(value="/studio", method=RequestMethod.GET)
+	@RequestMapping(value="/slist2", method=RequestMethod.GET)
 	public void studio(Criteria cri, Model model) throws Exception {
 		logger.info("스튜디오 페이징 ");
 		model.addAttribute("list", ss.listCriteria(cri));
@@ -45,9 +45,9 @@ public class CompanyController {
 		model.addAttribute("pageMaker", pagemaker);
 	}
 	
+	/*
 	
-	
-	@RequestMapping(value="/dress", method=RequestMethod.GET)
+	@RequestMapping(value="/dress2", method=RequestMethod.GET)
 	public void dress(Criteria cri, Model model) throws Exception {
 		logger.info("드레스 페이징 ");
 		model.addAttribute("dresslist", ds.DressCri(cri));
@@ -58,7 +58,7 @@ public class CompanyController {
 		model.addAttribute("pageMaker", pagemaker);
 	}
 	
-	@RequestMapping(value="/makeup", method=RequestMethod.GET)
+	@RequestMapping(value="/makeup2", method=RequestMethod.GET)
 	public void makeup(Criteria cri, Model model) throws Exception {
 		logger.info("메이크업 페이징 ");
 		model.addAttribute("makeuplist", ms.MakeupCri(cri));
@@ -69,6 +69,7 @@ public class CompanyController {
 		model.addAttribute("pageMaker", pagemaker);
 	}
 	
+	*/
 	
 	@RequestMapping(value="/detail", method=RequestMethod.GET)
 	public void detailGET() {

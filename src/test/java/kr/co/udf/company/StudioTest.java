@@ -51,7 +51,7 @@ public class StudioTest {
 		 List<StudioCompany> list = dao.listCriteria(cri);
 		 
 		 for (StudioCompany studio : list) {
-			 logger.info(studio.getSc_no() + ":" + studio.getSc_main_nm());
+			 logger.info(studio.getSc_no() + ":" + studio.getSc_nm());
 		 }
 	 }
 	 
@@ -89,6 +89,10 @@ public class StudioTest {
 			logger.info(uricompo.toString());
 	}
 	
+		@Test
+		public void testlistALl() throws Exception {
+			logger.info(dao.listAll());
+		}
 	
 	
 	}

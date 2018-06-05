@@ -369,6 +369,8 @@
 
 
                 <script>
+                
+            var list = [];
 			var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/parking_lot_maps.png';
 			
 			function initialize() {
@@ -394,30 +396,36 @@
 				var geocoder = new google.maps.Geocoder();
 				var bounds = new google.maps.LatLngBounds();
 
-
 				var region = document.getElementById("mapList").value.split(",");
 				var name = document.getElementById("nameList").value.split(",");
-		        var currentInfoWindow = null;
+				/*
+					info : {region:name, region:name}
+				*/
 				//var myLatlng1 = new google.maps.LatLngBounds(37.4837121, 127.0324112);
 				//console.log(myLatlng1);
-				
+				var currentInfoWindow = null;
+				var infoWindow = new google.maps.InfoWindow({ content: '' });
+															
 				//마커를 올릴 지역을 가져온다.
 				if (region.length > 0) {
 					for (var i = 0; i < region.length; i++) {
-						
-						geocoder.geocode(
-										{
-											'address' : region[i]
-										},
+						geocoder.geocode({'address' : region[i]},
 										function (results, status) {
 											if (status == google.maps.GeocoderStatus.OK) {
 												for (var j = 0; j < results.length; j++) {
+													for (var n = 0; n <name.length; n++) {
 													// 좌표값 받아오기
 													
 													var lat = results[j].geometry.location.lat();
 													var lng = results[j].geometry.location.lng();
 													
-
+													
+													var message = name[n];
+													console.info('message : ' + message);
+													//console.info('리스트 : ' + message);
+													//list.push(message);
+													//console.info('message :' + list);
+													
 													// 마커 속성 설정하기
 													var marker = new google.maps.Marker(				
 															{
@@ -425,112 +433,53 @@
 																title : results[j].formatted_address,
 																map : map,
 																bounds: true,
-																maxZoom:17
+																maxZoom: 17,
+																//name: [message[m]]
 																//center : {lat: -34, lng: 151}
 																//icon : iconBase
 															});
-													
 														bounds.extend(marker.position);
 														map.fitBounds(bounds);
 
-													
-													//console.info(marker.position.lat(), marker.position.lng());
-													//map.setCenter(marker.position.lat()+marker.position.lng());
-													
-													//console.log(lat+','+lng);
-													
-													/*
-													if (status === google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {    
-													      setTimeout(function() {
-														           codeAddress(address);
-														        }, 200);
-														  }
-													*/
-													
-
-													//var asd = [parseFloat(marker.position.lat()), parseFloat(marker.position.lng())]
-													//console.log(asd[0],asd[1]);
-													
-													//console.log(marker.position.lat(), marker.position.lng())
-													
-													//var latLngBounds = new google.maps.LatLngBounds(parseFloat(results[j].geometry.location));
-													//latLngBounds.extend();
-													
-													//console.log(lat,lng);
-													
-													/*
-													
-													var asd = [marker.position.lat(), marker.position.lng()]
-													console.log(asd[0],asd[1]);
-													*/
-													
-													/*
-													for(var dd in asd){
-														console.log(asd[dd]);
-													} 
-													*/
-													//console.log(asd[0][1]);
-													
-													//var latLngBounds = new google.maps.LatLngBounds(
-													//		new google.maps.LatLng( 124.456,  )
-													//) ;
-													
-													
-													
-													//latlngbounds = new google.maps.LatLngBounds();
-													//console.log(latlngbounds);
-													
-													//latlngbounds.extend(asd[0],asd[1]);
-													//map.setCenter(latlngbounds.getCenter());
-													
-													//console.log(latlngbounds.getCenter());
-													
-												//console.log(lat, lng);
-											
-/*
-												console.log(lat,lng);
-												console.log(marker.position.lat(), marker.position.lng());
 												
-												map.fitBounds(bounds); 
-					*/
-					
+
 					
 													//인포윈도우 만들기 
-													
-													
-															var infoWindow = new google.maps.InfoWindow({
-										                content: infowin
-										            });
-													
-
-													for (var n = 0; n < name.length; n++) {
-														
-													var address = "주소";
-													var image = "대표이미지";
 													var infowin = '';
 													infowin += '<div class="hall_box">';
 													infowin += '<img src = "http://iwedding.co.kr/center/website/brandplus/6285/721-N153_141014032549_1.jpg">'
 													infowin += '<div class="hall_detail">';
-													infowin += '<dl>'+name[n]+'</dl>';
-													infowin += '<dl><dd>'+address+'</dd></dl>';
+													infowin += '<dl>'+marker.title+'</dl>';
+													infowin += '<dl><dd>가게이름</dd></dl>';
 													infowin += '</div>';
 													
+													//var address = region;
 													//console.log(name[n]);
 													
 													// 마커 클릭 이벤트
-													google.maps.event.addListener(marker,'click',function() {
-																		
-																		if(currentInfoWindow !=null){
-																			currentInfoWindow.close();
-																		}
-																		//infoWindow.close();
-																		//infoWindow.setContent(infowin);
-																		infoWindow.open(map,marker);
-																		currentInfoWindow = infoWindow;
-																	});
 													
-													}
+													
+													var image = "대표이미지";
+													
+													//console.log('이름 : ' + marker.name);
+													//console.log('위치 :' + marker.title);
+													
+													list.push({name:marker.name, title:marker.title});
+													
+													google.maps.event.addListener(marker,'click',function(e) {
+														
+														if(currentInfoWindow !=null){
+															currentInfoWindow.close();
+														}
+														//infoWindow.close();
+														infoWindow.setContent(infowin);
+														infoWindow.open(map,marker);
+														console.log('marker' + marker);
+														currentInfoWindow = infoWindow;
+													});
+													
 												}
+											}
 												
 											} else {
 												alert("검색결과가 없습니다");
@@ -540,31 +489,20 @@
 					
 				}
 				
-				}
+			}
 		</script>
     
     <!-- 마커 장소 찍기 -->
     
+    <!-- studio.sc_addr:studio.sc_nm, -->
+    
            <input type="hidden" id="mapList"
-               value= "
-                 <c:forEach items="${list}" var="studio" varStatus="index">
-                    <c:choose>
-                      <c:when test="${index.last}">${studio.sc_addr}</c:when>
-                      <c:otherwise>${studio.sc_addr},</c:otherwise>
-                    </c:choose>
-                 </c:forEach>
+               value= "경기도 안산시 단원구 초지1로 78
                " />
                
    
            <input type="hidden" id="nameList"
-               value= "
-                 <c:forEach items="${list}" var="studio" varStatus="index">
-                    <c:choose>
-                      <c:when test="${index.last}">${studio.sc_nm}</c:when>
-                      <c:otherwise>${studio.sc_nm},</c:otherwise>
-                    </c:choose>
-                 </c:forEach>
-               " />
+               value= "<c:forEach items="${list}" var="studio" varStatus="index"><c:choose><c:when test="${index.last}">${studio.sc_nm}</c:when><c:otherwise>${studio.sc_nm},</c:otherwise></c:choose></c:forEach>" />
 
 
                 <!-- 구글맵 key -->

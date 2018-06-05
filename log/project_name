@@ -1,89 +1,60 @@
-2018-05-31 15:39:09 [INFO ] [kr.co.udf.company.StudioTest:89] /board/listpage?bno=1&perPerNum=10 
-2018-05-31 15:47:53 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: SELECT count(dc_no) FROM dress_company WHERE dc_no > 0  
-2018-05-31 15:47:53 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters:  
-2018-05-31 15:47:53 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 1 
-2018-05-31 15:47:53 [INFO ] [kr.co.udf.company.DressTest:55] 5 
-2018-05-31 15:47:53 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: SELECT * FROM ( SELECT rownum rn, dc_no, dc_nm, dc_company_no, dc_main_nm, dc_addr, dc_main_image, dc_email, dc_pw, dc_tel, dc_introduce, sessionkey, regdate, updatedate FROM dress_company WHERE rownum <= ? * ? and dc_no > 0 order by dc_no desc ) where rn > (? -1) * ?  
-2018-05-31 15:47:53 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters: 1(Integer), 10(Integer), 1(Integer), 10(Integer) 
-2018-05-31 15:47:54 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 5 
-2018-05-31 15:47:54 [INFO ] [kr.co.udf.company.DressTest:48] 경기도 안산시 단원구 초지1로 78:프리미엄 드레스 
-2018-05-31 15:47:54 [INFO ] [kr.co.udf.company.DressTest:48] 서울특별시 중구 남산동1가 13-6:명동라루체 웨딩홀 
-2018-05-31 15:47:54 [INFO ] [kr.co.udf.company.DressTest:48] 서울특별시 용산구 소월로 38길 24 2층:아르하쿠튀르 
-2018-05-31 15:47:54 [INFO ] [kr.co.udf.company.DressTest:48] 서울특별시 강남구 청담동 7-17:벨에포크웨딩드레스 
-2018-05-31 15:47:54 [INFO ] [kr.co.udf.company.DressTest:48] 서울특별시 서초구 강남대로 375 서초현대타워빌딩:강남드레스 
-2018-05-31 17:59:12 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: SELECT * FROM ( SELECT rownum rn, dc_no, dc_nm, dc_company_no, dc_main_nm, dc_addr, dc_main_image, dc_email, dc_pw, dc_tel, dc_introduce, sessionkey, regdate, updatedate FROM dress_company WHERE rownum <= ? * ? and dc_no > 0 order by dc_no desc ) where rn > (? -1) * ?  
-2018-05-31 17:59:12 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters: 1(Integer), 10(Integer), 1(Integer), 10(Integer) 
-2018-05-31 17:59:12 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 5 
-2018-05-31 17:59:12 [INFO ] [kr.co.udf.company.DressTest:48] 경기도 안산시 단원구 초지1로 78:프리미엄 드레스 
-2018-05-31 17:59:12 [INFO ] [kr.co.udf.company.DressTest:48] 서울특별시 중구 남산동1가 13-6:명동라루체 웨딩홀 
-2018-05-31 17:59:12 [INFO ] [kr.co.udf.company.DressTest:48] 서울특별시 용산구 소월로 38길 24 2층:아르하쿠튀르 
-2018-05-31 17:59:12 [INFO ] [kr.co.udf.company.DressTest:48] 서울특별시 강남구 청담동 7-17:벨에포크웨딩드레스 
-2018-05-31 17:59:12 [INFO ] [kr.co.udf.company.DressTest:48] 서울특별시 서초구 강남대로 375 서초현대타워빌딩:강남드레스 
-2018-05-31 18:01:07 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: SELECT count(dc_no) FROM dress_company WHERE dc_no > 0  
-2018-05-31 18:01:07 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters:  
-2018-05-31 18:01:07 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 1 
-2018-05-31 18:01:07 [INFO ] [kr.co.udf.company.DressTest:56] 5 
-2018-05-31 18:03:39 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: SELECT count(dc_no) FROM dress_company WHERE dc_no > 0  
-2018-05-31 18:03:39 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters:  
-2018-05-31 18:03:39 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 1 
-2018-05-31 18:03:39 [INFO ] [kr.co.udf.company.DressTest:56] 5 
-2018-05-31 18:03:39 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: select * from ( SELECT rownum rn, dc_no, dc_nm, dc_company_no, dc_main_nm, dc_addr, dc_main_image, dc_email, dc_pw, dc_tel, dc_introduce, sessionkey, regdate, updatedate FROM dress_company where 1=1 and dc_nm like '%'|| ?||'%' and rownum <= ? * ? and dc_no > 0 order by dc_no DESC ) where rn > (? -1) * ?  
-2018-05-31 18:03:39 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters: 이마트(String), 1(Integer), 10(Integer), 1(Integer), 10(Integer) 
-2018-05-31 18:03:40 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 0 
-2018-05-31 18:03:40 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: select count(dc_no) from dress_company where dc_no > 0 and dc_nm like '%'|| ?||'%'  
-2018-05-31 18:03:40 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters: 이마트(String) 
-2018-05-31 18:03:40 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 1 
-2018-05-31 18:03:40 [INFO ] [kr.co.udf.company.DressTest:71] 개수 :0 
-2018-05-31 18:03:48 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: SELECT count(dc_no) FROM dress_company WHERE dc_no > 0  
-2018-05-31 18:03:48 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters:  
-2018-05-31 18:03:48 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 1 
-2018-05-31 18:03:48 [INFO ] [kr.co.udf.company.DressTest:56] 5 
-2018-05-31 18:03:48 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: select * from ( SELECT rownum rn, dc_no, dc_nm, dc_company_no, dc_main_nm, dc_addr, dc_main_image, dc_email, dc_pw, dc_tel, dc_introduce, sessionkey, regdate, updatedate FROM dress_company where 1=1 and dc_nm like '%'|| ?||'%' and rownum <= ? * ? and dc_no > 0 order by dc_no DESC ) where rn > (? -1) * ?  
-2018-05-31 18:03:48 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters: 이마트(String), 1(Integer), 10(Integer), 1(Integer), 10(Integer) 
-2018-05-31 18:03:48 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 0 
-2018-05-31 18:03:48 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: select count(dc_no) from dress_company where dc_no > 0 and dc_nm like '%'|| ?||'%'  
-2018-05-31 18:03:48 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters: 이마트(String) 
-2018-05-31 18:03:48 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 1 
-2018-05-31 18:03:48 [INFO ] [kr.co.udf.company.DressTest:71] 개수 :0 
-2018-05-31 18:04:02 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: SELECT count(dc_no) FROM dress_company WHERE dc_no > 0  
-2018-05-31 18:04:02 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters:  
-2018-05-31 18:04:02 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 1 
-2018-05-31 18:04:02 [INFO ] [kr.co.udf.company.DressTest:56] 5 
-2018-05-31 18:04:02 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: SELECT * FROM ( SELECT rownum rn, dc_no, dc_nm, dc_company_no, dc_main_nm, dc_addr, dc_main_image, dc_email, dc_pw, dc_tel, dc_introduce, sessionkey, regdate, updatedate FROM dress_company WHERE rownum <= ? * ? and dc_no > 0 order by dc_no desc ) where rn > (? -1) * ?  
-2018-05-31 18:04:02 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters: 1(Integer), 10(Integer), 1(Integer), 10(Integer) 
-2018-05-31 18:04:02 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 5 
-2018-05-31 18:04:02 [INFO ] [kr.co.udf.company.DressTest:49] 경기도 안산시 단원구 초지1로 78:프리미엄 드레스 
-2018-05-31 18:04:02 [INFO ] [kr.co.udf.company.DressTest:49] 서울특별시 중구 남산동1가 13-6:명동라루체 웨딩홀 
-2018-05-31 18:04:02 [INFO ] [kr.co.udf.company.DressTest:49] 서울특별시 용산구 소월로 38길 24 2층:아르하쿠튀르 
-2018-05-31 18:04:02 [INFO ] [kr.co.udf.company.DressTest:49] 서울특별시 강남구 청담동 7-17:벨에포크웨딩드레스 
-2018-05-31 18:04:02 [INFO ] [kr.co.udf.company.DressTest:49] 서울특별시 서초구 강남대로 375 서초현대타워빌딩:강남드레스 
-2018-05-31 18:04:02 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: select * from ( SELECT rownum rn, dc_no, dc_nm, dc_company_no, dc_main_nm, dc_addr, dc_main_image, dc_email, dc_pw, dc_tel, dc_introduce, sessionkey, regdate, updatedate FROM dress_company where 1=1 and dc_nm like '%'|| ?||'%' and rownum <= ? * ? and dc_no > 0 order by dc_no DESC ) where rn > (? -1) * ?  
-2018-05-31 18:04:02 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters: 이마트(String), 1(Integer), 10(Integer), 1(Integer), 10(Integer) 
-2018-05-31 18:04:02 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 0 
-2018-05-31 18:04:02 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: select count(dc_no) from dress_company where dc_no > 0 and dc_nm like '%'|| ?||'%'  
-2018-05-31 18:04:02 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters: 이마트(String) 
-2018-05-31 18:04:02 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 1 
-2018-05-31 18:04:02 [INFO ] [kr.co.udf.company.DressTest:71] 개수 :0 
-2018-05-31 18:04:48 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: SELECT count(dc_no) FROM dress_company WHERE dc_no > 0  
-2018-05-31 18:04:48 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters:  
-2018-05-31 18:04:48 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 1 
-2018-05-31 18:04:48 [INFO ] [kr.co.udf.company.DressTest:56] 5 
-2018-05-31 18:04:48 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: SELECT * FROM ( SELECT rownum rn, dc_no, dc_nm, dc_company_no, dc_main_nm, dc_addr, dc_main_image, dc_email, dc_pw, dc_tel, dc_introduce, sessionkey, regdate, updatedate FROM dress_company WHERE rownum <= ? * ? and dc_no > 0 order by dc_no desc ) where rn > (? -1) * ?  
-2018-05-31 18:04:48 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters: 1(Integer), 10(Integer), 1(Integer), 10(Integer) 
-2018-05-31 18:04:48 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 5 
-2018-05-31 18:04:48 [INFO ] [kr.co.udf.company.DressTest:49] 경기도 안산시 단원구 초지1로 78:프리미엄 드레스 
-2018-05-31 18:04:48 [INFO ] [kr.co.udf.company.DressTest:49] 서울특별시 중구 남산동1가 13-6:명동라루체 웨딩홀 
-2018-05-31 18:04:48 [INFO ] [kr.co.udf.company.DressTest:49] 서울특별시 용산구 소월로 38길 24 2층:아르하쿠튀르 
-2018-05-31 18:04:48 [INFO ] [kr.co.udf.company.DressTest:49] 서울특별시 강남구 청담동 7-17:벨에포크웨딩드레스 
-2018-05-31 18:04:48 [INFO ] [kr.co.udf.company.DressTest:49] 서울특별시 서초구 강남대로 375 서초현대타워빌딩:강남드레스 
-2018-05-31 18:04:48 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: select * from ( SELECT rownum rn, dc_no, dc_nm, dc_company_no, dc_main_nm, dc_addr, dc_main_image, dc_email, dc_pw, dc_tel, dc_introduce, sessionkey, regdate, updatedate FROM dress_company where 1=1 and dc_addr like '%'|| ?||'%' and rownum <= ? * ? and dc_no > 0 order by dc_no DESC ) where rn > (? -1) * ?  
-2018-05-31 18:04:48 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters: 서울특별시(String), 1(Integer), 10(Integer), 1(Integer), 10(Integer) 
-2018-05-31 18:04:48 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 4 
-2018-05-31 18:04:48 [INFO ] [kr.co.udf.company.DressTest:69] 4:김드레 
-2018-05-31 18:04:48 [INFO ] [kr.co.udf.company.DressTest:69] 3:김드레 
-2018-05-31 18:04:48 [INFO ] [kr.co.udf.company.DressTest:69] 2:김드레 
-2018-05-31 18:04:48 [INFO ] [kr.co.udf.company.DressTest:69] 1:김드레 
-2018-05-31 18:04:48 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: select count(dc_no) from dress_company where dc_no > 0 and dc_addr like '%'|| ?||'%'  
-2018-05-31 18:04:48 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters: 서울특별시(String) 
-2018-05-31 18:04:48 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 1 
-2018-05-31 18:04:48 [INFO ] [kr.co.udf.company.DressTest:71] 개수 :4 
+2018-06-05 09:30:15 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: UPDATE studio_product SET sp_price = ?, sp_apv_yn = ?,sp_total_yn = ?,sp_shoot_type = ?, sp_image = ? WHERE sp_no = ?  
+2018-06-05 09:32:23 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: UPDATE studio_product SET sp_price = ?, sp_apv_yn = ?,sp_total_yn = ?,sp_shoot_type = ?, sp_image = ? WHERE sp_no = ?  
+2018-06-05 09:35:42 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: UPDATE studio_product SET sp_price = ?, sp_apv_yn = ?,sp_total_yn = ?,sp_shoot_type = ?, sp_image = ? WHERE sp_no = ?  
+2018-06-05 09:38:21 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: UPDATE studio_product SET sp_price = ?, sp_apv_yn = ?,sp_total_yn = ?,sp_shoot_type = ?, sp_image = ? WHERE sp_no = ?  
+2018-06-05 09:38:21 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters: 10000(Integer), Y(String), N(String), 1(String), sample image(String), 7(Integer) 
+2018-06-05 09:39:22 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: DELETE FROM studio_product WHERE sp_no = ?  
+2018-06-05 09:39:22 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters: 10(Integer) 
+2018-06-05 09:39:22 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==    Updates: 1 
+2018-06-05 10:50:30 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==    Updates: 1 
+2018-06-05 11:16:02 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: SELECT count(dc_no) FROM dress_company WHERE dc_no > 0  
+2018-06-05 11:16:03 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters:  
+2018-06-05 11:16:03 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 1 
+2018-06-05 11:16:03 [INFO ] [kr.co.udf.company.DressTest:56] 5 
+2018-06-05 11:16:03 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: SELECT * FROM ( SELECT rownum rn, dc_no, dc_nm, dc_company_no, dc_main_nm, dc_addr, dc_main_image, dc_email, dc_pw, dc_tel, dc_introduce, sessionkey, regdate, updatedate FROM dress_company WHERE rownum <= ? * ? and dc_no > 0 order by dc_no desc ) where rn > (? -1) * ?  
+2018-06-05 11:16:03 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters: 1(Integer), 10(Integer), 1(Integer), 10(Integer) 
+2018-06-05 11:16:03 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 5 
+2018-06-05 11:16:03 [INFO ] [kr.co.udf.company.DressTest:49] 경기도 안산시 단원구 초지1로 78:프리미엄 드레스 
+2018-06-05 11:16:03 [INFO ] [kr.co.udf.company.DressTest:49] 서울특별시 중구 남산동1가 13-6:명동라루체 웨딩홀 
+2018-06-05 11:16:03 [INFO ] [kr.co.udf.company.DressTest:49] 서울특별시 용산구 소월로 38길 24 2층:아르하쿠튀르 
+2018-06-05 11:16:03 [INFO ] [kr.co.udf.company.DressTest:49] 서울특별시 강남구 청담동 7-17:벨에포크웨딩드레스 
+2018-06-05 11:16:03 [INFO ] [kr.co.udf.company.DressTest:49] 서울특별시 서초구 강남대로 375 서초현대타워빌딩:강남드레스 
+2018-06-05 11:16:03 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: select * from ( SELECT rownum rn, dc_no, dc_nm, dc_company_no, dc_main_nm, dc_addr, dc_main_image, dc_email, dc_pw, dc_tel, dc_introduce, sessionkey, regdate, updatedate FROM dress_company where 1=1 and dc_addr like '%'|| ?||'%' and rownum <= ? * ? and dc_no > 0 order by dc_no DESC ) where rn > (? -1) * ?  
+2018-06-05 11:16:03 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters: 서울특별시(String), 1(Integer), 9(Integer), 1(Integer), 9(Integer) 
+2018-06-05 11:16:03 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 4 
+2018-06-05 11:16:03 [INFO ] [kr.co.udf.company.DressTest:69] 4:김드레 
+2018-06-05 11:16:03 [INFO ] [kr.co.udf.company.DressTest:69] 3:김드레 
+2018-06-05 11:16:03 [INFO ] [kr.co.udf.company.DressTest:69] 2:김드레 
+2018-06-05 11:16:03 [INFO ] [kr.co.udf.company.DressTest:69] 1:김드레 
+2018-06-05 11:16:03 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: select count(dc_no) from dress_company where dc_no > 0 and dc_addr like '%'|| ?||'%'  
+2018-06-05 11:16:03 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters: 서울특별시(String) 
+2018-06-05 11:16:03 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 1 
+2018-06-05 11:16:03 [INFO ] [kr.co.udf.company.DressTest:71] 개수 :4 
+2018-06-05 11:16:39 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: select * from ( SELECT rownum rn, dc_no, dc_nm, dc_company_no, dc_main_nm, dc_addr, dc_main_image, dc_email, dc_pw, dc_tel, dc_introduce, sessionkey, regdate, updatedate FROM dress_company where 1=1 and dc_nm like '%'|| ?||'%' and rownum <= ? * ? and dc_no > 0 order by dc_no DESC ) where rn > (? -1) * ?  
+2018-06-05 11:16:39 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters: 아르하쿠튀르(String), 1(Integer), 9(Integer), 1(Integer), 9(Integer) 
+2018-06-05 11:16:39 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 1 
+2018-06-05 11:16:39 [INFO ] [kr.co.udf.company.DressTest:69] 3:김드레 
+2018-06-05 11:16:39 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: select count(dc_no) from dress_company where dc_no > 0 and dc_nm like '%'|| ?||'%'  
+2018-06-05 11:16:39 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters: 아르하쿠튀르(String) 
+2018-06-05 11:16:39 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 1 
+2018-06-05 11:16:39 [INFO ] [kr.co.udf.company.DressTest:71] 개수 :1 
+2018-06-05 11:18:40 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: select * from ( SELECT rownum rn, sc_no, sc_nm, sc_company_no, sc_main_nm, sc_addr, sc_main_image, sc_email, sc_pw, sc_tel, sc_introduce, sessionkey, regdate, updatedate FROM studio_company where 1=1 and sc_nm like '%'|| ?||'%' and rownum <= ? * ? and sc_no > 0 order by sc_no DESC ) where rn > (? -1) * ?  
+2018-06-05 11:18:40 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters: 이마트(String), 1(Integer), 9(Integer), 1(Integer), 9(Integer) 
+2018-06-05 11:18:40 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 1 
+2018-06-05 11:18:40 [INFO ] [kr.co.udf.company.StudioTest:74] 50:홍길동 
+2018-06-05 11:18:41 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: select count(sc_no) from studio_company where sc_no > 0 and sc_nm like '%'|| ?||'%'  
+2018-06-05 11:18:41 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters: 이마트(String) 
+2018-06-05 11:18:41 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 1 
+2018-06-05 11:18:41 [INFO ] [kr.co.udf.company.StudioTest:76] 개수 :1 
+2018-06-05 11:19:16 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: select * from ( SELECT rownum rn, dc_no, dc_nm, dc_company_no, dc_main_nm, dc_addr, dc_main_image, dc_email, dc_pw, dc_tel, dc_introduce, sessionkey, regdate, updatedate FROM dress_company where 1=1 and dc_nm like '%'|| ?||'%' and rownum <= ? * ? and dc_no > 0 order by dc_no DESC ) where rn > (? -1) * ?  
+2018-06-05 11:19:16 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters: 아르하쿠튀르(String), 1(Integer), 9(Integer), 1(Integer), 9(Integer) 
+2018-06-05 11:19:16 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 1 
+2018-06-05 11:19:16 [INFO ] [kr.co.udf.company.DressTest:69] 3:김드레 
+2018-06-05 11:19:16 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: select count(dc_no) from dress_company where dc_no > 0 and dc_nm like '%'|| ?||'%'  
+2018-06-05 11:19:16 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters: 아르하쿠튀르(String) 
+2018-06-05 11:19:16 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 1 
+2018-06-05 11:19:16 [INFO ] [kr.co.udf.company.DressTest:71] 개수 :1 
+2018-06-05 14:33:12 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==>  Preparing: SELECT sc_no, sc_nm, sc_company_no, sc_main_nm, sc_addr, sc_main_image, sc_email, sc_pw, sc_tel, sc_introduce, sessionkey, regdate, updatedate FROM studio_company  
+2018-06-05 14:33:12 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] ==> Parameters:  
+2018-06-05 14:33:12 [DEBUG] [apache.ibatis.logging.jdbc.BaseJdbcLogger:159] <==      Total: 12 
+2018-06-05 14:33:12 [INFO ] [kr.co.udf.company.StudioTest:94] [StudioCompany [sc_no=35, sc_nm=강남힐스튜디오, sc_company_no=35, sc_main_nm=홍길동, sc_addr=서울특별시 서초구 강남대로 375 서초현대타워빌딩, sc_main_mage=null, sc_email=gangnamhill@naver.com, sc_pw=1234, sc_tel=1012345678, sc_introduce=우리 강남힐스튜디오는 33년의 깊은 전통을 가지고 있습니다., sessionKey=none, sessionLimit=null, regdate=2018-05-29 11:58:25, updatedate=2018-05-29 11:58:25], StudioCompany [sc_no=36, sc_nm=24/7스튜디오, sc_company_no=36, sc_main_nm=김길동, sc_addr=서울특별시 강남구 청담동 80-17, sc_main_mage=null, sc_email=gangnamhill@naver.com, sc_pw=1234, sc_tel=1012345678, sc_introduce=24시간 7일 일주일동안 언제나 라는 뜻의 24/7스튜디오 입니다., sessionKey=none, sessionLimit=null, regdate=2018-05-29 11:58:27, updatedate=2018-05-29 11:58:27], StudioCompany [sc_no=41, sc_nm=논현동스튜디오, sc_company_no=41, sc_main_nm=홍길동, sc_addr= 서울특별시 강남구 논현동 107-45, sc_main_mage=null, sc_email=gangnamhill@naver.com, sc_pw=1234, sc_tel=1012345678, sc_introduce=우리 강남힐스튜디오는 33년의 깊은 전통을 가지고 있습니다., sessionKey=none, sessionLimit=null, regdate=2018-05-30 14:03:52, updatedate=2018-05-30 14:03:52], StudioCompany [sc_no=42, sc_nm=논현2동스튜디오, sc_company_no=42, sc_main_nm=김길동, sc_addr=서울특별시 강남구 논현2동 102-25, sc_main_mage=null, sc_email=gangnamhill@naver.com, sc_pw=1234, sc_tel=1012345678, sc_introduce=24시간 7일 일주일동안 언제나 라는 뜻의 24/7스튜디오 입니다., sessionKey=none, sessionLimit=null, regdate=2018-05-30 14:03:54, updatedate=2018-05-30 14:03:54], StudioCompany [sc_no=43, sc_nm=삼성동스튜디오, sc_company_no=43, sc_main_nm=김길동, sc_addr=서울특별시 강남구 삼성동 65-9, sc_main_mage=null, sc_email=gangnamhill@naver.com, sc_pw=1234, sc_tel=1012345678, sc_introduce=느와르 블랑 스튜디오입니다. 사진찍는 것을 두려워 하지 마세요. 당신의 아름다운 모습을 찾아드립니다., sessionKey=none, sessionLimit=null, regdate=2018-05-30 14:03:56, updatedate=2018-05-30 14:03:56], StudioCompany [sc_no=44, sc_nm=금천구스튜디오, sc_company_no=44, sc_main_nm=홍길동, sc_addr=서울특별시 금천구 독산1동 152-8, sc_main_mage=null, sc_email=gangnamhill@naver.com, sc_pw=1234, sc_tel=1012345678, sc_introduce=우리 강남힐스튜디오는 33년의 깊은 전통을 가지고 있습니다., sessionKey=none, sessionLimit=null, regdate=2018-05-30 14:06:05, updatedate=2018-05-30 14:06:05], StudioCompany [sc_no=45, sc_nm=마포구스튜디오, sc_company_no=45, sc_main_nm=김길동, sc_addr=서울특별시 마포구 성산동 200-51, sc_main_mage=null, sc_email=gangnamhill@naver.com, sc_pw=1234, sc_tel=1012345678, sc_introduce=24시간 7일 일주일동안 언제나 라는 뜻의 24/7스튜디오 입니다., sessionKey=none, sessionLimit=null, regdate=2018-05-30 14:06:06, updatedate=2018-05-30 14:06:06], StudioCompany [sc_no=46, sc_nm=양천구스튜디오, sc_company_no=46, sc_main_nm=김길동, sc_addr=서울특별시 양천구 목1동 406-293, sc_main_mage=null, sc_email=gangnamhill@naver.com, sc_pw=1234, sc_tel=1012345678, sc_introduce=느와르 블랑 스튜디오입니다. 사진찍는 것을 두려워 하지 마세요. 당신의 아름다운 모습을 찾아드립니다., sessionKey=none, sessionLimit=null, regdate=2018-05-30 14:06:08, updatedate=2018-05-30 14:06:08], StudioCompany [sc_no=47, sc_nm=종로구스튜디오, sc_company_no=47, sc_main_nm=김길동, sc_addr=서울특별시 종로구 통의동 35-41, sc_main_mage=null, sc_email=gangnamhill@naver.com, sc_pw=1234, sc_tel=1012345678, sc_introduce=24시간 7일 일주일동안 언제나 라는 뜻의 24/7스튜디오 입니다., sessionKey=none, sessionLimit=null, regdate=2018-05-30 14:07:08, updatedate=2018-05-30 14:07:08], StudioCompany [sc_no=48, sc_nm=고양시스튜디오, sc_company_no=48, sc_main_nm=홍길동, sc_addr=경기도 고양시 일산동구 설문동 153-34, sc_main_mage=null, sc_email=gangnamhill@naver.com, sc_pw=1234, sc_tel=1012345678, sc_introduce=우리 강남힐스튜디오는 33년의 깊은 전통을 가지고 있습니다., sessionKey=none, sessionLimit=null, regdate=2018-05-30 14:07:09, updatedate=2018-05-30 14:07:09], StudioCompany [sc_no=49, sc_nm=의정부스튜디오, sc_company_no=49, sc_main_nm=김길동, sc_addr=경기도 의정부시 의정부2동 431-24, sc_main_mage=null, sc_email=gangnamhill@naver.com, sc_pw=1234, sc_tel=1012345678, sc_introduce=느와르 블랑 스튜디오입니다. 사진찍는 것을 두려워 하지 마세요. 당신의 아름다운 모습을 찾아드립니다., sessionKey=none, sessionLimit=null, regdate=2018-05-30 14:07:23, updatedate=2018-05-30 14:07:23], StudioCompany [sc_no=50, sc_nm=이마트스튜디오, sc_company_no=50, sc_main_nm=홍길동, sc_addr=경기도 안산시 단원구 초지동 이마트, sc_main_mage=null, sc_email=gangnamhill@naver.com, sc_pw=1234, sc_tel=1012345678, sc_introduce=우리 강남힐스튜디오는 33년의 깊은 전통을 가지고 있습니다., sessionKey=none, sessionLimit=null, regdate=2018-05-30 16:04:30, updatedate=2018-05-30 16:04:30]] 

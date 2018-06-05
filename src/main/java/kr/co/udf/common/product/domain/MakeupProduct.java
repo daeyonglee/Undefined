@@ -1,12 +1,14 @@
 package kr.co.udf.common.product.domain;
 
 public class MakeupProduct {
-	private int productNo;
-	private int companyNo;
-	private int price;
-	private char acc; // 악세사리 여부
-	private char family; // 가족 포함 여부
-	private char hair; // 헤어 여부
+	private int mp_no;
+	private int mc_no;
+	private String mc_nm;
+	private int mp_price;
+	private char mp_acc_yn; // 악세사리 여부
+	private char mp_family_yn; // 가족 포함 여부
+	private char mp_hair_yn; // 헤어 여부
+	private String mp_image;
 	private String regdate;
 	private String updatedate;
 
@@ -15,53 +17,68 @@ public class MakeupProduct {
 		super();
 	}
 
-	/** Getter & Setter */
-	public int getProductNo() {
-		return productNo;
+	public int getMp_no() {
+		return mp_no;
 	}
 
-	public void setProductNo(int productNo) {
-		this.productNo = productNo;
+	public void setMp_no(int mp_no) {
+		this.mp_no = mp_no;
 	}
 
-	public int getCompanyNo() {
-		return companyNo;
+	public int getMc_no() {
+		return mc_no;
 	}
 
-	public void setCompanyNo(int companyNo) {
-		this.companyNo = companyNo;
+	public void setMc_no(int mc_no) {
+		this.mc_no = mc_no;
 	}
 
-	public int getPrice() {
-		return price;
+	public String getMc_nm() {
+		return mc_nm;
 	}
 
-	public void setPrice(int price) {
-		this.price = price;
+	public void setMc_nm(String mc_nm) {
+		this.mc_nm = mc_nm;
 	}
 
-	public char getAcc() {
-		return acc;
+	public int getMp_price() {
+		return mp_price;
 	}
 
-	public void setAcc(char acc) {
-		this.acc = acc;
+	public void setMp_price(int mp_price) {
+		this.mp_price = mp_price;
 	}
 
-	public char getFamily() {
-		return family;
+	public char getMp_acc_yn() {
+		return mp_acc_yn;
 	}
 
-	public void setFamily(char family) {
-		this.family = family;
+	public void setMp_acc_yn(char mp_acc_yn) {
+		this.mp_acc_yn = mp_acc_yn;
 	}
 
-	public char getHair() {
-		return hair;
+	public char getMp_family_yn() {
+		return mp_family_yn;
 	}
 
-	public void setHair(char hair) {
-		this.hair = hair;
+	public void setMp_family_yn(char mp_family_yn) {
+		this.mp_family_yn = mp_family_yn;
+	}
+
+	public char getMp_hair_yn() {
+		return mp_hair_yn;
+	}
+
+	public void setMp_hair_yn(char mp_hair_yn) {
+		this.mp_hair_yn = mp_hair_yn;
+	}
+
+	public String getMp_image() {
+		return mp_image;
+	}
+
+	public void setMp_image(String mp_image) {
+		this.mp_image = mp_image;
 	}
 
 	public String getRegdate() {
@@ -80,12 +97,13 @@ public class MakeupProduct {
 		this.updatedate = updatedate;
 	}
 
-	/** toString */
 	@Override
 	public String toString() {
-		return "MakeupProduct [productNo=" + productNo + ", companyNo=" + companyNo + ", price=" + price + ", acc="
-				+ acc + ", family=" + family + ", hair=" + hair + ", regdate=" + regdate + ", updatedate=" + updatedate
-				+ "]";
+		return "MakeupProduct [mp_no=" + mp_no + ", mc_no=" + mc_no + ", mc_nm=" + mc_nm + ", mp_price=" + mp_price
+				+ ", mp_acc_yn=" + mp_acc_yn + ", mp_family_yn=" + mp_family_yn + ", mp_hair_yn=" + mp_hair_yn
+				+ ", mp_image=" + mp_image + ", regdate=" + regdate + ", updatedate=" + updatedate + "]";
 	}
+
+
 
 }

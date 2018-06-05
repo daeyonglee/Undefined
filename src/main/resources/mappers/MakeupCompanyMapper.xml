@@ -130,7 +130,7 @@ FROM (SELECT *
  	
  		<select id="MakeupSearchCount" resultType="int">
 	 <![CDATA[
-	select count(dc_no)
+	select count(mc_no)
 	from makeup_company
 	where mc_no > 0
 	]]>

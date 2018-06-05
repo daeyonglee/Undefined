@@ -2,13 +2,14 @@ package kr.co.udf.common.product.domain;
 
 public class StudioProduct {
 
-	private int productNo;
-	private int companyNo;
-	private int price;
-	private String image;
-	private char apv;
-	private char total;
-	private char shoot;
+	private int sp_no;
+	private int sc_no;
+	private String sc_nm;
+	private int sp_price;
+	private char sp_apv_yn;
+	private char sp_total_yn;
+	private char sp_shoot_type;
+	private String sp_image;
 	private String regdate;
 	private String updatedate;
 
@@ -17,86 +18,113 @@ public class StudioProduct {
 	public StudioProduct() {
 		super();
 	}
-	
-	/** Getter & Setter */
-	public int getProductNo() {
-		return productNo;
+
+
+	public int getSp_no() {
+		return sp_no;
 	}
 
-	public void setProductNo(int productNo) {
-		this.productNo = productNo;
+
+	public void setSp_no(int sp_no) {
+		this.sp_no = sp_no;
 	}
 
-	public int getCompanyNo() {
-		return companyNo;
+
+	public int getSc_no() {
+		return sc_no;
 	}
 
-	public void setCompanyNo(int companyNo) {
-		this.companyNo = companyNo;
+
+	public void setSc_no(int sc_no) {
+		this.sc_no = sc_no;
 	}
 
-	public int getPrice() {
-		return price;
+
+	public String getSc_nm() {
+		return sc_nm;
 	}
 
-	public void setPrice(int price) {
-		this.price = price;
+
+	public void setSc_nm(String sc_nm) {
+		this.sc_nm = sc_nm;
 	}
 
-	public String getImage() {
-		return image;
+
+	public int getSp_price() {
+		return sp_price;
 	}
 
-	public void setImage(String image) {
-		this.image = image;
+
+	public void setSp_price(int sp_price) {
+		this.sp_price = sp_price;
 	}
 
-	public char getApv() {
-		return apv;
+
+	public String getSp_image() {
+		return sp_image;
 	}
 
-	public void setApv(char apv) {
-		this.apv = apv;
+
+	public void setSp_image(String sp_image) {
+		this.sp_image = sp_image;
 	}
 
-	public char getTotal() {
-		return total;
+
+	public char getSp_apv_yn() {
+		return sp_apv_yn;
 	}
 
-	public void setTotal(char total) {
-		this.total = total;
+
+	public void setSp_apv_yn(char sp_apv_yn) {
+		this.sp_apv_yn = sp_apv_yn;
 	}
 
-	public char getShoot() {
-		return shoot;
+
+	public char getSp_total_yn() {
+		return sp_total_yn;
 	}
 
-	public void setShoot(char shoot) {
-		this.shoot = shoot;
+
+	public void setSp_total_yn(char sp_total_yn) {
+		this.sp_total_yn = sp_total_yn;
 	}
+
+
+	public char getSp_shoot_type() {
+		return sp_shoot_type;
+	}
+
+
+	public void setSp_shoot_type(char sp_shoot_type) {
+		this.sp_shoot_type = sp_shoot_type;
+	}
+
 
 	public String getRegdate() {
 		return regdate;
 	}
 
+
 	public void setRegdate(String regdate) {
 		this.regdate = regdate;
 	}
+
 
 	public String getUpdatedate() {
 		return updatedate;
 	}
 
+
 	public void setUpdatedate(String updatedate) {
 		this.updatedate = updatedate;
 	}
 
-	/** toString */
+
 	@Override
 	public String toString() {
-		return "StudioProduct [productNo=" + productNo + ", companyNo=" + companyNo + ", price=" + price + ", image="
-				+ image + ", apv=" + apv + ", total=" + total + ", shoot=" + shoot + ", regdate=" + regdate
-				+ ", updatedate=" + updatedate + "]";
+		return "StudioProduct [sp_no=" + sp_no + ", sc_no=" + sc_no + ", sc_nm=" + sc_nm + ", sp_price=" + sp_price
+				+ ", sp_image=" + sp_image + ", sp_apv_yn=" + sp_apv_yn + ", sp_total_yn=" + sp_total_yn
+				+ ", sp_shoot_type=" + sp_shoot_type + ", regdate=" + regdate + ", updatedate=" + updatedate + "]";
 	}
-
 }
+	
