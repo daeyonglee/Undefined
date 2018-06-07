@@ -1,34 +1,30 @@
-package kr.co.udf.common.company.domain;
+package kr.co.udf.company.domain;
 
-public class StudioCompany {
-
-	private int companyNo;
+public class Dress {
+	
+	private int no;
 	private String nm;
-	private int regNo; // 사업자번호
-	private String headName; // 회사대표 이름
+	private int companyNo;
+	private String mainNm;
 	private String addr;
 	private String mainImage;
 	private String email;
 	private String pw;
 	private int tel;
-	private String intro;
 	private String introduce;
 	private String regdate;
 	private String updatedate;
-
 	
-	/** 생성자 */
-	public StudioCompany() {
-		super();
+	public Dress() {
+		
 	}
 
-	/** Getter & Setter */
-	public int getCompanyNo() {
-		return companyNo;
+	public int getNo() {
+		return no;
 	}
 
-	public void setCompanyNo(int companyNo) {
-		this.companyNo = companyNo;
+	public void setNo(int no) {
+		this.no = no;
 	}
 
 	public String getNm() {
@@ -39,20 +35,20 @@ public class StudioCompany {
 		this.nm = nm;
 	}
 
-	public int getRegNo() {
-		return regNo;
+	public int getCompanyNo() {
+		return companyNo;
 	}
 
-	public void setRegNo(int regNo) {
-		this.regNo = regNo;
+	public void setCompanyNo(int companyNo) {
+		this.companyNo = companyNo;
 	}
 
-	public String getHeadName() {
-		return headName;
+	public String getMainNm() {
+		return mainNm;
 	}
 
-	public void setHeadName(String headName) {
-		this.headName = headName;
+	public void setMainNm(String mainNm) {
+		this.mainNm = mainNm;
 	}
 
 	public String getAddr() {
@@ -94,14 +90,6 @@ public class StudioCompany {
 	public void setTel(int tel) {
 		this.tel = tel;
 	}
-	
-	public String getIntro() {
-		return intro;
-	}
-
-	public void setIntro(String intro) {
-		this.intro = intro;
-	}
 
 	public String getIntroduce() {
 		return introduce;
@@ -127,13 +115,13 @@ public class StudioCompany {
 		this.updatedate = updatedate;
 	}
 
-	/** toString */
 	@Override
 	public String toString() {
-		return "StudioCompany [companyNo=" + companyNo + ", nm=" + nm + ", regNo=" + regNo + ", headName=" + headName
-				+ ", addr=" + addr + ", mainImage=" + mainImage + ", email=" + email + ", pw=" + pw + ", tel=" + tel
-				+ ", intro=" + intro + ", introduce=" + introduce + ", regdate=" + regdate + ", updatedate="
-				+ updatedate + "]";
+		return "Dress [no=" + no + ", nm=" + nm + ", companyNo=" + companyNo + ", mainNm=" + mainNm + ", addr=" + addr
+				+ ", mainImage=" + mainImage + ", email=" + email + ", pw=" + pw + ", tel=" + tel + ", introduce="
+				+ introduce + ", regdate=" + regdate + ", updatedate=" + updatedate + "]";
 	}
-
+	
+	
+	
 }

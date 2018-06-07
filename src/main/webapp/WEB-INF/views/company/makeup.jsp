@@ -1,6 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
 
 <!DOCTYPE html>
 <html>
@@ -160,9 +162,9 @@
           <div class="col-md-9 padding-top-40 properties-page">
             <div class="section clear">
               <div class="col-xs-10 page-subheader sorting pl0">
-                 <button type="button" disabled>STUDIO</button>     
+                <a href="studio"> <button type="button">STUDIO</button></a>  
                  <a href="dress"><button type="button">DRESS</button></a>
-                 <a href="makeup"><button type="button">MAKEUP</button></a>   
+                 <button type="button" disabled>MAKEUP</button>
                  
 
           <script type="text/javascript">
@@ -179,21 +181,21 @@
 
   
             </div>
-         
-
+            <!-- 왼쪽 컨테이너 -->
             <div class="section clear">
               <div id="list-type" class="proerty-th">
 
-                <c:forEach items="${list}" var="studio">
+                 
+         <c:forEach items="${list}" var="studio" varStatus="status">
+
                   <div class="col-sm-6 col-md-4 p0">
                     <div class="box-two proerty-item">
                       <div class="item-thumb">
-                        <!-- 사진 리스트 -->
 
 
+                
                         <div id="myCarousel" class="carousel slide"
                           data-ride="carousel">
-                          <!-- Indicators -->
                           <ol class="carousel-indicators">
                             <li data-target="#myCarousel"
                               data-slide-to="0" class="active"></li>
@@ -203,7 +205,7 @@
                               data-slide-to="2"></li>
                           </ol>
 
-                          <!-- Wrapper for slides -->
+ 
                           <div class="carousel-inner">
                             <div class="item active">
                               <img
@@ -222,7 +224,7 @@
                             </div>
                           </div>
 
-                          <!-- Left and right controls -->
+
                           <a class="left carousel-control"
                             href="#myCarousel" data-slide="prev"> <span
                             class="glyphicon glyphicon-chevron-left"></span>
@@ -235,26 +237,36 @@
                         </div>
                       </div>
 
-
+          
+       
                       <div class="item-entry overflow">
                         <h5>
                           <a
                             href="/company/compare?companyNo=${studio.companyNo}">
                             ${studio.nm} </a>
                         </h5>
+                        
+             
+         
                         <div class="dot-hr"></div>
                         <span class="proerty-price pull-left">
                           ★★★ </span> 3.0/5.0 (20명) <br>
-                        <div class="">${studio.introduce}</div>
+            
+            <c:choose>
+           <c:when test="${fn:length(studio.introduce) > 40}">
+                        <div class=""><c:out value="${fn:substring(studio.introduce,0,39)}"/> ... </div>
+                          </c:when>
+                             <c:otherwise>
+                              <c:out value="${studio.introduce}"/>
+                               </c:otherwise> 
+                                    </c:choose>   
                       </div>
-
                     </div>
                   </div>
-                </c:forEach>
-
+            
+</c:forEach>
               </div>
             </div>
-            
           <!-- 페이징 처리 -->
             <div class="section">
               <div class="pull-legt">
@@ -287,125 +299,143 @@
 
         <!-- 리스트 끝 -->
 
-
-
-   <!-- 사이드바  -->
+        <!-- 사이드바  -->
 
         <div id="layer_map">
           <div class="col-md-3 pl0 padding-top-40">
             <div class="blog-asside-right pl0">
-              <div
-                class="panel panel-default sidebar-menu wow fadeInRight animated">
+              <div class="panel panel-default sidebar-menu wow fadeInRight animated">
 
                 <!-- 지도시작 -->
 
-                <div id="map" style="width: 100%; height: 700px;">
-                </div>
-                   <script>
-      var x = "37.4837121";
-      var y = "127.0324112";
-      //전국에 대한 중심 좌표(지도 중심 좌표 설정-변경 해도 됨)
-
-      var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/parking_lot_maps.png';
-      
-      
-      function initialize() {
-        var latlng = new google.maps.LatLng(x, y);
-        //map center coordinate (맵 중심 좌표)
-        //좌표 객체를 이렇게 만든다. marker 를 만들때도
-        //이렇게 객체를 만들어서 사용할 수 있다.
-        var myOptions = {
-          zoom : 11,
-          center : latlng,
-          mapTypeId : google.maps.MapTypeId.ROADMAP
-        };
-        var map = new google.maps.Map(document.getElementById("map"),
-            myOptions);
-
-        var geocoder = new google.maps.Geocoder();
-
-        var region = document.getElementById("mapList").value.split(",");
-        
-        //마커를 올릴 지역을 가져온다.
-        if (region.length > 0) {
-          for (var i = 0; i < region.length; i++) {
-            geocoder.geocode(
-                    {
-                      'address' : region[i]
-                    },
-                    function(results, status) {
-                      //지오 코딩이라는 지역 이름을 가지고 좌표를 얻을 수 있는 API 를 이용하여 좌표를 가져온다.
-                      if (status == google.maps.GeocoderStatus.OK) {
-                        for (var j = 0; j < results.length; j++) {
-                          // 마커 속성 설정하기
-                          var marker = new google.maps.Marker(        
-                              {
-                                position : results[j].geometry.location,
-                                title : results[j].formatted_address,
-                                map : map,
-                                //icon : iconBase
-                              });
-                          if (status === google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {    
-                                setTimeout(function() {
-                                       codeAddress(address);
-                                    }, 200);
-                              }
-                          
-                          //마커를 만들어 준다.
-                          //좌표를 알고 있을 경우   position: results[j].geometry.location 부분에 var latlng = new google.maps.LatLng(x, y); 
-                          //와 같이 객체를 만들어서 position: latlng 를 넣어 준다.
-
-                          var infoWindow = new google.maps.InfoWindow;
-
-                          var name = document.getElementById("nameList").value.split(",");
-                          var address = "주소";
-                          var image = "대표이미지";
-
-                          var infowin = '';
-                          infowin += '<div class="hall_box">';
-                          infowin += '<img src = "http://iwedding.co.kr/center/website/brandplus/6285/721-N153_141014032549_1.jpg">'
-                          infowin += '<div class="hall_detail">';
-                          infowin += '<dl>'+name+'</dl>';
-                          infowin += '<dl><dd>경기도 안산시 단원구 초지1로 78</dd></dl>';
-                          infowin += '<li class="clear_fix">느와르 블랑 스튜디오입니다. 사진찍는 것을 두려워 하지 마세요. 당신의 아름다운 모습을 찾아드립니다.</li>'
-                          infowin += '</div>';
-                  
-                          // 마커 클릭 이벤트
-                          google.maps.event.addListener(
-                                  marker,
-                                  'click',
-                                  function() {
-                                    infoWindow.setContent(infowin);
-                                    infoWindow.open(map,marker);
-                                    maxWidth: 200
-                                  });
-                        }
-                      } else {
-                        alert("ERRER - region[" + i
-                            + "] : " + region[i]);
-                        alert("Geocode was not successful for the following reason: "
-                            + status);
-                      }
-                    });
-          }
-        }
-      }
-    </script>
-                
+                <div id="map" style="width: 150%; height: 700px;"></div>
 
 
-                <input type="hidden" id="region1"
-                  value="서울특별시,대전광역시,대구광역시" />
+                <script>
+			var x = "37.4837121";
+			var y = "127.0324112";
+			//전국에 대한 중심 좌표(지도 중심 좌표 설정-변경 해도 됨)
+
+			var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/parking_lot_maps.png';
+			
+			
+			function initialize() {
+				var latlng = new google.maps.LatLng(x, y);
+				//map center coordinate (맵 중심 좌표)
+				//좌표 객체를 이렇게 만든다. marker 를 만들때도
+				//이렇게 객체를 만들어서 사용할 수 있다.
+				var myOptions = {
+					zoom : 11,
+					center : latlng,
+					mapTypeId : google.maps.MapTypeId.ROADMAP
+				};
+				var map = new google.maps.Map(document.getElementById("map"),
+						myOptions);
+
+				var geocoder = new google.maps.Geocoder();
+
+				var region = document.getElementById("mapList").value.split(",");
+				
+				//마커를 올릴 지역을 가져온다.
+				if (region.length > 0) {
+					for (var i = 0; i < region.length; i++) {
+						geocoder.geocode(
+										{
+											'address' : region[i]
+										},
+										function(results, status) {
+											//지오 코딩이라는 지역 이름을 가지고 좌표를 얻을 수 있는 API 를 이용하여 좌표를 가져온다.
+											if (status == google.maps.GeocoderStatus.OK) {
+												for (var j = 0; j < results.length; j++) {
+													// 마커 속성 설정하기
+													var marker = new google.maps.Marker(				
+															{
+																position : results[j].geometry.location,
+																title : results[j].formatted_address,
+																map : map,
+																//icon : iconBase
+															});
+													if (status === google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {    
+													      setTimeout(function() {
+														           codeAddress(address);
+														        }, 200);
+														  }
+													
+													//마커를 만들어 준다.
+													//좌표를 알고 있을 경우   position: results[j].geometry.location 부분에 var latlng = new google.maps.LatLng(x, y); 
+													//와 같이 객체를 만들어서 position: latlng 를 넣어 준다.
+
+													var infoWindow = new google.maps.InfoWindow;
+
+													var name = document.getElementById("nameList").value.split(",");
+													var address = "주소";
+													var image = "대표이미지";
+
+													var infowin = '';
+													infowin += '<div class="hall_box">';
+													infowin += '<img src = "http://iwedding.co.kr/center/website/brandplus/6285/721-N153_141014032549_1.jpg">'
+													infowin += '<div class="hall_detail">';
+													infowin += '<dl>'+name+'</dl>';
+													infowin += '<dl><dd>경기도 안산시 단원구 초지1로 78</dd></dl>';
+													infowin += '<li class="clear_fix">느와르 블랑 스튜디오입니다. 사진찍는 것을 두려워 하지 마세요. 당신의 아름다운 모습을 찾아드립니다.</li>'
+													infowin += '</div>';
+									
+													// 마커 클릭 이벤트
+													google.maps.event.addListener(
+																	marker,
+																	'click',
+																	function() {
+																		infoWindow.setContent(infowin);
+																		infoWindow.open(map,marker);
+																		maxWidth: 200
+																	});
+												}
+											} else {
+												alert("ERRER - region[" + i
+														+ "] : " + region[i]);
+												alert("Geocode was not successful for the following reason: "
+														+ status);
+											}
+										});
+					}
+				}
+			}
+		</script>
+    
+    <!-- 마커 장소 찍기 -->
+    
+           <input type="hidden" id="mapList"
+               value= "
+                 <c:forEach items="${list}" var="studio" varStatus="index">
+                    <c:choose>
+                      <c:when test="${index.last}">${studio.addr}</c:when>
+                      <c:otherwise>${studio.addr},</c:otherwise>
+                    </c:choose>
+                 </c:forEach>
+               " />
+               
+  
+                    <input type="hidden" id="nameList"
+               value= "
+                 <c:forEach items="${list}" var="studio" varStatus="index">
+                    <c:choose>
+                      <c:when test="${index.last}">${studio.nm}</c:when>
+                      <c:otherwise>${studio.nm},</c:otherwise>
+                    </c:choose>
+                 </c:forEach>
+               " />
+            
 
 
                 <!-- 구글맵 key -->
                 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEd3UEpvjDZcH8FLF2eO4SJvDAdp2IByY&callback=initMap"></script>
+
               </div>
             </div>
           </div>
         </div>
-        <!-- 지도 끝 -->
 
+        <!-- 지도 끝 -->
       </div>
     </div>
   </div>

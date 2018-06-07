@@ -23,13 +23,29 @@ public class StudioTest {
 	private StudioCompanyDao dao;
 	SqlSessionFactory sqlFactory;
 	
-	@Test
+	//@Test
 	public void testList() throws Exception {
 		logger.info(dao.listStudio());
 	}
 	
-	@Test
+	//@Test
 	public void testListAll() throws Exception {
-		logger.info(dao.detailStudio(1));
+		logger.info(dao.detailStudio(41));
 	}
+	
+	@Test
+	public void testReview() throws Exception {
+		logger.info(dao.reviewStudio(1));
+	}
+	
+	//@Test
+	public void testAvg() throws Exception {
+		logger.info(dao.avgPoint(69));
+	}
+	
+	//@Test
+	public void testCount() throws Exception {
+		logger.info(dao.countReview(1));
+	}
+
 }

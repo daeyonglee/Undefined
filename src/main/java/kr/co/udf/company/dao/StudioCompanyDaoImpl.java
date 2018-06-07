@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import kr.co.udf.common.company.domain.StudioCompany;
+import kr.co.udf.company.domain.StudioReview;
 
 @Repository
 public class StudioCompanyDaoImpl implements StudioCompanyDao {
@@ -27,6 +28,30 @@ public class StudioCompanyDaoImpl implements StudioCompanyDao {
 	public StudioCompany detailStudio(int companyNo) {
 		return sqlSession.selectOne(NAMESPACE + ".detailStudio", companyNo);
 	}
-
+	
+	/** 스튜디오 업체 리뷰 추가 */
+	@Override
+	public void addReview(StudioReview studioReview) {
+		sqlSession.insert(NAMESPACE + ".addReview", studioReview);
+	}
+	
+	/** 스튜디오 업체 리뷰 출력 */
+	@Override
+	public List<StudioReview> reviewStudio(int companyNo) {
+		return sqlSession.selectList(NAMESPACE + ".reviewStudio", companyNo);
+	}
+	
+	/** 스튜디오 업체 평균 별점 */
+	@Override
+	public double avgPoint(int companyNo) {
+		return sqlSession.selectOne(NAMESPACE + ".avgPoint", companyNo);
+	} 
+	
+	/** 스튜디오 업체 리뷰 갯수 */
+	@Override
+	public int countReview(int companyNo) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + ".countReview", companyNo);
+	}
+	
 }
 

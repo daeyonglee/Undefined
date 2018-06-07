@@ -33,9 +33,48 @@
 		sc_main_image AS mainImage, 
 		sc_email AS email, 
 		sc_tel AS tel, 
+		sc_smy_intro AS intro,
 		sc_introduce AS introduce
 	FROM studio_company
 	WHERE sc_no = #{companyNo}
 	]]> 
 	</select>	
+	
+	<insert id="addReview">
+	INSERT INTO studio_review (sr_no, sc_no, sr_content, sr_point, regdate, updatedate)
+	VALUES (studio_review_seq.nextval, #{companyNo}, #{content}, #{point}, sysdate, sysdate) 
+	</insert>
+	
+	<select id="reviewStudio" resultType="kr.co.udf.company.domain.StudioReview">
+	<![CDATA[
+	SELECT
+		sr_no AS no, 	 
+		sc_no AS companyNo,
+		sr_content AS content,  	
+		sr_point AS point,  	
+		TO_CHAR(regdate, 'YY-MM-DD') AS regdate,  	
+	    updatedate AS updatedate 
+	FROM studio_review 	
+	WHERE sc_no = #{companyNo}
+	ORDER BY sr_no DESC
+	]]>
+	</select>
+	
+	<select id="avgPoint" resultType="double">
+	<![CDATA[
+	SELECT
+		ROUND(AVG(sr_point), 1) AS avg	 
+	FROM studio_review 	
+	WHERE sc_no = #{companyNo}
+	]]>
+	</select> 
+	
+	<select id="countReview" resultType="int">
+	<![CDATA[
+	SELECT
+		COUNT(*) AS count	 
+	FROM studio_review 	
+	WHERE sc_no = #{companyNo}
+	]]>
+	</select> 
 </mapper>
