@@ -127,7 +127,8 @@
          </div> -->
          <ul class="main-nav nav navbar-nav navbar-right">
              <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="/">HOME</a></li>
-             <li class="dropdown ymm-sw " data-wow-delay="0.2s">
+             <li class="wow fadeInDown" data-wow-delay="0.2s"><a class="" href="/recommend/index">통합추천</a></li>
+             <li class="dropdown ymm-sw " data-wow-delay="0.3s">
                <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">역경매<b class="caret"></b></a>
                <ul class="dropdown-menu navbar-nav">
                    <li>
