@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,6 +48,7 @@ public class UserLoginController {
 		
 		logger.info("##### loginPOST start #####");
 		logger.info(login);
+		
 		// 회원 여부 확인
 		HashMap<String, Object> rMap = loginService.login(login);
 		
@@ -57,6 +60,7 @@ public class UserLoginController {
 
 		login.setNo((BigDecimal)rMap.get("NO"));
 		login.setRole((String)rMap.get("ROLE"));
+		login.setNm((String)rMap.get("NM"));
 		
 		model.addAttribute("login", login);
 		model.addAttribute("role", (String)rMap.get("ROLE"));
@@ -106,5 +110,25 @@ public class UserLoginController {
 			response.addCookie(loginCookie);
 		}
 		return "redirect:/";
+	}
+	
+	@RequestMapping(value="/user/logincheck", method=RequestMethod.GET)
+	public ResponseEntity<Login> logincheck(Login dto) {
+		
+		ResponseEntity<Login> responseEntity = null;
+		Login login = loginService.logincheck(dto);
+		
+		try {
+			if (login != null)
+				responseEntity = new ResponseEntity<Login>(login,HttpStatus.OK);
+			else
+				responseEntity = new ResponseEntity<Login>(HttpStatus.OK);
+		} catch(Exception e) {
+			e.printStackTrace();
+			responseEntity = new ResponseEntity<Login>(HttpStatus.BAD_REQUEST);
+		}
+		
+		return responseEntity;
+		
 	}
 }

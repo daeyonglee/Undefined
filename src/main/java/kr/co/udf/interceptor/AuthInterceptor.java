@@ -10,13 +10,16 @@ import org.apache.log4j.Logger;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.util.WebUtils;
 
+import kr.co.udf.user.domain.Login;
+import kr.co.udf.user.service.UserLoginService;
+
 
 public class AuthInterceptor extends HandlerInterceptorAdapter{
 
 	private static final Logger logger = Logger.getLogger(AuthInterceptor.class);
 	
-	/*@Inject
-	private UserService service;
+	@Inject
+	private UserLoginService service;
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
@@ -32,12 +35,12 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 			Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
 			
 			if (loginCookie != null) {
-				User user = service.checkLoginBefore(loginCookie.getValue());
+				Login login = service.checkLoginBefore(loginCookie.getValue());
 				
-				logger.info("USER: " + user);
+				logger.info("LOGIN: " + login);
 				
-				if (user != null) {
-					session.setAttribute("login", user);
+				if (login != null) {
+					session.setAttribute("login", login);
 					return true;
 				}
 			}
@@ -64,5 +67,5 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 			logger.info("dest: " + (uri + query));
 			req.getSession().setAttribute("dest", uri+query);
 		}
-	}*/
+	}
 }

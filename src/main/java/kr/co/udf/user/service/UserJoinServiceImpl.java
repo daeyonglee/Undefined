@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import kr.co.udf.common.util.UploadFileUtils;
 import kr.co.udf.user.dao.UserJoinDao;
 import kr.co.udf.user.domain.CompanyDTO;
+import kr.co.udf.user.domain.Login;
 import kr.co.udf.user.domain.UserDTO;
 
 @Service
@@ -50,6 +51,11 @@ public class UserJoinServiceImpl implements UserJoinService{
             
             UploadFileUtils.uploadFile(cpMainImgPath, dto.getMainImg().getOriginalFilename(), dto.getMainImg().getBytes());
 		}
+	}
+
+	@Override
+	public Login emailcheck(Login login) {
+		return joinDao.emailcheck(login);
 	}
 
 }

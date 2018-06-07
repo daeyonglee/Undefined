@@ -10,34 +10,40 @@
 		SELECT M.no
 		     , M.email
 		     , M.pw
+		     , M.nm
 		     , M.role
 		  FROM (SELECT user_no as no
 		             , user_email as email
 		             , user_pw as pw
+		             , user_nm as nm
 		             , 'users' as role
 		          FROM users
 		        UNION
 		        SELECT admin_no as no
 		             , admin_email as email
 		             , admin_pw as pw
+		             , admin_nm as nm
 		             , 'admin' as role
 		          FROM admin
 		        UNION
 		        SELECT dc_no as no
 		             , dc_email as email
 		             , dc_pw as pw
+		             , dc_nm as nm
 		             , 'dc' as role
 		          FROM dress_company
 		        UNION
 		        SELECT mc_no as no
 		             , mc_email as email
 		             , mc_pw as pw
+		             , mc_nm as nm
 		             , 'mc' as role
 		          FROM makeup_company
 		        UNION
 		        SELECT sc_no as no
 		             , sc_email as email
 		             , sc_pw as pw
+		             , sc_nm as nm
 		             , 'sc' as role
 		          FROM studio_company) M
 		 WHERE email = #{email}
@@ -72,10 +78,54 @@
 		</choose>
 	</update>
 	
-	<!--<select id="checkUserWithSessionKey" resultType="kr.or.kosta.springmvc.user.domain.User">
+	<select id="checkUserWithSessionKey" resultType="kr.co.udf.user.domain.Login">
 		SELECT *
 		  FROM tbl_user
 		 WHERE sessionKey = #{value}
 		   AND sessionlimit > sysdate
-	</select> -->
+	</select>
+	
+	<select id="logincheck" parameterType="kr.co.udf.user.domain.Login" resultType="kr.co.udf.user.domain.Login">
+		SELECT M.no
+		     , M.email
+		     , M.pw
+		     , M.nm
+		     , M.role
+		  FROM (SELECT user_no as no
+		             , user_email as email
+		             , user_pw as pw
+		             , user_nm as nm
+		             , 'users' as role
+		          FROM users
+		        UNION
+		        SELECT admin_no as no
+		             , admin_email as email
+		             , admin_pw as pw
+		             , admin_nm as nm
+		             , 'admin' as role
+		          FROM admin
+		        UNION
+		        SELECT dc_no as no
+		             , dc_email as email
+		             , dc_pw as pw
+		             , dc_nm as nm
+		             , 'dc' as role
+		          FROM dress_company
+		        UNION
+		        SELECT mc_no as no
+		             , mc_email as email
+		             , mc_pw as pw
+		             , mc_nm as nm
+		             , 'mc' as role
+		          FROM makeup_company
+		        UNION
+		        SELECT sc_no as no
+		             , sc_email as email
+		             , sc_pw as pw
+		             , sc_nm as nm
+		             , 'sc' as role
+		          FROM studio_company) M
+		 WHERE email = #{email}
+		   AND pw    = #{pw}
+	</select>
 </mapper>

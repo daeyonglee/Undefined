@@ -46,11 +46,18 @@
 	
 	<!-- interceptor -->
 	<beans:bean id="loginInterceptor" class="kr.co.udf.interceptor.LoginInterceptor"></beans:bean>
+	<beans:bean id="authInterceptor" class="kr.co.udf.interceptor.AuthInterceptor"></beans:bean>
 	
 	<interceptors>
 		<interceptor>
 			<mapping path="/user/loginp"/>
 			<beans:ref bean="loginInterceptor" />
+		</interceptor>
+		<interceptor>
+			<mapping path="/company/*"/>
+			<mapping path="/auction/*"/>
+			<mapping path="/recommend/*"/>
+			<beans:ref bean="authInterceptor"/>
 		</interceptor>
 	</interceptors>
 	

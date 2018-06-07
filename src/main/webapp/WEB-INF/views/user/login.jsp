@@ -22,7 +22,7 @@
 					<div class="box-for overflow">                         
 						<div class="col-md-12 col-xs-12 login-blocks">
 							<h2>Login : </h2> 
-							<form action="/user/loginp" method="post">
+							<form id="frmLogin" action="/user/loginp" method="post">
 								<div class="form-group">
 									<label for="email">Email</label>
 									<input type="text" name="email" class="form-control" id="email">
@@ -62,6 +62,36 @@
   
   <script type="text/javascript">
   	$(document).ready(function(){
+  		
+  		// 이메일과 비밀번호 체크
+  		$(".btn.btn-default.btn-login").on('click', function(e){
+  			e.preventDefault();
+  			
+  			var email = $("#email").val();
+  			var pw = $("#pw").val();
+  			
+  			var data = {
+  					email: email,
+  					pw: pw
+  			}
+  			
+  			$.ajax({
+  				type : "get",
+  				url : "/user/logincheck",
+  				data : data,
+  				success: function(data){
+  					console.log(data);
+  					
+  					if (data == "" || data == null || data == undefined) {
+  						alert("이메일과 비밀번호가 일치하지 않습니다.");
+  						return;
+  					} else {
+  						$("#frmLogin").submit();
+  					}
+  				}
+  			});
+  		});
+  		
   		//네이버 로그인  
   		$('#naver').on('click', function(e){
 	 			var naverLogin = new naver.LoginWithNaverId( 

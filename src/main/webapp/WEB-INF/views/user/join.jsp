@@ -60,12 +60,6 @@
                                         <div class="col-lg-12">
                                           <div>
                                             <p>
-                                                <label><strong>Terms and Conditions</strong></label>
-                                                By accessing or using  GARO ESTATE services, such as 
-                                                posting your property advertisement with your personal 
-                                                information on our website you agree to the
-                                                collection, use and disclosure of your personal information 
-                                                in the legal proper manner
                                             </p>
                                           </div>
                                           <div class="col-lg-4"></div>

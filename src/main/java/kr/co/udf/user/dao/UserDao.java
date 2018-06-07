@@ -13,6 +13,7 @@ public interface UserDao {
 	
 	public void keepLogin(BigDecimal no, String sessionId, Date next, String role);
 	
-	public User checkUserWithSessionKey(String value);
+	public Login checkUserWithSessionKey(String value);
 	
+	public Login logincheck(Login dto);
 }

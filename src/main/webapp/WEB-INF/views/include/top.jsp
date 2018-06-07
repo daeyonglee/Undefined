@@ -72,14 +72,16 @@
                       <c:choose>
                         <c:when test="${null ne sessionScope.login || null ne cookie.loginCookie.value}">
                         		<c:if test="${sessionScope.login.role ne 'admin'}">
-	                          <li><a href="/user/logout">로그아웃</a></li>
-	                          <li><a href="/user/mypage/index">마이페이지</a></li>
-	                          <li><a href="#">고객센터</a></li>
+                              <li><b>${sessionScope.login.nm}님</b></li>
+  	                          <li><a href="/user/logout">로그아웃</a></li>
+  	                          <li><a href="/user/mypage/index">마이페이지</a></li>
+  	                          <li><a href="#">고객센터</a></li>
                         		</c:if>
                         		<c:if test="${sessionScope.login.role eq 'admin'}">
+                              <li><b>${sessionScope.login.nm}님</b></li>
                         			<li><a href="/user/logout">로그아웃</a></li>
-	                          <li><a href="/user/mypage/index">관리자페이지</a></li>
-	                          <li><a href="#">고객센터</a></li>
+  	                          <li><a href="/user/mypage/index">관리자페이지</a></li>
+  	                          <li><a href="#">고객센터</a></li>
                         		</c:if>
                         </c:when>
                         <c:otherwise>
@@ -114,7 +116,7 @@
              <span class="icon-bar"></span>
              <span class="icon-bar"></span>
          </button>
-         <a class="navbar-brand" href="index.html"><img src="/resources/assets/img/logo.png" alt=""></a>
+         <a class="navbar-brand" href="/"><img src="/resources/assets/img/logo.png" alt=""></a>
      </div>
 
      <!-- Collect the nav links, forms, and other content for toggling -->
@@ -142,7 +144,7 @@
                    <li>
                        <a href="/company/listmap">업체 찾기</a>
                    </li>
-                   <li>
+                   <!-- <li>
                        <a href="index-3.html">Home Style 3</a>
                    </li>
                    <li>
@@ -150,12 +152,11 @@
                    </li>
                    <li>
                        <a href="index-5.html">Home Style 5</a>
-                   </li>
-               
+                   </li> -->
                </ul>
              </li>
-             <li class="wow fadeInDown" data-wow-delay="0.4s"><a class="" href="property.html">업체정보</a></li>
-             <li class="wow fadeInDown" data-wow-delay="0.5s"><a href="contact.html">공지사항</a></li>
+             <li class="wow fadeInDown" data-wow-delay="0.4s"><a href="/sarticle/list?board_no=1">자유게시판</a></li>
+             <li class="wow fadeInDown" data-wow-delay="0.5s"><a href="/sarticle/list?board_no=2">공지사항</a></li>
          </ul>
      </div><!-- /.navbar-collapse -->
  </div><!-- /.container-fluid -->

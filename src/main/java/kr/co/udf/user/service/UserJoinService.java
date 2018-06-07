@@ -3,6 +3,7 @@ package kr.co.udf.user.service;
 import java.io.IOException;
 
 import kr.co.udf.user.domain.CompanyDTO;
+import kr.co.udf.user.domain.Login;
 import kr.co.udf.user.domain.UserDTO;
 
 public interface UserJoinService {
@@ -18,4 +19,10 @@ public interface UserJoinService {
 	 * @param dto
 	 */
 	public void companyjoin(CompanyDTO dto) throws IOException, Exception;
+	
+	/**
+	 * 이메일 존재 유무 체크
+	 * @param login
+	 */
+	public Login emailcheck(Login login);
 }

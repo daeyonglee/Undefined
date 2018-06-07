@@ -2,6 +2,95 @@ searchVisible = 0;
 transparent = true;
 
 $(document).ready(function () {
+	
+	$(".wizard-card form").validate({
+        rules: {
+            email: {
+                required: true,
+                email: true
+            },
+            pw: {
+            	required: true,
+            	minlength: 6,
+            	maxlength: 20
+            },
+            repw: {
+            	required: true,
+            	equalTo: "#pw"
+            },
+            companyNo: {
+        		requrired: true
+        	},
+        	name : {
+        		required: true
+        	},
+        	mainNm : {
+        		required: true
+        	},
+        	tel:{
+        		required: true,
+        		tel: true
+        	},
+        	birthday:{
+        		required: true,
+        		date: true
+        	},
+        	addrdetail: {
+        		required: "#postcode"
+        	}
+
+            /*  other possible input validations
+             ,username: {
+             required: true,
+             minlength: 2
+             },
+             password: {
+             required: true,
+             minlength: 5
+             },
+             confirm_password: {
+             required: true,
+             minlength: 5,
+             equalTo: "#password"
+             },
+             
+             topic: {
+             required: "#newsletter:checked",
+             minlength: 2
+             },
+             agree: "required"
+             */
+
+        },
+        messages: {
+            email: "이메일 형식이 유효하지 않습니다.",
+            pw: "6~20자 사이의 값을 입력해주세요.",
+            repw: {
+            	required: "비밀번호가 일치하지 않습니다.",
+            	equalTo: "비밀번호가 일치하지 않습니다."
+            }
+            /*   other posible validation messages
+             username: {
+             required: "Please enter a username",
+             minlength: "Your username must consist of at least 2 characters"
+             },
+             password: {
+             required: "Please provide a password",
+             minlength: "Your password must be at least 5 characters long"
+             },
+             confirm_password: {
+             required: "Please provide a password",
+             minlength: "Your password must be at least 5 characters long",
+             equalTo: "Please enter the same password as above"
+             },
+             email: "Please enter a valid email address",
+             agree: "Please accept our policy",
+             topic: "Please select at least 2 topics"
+             */
+
+        }
+    });
+	
     /*  Activate the tooltips      */
     $('[rel="tooltip"]').tooltip();
 
@@ -28,7 +117,26 @@ $(document).ready(function () {
             if (index == 1) {
                 return validateFirstStep();
             } else if (index == 2) {
-                return validateSecondStep();
+               var email = $("#email").val();
+          	   
+          	   // 이메일체크
+          	   $.ajax({
+          		   url: "/user/emailcheck",
+          		   type: "get",
+          		   data: {email:email},
+          		   dataType: "json",
+          		   success:function(data){
+          			   console.log(data);
+          			   if (data == "" || data == null || data == undefined) {
+          				   
+          			   } else {
+          				   alert("이미 이메일이 존재합니다.");
+        				   return;
+          			   }
+          		   }
+          	   })
+            	
+          	   return validateSecondStep();
             } else if (index == 3) {
                 return validateThirdStep();
             } //etc. 
@@ -101,7 +209,7 @@ $(document).ready(function () {
     		form.enctype = 'multipart/form-data';
     	}
     	
-    	form.submit();
+    	//form.submit();
     	
     });
     
@@ -204,7 +312,7 @@ function validateFirstStep() {
 		
 		var html  = "<div class='form-group'>";
 		    html += "  <label>이메일 <small>(required)</small></label>";
-		    html += "  <input name='email' type='email' class='form-control'>";
+		    html += "  <input id='email' name='email' type='email' class='form-control'>";
 		    html += "</div>";
 		    html += "<div class='form-group'>";
 		    html += "  <label>비밀번호 <small>(required)</small></label>";
@@ -221,7 +329,7 @@ function validateFirstStep() {
 		
 		var html  = "<div class='form-group'>";
 		    html += "  <label>이메일 <small>(required)</small></label>";
-		    html += "  <input name='email' type='email' class='form-control'>";
+		    html += "  <input id='email' name='email' type='email' class='form-control'>";
 		    html += "</div>";
 		    html += "<div class='form-group'>";
 		    html += "  <label>비밀번호 <small>(required)</small></label>";
@@ -231,87 +339,8 @@ function validateFirstStep() {
 		    html += "  <label>비밀번호 확인<small>(required)</small></label>";
 		    html += "<input name='repw' id='repw' type='password' class='form-control'>";
 		    html += "</div>";
-		    /*html += "<div class='form-group'>";
-		    html += "  <label>전화번호<small>(required)</small></label>";
-		    html += "  <input name='tel' type='tel' class='form-control'>";
-		    html += "</div>";
-		    html += "<div class='form-group'>";
-		    html += "  <label>주소<small>(required)</small></label>";
-		    html += "  <input name='addr' type='text' class='form-control'>";
-		    html += "</div>";*/
 	    $("#base-container").html(html);
 	}
-	// html 태그 구성
-	// 1. 일반 사용자 일시
-	var html = ""
-
-    var $validator = $(".wizard-card form").validate({
-        rules: {
-            email: {
-                required: true,
-                email: true
-            },
-            pw: {
-            	required: true,
-            	minlength: 6,
-            	maxlength: 20
-            },
-            repw: {
-            	required: true,
-            	equalTo: "#pw"
-            }
-
-            /*  other possible input validations
-             ,username: {
-             required: true,
-             minlength: 2
-             },
-             password: {
-             required: true,
-             minlength: 5
-             },
-             confirm_password: {
-             required: true,
-             minlength: 5,
-             equalTo: "#password"
-             },
-             
-             topic: {
-             required: "#newsletter:checked",
-             minlength: 2
-             },
-             agree: "required"
-             */
-
-        },
-        messages: {
-            email: "이메일 형식이 유효하지 않습니다.",
-            pw: "6~20자 사이의 값을 입력해주세요.",
-            repw: {
-            	required: "비밀번호가 일치하지 않습니다.",
-            	equalTo: "비밀번호가 일치하지 않습니다."
-            }
-            /*   other posible validation messages
-             username: {
-             required: "Please enter a username",
-             minlength: "Your username must consist of at least 2 characters"
-             },
-             password: {
-             required: "Please provide a password",
-             minlength: "Your password must be at least 5 characters long"
-             },
-             confirm_password: {
-             required: "Please provide a password",
-             minlength: "Your password must be at least 5 characters long",
-             equalTo: "Please enter the same password as above"
-             },
-             email: "Please enter a valid email address",
-             agree: "Please accept our policy",
-             topic: "Please select at least 2 topics"
-             */
-
-        }
-    });
 
     if (!$(".wizard-card form").valid()) {
     	console.log($validator);
@@ -323,8 +352,6 @@ function validateFirstStep() {
 }
 
 function validateSecondStep() {
-	
-	console.log( $(":input:radio[name=type]:checked").val());
 	
 	var type = $(":input:radio[name=type]:checked").val();
 	
@@ -438,41 +465,20 @@ function validateSecondStep() {
 	        increaseArea: '20%' // optional
 	   });
 	}
-                                          
-    //code here for second step
-    $(".wizard-card form").validate({
-        rules: {
-        	tel:{
-        		required: true,
-        		tel: true
-        	},
-        	birthday:{
-        		required: true,
-        		date: true
-        	},
-        	addrdetail: {
-        		required: "#postcode"
-        	}
-        },
-        messages: {
-        }
-    });
-
+	
     if (!$(".wizard-card form").valid()) {
         return false;
     }
+    
     return true;
 
 }
 
 function validateThirdStep() {
-    //code here for third step
-
-
+	
 }
 
 //Function to show image before upload
-
 function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();

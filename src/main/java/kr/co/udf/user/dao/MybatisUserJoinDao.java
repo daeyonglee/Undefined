@@ -6,9 +6,11 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
 import kr.co.udf.user.domain.CompanyDTO;
+import kr.co.udf.user.domain.Login;
 import kr.co.udf.user.domain.UserDTO;
 
 @Repository
@@ -48,6 +50,11 @@ public class MybatisUserJoinDao implements UserJoinDao {
 		if (dto.getCompanyType().equals("studio")) {
 			session.insert(NAMESPACE+".companyjoinStudio", map);
 		}
+	}
+
+	@Override
+	public Login emailcheck(Login login) {
+		return session.selectOne(NAMESPACE+".emailcheck", login);
 	}
 
 }

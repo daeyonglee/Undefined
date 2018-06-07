@@ -580,7 +580,7 @@ CREATE TABLE article
      article_no      NUMBER(10) NOT NULL, 
      board_no        NUMBER(10) NOT NULL, 
      user_no         NUMBER(10) NOT NULL, 
-     article_head    VARCHAR2(50) NOT NULL, 
+     article_head    VARCHAR2(50), 
      article_title   VARCHAR2(100) NOT NULL, 
      article_content VARCHAR2(3000) NOT NULL, 
      hitcount        NUMBER(20) DEFAULT 0, 
