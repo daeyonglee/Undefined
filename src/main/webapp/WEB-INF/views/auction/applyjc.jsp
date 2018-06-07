@@ -1,3 +1,4 @@
+
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@include file="../include/top.jsp"%>
 <!DOCTYPE html>
@@ -15,6 +16,8 @@
 <head>
 <link rel="stylesheet" href="/resources/assets/css/wizard.css">
 <link rel="stylesheet" href="/resources/assets/css/user/join.css">
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script type="text/javascript" src="/resources/assets/js/user/join.js"></script>
 
 <!--  datepicker 관련 소스들 -->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -25,9 +28,6 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 <script>
 
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script type="text/javascript" src="/resources/assets/js/user/join.js"></script>
-<script>
 
 $(document).ready(function() {
  
@@ -46,21 +46,20 @@ $(document).ready(function() {
         alert("처리가 완료되었습니다.");
       }
 </script>
-
 <script>
   $( function() {
       $( ".datepicker" ).datepicker({});
       
       $('.timepicker').timepicker({
-           timeFormat: 'h:mm p',
-           interval: 30,
-           minTime: '9',
-           maxTime: '7:00pm',
-           startTime: '11:00',
-           dynamic: false,
-           dropdown: true,
-           scrollbar: false
-       });
+    	    timeFormat: 'h:mm p',
+    	    interval: 30,
+    	    minTime: '9',
+    	    maxTime: '7:00pm',
+    	    startTime: '11:00',
+    	    dynamic: false,
+    	    dropdown: true,
+    	    scrollbar: false
+    	});
 
   });
   </script> 
@@ -112,8 +111,8 @@ $(document).ready(function() {
               <div class="tab-content">
                 <div class="tab-pane" id="step1">
                   <div class="col-lg-12">
-
-                    <!--  업체 종류 체크 박스 -->
+                  
+                   <!--  업체 종류 체크 박스 -->
                     <div id="accordion">
                     <div class="div">
                       <div class="col-lg-2">
@@ -132,100 +131,68 @@ $(document).ready(function() {
                     </button>
                       </div>
                     </div>
-                    
-                     
-                    
-                    <div class="collapse" id="collapse1">
-                    <div class="card card-body">
-                        <div class="col-lg-2" id="col">
-                      <label>옵션</label>
-                    </div>
-                    <div class="col-lg-10" id="col" style="height: 55px">
-                      <div class="col-lg-3">
-                        <input class='form-control' type="checkbox" name="locFirst" id="locFirst" > 실/내외 촬영
-                      </div>
-                      <div class="col-lg-4">
-                        <input class='form-control' type="checkbox" name="locSecond" id="locSecond"> 토탈샵(메이크업+드레스 제공)
-                      </div>
-                      <div class="col-lg-3">
-                        <input class='form-control' type="checkbox" name="locThird" id="locThird"> 액자/앨범/비디오
-                      </div>
-                    </div>
-                    </div>
-                  </div>
-                  
-                  <div class="collapse" id="collapse2">
-                    <div class="card card-body">
-                      <div class="col-lg-2">
-                        <label>옵션</label>
-                      </div>                      
-                      <div class="col-lg-10">
-                        <div class="checkbox" >
-                          <label> <input type="radio" name="type" value="studio"  /> <strong>머메이드라인</strong></label> 
-                          <label> <input type="radio" name="type" value="dress" />   <strong>A라인</strong></label>
-                          <label> <input type="radio" name="type" value="makeup" />  <strong>H라인</strong></label>
-                          <label> <input type="radio" name="type" value="makeup" />  <strong>벨라인</strong></label>
-                          <label> <input type="radio" name="type" value="makeup" />  <strong>엠파이어라인</strong></label>
-                          <label> <input type="radio" name="type" value="makeup" />  <strong>프린세스라인</strong></label>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div class="collapse" id="collapse3">
-                    <div class="card card-body">
-                      <div class="col-lg-2">
-                        <label>옵션</label>
-                      </div>                      
-                      <div class="col-lg-10">
-                        <div class="checkbox" >
-                          <label> <input type="radio" name="type" value="studio"  /> <strong>헤어</strong></label> 
-                          <label> <input type="radio" name="type" value="dress" />   <strong>신랑신부(가족포함)</strong></label>
-                          <label> <input type="radio" name="type" value="makeup" />  <strong>악세사리</strong></label>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  </div>  
 
-                    <!--  인적사항 기입란 -->
+<!--                      업체 종류 체크 박스
+                    <div class="div">
+                      <div class="col-lg-2">
+                        <label>업체 종류</label>
+                      </div>
+                      
+                      <div class="col-lg-10">
+                        <div class="checkbox">
+                          <label> <input type="radio" name="type" value="studio" checked="checked" /><strong>스튜디오</strong></label> 
+                            <label> <input type="radio" name="type" value="dress" /> <strong>드레스</strong></label>
+                          <label> <input type="radio" name="type" value="makeup" /> <strong>메이크업</strong></label>
+                        </div>
+                      </div>
+                    </div>
+                     -->
+      <table class="table table-striped">
+        <thead>
+        </thead>
+        <tbody>
+          <tr data-toggle="collapse" data-target="#accordion"  class="clickable">
+            <td><p><b>스튜디오 역경매 신청하기</b></p></td>
+          </tr>
+          <tr>
+            <td colspan="3"><div id="accordion" class="collapse">
+                                    <!--  인적사항 기입란 -->
                     <div class="col-lg-2" id="col">
                       <label>이름</label>
                     </div>
                     <div class="col-lg-10" id="col">
                       <div class="col-lg-6">
-                        <input class='form-control' type="text" name="writer" id="name" value = "" readonly="readonly">
+                        <input class='form-control' type="text" name="writer" id="name" value="${auction.writer }">
                       </div>
                     </div>
 
-<!--                     <div class="col-lg-2" id="col">
+                    <div class="col-lg-2" id="col">
                       <label>연락처</label>
                     </div>
                     <div class="col-lg-10" id="col">
                       <div class="col-lg-6">
-                        <input class='form-control' type="tel" placeholder='ex. 010-5555-6666'>
+                        <input class='form-control' type="tel" value="${auction.tel }">
                       </div>
-                    </div> -->
+                    </div>
 
                     <div class="col-lg-2" id="col">
                       <label>예식 희망 지역</label>
                     </div>
                     <div class="col-lg-10" id="col">
                       <div class="col-lg-3">
-                        <input class='form-control' type="text" name="locFirst" id="locFirst" placeholder='ex. 1지망'>
+                        <input class='form-control' type="text" name="locFirst" id="locFirst" placeholder='ex. 1지망(필수)'>
                       </div>
                       <div class="col-lg-3">
-                        <input class='form-control' type="text" name="locSecond" id="locSecond" placeholder='ex. 2지망'>
+                        <input class='form-control' type="text" name="locSecond" id="locSecond" placeholder='ex. 2지망(필수)'>
                       </div>
                       <div class="col-lg-3">
-                        <input class='form-control' type="text" name="locThird" id="locThird" placeholder='ex. 3지망'>
+                        <input class='form-control' type="text" name="locThird" id="locThird" placeholder='ex. 3지망(필수)'>
                       </div>
                     </div>
 
                     <div class="col-lg-2" id="col">
                       <label>예식 희망 일자</label>
                     </div>
-                    
                     <div class="col-lg-10" id="col">
                       <div class="col-lg-3">
                         <input data-format="yyyy-MM-dd" class='form-control datepicker' type="text" name="dayFirst" placeholder='ex. 1지망 날짜(필수)'>
@@ -246,28 +213,29 @@ $(document).ready(function() {
                         <input class='form-control timepicker' type="text" name="timeThird" placeholder='ex. 3지망 시간(필수)'>
                       </div>
                     </div>
-                    
+
                     <div class="col-lg-2" id="col">
-                      <label>상담 날짜</label>
+                      <label>드레스 타입</label>
                     </div>
-                    <div class="col-lg-10" id="col">
+                    <div class="col-lg-10" id="col" style="height: 55px">
                       <div class="col-lg-3">
-                        <input class='form-control datepicker' type="text" name ="meetDatefirst" placeholder='ex. 1지망'>
+                        <input class='form-control' type="checkbox" name="locFirst" id="locFirst" > 엠파이어 라인
                       </div>
                       <div class="col-lg-3">
-                        <input class='form-control datepicker' type="text" name ="meetDateSecond" placeholder='ex. 2지망'>
+                        <input class='form-control' type="checkbox" name="locSecond" id="locSecond"> A라인
                       </div>
                       <div class="col-lg-3">
-                        <input class='form-control datepicker' type="text" name ="meetDateThird" placeholder='ex. 3지망'>
+                        <input class='form-control' type="checkbox" name="locThird" id="locThird"> H라인
                       </div>
                     </div>
+                    
                     
                      <div class="col-lg-2" id="col">
                       <label>입찰 마감일</label>
                     </div>
                     <div class="col-lg-10" id="col">
                       <div class="col-lg-3">
-                        <input class='form-control' type="text" name="deadline" placeholder='ex. 2018-06-30'>
+                        <input class='form-control datepicker' type="text" name="deadline" placeholder='ex. 2018-06-30'>
                       </div>
                     </div>
 
@@ -276,7 +244,40 @@ $(document).ready(function() {
                     </div>
                     <div class="col-lg-10" id="col">
                       <textarea class='form-control' name="memo" maxlength='1000'></textarea>
-                    </div>
+                    </div></div></td>
+          </tr>
+          
+          <tr data-toggle="collapse" data-target="#accordion1"
+            class="clickable">
+            <td><p><b>드레스 역경매 신청하기</b></p></td>
+          </tr>
+          <tr>
+            <td colspan="3"><div id="accordion1" class="collapse">
+            역경매를 신청하셨다면 담당 플래너를 통해 최종 신청 내용을 점검하시구요... 기다리시면 됩니다!<br><br>                
+                최대한 빨리 입찰서를 받으실 수 있도록 도와드리겠습니다.<br><br> 
+                업체에서 입찰서가 제출되었다면 제출된 입찰서를 꼼꼼히 살펴보시고 마음에 드는 업체 입찰서의 우측 상단에 있는 '방문예약'이나 '상세상담 신청' 버튼을 클릭하세요.<br><br> 
+                담당자가 확인하여 방문예약을 해드리거나 상세 상담을 위한 안내 연락을 드리게됩니다.
+                <br><br> 업체나 아이티웨딩 상담센터에 방문하셔서 최종 선택을 하신 후 계약을 하시면 기본적인 결혼준비의 절반은 끝나게 됩니다.<br><br> 감사합니다.</div></td>
+          </tr>
+          
+            <tr data-toggle="collapse" data-target="#accordion2"
+            class="clickable">
+            <td><p><b>메이크업 역경매 신청하기</b></p></td>
+          </tr>
+          <tr>
+            <td colspan="3"><div id="accordion2" class="collapse">
+            웨딩홀 역경매를 신청하신 후 입찰서에 명시되는 견적은 모두 웨딩홀에서 직접 안내하는 내용입니다.<br><br>
+            아이티웨딩은 최대한 업체간의 경쟁을 유도하고 고객님에게 더 나은 서비스를 드릴 수 있도록 웨딩홀에 안내하고 있습니다. 또한 웨딩홀에서도 저렴한 견적을 편리하게 입찰 할 수 있도록 돕고 있고요.<br><br>
+            간혹 웨딩홀에 먼저 방문하셔서 견적을 받으신 고객님에겐 웨딩홀에서 더 저렴한 견적을 안내해 드리지 못하는 경우가 있습니다.<br><br>
+            같은 고객님께 드리는 견적이 달라지기 때문입니다.<br><br>
+            이러한 경우를 제외하면 대체로 저렴한 견적서가 제출되게 됩니다.            
+            </div></td>
+          </tr>
+        </tbody>
+      </table>
+                    
+
+
                   </div>
                 </div>
                 <div class="col-lg-4"></div>
@@ -295,8 +296,6 @@ $(document).ready(function() {
       </div>
     </div>
   </div>
-
-
 
   <!-- End submit form -->
 

@@ -14,12 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.mysql.jdbc.log.Log;
+
 import kr.co.udf.auction.domain.Auction;
 import kr.co.udf.auction.domain.AuctionBid;
 import kr.co.udf.auction.service.AuctionApplyService;
 import kr.co.udf.auction.service.MypageBidService;
 import kr.co.udf.common.web.PageMaker;
 import kr.co.udf.common.web.SearchParams;
+import kr.co.udf.user.domain.Login;
 import kr.co.udf.user.domain.User;
 
 @Controller
@@ -35,8 +38,8 @@ public class MypageBidController {
 	@RequestMapping(value = "/apply", method = RequestMethod.GET)
 	public String applyList(SearchParams params, HttpSession session, Model model) throws Exception {
 		
-		User user = (User)session.getAttribute("login");
-		int userNo = user.getNo().intValue();
+		Login login = (Login)session.getAttribute("login");
+		int userNo = login.getNo().intValue();
 		logger.info(userNo);
 		
 		model.addAttribute("applyList", service.applyListByUser(userNo));
@@ -49,9 +52,8 @@ public class MypageBidController {
 	@RequestMapping(value="/win", method=RequestMethod.GET)
 	public String winList(HttpSession session, Model model) throws Exception{
 		
-		User user = (User)session.getAttribute("login");
-		
-		int userNo = user.getNo().intValue();
+		Login login = (Login)session.getAttribute("login");
+		int userNo = login.getNo().intValue();
 		logger.info(userNo);
 		
 		model.addAttribute("winList", service.winListByUser(userNo));
@@ -63,8 +65,8 @@ public class MypageBidController {
 	@RequestMapping(value="/bidlist", method=RequestMethod.GET)
 	public String bidList(@RequestParam("applyNo") int applyNo, @RequestParam("type") String type, HttpSession session, Model model) throws Exception{
 		
-		User user = (User)session.getAttribute("login");
-		int userNo = user.getNo().intValue();
+		Login login = (Login)session.getAttribute("login");
+		int userNo = login.getNo().intValue();
 		logger.info(userNo);
 		
 		List<AuctionBid> bid = service.bidListByUser(userNo, applyNo, type);
@@ -79,8 +81,8 @@ public class MypageBidController {
 	@RequestMapping(value="/bid/read", method=RequestMethod.GET)
 	public String readBid(@RequestParam("applyNo") int applyNo, @RequestParam("type") String type, HttpSession session, Model model) throws Exception {
 		
-		User user = (User)session.getAttribute("login");
-		int userNo = user.getNo().intValue();
+		Login login = (Login)session.getAttribute("login");
+		int userNo = login.getNo().intValue();
 		logger.info(userNo);
 		
 		AuctionBid bid = service.readBid(userNo, applyNo, type);
