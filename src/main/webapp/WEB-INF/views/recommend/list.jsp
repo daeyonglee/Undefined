@@ -8,14 +8,15 @@
 
 <style>
 .cart {
-	background-color: #ffffdd;
+   background-color: #ffffdd;
 }
 
 #itemMenu {
-	background-color: white;
+   background-color: white;
 }
 
 .topFix {
+<<<<<<< HEAD
 	position: fixed;
 	top: 0px;
 	z-index: 999;
@@ -26,10 +27,22 @@
 	position: fixed;
 	bottom: 0px;
 	z-index: 999;
+=======
+   position: fixed;
+   top: 0px;
+   z-index: 999;
+   cursor:
+}
+
+.bottomFix {
+   position: fixed;
+   bottom: 0px;
+   z-index: 999;
+>>>>>>> dev
 }
 
 #studioCart #dressCart #makeupCart {
-	border-color: #eeeeee;
+   border-color: #eeeeee;
 }
 
 .addCartBtn{
@@ -138,6 +151,7 @@
     </div>
   </div>
   <script>
+<<<<<<< HEAD
   	$(document).ready(function() {
   		topFix();
   		bottomFix();
@@ -296,6 +310,166 @@
   		});
   	}
   	
+=======
+     $(document).ready(function() {
+        topFix();
+        bottomFix();
+        addItem();
+        removeItem();
+        addCart();
+     });
+     
+     /** 스튜디오, 드레스, 메이크업 네비바가 브라우저 상단에 고정되는 스크롤 이벤트*/
+     function topFix(){
+        var itemMenuOffset = $('#itemMenu').offset();
+        $(window).on("scroll", function() {
+           if ($(document).scrollTop() > itemMenuOffset.top) {
+              $('#itemMenu').addClass('topFix');
+           } else {
+              $('#itemMenu').removeClass('topFix');
+           }
+        });
+     }
+     
+     /** 장바구니가 브라우저 하단에 고정되는 스크롤 이벤트 */
+     function bottomFix(){
+        var containerOffset = $(".container").offset();
+        $(window).on("scroll", function() {
+           if($(document).scrollTop() + $(window).height() <= $("#cart").offset().top + parseInt($("#cart").css("height"))){
+             $("#cart").addClass('bottomFix');
+             $("#cart").css("width", $(".container").css("width"));
+           } else {
+              $("#cart").removeClass("bottomFix");
+           }
+        });
+     }
+     
+     /** 각 상품을 장바구니 리스트에 추가하는 클릭 이벤트 */
+     function addItem(){
+        $(".studioItem").on("click", function(){
+           var sp_no = $(this).find(".studioNo").text().trim();
+           var param = {
+                 sp_no : sp_no
+           };
+           $.ajax({
+              url: "/recommend/addItem",
+              type: "post",
+              dataType: "json",
+              contentType: "application/json; charset=UTF-8",
+              data: JSON.stringify(param),
+              success: function(studio){
+                 $("#studioCart").append(
+                       "<li class='cartItem'>" +
+                       "<div class='itemNo' hidden='hidden'>" + studio.sp_no + "</div>" + 
+                       "<div>" + studio.sp_image + "</div>" + 
+                       "</li>"
+                       );
+              }
+           });
+        });
+        
+        $(".dressItem").on("click", function(){
+           var dp_no = $(this).find(".dressNo").text().trim();
+           var param = {
+                 dp_no : dp_no
+           };
+           $.ajax({
+              url: "/recommend/addItem",
+              type: "post",
+              dataType: "json",
+              contentType: "application/json; charset=UTF-8",
+              data: JSON.stringify(param),
+              success: function(dress){
+                 $("#dressCart").append(
+                       "<li class='cartItem'>" +
+                       "<div class='itemNo' hidden='hidden'>" + dress.dp_no + "</div>" + 
+                       "<div>" + dress.dp_image + "</div>" + 
+                       "</li>"
+                       );
+              }
+           });
+        });
+        
+        $(".makeupItem").on("click", function(){
+           var mp_no = $(this).find(".makeupNo").text().trim();
+           var param = {
+                 mp_no : mp_no
+           };
+           $.ajax({
+              url: "/recommend/addItem",
+              type: "post",
+              dataType: "json",
+              contentType: "application/json; charset=UTF-8",
+              data: JSON.stringify(param),
+              success: function(makeup){
+                 $("#makeupCart").append(
+                       "<li class='cartItem'>" +
+                       "<div class='itemNo' hidden='hidden'>" + makeup.mp_no + "</div>" + 
+                       "<div>" + makeup.mp_image + "</div>" + 
+                       "</li>"
+                       );
+              }
+           });
+        });
+     }
+     
+     /** 장바구니의 아이템을 클릭하면 삭제되는 클릭 이벤트 */
+     function removeItem(){
+        $(".cart").on("click", function(){
+           $(this).find(".cartItem").on("click", function(){
+              $(this).remove();
+           });
+        })
+     }
+     
+     function addCart(){
+        $("#addCartBtn").on("click", function(){
+           var sp_no = $("#studioCart").find(".itemNo");
+           var dp_no = $("#dressCart").find(".itemNo");
+           var mp_no = $("#makeupCart").find(".itemNo");
+           
+           console.log(sp_no);
+           console.log(dp_no);
+           console.log(mp_no);
+           
+           var sp_list = [];
+           var dp_list = [];
+           var mp_list = [];
+           
+           sp_no.each(function(){
+              sp_list.push($(this).text().trim());
+           })
+           
+           dp_no.each(function(){
+              dp_list.push($(this).text().trim());
+           })
+           
+           mp_no.each(function(){
+              mp_list.push($(this).text().trim());
+           })
+           
+           var params = {
+                 sp_no : sp_list,
+                 dp_no : dp_list,
+                 mp_no : mp_list
+           }
+           
+           console.log(params);
+           
+         $.ajax({
+              url: "/recommend/addCart",
+              type: "post",
+              dataType: "json",
+              contentType: "application/json; charset=UTF-8",
+              data: JSON.stringify(params),
+              success: function(){
+                 
+              }
+           });
+        });
+     }
+     
+>>>>>>> dev
   </script>
 
   <%@include file="../include/bottom.jsp"%>

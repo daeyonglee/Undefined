@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
 
-<%@ page session="false"%>
+<%@ page session="true"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%@include file="../include/top.jsp"%>
@@ -136,7 +136,7 @@
       </div> -->
 
   <%
-	 }}
+    }}
  %>
       <!-- 추가 파라미터 처리를 위함 -->
       <form role="form" action="modifyPage" method="post">
@@ -153,16 +153,16 @@
     </div>
   </div>
   
-	<!-- 댓글 수정과 삭제를 위한 Modal창 -->
+   <!-- 댓글 수정과 삭제를 위한 Modal창 -->
       <!-- Modal -->
     <div id="modifyModal" class="modal modal-primary fade" role="dialog">
       <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
           <div class="modal-header">
+            <label><font color="fdc600">댓글 수정하기</font></label>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <Input type="hidden" class="modal-title"></Input>
-            <h5><font color="fdc600">댓글 수정하기</font></h5>
+            <label class="modal-title"></label>        
           </div>
           <div class="modal-body" data-reply_no>
             <p><input type="text" id="reply_content" class="form-control"></p>
@@ -188,11 +188,11 @@
 /* 댓글목록 리스트버튼 클릭 시 댓글 보여주기/숨기기 */
 $("#repliesDiv").on("click", function() {
    if ($(".timeline li").size() > 1) {
-	  //alert("if");
-	  $(".replyLi").remove();
+     //alert("if");
+     $(".replyLi").remove();
   }else{
-	  //alert("else");
-	  getPage("/replies/" + article_no + "/1");
+     //alert("else");
+     getPage("/replies/" + article_no + "/1");
   } 
 });
 
@@ -237,7 +237,7 @@ $(".timeline").on("click", ".replyLi", function(event){
 $("#replyModBtn").on("click",function(){
     var reply_no = $(".modal-title").html();
     var reply_content = $("#reply_content").val();
-    
+   alert("reply_no"+$(".modal-title").html());
     $.ajax({
       type:'put',
       url:'/replies/'+reply_no,
@@ -270,7 +270,7 @@ $("#replyDelBtn").on("click",function(){
       success:function(result){
         console.log("result: " + result);
         if(result == 'success'){
-    	   alert("삭제 되었습니다.");
+          alert("삭제 되었습니다.");
            getPage("/replies/"+article_no+"/"+replyPage );
         }
     }});
@@ -285,7 +285,7 @@ function getPage(pageInfo) {
   $.getJSON(pageInfo, function(data) {
     printData(data.list, $("#repliesDiv"), $('#template'));
     printPaging(data.pageMaker, $(".pagination"));
-	
+   
     $("#modifyModal").modal('hide');
   });
 }
@@ -332,7 +332,7 @@ var printPaging = function(pageMaker, target) {
 <script id="template" type="text/x-handlebars-template">
 {{#each .}}
 <li class="replyLi" data-reply_no={{reply_no}}>
-<i class="fa fa-comments bg-yellow 	"></i>
+<i class="fa fa-comments bg-yellow    "></i>
  <div class="timeline-item" >
   <span class="time">
   <h6 class="timeline-header"> 작성자: {{user_nm}}</h6>
@@ -365,6 +365,7 @@ var printPaging = function(pageMaker, target) {
       });
       
       $(".modifyBtn").on("click", function(){
+         //alert();
         formObj.attr("action", "/sarticle/modifyPage");
         formObj.attr("method","get");
         formObj.submit();
