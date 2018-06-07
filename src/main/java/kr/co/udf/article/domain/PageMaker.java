@@ -12,9 +12,36 @@ public class PageMaker {
 	private int endPage;
 	private boolean prev;
 	private boolean next;
+	private int board_no;
 
 	private int displayPageNum = 10;
 	private Criteria cri;
+
+
+	public PageMaker() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public PageMaker(int totalCount, int startPage, int endPage, boolean prev, boolean next, int board_no,
+			int displayPageNum, Criteria cri) {
+		super();
+		this.totalCount = totalCount;
+		this.startPage = startPage;
+		this.endPage = endPage;
+		this.prev = prev;
+		this.next = next;
+		this.board_no = board_no;
+		this.displayPageNum = displayPageNum;
+		this.cri = cri;
+	}
+
+	public int getBoard_no() {
+		return board_no;
+	}
+
+	public void setBoard_no(int board_no) {
+		this.board_no = board_no;
+	}
 
 	public void setCri(Criteria cri) {
 		this.cri = cri;
@@ -90,13 +117,14 @@ public class PageMaker {
 	public Criteria getCri() {
 		return cri;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "PageMaker [totalCount=" + totalCount + ", startPage=" + startPage + ", endPage=" + endPage + ", prev="
-				+ prev + ", next=" + next + ", displayPageNum=" + displayPageNum + ", cri=" + cri + "]";
+				+ prev + ", next=" + next + ", board_no=" + board_no + ", displayPageNum=" + displayPageNum + ", cri="
+				+ cri + "]";
 	}
-	
+
 	public String makeQuery(int page) {
 		UriComponents uriComponents=
 			UriComponentsBuilder.newInstance()
@@ -107,19 +135,17 @@ public class PageMaker {
 		return uriComponents.toUriString();
 	}
 	
-//	public String makeSearch(int page) {
-//		UriComponents uriComponents=
-//				UriComponentsBuilder.newInstance()
-//				.queryParam("page",page)
-//				.queryParam("perPageNum",cri.getPerPageNum())
-//				.queryParam("searchType",((SearchCriteria) cri).getSearchType())
-//				.queryParam("keyword", encoding(((SearchCriteria) cri).getKeyword())).build();
-//		
-//		return uriComponents.toUriString();
-//	}
+	public String makeSearch(int page) {
+		UriComponents uriComponents=
+				UriComponentsBuilder.newInstance()
+				.queryParam("page",page)
+				.queryParam("perPageNum",cri.getPerPageNum())
+				.queryParam("searchType",((SearchCriteria) cri).getSearchType())
+				.queryParam("keyword", encoding(((SearchCriteria) cri).getKeyword())).build();
+		return uriComponents.toUriString();
+	}
 
 	private Object encoding(String keyword) {
-
 		if(keyword ==null || keyword.trim().length()==0) {
 			return "";
 		}

@@ -100,8 +100,9 @@
 		                        FROM   users 
 		                        WHERE  user_no = article.user_no)  user_nm 
 		                FROM   article 
-		                ORDER  BY article_no DESC)) 
-		WHERE  page = #{page} and board_no= #{board_no}   
+		                ORDER  BY article_no DESC)
+		                WHERE board_no= #{board_no} ) 
+		WHERE  page = #{page}   
 	</select>
 	
 	<select id="listCriteria" resultType="map">
@@ -138,88 +139,106 @@
 		                        FROM   users 
 		                        WHERE  user_no = article.user_no)  user_nm 
 		                FROM   article 
-		                ORDER  BY article_no DESC)) 
-		WHERE  page = #{page} and board_no= #{board_no}   
+		                ORDER  BY article_no DESC)
+		                WHERE board_no= #{board_no}  ) 
+		WHERE  page = #{page}  
 	</select>
 	
 	<select id="countPaging" resultType="int">
-	<![CDATA[
 		SELECT Count(article_no) 
 		FROM   article 
-		WHERE  article_no > 0 
-	]]>		   
+		WHERE  article_no > 0 and board_no= #{board_no}  
 	</select>
-	 	<!-- 		
-	<select id="listSearch" resultType="kr.co.kosta.springmvc.board.domain.Board">
-	<![CDATA[
-		SELECT bno, 
-		       title, 
-		       content, 
-		       writer, 
-		       regdate, 
-		       viewcnt,kind 
-		FROM   (SELECT Ceil(rownum / #{perPageNum}) request_page, 
-		               bno, 
-		               title, 
-		               content, 
-		               writer, 
-		               regdate, 
-		               viewcnt,kind 
-		        FROM   (SELECT bno, 
-		                       title, 
-		                       content, 
-		                       writer, 
-		                       To_char(regdate, 'YYYY-MM-DD HH24:MI') regdate, 
-		                       viewcnt,kind 
+		
+	<select id="listSearch" resultType="map">
+		SELECT article_no, 
+		       article_head, 
+		       article_title, 
+		       article_content, 
+		       regdate,
+		       hitcount, 
+		       board_no, 
+		       board_nm,  
+		       user_nm
+		FROM   (SELECT Ceil(rownum / #{perPageNum}) page, 
+		               article_no, 
+		               article_head, 
+		               article_title, 
+		               article_content, 
+		               hitcount, 
+		               regdate,
+		               board_no, 
+		               board_nm, 
+		               user_nm 
+		        FROM   (SELECT article_no, 
+		                       article_head, 
+		                       article_title, 
+		                       article_content, 
+		                       To_char(article.regdate, 'YYYY-MM-DD') regdate, 
+		                       hitcount, 
+		                       board_no, 
+		                       (SELECT board_nm 
+		                        FROM   board 
+		                        WHERE  board_no = article.board_no)   board_nm, 
+		                       (SELECT user_nm 
+		                        FROM   users 
+		                        WHERE  user_no = article.user_no)  user_nm 
 		                FROM   article 
-		                ORDER  BY bno DESC)) 
-		WHERE  request_page = #{page} 
-	]]>		
+		                ORDER  BY article_no DESC)
+		                WHERE  board_no= #{board_no}) 
+		WHERE  page = #{page}
 		<include refid="search"></include>
 	</select>
 	
 	<sql id="search">
 		<if test="searchType !=null">
 			<if test="searchType == 't'.toString()">
-				and title like
+				and article_title like
 				'%'||#{keyword}||'%'
 			</if>
 			<if test="searchType == 'c'.toString()">
-				and content like
+				and article_content like
 				'%'||#{keyword}||'%'
 			</if>
 			<if test="searchType == 'w'.toString()">
-				and writer like
+				and user_nm like
 				'%'||#{keyword}||'%'
 			</if>
 			<if test="searchType == 'tc'.toString()">
-				and (title like
-				'%'||#{keyword}||'%' Or content like 
+				and (article_title like
+				'%'||#{keyword}||'%' Or article_content like 
 				'%'||#{keyword}||'%')
 			</if>
 			<if test="searchType== 'cw'.toString()" >
-				and (content like
-				'%'||#{keyword}||'%' Or writer like 
+				and (article_content like
+				'%'||#{keyword}||'%' Or user_nm like 
 				'%'||#{keyword}||'%')
 			</if>
 			<if test="searchType== 'tcw'.toString()" >
-				and (title like '%'||#{keyword}||'%' 
-					Or content like '%'||#{keyword}||'%'
-					Or writer like '%'||#{keyword}||'%')
+				and (article_title like '%'||#{keyword}||'%' 
+					Or article_content like '%'||#{keyword}||'%'
+					Or user_nm like '%'||#{keyword}||'%')
 			</if>
 		</if>
 	</sql>
-	
-	
+
 	<select id="listSearchCount" resultType="int">
-	<![CDATA[
-		SELECT Count(bno) 
-		FROM   article 
-		WHERE  bno > 0 
-	]]>		   
+			SELECT Count(article_no) 
+			FROM   article a 
+			       JOIN users u 
+			         ON a.user_no = u.user_no 
+			WHERE  a.article_no > 0 
+			       AND board_no = ${board_no} 
 		<include refid="search"></include>
-	</select>  -->
-	
-	
+	</select>  
+
+	<update id="hitCount">
+			UPDATE ARTICLE 	
+			SET  HITCOUNT = HITCOUNT + 1
+			WHERE article_no = #{article_no}
+	</update>
+
+
+
 </mapper>	
 

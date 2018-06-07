@@ -15,14 +15,4 @@ public interface BoardService {
   public void remove(Integer board_no) throws Exception;
 
   public List<Board> listAll() throws Exception;
-
-//  public List<Board> listCriteria(Criteria cri) throws Exception;
-//
-//  public int listCountCriteria(Criteria cri) throws Exception;
-//
-//  public List<Board> listSearchCriteria(SearchCriteria cri) 
-//      throws Exception;
-//
-//  public int listSearchCount(SearchCriteria cri) throws Exception;
-
 }

@@ -71,6 +71,7 @@
                       <!-- 로그인 여부에 따라 li 변경 -->
                       <c:choose>
                         <c:when test="${null ne sessionScope.login || null ne cookie.loginCookie.value}">
+<<<<<<< HEAD
                         	<c:if test="${sessionScope.login.role ne 'admin'}">
                               <li><b>${sessionScope.login.nm}님</b></li>
   	                          <li><a href="/user/logout">로그아웃</a></li>
@@ -84,6 +85,12 @@
   	                          <li><a href="#">고객센터</a></li>
                         	</c:if>
 
+=======
+                          <li><a href="<%=request.getContextPath()%>/sarticle/list?board_no=3">쪽지함</a></li>
+                          <li><a href="/user/logout">로그아웃</a></li>
+                          <li><a href="#">마이페이지</a></li>
+                          <li><a href="#">고객센터</a></li>
+>>>>>>> seongmin
                         </c:when>
                         <c:otherwise>
                           <li><a href="/user/login">로그인</a></li>
@@ -156,9 +163,17 @@
                    </li> -->
                </ul>
              </li>
+<<<<<<< HEAD
 
              <li class="wow fadeInDown" data-wow-delay="0.4s"><a href="/sarticle/list?board_no=1">자유게시판</a></li>
              <li class="wow fadeInDown" data-wow-delay="0.5s"><a href="/sarticle/list?board_no=2">공지사항</a></li>
+=======
+             <li class="wow fadeInDown" data-wow-delay="0.4s"><a class="" href="property.html">업체정보</a></li>
+             <li class="wow fadeInDown" data-wow-delay="0.5s"><a 
+             href="<%=request.getContextPath()%>/sarticle/list?board_no=1">공지사항</a></li>
+               <li class="wow fadeInDown" data-wow-delay="0.5s"><a 
+             href="<%=request.getContextPath()%>/sarticle/list?board_no=2">자유게시판</a></li>
+>>>>>>> seongmin
          </ul>
      </div><!-- /.navbar-collapse -->
  </div><!-- /.container-fluid -->

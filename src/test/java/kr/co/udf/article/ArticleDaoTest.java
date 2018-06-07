@@ -18,6 +18,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import kr.co.udf.article.dao.ArticleDao;
 import kr.co.udf.article.domain.Article;
 import kr.co.udf.article.domain.Criteria;
+import kr.co.udf.article.domain.SearchCriteria;
 import kr.co.udf.board.BoardDaoTest;
 
 
@@ -159,7 +160,7 @@ public class ArticleDaoTest {
     logger.info(uriComponents.toString());
   }
 
-  @Test
+//  @Test
   public void testURI2() throws Exception {
     UriComponents uriComponents = 
     		UriComponentsBuilder.newInstance()
@@ -173,26 +174,55 @@ public class ArticleDaoTest {
     logger.info("/article/read?article_no=12&perPageNum=10");
     logger.info(uriComponents.toString());
   }
-//
+
 //  @Test
-//  public void testDynamic1() throws Exception {
-//
-//    SearchCriteria cri = new SearchCriteria();
-//    cri.setPage(1);
-//    cri.setKeyword("글");
-//    cri.setSearchType("t");
-//
-//    logger.info("=====================================");
-//
-//    List<Board> list = dao.listSearch(cri);
-//
-//    for (Board board : list) {
-//      logger.info(board.getBno() + ": " + board.getTitle());
-//    }
-//
-//    logger.info("=====================================");
-//
-//    logger.info("COUNT: " + dao.listSearchCount(cri));
-//  }
+  public void testSearchList() throws Exception {
+    SearchCriteria cri = new SearchCriteria();
+    cri.setPage(1);
+    cri.setKeyword("임");
+    cri.setSearchType("w");
+
+    logger.info("=====================================");
+
+    List<Map<String, Object>> list = dao.listSearch(cri);
+
+    for ( Map<String, Object> row : list) {
+		// 숫자형은 BigDecimal로 받음
+		BigDecimal article_no = (BigDecimal) row.get("ARTICLE_NO");
+		String article_head = (String) row.get("ARTICLE_HEAD");
+		String article_title = (String) row.get("ARTICLE_TITLE");
+		String article_content = (String) row.get("ARTICLE_CONTENT");
+		String user_nm = (String) row.get("USER_NM");
+		String regdate = (String) row.get("REGIDATE");
+		BigDecimal hitcount = (BigDecimal) row.get("HITCOUNT");
+		logger.debug(article_no + "\t" + article_head + "\t" + article_title +  "\t" + article_content+ "\t" + user_nm+ "\t" + hitcount);
+    }
+
+    logger.info("=====================================");
+
+    logger.info("COUNT: " + dao.listSearchCount(cri));
+  }
+  
+//  @Test
+  	public void TotalCountArticle() throws Exception {
+  	    SearchCriteria cri = new SearchCriteria();
+  	    cri.setPage(2);
+  	    cri.setKeyword("임");
+  	    cri.setSearchType("w");
+  		int CountArticles= dao.listSearchCount(cri);
+  		
+  		logger.info(CountArticles);
+  	}
+  	
+//  @Test
+//  	public void testHitCount() throws Exception {
+//  	    SearchCriteria cri = new SearchCriteria();
+//  	    cri.setPage(2);
+//  	    cri.setKeyword("임");
+//  	    cri.setSearchType("w");
+//  		int CountArticles= dao.listSearchCount(cri);
+//  		
+//  		logger.info(CountArticles);
+//  	}
 
 }
