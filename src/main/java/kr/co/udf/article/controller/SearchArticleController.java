@@ -39,6 +39,7 @@ public class SearchArticleController {
 	    pageMaker.setTotalCount(service.listSearchCount(cri));
 	    
 	    model.addAttribute("pageMaker", pageMaker);
+	    
 	}
 	
 	@RequestMapping(value = "/readPage", method = RequestMethod.GET)

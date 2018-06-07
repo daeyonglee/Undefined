@@ -109,12 +109,12 @@
 		SELECT article_no, 
 		       article_head, 
 		       article_title, 
-		       article_content article_content, 
-		       regdate regdate,
-		       hitcount hitcount, 
-		       board_no board_no, 
-		       board_nm board_nm,  
-		       user_nm user_nm
+		       article_content, 
+		       regdate,
+		       hitcount, 
+		       board_no, 
+		       board_nm,  
+		       user_nm
 		FROM   (SELECT Ceil(rownum / #{perPageNum}) page, 
 		               article_no, 
 		               article_head, 
@@ -159,7 +159,8 @@
 		       hitcount, 
 		       board_no, 
 		       board_nm,  
-		       user_nm
+		       user_nm,
+		       reply_count
 		FROM   (SELECT Ceil(rownum / #{perPageNum}) page, 
 		               article_no, 
 		               article_head, 
@@ -169,7 +170,8 @@
 		               regdate,
 		               board_no, 
 		               board_nm, 
-		               user_nm 
+		               user_nm,
+		               reply_count
 		        FROM   (SELECT article_no, 
 		                       article_head, 
 		                       article_title, 
@@ -182,7 +184,10 @@
 		                        WHERE  board_no = article.board_no)   board_nm, 
 		                       (SELECT user_nm 
 		                        FROM   users 
-		                        WHERE  user_no = article.user_no)  user_nm 
+		                        WHERE  user_no = article.user_no)  user_nm,
+	                           (SELECT COUNT(article_no) 
+	                           FROM   reply 
+	                           WHERE  article_no = article.article_no) reply_count  
 		                FROM   article 
 		                ORDER  BY article_no DESC)
 		                WHERE  board_no= #{board_no}) 
@@ -238,7 +243,11 @@
 			WHERE article_no = #{article_no}
 	</update>
 
-
-
+	<select id="replyCount" resultType="int">
+		SELECT Count(article_no) 
+		FROM   reply 
+		WHERE  article_no =#{article_no}
+	</select>  
+	
 </mapper>	
 
