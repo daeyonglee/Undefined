@@ -22,16 +22,16 @@
           <li class="list-group-item">
             <label style="float: left;">지역</label>
               <select name="location" style="margin-left: 20px;">
-                <option value="">선택하세요</option>
+                <option value="선택">선택하세요</option>
                 <option value="서울">서울</option>
                 <option value="경기">경기</option>
-                <option value="충북">충북</option>
-                <option value="충남">충남</option>
-                <option value="강원">강원</option>
-                <option value="경북">경북</option>
-                <option value="경남">경남</option>
-                <option value="전북">전북</option>
-                <option value="전남">전남</option>
+                <option value="충청북도">충북</option>
+                <option value="충청남도">충남</option>
+                <option value="강원도">강원</option>
+                <option value="경상북도">경북</option>
+                <option value="경상남도">경남</option>
+                <option value="전라북도">전북</option>
+                <option value="전라남도">전남</option>
                 <option value="제주">제주</option>
               </select>
           </li>
@@ -41,15 +41,19 @@
             <input type="text" class="form-control" name="maxCost" placeholder="최대">      
           </li>
         </ul>  
-<!--       <button id="nextBtn" class="btn search-btn" type="button" style="float: right"><i class="fa fa-caret-square-o-right"></i></button>
- -->      </div>
+      </div>
       
       <div class="studioForm" hidden="hidden">
         <ul class="list-group">
           <li class="list-group-item">
             <label style="float: left;">스튜디오 옵션</label>
-            <label class="checkbox-inline"><input type="checkbox" name="studio" value="sp_shoot_type"> 실내/외 촬영</label>
-            <label class="checkbox-inline"><input type="checkbox" name="studio" value="sp_total_yn"> 토탈샵(메이크업 + 드레스 제공)</label><br>
+            <label class="checkbox-inline" id="shoot"><input type="checkbox" name="studio"> 실내/외 촬영</label>
+            <select name="studio" disabled="disabled">
+              <option value="실내">실내</option>
+              <option value="실외">실외</option>
+              <option value="모두">모두</option>
+            </select>
+            <label class="checkbox-inline"><input type="checkbox" name="studio" value="sp_total_yn"> 토탈샵(메이크업 + 드레스 제공)</label>
             <label class="checkbox-inline"><input type="checkbox" name="studio" value="sp_apv_yn"> 액자/앨범/비디오</label>
           </li>
         </ul>
@@ -59,12 +63,12 @@
         <ul class="list-group">
           <li class="list-group-item">
             <label style="float: left;">드레스 종류</label>
-            <label class="checkbox-inline"><input type="checkbox" name="line" value="a"> A라인</label>
-            <label class="checkbox-inline"><input type="checkbox" name="line" value="h"> H라인</label>
-            <label class="checkbox-inline"><input type="checkbox" name="line" value="b"> 벨라인</label>
-            <label class="checkbox-inline"><input type="checkbox" name="line" value="p"> 프린세스라인</label>
-            <label class="checkbox-inline"><input type="checkbox" name="line" value="m"> 머메이드라인</label>
-            <label class="checkbox-inline"><input type="checkbox" name="line" value="e"> 엠파이어라인</label>
+            <label class="checkbox-inline"><input type="checkbox" name="dress" value="a"> A라인</label>
+            <label class="checkbox-inline"><input type="checkbox" name="dress" value="h"> H라인</label>
+            <label class="checkbox-inline"><input type="checkbox" name="dress" value="벨"> 벨라인</label>
+            <label class="checkbox-inline"><input type="checkbox" name="dress" value="프린세스"> 프린세스라인</label>
+            <label class="checkbox-inline"><input type="checkbox" name="dress" value="머메이드"> 머메이드라인</label>
+            <label class="checkbox-inline"><input type="checkbox" name="dress" value="엠파이어"> 엠파이어라인</label>
           </li>
         </ul>
       </div>
@@ -73,12 +77,13 @@
         <ul class="list-group">
           <li class="list-group-item">
           <label style="float: left;">메이크업 옵션</label>
-          <label class="checkbox-inline"><input type="checkbox" name="makeup" value="mp_hair_yn"> 헤어</label>
+          <label class="checkbox-inline"><input type="checkbox" name="makeup" value="mp_hair_yn"> 헤어포함</label>
           <label class="checkbox-inline"><input type="checkbox" name="makeup" value="mp_family_yn"> 가족포함</label>
           <label class="checkbox-inline"><input type="checkbox" name="makeup" value="mp_acc_yn"> 악세사리</label>
           </li>
         </ul>
       </div>
+      
       <div class="searchBtn" hidden="hidden">
         <button id="searchBtn" class="btn search-btn" type="submit" style="float: right"><i class="fa fa-search"></i></button>
       </div>
@@ -90,9 +95,9 @@
     $(document).ready(
     	function(){
         	numOnly();
-        	$('.message').css('color', 'red');
-      		//nextForm();
       		toggleForm();
+      		shootTypeSwitch();
+      		searchBtnEvent();
   	})
   	
   	function numOnly(){
@@ -103,38 +108,8 @@
     	    this.value = this.value.replace(/[^0-9]/g,'');
     	});
     }
-  
-    /* function nextForm(){
-    	$('#nextBtn').on("click", function(){
-        	var itemChecked = $("input:checkbox[name='item']").is(':checked');
-        	
-        	var locationChecked = $(".custom-select option:selected").val();
-    		
-    		var minCostChecked = $("input:text[name='minCost']").val();
-    		var maxCostChecked = $("input:text[name='maxCost']").val();
-    		
-    		if(!itemChecked){
-        		$('.message').html("최소 하나 이상의 항목을 체크해주세요");
-        		return;
-        	}
-        	
-        	if(locationChecked == ""){
-        		$('.message').html("지역을 선택해주세요");
-        		return;
-        	}
-        	
-			if(minCostChecked == "" || maxCostChecked == ""){
-        		$('.message').html("최소/최대 금액을 입력해주세요.");
-        		return;
-        	} else if(parseInt(minCostChecked) > parseInt(maxCostChecked)){
-        		$('.message').html("최대 금액은 최소 금액보다 커야 합니다.");
-        		return;
-        	}
-			
-			$('.indexForm').toggle("slow", toggleForm())
-    	})
-  	} */
-  	function toggleStudio(e){
+    
+  	function toggleStudio(){
 		$('.studioForm').toggle("slow");
 	}
   	
@@ -154,29 +129,45 @@
     	
     	$('#makeup').on("click", toggleMakeup);
     	
-    	/* $('#studio').on("click", function(){
-    		if($("input:checkbox[value='studio']").is(":checked")){
-	    		$('.studioForm').show("slow");
+    	$(".checkbox-inline").on("click", function(){
+    		var xor = [];
+    		$("input:checkbox[name='item']").each(function(index){
+    			var isItemChecked = $("input:checkbox[value=" + $(this).val() + "]").is(":checked");
+    			var isOptionChecked = $("input:checkbox[name=" + $(this).val() + "]").is(":checked");
+    			xor[index] = isOptionChecked || (!isItemChecked && !isOptionChecked);
+    		});
+    		
+    		if(xor[0] && xor[1] && xor[2] && $("input:checkbox[name='item']").is(":checked")){
+				$(".searchBtn").show("slow");
+			} else {
+				$(".searchBtn").hide("slow");
+			}
+    	});
+    }
+    
+    function shootTypeSwitch(){
+    	$("#shoot").on("click", function(){
+    		if($(this).find("input:checkbox").is(":checked")){
+    			$("select[name='studio']").attr("disabled", false);
     		} else {
-	    		$('.studioForm').hide("slow");
+    			$("select[name='studio']").attr("disabled", true);
     		}
     	});
-    	 
-    	$('#dress').on("click", function(){
-    		if($("input:checkbox[value='dress']").is(":checked")){
-	    		$('.dressForm').show("slow");
-    		} else {
-	    		$('.dressForm').hide("slow");
+    }
+    
+    function searchBtnEvent(){
+    	$('.message').css('color', 'red');
+    	$(".searchBtn").on("click", function(){
+    		if($("select[name='location']").val() == "선택"){
+    			$(".message").html("지역을 선택해주세요...");
+    			return false;
     		}
-    	});
-    	
-    	$('#makeup').on("click", function(){
-    		if($("input:checkbox[value='makeup']").is(":checked")){
-	    		$('.makeupForm').show("slow");
-    		} else {
-	    		$('.makeupForm').hide("slow");
+    		
+    		if($("input:text[name='minCost']").val() == "" || $("input:text[name='maxCost']").val() == ""){
+    			$(".message").html("금액을 입력해주세요...");
+    			return false;
     		}
-    	}); */
+    	})
     }
     
 </script>
