@@ -17,6 +17,7 @@ import kr.co.udf.common.company.domain.StudioCompany;
 import kr.co.udf.company.dao.DressDao;
 import kr.co.udf.company.dao.StudioDao;
 import kr.co.udf.company.domain.Criteria;
+import kr.co.udf.company.domain.SearchCriteria;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -32,26 +33,42 @@ public class DressTest {
 	
 	//@Test
 	public void testList() throws Exception {
-		logger.info(dao.listAll());
+		logger.info(dao.listDress());
 	}
 	
-	  @Test
+	// @Test
 	 public void testListCriteria() throws Exception {
 		 
 		 Criteria cri = new Criteria();
 		 cri.setPage(1);
 		 cri.setPerPageNum(10);
 		 
-		 List<DressCompany> list = dao.listCriteria(cri);
+		 List<DressCompany> list = dao.DressCri(cri);
 		 
 		 for (DressCompany studio : list) {
-			 //logger.info(studio.getCompanyNo() + ":" + studio.getHeadName());
+			 logger.info(studio.getDc_addr() + ":" + studio.getDc_nm());
 		 }
 	 }
 	 
-	@Test
+	//@Test
 	public void testPageint() throws Exception {
 		Criteria cri = new Criteria();
-		logger.info(dao.countPaging(cri));
+		logger.info(dao.DressCount(cri));
 	}
+	
+	@Test
+	public void testSearch() throws Exception {
+		
+		SearchCriteria cri = new SearchCriteria();
+		cri.setPage(1);
+		cri.setKeyword("아르하쿠튀르");
+		cri.setSearchType("name");
+	
+		List<DressCompany> list = dao.DressSearch(cri);
+		for (DressCompany dress : list) {
+			logger.info(dress.getDc_no() + ":" + dress.getDc_main_nm());
+		}
+		logger.info("개수 :" + dao.DressSearchCount(cri));
+	}
+	
 }

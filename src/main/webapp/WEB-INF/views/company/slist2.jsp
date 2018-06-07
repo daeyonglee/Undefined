@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -126,8 +127,20 @@
 
 <!-- 인포윈도우 스타일 -->
 <style type="text/css">
-  .hall_box{overflow:hidden}
-.hall_box img{float:left;width:170px;height:139px;margin-right:13px}
+.gm-style-iw {
+  overflow: auto !important;
+  max-width:200px;
+  max-height:175px;
+}
+.gm-style-iw > div {
+  overflow: auto !important;
+  max-width:200px;
+  max-height:175px;
+  }
+  .hall_box{overflow:hidden;width:200px;height:100px;}
+  
+  
+.hall_box img{float:left;width:80px;height:80px;margin-right:13px}
 .hall_box .hall_detail{float:left;height:100%}
 .hall_box .hall_detail dl{margin-bottom:25px;font-size:15px;color:#515151;font-weight:bold;}
 .hall_box .hall_detail dl dt a{font-size:10px;color:#2a2a2a;font-weight:bold}
@@ -165,8 +178,8 @@
           <div class="col-md-9 padding-top-40 properties-page">
             <div class="section clear">
               <div class="col-xs-10 page-subheader sorting pl0">
-                  <a href="slist"> <button type="button">STUDIO</button>  </a>   
-                 <button type="button" disabled>DRESS</button>
+                 <button type="button" disabled>STUDIO</button>     
+                 <a href="dress"><button type="button">DRESS</button></a>
                  <a href="makeup"><button type="button">MAKEUP</button></a>   
                  
           <script type="text/javascript">
@@ -188,7 +201,7 @@
               <div id="list-type" class="proerty-th">
 
                  
-         <c:forEach items="${dresslist}" var="dress" varStatus="status">
+         <c:forEach items="${list}" var="studio" varStatus="status">
 
                   <div class="col-sm-6 col-md-4 p0">
                     <div class="box-two proerty-item">
@@ -206,6 +219,8 @@
                             <li data-target="#myCarousel"
                               data-slide-to="2"></li>
                           </ol>
+
+ 
                           <div class="carousel-inner">
                             <div class="item active">
                               <img
@@ -223,6 +238,8 @@
                                 style="width: 100%;">
                             </div>
                           </div>
+
+
                           <a class="left carousel-control"
                             href="#myCarousel" data-slide="prev"> <span
                             class="glyphicon glyphicon-chevron-left"></span>
@@ -234,22 +251,28 @@
                           </a>
                         </div>
                       </div>
+
+          
+       
                       <div class="item-entry overflow">
                         <h5>
                           <a
-                            href="/company/compare?companyNo=${dress.dc_no}">
-                            ${dress.dc_nm} </a>
+                            href="/company/compare?dc_company_no=${studio.sc_no}">
+                            ${studio.sc_nm} </a>
                         </h5>
+                        
+             
+         
                         <div class="dot-hr"></div>
                         <span class="proerty-price pull-left">
                           ★★★ </span> 3.0/5.0 (20명) <br>
             
           <c:choose>
-           <c:when test="${fn:length(dress.dc_introduce) > 40}">
-                        <div class=""><c:out value="${fn:substring(dress.dc_introduce,0,39)}"/> ... </div>
+           <c:when test="${fn:length(studio.sc_introduce) > 40}">
+                        <div class=""><c:out value="${fn:substring(studio.sc_introduce,0,39)}"/> ... </div>
                           </c:when>
                              <c:otherwise>
-                              <c:out value="${dress.dc_introduce}"/>
+                              <c:out value="${studio.sc_introduce}"/>
                                </c:otherwise> 
                                     </c:choose>   
                       </div>
@@ -272,7 +295,7 @@
 					<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
 								<li
 									<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
-									<a href="dress?page=${idx}">${idx}</a>
+									<a href="slist?page=${idx}">${idx}</a>
 								</li>
 							</c:forEach>
 
@@ -301,16 +324,16 @@
 
               <!-- 업체검색 -->
                <div class="searchType">
-                <select name="selectBox" id="selectBox">
-                  <option value="addr"
+                 <select name="selectBox" id="selectBox">
+                                   <option value="addr"
                   <c:out value="${cri.searchType eq 'addr'?'selected':''}"/>>
                     위치</option>
                   <option value="name" 
                     <c:out value="${cri.searchType eq 'name'?'selected':''}"/>>
                     업체명</option>
+
                  </select>
                  
-                           
                    <div class="input-group">
                       <input class="form-control" name='keyword' id="keywordInput" placeholder="Search" type="text"
                          value='${cri.keyword}'>
@@ -321,35 +344,33 @@
                                         </span>
                                     </div>
                                 </div>
-                                
-                                
-  <script>
+                  
+<script>
   $(document).ready(
       function() {
 
         $('#searchBtn').on(
             "click",
             function(event) {
-              self.location = "dress"
-          + '${pageMaker.makeQuery(1)}'
-          + "&searchType=" + $("select option:selected").val()
-          + "&keyword=" + $('#keywordInput').val();
+            	self.location = "slist"
+					+ '${pageMaker.makeQuery(1)}'
+					+ "&searchType=" + $("select option:selected").val()
+					+ "&keyword=" + $('#keywordInput').val();
             });
         });
 
 </script>                              
-                                          
                                 
                                 
                                 
-                                
-         <!-- 지도시작 -->
+                <!-- 지도시작 -->
 
                 <div id="map" style="width: 100%; height: 650px;"></div>
 
 
                 <script>
                 
+            var list = [];
 			var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/parking_lot_maps.png';
 			
 			function initialize() {
@@ -377,16 +398,14 @@
 
 				var region = document.getElementById("mapList").value.split(",");
 				var name = document.getElementById("nameList").value.split(",");
-				
-				var list = document.getElementById("list").value.split(",");
-				//console.log(list);
 				/*
 					info : {region:name, region:name}
 				*/
 				//var myLatlng1 = new google.maps.LatLngBounds(37.4837121, 127.0324112);
 				//console.log(myLatlng1);
 				var currentInfoWindow = null;
-				
+				var infoWindow = new google.maps.InfoWindow({ content: '' });
+															
 				//마커를 올릴 지역을 가져온다.
 				if (region.length > 0) {
 					for (var i = 0; i < region.length; i++) {
@@ -394,11 +413,19 @@
 										function (results, status) {
 											if (status == google.maps.GeocoderStatus.OK) {
 												for (var j = 0; j < results.length; j++) {
+													for (var n = 0; n <name.length; n++) {
 													// 좌표값 받아오기
 													
 													var lat = results[j].geometry.location.lat();
 													var lng = results[j].geometry.location.lng();
-
+													
+													
+													var message = name[n];
+													console.info('message : ' + message);
+													//console.info('리스트 : ' + message);
+													//list.push(message);
+													//console.info('message :' + list);
+													
 													// 마커 속성 설정하기
 													var marker = new google.maps.Marker(				
 															{
@@ -406,27 +433,40 @@
 																title : results[j].formatted_address,
 																map : map,
 																bounds: true,
-																maxZoom: 17
+																maxZoom: 17,
+																//name: [message[m]]
 																//center : {lat: -34, lng: 151}
 																//icon : iconBase
 															});
-														
 														bounds.extend(marker.position);
 														map.fitBounds(bounds);
-														
+
+												
+
+					
+													//인포윈도우 만들기 
+													var infowin = '';
+													infowin += '<div class="hall_box">';
+													infowin += '<img src = "http://iwedding.co.kr/center/website/brandplus/6285/721-N153_141014032549_1.jpg">'
+													infowin += '<div class="hall_detail">';
+													infowin += '<dl>'+marker.title+'</dl>';
+													infowin += '<dl><dd>가게이름</dd></dl>';
+													infowin += '</div>';
+													
 													//var address = region;
 													//console.log(name[n]);
 													
 													// 마커 클릭 이벤트
 													
+													
+													var image = "대표이미지";
+													
 													//console.log('이름 : ' + marker.name);
-													//console.log('위치 : ' + marker.title);
+													//console.log('위치 :' + marker.title);
+													
+													list.push({name:marker.name, title:marker.title});
 													
 													google.maps.event.addListener(marker,'click',function(e) {
-														
-														console.log(marker);
-														var infowin = searchName(marker);
-														var infoWindow = new google.maps.InfoWindow({ content: infowin });
 														
 														if(currentInfoWindow !=null){
 															currentInfoWindow.close();
@@ -434,46 +474,19 @@
 														//infoWindow.close();
 														infoWindow.setContent(infowin);
 														infoWindow.open(map,marker);
-														console.log(marker);
+														console.log('marker' + marker);
 														currentInfoWindow = infoWindow;
 													});
+													
+												}
 											}
 												
 											} else {
 												alert("검색결과가 없습니다");
 											}
 										});
-					};
+					}
 					
-				}
-				
-				function searchName(marker) {
-					
-					var title = marker.title.replace("대한민국", "").trim();
-					var infowin = '';
-					var image = '';
-					//인포윈도우 만들기 
-					infowin += '<div class="hall_box">';
-					//infowin += '<img src = "http://iwedding.co.kr/center/website/brandplus/6285/721-N153_141014032549_1.jpg">'
-					infowin += '<div class="hall_detail">';
-					
-					$.each(list, function(index, value) {
-						
-						var arr = value.split(":");
-						var arrNo = arr[2].trim();
-						var arrTitle = arr[1].trim();
-						var arrName = arr[0].trim();
-						
-						if (title == arrTitle) {
-							infowin += '<dl><a href="/company/compare?dc_company_no='+arrNo+'">'+arrName+'</a></dl>';
-						}
-						
-					});
-					
-					infowin += '<dl><dd>' +title+'</dd></dl>';
-					infowin += '</div></div>';
-					
-					return infowin;
 				}
 				
 			}
@@ -484,35 +497,12 @@
     <!-- studio.sc_addr:studio.sc_nm, -->
     
            <input type="hidden" id="mapList"
-               value= "
-                 <c:forEach items="${dresslist}" var="dress" varStatus="index">
-                    <c:choose>
-                      <c:when test="${index.last}">${dress.dc_addr}</c:when>
-                      <c:otherwise>${dress.dc_addr},</c:otherwise>
-                    </c:choose>
-                 </c:forEach>
+               value= "경기도 안산시 단원구 초지1로 78
                " />
                
-          <input type="hidden" id="list"
-             value= "
-               <c:forEach items="${dresslist}" var="dress" varStatus="index">
-                  <c:choose>
-                    <c:when test="${index.last}">${dress.dc_nm}:${dress.dc_addr}:${dress.dc_no }</c:when>
-                    <c:otherwise>${dress.dc_nm}:${dress.dc_addr}:${dress.dc_no },</c:otherwise>
-                  </c:choose>
-               </c:forEach>
-             " />
-             
    
            <input type="hidden" id="nameList"
-               value= "
-                 <c:forEach items="${dresslist}" var="dress" varStatus="index">
-                    <c:choose>
-                      <c:when test="${index.last}">${dress.dc_nm}</c:when>
-                      <c:otherwise>${dress.dc_nm},</c:otherwise>
-                    </c:choose>
-                 </c:forEach>
-               " />
+               value= "<c:forEach items="${list}" var="studio" varStatus="index"><c:choose><c:when test="${index.last}">${studio.sc_nm}</c:when><c:otherwise>${studio.sc_nm},</c:otherwise></c:choose></c:forEach>" />
 
 
                 <!-- 구글맵 key -->
@@ -528,5 +518,6 @@
     </div>
   </div>
   
+
 </body>
 </html>

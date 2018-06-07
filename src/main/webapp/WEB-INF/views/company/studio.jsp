@@ -243,8 +243,8 @@
                           ★★★ </span> 3.0/5.0 (20명) <br>
             
             <c:choose>
-           <c:when test="${fn:length(studio.introduce) > 40}">
-                        <div class=""><c:out value="${fn:substring(studio.introduce,0,39)}"/> ... </div>
+           <c:when test="${fn:length(studio.introduce) > 30}">
+                        <div class=""><c:out value="${fn:substring(studio.introduce,0,29)}"/> ... </div>
                           </c:when>
                              <c:otherwise>
                               <c:out value="${studio.introduce}"/>
@@ -327,7 +327,7 @@
 				//좌표 객체를 이렇게 만든다. marker 를 만들때도
 				//이렇게 객체를 만들어서 사용할 수 있다.
 				var myOptions = {
-					zoom : 11,
+					zoom : 9,
 					center : latlng,
 					mapTypeId : google.maps.MapTypeId.ROADMAP
 				};
@@ -393,6 +393,17 @@
 																		maxWidth: 200
 																	});
 
+													
+													google.map.event.addListener(map,"zoom_changed", finction(){
+														zoomChangedBoundsListner = google.map.event.addListener(map, "bounds_changed", function(event) {
+															if(this.getZoom() > 12)
+																this.setZoom(12);
+															google.maps.event.removeListener(zoomChangeBoundListner);
+															
+														});
+														
+													});
+													
 													}
 												}
 											} else {

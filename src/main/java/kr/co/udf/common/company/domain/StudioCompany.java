@@ -11,6 +11,7 @@ public class StudioCompany {
 	private String sc_email;
 	private String sc_pw;
 	private int sc_tel;
+	private String sc_smy_intro;
 	private String sc_introduce;
 	private String sessionKey;
 	private String sessionLimit;
@@ -135,14 +136,23 @@ public class StudioCompany {
 		this.updatedate = updatedate;
 	}
 
-	/** toString */
+	public String getSc_smy_intro() {
+		return sc_smy_intro;
+	}
+
+	public void setSc_smy_intro(String sc_smy_intro) {
+		this.sc_smy_intro = sc_smy_intro;
+	}
+
 	@Override
 	public String toString() {
 		return "StudioCompany [sc_no=" + sc_no + ", sc_nm=" + sc_nm + ", sc_company_no=" + sc_company_no
 				+ ", sc_main_nm=" + sc_main_nm + ", sc_addr=" + sc_addr + ", sc_main_mage=" + sc_main_mage
-				+ ", sc_email=" + sc_email + ", sc_pw=" + sc_pw + ", sc_tel=" + sc_tel + ", sc_introduce="
-				+ sc_introduce + ", sessionKey=" + sessionKey + ", sessionLimit=" + sessionLimit + ", regdate="
-				+ regdate + ", updatedate=" + updatedate + "]";
+				+ ", sc_email=" + sc_email + ", sc_pw=" + sc_pw + ", sc_tel=" + sc_tel + ", sc_smy_intro="
+				+ sc_smy_intro + ", sc_introduce=" + sc_introduce + ", sessionKey=" + sessionKey + ", sessionLimit="
+				+ sessionLimit + ", regdate=" + regdate + ", updatedate=" + updatedate + "]";
 	}
+
+
 
 }

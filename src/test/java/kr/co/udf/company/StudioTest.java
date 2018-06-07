@@ -10,6 +10,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import kr.co.udf.common.company.domain.StudioCompany;
 import kr.co.udf.company.dao.StudioDao;
@@ -49,17 +51,17 @@ public class StudioTest {
 		 List<StudioCompany> list = dao.listCriteria(cri);
 		 
 		 for (StudioCompany studio : list) {
-			 //logger.info(studio.getCompanyNo() + ":" + studio.getHeadName());
+			 logger.info(studio.getSc_no() + ":" + studio.getSc_nm());
 		 }
 	 }
 	 
-	@Test
+	//@Test
 	public void testPageint() throws Exception {
 		Criteria cri = new Criteria();
 		logger.info(dao.countPaging(cri));
 	}
 	
-	@Test
+	//@Test
 	public void testSearch() throws Exception {
 		
 		SearchCriteria cri = new SearchCriteria();
@@ -69,8 +71,28 @@ public class StudioTest {
 	
 		List<StudioCompany> list = dao.listSearch(cri);
 		for (StudioCompany studio : list) {
-			//logger.info(studio.getCompanyNo() + ":" + studio.getNm());
+			logger.info(studio.getSc_no() + ":" + studio.getSc_main_nm());
 		}
 		logger.info("개수 :" + dao.listSearchCount(cri));
 	}
-}
+	
+	 //@Test
+		public void testURI() throws Exception {
+			
+			UriComponents uricompo =
+					UriComponentsBuilder.newInstance()
+					.path("/board/listpage")
+					.queryParam("bno", 1)
+					.queryParam("perPerNum", 10)
+					.build();
+			
+			logger.info(uricompo.toString());
+	}
+	
+		@Test
+		public void testlistALl() throws Exception {
+			logger.info(dao.listAll());
+		}
+	
+	
+	}

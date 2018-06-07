@@ -3,7 +3,7 @@ package kr.co.udf.common.product.domain;
 public class MakeupProduct {
 	private int mp_no;
 	private int mc_no;
-	private String mp_nm;
+	private String mc_nm;
 	private int mp_price;
 	private char mp_acc_yn; // 악세사리 여부
 	private char mp_family_yn; // 가족 포함 여부
@@ -17,7 +17,6 @@ public class MakeupProduct {
 		super();
 	}
 
-	/** Getter & Setter */
 	public int getMp_no() {
 		return mp_no;
 	}
@@ -34,12 +33,12 @@ public class MakeupProduct {
 		this.mc_no = mc_no;
 	}
 
-	public String getMp_nm() {
-		return mp_nm;
+	public String getMc_nm() {
+		return mc_nm;
 	}
 
-	public void setMp_nm(String mp_nm) {
-		this.mp_nm = mp_nm;
+	public void setMc_nm(String mc_nm) {
+		this.mc_nm = mc_nm;
 	}
 
 	public int getMp_price() {
@@ -98,12 +97,13 @@ public class MakeupProduct {
 		this.updatedate = updatedate;
 	}
 
-	/** toString */
 	@Override
 	public String toString() {
-		return "MakeupProduct [mp_no=" + mp_no + ", mc_no=" + mc_no + ", mp_nm=" + mp_nm + ", mp_price=" + mp_price
+		return "MakeupProduct [mp_no=" + mp_no + ", mc_no=" + mc_no + ", mc_nm=" + mc_nm + ", mp_price=" + mp_price
 				+ ", mp_acc_yn=" + mp_acc_yn + ", mp_family_yn=" + mp_family_yn + ", mp_hair_yn=" + mp_hair_yn
 				+ ", mp_image=" + mp_image + ", regdate=" + regdate + ", updatedate=" + updatedate + "]";
 	}
+
+
 
 }

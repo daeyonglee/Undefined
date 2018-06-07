@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                          "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace = "kr.co.udf.product.dao.DressProductDao">
+	
+		
+	<select id="read" resultType="kr.co.udf.common.product.domain.DressProduct">
+	SELECT dp_no, dc_no, dc_nm, dp_price, dp_style, dp_image, regdate, updatedate
+	FROM dress_product
+	WHERE dp_no = #{dp_no}
+	</select>
+	
+	<insert id="create">
+	INSERT INTO dress_product (dp_no, dc_no, dc_nm, dp_price, dp_style, dp_image)
+	VALUES (dress_product_seq.nextval, #{dc_no}, #{dc_nm}, #{dp_price},#{dp_style},#{dp_image})
+	</insert>
+	
+	<update id="update">
+	UPDATE dress_product 
+	SET dp_price = #{dp_price},	dp_style = #{dp_style},dp_image = #{dp_image}
+	WHERE dp_no = #{dp_no}
+	</update>
+	
+	<delete id="delete">
+	DELETE FROM dress_product
+	WHERE dp_no = #{dp_no}
+	</delete>
+	
+</mapper>

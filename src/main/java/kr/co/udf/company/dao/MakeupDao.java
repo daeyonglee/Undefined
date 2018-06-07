@@ -6,15 +6,20 @@ import kr.co.udf.common.company.domain.DressCompany;
 import kr.co.udf.common.company.domain.MakeupCompany;
 import kr.co.udf.common.company.domain.StudioCompany;
 import kr.co.udf.company.domain.Criteria;
+import kr.co.udf.company.domain.SearchCriteria;
 
 public interface MakeupDao {
 
-	public List<MakeupCompany> listAll() throws Exception ;
+	public List<MakeupCompany> listMakeup() throws Exception ;
 	
-	public List<MakeupCompany> listPage(int page) throws Exception;
+	public List<MakeupCompany> MakeupPage(int page) throws Exception;
 
-	public List<MakeupCompany> listCriteria(Criteria cri) throws Exception;
+	public List<MakeupCompany> MakeupCri(Criteria cri) throws Exception;
 	
-	public int countPaging(Criteria cri) throws Exception;
+	public int MakeupCount(Criteria cri) throws Exception;
+	
+	public List<MakeupCompany> MakeupSearch(SearchCriteria cri) throws Exception;
+
+	public int MakeupSearchCount(SearchCriteria cri) throws Exception;
 	
 }

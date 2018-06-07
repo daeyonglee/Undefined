@@ -10,6 +10,7 @@ import kr.co.udf.common.company.domain.StudioCompany;
 import kr.co.udf.company.dao.StudioDao;
 import kr.co.udf.company.domain.Criteria;
 import kr.co.udf.company.domain.SearchCriteria;
+import kr.co.udf.company.domain.StudioReview;
 
 @Service
 public class StudioServiceImpl implements StudioService {
@@ -47,4 +48,28 @@ public class StudioServiceImpl implements StudioService {
 		return dao.listSearchCount(cri);
 	}
 	 
+	@Override
+	public StudioCompany detailStudio(int sc_no) throws Exception {
+		return dao.detailStudio(sc_no);
+	}
+	
+	@Override
+	public void addReview(StudioReview studioReview) throws Exception {
+		dao.addReview(studioReview);
+	}
+	
+	@Override
+	public List<StudioReview> reviewStudio(int sc_no) throws Exception {
+		return dao.reviewStudio(sc_no);
+	}
+
+	@Override
+	public double avgPoint(int sc_no) throws Exception {
+		return dao.avgPoint(sc_no);
+	}
+	
+	@Override
+	public int countReview(int sc_no) throws Exception {
+		return dao.countReview(sc_no);
+	}
 }

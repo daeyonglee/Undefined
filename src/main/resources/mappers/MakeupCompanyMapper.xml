@@ -4,7 +4,7 @@
 
 
 
-<mapper namespace="kr.co.udf.company.dao.DressDao"> 
+<mapper namespace="kr.co.udf.company.dao.MakeupDao"> 
 	<select id="listMakeup" resultType="kr.co.udf.common.company.domain.MakeupCompany">
 	<![CDATA[
 	SELECT mc_no, 
@@ -83,6 +83,59 @@ FROM (SELECT *
 	WHERE mc_no > 0
 	]]>
 	</select>
+	
+	
+<sql id="searchMakeup">
+   <if test="searchType == 'name'.toString()">
+     and mc_nm like '%'|| #{keyword}||'%'
+   </if>
+   <if test="searchType == 'addr'.toString()">
+     and mc_addr like '%'|| #{keyword}||'%'
+   </if>
+</sql>
+
+	
+	<select id="MakeupSearch" resultType="kr.co.udf.common.company.domain.MakeupCompany">
+<![CDATA[
+	select *
+	from
+ 	 (
+ 	SELECT rownum rn,
+    mc_no, 
+	mc_nm, 
+	mc_company_no, 
+	mc_main_nm, 
+	mc_addr, 
+	mc_main_image, 
+	mc_email, 
+	mc_pw, 
+	mc_tel, 
+	mc_introduce, 
+	sessionkey, 
+	regdate, 
+	updatedate
+ 	FROM makeup_company
+ 	 where 1=1
+ 	 ]]>
+ 	   <include refid="searchMakeup"></include>
+<![CDATA[ 
+ 	 and rownum <= #{page} * #{perPageNum}
+ 	 and mc_no > 0
+     order by mc_no DESC
+ 	 )
+	where rn > (#{page} -1) * #{perPageNum}
+ 	]]>
+ 		
+	</select>
+ 	
+ 		<select id="MakeupSearchCount" resultType="int">
+	 <![CDATA[
+	select count(mc_no)
+	from makeup_company
+	where mc_no > 0
+	]]>
+	   <include refid="searchMakeup"></include>
+	</select>	
 	
 	
 </mapper>

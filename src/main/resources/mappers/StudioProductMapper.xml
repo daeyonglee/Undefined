@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                          "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace = "kr.co.udf.product.dao.StudioProductDao">
+	
+		
+	<select id="read" resultType="kr.co.udf.common.product.domain.StudioProduct">
+	SELECT sp_no, sc_no, sc_nm, sp_price, sp_apv_yn, sp_total_yn, sp_shoot_type, sp_image, regdate, updatedate
+	FROM studio_product
+	WHERE sp_no = #{sp_no}
+	</select>
+	
+	<insert id="create">
+	INSERT INTO studio_product (sp_no, sc_no, sc_nm, sp_price, sp_apv_yn, sp_total_yn, sp_shoot_type, sp_image)
+	VALUES (studio_product_seq.nextval, #{sc_no}, #{sc_nm}, #{sp_price},#{sp_apv_yn},#{sp_total_yn},#{sp_shoot_type},#{sp_image})
+	</insert>
+	
+		
+	<update id="update">
+	UPDATE studio_product 
+	SET sp_price = #{sp_price},	sp_apv_yn = #{sp_apv_yn},sp_total_yn = #{sp_total_yn},sp_shoot_type = #{sp_shoot_type}, sp_image = #{sp_image}
+	WHERE sp_no = #{sp_no}
+	</update>
+	
+	<delete id="delete" >
+	DELETE FROM studio_product
+	WHERE sp_no = #{sp_no}
+	</delete>
+
+	<select id="listAll" resultType="kr.co.udf.common.product.domain.StudioProduct">
+	SELECT *
+	FROM studio_product
+	ORDER BY sp_no DESC
+	</select>
+	
+	
+</mapper>

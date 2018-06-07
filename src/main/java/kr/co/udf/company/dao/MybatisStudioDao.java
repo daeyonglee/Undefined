@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import kr.co.udf.common.company.domain.StudioCompany;
 import kr.co.udf.company.domain.Criteria;
 import kr.co.udf.company.domain.SearchCriteria;
+import kr.co.udf.company.domain.StudioReview;
 
 @Repository
 public class MybatisStudioDao implements StudioDao {
@@ -47,5 +48,35 @@ public class MybatisStudioDao implements StudioDao {
 	@Override
 	public int listSearchCount(SearchCriteria cri) throws Exception {
 		return session.selectOne(namespace+".listSearchCount", cri);
+	}
+	
+	/** 스튜디오 업체 상세정보 조회 */
+	@Override
+	public StudioCompany detailStudio(int sc_no) {
+		return session.selectOne(namespace + ".detailStudio", sc_no);
+	}
+	
+	/** 스튜디오 업체 리뷰 추가 */
+	@Override
+	public void addReview(StudioReview studioReview) {
+		session.insert(namespace + ".addReview", studioReview);
+	}
+	
+	/** 스튜디오 업체 리뷰 출력 */
+	@Override
+	public List<StudioReview> reviewStudio(int sc_no) {
+		return session.selectList(namespace + ".reviewStudio", sc_no);
+	}
+	
+	/** 스튜디오 업체 평균 별점 */
+	@Override
+	public double avgPoint(int sc_no) {
+		return session.selectOne(namespace + ".avgPoint", sc_no);
+	} 
+	
+	/** 스튜디오 업체 리뷰 갯수 */
+	@Override
+	public int countReview(int sc_no) throws Exception {
+		return session.selectOne(namespace + ".countReview", sc_no);
 	}
 }
