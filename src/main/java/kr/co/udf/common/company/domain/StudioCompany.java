@@ -4,13 +4,13 @@ public class StudioCompany {
 
 	private int sc_no;
 	private String sc_nm;
-	private int sc_company_no; // 사업자번호
+	private long sc_company_no; // 사업자번호
 	private String sc_main_nm; // 회사대표 이름
 	private String sc_addr;
 	private String sc_main_mage;
 	private String sc_email;
 	private String sc_pw;
-	private int sc_tel;
+	private long sc_tel;
 	private String sc_smy_intro;
 	private String sc_introduce;
 	private String sessionKey;
@@ -40,11 +40,11 @@ public class StudioCompany {
 		this.sc_nm = sc_nm;
 	}
 
-	public int getSc_company_no() {
+	public long getSc_company_no() {
 		return sc_company_no;
 	}
 
-	public void setSc_company_no(int sc_company_no) {
+	public void setSc_company_no(long sc_company_no) {
 		this.sc_company_no = sc_company_no;
 	}
 
@@ -88,11 +88,11 @@ public class StudioCompany {
 		this.sc_pw = sc_pw;
 	}
 
-	public int getSc_tel() {
+	public long getSc_tel() {
 		return sc_tel;
 	}
 
-	public void setSc_tel(int sc_tel) {
+	public void setSc_tel(long sc_tel) {
 		this.sc_tel = sc_tel;
 	}
 
