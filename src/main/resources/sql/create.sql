@@ -51,6 +51,8 @@ DROP SEQUENCE board_seq;
 
 DROP SEQUENCE article_seq; 
 
+DROP SEQUENCE reply_seq; 
+
 DROP SEQUENCE users_seq; 
 
 DROP SEQUENCE admin_seq; 
@@ -118,7 +120,9 @@ DROP TABLE ADMIN CASCADE CONSTRAINTS;
 
 DROP TABLE board CASCADE CONSTRAINTS; 
 
-DROP TABLE article CASCADE CONSTRAINTS; 
+DROP TABLE article CASCADE CONSTRAINTS;
+
+DROP TABLE reply CASCADE CONSTRAINTS;
 
 DROP TABLE point_product CASCADE CONSTRAINTS; 
 
@@ -222,6 +226,8 @@ CREATE SEQUENCE dress_review_seq;
 CREATE SEQUENCE studio_review_seq;
 
 CREATE SEQUENCE makeup_review_seq;
+
+CREATE SEQUENCE reply_seq;
 
 -- create table 
 
@@ -580,7 +586,7 @@ CREATE TABLE article
      article_no      NUMBER(10) NOT NULL, 
      board_no        NUMBER(10) NOT NULL, 
      user_no         NUMBER(10) NOT NULL, 
-     article_head    VARCHAR2(50), 
+     article_head    VARCHAR2(50), -- kind 스드메 종류 null허용으로 바뀌어야 쪽지함, 공지사항 가능
      article_title   VARCHAR2(100) NOT NULL, 
      article_content VARCHAR2(3000) NOT NULL, 
      hitcount        NUMBER(20) DEFAULT 0, 
@@ -589,7 +595,16 @@ CREATE TABLE article
      updatedate      DATE DEFAULT SYSDATE NOT NULL, 
      PRIMARY KEY (article_no, board_no, user_no) 
   ); 
-
+ 
+create table reply(
+     reply_no      NUMBER(10)  NOT NULL, 
+     article_no      NUMBER(10)  DEFAULT 0 NOT NULL, 
+     reply_content VARCHAR2(1000) NOT NULL,
+     user_nm       VARCHAR2(30) NOT NULL,
+     regdate         DATE DEFAULT SYSDATE NOT NULL,
+     updatedate      DATE DEFAULT SYSDATE NOT NULL,     
+     PRIMARY KEY (reply_no, article_no) 
+);
 
 
 -- 회원 
@@ -804,14 +819,6 @@ ALTER TABLE makeup_bid
   makeup_auction_apply (maa_no, user_no), CONSTRAINT mb_mc_fk FOREIGN KEY (mc_no 
   ) REFERENCES makeup_company (mc_no)); 
 
-ALTER TABLE article 
-  ADD CONSTRAINT article_board_fk FOREIGN KEY (board_no) REFERENCES board ( 
-  board_no); 
-
-ALTER TABLE article 
-  ADD CONSTRAINT article_users_fk FOREIGN KEY (user_no) REFERENCES users ( 
-  user_no); 
-
 ALTER TABLE point_use_hist 
   ADD( CONSTRAINT puh_users_fk FOREIGN KEY (user_no) REFERENCES users (user_no), 
   CONSTRAINT puh_pp_fk FOREIGN KEY (pp_no) REFERENCES point_product (pp_no)); 
@@ -849,6 +856,14 @@ ALTER TABLE dress_review ADD CONSTRAINT dr_dc_fk FOREIGN KEY (dc_no) REFERENCES 
 ALTER TABLE studio_review ADD CONSTRAINT sr_sc_fk FOREIGN KEY (sc_no) REFERENCES studio_company (sc_no);
 ALTER TABLE makeup_review ADD CONSTRAINT mr_mc_fk FOREIGN KEY (mc_no) REFERENCES makeup_company (mc_no);
 
+ALTER TABLE article 
+  ADD CONSTRAINT article_board_fk FOREIGN KEY (board_no) REFERENCES board ( 
+  board_no);
+  
+ALTER TABLE article ADD CONSTRAINT article_users_fk FOREIGN KEY (user_no) REFERENCES users (user_no); 
+  
+ALTER TABLE reply ADD CONSTRAINT reply_article_fk FOREIGN KEY (article_no) REFERENCES article(article_no);
+ 
 -- insert data 
 -- admin 
 desc ADMIN; 

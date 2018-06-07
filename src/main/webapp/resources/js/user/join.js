@@ -27,35 +27,18 @@ $(document).ready(function () {
 
         },
         onNext: function (tab, navigation, index) {
-            
-        	if (!$(".wizard-card form").valid()) {
-        		$validator.focusInvalid();
-                return false;
-            }
-            
         	if (index == 1) {
                 return validateFirstStep();
             } else if (index == 2) {
-               var email = $("#email").val();
-          	   
-          	   // 이메일체크
-          	   $.ajax({
-          		   url: "/user/emailcheck",
-          		   type: "get",
-          		   data: {email:email},
-          		   dataType: "json",
-          		   success:function(data){
-          			   console.log(data);
-          			   if (data.email == "" || data.email == null || data.email == undefined) {
-          				   
-          			   } else {
-          				   alert("이미 이메일이 존재합니다.");
-        				   return;
-          			   }
-          		   }
-          	   })
             	
-          	   return validateSecondStep();
+            	var chk = validateSecondStep();
+            	var chk2 = emailcheck();
+            	
+            	if (chk) {
+            		return true;
+            	} else {
+            		return false;
+            	}
             } else if (index == 3) {
                 return validateThirdStep();
             } //etc. 
@@ -230,6 +213,30 @@ $(document).ready(function () {
     });  
 });
 
+function emailcheck(){
+	var email = $("#email").val();
+	var result;
+   // 이메일체크
+   $.ajax({
+	   url: "/user/emailcheck",
+	   type: "get",
+	   async: false,
+	   data: {email:email},
+	   dataType: "json",
+	   success:function(data){
+		   console.log(data);
+		   if (data.email == "" || data.email == null || data.email == undefined) {
+			   result = true;
+		   } else {
+			   alert("이미 이메일이 존재합니다.");
+			   result = false;
+		   }
+	   }
+   });
+   
+   return result;
+};
+
 function validateFirstStep() {
 
 	// 앞에서 일반 사용자를 선택했는지 업체를 선택했는지 확인
@@ -239,15 +246,15 @@ function validateFirstStep() {
 		
 		var html  = "<div class='form-group'>";
 		    html += "  <label>이메일 <small>(required)</small></label>";
-		    html += "  <input id='email' name='email' type='email' class='form-control' required>";
+		    html += "  <input id='email' name='email' type='email' class='form-control'>";
 		    html += "</div>";
 		    html += "<div class='form-group'>";
 		    html += "  <label>비밀번호 <small>(required)</small></label>";
-		    html += "  <input name='pw' id='pw' type='password' class='form-control' required>";
+		    html += "  <input name='pw' id='pw' type='password' class='form-control'>";
 		    html += "</div>";
 		    html += "<div class='form-group'>";
 		    html += "  <label>비밀번호 확인<small>(required)</small></label>";
-		    html += "<input name='repw' id='repw' type='password' class='form-control' required>";
+		    html += "<input name='repw' id='repw' type='password' class='form-control'>";
 		    html += "</div>";
 		$("#base-container").html(html);
 	}
@@ -256,15 +263,15 @@ function validateFirstStep() {
 		
 		var html  = "<div class='form-group'>";
 		    html += "  <label>이메일 <small>(required)</small></label>";
-		    html += "  <input id='email' name='email' type='email' class='form-control' required>";
+		    html += "  <input id='email' name='email' type='email' class='form-control'>";
 		    html += "</div>";
 		    html += "<div class='form-group'>";
 		    html += "  <label>비밀번호 <small>(required)</small></label>";
-		    html += "  <input name='pw' id='pw' type='password' class='form-control' required>";
+		    html += "  <input name='pw' id='pw' type='password' class='form-control'>";
 		    html += "</div>";
 		    html += "<div class='form-group'>";
 		    html += "  <label>비밀번호 확인<small>(required)</small></label>";
-		    html += "<input name='repw' id='repw' type='password' class='form-control' required>";
+		    html += "<input name='repw' id='repw' type='password' class='form-control'>";
 		    html += "</div>";
 	    $("#base-container").html(html);
 	}
@@ -494,50 +501,7 @@ function validateSecondStep() {
             repw: {
             	required: true,
             	equalTo: "#pw"
-            },
-            companyNo: {
-        		requrired: true
-        	},
-        	name : {
-        		required: true
-        	},
-        	mainNm : {
-        		required: true
-        	},
-        	tel:{
-        		required: true,
-        		tel: true
-        	},
-        	birthday:{
-        		required: true,
-        		date: true
-        	},
-        	addrdetail: {
-        		required: "#postcode"
-        	}
-
-            /*  other possible input validations
-             ,username: {
-             required: true,
-             minlength: 2
-             },
-             password: {
-             required: true,
-             minlength: 5
-             },
-             confirm_password: {
-             required: true,
-             minlength: 5,
-             equalTo: "#password"
-             },
-             
-             topic: {
-             required: "#newsletter:checked",
-             minlength: 2
-             },
-             agree: "required"
-             */
-
+            }
         },
         messages: {
             email: "이메일 형식이 유효하지 않습니다.",
@@ -546,25 +510,6 @@ function validateSecondStep() {
             	required: "비밀번호가 일치하지 않습니다.",
             	equalTo: "비밀번호가 일치하지 않습니다."
             }
-            /*   other posible validation messages
-             username: {
-             required: "Please enter a username",
-             minlength: "Your username must consist of at least 2 characters"
-             },
-             password: {
-             required: "Please provide a password",
-             minlength: "Your password must be at least 5 characters long"
-             },
-             confirm_password: {
-             required: "Please provide a password",
-             minlength: "Your password must be at least 5 characters long",
-             equalTo: "Please enter the same password as above"
-             },
-             email: "Please enter a valid email address",
-             agree: "Please accept our policy",
-             topic: "Please select at least 2 topics"
-             */
-
         }
     });
 	

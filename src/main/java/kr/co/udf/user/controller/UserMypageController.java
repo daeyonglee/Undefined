@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
@@ -23,8 +24,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import kr.co.udf.auction.domain.AuctionBid;
+import kr.co.udf.auction.service.MypageBidService;
 import kr.co.udf.common.util.MediaUtils;
-import kr.co.udf.common.util.UploadFileUtils;
+import kr.co.udf.common.web.SearchParams;
 import kr.co.udf.user.domain.Company;
 import kr.co.udf.user.domain.CompanyDTO;
 import kr.co.udf.user.domain.Login;
@@ -43,6 +46,9 @@ public class UserMypageController {
 	
 	@Inject
 	UserMypageService mypageService;
+	
+	@Inject
+	private MypageBidService mypageBidService;
 	
 	/**
 	 * 마이페이지 index
@@ -187,14 +193,63 @@ public class UserMypageController {
 		return "redirect:/user/mypage/index";
 	}
 	
-	/**
-	 * 마이페이지 >> 역경매신청현황
-	 */
-	@RequestMapping(value="bidlist", method=RequestMethod.GET)
-	public String bidList() {
-		logger.info("마이페이지-역경매 신청 현황 들어왔숑");
+	/** 마이페이지 - 나의 신청서 리스트 조회 */
+	@RequestMapping(value = "/apply", method = RequestMethod.GET)
+	public String applyList(SearchParams params, HttpSession session, Model model) throws Exception {
 		
-		return "/user/bidlist";
+		Login login = (Login)session.getAttribute("login");
+		int userNo = login.getNo().intValue();
+		logger.info(userNo);
+		
+		model.addAttribute("applyList", mypageBidService.applyListByUser(userNo));
+		
+		return "/user/mypage/apply";
+
+	}
+	
+	/** 마이페이지 - 나의 낙찰된 신청서 리스트 조회 */
+	@RequestMapping(value="/win", method=RequestMethod.GET)
+	public String winList(HttpSession session, Model model) throws Exception{
+		
+		Login login = (Login)session.getAttribute("login");
+		int userNo = login.getNo().intValue();
+		logger.info(userNo);
+		
+		model.addAttribute("winList", mypageBidService.winListByUser(userNo));
+		
+		return "/user/mypage/win";
+	}
+	
+	/** 마이페이지 - 입찰중 or 낙찰대기중인 신청서의 입찰서 리스트 조회 */
+	@RequestMapping(value="/bidlist", method=RequestMethod.GET)
+	public String bidList(@RequestParam("applyNo") int applyNo, @RequestParam("type") String type, HttpSession session, Model model) throws Exception{
+		
+		Login login = (Login)session.getAttribute("login");
+		int userNo = login.getNo().intValue();
+		logger.info(userNo);
+		
+		List<AuctionBid> bid = mypageBidService.bidListByUser(userNo, applyNo, type);
+		logger.info(bid);
+		
+		model.addAttribute("bidList", bid);
+		
+		return "/user/mypage/bidlist";
+	}
+	
+	/** 마이페이지 - 입찰중 or 낙찰대기중인 신청서 상세 조회 */
+	@RequestMapping(value="/bid/read", method=RequestMethod.GET)
+	public String readBid(@RequestParam("applyNo") int applyNo, @RequestParam("type") String type, HttpSession session, Model model) throws Exception {
+		
+		Login login = (Login)session.getAttribute("login");
+		int userNo = login.getNo().intValue();
+		logger.info(userNo);
+		
+		AuctionBid bid = mypageBidService.readBid(userNo, applyNo, type);
+		logger.info(bid);
+		
+		model.addAttribute("bid", bid);
+		
+		return "/user/mypage/bidread";
 	}
 	
 	/**
@@ -204,7 +259,7 @@ public class UserMypageController {
 	public String interest() {
 		logger.info("마이페이지-관심업체 들어왔숑");
 		
-		return "/user/interest";
+		return "/user/mypage/interest";
 	}
 	
 	/**
@@ -214,7 +269,7 @@ public class UserMypageController {
 	public String point() {
 		logger.info("마이페이지-포인트관리 들어왔숑");
 		
-		return "/user/point";
+		return "/user/mypage/point";
 	}	
 	
 	/**

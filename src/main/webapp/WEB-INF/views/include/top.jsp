@@ -157,8 +157,8 @@
                </ul>
              </li>
 
-             <li class="wow fadeInDown" data-wow-delay="0.4s"><a href="/sarticle/list?board_no=1">자유게시판</a></li>
-             <li class="wow fadeInDown" data-wow-delay="0.5s"><a href="/sarticle/list?board_no=2">공지사항</a></li>
+             <li class="wow fadeInDown" data-wow-delay="0.4s"><a href="/sarticle/list?board_no=2">자유게시판</a></li>
+             <li class="wow fadeInDown" data-wow-delay="0.5s"><a href="/sarticle/list?board_no=1">공지사항</a></li>
          </ul>
      </div><!-- /.navbar-collapse -->
  </div><!-- /.container-fluid -->
