@@ -842,7 +842,7 @@ ALTER TABLE dress_cvst_list
   dc_no));
   
 ALTER TABLE dress_review ADD PRIMARY KEY (dr_no, dc_no);
-ALTER TABLE studio_review ADD PRIMARY KEY (dr_no, sc_no);
+ALTER TABLE studio_review ADD PRIMARY KEY (sr_no, sc_no);
 ALTER TABLE makeup_review ADD PRIMARY KEY (mr_no, mc_no);
 
 ALTER TABLE dress_review ADD CONSTRAINT dr_dc_fk FOREIGN KEY (dc_no) REFERENCES dress_company (dc_no);
@@ -884,44 +884,6 @@ VALUES      (admin_seq.NEXTVAL,
 
 SELECT * 
 FROM   ADMIN; 
-
--- users 
-desc users; 
-INSERT INTO users 
-            (user_no, 
-             user_email, 
-             user_pw,
-             user_nm,
-             user_birthday, 
-             user_addr, 
-             user_tel, 
-             user_point) 
-VALUES      (users_seq.NEXTVAL, 
-             'kosta@naver.com', 
-             '1234',
-             '임꺽정',
-             TO_DATE('1990-01-11'), 
-             '경기도 성남시 분당구 판교역로 241번길 20 미래에셋 벤처타워 1층',
-             07050395805, 
-             0); 
-
-INSERT INTO users 
-            (user_no, 
-             user_email, 
-             user_pw,
-             user_nm,
-             user_birthday, 
-             user_addr, 
-             user_tel, 
-             user_point) 
-VALUES      (users_seq.NEXTVAL, 
-             'dleo200@naver.com', 
-             '1q2w3e4r',
-             '홍길동',
-             TO_DATE('1990-01-11'), 
-             ' 경기도 성남시 분당구 정자동 불정로 6 NAVER 그린팩토리 1층', 
-             01083768171, 
-             0); 
 
 SELECT * 
 FROM   users; 

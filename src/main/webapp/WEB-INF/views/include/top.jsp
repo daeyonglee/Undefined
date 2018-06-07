@@ -132,7 +132,7 @@
                <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">역경매<b class="caret"></b></a>
                <ul class="dropdown-menu navbar-nav">
                    <li>
-                       <a href="/auction/intro">스드메 역경매란?</a>
+                       <a href="/auction/intro"  >스드메 역경매란?</a>
                    </li>
                    <li>
                        <a href="/auction/index">스드메 역경매 </a>
