@@ -25,7 +25,7 @@
 
 .bottomFix {
 	position: fixed;
-	height: 100px;
+	/* height: 100px; */
 	bottom: 0px;
 	z-index: 999;
 }
@@ -36,6 +36,10 @@
 
 #studioCart #dressCart #makeupCart {
 	border-color: #eeeeee;
+}
+
+.addCartBtn{
+    float: right;
 }
 </style>
 </head>
@@ -72,12 +76,6 @@
             </li>
           </c:forEach>
         </ul>
-        <div id="studioCart" class="cart">
-          <ul class="list-inline">
-          
-          </ul>
-          <button id="addSCartBtn" class="addCartBtn">관심상품에 추가</button>
-        </div>
       </div>
       <div id="dressTab" class="tab-pane fade">
         <ul class="list-inline">
@@ -93,12 +91,6 @@
             </li>
           </c:forEach>
         </ul>
-        <div id="dressCart" class="cart">
-          <ul class="list-inline">
-          
-          </ul>
-          <button id="addDCartBtn" class="addCartBtn">관심상품에 추가</button>
-        </div>
       </div>
       <div id="makeupTab" class="tab-pane fade">
         <ul class="list-inline">
@@ -116,16 +108,35 @@
             </li>
           </c:forEach>
         </ul>
-        <div id="makeupCart" class="cart">
-          <ul class="list-inline">
+      </div>
+    </div>
+    <div id="cart" class="cart">
+      <ul id="cartMenu" class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#studioCartTab">스튜디오</a></li>
+        <li><a data-toggle="tab" href="#dressCartTab">드레스</a></li>
+        <li><a data-toggle="tab" href="#makeupCartTab">메이크업</a></li>
+      </ul>
+      
+      <div class="tab-content">
+        <div id="studioCartTab" class="tab-pane fade in active">
+          <ul class="list-inline" id="studioCart">
           
           </ul>
-          <button id="addMcartBtn" class="addCartBtn">관심상품에 추가</button>
         </div>
+        <div id="dressCartTab" class="tab-pane fade">
+          <ul class="list-inline" id="dressCart">
+          
+          </ul>
+        </div>   
+        <div id="makeupCartTab" class="tab-pane fade">
+          <ul class="list-inline" id="makeupCart">
+          
+          </ul>
+        </div>   
+        <button id="addCartBtn" class="addCartBtn">관심상품에 추가</button>
       </div>
     </div>
   </div>
-
   <script>
   	$(document).ready(function() {
   		topFix();
@@ -151,14 +162,12 @@
   	function bottomFix(){
   		var containerOffset = $(".container").offset();
   		$(window).on("scroll", function() {
-  			$(".cart").each(function(index){
-      			if($(document).scrollTop() + $(window).height() < this.offset().top + parseInt(this.css("height"))){
-        			this.addClass('bottomFix');
-        			this.css("width", $(".container").css("width"));
-      			} else {
-      				this.removeClass("bottomFix");
-      			}
-  			});
+  			if($(document).scrollTop() + $(window).height() <= $("#cart").offset().top + parseInt($("#cart").css("height"))){
+    			$("#cart").addClass('bottomFix');
+    			$("#cart").css("width", $(".container").css("width"));
+  			} else {
+  				$("#cart").removeClass("bottomFix");
+  			}
   		});
   	}
   	
@@ -176,7 +185,7 @@
   				contentType: "application/json; charset=UTF-8",
   				data: JSON.stringify(param),
   				success: function(studio){
-  					$("#studioCart").children("ul").html(
+  					$("#studioCart").append(
   							"<li class='cartItem'>" +
   							"<div class='itemNo' hidden='hidden'>" + studio.sp_no + "</div>" + 
   							"<div>" + studio.sp_image + "</div>" + 
@@ -200,7 +209,7 @@
   				contentType: "application/json; charset=UTF-8",
   				data: JSON.stringify(param),
   				success: function(dress){
-  					$("#dressCart").children("ul").html(
+  					$("#dressCart").append(
   							"<li class='cartItem'>" +
   							"<div class='itemNo' hidden='hidden'>" + dress.dp_no + "</div>" + 
   							"<div>" + dress.dp_image + "</div>" + 
@@ -224,7 +233,7 @@
   				contentType: "application/json; charset=UTF-8",
   				data: JSON.stringify(param),
   				success: function(makeup){
-  					$("#makeupCart").children("ul").html(
+  					$("#makeupCart").append(
   							"<li class='cartItem'>" +
   							"<div class='itemNo' hidden='hidden'>" + makeup.mp_no + "</div>" + 
   							"<div>" + makeup.mp_image + "</div>" + 
@@ -239,19 +248,10 @@
   	
   	/** 장바구니의 아이템을 클릭하면 삭제되는 클릭 이벤트 */
   	function removeItem(){
-  		$("#studioCart").on("click", function(){
-  			$(this).toggle();
-  			$(this).html("스튜디오를 선택해주세요");
-  		})
-  		
-  		$("#dressCart").on("click", function(){
-  			$(this).toggle();
-  			$(this).html("드레스를 선택해주세요");
-  		})
-  		
-  		$("#makeupCart").on("click", function(){
-  			$(this).toggle();
-  			$(this).html("메이크업을 선택해주세요");
+  		$(".cart").on("click", function(){
+  			$(this).find(".cartItem").on("click", function(){
+  				$(this).remove();
+  			});
   		})
   	}
   	

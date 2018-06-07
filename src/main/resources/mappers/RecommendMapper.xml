@@ -183,6 +183,7 @@
 		       mp_acc_yn, 
 		       mp_family_yn, 
 		       mp_hair_yn, 
+		       mp_image,
 		       TO_CHAR(regdate, 'YYYY-MM-DD')    regdate,
                TO_CHAR(updatedate, 'YYYY-MM-DD') updatedate 
 		FROM   makeup_product 
