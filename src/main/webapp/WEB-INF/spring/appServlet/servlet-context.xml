@@ -57,6 +57,7 @@
 			<mapping path="/company/*"/>
 			<mapping path="/auction/*"/>
 			<mapping path="/recommend/*"/>
+			<mapping path="/user/mypage/index"/>
 			<beans:ref bean="authInterceptor"/>
 		</interceptor>
 	</interceptors>

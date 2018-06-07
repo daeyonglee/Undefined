@@ -127,11 +127,12 @@
          </div> -->
          <ul class="main-nav nav navbar-nav navbar-right">
              <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="/">HOME</a></li>
-             <li class="dropdown ymm-sw " data-wow-delay="0.2s">
+             <li class="wow fadeInDown" data-wow-delay="0.2s"><a class="" href="/recommend/index">통합추천</a></li>
+             <li class="dropdown ymm-sw " data-wow-delay="0.3s">
                <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">역경매<b class="caret"></b></a>
                <ul class="dropdown-menu navbar-nav">
                    <li>
-                       <a href="/auction/intro">스드메 역경매란?</a>
+                       <a href="/auction/intro"  >스드메 역경매란?</a>
                    </li>
                    <li>
                        <a href="/auction/index">스드메 역경매 </a>
@@ -156,8 +157,8 @@
                </ul>
              </li>
 
-             <li class="wow fadeInDown" data-wow-delay="0.4s"><a href="/sarticle/list?board_no=1">자유게시판</a></li>
-             <li class="wow fadeInDown" data-wow-delay="0.5s"><a href="/sarticle/list?board_no=2">공지사항</a></li>
+             <li class="wow fadeInDown" data-wow-delay="0.4s"><a href="/sarticle/list?board_no=2">자유게시판</a></li>
+             <li class="wow fadeInDown" data-wow-delay="0.5s"><a href="/sarticle/list?board_no=1">공지사항</a></li>
          </ul>
      </div><!-- /.navbar-collapse -->
  </div><!-- /.container-fluid -->
