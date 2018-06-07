@@ -73,9 +73,24 @@
             <tr>
             <!--게시글 번호 내림차순 출력하는 계산식 (전체 글 수-(선택한 페이지 *페이지에 출력되는 article수)+페이지에 출력되는 article수)- i%> -->
               <td><c:out value="${(TotalCount-(Page*PageSize)+PageSize)-i}"/></td>
+              <!--자유게시판일 경우에만 Article_head를 보여주기 위한 코드  -->
+            <%
+             if(request.getParameter("board_no")!=null){
+             if(Integer.parseInt(request.getParameter("board_no"))!=2){
+            %>              
               <td><a
                 href='/sarticle/readPage${pageMaker.makeSearch(pageMaker.cri.page) }&article_no=${article.ARTICLE_NO}&board_no=<%=request.getParameter("board_no")%>'>
                   ${article.ARTICLE_TITLE}</a></td>
+            <%
+             }else{
+            %>
+                 <td><a
+                 href='/sarticle/readPage${pageMaker.makeSearch(pageMaker.cri.page) }&article_no=${article.ARTICLE_NO}&board_no=<%=request.getParameter("board_no")%>'>
+                   [${article.ARTICLE_HEAD}] ${article.ARTICLE_TITLE}</a></td>
+                   
+              <%
+             }}
+              %>
               <td>${article.USER_NM}</td>
               <td>${article.REGDATE}</td>
                <!--쪽지함의 경우에는 조회수가 나타나지 않도록 하기 위한 코드 -->

@@ -48,9 +48,9 @@
               <select class="selectpicker" name="article_head"
                 id="article_head" name="article_head">
                 <option value="${read.article_head}" selected="selected">${read.article_head}</option>
-                <option value="Studio">스튜디오</option>
-                <option value="Dress">드레스</option>
-                <option value="Makeup">메이크업</option>
+                <option value="스튜디오">스튜디오</option>
+                <option value="드레스">드레스</option>
+                <option value="메이크업">메이크업</option>
               </select>
             </div>
           </div>
