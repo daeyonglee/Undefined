@@ -16,7 +16,7 @@ public interface UserJoinDao {
 	 * 업체 회원가입
 	 * @param dto
 	 */
-	public void companyjoin(CompanyDTO dto);
+	public void companyjoin(CompanyDTO dto, String uploadFileName);
 	
 	/**
 	 * 이메일 존재 유무 체크

@@ -16,7 +16,7 @@ public class UploadFileUtils {
 
 	private static final Logger logger = Logger.getLogger(UploadFileUtils.class);
 	
-	private static String calcPath(String uploadPath) {
+	public static String calcPath(String uploadPath) {
 		
 		Calendar cal = Calendar.getInstance();
 		

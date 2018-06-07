@@ -40,8 +40,6 @@ public class UserJoinServiceImpl implements UserJoinService{
 	 */
 	@Override
 	public void companyjoin(CompanyDTO dto) throws IOException, Exception {
-		joinDao.companyjoin(dto);
-		
 		if(dto.getMainImg().isEmpty() == false){
 		 	logger.debug("------------- file start -------------");
             logger.debug("name : "+dto.getMainImg().getName());
@@ -49,8 +47,11 @@ public class UserJoinServiceImpl implements UserJoinService{
             logger.debug("size : "+dto.getMainImg().getSize());
             logger.debug("-------------- file end --------------\n");
             
-            UploadFileUtils.uploadFile(cpMainImgPath, dto.getMainImg().getOriginalFilename(), dto.getMainImg().getBytes());
+            String uploadFileName = UploadFileUtils.uploadFile(cpMainImgPath, dto.getMainImg().getOriginalFilename(), dto.getMainImg().getBytes());
+            
+            joinDao.companyjoin(dto, uploadFileName);
 		}
+		
 	}
 
 	@Override

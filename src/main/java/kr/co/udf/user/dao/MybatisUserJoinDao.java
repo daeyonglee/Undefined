@@ -34,11 +34,11 @@ public class MybatisUserJoinDao implements UserJoinDao {
 	}
 
 	@Override
-	public void companyjoin(CompanyDTO dto) {
+	public void companyjoin(CompanyDTO dto, String uploadFileName) {
 		Map<String, Object> map = new HashMap<>();
 		
 		map.put("company", dto);
-		map.put("image", dto.getMainImg().getOriginalFilename());
+		map.put("image", uploadFileName);
 		map.put("addr", dto.getPostcode()+"^^"+dto.getAddr()+"^^"+dto.getAddrdetail());
 		
 		if (dto.getCompanyType().equals("dress")) {

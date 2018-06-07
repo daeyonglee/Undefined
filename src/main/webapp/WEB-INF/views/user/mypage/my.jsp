@@ -124,7 +124,7 @@
         						<div class="col-md-4 col-xs-4 col-sm-offset-1">
         							<div class="picture-container">
         								<div class="picture">
-        									<img class="picture-src" id='wizardPicturePreview' title=''>
+        									<img src="/user/mypage/imgview?imgview=${company.mainImg}" class="picture-src" id='wizardPicturePreview' title=''>
         									<input name="mainImg" type="file" id='wizard-picture' value="${company.mainImg}">
         								</div>
         								<div>
@@ -172,7 +172,7 @@
         					<div class="col-sm-12">
                     <div class='form-group'>
                       <label>한 줄 소개</label>
-                      <input type='text' name='smyIntro' class='form-control' placeholder='간단하게 보여질 한 줄 소개' value="${smyIntro}">
+                      <input type='text' name='smyIntro' class='form-control' placeholder='간단하게 보여질 한 줄 소개' value="${company.smyIntro}">
                     </div>
         						<div class="form-group">
         							<label>업체 소개</label>

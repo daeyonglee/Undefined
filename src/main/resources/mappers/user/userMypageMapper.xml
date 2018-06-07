@@ -58,7 +58,7 @@
 		  FROM studio_company
 		 WHERE sc_no = #{no}
 		   AND sc_email = #{email}
-		   AND sc_pw = #{pw};
+		   AND sc_pw = #{pw}
 	</select>
 	
 	<!-- 메이크업 업체 정보조회 -->
@@ -78,7 +78,7 @@
 		  FROM makeup_company
 		 WHERE mc_no = #{no}
 		   AND mc_email = #{email}
-		   AND mc_pw = #{pw};
+		   AND mc_pw = #{pw}
 	</select>
 	
 	<!-- 나의 정보관리 정보 수정하기 (일반 사용자) -->

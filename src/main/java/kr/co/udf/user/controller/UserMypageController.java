@@ -2,6 +2,7 @@ package kr.co.udf.user.controller;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 
@@ -9,9 +10,12 @@ import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.udf.common.util.MediaUtils;
+import kr.co.udf.common.util.UploadFileUtils;
 import kr.co.udf.user.domain.Company;
 import kr.co.udf.user.domain.CompanyDTO;
 import kr.co.udf.user.domain.Login;
@@ -212,5 +217,41 @@ public class UserMypageController {
 		return "/user/point";
 	}	
 	
-
+	/**
+	 * 마이페이지 >> 이미지 호출
+	 * @throws IOException 
+	 */
+	@RequestMapping(value="imgview", method=RequestMethod.GET)
+	public ResponseEntity<byte[]> imgview(@RequestParam("imgview") String imgview) throws IOException {
+		InputStream in = null;
+		ResponseEntity<byte[]> entity = null;
+		logger.info("FILE NAME : " + imgview);
+		logger.info(imgview);
+		
+		try {
+			String formatName = imgview.substring(imgview.lastIndexOf(".")+1);
+			MediaType mType = MediaUtils.getMediaType(formatName);
+			
+			HttpHeaders headers = new HttpHeaders();
+			in = new FileInputStream(cpMainImgPath+imgview);
+			
+			if (mType != null) {
+				headers.setContentType(mType);
+			} else {
+				imgview = imgview.substring(imgview.indexOf("_")+1);
+				headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+				headers.add("Content-Disposition", "attachment; filename=\"" + new String(imgview.getBytes("UTF-8"), "ISO-8859-1")+"\"");
+			}
+			
+			entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), headers, HttpStatus.CREATED);
+					
+		} catch(Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
+		} finally {
+			in.close();
+		}
+		
+		return entity;
+	}
 }
