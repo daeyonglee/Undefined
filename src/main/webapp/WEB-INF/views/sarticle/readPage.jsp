@@ -161,13 +161,14 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h6 type="hidden" class="modal-title"></h6>
+            <Input type="hidden" class="modal-title"></Input>
+            <h5><font color="fdc600">댓글 수정하기</font></h5>
           </div>
           <div class="modal-body" data-reply_no>
             <p><input type="text" id="reply_content" class="form-control"></p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-info" id="replyModBtn">수정</button>
+            <button type="button" class="btn btn-warning" id="replyModBtn">수정</button>
             <button type="button" class="btn btn-danger" id="replyDelBtn">삭제</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
           </div>
@@ -187,10 +188,10 @@
 /* 댓글목록 리스트버튼 클릭 시 댓글 보여주기/숨기기 */
 $("#repliesDiv").on("click", function() {
    if ($(".timeline li").size() > 1) {
-	  alert("if");
+	  //alert("if");
 	  $(".replyLi").remove();
   }else{
-	  alert("else");
+	  //alert("else");
 	  getPage("/replies/" + article_no + "/1");
   } 
 });
@@ -228,6 +229,7 @@ $(".timeline").on("click", ".replyLi", function(event){
   var reply = $(this);
   $("#reply_content").val(reply.find('.timeline-body').text());
   $(".modal-title").html(reply.attr("data-reply_no"));
+  $(".data-reply_no").hide();
   
 });
 
@@ -330,7 +332,7 @@ var printPaging = function(pageMaker, target) {
 <script id="template" type="text/x-handlebars-template">
 {{#each .}}
 <li class="replyLi" data-reply_no={{reply_no}}>
-<i class="fa fa-comments bg-blue"></i>
+<i class="fa fa-comments bg-yellow 	"></i>
  <div class="timeline-item" >
   <span class="time">
   <h6 class="timeline-header"> 작성자: {{user_nm}}</h6>
