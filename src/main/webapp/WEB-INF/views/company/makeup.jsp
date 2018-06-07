@@ -168,7 +168,6 @@
                   <a href="slist"> <button type="button">STUDIO</button>  </a>   
                  <a href="dress"> <button type="button">DRESS</button></a>
                  <a href="makeup"><button type="button" disabled>MAKEUP</button></a>   
-                 
           <script type="text/javascript">
 //          $(document).ready(function() {
  //    			 $("button").click(function() {
@@ -187,7 +186,7 @@
             <div class="section clear">
               <div id="list-type" class="proerty-th">
 
-                 
+               
          <c:forEach items="${makeuplist}" var="makeup" varStatus="status">
 
                   <div class="col-sm-6 col-md-4 p0">
@@ -240,6 +239,7 @@
                             href="/company/compare?companyNo=${makeup.mc_no}">
                             ${makeup.mc_nm} </a>
                         </h5>
+
                         <div class="dot-hr"></div>
                         <span class="proerty-price pull-left">
                           ★★★ </span> 3.0/5.0 (20명) <br>
@@ -298,7 +298,7 @@
           <div class="col-md-3 pl0 padding-top-40">
             <div class="blog-asside-right pl0">
               <div class="panel panel-default sidebar-menu wow fadeInRight animated">
-
+              
               <!-- 업체검색 -->
                <div class="searchType">
                 <select name="selectBox" id="selectBox">
@@ -475,7 +475,6 @@
 					
 					return infowin;
 				}
-				
 			}
 		</script>
     
@@ -527,6 +526,5 @@
       </div>
     </div>
   </div>
-  
 </body>
 </html>

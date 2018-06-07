@@ -70,5 +70,4 @@ public class DressTest {
 		}
 		logger.info("개수 :" + dao.DressSearchCount(cri));
 	}
-	
 }

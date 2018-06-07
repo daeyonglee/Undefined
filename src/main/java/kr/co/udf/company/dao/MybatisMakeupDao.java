@@ -49,5 +49,4 @@ public class MybatisMakeupDao implements MakeupDao {
 	public int MakeupSearchCount(SearchCriteria cri) throws Exception {
 		return session.selectOne(namespace+".MakeupSearchCount", cri);
 	}
-
 }

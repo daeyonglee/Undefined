@@ -184,7 +184,7 @@
           <script type="text/javascript">
 //          $(document).ready(function() {
  //              $("button").click(function() {
- //                $("#result").load("dress #session01");  
+ //                $("#result").load("dress #session01");
 //      })
  //   })
           </script>
@@ -364,7 +364,7 @@
                   </script>                              
                                                   
                                                   
-                                
+                              
                 <!-- 지도시작 -->
 
                 <div id="map" style="width: 100%; height: 650px;"></div>
@@ -395,6 +395,7 @@
 						myOptions);
 
 				var geocoder = new google.maps.Geocoder();
+
 				var bounds = new google.maps.LatLngBounds();
 
 				var region = document.getElementById("mapList").value.split(",");
@@ -500,12 +501,10 @@
 				
 			}
 		</script>
->>>>>>> soojin
     
     <!-- 마커 장소 찍기 -->
     
     <!-- studio.sc_addr:studio.sc_nm, -->
-    
            <input type="hidden" id="mapList"
                value= "
                  <c:forEach items="${list}" var="studio" varStatus="index">
@@ -550,7 +549,6 @@
       </div>
     </div>
   </div>
-  
 
 </body>
 </html>

@@ -16,7 +16,7 @@
 	mc_email, 
 	mc_pw, 
 	mc_tel, 
-	mc_introduce, 
+	mc_introduce,
 	sessionkey, 
 	regdate, 
 	updatedate
@@ -136,6 +136,4 @@ FROM (SELECT *
 	]]>
 	   <include refid="searchMakeup"></include>
 	</select>	
-	
-	
 </mapper>

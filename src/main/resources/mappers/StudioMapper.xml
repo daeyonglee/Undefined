@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.udf.company.dao.StudioCompanyDao"> 
+	<select id="listStudio" resultType="kr.co.udf.common.company.domain.StudioCompany">
+	<![CDATA[
+	SELECT sc_no companyNo, 
+	sc_nm nm, 
+	sc_company_no regNo, 
+	sc_main_nm headName, 
+	sc_addr addr, 
+	sc_main_image mainImage, 
+	sc_email email, 
+	sc_pw pw, 
+	sc_tel tel, 
+	sc_introduce introduce, 
+	sessionkey, 
+	regdate, 
+	updatedate
+	FROM studio_company
+	]]> 
+	</select>
+
+	<select id="detailStudio" resultType="kr.co.udf.common.company.domain.StudioCompany">
+	<![CDATA[
+	SELECT
+		sc_no AS companyNo, 
+		sc_nm AS nm,
+		sc_company_no AS regNo, 
+		sc_main_nm AS headName, 
+		sc_addr AS addr, 
+		sc_main_image AS mainImage, 
+		sc_email AS email, 
+		sc_tel AS tel, 
+		sc_smy_intro AS intro,
+		sc_introduce AS introduce
+	FROM studio_company
+	WHERE sc_no = #{companyNo}
+	]]> 
+	</select>	
+	
+	<insert id="addReview">
+	INSERT INTO studio_review (sr_no, sc_no, sr_content, sr_point, regdate, updatedate)
+	VALUES (studio_review_seq.nextval, #{companyNo}, #{content}, #{point}, sysdate, sysdate) 
+	</insert>
+	
+	<select id="reviewStudio" resultType="kr.co.udf.company.domain.StudioReview">
+	<![CDATA[
+	SELECT
+		sr_no AS no, 	 
+		sc_no AS companyNo,
+		sr_content AS content,  	
+		sr_point AS point,  	
+		TO_CHAR(regdate, 'YY-MM-DD') AS regdate,  	
+	    updatedate AS updatedate 
+	FROM studio_review 	
+	WHERE sc_no = #{companyNo}
+	ORDER BY sr_no DESC
+	]]>
+	</select>
+	
+	<select id="avgPoint" resultType="double">
+	<![CDATA[
+	SELECT
+		ROUND(AVG(sr_point), 1) AS avg	 
+	FROM studio_review 	
+	WHERE sc_no = #{companyNo}
+	]]>
+	</select> 
+	
+	<select id="countReview" resultType="int">
+	<![CDATA[
+	SELECT
+		COUNT(*) AS count	 
+	FROM studio_review 	
+	WHERE sc_no = #{companyNo}
+	]]>
+	</select> 
+</mapper>

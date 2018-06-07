@@ -35,6 +35,4 @@ public interface StudioService {
 	
 	/** 스튜디오 업체 리뷰 갯수 */
 	public int countReview(int sc_no) throws Exception;
-	
-	
 }

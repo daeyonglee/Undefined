@@ -168,7 +168,7 @@
                   <a href="slist"> <button type="button">STUDIO</button>  </a>   
                  <button type="button" disabled>DRESS</button>
                  <a href="makeup"><button type="button">MAKEUP</button></a>   
-                 
+                
           <script type="text/javascript">
 //          $(document).ready(function() {
  //    			 $("button").click(function() {
@@ -187,7 +187,6 @@
             <div class="section clear">
               <div id="list-type" class="proerty-th">
 
-                 
          <c:forEach items="${dresslist}" var="dress" varStatus="status">
 
                   <div class="col-sm-6 col-md-4 p0">
@@ -206,6 +205,7 @@
                             <li data-target="#myCarousel"
                               data-slide-to="2"></li>
                           </ol>
+
                           <div class="carousel-inner">
                             <div class="item active">
                               <img
@@ -223,6 +223,7 @@
                                 style="width: 100%;">
                             </div>
                           </div>
+
                           <a class="left carousel-control"
                             href="#myCarousel" data-slide="prev"> <span
                             class="glyphicon glyphicon-chevron-left"></span>
@@ -240,6 +241,7 @@
                             href="/company/compare?companyNo=${dress.dc_no}">
                             ${dress.dc_nm} </a>
                         </h5>
+
                         <div class="dot-hr"></div>
                         <span class="proerty-price pull-left">
                           ★★★ </span> 3.0/5.0 (20명) <br>
@@ -272,6 +274,7 @@
 					<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
 								<li
 									<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
+
 									<a href="dress?page=${idx}">${idx}</a>
 								</li>
 							</c:forEach>
@@ -386,7 +389,7 @@
 				//var myLatlng1 = new google.maps.LatLngBounds(37.4837121, 127.0324112);
 				//console.log(myLatlng1);
 				var currentInfoWindow = null;
-				
+
 				//마커를 올릴 지역을 가져온다.
 				if (region.length > 0) {
 					for (var i = 0; i < region.length; i++) {
@@ -475,7 +478,6 @@
 					
 					return infowin;
 				}
-				
 			}
 		</script>
     

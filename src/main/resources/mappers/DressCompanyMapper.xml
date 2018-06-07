@@ -136,5 +136,5 @@ FROM (SELECT *
 	]]>
 	   <include refid="searchDress"></include>
 	</select>	
-	
+
 </mapper>

@@ -50,5 +50,4 @@ public class MybatisDressDao implements DressDao {
 	public int DressSearchCount(SearchCriteria cri) throws Exception {
 		return session.selectOne(namespace+".DressSearchCount", cri);
 	}
-
 }

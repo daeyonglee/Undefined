@@ -48,6 +48,4 @@ public class DressServiceImpl implements DressService {
 	public int DressSearchCount(SearchCriteria cri) throws Exception {
 		return dao.DressSearchCount(cri);
 	} 
-	 
-	
 }

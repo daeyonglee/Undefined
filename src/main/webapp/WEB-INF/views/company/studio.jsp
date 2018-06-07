@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -167,6 +168,7 @@
                  <button type="button" disabled>STUDIO</button>     
                  <a href="dress"><button type="button">DRESS</button></a>
                  <a href="makeup"><button type="button">MAKEUP</button></a>   
+                
           <script type="text/javascript">
 //          $(document).ready(function() {
  //    			 $("button").click(function() {
@@ -204,6 +206,7 @@
                             <li data-target="#myCarousel"
                               data-slide-to="2"></li>
                           </ol>
+
                           <div class="carousel-inner">
                             <div class="item active">
                               <img
@@ -221,6 +224,7 @@
                                 style="width: 100%;">
                             </div>
                           </div>
+
                           <a class="left carousel-control"
                             href="#myCarousel" data-slide="prev"> <span
                             class="glyphicon glyphicon-chevron-left"></span>
@@ -232,6 +236,7 @@
                           </a>
                         </div>
                       </div>
+
                       <div class="item-entry overflow">
                         <h5>
                           <a

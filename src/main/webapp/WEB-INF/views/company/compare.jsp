@@ -287,7 +287,6 @@ span.star-prototype > * {
             </div>
           </div>
 
-
 <script>
   var locked = 0;
   
@@ -359,7 +358,7 @@ span.star-prototype > * {
 $.fn.generateStars = function() {
     return this.each(function(i,e){$(e).html($('<span/>').width($(e).text()*16));});
 };
-
+<script>
 
 // 숫자 평점을 별로 변환하도록 호출하는 함수
 $(function(){
@@ -387,8 +386,7 @@ $('.star-prototype').generateStars();
                           <img id=image2 onmouseover=show(2) onclick=mark(2) onmouseout=noshow(2) src="/resources/images/empty.png">
                           <img id=image3 onmouseover=show(3) onclick=mark(3) onmouseout=noshow(3) src="/resources/images/empty.png"> 
                           <img id=image4 onmouseover=show(4) onclick=mark(4) onmouseout=noshow(4) src="/resources/images/empty.png"> 
-                          <img id=image5 onmouseover=show(5) onclick=mark(5) onmouseout=noshow(5) src="/resources/images/empty.png"> 
-                        
+                          <img id=image5 onmouseover=show(5) onclick=mark(5) onmouseout=noshow(5) src="/resources/images/empty.png">                     
                         </div>
                         <input type="hidden" name="point"/>  
                     </td>
@@ -591,7 +589,6 @@ $(document).ready(readyFn);
                     </form>
 
                   </div>
-
                 </div>
               </div>
             </div>
@@ -663,9 +660,6 @@ $(document).ready(readyFn);
   <!-- 구글맵 key -->
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEd3UEpvjDZcH8FLF2eO4SJvDAdp2IByY"></script>
   <!-- 지도 끝 -->
-
-
-
             </div>
           </aside>
           

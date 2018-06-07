@@ -50,7 +50,4 @@ public class MakeupServiceImpl implements MakeupService {
 	public int MakeupSearchCount(SearchCriteria cri) throws Exception {
 		return dao.MakeupSearchCount(cri);
 	}
-
-
-	 
 }

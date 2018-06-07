@@ -22,7 +22,7 @@
 	FROM studio_company
 	]]> 
 	</select>
-
+	
 	<select id="listPage" resultType="kr.co.udf.common.company.domain.StudioCompany">
 	 <![CDATA[
 SELECT *
@@ -187,5 +187,5 @@ FROM (SELECT *
 	FROM studio_review 	
 	WHERE sc_no = #{sc_no}
 	]]>
-	</select> 
+	</select>
 </mapper>

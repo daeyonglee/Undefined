@@ -95,6 +95,14 @@ public class StudioCompany {
 	public void setSc_tel(int sc_tel) {
 		this.sc_tel = sc_tel;
 	}
+	
+	public String getIntro() {
+		return intro;
+	}
+
+	public void setIntro(String intro) {
+		this.intro = intro;
+	}
 
 	public String getSc_introduce() {
 		return sc_introduce;
@@ -146,13 +154,9 @@ public class StudioCompany {
 
 	@Override
 	public String toString() {
-		return "StudioCompany [sc_no=" + sc_no + ", sc_nm=" + sc_nm + ", sc_company_no=" + sc_company_no
-				+ ", sc_main_nm=" + sc_main_nm + ", sc_addr=" + sc_addr + ", sc_main_mage=" + sc_main_mage
-				+ ", sc_email=" + sc_email + ", sc_pw=" + sc_pw + ", sc_tel=" + sc_tel + ", sc_smy_intro="
-				+ sc_smy_intro + ", sc_introduce=" + sc_introduce + ", sessionKey=" + sessionKey + ", sessionLimit="
-				+ sessionLimit + ", regdate=" + regdate + ", updatedate=" + updatedate + "]";
+		return "StudioCompany [companyNo=" + companyNo + ", nm=" + nm + ", regNo=" + regNo + ", headName=" + headName
+				+ ", addr=" + addr + ", mainImage=" + mainImage + ", email=" + email + ", pw=" + pw + ", tel=" + tel
+				+ ", intro=" + intro + ", introduce=" + introduce + ", regdate=" + regdate + ", updatedate="
+				+ updatedate + "]";
 	}
-
-
-
 }
