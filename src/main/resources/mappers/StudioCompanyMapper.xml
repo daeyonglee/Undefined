@@ -9,13 +9,12 @@
 	<![CDATA[
 	SELECT sc_no, 
 	sc_nm, 
-	sc_company_no, 
 	sc_main_nm, 
 	sc_addr, 
 	sc_main_image, 
 	sc_email, 
 	sc_pw, 
-	sc_tel, 
+	sc_smy_intro, 
 	sc_introduce, 
 	sessionkey, 
 	regdate, 
@@ -30,13 +29,12 @@ SELECT *
 FROM (SELECT CEIL (rownum / 12) page,
 	sc_no, 
 	sc_nm, 
-	sc_company_no, 
 	sc_main_nm, 
 	sc_addr, 
 	sc_main_image, 
 	sc_email, 
 	sc_pw, 
-	sc_tel, 
+	sc_smy_intro, 
 	sc_introduce, 
 	sessionkey, 
 	regdate, 
@@ -56,13 +54,12 @@ FROM (SELECT *
  	SELECT rownum rn,
     sc_no, 
 	sc_nm, 
-	sc_company_no, 
 	sc_main_nm, 
 	sc_addr, 
 	sc_main_image, 
 	sc_email, 
 	sc_pw, 
-	sc_tel, 
+	sc_smy_intro, 
 	sc_introduce, 
 	sessionkey, 
 	regdate, 
@@ -104,13 +101,12 @@ FROM (SELECT *
  	SELECT rownum rn,
  	sc_no, 
 	sc_nm, 
-	sc_company_no, 
 	sc_main_nm, 
 	sc_addr, 
 	sc_main_image, 
 	sc_email, 
 	sc_pw, 
-	sc_tel, 
+	sc_smy_intro, 
 	sc_introduce, 
 	sessionkey, 
 	regdate, 
@@ -137,5 +133,62 @@ FROM (SELECT *
 	]]>
 	   <include refid="search"></include>
 	</select>	
+	
+	<!-- 페이지 리드, 리뷰  -->
+		<select id="detailStudio" resultType="kr.co.udf.common.company.domain.StudioCompany">
+	<![CDATA[
+	SELECT
+		sc_no,
+		sc_nm,
+		sc_company_no,
+		sc_main_nm, 
+		sc_addr, 
+		sc_main_image,
+		sc_email,
+		sc_tel,
+		sc_smy_intro, 
+		sc_introduce
+	FROM studio_company
+	WHERE sc_no = #{sc_no}
+	]]> 
+	</select>	
+	
+	<insert id="addReview">
+	INSERT INTO studio_review (sr_no, sc_no, sr_content, sr_point, regdate, updatedate)
+	VALUES (studio_review_seq.nextval, #{sc_no}, #{sr_content}, #{sr_point}, sysdate, sysdate) 
+	</insert>
+	
+	<select id="reviewStudio" resultType="kr.co.udf.company.domain.StudioReview">
+	<![CDATA[
+	SELECT
+		sr_no, 
+		sc_no,
+		sr_content,  	
+		sr_point, 
+		regdate,
+	    updatedate
+	FROM studio_review 	
+	WHERE sc_no = #{sc_no}
+	ORDER BY sr_no DESC
+	]]>
+	</select>
+	
+	<select id="avgPoint" resultType="double">
+	<![CDATA[
+	SELECT
+		ROUND(AVG(sr_point), 1) AS avg	 
+	FROM studio_review 	
+	WHERE sc_no = #{sc_no}
+	]]>
+	</select> 
+	
+	<select id="countReview" resultType="int">
+	<![CDATA[
+	SELECT
+		COUNT(*) AS count	 
+	FROM studio_review 	
+	WHERE sc_no = #{sc_no}
+	]]>
+	</select> 
 	
 </mapper>

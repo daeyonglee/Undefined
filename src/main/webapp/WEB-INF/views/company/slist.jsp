@@ -256,7 +256,7 @@
                       <div class="item-entry overflow">
                         <h5>
                           <a
-                            href="/company/compare?sc_company_no=${studio.sc_no}">
+                            href="/company/compare?sc_no=${studio.sc_no}">
                             ${studio.sc_nm} </a>
                         </h5>
                         
@@ -265,20 +265,23 @@
                         <div class="dot-hr"></div>
                         <span class="proerty-price pull-left">
                           ★★★ </span> 3.0/5.0 (20명) <br>
-            
-          <c:choose>
-           <c:when test="${fn:length(studio.sc_introduce) > 40}">
-                        <div class=""><c:out value="${fn:substring(studio.sc_introduce,0,39)}"/> ... </div>
-                          </c:when>
-                             <c:otherwise>
-                              <c:out value="${studio.sc_introduce}"/>
-                               </c:otherwise> 
-                                    </c:choose>   
-                      </div>
+                    
+                        <!-- introduce 글자수 자르기 --> 
+                      <c:choose>
+                         <c:when test="${fn:length(studio.sc_introduce) > 40}">
+                           <div class="">
+                            <c:out value="${fn:substring(studio.sc_introduce,0,39)}"/> ... </div>
+                         </c:when>
+                            <c:otherwise>
+                              <div class="">
+                              <c:out value="${studio.sc_introduce}"/> <br> </div>
+                             </c:otherwise> 
+                            </c:choose>   
+                            </div>
                     </div>
                   </div>
             
-</c:forEach>
+          </c:forEach>
               </div>
             </div>
 
@@ -288,7 +291,7 @@
                 <div class="pagination">
                   <ul>
                 	<c:if test="${pageMaker.prev}">
-						<li><a href="${pageMaker.startPage - 1}">&laquo;</a></li>
+						<li><a href="slist?page=${pageMaker.startPage - 1}">&laquo;</a></li>
 					</c:if>
 
 					<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
@@ -300,7 +303,7 @@
 
 							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 								<li><a
-									href="${pageMaker.endPage +1}">&raquo;</a></li>
+									href="slist?page=${pageMaker.endPage +1}">&raquo;</a></li>
 							</c:if>
                   </ul>
                 </div>
@@ -344,23 +347,23 @@
                                     </div>
                                 </div>
                   
-<script>
-  $(document).ready(
-      function() {
-
-        $('#searchBtn').on(
-            "click",
-            function(event) {
-            	self.location = "slist"
-					+ '${pageMaker.makeQuery(1)}'
-					+ "&searchType=" + $("select option:selected").val()
-					+ "&keyword=" + $('#keywordInput').val();
-            });
-        });
-
-</script>                              
-                                
-                                
+                  <script>
+                    $(document).ready(
+                        function() {
+                  
+                          $('#searchBtn').on(
+                              "click",
+                              function(event) {
+                              	self.location = "slist"
+                  					+ '${pageMaker.makeQuery(1)}'
+                  					+ "&searchType=" + $("select option:selected").val()
+                  					+ "&keyword=" + $('#keywordInput').val();
+                              });
+                          });
+                  
+                  </script>                              
+                                                  
+                                                  
                                 
                 <!-- 지도시작 -->
 
@@ -410,58 +413,58 @@
 				if (region.length > 0) {
 					for (var i = 0; i < region.length; i++) {
 						geocoder.geocode({'address' : region[i]},
-										function (results, status) {
-											if (status == google.maps.GeocoderStatus.OK) {
-												for (var j = 0; j < results.length; j++) {
-													// 좌표값 받아오기
-													
-													var lat = results[j].geometry.location.lat();
-													var lng = results[j].geometry.location.lng();
+						function (results, status) {
+							if (status == google.maps.GeocoderStatus.OK) {
+								for (var j = 0; j < results.length; j++) {
+									// 좌표값 받아오기
+									
+									var lat = results[j].geometry.location.lat();
+									var lng = results[j].geometry.location.lng();
 
-													// 마커 속성 설정하기
-													var marker = new google.maps.Marker(				
-															{
-																position : results[j].geometry.location,
-																title : results[j].formatted_address,
-																map : map,
-																bounds: true,
-																maxZoom: 17
-																//center : {lat: -34, lng: 151}
-																//icon : iconBase
-															});
-														
-														bounds.extend(marker.position);
-														map.fitBounds(bounds);
-														
-													//var address = region;
-													//console.log(name[n]);
-													
-													// 마커 클릭 이벤트
-													
-													//console.log('이름 : ' + marker.name);
-													//console.log('위치 : ' + marker.title);
-													
-													google.maps.event.addListener(marker,'click',function(e) {
-														
-														console.log(marker);
-														var infowin = searchName(marker);
-														var infoWindow = new google.maps.InfoWindow({ content: infowin });
-														
-														if(currentInfoWindow !=null){
-															currentInfoWindow.close();
-														}
-														//infoWindow.close();
-														infoWindow.setContent(infowin);
-														infoWindow.open(map,marker);
-														console.log(marker);
-														currentInfoWindow = infoWindow;
-													});
-											}
-												
-											} else {
-												alert("검색결과가 없습니다");
-											}
-										});
+									// 마커 속성 설정하기
+									var marker = new google.maps.Marker(				
+											{
+												position : results[j].geometry.location,
+												title : results[j].formatted_address,
+												map : map,
+												bounds: true,
+												maxZoom: 17
+												//center : {lat: -34, lng: 151}
+												//icon : iconBase
+											});
+										
+										bounds.extend(marker.position);
+										map.fitBounds(bounds);
+										
+									//var address = region;
+									//console.log(name[n]);
+									
+									// 마커 클릭 이벤트
+									
+									//console.log('이름 : ' + marker.name);
+									//console.log('위치 : ' + marker.title);
+									
+									google.maps.event.addListener(marker,'click',function(e) {
+										
+										console.log(marker);
+										var infowin = searchName(marker);
+										var infoWindow = new google.maps.InfoWindow({ content: infowin });
+										
+										if(currentInfoWindow !=null){
+											currentInfoWindow.close();
+										}
+										//infoWindow.close();
+										infoWindow.setContent(infowin);
+										infoWindow.open(map,marker);
+										console.log(marker);
+										currentInfoWindow = infoWindow;
+									});
+							}
+								
+							} else {
+								alert("검색결과가 없습니다");
+							}
+						});
 					};
 					
 				}
@@ -484,7 +487,7 @@
 						var arrName = arr[0].trim();
 						
 						if (title == arrTitle) {
-							infowin += '<dl><a href="/company/compare?sc_company_no='+arrNo+'">'+arrName+'</a></dl>';
+							infowin += '<dl><a href="/company/compare?sc_no='+arrNo+'">'+arrName+'</a></dl>';
 						}
 						
 					});
