@@ -29,7 +29,7 @@ public class CompanyController {
 	private StudioService service;
 	
 	@RequestMapping(value="/compare", method=RequestMethod.GET)
-	public void detailStudio(@RequestParam("sc_company_no") int sc_no, Model model) throws Exception {
+	public void detailStudio(@RequestParam("sc_no") int sc_no, Model model) throws Exception {
 		model.addAttribute(service.detailStudio(sc_no));
 		model.addAttribute("avg", service.avgPoint(sc_no));
 		model.addAttribute("count", service.countReview(sc_no));
@@ -42,13 +42,13 @@ public class CompanyController {
 	@RequestMapping(value="/add", method=RequestMethod.POST)
 	public String addCompare(StudioCompany studioCompany, @ModelAttribute("cart") List<StudioCompany> cart, @RequestParam("sc_no") int sc_no) {
 		cart.add(studioCompany);
-		return "redirect:/company/compare?companyNo="+ sc_no;
+		return "redirect:/company/compare?sc_no="+ sc_no;
 	}
 
 	@RequestMapping(value="/review", method=RequestMethod.POST)
 	public String addReview(StudioReview studioReview, @RequestParam("sc_no") int sc_no) throws Exception {
 		service.addReview(studioReview);
-		return "redirect:/company/compare?companyNo="+ sc_no;
+		return "redirect:/company/compare?sc_no="+ sc_no;
 	}
 	
 }

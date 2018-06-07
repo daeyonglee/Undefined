@@ -2,10 +2,10 @@ package kr.co.udf.company.domain;
 
 public class StudioReview {
 	
-	private int no;
-	private int companyNo;
-	private String content;
-	private String point;
+	private int sr_no;
+	private int sc_no;
+	private String sr_content;
+	private String sr_point;
 	private String regdate;
 	private String updatedate;
 	
@@ -15,36 +15,36 @@ public class StudioReview {
 	}
 
 	/** Getter & Setter */
-	public int getNo() {
-		return no;
+	public int getSr_no() {
+		return sr_no;
 	}
 
-	public void setNo(int no) {
-		this.no = no;
+	public void setSr_no(int sr_no) {
+		this.sr_no = sr_no;
 	}
 
-	public int getCompanyNo() {
-		return companyNo;
+	public int getSc_no() {
+		return sc_no;
 	}
 
-	public void setCompanyNo(int companyNo) {
-		this.companyNo = companyNo;
+	public void setSc_no(int sc_no) {
+		this.sc_no = sc_no;
 	}
 
-	public String getContent() {
-		return content;
+	public String getSr_content() {
+		return sr_content;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
+	public void setSr_content(String sr_content) {
+		this.sr_content = sr_content;
 	}
 
-	public String getPoint() {
-		return point;
+	public String getSr_point() {
+		return sr_point;
 	}
 
-	public void setPoint(String point) {
-		this.point = point;
+	public void setSr_point(String sr_point) {
+		this.sr_point = sr_point;
 	}
 
 	public String getRegdate() {
@@ -62,12 +62,12 @@ public class StudioReview {
 	public void setUpdatedate(String updatedate) {
 		this.updatedate = updatedate;
 	}
-	
+
 	/** toString */
+	
 	@Override
 	public String toString() {
-		return "StudioReview [no=" + no + ", companyNo=" + companyNo + ", content=" + content + ", point=" + point
-				+ ", regdate=" + regdate + ", updatedate=" + updatedate + "]";
+		return "StudioReview [sr_no=" + sr_no + ", sc_no=" + sc_no + ", sr_content=" + sr_content + ", sr_point="
+				+ sr_point + ", regdate=" + regdate + ", updatedate=" + updatedate + "]";
 	}
-
 }

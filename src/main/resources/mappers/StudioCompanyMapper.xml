@@ -13,7 +13,6 @@
 	sc_addr, 
 	sc_main_image, 
 	sc_email, 
-	sc_pw, 
 	sc_smy_intro, 
 	sc_introduce, 
 	sessionkey, 
@@ -33,7 +32,6 @@ FROM (SELECT CEIL (rownum / 12) page,
 	sc_addr, 
 	sc_main_image, 
 	sc_email, 
-	sc_pw, 
 	sc_smy_intro, 
 	sc_introduce, 
 	sessionkey, 
@@ -58,9 +56,7 @@ FROM (SELECT *
 	sc_addr, 
 	sc_main_image, 
 	sc_email, 
-	sc_pw, 
-	sc_smy_intro, 
-	sc_introduce, 
+	sc_introduce,
 	sessionkey, 
 	regdate, 
 	updatedate
@@ -104,8 +100,7 @@ FROM (SELECT *
 	sc_main_image, 
 	sc_email, 
 	sc_pw, 
-	sc_smy_intro, 
-	sc_introduce, 
+	sc_introduce,
 	sessionkey, 
 	regdate, 
 	updatedate
@@ -144,7 +139,6 @@ FROM (SELECT *
 		sc_main_image,
 		sc_email,
 		sc_tel,
-		sc_smy_intro, 
 		sc_introduce
 	FROM studio_company
 	WHERE sc_no = #{sc_no}

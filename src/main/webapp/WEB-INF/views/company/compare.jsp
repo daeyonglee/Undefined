@@ -368,7 +368,7 @@ $('.star-prototype').generateStars();
 
           <div class="single-property-wrapper">
             <div class="single-property-header">
-              <h1 class="property-title pull-left">${studioCompany.intro}</h1>
+              <h1 class="property-title pull-left">${studioCompany.sc_introduce}</h1>
               <span class="property-price pull-right"> 
               
 <span class="star-prototype">${avg}</span>
@@ -376,7 +376,7 @@ $('.star-prototype').generateStars();
             </div>
             
             <form action="/company/review" method="post" name="starting">
-                <input type='hidden' name='companyNo' value="${studioCompany.sc_smy_intro}"> 
+                <input type='hidden' name='sc_no' value="${studioCompany.sc_smy_intro}"> 
                 <table>
                   <tr>
                     <td colspan="2">
@@ -626,7 +626,7 @@ $(document).ready(readyFn);
                                                     new google.maps.Size(size_x, size_y));
          
         // Geocoding *****************************************************
-        var address = '${studioCompany.addr}'; // DB에서 주소 가져와서 검색하거나 왼쪽과 같이 주소를 바로 코딩.
+        var address = '${studioCompany.sc_addr}'; // DB에서 주소 가져와서 검색하거나 왼쪽과 같이 주소를 바로 코딩.
         var marker = null;
         var geocoder = new google.maps.Geocoder();
         geocoder.geocode( { 'address': address}, function(results, status) {
