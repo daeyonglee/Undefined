@@ -116,7 +116,11 @@
              <span class="icon-bar"></span>
              <span class="icon-bar"></span>
          </button>
+<<<<<<< HEAD
          <a class="navbar-brand" href="/"><img src="/resources/assets/img/logo.png" alt=""></a>
+=======
+         <a class="navbar-brand" href="index.html"><img src="/resources/assets/img/logo2.png" alt=""></a>
+>>>>>>> hyungyou
      </div>
 
      <!-- Collect the nav links, forms, and other content for toggling -->

@@ -15,6 +15,7 @@ public class Login {
 	private String nm;
 	private boolean useCookie;
 	private String role;
+	private String nm;
 	
 	public Login() {}
 

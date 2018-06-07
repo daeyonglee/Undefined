@@ -113,34 +113,30 @@
                     </div>                    
                     
                     <div class="col-lg-2" id="col">
-                      <label>상품 리스트</label>
+                      <label>상품 명</label>
                     </div>
-                    <div class="col-lg-10" id="col" style="height: 55px">
-                      <div class="col-lg-3">
-                        <input class='form-control' type="checkbox" name="locFirst" id="locFirst" > image-1
-                      </div>
-                      <div class="col-lg-3">
-                        <input class='form-control' type="checkbox" name="locSecond" id="locSecond"> image-2
-                      </div>
-                      <div class="col-lg-3">
-                        <input class='form-control' type="checkbox" name="locThird" id="locThird"> image-3
+                     <div class="col-lg-10" id="col">
+                      <div class="col-lg-6">
+                        <input class='form-control' type="text" name="locFirst" id="locFirst" value="" readonly="readonly">
                       </div>
                     </div>
                     
-                    <div class="col-lg-2" id="col">
-                      <label></label>
+                     <div class="col-lg-2" id="col">
+                      <label>상품 가격</label>
                     </div>
-                    <div class="col-lg-10" id="col" style="height: 55px">
-                      <div class="col-lg-3">
-                        <input class='form-control' type="checkbox" name="locFirst" id="locFirst" > image-1
-                      </div>
-                      <div class="col-lg-3">
-                        <input class='form-control' type="checkbox" name="locSecond" id="locSecond"> image-2
-                      </div>
-                      <div class="col-lg-3">
-                        <input class='form-control' type="checkbox" name="locThird" id="locThird"> image-3
+                     <div class="col-lg-10" id="col">
+                      <div class="col-lg-6">
+                        <input class='form-control' type="text" name="locFirst" id="locFirst" value="" readonly="readonly">
                       </div>
                     </div>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
                     <div class="col-lg-2" id="col">
                       <label>상담 날짜</label>
                     </div>
