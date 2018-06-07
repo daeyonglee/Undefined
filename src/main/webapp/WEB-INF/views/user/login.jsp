@@ -7,7 +7,7 @@
       <div class="container">
           <div class="row">
               <div class="page-head-content">
-                  <h1 class="page-title">Home New account / Sign in </h1>               
+                  <h1 class="page-title">로그인</h1>               
               </div>
           </div>
       </div>

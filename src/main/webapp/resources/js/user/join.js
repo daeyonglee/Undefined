@@ -36,25 +36,26 @@ $(document).ready(function () {
         	if (index == 1) {
                 return validateFirstStep();
             } else if (index == 2) {
+               
                var email = $("#email").val();
-          	   
-          	   // 이메일체크
-          	   $.ajax({
-          		   url: "/user/emailcheck",
-          		   type: "get",
-          		   data: {email:email},
-          		   dataType: "json",
-          		   success:function(data){
-          			   console.log(data);
-          			   if (data.email == "" || data.email == null || data.email == undefined) {
-          				   
-          			   } else {
-          				   alert("이미 이메일이 존재합니다.");
-        				   return;
-          			   }
-          		   }
-          	   })
-            	
+           	   
+           	   // 이메일체크
+           	   $.ajax({
+           		   url: "/user/emailcheck",
+           		   type: "get",
+           		   data: {email:email},
+           		   dataType: "json",
+           		   success:function(data){
+           			   console.log(data);
+           			   if (data.email == "" || data.email == null || data.email == undefined) {
+           				   
+           			   } else {
+           				   alert("이미 이메일이 존재합니다.");
+         				   return;
+           			   }
+           		   }
+           	   });
+           	   
           	   return validateSecondStep();
             } else if (index == 3) {
                 return validateThirdStep();

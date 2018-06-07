@@ -25,93 +25,93 @@
 
 <style>
 body {
-	font-family: "Lato", sans-serif;
+   font-family: "Lato", sans-serif;
 }
 
 .sidenav {
-	height: 100%;
-	width: 0;
-	position: fixed;
-	z-index: 1;
-	top: 0;
-	right: 0;
-	background-color: #111;
-	overflow-x: hidden;
-	transition: 0.5s;
-	padding-top: 60px;
+   height: 100%;
+   width: 0;
+   position: fixed;
+   z-index: 1;
+   top: 0;
+   right: 0;
+   background-color: #111;
+   overflow-x: hidden;
+   transition: 0.5s;
+   padding-top: 60px;
 }
 
 .sidenav a {
-	padding: 8px 8px 8px 32px;
-	text-decoration: none;
-	font-size: 25px;
-	color: #818181;
-	display: block;
-	transition: 0.3s;
+   padding: 8px 8px 8px 32px;
+   text-decoration: none;
+   font-size: 25px;
+   color: #818181;
+   display: block;
+   transition: 0.3s;
 }
 
 .sidenav a:hover {
-	color: #f1f1f1;
+   color: #f1f1f1;
 }
 
 .sidenav .closebtn {
-	position: absolute;
-	top: 0;
-	right: 25px;
-	font-size: 36px;
-	margin-left: 50px;
+   position: absolute;
+   top: 0;
+   right: 25px;
+   font-size: 36px;
+   margin-left: 50px;
 }
 
 @media screen and (max-height: 450px) {
-	.sidenav {
-		padding-top: 15px;
-	}
-	.sidenav a {
-		font-size: 18px;
-	}
+   .sidenav {
+      padding-top: 15px;
+   }
+   .sidenav a {
+      font-size: 18px;
+   }
 }
 
 .checked {
-	color: orange;
+   color: orange;
 }
 
 /* 떠다니는 메뉴 (Floating Menu) */
 #floatdiv {
-	position: fixed;
-	_position: absolute;
-	_z-index: -1;
-	width: 170px;
-	overflow: hidden;
-	left: 0px;
-	top: 50%;
-	background-color: transparent;
-	margin: 0;
-	padding: 0;
+   position: fixed;
+   _position: absolute;
+   _z-index: -1;
+   width: 170px;
+   overflow: hidden;
+   left: 0px;
+   top: 50%;
+   background-color: transparent;
+   margin: 0;
+   padding: 0;
 }
 
 #floatdiv ul {
-	list-style: none;
+   list-style: none;
 }
 
 #floatdiv li {
-	margin-bottom: 2px;
-	text-align: center;
+   margin-bottom: 2px;
+   text-align: center;
 }
 
 #floatdiv a {
-	color: #5D5D5D;
-	border: 0;
-	text-decoration: none;
-	display: block;
+   color: #5D5D5D;
+   border: 0;
+   text-decoration: none;
+   display: block;
 }
 
 #floatdiv a:hover, #floatdiv .menu {
-	background-color: #5D5D5D;
-	color: #fff;
+   background-color: #5D5D5D;
+   color: #fff;
 }
 
 #floatdiv .menu, #floatdiv .last {
-	margin-bottom: 0px;
+   margin-bottom: 0px;
 }
 
 #imgBorder {
@@ -533,19 +533,19 @@ $('.star-prototype').generateStars();
 <!-- 
 <script>
 $(function() {
-	$("#jqueryComp").click(function(event){
-		$("#floatdiv").css("color", "red");
-	});
+   $("#jqueryComp").click(function(event){
+      $("#floatdiv").css("color", "red");
+   });
 });
 </script> -->
 <script>
 function readyFn() {
-	 
-		  setInterval(function() {
-		    $('#floatdiv').toggle();
-		    $("#floatdiv").css("color", "pink");
-		  }, 1500); // 깜빡이는 속도 조절 (클수록 느리게)
-		
+    
+        setInterval(function() {
+          $('#floatdiv').toggle();
+          $("#floatdiv").css("color", "pink");
+        }, 1500); // 깜빡이는 속도 조절 (클수록 느리게)
+      
 }
 
 $(document).ready(readyFn);
@@ -575,7 +575,7 @@ $(document).ready(readyFn);
                        <c:if test="${not flag}">
                          <c:forEach items="${cart}" var="dto">
                           <c:if test="${comp eq dto.sc_no}">
-                	        <input type='submit' id='jqueryComp' class='btn btn-next btn-primary' name='next' value='비교업체 등록' disabled='disabled'/>
+                           <input type='submit' id='jqueryComp' class='btn btn-next btn-primary' name='next' value='비교업체 등록' disabled='disabled'/>
                             <c:set var="flag" value="true"/>
                           </c:if>
                          </c:forEach>
@@ -675,22 +675,22 @@ $(document).ready(readyFn);
 
 
   <script>
-			$(document).ready(function() {
+         $(document).ready(function() {
 
-				$('#image-gallery').lightSlider({
-					gallery : true,
-					item : 1,
-					thumbItem : 9,
-					slideMargin : 0,
-					speed : 500,
-					auto : true,
-					loop : true,
-					onSliderLoad : function() {
-						$('#image-gallery').removeClass('cS-hidden');
-					}
-				});
-			});
-		</script>
+            $('#image-gallery').lightSlider({
+               gallery : true,
+               item : 1,
+               thumbItem : 9,
+               slideMargin : 0,
+               speed : 500,
+               auto : true,
+               loop : true,
+               onSliderLoad : function() {
+                  $('#image-gallery').removeClass('cS-hidden');
+               }
+            });
+         });
+      </script>
 
 
   <div id="mySidenav" class="sidenav">
@@ -736,14 +736,14 @@ $(document).ready(readyFn);
   <!--  span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span-->
 
   <script>
-			function openNav() {
-				document.getElementById("mySidenav").style.width = "250px";
-			}
+         function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+         }
 
-			function closeNav() {
-				document.getElementById("mySidenav").style.width = "0";
-			}
-		</script>
+         function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+         }
+      </script>
 
 
   <!-- Modal -->
@@ -774,4 +774,3 @@ $(document).ready(readyFn);
 
 </body>
 </html>
-

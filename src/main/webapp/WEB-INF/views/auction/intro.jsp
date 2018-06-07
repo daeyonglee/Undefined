@@ -66,9 +66,6 @@ text-align: center;
 					</div>
 				</div>
 			</div>
-      <button id="mypageBidList">신청서 별 입찰서 리스트</button>
-      <button id="bidListBtn">입찰 리스트</button>
-      <button id="winListBtn">낙찰 리스트</button>
       <button id="studioRegistBtn">스튜디오 역경매 신청하기</button>
       <button id="dressRegistBtn">드레스 역경매 신청하기</button>
       <button id="makeupRegistBtn">메이크업 역경매 신청하기</button>
