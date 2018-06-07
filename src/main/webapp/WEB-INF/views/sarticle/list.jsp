@@ -86,8 +86,7 @@
             %>
                  <td><a
                  href='/sarticle/readPage${pageMaker.makeSearch(pageMaker.cri.page) }&article_no=${article.ARTICLE_NO}&board_no=<%=request.getParameter("board_no")%>'>
-                   [${article.ARTICLE_HEAD}] ${article.ARTICLE_TITLE}</a></td>
-                   
+                    <font color="orange">[${article.ARTICLE_HEAD}]</font> ${article.ARTICLE_TITLE} <font color="yellow">[${article.REPLY_COUNT}]</font></a></td>
               <%
              }}
               %>
