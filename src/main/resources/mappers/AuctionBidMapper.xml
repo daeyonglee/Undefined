@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.udf.auction.dao.MyBatisAuctionBidDao">
+  
+ <!-- 게시물 상세 조회 -->
+
+
+<!--  (페이징 처리 없이) 전체 신청 리스트 조회 -->
+
+<!--  스드메 신청서 신규 작성 -->
+<insert id="createMakeupBid" parameterType="AuctionBid">
+INSERT INTO makeup_bid (
+       mb_no
+     , mc_no
+     , maa_no
+     , user_no
+     , regdate
+     , updatedate)
+VALUES (makeup_bid_seq.NEXTVAL
+      , #{companyNo}
+      , #{applyNo}
+      , #{userNo}
+      , TO_DATE(SYSDATE, 'YYYY-MM-DD HH24:MI')
+      , TO_DATE(SYSDATE, 'YYYY-MM-DD HH24:MI'))
+</insert>
+
+<insert id="createDressBid" parameterType="AuctionBid">
+INSERT INTO dress_bid (
+       db_no
+     , dc_no
+     , daa_no
+     , user_no
+     , regdate
+     , updatedate)
+VALUES (dress_bid_seq.NEXTVAL
+      , #{companyNo}
+      , #{applyNo}
+      , #{userNo}
+      , TO_DATE(SYSDATE, 'YYYY-MM-DD HH24:MI')
+      , TO_DATE(SYSDATE, 'YYYY-MM-DD HH24:MI'))
+</insert>
+
+<insert id="createStudioBid" parameterType="AuctionBid">
+INSERT INTO studio_bid (
+       sb_no
+     , sc_no
+     , saa_no
+     , user_no
+     , regdate
+     , updatedate)
+VALUES (studio_bid_seq.NEXTVAL
+      , #{companyNo}
+      , #{applyNo}
+      , #{userNo}
+      , TO_DATE(SYSDATE, 'YYYY-MM-DD HH24:MI')
+      , TO_DATE(SYSDATE, 'YYYY-MM-DD HH24:MI'))
+</insert>
+
+<!-- 타입 별로 회사 정보 출력하는 sql -->
+<select id="searchMakeupCompany" parameterType="int" resultType="MakeupCompany">
+SELECT mc.mc_no         companyNo, 
+       mc.mc_nm         nm, 
+       mc.mc_company_no regNo, 
+       mc.mc_main_nm    headName, 
+       mc.mc_addr       addr, 
+       mc.mc_main_image mainImage, 
+       mbpl.mp_no       productNo, 
+       mc.mc_email      email, 
+       mc.mc_tel        tel, 
+       mc.mc_introduce  introduce, 
+       'mc'             role 
+FROM   makeup_company mc 
+       FULL OUTER JOIN makeup_bid_product_list mbpl 
+                    ON mc.mc_no = mbpl.mc_no
+WHERE mc.mc_no = #{no}
+</select>
+
+<select id="searchStudioCompany" parameterType="int" resultType="StudioCompany">
+SELECT sc.sc_no         companyNo, 
+       sc.sc_nm         nm, 
+       sc.sc_company_no regNo, 
+       sc.sc_main_nm    headName, 
+       sc.sc_addr       addr, 
+       sc.sc_main_image mainImage, 
+       sbpl.sp_no       productNo, 
+       sc.sc_email      email, 
+       sc.sc_tel        tel, 
+       sc.sc_introduce  introduce, 
+       'sc'             role 
+FROM   studio_company sc 
+       FULL OUTER JOIN studio_bid_product_list sbpl 
+                    ON sc.sc_no = sbpl.sc_no 
+WHERE sc.sc_no = #{no}
+
+</select>
+
+<select id="searchDressCompany" parameterType="int" resultType="DressCompany">
+SELECT dc.dc_no         companyNo, 
+       dc.dc_nm         nm, 
+       dc.dc_company_no regNo, 
+       dc.dc_main_nm    headName, 
+       dc.dc_addr       addr, 
+       dc.dc_main_image mainImage, 
+       dbpl.dp_no       productNo, 
+       dc.dc_email      email, 
+       dc.dc_tel        tel, 
+       dc.dc_introduce  introduce, 
+       'dc'             role 
+FROM   dress_company dc 
+       FULL OUTER JOIN dress_bid_product_list dbpl 
+                    ON dc.dc_no = dbpl.dc_no 
+WHERE dc.dc_no  = #{no}
+
+</select>
+
+<select id="listByUser" parameterType="int" resultType="AuctionBid">
+select M.*
+FROM  (select  mb_no    bidNo
+             , mc_no    companyNo
+             , maa_no   applyNo
+             , user_no  userNo
+             , regdate
+             , updatedate
+         from makeup_bid
+         where user_no = #{userNo}
+        union
+        select  db_no    bidNo
+              , dc_no    companyNo
+              , daa_no   applyNo
+              , user_no  userNo
+              , regdate
+              , updatedate
+         from dress_bid
+         where user_no = #{userNo}
+         union
+         select  sb_no    bidNo
+               , sc_no    companyNo
+               , saa_no   applyNo
+               , user_no  userNo
+               , regdate
+               , updatedate
+          from studio_bid
+          where user_no = #{userNo}) M
+</select>
+
+<select id="listByApplyNo" parameterType="AuctionBid" resultType="AuctionBid">
+select M.*
+FROM  (select  mb_no    bidNo
+             , mc_no    companyNo
+             , maa_no   applyNo
+             , user_no 
+             , regdate
+             , updatedate
+         from makeup_bid
+        union
+        select  db_no    bidNo
+              , dc_no    companyNo
+              , daa_no   applyNo
+              , user_no  
+              , regdate
+              , updatedate
+         from dress_bid
+         union
+         select  sb_no    bidNo
+               , sc_no    companyNo
+               , saa_no   applyNo
+               , user_no 
+               , regdate
+               , updatedate
+          from studio_bid ) M
+where user_no = #{userNo} and applyNo = #{applyNo}
+</select>
+
+<!-- 게시물 조회 -->
+<select id="winread" resultType="AuctionBid">
+select d.*
+from (SELECT  d.daa_no  no
+      , u.user_no userNo
+      , u.user_nm writer
+      , NVL(u.user_tel, null) tel
+      , d.daa_loc loc
+      , SUBSTR(to_char(d.daa_date, 'YYYY-MM-DD HH24:MI'),0,10) day
+      , SUBSTR(to_char(d.daa_date, 'YYYY-MM-DD HH24:MI'),12,7) time
+      , TO_CHAR(d.daa_deadline, 'YYYY-MM-DD') deadline
+      , d.daa_memo memo
+      , d.daa_stat stat
+      , TO_CHAR(d.regdate, 'YYYY-MM-DD') regdate
+      ,'dress' type
+      , b.dbpl_discount discount
+      , b.dBPL_MEET_DATE meetDate
+      , c.dc_NM cnm
+      , r.dp_NM pnm
+      , c.dc_tel ctel
+      , r.dp_price price
+FROM   dress_auction_apply d
+       JOIN users u 
+         ON d.user_no = u.user_no
+       Join DRESS_BID_PRODUCT_LIST b
+         ON d.user_no = b.user_no
+       join dress_company c
+         on b.dc_no = c.dc_no
+       join dress_product r
+        on c.dc_no = r.dc_no
+UNION
+SELECT m.maa_no  no
+     , u.user_no userNo
+     , u.user_nm writer   
+     , NVL(u.user_tel, null) tel
+     , m.maa_loc loc
+     , SUBSTR(to_char(m.maa_date, 'YYYY-MM-DD HH24:MI'),0,10) day
+     , SUBSTR(to_char(m.maa_date, 'YYYY-MM-DD HH24:MI'),12,7) time
+     , SUBSTR(TO_CHAR(m.maa_deadline, 'YYYY-MM-DD HH24:MI'),0,10) deadline
+     , m.maa_memo memo
+     , m.maa_stat stat
+     , TO_CHAR(m.regdate, 'YYYY-MM-DD') regdate
+     ,'makeup' type
+     , b.mbpl_discount discount
+     , b.mBPL_MEET_DATE meetDate
+     , c.mc_NM cnm
+     , r.mp_NM pnm
+     , c.mc_tel ctel
+     , r.mp_price price
+  FROM makeup_auction_apply m
+       JOIN users u 
+         ON m.user_no = u.user_no
+         Join makeup_BID_PRODUCT_LIST b
+         ON m.user_no = b.user_no
+       join makeup_company c
+         on b.mc_no = c.mc_no
+       join makeup_product r
+        on c.mc_no = r.mc_no
+UNION
+SELECT s.saa_no  no
+     , u.user_no userNo
+     , u.user_nm writer
+     , NVL(u.user_tel, null) tel
+     , s.saa_loc loc
+     , SUBSTR(to_char(s.saa_date, 'YYYY-MM-DD HH24:MI'),0,10) day
+     , SUBSTR(to_char(s.saa_date, 'YYYY-MM-DD HH24:MI'),12,7) time
+     , SUBSTR(TO_CHAR(s.saa_deadline, 'YYYY-MM-DD HH24:MI'),0,10) deadline
+     , s.saa_memo memo
+     , s.saa_stat stat
+     , TO_CHAR(s.regdate, 'YYYY-MM-DD') regdate
+     , 'studio' type
+     , b.sbpl_discount discount
+     , b.sBPL_MEET_DATE meetDate
+     , c.sc_NM cnm
+     , r.sp_NM pnm
+     , c.sc_tel ctel
+     , r.sp_price price
+  FROM studio_auction_apply s
+       JOIN users u
+         ON s.user_no = u.user_no
+         Join studio_BID_PRODUCT_LIST b
+         ON s.user_no = b.user_no
+       join studio_company c
+         on b.sc_no = c.sc_no
+       join studio_product r
+        on c.sc_no = r.sc_no) d
+ WHERE no = #{no} and type = #{type}
+	</select>	
+
+</mapper>

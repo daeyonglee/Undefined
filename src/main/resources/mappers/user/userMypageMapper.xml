@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+<mapper namespace="kr.co.udf.user.dao.UserMypageDao">
+	
+	<!-- 일반 사용자 정보조회 -->
+	<select id="myinfoUsers" resultType="kr.co.udf.user.domain.User">
+		SELECT user_no no
+		     , user_email email
+		     , user_pw pw
+		     , user_nm nm
+		     , to_char(user_birthday, 'YYYY-MM-DD') birthday
+		     , user_addr addr
+		     , user_tel tel
+		     , user_point point
+		  FROM users
+		 WHERE user_no = #{no}
+		   AND user_email = #{email}
+		   AND user_pw = #{pw}
+	</select>
+	
+	<!-- 드레스 업체 정보조회 -->
+	<select id="myinfoDress" resultType="kr.co.udf.user.domain.Company">
+		SELECT dc_no no
+		     , dc_nm nm
+		     , dc_company_no companyNo
+		     , dc_main_nm mainNm
+		     , dc_addr addr
+		     , dc_main_image mainImg
+		     , dc_email email
+		     , dc_pw pw
+		     , dc_tel tel
+		     , dc_introduce introduce
+		     , dc_smy_intro smyIntro
+		     , 'dress' companyType
+		  FROM dress_company
+		 WHERE dc_no = #{no}
+		   AND dc_email = #{email}
+		   AND dc_pw = #{pw}
+	</select>
+	<!-- 스튜디오 업체 정보조회 -->
+	<select id="myinfoStudio" resultType="kr.co.udf.user.domain.Company">
+		SELECT sc_no no
+		     , sc_nm nm
+		     , sc_company_no companyNo
+		     , sc_main_nm mainNm
+		     , sc_addr addr
+		     , sc_main_image mainImg
+		     , sc_email email
+		     , sc_pw pw
+		     , sc_tel tel
+		     , sc_introduce introduce
+		     , sc_smy_intro smyIntro
+		     , 'studio' companyType
+		  FROM studio_company
+		 WHERE sc_no = #{no}
+		   AND sc_email = #{email}
+		   AND sc_pw = #{pw};
+	</select>
+	
+	<!-- 메이크업 업체 정보조회 -->
+	<select id="myinfoMakeup" resultType="kr.co.udf.user.domain.Company">
+		SELECT mc_no no
+		     , mc_nm nm
+		     , mc_company_no companyNo
+		     , mc_main_nm mainNm
+		     , mc_addr addr
+		     , mc_main_image mainImg
+		     , mc_email email
+		     , mc_pw pw
+		     , mc_tel tel
+		     , mc_introduce introduce
+		     , mc_smy_intro smyIntro
+		     , 'makeup' companyType
+		  FROM makeup_company
+		 WHERE mc_no = #{no}
+		   AND mc_email = #{email}
+		   AND mc_pw = #{pw};
+	</select>
+	
+	<!-- 나의 정보관리 정보 수정하기 (일반 사용자) -->
+	<update id="userupdate" parameterType="map">
+		UPDATE users
+		   SET user_pw = #{user.pw}
+		     , user_nm = #{user.name}
+		     , user_birthday = to_date(#{user.birthday}, 'YYYY-MM-DD')
+		     , user_addr = #{addr}
+		     , user_tel = #{user.tel}
+		 WHERE user_no = #{user.no}
+	</update>
+	
+	<!-- 나의 정보관리 정보 수정하기 (드레스) -->
+	<update id="companyupdateDress" parameterType="map">
+		UPDATE dress_company
+		   SET dc_pw = #{company.pw}
+		     , dc_addr = #{addr}
+		     , dc_main_nm = #{company.mainNm}
+		     , dc_tel = #{company.tel}
+		     , dc_introduce = #{company.introduce}
+		     , dc_smy_intro = #{company.smyIntro}
+		     , dc_nm = #{company.nm}
+		     , dc_company_no = #{company.companyNo}
+		 WHERE dc_no = #{company.no}
+	</update>
+	
+	<!-- 나의 정보관리 정보 수정하기 (메이크업) -->
+	<update id="companyupdateMakeup" parameterType="map">
+		UPDATE makeup_company
+		   SET mc_pw = #{company.pw}
+		     , mc_addr = #{addr}
+		     , mc_main_nm = #{company.mainNm}
+		     , mc_tel = #{company.tel}
+		     , mc_introduce = #{company.introduce}
+		     , mc_smy_intro = #{company.smyIntro}
+		     , mc_nm = #{company.nm}
+		     , mc_company_no = #{company.companyNo}
+		 WHERE mc_no = #{company.no}
+	</update>
+	
+	<!-- 나의 정보관리 정보 수정하기 (스튜디오) -->
+	<update id="companyupdateStudio" parameterType="map">
+		UPDATE studio_company
+		   SET c_pw = #{company.pw}
+		     , c_addr = #{addr}
+		     , c_main_nm = #{company.mainNm}
+		     , c_tel = #{company.tel}
+		     , c_introduce = #{company.introduce}
+		     , c_smy_intro = #{company.smyIntro}
+		     , c_nm = #{company.nm}
+		     , c_company_no = #{company.companyNo}
+		 WHERE c_no = #{company.no}
+	</update>
+</mapper>

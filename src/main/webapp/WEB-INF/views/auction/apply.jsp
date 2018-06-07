@@ -91,14 +91,12 @@ $(document).ready(function() {
                       <div class="col-lg-2">
                         <label>업체 종류</label>
                       </div>
+                      
                       <div class="col-lg-10">
                         <div class="checkbox">
-                          <label> <input type="radio"
-                            name="type" value="studio" checked="checked" />
-                            <strong>스튜디오</strong></label> <label> <input
-                            type="radio" name="type" value="dress" /> <strong>드레스</strong></label>
-                          <label> <input type="radio"
-                            name="type" value="makeup" /> <strong>메이크업</strong></label>
+                          <label> <input type="radio" name="type" value="studio" checked="checked" /><strong>스튜디오</strong></label> 
+                            <label> <input type="radio" name="type" value="dress" /> <strong>드레스</strong></label>
+                          <label> <input type="radio" name="type" value="makeup" /> <strong>메이크업</strong></label>
                         </div>
                       </div>
                     </div>

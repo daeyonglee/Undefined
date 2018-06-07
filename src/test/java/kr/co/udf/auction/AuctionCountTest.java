@@ -29,7 +29,7 @@ public class AuctionCountTest {
 	private static final Logger logger = Logger.getLogger(AuctionCountTest.class);
 	
 	@Test
-	public void test() {
-		logger.info(dao.count()); 
+	public void test() throws Exception {
+		logger.info(dao.count());
 	}
 }

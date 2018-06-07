@@ -2,8 +2,8 @@ searchVisible = 0;
 transparent = true;
 
 $(document).ready(function () {
-	//code here for second step
-	var $validator = $(".wizard-card form").validate({
+
+	$(".wizard-card form").validate({
         rules: {
             email: {
                 required: true,
@@ -18,15 +18,26 @@ $(document).ready(function () {
             	required: true,
             	equalTo: "#pw"
             },
-            tel:{
-        		required: true,
+            companyNo: {
+        		requrired: true
         	},
-        	/*birthday:{
+        	name : {
+        		required: true
+        	},
+        	mainNm : {
+        		required: true
+        	},
+        	tel:{
+        		required: true,
+        		tel: true
+        	},
+        	birthday:{
         		required: true,
         		date: true
         	},
         	addrdetail: {
-        	}*/
+        		required: "#postcode"
+        	}
 
             /*  other possible input validations
              ,username: {
@@ -57,10 +68,7 @@ $(document).ready(function () {
             repw: {
             	required: "비밀번호가 일치하지 않습니다.",
             	equalTo: "비밀번호가 일치하지 않습니다."
-            },
-            tel: "전화번호 형식이 유효하지 않습니다. ex)xxx-xxxx-xxxx",
-        	birthday: "2345",
-        	addrdetail: "3456"
+            }
             /*   other posible validation messages
              username: {
              required: "Please enter a username",
@@ -82,32 +90,6 @@ $(document).ready(function () {
 
         }
     });
-
-	/**
-	 * Finish 버튼에 대한 클릭 이벤트
-	 */
-	$('.btn-finish').click(function(){
-		
-		if (!$(".wizard-card form").valid()) {
-    		$validator.focusInvalid();
-            return false;
-        }
-		
-		var type = $(":input:radio[name=type]:checked").val();
-		var formobj = document.forms[0];
-		
-		if (type == "users") {
-			formobj.action = "/user/userjoin"
-			
-		}
-		
-		if (type == "company") {
-			formobj.action = "/user/companyjoin"
-		}
-		
-		formobj.submit();
-		
-	});
 	
     /*  Activate the tooltips      */
     $('[rel="tooltip"]').tooltip();
@@ -142,7 +124,26 @@ $(document).ready(function () {
         	if (index == 1) {
                 return validateFirstStep();
             } else if (index == 2) {
-                return validateSecondStep();
+               var email = $("#email").val();
+          	   
+          	   // 이메일체크
+          	   $.ajax({
+          		   url: "/user/emailcheck",
+          		   type: "get",
+          		   data: {email:email},
+          		   dataType: "json",
+          		   success:function(data){
+          			   console.log(data);
+          			   if (data == "" || data == null || data == undefined) {
+          				   
+          			   } else {
+          				   alert("이미 이메일이 존재합니다.");
+        				   return;
+          			   }
+          		   }
+          	   })
+            	
+          	   return validateSecondStep();
             } else if (index == 3) {
                 return validateThirdStep();
             } //etc. 
@@ -223,7 +224,7 @@ $(document).ready(function () {
     		form.enctype = 'multipart/form-data';
     	}
     	
-    	form.submit();
+    	//form.submit();
     	
     });
     
@@ -235,7 +236,7 @@ $(document).ready(function () {
     	
     	var bzowr_rgst_no = $('input[name="companyNo"]').val(); 
     	var wkpl_nm = $('input[name="name"]').val();
-    	var url = 'http://apis.data.go.kr/B552015/NpsBplcInfoInqireService/getBassInfoSearch?serviceKey=0FwR7es8bXjf958cfwrKjsoU37Ylsl26vr9cInO9I%2FELaImq4zuqdCQNlnLKMp0kI4f4X6xS9T01iyFhoPOKXw%3D%3D&bzowr_rgst_no='+bzowr_rgst_no+"&wkpl_nm="+wkpl_nm;
+    	var url = 'http://apis.data.go.kr/B552015/NpsBplcInfoInqireService/getBassInfoSearch?'+encodeURIComponent('ServiceKey')+'=0FwR7es8bXjf958cfwrKjsoU37Ylsl26vr9cInO9I%2FELaImq4zuqdCQNlnLKMp0kI4f4X6xS9T01iyFhoPOKXw%3D%3D&'+encodeURIComponent('bzowr_rgst_no')+'='+encodeURIComponent(bzowr_rgst_no)+'&'+encodeURIComponent('wkpl_nm')+'='+encodeURIComponent(wkpl_nm);
     	console.log(url);
     	var yqlURL = [ "http://query.yahooapis.com/v1/public/yql", "?q=" + encodeURIComponent("select * from xml where url='" + url + "'"), "&format=xml&callback=?" ].join("");
     	
@@ -246,6 +247,10 @@ $(document).ready(function () {
     			
     			var companyNo = $(data.results[0]).find("bzowrRgstNo").text();
     			var companyNm = $(data.results[0]).find("wkplNm").text();
+    			
+    			console.log(data);
+    			console.log(companyNo);
+    			console.log(companyNm);
     			
     			if (companyNo == "" || companyNm == "") {
     				alert("인증 실패하였습니다.");
@@ -306,7 +311,8 @@ $(document).ready(function () {
                  document.getElementById('addr').value = fullAddr;
 
                  // 커서를 상세주소 필드로 이동한다.
-                 document.getElementById('addrdetail').focus();
+               document.getElementById('addrdetail').value = "";
+               document.getElementById('addrdetail').focus();
              }
          }).open();
     });  
@@ -321,7 +327,7 @@ function validateFirstStep() {
 		
 		var html  = "<div class='form-group'>";
 		    html += "  <label>이메일 <small>(required)</small></label>";
-		    html += "  <input name='email' type='email' class='form-control'>";
+		    html += "  <input id='email' name='email' type='email' class='form-control'>";
 		    html += "</div>";
 		    html += "<div class='form-group'>";
 		    html += "  <label>비밀번호 <small>(required)</small></label>";
@@ -338,7 +344,7 @@ function validateFirstStep() {
 		
 		var html  = "<div class='form-group'>";
 		    html += "  <label>이메일 <small>(required)</small></label>";
-		    html += "  <input name='email' type='email' class='form-control'>";
+		    html += "  <input id='email' name='email' type='email' class='form-control'>";
 		    html += "</div>";
 		    html += "<div class='form-group'>";
 		    html += "  <label>비밀번호 <small>(required)</small></label>";
@@ -348,21 +354,19 @@ function validateFirstStep() {
 		    html += "  <label>비밀번호 확인<small>(required)</small></label>";
 		    html += "<input name='repw' id='repw' type='password' class='form-control'>";
 		    html += "</div>";
-		    /*html += "<div class='form-group'>";
-		    html += "  <label>전화번호<small>(required)</small></label>";
-		    html += "  <input name='tel' type='tel' class='form-control'>";
-		    html += "</div>";
-		    html += "<div class='form-group'>";
-		    html += "  <label>주소<small>(required)</small></label>";
-		    html += "  <input name='addr' type='text' class='form-control'>";
-		    html += "</div>";*/
 	    $("#base-container").html(html);
 	}
+	
+    if (!$(".wizard-card form").valid()) {
+    	console.log($validator);
+    	$validator.focusInvalid();
+        return false;
+    }
+
+    return true;
 }
 
 function validateSecondStep() {
-	
-	console.log( $(":input:radio[name=type]:checked").val());
 	
 	var type = $(":input:radio[name=type]:checked").val();
 	
@@ -456,6 +460,10 @@ function validateSecondStep() {
 		    html += "</div>";
 		    html += "<div class='row'>";
 		    html += "  <div class='col-sm-12'>";
+		    html += "  	 <div class='form-group>'";
+		    html += "      <label>한 줄 소개</label>";
+		    html += "      <input type='text' name='smyIntro' class='form-control' placeholder='간단하게 보여질 한 줄 소개'>";
+		    html += "    </div>";
 		    html += "    <div class='form-group'>";
 		    html += "      <label>업체 소개</label>";
 		    html += "      <textarea name='introduce' class='tx-cp-memo' maxlength='1000'></textarea>";
@@ -472,13 +480,20 @@ function validateSecondStep() {
 	        increaseArea: '20%' // optional
 	   });
 	}
+	
+    if (!$(".wizard-card form").valid()) {
+        return false;
+    }
+    
+    return true;
+
 }
 
 function validateThirdStep() {
+	
 }
 
 //Function to show image before upload
-
 function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
@@ -489,16 +504,3 @@ function readURL(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

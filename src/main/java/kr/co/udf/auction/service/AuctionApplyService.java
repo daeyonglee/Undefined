@@ -18,7 +18,7 @@ public interface AuctionApplyService {
 	public Auction read(int no, String type) throws Exception;
 
 	// 역경매 신청서 수정
-	public void update(Auction auction) throws Exception;
+	public void modify(Auction auction) throws Exception;
 
 	// 역경매 신청서 삭제
 	public void delete(int no, String type) throws Exception;
@@ -28,7 +28,10 @@ public interface AuctionApplyService {
 
 	// 전체 회원의 역경매 리스트 페이징 처리
 	public List<Auction> listParams(SearchParams params) throws Exception;
-	
+
+	// 전체 게시물 조회 + 낙찰 페이징 처리
+	public List<Auction> winlistParams(SearchParams params) throws Exception;
+
 	// 전체 게시물 수
 	public int countPage() throws Exception;
 
@@ -39,8 +42,18 @@ public interface AuctionApplyService {
 
 	public List<Auction> listByMakeup(SearchParams params) throws Exception;
 
+	// 카테고리별 낙찰게시물 조회 + 페이징 처리
+	public List<Auction> winlistByStudio(SearchParams params) throws Exception;
+
+	public List<Auction> winlistByDress(SearchParams params) throws Exception;
+
+	public List<Auction> winlistByMakeup(SearchParams params) throws Exception;
+
 	// 스.드.메 카테고리 별 총 게시물 수
-	public int listByTypeCount() throws Exception;
+	public int listByTypeCount(SearchParams params) throws Exception;
+
+	// 낙찰 카테고리별 게시물 수 조회
+	public int winlistByTypeCount(SearchParams params) throws Exception;
 
 	// 스튜디오 입찰 실시간 화면 조회
 	public List<Auction> realtimelist() throws Exception;

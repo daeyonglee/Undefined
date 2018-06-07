@@ -21,15 +21,15 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		
 		HttpSession session = request.getSession();
 		ModelMap modelMap = modelAndView.getModelMap();
-		Object user = modelMap.get("user");
+		Object login = modelMap.get("login");
 		String role = (String)modelMap.get("role");
 		
-		logger.info(user);
+		logger.info(login);
 		logger.info(role);
 		
-		if (user != null) {
+		if (login != null) {
 			logger.info("new Login success");
-			session.setAttribute(LOGIN, user);
+			session.setAttribute(LOGIN, login);
 			session.setAttribute("role", role);
 
 			if (request.getParameter("useCookie") != null  && role != "admin") {

@@ -1,42 +1,42 @@
 package kr.co.udf.auction.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.aspectj.org.eclipse.jdt.internal.compiler.ast.ArrayAllocationExpression;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.databind.util.JSONPObject;
 
 import kr.co.udf.auction.domain.Auction;
+import kr.co.udf.auction.domain.AuctionBid;
 import kr.co.udf.auction.domain.AuctionCount;
 import kr.co.udf.auction.service.AuctionApplyService;
+import kr.co.udf.auction.service.AuctionBidService;
 import kr.co.udf.auction.service.AuctionCountService;
+import kr.co.udf.common.company.domain.DressCompany;
+import kr.co.udf.common.company.domain.MakeupCompany;
+import kr.co.udf.common.company.domain.StudioCompany;
 import kr.co.udf.common.web.PageMaker;
 import kr.co.udf.common.web.SearchParams;
-import kr.co.udf.user.domain.Login;
 import kr.co.udf.user.domain.User;
 
 @Controller
 @RequestMapping("/auction/*")
 public class AuctionController {
-
+	
 	Logger logger = Logger.getLogger(AuctionController.class);
 
 	@Inject
@@ -44,6 +44,9 @@ public class AuctionController {
 
 	@Inject
 	private AuctionCountService countService;
+	
+	@Inject
+	private AuctionBidService bidService;
 
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String index() {
@@ -55,7 +58,7 @@ public class AuctionController {
 		logger.info("apply form.....");
 	}
 	
-	// 상세보기	
+	/** 상세보기 */	
 	@RequestMapping(value = "/read", method = RequestMethod.GET)
 	public void read(@RequestParam("no") int no, @RequestParam("type")String type, Model model) throws Exception {
 				
@@ -63,16 +66,48 @@ public class AuctionController {
 		
 	}
 	
-	// 삭제
+	/** 낙찰서 상세보기 */
+	@RequestMapping(value = "/winread", method = RequestMethod.GET)
+	public void winread(@RequestParam("no") int no, @RequestParam("type")String type, Model model) throws Exception {
+				
+		model.addAttribute("Auction",bidService.winread(no,type));				
+		
+	}
+	
+	
+	
+	/** 삭제 */
 	@RequestMapping(value = "/remove", method = RequestMethod.POST)
 	public String delete(@RequestParam("no") int no, @RequestParam("type") String type, RedirectAttributes rttr) throws Exception {
 				
 		service.delete(no, type);
 		
-		rttr.addFlashAttribute("");
+		rttr.addFlashAttribute("msg","SUCCESS");
 		
 		return "redirect:/auction/bid";
 		
+	}
+	
+	/** 수정(리드)  */
+	@RequestMapping(value = "/modify", method = RequestMethod.GET)
+	public void modifyGET(int no, String type, Model model) throws Exception{
+		
+		model.addAttribute("Auction",service.read(no, type));
+
+	}
+	
+	/** 수정 */
+	@RequestMapping(value = "/modify", method = RequestMethod.POST)
+	public String modifyPost(Auction auction , RedirectAttributes rttr) throws Exception{
+		
+		logger.info(auction);
+		
+		service.modify(auction);
+		
+		rttr.addFlashAttribute("msg","SUCCESS");
+		
+		return "redirect:/auction/bid";		
+
 	}
 	
 	/** 스드메 카테고리 별로 신청서 등록하기*/
@@ -114,79 +149,334 @@ public class AuctionController {
 	 * service.listParams(params)); }
 	 */
 
-	@RequestMapping(value = "/bid", method = RequestMethod.GET)
-	public void bid(@ModelAttribute("parmas") SearchParams params, Model model) throws Exception {
-		logger.info("listParams get...." + params.toString());
-
-		model.addAttribute("list", service.listParams(params));
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public void bid(SearchParams params, Model model) throws Exception {
+		
+		if (params.getSearchType() == null) {
+			params.setSearchType("all");
+		}
+		
+		// 화면 변경이 될 때 searchType이 존재 하는지 확인 후 그에 맞는 데이터 조회.
+		// 근데 지금은 그냥 무조건 전체조회.
+		// 그러므로 확인해야한다. 무엇을? searchType을
+		
+		if ("studio".equals(params.getSearchType())) {
+			model.addAttribute("list", service.listByStudio(params));
+		} else if ("dress".equals(params.getSearchType())) {
+			model.addAttribute("list",service.listByDress(params));
+		} else if ("makeup".equals(params.getSearchType())) {
+			model.addAttribute("list", service.listByMakeup(params));
+		} else {
+			model.addAttribute("list", service.listParams(params));
+		}
 
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setParams(params);
-		pageMaker.setTotalCount(service.listByTypeCount());
-		logger.info(pageMaker.toString());
+		pageMaker.setTotalCount(service.listByTypeCount(params));
 
 		model.addAttribute("pageMaker", pageMaker);
 	}
+	
+	@RequestMapping(value = "/win", method = RequestMethod.GET)
+	public void win(AuctionBid bid,SearchParams params, Model model) throws Exception {
 
-	@RequestMapping(value = "/bid/studio", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ResponseEntity<List<JSONPObject>> studioApplyList(
-			@RequestParam("params") SearchParams params) {
+		if (params.getSearchType() == null) {
+			params.setSearchType("all");
+		}
+		
+		if ("studio".equals(params.getSearchType())) {
+			model.addAttribute("winlist", service.winlistByStudio(params));
+		} else if ("dress".equals(params.getSearchType())) {
+			model.addAttribute("winlist",service.winlistByDress(params));
+		} else if ("makeup".equals(params.getSearchType())) {
+			model.addAttribute("winlist", service.winlistByMakeup(params));
+		} else {
+			model.addAttribute("winlist", service.winlistParams(params));
+		}
 
-		return null;
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setParams(params);
+		pageMaker.setTotalCount(service.winlistByTypeCount(params));
 
-		/*
-		 * @RequestMapping(value="", method=RequestMethod.GET,
-		 * produces=MediaType.APPLICATION_JSON_VALUE) public @ResponseBody
-		 * List<JSONObject> getAll() { List<Entity> entityList =
-		 * entityManager.findAll();
-		 * 
-		 * List<JSONObject> entities = new ArrayList<JSONObject>(); for (Entity n :
-		 * entityList) { JSONObject entity = new JSONObject(); entity.put("id",
-		 * n.getId()); entity.put("address", n.getAddress()); entities.add(entity); }
-		 * return entities; }
-		 */
+		model.addAttribute("pageMaker", pageMaker);
+		 int discountPrice = ((int)(bid.getPrice().intValue() * bid.getDiscount().intValue() * 0.01));
+		 logger.info(discountPrice);
+	     model.addAttribute("discountPrice", discountPrice);
+	}
+	
+	// 입찰서 신규 등록하기(bid)
+		@RequestMapping(value = "/bid", method = RequestMethod.GET)
+		public void bidForm(int no, String type, HttpSession session, Model model) throws Exception{
+			
+			logger.info("bidForm 진입");
+			User user = (User)session.getAttribute("login");
+			String role = (String)session.getAttribute("role");
+			
+			logger.info("회사 타입은?" + role);
+			logger.info("회사의 정체는?" + user);
+			
+			logger.info((user.getNo()).intValue());
+			
+			if (role.equals("mc")) {
+				logger.info("[makeup] 업체입니다..");
+				MakeupCompany company =  bidService.searchMakeupCompany((user.getNo()).intValue());
+				logger.info(company);
+				model.addAttribute("Company", company);
 
-		/*
-		 * @RequestMapping(value="", method=RequestMethod.GET,
-		 * produces=MediaType.APPLICATION_JSON_VALUE) public @ResponseBody
-		 * ResponseEntity<Object> getAll() { List<Entity> entityList =
-		 * entityManager.findAll();
-		 * 
-		 * List<JSONObject> entities = new ArrayList<JSONObject>(); for (Entity n :
-		 * entityList) { JSONObject Entity = new JSONObject(); entity.put("id",
-		 * n.getId()); entity.put("address", n.getAddress()); entities.add(entity); }
-		 * return new ResponseEntity<Object>(entities, HttpStatus.OK); }
-		 */
 
+			} else if (role.equals("dc")) {
+				logger.info("[dress] 업체입니다...");
+				DressCompany company = bidService.searchDressCompany((user.getNo()).intValue());
+				logger.info(company);
+				model.addAttribute("Company", company);
+
+
+			} else if (role.equals("sc")) {
+				logger.info("[studio] 업체입니다...");
+				StudioCompany company = bidService.searchStudioCompany((user.getNo()).intValue());
+				logger.info(company);
+				model.addAttribute("Company", company);
+				
+			}
+			
+			// 이 no는 신청서번호
+			logger.info(no);
+			logger.info(type);
+			Auction auction = new Auction();
+			auction = service.read(no, type);
+			
+			model.addAttribute("Auction", auction);
+			
+			// 근데 dress_company, studio_company, makeup_company, users 등 어디에 있는 데이터인지 모른다
+			// 근데 로그인을 한 경우라면 session값에 login을 출력해보면
+			// 그 안에 role이라는게 있다. 예를 들어 dc, mc, sc, users 등 4가지 경우로 나뉜다.
+			// 그 값을 알게되면 그에 해당하는 테이블에서 데이터를 조회하면 된다.
+			// Login 객체에 no, email, pw, role;
+			// Login의 no로 데이터를 조회해
+			// 그러면 그에대한 데이터를 얻을 수 있잖아.
+			
+		}
+
+		@RequestMapping(value = "/bid", method = RequestMethod.POST)
+		public String winPost(@RequestParam("type") String type, @RequestParam("no") int no, AuctionBid bid, HttpSession session, RedirectAttributes rttr) throws Exception {
+			
+			User user = (User)session.getAttribute("login");
+			Auction auction = service.read(no, type);
+			
+			bid.setApplyNo(no);
+			bid.setCompanyNo(user.getNo().intValue());
+			bid.setUserNo(auction.getUserNo().intValue());
+			
+			logger.info("회사의 정체는?" + user);
+			logger.info("입찰서 내용은?" + auction);
+			
+			if(type.equals("dress")) {
+				bidService.createDressBid(bid);
+				logger.info("[dress] 입찰서 제출합니다");
+				logger.info(bid);
+				
+			} else if (type.equals("makeup")) {
+				bidService.createMakeupBid(bid);
+				logger.info("[makeup] 입찰서 제출합니다");
+				logger.info(bid);
+				
+			} else if (type.equals("studio")) {
+				bidService.createStudioBid(bid);
+				logger.info("[makeup] 입찰서 제출합니다");
+				logger.info(bid);
+
+			}
+
+			rttr.addFlashAttribute("msg", "SUCCESS");
+			return "redirect:/auction/list";
+		}
+		
+		// 경매 입찰서 리스트 전체 조회(list)
+		@RequestMapping(value = "/bidlist", method = RequestMethod.GET)
+		public void bidlist(@RequestParam("userNo") int userNo, AuctionBid bid, HttpSession session, Model model) throws Exception {
+			logger.info("bidlist get...." );
+			
+			User user = (User) session.getAttribute("login");
+			logger.info(user);
+			
+			bid.setUserNo(userNo);
+			model.addAttribute("bidList", bidService.listByUser(userNo));
+
+	/*		PageMaker pageMaker = new PageMaker();
+			pageMaker.setTotalCount(service.listByTypeCount());
+			logger.info(pageMaker.toString());
+
+			model.addAttribute("pageMaker", pageMaker);
+	*/	}
+	
+
+	
+	@RequestMapping(value="/bid/studio", method=RequestMethod.GET)
+	public ResponseEntity<List<Auction>> studioApplyList(SearchParams params) throws Exception{
+		
+		ResponseEntity<List<Auction>> entity = null;
+		
+
+		List<Auction> list = service.listByStudio(params);
+		
+		params.setSearchType("studio");
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setParams(params);
+		pageMaker.setTotalCount(service.listByTypeCount(params));
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("list", list);
+		map.put("pageMaker", pageMaker);
+		
+		try {
+			entity = new ResponseEntity(map, HttpStatus.OK);
+		} catch(Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity(HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
 	}
 
 	@RequestMapping(value = "/bid/dress", method = RequestMethod.GET)
-	public ResponseEntity<List<Auction>> dressApplyList(@RequestParam("params") SearchParams params) {
-
+	public ResponseEntity<List<Auction>> dressApplyList(SearchParams params)throws Exception{
+		
+		
 		ResponseEntity<List<Auction>> entity = null;
-		params.setPerPageNum(10);
-
+		
+		params.setSearchType("dress");
+		
+		List<Auction> list = service.listByDress(params);
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setParams(params);
+		pageMaker.setTotalCount(service.listByTypeCount(params));
+		
+		Map<String,Object> map = new HashMap<>();
+		map.put("list", list);
+		map.put("pageMaker",pageMaker);
+				
 		try {
-			entity = new ResponseEntity<>(service.listByDress(params), HttpStatus.OK);
+			entity = new ResponseEntity(map,HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			entity = new ResponseEntity(HttpStatus.BAD_REQUEST);
 		}
 		return entity;
 	}
 
 	@RequestMapping(value = "/bid/makeup", method = RequestMethod.GET)
-	public ResponseEntity<List<Auction>> makeupApplyList(@RequestParam("params") SearchParams params) {
+	public ResponseEntity<List<Auction>> makeupApplyList(SearchParams params)  throws Exception {
 
-		ResponseEntity<List<Auction>> entity = null;
-		params.setPerPageNum(10);
+		
+	    ResponseEntity<List<Auction>> entity = null;
+		
 
+		List<Auction> list = service.listByMakeup(params);
+		
+		params.setSearchType("makeup");
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setParams(params);
+		pageMaker.setTotalCount(service.listByTypeCount(params));
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("list", list);
+		map.put("pageMaker", pageMaker);
+		
 		try {
-			entity = new ResponseEntity<>(service.listByMakeup(params), HttpStatus.OK);
-		} catch (Exception e) {
+			entity = new ResponseEntity(map, HttpStatus.OK);
+		} catch(Exception e) {
 			e.printStackTrace();
-			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			entity = new ResponseEntity(HttpStatus.BAD_REQUEST);
 		}
+		return entity;
+	}
+	
+	@RequestMapping(value="/win/studio", method=RequestMethod.GET)
+	public ResponseEntity<List<Auction>> winstudioApplyList(SearchParams params)throws Exception{
+		
+		ResponseEntity<List<Auction>> entity = null;
+		
+
+		List<Auction> list = service.winlistByStudio(params);
+		
+		params.setSearchType("studio");
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setParams(params);
+		pageMaker.setTotalCount(service.winlistByTypeCount(params));
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("list", list);
+		map.put("pageMaker", pageMaker);
+		
+		try {
+			entity = new ResponseEntity(map, HttpStatus.OK);
+		} catch(Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity(HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
+	}
+
+	@RequestMapping(value = "/win/dress", method = RequestMethod.GET)
+	public ResponseEntity<List<Auction>> windressApplyList(SearchParams params)throws Exception {
+		
+		
+		ResponseEntity<List<Auction>> entity = null;
+		
+
+		List<Auction> list = service.winlistByDress(params);
+		
+		params.setSearchType("dress");
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setParams(params);
+		pageMaker.setTotalCount(service.winlistByTypeCount(params));
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("list", list);
+		map.put("pageMaker", pageMaker);
+		
+		try {
+			entity = new ResponseEntity(map, HttpStatus.OK);
+		} catch(Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity(HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
+	}
+
+	@RequestMapping(value = "/win/makeup", method = RequestMethod.GET)
+	public ResponseEntity<List<Auction>> winmakeupApplyList(SearchParams params) throws Exception {
+
+		
+		ResponseEntity<List<Auction>> entity = null;
+		
+
+		List<Auction> list = service.winlistByMakeup(params);
+		
+		params.setSearchType("makeup");
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setParams(params);
+		pageMaker.setTotalCount(service.winlistByTypeCount(params));
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("list", list);
+		map.put("pageMaker", pageMaker);
+		
+		try {
+			entity = new ResponseEntity(map, HttpStatus.OK);
+		} catch(Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity(HttpStatus.BAD_REQUEST);
+		}
+		
 		return entity;
 	}
 
@@ -202,11 +492,6 @@ public class AuctionController {
 		return "auction/submitbid";
 	}
 
-	@RequestMapping(value = "/win", method = RequestMethod.GET)
-	public String win() {
-
-		return "auction/win";
-	}
 
 	@RequestMapping(value = "count", method = RequestMethod.GET)
 	public ResponseEntity<AuctionCount> userCnt() {
@@ -309,6 +594,6 @@ public class AuctionController {
 		}
 
 		return entity;
- 
+
 	}
 }

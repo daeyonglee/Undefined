@@ -1,6 +1,7 @@
 package kr.co.udf.user.dao;
 
 import kr.co.udf.user.domain.CompanyDTO;
+import kr.co.udf.user.domain.Login;
 import kr.co.udf.user.domain.UserDTO;
 
 public interface UserJoinDao {
@@ -16,4 +17,11 @@ public interface UserJoinDao {
 	 * @param dto
 	 */
 	public void companyjoin(CompanyDTO dto);
+	
+	/**
+	 * 이메일 존재 유무 체크
+	 * @param login
+	 * @return
+	 */
+	public Login emailcheck(Login login);
 }

@@ -52,11 +52,20 @@ public class MyBatisAuctionApplyDao implements AuctionApplyDao {
 		
 		return list;
 	}
+	
+	
 
 	@Override
 	public void update(Auction auction) throws Exception {
-		// TODO Auto-generated method stub
-
+		
+		if(auction.getType().equals("dress")) {
+			session.update(NAMESPACE +".updateDress",auction);
+		} else if(auction.getType().equals("makeup")) {
+			session.update(NAMESPACE +".updateMakeup",auction);			
+		} else if(auction.getType().equals("studio")) {
+			session.update(NAMESPACE +".updateStudio",auction);			
+		}
+		
 	}
 
 	@Override
@@ -65,11 +74,14 @@ public class MyBatisAuctionApplyDao implements AuctionApplyDao {
 		if (type.equals("dress")) {
 			session.delete(NAMESPACE+".deleteDress", no);
 		} else if(type.equals("makeup")) {
-			session.delete(NAMESPACE+".deleteMakeup", no);
+			session.delete(NAMESPACE+".deleteMakeup", no);                                                                                                                                                                                                                                                                                                                  
 		} else if(type.equals("studio")) {
 			session.delete(NAMESPACE+".deleteStudio", no);
 		}
 	}
+	
+	
+
 
 	@Override
 	public List<Auction> listAll() throws Exception {
@@ -79,6 +91,11 @@ public class MyBatisAuctionApplyDao implements AuctionApplyDao {
 	@Override
 	public List<Auction> listParams(SearchParams params) throws Exception {
 		return session.selectList(NAMESPACE + ".listParams", params);
+	}
+	
+	@Override
+	public List<Auction> winlistParams(SearchParams params) throws Exception {
+		return session.selectList(NAMESPACE+ ".winlistParams",params);
 	}
 
 	@Override
@@ -103,10 +120,31 @@ public class MyBatisAuctionApplyDao implements AuctionApplyDao {
 		return session.selectList(NAMESPACE + ".listByMakeup", params);
 
 	}
+	
+	@Override
+	public List<Auction> winlistByStudio(SearchParams params) throws Exception {
+		return session.selectList(NAMESPACE + ".winlistByStudio", params);
+	}
 
 	@Override
-	public int listByTypeCount() throws Exception {
-		return session.selectOne(NAMESPACE + ".listByTypeCount");
+	public List<Auction> winlistByDress(SearchParams params) throws Exception {
+		return session.selectList(NAMESPACE + ".winlistByDress", params);
+	}
+
+	@Override
+	public List<Auction> winlistByMakeup(SearchParams params) throws Exception {
+		return session.selectList(NAMESPACE + ".winlistByMakeup", params);
+	}
+
+
+	@Override
+	public int listByTypeCount(SearchParams params) throws Exception {
+		return session.selectOne(NAMESPACE + ".listByTypeCount",params);
+	}
+	
+	@Override
+	public int winlistByTypeCount(SearchParams params) throws Exception {
+		return session.selectOne(NAMESPACE + ".winlistByTypeCount", params);
 	}
 	
 	@Override

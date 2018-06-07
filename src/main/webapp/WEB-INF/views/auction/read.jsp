@@ -27,6 +27,11 @@
 
 
   <article class="container">
+          <form role = "form" method="post">
+          <input type="hidden" name="no" value="${Auction.no}" />
+          <input type="hidden" name="type" value="${Auction.type}" />
+          </form>
+  
 
 
     <div class="content-area submit-property"
@@ -39,8 +44,7 @@
             <div class="wizard-card ct-wizard-orange"
               id="wizardProperty">
               <form id="applyForm" method="post">
-                <input type="hidden" name="no" value="${no}" />
-                <input type="hidden" name="type" value="${type}" />
+              
                 <div class="wizard-header"></div>
                 <ul>
                   <li><a href="#step1" data-toggle="tab">역경매
@@ -58,9 +62,7 @@
                       </div>
                       <div class="col-lg-10" id="col">
                         <div class="col-lg-6">
-                          <input class='form-control' type="text"
-                            name="type" readonly="readonly"
-                            value="${Auction.type}">
+                          <input class='form-control' type="text" name="type" readonly="readonly" value="${Auction.type}">
                         </div>
                       </div>
 
@@ -165,16 +167,16 @@
             <!--  submit 버튼   -->
             <div class="form-group text-center">
               <span id=button>  <input
-                  type='button' class='btn-primary' id="submit"
-                  name='submit' value='글목록'
+                  type='button' class='btn-primary' id="list"
+                  name='list' value='글목록'
                   style="width: 140px; padding-top: 5px; padding-bottom: 5px" />
                <input type='button'
                   class='btn-warning' id="submit" name='submit'
-                  value='수정' style="width: 140px;" />
+                  value='수정' style="width: 140px; color: #f5f5f5;" />
                <input type='button'
                   class='btn-danger' id="submit" name='submit'
-                  value='삭제' style="width: 140px;" />
-              
+                  value='삭제' style="width: 140px; color : #f5f5f5;" />
+                        <a href="bid?no=${Auction.no}&type=${Auction.type}"><input type="button" class="btn-primary" id="bid"  name="bid" value="입찰서 제출" style="width: 140px; padding-top: 5px; padding-bottom: 5px; float: right;"></a>
               </span>
             </div>
             <div class="clearfix"></div>
@@ -191,27 +193,24 @@
 
 
   <script>
-         $(document).ready(function() {
-            var formObj = $("form[role='form']");
+			$(document).ready(function() {
+				var formObj = $("form[role='form']");
 
-            $(".btn-warning").on("click", function() {
-               formObj.attr("action", "modify");
-               formObj.attr("method", "get");
-               formObj.submit();
-            });
-            $(".btn-danger").on("click", function() {
-               formObj.attr("action", "remove");
-               formObj.submit();
-            });
+				$(".btn-warning").on("click", function() {
+					formObj.attr("action", "modify");
+					formObj.attr("method", "get");
+					formObj.submit();
+				});
+				$(".btn-danger").on("click", function() {
+					formObj.attr("action", "remove");
+					formObj.submit();
+				});
 
-            $(".btn-primary").on("click", function() {
-               self.location = "bid";
-            });
-         });
-      </script>
-
-
-
+				$("#list").on("click", function() {
+					self.location = "list";
+				});
+			});
+		</script>
 
   <%@include file="../include/bottom.jsp"%>
 </body>

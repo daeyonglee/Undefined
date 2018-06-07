@@ -30,7 +30,7 @@ public class PageMaker {
 		endPage = (int)(Math.ceil(params.getPage() / (double) displayPageNum)  * displayPageNum);
 		startPage = (endPage - displayPageNum) + 1;
 		
-		int tempEndPage = (int)(Math.ceil(totalCount) / (double) params.getPerPageNum());
+		int tempEndPage = (int)(Math.ceil(totalCount / (double) params.getPerPageNum()));
 		if(endPage > tempEndPage) {
 			endPage = tempEndPage;			
 		}

@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import kr.co.udf.user.dao.UserDao;
 import kr.co.udf.user.domain.Login;
-import kr.co.udf.user.domain.User;
 
 @Service
 public class UserLoginServiceImpl implements UserLoginService {
@@ -29,7 +28,12 @@ public class UserLoginServiceImpl implements UserLoginService {
 	}
 
 	@Override
-	public User checkLoginBefore(String value) {
+	public Login checkLoginBefore(String value) {
 		return dao.checkUserWithSessionKey(value);
+	}
+	
+	@Override
+	public Login logincheck(Login dto) {
+		return dao.logincheck(dto);
 	}
 }

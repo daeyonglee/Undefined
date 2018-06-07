@@ -86,6 +86,15 @@ public class MyBatisAuctionDaoTest {
 		String keyword = "dress";
 //		List<Auction> list = dao.listByType(keyword);
 	}
+	@Test
+	public void winListByStudio() throws Exception{
+		SearchParams params = new SearchParams();
+		params.setPage(1);
+		params.setPerPageNum(10);
+		
+		logger.info(dao.winlistByStudio(params));
+		
+	}
 
 }
  

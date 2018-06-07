@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@include file="../include/top.jsp"%>
+<%@include file="../../include/top.jsp"%>
 <!DOCTYPE html>
 
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -14,13 +14,26 @@
 <!--<![endif]-->
 <head>
 <link rel="stylesheet" href="/resources/assets/css/wizard.css">
-<link rel="stylesheet" href="/resources/assets/css/user/join.css">
 
 <meta charset="utf-8">
 <title>마이페이지</title>
 <script type="text/javascript">
 
-	
+	$(function(){
+
+		var msg = "${msg}";
+		console.log(msg);
+		if (msg != null || msg != "") {
+			
+			if (msg == "update") {
+				alert("정상적으로 수정되었습니다.");
+			}
+		}
+		
+  	$('#my').on('click',function(e){
+  		self.location='/user/mypage/my';
+  	});
+	});
 
 </script>
 </head>
@@ -77,11 +90,21 @@
             <h4><strong>포인트관리</strong></h4>
           </div>
         </div>
+        <c:if test="${login.role ne 'users'} or ${login.role ne 'admin'}">
+        <div class="col-xs-3 m-padding">
+          <div id="product" class="welcome-estate">
+            <div class="welcome-icon">
+              <i class="pe-7s-wallet pe-4x"></i>
+            </div>
+            <h4><strong>나의 상품보기</strong></h4>
+          </div>
+        </div>
+        </c:if>
       </div>
     </div>
   </div>
   
-  <%@include file="../include/bottom.jsp"%>
+  <%@include file="../../include/bottom.jsp"%>
   
 </body>
 </html>

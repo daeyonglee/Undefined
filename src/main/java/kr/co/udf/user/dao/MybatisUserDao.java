@@ -38,7 +38,12 @@ public class MybatisUserDao implements UserDao {
 	}
 
 	@Override
-	public User checkUserWithSessionKey(String value) {
+	public Login checkUserWithSessionKey(String value) {
 		return sqlSession.selectOne(NAMESPACE+".checkUserWithSessionKey", value);
+	}
+	
+	@Override
+	public Login logincheck(Login dto) {
+		return sqlSession.selectOne(NAMESPACE+".logincheck", dto);
 	}
 }

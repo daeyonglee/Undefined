@@ -66,6 +66,7 @@ text-align: center;
 					</div>
 				</div>
 			</div>
+      <button id="mypageBidList">신청서 별 입찰서 리스트</button>
       <button id="bidListBtn">입찰 리스트</button>
       <button id="winListBtn">낙찰 리스트</button>
       <button id="studioRegistBtn">스튜디오 역경매 신청하기</button>
@@ -84,10 +85,16 @@ text-align: center;
   <script>
   $(document).ready(
       function() {
+    	  
+        $('#mypageBidList').on("click", function(evt) {
+
+              self.location = "/mypage/auction/apply";
+
+          });
 
         $('#bidListBtn').on("click", function(evt) {
 
-          self.location = "bid";
+          self.location = "list";
 
         });
         

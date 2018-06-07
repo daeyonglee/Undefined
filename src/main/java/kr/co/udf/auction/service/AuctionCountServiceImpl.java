@@ -14,9 +14,7 @@ public class AuctionCountServiceImpl implements AuctionCountService {
 	AuctionDao dao;
 
 	@Override
-	public AuctionCount count() {
+	public AuctionCount count() throws Exception{
 		return dao.count();
 	}
-	
-
 }

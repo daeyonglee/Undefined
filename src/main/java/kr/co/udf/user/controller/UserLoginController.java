@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,6 +48,7 @@ public class UserLoginController {
 		
 		logger.info("##### loginPOST start #####");
 		logger.info(login);
+		
 		// 회원 여부 확인
 		HashMap<String, Object> rMap = loginService.login(login);
 		
@@ -54,14 +57,12 @@ public class UserLoginController {
 		}
 		
 		logger.info(rMap);
+
+		login.setNo((BigDecimal)rMap.get("NO"));
+		login.setRole((String)rMap.get("ROLE"));
+		login.setNm((String)rMap.get("NM"));
 		
-		User user = new User();
-		
-		user.setEmail((String)rMap.get("EMAIL"));
-		user.setNo((BigDecimal)rMap.get("NO"));
-		user.setPw((String)rMap.get("PW"));
-		
-		model.addAttribute("user", user);
+		model.addAttribute("login", login);
 		model.addAttribute("role", (String)rMap.get("ROLE"));
 		
 		if (login.isUseCookie()) {
@@ -74,7 +75,7 @@ public class UserLoginController {
 			
 			Date sessionlimit = new Date(System.currentTimeMillis()+(1000*amount));
 			
-			loginService.keepLogin(user.getNo(), session.getId(), sessionlimit, (String)rMap.get("ROLE"));
+			loginService.keepLogin(login.getNo(), session.getId(), sessionlimit, (String)rMap.get("ROLE"));
 		}
 		
 		logger.info("##### loginPOST end #####");
@@ -87,21 +88,47 @@ public class UserLoginController {
 		Object obj = session.getAttribute("login");
 		Object obj2 = session.getAttribute("role");
 		
+		logger.info(obj);
+		logger.info(obj2);
+		
+		Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
+		
 		if (obj != null) {
-			User user = (User)obj;
-			
+			Login login = (Login)obj;
 			session.removeAttribute("login");
 			session.invalidate();
 			
-			Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
+			logger.info(loginCookie);
 			
-			if (loginCookie != null) {
-				loginCookie.setPath("/");
-				loginCookie.setMaxAge(0);
-				response.addCookie(loginCookie);
-				loginService.keepLogin(user.getNo(), session.getId(), new Date(), (String)obj2);
-			}
+			loginService.keepLogin(login.getNo(), session.getId(), new Date(), (String)obj2);
+			
+		}
+		
+		if (loginCookie != null) {
+			loginCookie.setPath("/");
+			loginCookie.setMaxAge(0);
+			response.addCookie(loginCookie);
 		}
 		return "redirect:/";
+	}
+	
+	@RequestMapping(value="/user/logincheck", method=RequestMethod.GET)
+	public ResponseEntity<Login> logincheck(Login dto) {
+		
+		ResponseEntity<Login> responseEntity = null;
+		Login login = loginService.logincheck(dto);
+		
+		try {
+			if (login != null)
+				responseEntity = new ResponseEntity<Login>(login,HttpStatus.OK);
+			else
+				responseEntity = new ResponseEntity<Login>(HttpStatus.OK);
+		} catch(Exception e) {
+			e.printStackTrace();
+			responseEntity = new ResponseEntity<Login>(HttpStatus.BAD_REQUEST);
+		}
+		
+		return responseEntity;
+		
 	}
 }
