@@ -18,20 +18,14 @@
 .topFix {
 	position: fixed;
 	top: 0px;
-    width: 76%;
 	z-index: 999;
 	cursor:
 }
 
 .bottomFix {
 	position: fixed;
-	/* height: 100px; */
 	bottom: 0px;
 	z-index: 999;
-}
-
-.studioItem .dressItem .makeupItem {
-	cursor: url("");
 }
 
 #studioCart #dressCart #makeupCart {
@@ -61,21 +55,33 @@
 
     <div class="tab-content">
       <div id="studioTab" class="tab-pane fade in active">
-        <ul class="list-inline">
           <c:forEach var="studio" items="${studioList}">
+      <%-- <ul class="list-inline">
             <li class="studioItem">
               <div class="studioNo" hidden="hidden">${studio.SP_NO}</div>
               <div>${studio.SP_IMAGE}</div>
               <div>${studio.SP_NM}</div>
               <div>${studio.SC_NM}</div>
-              <div>${studio.SP_PRICE}</div>
-              <div>${studio.SP_APV_YN}</div>
-              <div>${studio.SP_TOTAL_YN}</div>
-              <div>${studio.SP_SHOOT_TYPE}</div>
-              <div>${studio.REGDATE}</div>
+              <div>${studio.SP_PRICE}원</div>
             </li>
+        </ul> --%>
+        <div class="proerty-th">
+          <div class="col-sm-6 col-md-3 p0">
+            <div class="box-two proerty-item">
+              <div class="item-thumb">
+                  <a href=""><img src="/resources/assets/img/demo/property-4.jpg"></a>
+        
+              </div>
+              <div class="item-entry overflow">
+                  <h5><a href="property-1.html">${studio.SP_NM} </a></h5>
+                  <div class="dot-hr"></div>
+                  <span class="pull-left"><b>${studio.SC_NM}</b> </span>
+                  <span class="proerty-price pull-right">${studio.SP_PRICE}원</span>
+              </div>
+            </div>
+          </div>
+        </div>
           </c:forEach>
-        </ul>
       </div>
       <div id="dressTab" class="tab-pane fade">
         <ul class="list-inline">
@@ -85,9 +91,7 @@
               <div>${dress.DP_IMAGE}</div>
               <div>${dress.DP_NM}</div>
               <div>${dress.DC_NM}</div>
-              <div>${dress.DP_PRICE}</div>
-              <div>${dress.DP_STYLE}</div>
-              <div>${dress.REGDATE}</div>
+              <div>${dress.DP_PRICE}원</div>
             </li>
           </c:forEach>
         </ul>
@@ -100,11 +104,7 @@
               <div>${makeup.MP_IMAGE}</div>
               <div>${makeup.MP_NM}</div>
               <div>${makeup.MC_NM}</div>
-              <div>${makeup.MP_PRICE}</div>
-              <div>${makeup.MP_ACC_YN}</div>
-              <div>${makeup.MP_FAMILY_YN}</div>
-              <div>${makeup.MP_HAIR_YN}</div>
-              <div>${makeup.REGDATE}</div>
+              <div>${makeup.MP_PRICE}원</div>
             </li>
           </c:forEach>
         </ul>
@@ -189,8 +189,6 @@
   							"<li class='cartItem'>" +
   							"<div class='itemNo' hidden='hidden'>" + studio.sp_no + "</div>" + 
   							"<div>" + studio.sp_image + "</div>" + 
-  							"<div>" + studio.sp_nm + "</div>" +
-  							"<div>" + studio.sp_price + "원</div>" +
   							"</li>"
   							);
   				}
@@ -213,8 +211,6 @@
   							"<li class='cartItem'>" +
   							"<div class='itemNo' hidden='hidden'>" + dress.dp_no + "</div>" + 
   							"<div>" + dress.dp_image + "</div>" + 
-  							"<div>" + dress.dp_nm + "</div>" +
-  							"<div>" + dress.dp_price + "원</div>" +
   							"</li>"
   							);
   				}
@@ -237,8 +233,6 @@
   							"<li class='cartItem'>" +
   							"<div class='itemNo' hidden='hidden'>" + makeup.mp_no + "</div>" + 
   							"<div>" + makeup.mp_image + "</div>" + 
-  							"<div>" + makeup.mp_nm + "</div>" +
-  							"<div>" + makeup.mp_price + "원</div>" +
   							"</li>"
   							);
   				}
@@ -257,31 +251,48 @@
   	
   	function addCart(){
   		$("#addCartBtn").on("click", function(){
-  			var items = $("#cart").find(".itemNo");
+  			var sp_no = $("#studioCart").find(".itemNo");
+  			var dp_no = $("#dressCart").find(".itemNo");
+  			var mp_no = $("#makeupCart").find(".itemNo");
   			
-  			if(items.size() != 3){
-  				return false;
-  			} else {
-    			var sp_no = $("#studioCart").children(".itemNo").text().trim();
-    			var dp_no = $("#dressCart").children(".itemNo").text().trim();
-    			var mp_no = $("#makeupCart").children(".itemNo").text().trim();
-    			var params = {
-    					sp_no : sp_no,
-    					dp_no : dp_no,
-    					mp_no : mp_no
-    			}
-    			
-  				$.ajax({
-  	  				url: "/recommend/addCart",
-  	  				type: "post",
-  	  				dataType: "json",
-  	  				contentType: "application/json; charset=UTF-8",
-  	  				data: JSON.stringify(params),
-  	  				success: function(){
-  	  					
-  	  				}
-  	  			});
+  			console.log(sp_no);
+  			console.log(dp_no);
+  			console.log(mp_no);
+  			
+  			var sp_list = [];
+  			var dp_list = [];
+  			var mp_list = [];
+  			
+  			sp_no.each(function(){
+  				sp_list.push($(this).text().trim());
+  			})
+  			
+  			dp_no.each(function(){
+  				dp_list.push($(this).text().trim());
+  			})
+  			
+  			mp_no.each(function(){
+  				mp_list.push($(this).text().trim());
+  			})
+  			
+  			var params = {
+  					sp_no : sp_list,
+  					dp_no : dp_list,
+  					mp_no : mp_list
   			}
+  			
+  			console.log(params);
+  			
+			$.ajax({
+  				url: "/recommend/addCart",
+  				type: "post",
+  				dataType: "json",
+  				contentType: "application/json; charset=UTF-8",
+  				data: JSON.stringify(params),
+  				success: function(){
+  					
+  				}
+  			});
   		});
   	}
   	

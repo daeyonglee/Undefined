@@ -121,30 +121,55 @@
 	</select>
 
 	<select id="studioListTest" resultType="map">
-		SELECT sp.*, 
-		       sc.sc_nm, 
-		       sc.sc_addr 
-		FROM   studio_product sp 
-		       JOIN studio_company sc 
-		         ON sp.sc_no = sc.sc_no 
+		SELECT sp.sp_no               sp_no, 
+               sp.sc_no               sc_no, 
+               sp.sp_nm               sp_nm, 
+               sp.sp_price            sp_price, 
+               sp.sp_apv_yn           sp_apv_yn, 
+               sp.sp_total_yn         sp_total_yn, 
+               sp.sp_shoot_type       sp_shoot_type, 
+               sp.sp_image            sp_image, 
+               TO_CHAR(sp.regdate, 'YYYY-MM-DD')    regdate, 
+               TO_CHAR(sp.updatedate, 'YYYY-MM-DD') updatedate, 
+               sc.sc_nm               sc_nm, 
+               sc.sc_addr             sc_addr 
+        FROM   studio_product sp 
+               join studio_company sc 
+                 ON sp.sc_no = sc.sc_no
 	</select>
 	
 	<select id="dressListTest" resultType="map">
-		SELECT dp.*, 
-		       dc.dc_nm, 
-		       dc.dc_addr 
-		FROM   dress_product dp 
-		       JOIN dress_company dc 
-		         ON dp.dc_no = dc.dc_no 
+		SELECT dp.dp_no               dp_no, 
+               dp.dc_no               dc_no, 
+               dp.dp_nm               dp_nm, 
+               dp.dp_price            dp_price, 
+               dp.dp_style            dp_style, 
+               dp.dp_image            dp_image, 
+               TO_CHAR(dp.regdate, 'YYYY-MM-DD')    regdate, 
+               TO_CHAR(dp.updatedate, 'YYYY-MM-DD') updatedate, 
+               dc.dc_nm               dc_nm, 
+               dc.dc_addr             dc_addr 
+        FROM   dress_product dp 
+               join dress_company dc 
+                 ON dp.dc_no = dc.dc_no
 	</select>
 	
 	<select id="makeupListTest" resultType="map">
-		SELECT mp.*, 
-		       mc.mc_nm, 
-		       mc.mc_addr 
-		FROM   makeup_product mp 
-		       JOIN makeup_company mc 
-		         ON mp.mp_no = mc.mc_no 
+		SELECT mp.mp_no               mp_no, 
+               mp.mc_no               mc_no, 
+               mp.mp_nm               mp_nm, 
+               mp.mp_price            mp_price, 
+               mp.mp_acc_yn           mp_acc_yn, 
+               mp.mp_family_yn        mp_family_yn, 
+               mp.mp_hair_yn          mp_hair_yn, 
+               mp. mp_image           mp_image, 
+               TO_CHAR(mp.regdate, 'YYYY-MM-DD')    regdate, 
+               TO_CHAR(mp.updatedate, 'YYYY-MM-DD') updatedate, 
+               mc.mc_nm               mc_nm, 
+               mc.mc_addr             mc_addr 
+        FROM   makeup_product mp 
+               join makeup_company mc 
+                 ON mp.mc_no = mc.mc_no
 	</select>
 	
 	<select id="getStudio" resultType="kr.co.udf.common.product.domain.StudioProduct">

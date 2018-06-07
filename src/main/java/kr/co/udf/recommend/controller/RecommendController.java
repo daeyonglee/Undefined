@@ -154,10 +154,9 @@ public class RecommendController {
 	
 	@ResponseBody
 	@RequestMapping(value="addCart", method=RequestMethod.POST)
-	public String addCart(@RequestBody Map<String, Object> cart) {
-		service.addCart(cart);
-		
-		return "success";
+	public void addCart(@RequestBody Map<String, Object> cart) {
+		//service.addCart(cart);
+		logger.info(cart.toString());
 	}
 
 }
