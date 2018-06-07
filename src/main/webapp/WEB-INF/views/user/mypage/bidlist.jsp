@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ page session="false"%>
 
 <!DOCTYPE html>
 <html>
@@ -26,7 +25,7 @@ td, th {
 </style>
 </head>
 <body>
-  <%@include file="../include/top.jsp"%>
+  <%@include file="../../include/top.jsp"%>
 
   <!-- Main content -->
   <section class="content">
@@ -106,6 +105,6 @@ td, th {
     </script>
 
  
-  <%@include file="../include/bottom.jsp"%>
+  <%@include file="../../include/bottom.jsp"%>
 </body>
 </html>

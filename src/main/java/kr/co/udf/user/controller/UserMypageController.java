@@ -1,6 +1,5 @@
 package kr.co.udf.user.controller;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -11,8 +10,6 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +19,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.udf.auction.domain.AuctionBid;
 import kr.co.udf.auction.service.MypageBidService;
-import kr.co.udf.common.util.MediaUtils;
 import kr.co.udf.common.web.SearchParams;
 import kr.co.udf.user.domain.Company;
 import kr.co.udf.user.domain.CompanyDTO;
@@ -199,7 +195,7 @@ public class UserMypageController {
 		
 		model.addAttribute("applyList", mypageBidService.applyListByUser(userNo));
 		
-		return "/mypage/apply";
+		return "/user/mypage/apply";
 
 	}
 	
@@ -213,7 +209,7 @@ public class UserMypageController {
 		
 		model.addAttribute("winList", mypageBidService.winListByUser(userNo));
 		
-		return "/mypage/win";
+		return "/user/mypage/win";
 	}
 	
 	/** 마이페이지 - 입찰중 or 낙찰대기중인 신청서의 입찰서 리스트 조회 */
@@ -229,7 +225,7 @@ public class UserMypageController {
 		
 		model.addAttribute("bidList", bid);
 		
-		return "/mypage/bidlist";
+		return "/user/mypage/bidlist";
 	}
 	
 	/** 마이페이지 - 입찰중 or 낙찰대기중인 신청서 상세 조회 */
@@ -245,7 +241,7 @@ public class UserMypageController {
 		
 		model.addAttribute("bid", bid);
 		
-		return "/mypage/bidread";
+		return "/user/mypage/bidread";
 	}
 	
 	/**
@@ -255,7 +251,7 @@ public class UserMypageController {
 	public String interest() {
 		logger.info("마이페이지-관심업체 들어왔숑");
 		
-		return "/user/interest";
+		return "/user/mypage/interest";
 	}
 	
 	/**
@@ -265,7 +261,7 @@ public class UserMypageController {
 	public String point() {
 		logger.info("마이페이지-포인트관리 들어왔숑");
 		
-		return "/user/point";
+		return "/user/mypage/point";
 	}	
 	
 
