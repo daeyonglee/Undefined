@@ -6,6 +6,7 @@ import kr.co.udf.common.product.domain.DressProduct;
 import kr.co.udf.common.product.domain.MakeupProduct;
 import kr.co.udf.user.domain.DressProductDTO;
 import kr.co.udf.user.domain.Login;
+import kr.co.udf.user.domain.MakeupProductDTO;
 import kr.co.udf.user.domain.StudioProduct;
 import kr.co.udf.user.domain.StudioProductDTO;
 
@@ -17,4 +18,5 @@ public interface MypageProductDao {
 	
 	public void writedc(DressProductDTO product, String fileName);
 	public void writesc(StudioProductDTO product, String fileName);
+	public void writemc(MakeupProductDTO product, String fileName);
 }

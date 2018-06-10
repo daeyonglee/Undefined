@@ -15,6 +15,7 @@ import kr.co.udf.common.util.UploadFileUtils;
 import kr.co.udf.user.dao.MypageProductDao;
 import kr.co.udf.user.domain.DressProductDTO;
 import kr.co.udf.user.domain.Login;
+import kr.co.udf.user.domain.MakeupProductDTO;
 import kr.co.udf.user.domain.StudioProduct;
 import kr.co.udf.user.domain.StudioProductDTO;
 
@@ -73,7 +74,7 @@ public class MypageProductServiceImpl implements MypageProductService{
 		}
 		
 		if(product.getSpImage().isEmpty() == false){
-		 	logger.debug("------------- file start -------------");
+		 	 logger.debug("------------- file start -------------");
             logger.debug("name : "+product.getSpImage().getName());
             logger.debug("filename : "+product.getSpImage().getOriginalFilename());
             logger.debug("size : "+product.getSpImage().getSize());
@@ -84,5 +85,30 @@ public class MypageProductServiceImpl implements MypageProductService{
             dao.writesc(product, uploadFileName);
 		}
 		
+	}
+
+	@Override
+	public void writemc(MakeupProductDTO product) throws IOException, Exception {
+		if (product.getMpAccYn() == null) {
+			product.setMpAccYn("N");
+		}
+		if (product.getMpFamilyYn() == null) {
+			product.setMpFamilyYn("N");
+		}
+		if (product.getMpHairYn() == null) {
+			product.setMpHairYn("N");
+		}
+		
+		if (product.getMpImage().isEmpty() == false) {
+			logger.debug("------------- file start -------------");
+           logger.debug("name : "+product.getMpImage().getName());
+           logger.debug("filename : "+product.getMpImage().getOriginalFilename());
+           logger.debug("size : "+product.getMpImage().getSize());
+           logger.debug("-------------- file end --------------\n");
+            
+            String uploadFileName = UploadFileUtils.uploadFile(cpMainImgPath, product.getMpImage().getOriginalFilename(), product.getMpImage().getBytes());
+            
+            dao.writemc(product, uploadFileName);
+		}
 	}
 }

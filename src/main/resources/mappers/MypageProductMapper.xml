@@ -100,4 +100,32 @@
 		            )
 		            
 	</insert>
+	
+	<!-- 나의 상품관리 > 메이크업상품 등록 -->
+	<insert id="writemc" parameterType="map">
+		INSERT INTO makeup_product
+		            (
+		            	mp_no
+		            , mc_no
+		            , mp_nm
+		            , mp_price
+		            , mp_acc_yn
+		            , mp_family_yn
+		            , mp_hair_yn
+		            , mp_image
+		            , regdate
+		            , updatedate
+		            ) VALUES (
+		            	makeup_product_seq.nextval
+		            , #{product.mcNo}
+		            , #{product.mpNm}
+		            , #{product.mpPrice}
+		            , #{product.mpAccYn}
+		            , #{product.mpFamilyYn}
+		            , #{product.mpHairYns}
+		            , #{fileName}
+		            , sysdate
+		            , sysdate
+		            )
+	</insert>
 </mapper>

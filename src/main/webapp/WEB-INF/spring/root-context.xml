@@ -27,6 +27,7 @@
    </bean>
    
    <bean id="cpMainImgPath" class="java.lang.String">
-      <constructor-arg value="C:\\undefined\\company_main_image\\" />
+      <!-- <constructor-arg value="C:\\undefined\\company_main_image\\" /> -->
+      <constructor-arg value="/home/java/company_main_image/" />
    </bean>
 </beans>

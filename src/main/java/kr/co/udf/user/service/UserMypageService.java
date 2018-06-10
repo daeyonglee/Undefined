@@ -1,5 +1,7 @@
 package kr.co.udf.user.service;
 
+import java.io.IOException;
+
 import kr.co.udf.user.domain.CompanyDTO;
 import kr.co.udf.user.domain.Login;
 import kr.co.udf.user.domain.UserDTO;
@@ -23,5 +25,5 @@ public interface UserMypageService {
 	 * 나의 정보관리 정보 수정하기 (업체)
 	 * @param company
 	 */
-	public void companyupdate(CompanyDTO company);
+	public void companyupdate(CompanyDTO company) throws IOException, Exception;
 }

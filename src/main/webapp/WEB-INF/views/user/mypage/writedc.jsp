@@ -87,7 +87,7 @@
       <div class="wizard-footer">
         <div class="pull-right">
           <input type='submit' class='btn btn-finish btn-primary'
-            name='finish' value='Finish' />
+            name='finish' value='등록하기' />
         </div>
       </div>
       </form>

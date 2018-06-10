@@ -47,10 +47,6 @@
 							<h2>Social login :  </h2> 
            
 							<p>
-							<a id="facebook" class="login-social" href="#"><i class="fa fa-facebook"></i>&nbsp;</a> 
-							<a id="google" class="login-social" href="#"><i class="fa fa-google-plus"></i>&nbsp;</a> 
-							<a id="twitter" class="login-social" href="#"><i class="fa fa-twitter"></i>&nbsp;</a>
-							<a id="naver" class="login-social" href="#"><i class="fa"><b>N</b></i>&nbsp;</a>
 							<a id="kakao" class="login-social" href="#"><i class="fa"><b>K</b></i>&nbsp;</a>  
 							</p> 
             </div>

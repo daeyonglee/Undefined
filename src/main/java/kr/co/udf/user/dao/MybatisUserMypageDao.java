@@ -1,17 +1,22 @@
 package kr.co.udf.user.dao;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
+import kr.co.udf.common.util.UploadFileUtils;
 import kr.co.udf.user.domain.CompanyDTO;
 import kr.co.udf.user.domain.Login;
 import kr.co.udf.user.domain.User;
 import kr.co.udf.user.domain.UserDTO;
+import kr.co.udf.user.service.MypageProductServiceImpl;
 
 @Repository
 public class MybatisUserMypageDao implements UserMypageDao{
@@ -20,6 +25,11 @@ public class MybatisUserMypageDao implements UserMypageDao{
 	private SqlSession session;
 	
 	private static final String NAMESPACE = "kr.co.udf.user.dao.UserMypageDao";
+	
+	private static final Logger logger = Logger.getLogger(MypageProductServiceImpl.class);
+	
+	@Resource(name="cpMainImgPath")
+	private String cpMainImgPath;
 	
 	/**
 	 * 나의정보관리 비밀번호 확인
@@ -61,10 +71,22 @@ public class MybatisUserMypageDao implements UserMypageDao{
 	}
 
 	@Override
-	public void companyupdate(CompanyDTO company) {
+	public void companyupdate(CompanyDTO company) throws IOException, Exception {
 		Map<String, Object> map = new HashMap<>();
+		
 		map.put("company", company);
 		map.put("addr", company.getPostcode()+"^^"+company.getAddr()+"^^"+company.getAddrdetail());
+		
+		if(company.getMainImg().isEmpty() == false){
+		 	 logger.debug("------------- file start -------------");
+            logger.debug("name : "+company.getMainImg().getName());
+            logger.debug("filename : "+company.getMainImg().getOriginalFilename());
+            logger.debug("size : "+company.getMainImg().getSize());
+            logger.debug("-------------- file end --------------\n");
+            
+            String uploadFileName = UploadFileUtils.uploadFile(cpMainImgPath, company.getMainImg().getOriginalFilename(), company.getMainImg().getBytes());
+            map.put("fileName", uploadFileName);
+		}
 		
 		if ("dress".equals(company.getCompanyType())) {
 			session.update(NAMESPACE+".companyupdateDress", map);

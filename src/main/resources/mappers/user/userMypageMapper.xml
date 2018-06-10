@@ -94,10 +94,13 @@
 	
 	<!-- 나의 정보관리 정보 수정하기 (드레스) -->
 	<update id="companyupdateDress" parameterType="map">
-		UPDATE dress_company
+			UPDATE dress_company
 		   SET dc_pw = #{company.pw}
 		     , dc_addr = #{addr}
 		     , dc_main_nm = #{company.mainNm}
+					<if test="fileName != null">
+		     , dc_main_image = #{fileName}
+					</if>
 		     , dc_tel = #{company.tel}
 		     , dc_introduce = #{company.introduce}
 		     , dc_smy_intro = #{company.smyIntro}
@@ -112,6 +115,9 @@
 		   SET mc_pw = #{company.pw}
 		     , mc_addr = #{addr}
 		     , mc_main_nm = #{company.mainNm}
+		     <if test="fileName != null">
+		     , mc_main_image = #{fileName}
+		     </if>
 		     , mc_tel = #{company.tel}
 		     , mc_introduce = #{company.introduce}
 		     , mc_smy_intro = #{company.smyIntro}
@@ -123,14 +129,17 @@
 	<!-- 나의 정보관리 정보 수정하기 (스튜디오) -->
 	<update id="companyupdateStudio" parameterType="map">
 		UPDATE studio_company
-		   SET c_pw = #{company.pw}
-		     , c_addr = #{addr}
-		     , c_main_nm = #{company.mainNm}
-		     , c_tel = #{company.tel}
-		     , c_introduce = #{company.introduce}
-		     , c_smy_intro = #{company.smyIntro}
-		     , c_nm = #{company.nm}
-		     , c_company_no = #{company.companyNo}
-		 WHERE c_no = #{company.no}
+		   SET sc_pw = #{company.pw}
+		     , sc_addr = #{addr}
+		     , sc_main_nm = #{company.mainNm}
+		     <if test="fileName != null">
+		     , sc_main_image = #{fileName}
+		     </if>
+		     , sc_tel = #{company.tel}
+		     , sc_introduce = #{company.introduce}
+		     , sc_smy_intro = #{company.smyIntro}
+		     , sc_nm = #{company.nm}
+		     , sc_company_no = #{company.companyNo}
+		 WHERE sc_no = #{company.no}
 	</update>
 </mapper>

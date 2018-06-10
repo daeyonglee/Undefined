@@ -1,5 +1,7 @@
 package kr.co.udf.user.service;
 
+import java.io.IOException;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -39,7 +41,7 @@ public class UserMypageServiceImpl implements UserMypageService{
 	 * @param company
 	 */
 	@Override
-	public void companyupdate(CompanyDTO company) {
+	public void companyupdate(CompanyDTO company) throws IOException, Exception {
 		dao.companyupdate(company);
 	}
 }

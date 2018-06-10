@@ -35,6 +35,7 @@ import kr.co.udf.user.domain.Company;
 import kr.co.udf.user.domain.CompanyDTO;
 import kr.co.udf.user.domain.DressProductDTO;
 import kr.co.udf.user.domain.Login;
+import kr.co.udf.user.domain.MakeupProductDTO;
 import kr.co.udf.user.domain.StudioProduct;
 import kr.co.udf.user.domain.StudioProductDTO;
 import kr.co.udf.user.domain.User;
@@ -116,19 +117,6 @@ public class UserMypageController {
 					model.addAttribute("company", company);
 					
 					addrs = company.getAddr().split("\\^\\^");
-					
-					/*if (company.getMainImg().isEmpty() == false) {
-					 	logger.debug("------------- file start -------------");
-			            logger.debug("name : "+company.getMainImg().getName());
-			            logger.debug("filename : "+company.getMainImg().getOriginalFilename());
-			            logger.debug("size : "+company.getMainImg().getSize());
-			            logger.debug("-------------- file end --------------\n");
-			            
-			            String uploadFileName = UploadFileUtils.uploadFile(cpMainImgPath, product.getSpImage().getOriginalFilename(), product.getSpImage().getBytes());
-			            
-			            dao.writesc(product, uploadFileName);
-					}*/
-					
 					model.addAttribute("role", "company");
 				}
 				
@@ -176,7 +164,7 @@ public class UserMypageController {
 	}
 	
 	@RequestMapping(value="companyupdate", method=RequestMethod.POST)
-	public String companyupdate(CompanyDTO company, HttpSession session, RedirectAttributes rttr) {
+	public String companyupdate(CompanyDTO company, HttpSession session, RedirectAttributes rttr) throws IOException, Exception {
 		
 		// 세션값 변경
 		Login login = (Login)session.getAttribute("login");
@@ -328,6 +316,19 @@ public class UserMypageController {
 	@RequestMapping(value="writemc", method=RequestMethod.GET)
 	public void wrtiemc() {
 		
+	}
+	
+	@RequestMapping(value="writemc", method=RequestMethod.POST)
+	public String wrtiemcPOST(HttpSession session, MakeupProductDTO product) throws IOException, Exception {
+		
+		logger.debug(product);
+		
+		Login login = (Login)session.getAttribute("login");
+		product.setMcNo(login.getNo());
+		
+		mypageProductService.writemc(product);
+		
+		return "redirect:/user/mypage/plist";
 	}
 	
 	@RequestMapping(value="writesc", method=RequestMethod.GET)

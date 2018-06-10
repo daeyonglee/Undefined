@@ -13,6 +13,7 @@ import kr.co.udf.common.product.domain.DressProduct;
 import kr.co.udf.common.product.domain.MakeupProduct;
 import kr.co.udf.user.domain.DressProductDTO;
 import kr.co.udf.user.domain.Login;
+import kr.co.udf.user.domain.MakeupProductDTO;
 import kr.co.udf.user.domain.StudioProduct;
 import kr.co.udf.user.domain.StudioProductDTO;
 
@@ -60,6 +61,18 @@ public class MybatisMypageProductDao implements MypageProductDao {
 		map.put("fileName", fileName);
 		
 		session.insert(NAMESPACE+".writesc", map);
+		
+	}
+
+	@Override
+	public void writemc(MakeupProductDTO product, String fileName) {
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("product", product);
+		map.put("fileName", fileName);
+		
+		session.insert(NAMESPACE+".writemc", map);
 		
 	}
 }
