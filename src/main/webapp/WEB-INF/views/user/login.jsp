@@ -123,7 +123,7 @@
   		
   		// 카카오 로그인
 	  	$('#kakao').on('click', function(e){
-	  		Kakao.init('8cf547c17ecd2ac1e0269a8ace8f1cb4');
+	  		Kakao.init('1bc0928a7a681869b51f62debb67182a');
 					Kakao.Auth.login({
 						success: function(authObj) {
 							// 로그인 성공시, API를 호출합니다.
@@ -138,7 +138,7 @@
 		        	});
 						},
 						fail: function(err) {
-	         	alert(JSON.stringify(err));
+	         		alert(JSON.stringify(err));
 	 	        }
 	 	      });
 	  	});

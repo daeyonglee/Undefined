@@ -37,6 +37,10 @@
   	$("#bidlist").on('click', function(e){
   		self.location='/user/mypage/apply';
   	});
+  	
+  	$("#product").on('click', function(e){
+  		self.location='/user/mypage/plist';
+  	});
 	});
 
 </script>

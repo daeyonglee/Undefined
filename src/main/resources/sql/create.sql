@@ -361,16 +361,16 @@ CREATE TABLE makeup_company
 
 
 
--- 관심상품 
 -- 관심 상품(스튜디오) 
 CREATE TABLE studio_interest_product 
   ( 
      sip_no     NUMBER(10) NOT NULL, 
      user_no    NUMBER(10) NOT NULL, 
-     sc_no      NUMBER(10) NOT NULL, 
+     sp_no      NUMBER(10) NOT NULL, 
+     sc_no      NUMBER(10) NOT NULL,
      regdate    DATE DEFAULT SYSDATE NOT NULL, 
      updatedate DATE DEFAULT SYSDATE NOT NULL, 
-     PRIMARY KEY (sip_no, user_no, sc_no) 
+     PRIMARY KEY (sip_no, user_no, sp_no, sc_no) 
   ); 
 
 -- 관심 상품(드레스) 
@@ -379,7 +379,7 @@ CREATE TABLE dress_interest_product
      dip_no     NUMBER(10) NOT NULL, 
      user_no    NUMBER(10) NOT NULL, 
      dp_no      NUMBER(10) NOT NULL, 
-     dc_no      NUMBER(10) NOT NULL, 
+     dc_no      NUMBER(10) NOT NULL,
      regdate    DATE DEFAULT SYSDATE NOT NULL, 
      updatedate DATE DEFAULT SYSDATE NOT NULL, 
      PRIMARY KEY (dip_no, user_no, dp_no, dc_no) 
@@ -390,11 +390,12 @@ CREATE TABLE makeup_interest_product
   ( 
      mip_no     NUMBER(10) NOT NULL, 
      user_no    NUMBER(10) NOT NULL, 
-     mc_no      NUMBER(10) NOT NULL, 
+     mp_no      NUMBER(10) NOT NULL, 
+     mc_no      NUMBER(10) NOT NULL,
      regdate    DATE DEFAULT SYSDATE NOT NULL, 
      updatedate DATE DEFAULT SYSDATE NOT NULL, 
-     PRIMARY KEY (mip_no, user_no, mc_no) 
-  ); 
+     PRIMARY KEY (mip_no, user_no, mp_no, mc_no) 
+  );  
 
 
 
@@ -772,16 +773,15 @@ ALTER TABLE makeup_product
 
 ALTER TABLE studio_interest_product 
   ADD( CONSTRAINT sip_users_fk FOREIGN KEY (user_no) REFERENCES users (user_no), 
-  CONSTRAINT sip_sc_fk FOREIGN KEY (sc_no) REFERENCES studio_company (sc_no)); 
+  CONSTRAINT sip_sp_fk FOREIGN KEY (sp_no, sc_no) REFERENCES studio_product (sp_no, sc_no)); 
 
 ALTER TABLE dress_interest_product 
   ADD( CONSTRAINT dip_users_fk FOREIGN KEY (user_no) REFERENCES users (user_no), 
-  CONSTRAINT dip_dp_fk FOREIGN KEY (dp_no, dc_no) REFERENCES dress_product ( 
-  dp_no, dc_no)); 
+  CONSTRAINT dip_dp_fk FOREIGN KEY (dp_no, dc_no) REFERENCES dress_product (dp_no, dc_no)); 
 
 ALTER TABLE makeup_interest_product 
   ADD( CONSTRAINT mip_users_fk FOREIGN KEY (user_no) REFERENCES users (user_no), 
-  CONSTRAINT mip_mc_fk FOREIGN KEY (mc_no) REFERENCES makeup_company (mc_no)); 
+  CONSTRAINT mip_mp_fk FOREIGN KEY (mp_no, mc_no) REFERENCES makeup_product (mp_no, mc_no));  
 
 ALTER TABLE studio_interest_company 
   ADD( CONSTRAINT sic_users_fk FOREIGN KEY (user_no) REFERENCES users (user_no), 

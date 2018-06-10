@@ -36,7 +36,6 @@
                             <div class="page-subheader sorting pl0 pr-10">
 
                             </div>
-
                         </div>
 
                         <div class="section"> 
@@ -63,16 +62,11 @@
                                                     <a href="property-1.html" class="button">View</a>
                                                 </div>
                                             </div>
-
-
                                         </div>
                                     </div>
                                 </div>                             
-
-                                                                                 
                             </div>
                         </div>
-
                     </div>       
                 </div>
             </div>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.udf.user.dao.MypageProductDao">
+
+	<select id="plistDc" parameterType="kr.co.udf.user.domain.Login" resultType="kr.co.udf.user.domain.DressProduct">
+		SELECT dp_no dpNo
+		     , dc_no dcNo
+		     , dp_nm dpNm
+		     , dp_price dpPrice
+		     , dp_style dpStyle
+		     , dp_image dpImage
+		     , regdate
+		     , updatedate
+		  FROM dress_product
+		 WHERE dc_no = #{no}
+	</select>
+	
+	<select id="plistMc" parameterType="kr.co.udf.user.domain.Login" resultType="kr.co.udf.user.domain.MakeupProduct">
+		SELECT mp_no mpNo
+		     , mc_no mcNo
+		     , mp_nm mpNm
+		     , mp_price mpPrice
+		     , mp_acc_yn mpAccYn
+		     , mp_family_yn mpFamilyYn
+		     , mp_hair_yn mpHairYn
+		     , mp_image mpImage
+		     , regdate
+		     , updatedate 
+		  FROM makeup_product
+		 WHERE mc_no = #{no}
+	</select>
+	
+	<select id="plistSc" parameterType="kr.co.udf.user.domain.Login" resultType="kr.co.udf.user.domain.StudioProduct">
+		SELECT sp_no spNo
+		     , sc_no scNo
+		     , sp_nm spNm
+		     , sp_price spPrice
+		     , sp_apv_yn spApvYn
+		     , sp_total_yn spTotalYn
+		     , sp_shoot_type spShootType
+		     , sp_image spImage
+		     , regdate
+		     , updatedate 
+		  FROM studio_product
+		 WHERE sc_no = #{no}
+	</select>
+
+<!-- 나의 상품관리 > 드레스 등록 -->
+	<insert id="writedc" parameterType="map">
+		INSERT INTO dress_product
+		            (
+		            	dp_no
+		            , dc_no
+		            , dp_nm
+		            , dp_price
+		            , dp_style
+		            , dp_image
+		            , regdate
+		            , updatedate
+		            ) VALUES (
+		            	dress_product_seq.nextval
+		            , #{product.dcNo}
+		            , #{product.dpNm}
+		            , #{product.dpPrice}
+		            , #{product.dpStyle}
+		            , #{fileName}
+		            , sysdate
+		            , sysdate
+		            )
+		            
+	</insert>
+
+	<!-- 나의 상품관리 > 스튜디오상품 등록 -->
+	<insert id="writesc" parameterType="map">
+		INSERT INTO studio_product
+		            (
+		            	sp_no
+		            , sc_no
+		            , sp_nm
+		            , sp_price
+		            , sp_apv_yn
+		            , sp_total_yn
+		            , sp_shoot_type
+		            , sp_image
+		            , regdate
+		            , updatedate
+		            ) VALUES (
+		            	studio_product_seq.nextval
+		            , #{product.scNo}
+		            , #{product.spNm}
+		            , #{product.spPrice}
+		            , #{product.spApvYn}
+		            , #{product.spTotalYn}
+		            , #{product.spShootType}
+		            , #{fileName}
+		            , sysdate
+		            , sysdate
+		            )
+		            
+	</insert>
+</mapper>

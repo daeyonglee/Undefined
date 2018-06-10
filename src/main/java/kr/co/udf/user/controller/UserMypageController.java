@@ -26,13 +26,20 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.udf.auction.domain.AuctionBid;
 import kr.co.udf.auction.service.MypageBidService;
+import kr.co.udf.common.product.domain.DressProduct;
+import kr.co.udf.common.product.domain.MakeupProduct;
 import kr.co.udf.common.util.MediaUtils;
+import kr.co.udf.common.util.UploadFileUtils;
 import kr.co.udf.common.web.SearchParams;
 import kr.co.udf.user.domain.Company;
 import kr.co.udf.user.domain.CompanyDTO;
+import kr.co.udf.user.domain.DressProductDTO;
 import kr.co.udf.user.domain.Login;
+import kr.co.udf.user.domain.StudioProduct;
+import kr.co.udf.user.domain.StudioProductDTO;
 import kr.co.udf.user.domain.User;
 import kr.co.udf.user.domain.UserDTO;
+import kr.co.udf.user.service.MypageProductService;
 import kr.co.udf.user.service.UserMypageService;
 
 @Controller
@@ -45,10 +52,13 @@ public class UserMypageController {
 	private String cpMainImgPath;
 	
 	@Inject
-	UserMypageService mypageService;
+	private UserMypageService mypageService;
 	
 	@Inject
 	private MypageBidService mypageBidService;
+	
+	@Inject
+	private MypageProductService mypageProductService;
 	
 	/**
 	 * 마이페이지 index
@@ -107,23 +117,17 @@ public class UserMypageController {
 					
 					addrs = company.getAddr().split("\\^\\^");
 					
-					if (company.getMainImg() != null) {
-						/*String fileName = company.getMainImg();
-						String formatName = fileName.substring(fileName.lastIndexOf(".")+1);
-						MediaType mType = MediaUtils.getMediaType(formatName);
-						
-						HttpHeaders headers = new HttpHeaders();
-						
-						in = new FileInputStream(cpMainImgPath+fileName);
-						
-						if (mType != null) {
-							headers.setContentType(mType);
-						} else {
-							fileName = fileName.substring(fileName.indexOf("_")+1);
-							headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-							headers.add("Content-Disposition", "attachment; filename=\"" + new String(fileName.getBytes("UTF-8"), "ISO-8859-1")+"\"");
-						}*/
-					}
+					/*if (company.getMainImg().isEmpty() == false) {
+					 	logger.debug("------------- file start -------------");
+			            logger.debug("name : "+company.getMainImg().getName());
+			            logger.debug("filename : "+company.getMainImg().getOriginalFilename());
+			            logger.debug("size : "+company.getMainImg().getSize());
+			            logger.debug("-------------- file end --------------\n");
+			            
+			            String uploadFileName = UploadFileUtils.uploadFile(cpMainImgPath, product.getSpImage().getOriginalFilename(), product.getSpImage().getBytes());
+			            
+			            dao.writesc(product, uploadFileName);
+					}*/
 					
 					model.addAttribute("role", "company");
 				}
@@ -270,7 +274,78 @@ public class UserMypageController {
 		logger.info("마이페이지-포인트관리 들어왔숑");
 		
 		return "/user/mypage/point";
-	}	
+	}
+	
+	/**
+	 * 마이페이지 >> 나의 상품보기
+	 */
+	@RequestMapping(value="plist", method=RequestMethod.GET)
+	public String plist(Model model, HttpSession session) {
+
+		Login login = (Login)session.getAttribute("login");
+		
+		model.addAttribute("login", login);
+		
+		logger.debug(login);
+		
+		if ("sc".equals(login.getRole())) {
+			List<StudioProduct> slist = mypageProductService.plistSp(login);
+			logger.info(slist);
+			model.addAttribute("slist", slist);
+		}
+		if ("dc".equals(login.getRole())) {
+			List<DressProduct> dlist = mypageProductService.plistDp(login);
+			logger.info(dlist);
+			model.addAttribute("dlist", dlist);
+		}
+		if ("mc".equals(login.getRole())) {
+			List<MakeupProduct> mlist = mypageProductService.plistMp(login);
+			logger.info(mlist);
+			model.addAttribute("mlist", mlist);
+		}
+		
+		return "/user/mypage/plist";
+	}
+	
+	@RequestMapping(value="writedc", method=RequestMethod.GET)
+	public void writedc(Model model) {
+		
+	}
+	
+	@RequestMapping(value="writedc", method=RequestMethod.POST)
+	public String writedcPOST(HttpSession session, DressProductDTO product) throws IOException, Exception {
+		
+		logger.debug(product);
+		
+		Login login = (Login)session.getAttribute("login");
+		product.setDcNo(login.getNo());
+		
+		mypageProductService.writedc(product);
+		
+		return "redirect:/user/mypage/plist";
+	}
+	
+	@RequestMapping(value="writemc", method=RequestMethod.GET)
+	public void wrtiemc() {
+		
+	}
+	
+	@RequestMapping(value="writesc", method=RequestMethod.GET)
+	public void writesc() {
+		
+	}
+	
+	@RequestMapping(value="writesc", method=RequestMethod.POST)
+	public String writescPOST(HttpSession session, StudioProductDTO product) throws IOException, Exception {
+		logger.debug(product);
+		
+		Login login = (Login)session.getAttribute("login");
+		product.setScNo(login.getNo());
+		
+		mypageProductService.writesc(product);
+		
+		return "redirect:/user/mypage/plist";
+	}
 	
 	/**
 	 * 마이페이지 >> 이미지 호출
