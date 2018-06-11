@@ -160,7 +160,6 @@ td {
 		 var url;
 		 
 		 console.log(type);
-		 
 		 if (type == 'studio') {
 			 url = "bid/studio";
 		 } else if (type == 'dress'){
@@ -225,9 +224,7 @@ td {
 	 });
 	 
 	 function pagination(pageMaker) {
-		 
 		 console.log(pageMaker);
-		 
 		 var text2  = "<ul id = 'visible2'>";
 		 
 		 	if (pageMaker.prev) {
@@ -243,11 +240,11 @@ td {
 		 	if (pageMaker.next && pageMaker.endPage > 0) {
 		 		text2 +=  "<li><a href='#'>&raquo;</a></li>";	
 		 	}
-		text2 += "</ul>";
-		
-		$(".pagination").html(text2); 
-		 
-		console.log(text2);
+  		text2 += "</ul>";
+  		
+  		$(".pagination").html(text2); 
+  		 
+  		console.log(text2);
 	 }
 	 
 	 function totalCount(totalCount) {
@@ -265,10 +262,7 @@ td {
 	 	
 	});	 
  
- 
- 
 	</script>
- 
  
   <%@include file="../include/bottom.jsp"%>
 </body>
