@@ -83,6 +83,54 @@ VALUES (studio_bid_product_list_seq.NEXTVAL
       , TO_DATE(SYSDATE, 'YYYY-MM-DD HH24:MI'))
 </insert>
 
+<insert id="createDressProd" parameterType="AuctionBid">
+INSERT INTO dress_bid_product_list 
+      (dbpl_no
+     , db_no
+     , user_no
+     , daa_no
+     , dc_no
+     , dp_no
+     , dbpl_discount
+     , dbpl_meet_date
+     , regdate
+     , updatedate)
+VALUES (dress_bid_product_list_seq.NEXTVAL
+      , dress_bid_seq.CURRVAL
+      , #{userNo}
+      , #{applyNo}
+      , #{companyNo}
+      , #{productNo}
+      , #{discount}
+      , TO_DATE(#{meetDate}, 'YYYY-MM-DD')
+      , TO_DATE(SYSDATE, 'YYYY-MM-DD HH24:MI')
+      , TO_DATE(SYSDATE, 'YYYY-MM-DD HH24:MI'))
+</insert>
+
+<insert id="createMakeupProd" parameterType="AuctionBid">
+INSERT INTO dress_bid_product_list 
+      (mbpl_no
+     , mb_no
+     , user_no
+     , maa_no
+     , mc_no
+     , mp_no
+     , mbpl_discount
+     , mbpl_meet_date
+     , regdate
+     , updatedate)
+VALUES (makeup_bid_product_list_seq.NEXTVAL
+      , makeup_bid_seq.CURRVAL
+      , #{userNo}
+      , #{applyNo}
+      , #{companyNo}
+      , #{productNo}
+      , #{discount}
+      , TO_DATE(#{meetDate}, 'YYYY-MM-DD')
+      , TO_DATE(SYSDATE, 'YYYY-MM-DD HH24:MI')
+      , TO_DATE(SYSDATE, 'YYYY-MM-DD HH24:MI'))
+</insert>
+
 <!-- 타입 별로 회사 정보 출력하는 sql -->
 <select id="searchMakeupCompany" parameterType="int" resultType="MakeupCompany">
 SELECT mc.mc_no         companyNo, 
@@ -148,7 +196,33 @@ from studio_product
 where sc_no = #{companyNo}
 </select>
 
+<select id="searchDressProduct" parameterType="int" resultType="DressProduct">
+select   dp_no          productNo
+       , dc_no          companyNo 
+       , dp_nm          productNm
+       , dp_price       price
+       , dp_style       style 
+       , dp_image       productImage
+       , regdate        regdate
+       , updatedate     updatedate
+from dress_product
+where dc_no = #{companyNo}
+</select>
 
+<select id="searchMakeupProduct" parameterType="int" resultType="MakeupProduct">
+select   mp_no          productNo
+       , mc_no          companyNo 
+       , mp_nm          productNm
+       , mp_price       price
+       , mp_acc_yn      accYn
+       , mp_family_yn   familyYn
+       , mp_hair_yn     hairYn
+       , mp_image       productImage
+       , regdate        regdate
+       , updatedate     updatedate
+from makeup_product
+where mc_no = #{companyNo}
+</select>
 <select id="listByUser" parameterType="int" resultType="AuctionBid">
 select M.*
 FROM  (select  mb_no    bidNo
@@ -294,8 +368,8 @@ SELECT s.saa_no  no
        join studio_product r
         on c.sc_no = r.sc_no) d
  WHERE no = #{no} and type = #{type}
-	</select>	
-	
+   </select>   
+   
 <select id="readStudioProduct" resultType="StudioProduct">
 SELECT   sp_no           productNo
        , sc_no           companyNo

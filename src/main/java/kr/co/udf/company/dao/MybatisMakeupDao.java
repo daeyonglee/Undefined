@@ -80,4 +80,10 @@ public class MybatisMakeupDao implements MakeupDao {
 	public int countReview(int mc_no) throws Exception {
 		return session.selectOne(namespace + ".countReview", mc_no);
 	}
+	
+	@Override
+	/** 메이크업 업체 상품 갯수 */
+	public int countProduct(int mc_no) throws Exception {
+		return session.selectOne(namespace + ".countProduct", mc_no);
+	}
 }

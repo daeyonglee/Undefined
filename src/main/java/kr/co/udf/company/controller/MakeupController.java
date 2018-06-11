@@ -44,6 +44,9 @@ public class MakeupController {
 			model.addAttribute("list", service.reviewMakeup(mc_no));
 			model.addAttribute("avg", service.avgPoint(mc_no));
 		}
+		if (0 < service.countProduct(mc_no)) {
+			model.addAttribute("countProduct", service.countProduct(mc_no));
+		}
 		if (!model.containsAttribute("cart3")) {
 			model.addAttribute("cart3", new ArrayList<MakeupCompany>());
 		}

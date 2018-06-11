@@ -72,4 +72,9 @@ public class MakeupServiceImpl implements MakeupService {
 	public int countReview(int mc_no) throws Exception {
 		return dao.countReview(mc_no);
 	}
+	
+	@Override
+	public int countProduct(int mc_no) throws Exception {
+		return dao.countProduct(mc_no);
+	}
 }
