@@ -76,9 +76,9 @@
 		                 ON dp.dc_no = dc.dc_no)
 		WHERE  (dc_addr LIKE #{location} || '%')
 			   AND	(dp_price BETWEEN #{minCost} AND #{maxCost})
-			   AND	LOWER(dp_style) IN
+			   AND	dp_style IN
 		<foreach collection="dressOption" item="option" open=" (" close=")" separator=", ">
-			   		LOWER(#{option})
+			   		#{option}
 		</foreach>
 		ORDER BY updatedate DESC
 	</select>

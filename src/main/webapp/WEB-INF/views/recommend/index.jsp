@@ -63,12 +63,12 @@
         <ul class="list-group">
           <li class="list-group-item">
             <label style="float: left;">드레스 종류</label>
-            <label class="checkbox-inline"><input type="checkbox" name="dress" value="a"> A라인</label>
-            <label class="checkbox-inline"><input type="checkbox" name="dress" value="h"> H라인</label>
-            <label class="checkbox-inline"><input type="checkbox" name="dress" value="벨"> 벨라인</label>
-            <label class="checkbox-inline"><input type="checkbox" name="dress" value="프린세스"> 프린세스라인</label>
-            <label class="checkbox-inline"><input type="checkbox" name="dress" value="머메이드"> 머메이드라인</label>
-            <label class="checkbox-inline"><input type="checkbox" name="dress" value="엠파이어"> 엠파이어라인</label>
+            <label class="checkbox-inline"><input type="checkbox" name="dress" value="A라인"> A라인</label>
+            <label class="checkbox-inline"><input type="checkbox" name="dress" value="H라인"> H라인</label>
+            <label class="checkbox-inline"><input type="checkbox" name="dress" value="벨라인"> 벨라인</label>
+            <label class="checkbox-inline"><input type="checkbox" name="dress" value="프린세스라인"> 프린세스라인</label>
+            <label class="checkbox-inline"><input type="checkbox" name="dress" value="머메이드라인"> 머메이드라인</label>
+            <label class="checkbox-inline"><input type="checkbox" name="dress" value="엠파이어라인"> 엠파이어라인</label>
           </li>
         </ul>
       </div>
