@@ -75,13 +75,13 @@
                               <li><b>${sessionScope.login.nm}님</b></li>
   	                          <li><a href="/user/logout">로그아웃</a></li>
   	                          <li><a href="/user/mypage/index">마이페이지</a></li>
-  	                          <li><a href="#">고객센터</a></li>
+  	                          <li><a href="/usercenter/main">고객센터</a></li>
                         		</c:if>
                         		<c:if test="${sessionScope.login.role eq 'admin'}">
                               <li><b>${sessionScope.login.nm}님</b></li>
                         			<li><a href="/user/logout">로그아웃</a></li>
   	                          <li><a href="/user/mypage/index">관리자페이지</a></li>
-  	                          <li><a href="#">고객센터</a></li>
+  	                          <li><a href="/usercenter/main">고객센터</a></li>
                         	</c:if>
                         </c:when>
                         <c:otherwise>
