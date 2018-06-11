@@ -233,7 +233,7 @@ span.star-prototype>* {
     
 				<div class="box-two proerty-item">
 					<div class="item-thumb">
-						<a href="/company/makeup/makeupDetail?mc_no=${makeup.mc_no}"><img src="${makeup.mc_main_image}"></a>
+						<a href="/company/makeup/makeupDetail?mc_no=${makeup.mc_no}"><img src="/user/mypage/imgview?imgview=${makeup.mc_main_image}"></a>
 					</div>
 
 					<div class="item-entry overflow">
@@ -386,8 +386,6 @@ span.star-prototype>* {
 				var avg = document.getElementById("avgList").value.split("/");
 				var count = document.getElementById("countList").value.split("/");
 				var list = document.getElementById("list").value.split("/");
-
-				console.info('지역 : ' + region);
 				
 				
 				/*
@@ -458,7 +456,7 @@ span.star-prototype>* {
 										//infoWindow.close();
 										infoWindow.setContent(infowin);
 										infoWindow.open(map,marker);
-										console.log(marker);
+					
 										currentInfoWindow = infoWindow;
 									});
 									
@@ -494,8 +492,7 @@ span.star-prototype>* {
 						var arrAvg = arr[3].trim();
 						var arrCount = arr[4].trim();
 						
-						console.log('title : ' + title);
-						console.log('arrTitle : ' + arrTitle);
+				
 						if ( title == arrTitle) {
 							 infowin += '<dl><a href="/company/makeup/makeupDetail?mc_no='+arrNo+'">'+arrName+'</a></dl>';
 							 infowin += '<dl><dd><i class="pe-7s-map-marker strong"></i> ' +title+'</dd></dl>';

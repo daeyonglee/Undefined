@@ -14,114 +14,116 @@
 </head>
 
 
+
+
 <!-- 탭 -->
 <style>
 .controls {
-   margin-top: 10px;
-   border: 1px solid transparent;
-   border-radius: 2px 0 0 2px;
-   box-sizing: border-box;
-   -moz-box-sizing: border-box;
-   height: 32px;
-   outline: none;
-   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+	margin-top: 10px;
+	border: 1px solid transparent;
+	border-radius: 2px 0 0 2px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	height: 32px;
+	outline: none;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
 #pac-input {
-   background-color: #fff;
-   font-family: Roboto;
-   font-size: 15px;
-   font-weight: 300;
-   margin-left: 12px;
-   padding: 0 11px 0 13px;
-   text-overflow: ellipsis;
-   width: 300px;
+	background-color: #fff;
+	font-family: Roboto;
+	font-size: 15px;
+	font-weight: 300;
+	margin-left: 12px;
+	padding: 0 11px 0 13px;
+	text-overflow: ellipsis;
+	width: 300px;
 }
 
 #pac-input:focus {
-   border-color: #4d90fe;
+	border-color: #4d90fe;
 }
 
 .pac-container {
-   font-family: Roboto;
+	font-family: Roboto;
 }
 
 #type-selector {
-   color: #fff;
-   background-color: #4d90fe;
-   padding: 5px 11px 0px 11px;
+	color: #fff;
+	background-color: #4d90fe;
+	padding: 5px 11px 0px 11px;
 }
 
 #type-selector label {
-   font-family: Roboto;
-   font-size: 13px;
-   font-weight: 300;
+	font-family: Roboto;
+	font-size: 13px;
+	font-weight: 300;
 }
 
 #target {
-   width: 345px;
+	width: 345px;
 }
 
 /* Style the tab */
 .tab {
-   overflow: hidden;
-   border: 1px solid #fff;
-   background-color: #fff;
+	overflow: hidden;
+	border: 1px solid #fff;
+	background-color: #fff;
 }
 
 /* Style the buttons inside the tab */
 .tab button {
-   background-color: inherit;
-   float: left;
-   border: none;
-   outline: none;
-   cursor: pointer;
-   padding: 5px 10px;
-   transition: 0.3s;
-   font-size: 13px;
+	background-color: inherit;
+	float: left;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	padding: 5px 10px;
+	transition: 0.3s;
+	font-size: 13px;
 }
 
 /* Change background color of buttons on hover */
 .tab button:hover {
-   background-color: #ddd;
+	background-color: #ddd;
 }
 
 /* Create an active/current tablink class */
 .tab button.active {
-   background-color: #ccc;
+	background-color: #ccc;
 }
 
 /* Style the tab content */
 .tabcontent {
-   display: none;
-   padding: 6px 12px;
-   border: 1px solid #fff;
-   border-top: none;
+	display: none;
+	padding: 6px 12px;
+	border: 1px solid #fff;
+	border-top: none;
 }
 </style>
 
 <!-- 메뉴,지도 고정 -->
 <style type="text/css">
 #layer_top {
-   height: 100px;
-   width: 100%;
-   position: fixed;
-   z-index: 999;
-   background-color: #fff;
+	height: 100px;
+	width: 100%;
+	position: fixed;
+	z-index: 999;
+	background-color: #fff;
 }
 
 #layer_map {
-   height: 0px;
-   width: 83%;
-   position: fixed;
-   z-index: 777;
-   top: 130px;
-   left: 65%;
-   right: 50%
+	height: 0px;
+	width: 83%;
+	position: fixed;
+	z-index: 777;
+	top: 130px;
+	left: 65%;
+	right: 50%
 }
 
 #layer_con {
-   padding-top: 125px;
+	padding-top: 125px;
 }
 </style>
 
@@ -158,7 +160,7 @@
 <!-- 별 스타일  -->
 <style>
 span.star-prototype, span.star-prototype>* {
-	height: 20px;
+	height: 16px;
 	background: url(http://i.imgur.com/YsyS5y8.png) 0 -16px repeat-x;
 	width: 80px;
 	display: inline-block;
@@ -169,6 +171,7 @@ span.star-prototype>* {
 	max-width: 80px;
 }
 </style>
+
 
 <body onload="initialize()">
 
@@ -236,8 +239,9 @@ span.star-prototype>* {
     
 				<div class="box-two proerty-item">
 					<div class="item-thumb">
-						<a href="/company/compare?sc_no=${studio.sc_no}"><img src="${studio.sc_main_image}"></a>
+						<a href="/company/compare?sc_no=${studio.sc_no}"><img src="/user/mypage/imgview?imgview=${studio.sc_main_image}"></a>
 					</div>
+
 
 					<div class="item-entry overflow">
 						<h5><a href="/company/compare?sc_no=${studio.sc_no}"> ${studio.sc_nm} </a></h5>
@@ -385,7 +389,6 @@ span.star-prototype>* {
 				var count = document.getElementById("countList").value.split("/");
 				var list = document.getElementById("list").value.split("/");
 
-				console.info('지역 : ' + region);
 				
 				
 				/*

@@ -36,6 +36,7 @@ FROM (SELECT CEIL (rownum / 10) page,
 	sc.dc_email, 
 	sc.dc_pw, 
 	sc.dc_tel, 
+	sc.dc_smy_intro, 
 	sc.dc_introduce, 
 	sc.sessionkey, 
 	sc.regdate, 
@@ -67,6 +68,7 @@ FROM (SELECT *
 	sc.dc_email, 
 	sc.dc_pw, 
 	sc.dc_tel, 
+	sc.dc_smy_intro, 
 	sc.dc_introduce, 
 	sc.sessionkey, 
 	sc.regdate, 
@@ -116,6 +118,7 @@ FROM (SELECT *
 	sc.dc_email, 
 	sc.dc_pw, 
 	sc.dc_tel, 
+	sc.dc_smy_intro, 
 	sc.dc_introduce, 
 	sc.sessionkey, 
 	sc.regdate, 
@@ -201,5 +204,4 @@ FROM (SELECT *
 	WHERE dc_no = #{dc_no}
 	]]>
 	</select>	
-
 </mapper>

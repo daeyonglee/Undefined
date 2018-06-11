@@ -41,6 +41,10 @@
   	$("#product").on('click', function(e){
   		self.location='/user/mypage/plist';
   	});
+  	
+  	$("#like").on('click', function(e){
+  		self.location = '/user/mypage/like';
+  	});
 	});
 
 </script>
@@ -90,14 +94,16 @@
             <h4><strong>관심업체</strong></h4>
           </div>
         </div>
-        <!-- <div class="col-xs-3 m-padding">
-          <div id="point" class="welcome-estate">
+        <c:if test="${login.role eq 'users'}">
+        <div class="col-xs-3 m-padding">
+          <div id="like" class="welcome-estate">
             <div class="welcome-icon">
               <i class="pe-7s-wallet pe-4x"></i>
             </div>
-            <h4><strong>포인트관리</strong></h4>
+            <h4><strong>나의 상품보기</strong></h4>
           </div>
-        </div> -->
+        </div>
+        </c:if>
         <c:if test="${login.role ne 'users' and login.role ne 'admin'}">
         <div class="col-xs-3 m-padding">
           <div id="product" class="welcome-estate">

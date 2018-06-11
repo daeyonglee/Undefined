@@ -194,4 +194,5 @@ WHERE page = #{page}
 	WHERE sc_no = #{sc_no}
 	]]>
 	</select>
+	
 </mapper>

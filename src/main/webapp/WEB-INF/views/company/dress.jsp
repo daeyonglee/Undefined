@@ -232,7 +232,7 @@ span.star-prototype>* {
             
 				<div class="box-two proerty-item">
 					<div class="item-thumb">
-						<a href="/company/dress/dressDetail?dc_no=${dress.dc_no}"><img src="${dress.dc_main_image}"></a>
+						<a href="/company/dress/dressDetail?dc_no=${dress.dc_no}"><img src="/user/mypage/imgview?imgview=${dress.dc_main_image}"></a>
 					</div>
 
 					<div class="item-entry overflow">
@@ -387,9 +387,7 @@ span.star-prototype>* {
 				var count = document.getElementById("countList").value.split("/");
 				var list = document.getElementById("list").value.split("/");
 
-				console.info('지역 : ' + region);
-				
-				
+
 				/*
 					info : {region:name, region:name}
 				*/
