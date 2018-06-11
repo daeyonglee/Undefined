@@ -162,27 +162,10 @@
 				'%'||#{keyword}||'%'
 				and board_no= #{board_no}
 			</if>
-			<if test="searchType == 'w'.toString()">
-				WHERE user_nm like
-				'%'||#{keyword}||'%'
-				and board_no= #{board_no}
-			</if>
 			<if test="searchType == 'tc'.toString()">
 				WHERE (article_title like
 				'%'||#{keyword}||'%' Or article_content like 
 				'%'||#{keyword}||'%')
-				and board_no= #{board_no}
-			</if>
-			<if test="searchType== 'cw'.toString()" >
-				WHERE (article_content like
-				'%'||#{keyword}||'%' Or user_nm like 
-				'%'||#{keyword}||'%')
-				and board_no= #{board_no}
-			</if>
-			<if test="searchType== 'tcw'.toString()" >
-				WHERE (article_title like '%'||#{keyword}||'%' 
-					Or article_content like '%'||#{keyword}||'%'
-					Or user_nm like '%'||#{keyword}||'%')
 				and board_no= #{board_no}
 			</if>
 			<if test="searchType.equals('studio'.toString())" >
@@ -199,7 +182,28 @@
 			</if>		
 		</if>
 	</sql>
-		
+	
+	<sql id="searchWriter">
+		<if test="searchType !=null">
+			<if test="searchType == 'w'.toString()">
+				WHERE user_nm like
+				'%'||#{keyword}||'%'
+				and board_no= #{board_no}
+			</if>
+			<if test="searchType== 'cw'.toString()" >
+				WHERE (article_content like
+				'%'||#{keyword}||'%' Or user_nm like 
+				'%'||#{keyword}||'%')
+				and board_no= #{board_no}
+			</if>
+			<if test="searchType== 'tcw'.toString()" >
+				WHERE (article_title like '%'||#{keyword}||'%' 
+					Or article_content like '%'||#{keyword}||'%'
+					Or user_nm like '%'||#{keyword}||'%')
+				and board_no= #{board_no}
+			</if>
+		</if>
+	</sql>	
 	
 	<select id="listSearch" resultType="map">
 	<![CDATA[
@@ -242,7 +246,11 @@
 	                           WHERE  article_no = article.article_no) reply_count  
 		                FROM   article]]>
 		                <include refid="search"></include>
-						<![CDATA[ORDER  BY article_no DESC)) 
+						<![CDATA[ORDER  BY article_no DESC)
+						]]>
+						<include refid="searchWriter"></include>
+						<![CDATA[
+						) 
 		WHERE  page = #{page}]]>
 	</select>
 	
