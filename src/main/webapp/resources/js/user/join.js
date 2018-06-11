@@ -290,27 +290,7 @@ function validateFirstStep() {
             repw: {
             	required: true,
             	equalTo: "#pw"
-            },
-            companyNo: {
-        		requrired: true
-        	},
-        	name : {
-        		required: true
-        	},
-        	mainNm : {
-        		required: true
-        	},
-        	tel:{
-        		required: true,
-        		tel: true
-        	},
-        	birthday:{
-        		required: true,
-        		date: true
-        	},
-        	addrdetail: {
-        		required: "#postcode"
-        	}
+            }
 
             /*  other possible input validations
              ,username: {
