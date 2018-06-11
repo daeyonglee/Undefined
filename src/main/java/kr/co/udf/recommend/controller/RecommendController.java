@@ -135,34 +135,44 @@ public class RecommendController {
 		}
 	}
 
-	@ResponseBody
-	@RequestMapping(value = "addToCart", method = RequestMethod.POST)
-	public void addToCart(@RequestBody Map<String, Object> params) {
-		if (params.containsKey("sp_no")) {
+	@RequestMapping(value = "addToCart", method = RequestMethod.GET)
+	public String addToCart(String item, int item_no, int no) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		if (item.equals("studio")) {
+			params.put("sp_no", item_no);
+			params.put("no", no);
 			service.addSToCart(params);
-		} else if (params.containsKey("dp_no")) {
+		} else if (item.equals("dress")) {
+			params.put("dp_no", item_no);
+			params.put("no", no);
 			service.addDToCart(params);
-		} else {
+		} else if (item.equals("makeup")) {
+			params.put("mp_no", item_no);
+			params.put("no", no);
 			service.addMToCart(params);
 		}
+		
+		return "success";
 	}
-	
+
 	@ResponseBody
-	@RequestMapping(value="list/sdetail", method = RequestMethod.GET)
+	@RequestMapping(value = "list/sdetail", method = RequestMethod.GET)
 	public Map<String, Object> studioDetail(int sp_no) {
+		logger.info("sp_no : " + sp_no);
+		logger.info("service.studioDetail(sp_no) : " + service.studioDetail(sp_no));
 		return service.studioDetail(sp_no);
 	}
 
 	@ResponseBody
-	@RequestMapping(value="list/ddetail", method = RequestMethod.GET)
+	@RequestMapping(value = "list/ddetail", method = RequestMethod.GET)
 	public Map<String, Object> dressDetail(int dp_no) {
 		return service.dressDetail(dp_no);
 	}
-	
+
 	@ResponseBody
-	@RequestMapping(value="list/mdetail", method = RequestMethod.GET)
+	@RequestMapping(value = "list/mdetail", method = RequestMethod.GET)
 	public Map<String, Object> makeupDetail(int mp_no) {
 		return service.makeupDetail(mp_no);
 	}
-	
+
 }

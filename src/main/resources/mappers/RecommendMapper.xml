@@ -314,7 +314,7 @@
 		               mp_hair_yn, 
 		               mp_image, 
 		               regdate, 
-		               updatedate, 
+		               updatedate
 		        FROM   makeup_product 
 		        WHERE  mp_no = #{mp_no}) mp 
 		       JOIN makeup_company mc 

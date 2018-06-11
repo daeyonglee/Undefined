@@ -142,7 +142,7 @@
               <h4 class="modal-title">상세정보</h4>
             </div>
             <div class="modal-body">
-              <p>상품이 등록되었습니다.</p>
+              <p>상세정보...</p>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -191,21 +191,18 @@
   			
   			if(btnName === "sAddBtn"){
   				var sp_no = $(this).parent().prevAll(".studioNo").text().trim();
-  				console.log("sp_no : " + sp_no);
   				params = {
   						sp_no : sp_no,
   						no : no
   				};
   			} else if(btnName === "dAddBtn"){
   				var dp_no = $(this).parent().prevAll(".dressNo").text().trim();
-  				console.log("dp_no : " + dp_no);
   				params = {
   						dp_no : dp_no,
   						no : no
   				};
   			} else if(btnName === "mAddBtn"){
   				var mp_no = $(this).parent().prevAll(".makeupNo").text().trim();
-  				console.log("mp_no : " + mp_no);
   				params = {
   						mp_no : mp_no,
   						no : no
@@ -239,17 +236,60 @@
           $.ajax({
             url: "/recommend/list/sdetail",
             type: "get",
+            async: false,
             contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+            dataType: "json",
             data: param,
-            success: function(){
-              modal.find(".modal-body").html(item + " example");
+            success: function(studio){
+            	console.log(studio);
+            	var html = "<table>" +
+                  		    "<tr>" +
+                		      "<th>상품명</th>" +
+                		      "<td colspan='3'>" + studio.SP_NM + "</td>" +
+                		    "</tr>" +
+                		    "<tr>" +
+                		      "<th>업체명</th>" +
+                		      "<td>" + studio.SC_NM + "</td>" +
+                		      "<th>가격</th>" +
+                		      "<td>" + studio.SP_PRICE + "</td>" +
+                		    "</tr>" +
+                		    "<tr>" +
+                		      "<th>앨범/액자/비디오</th>";
+                		      if(studio.SP_APV_YN === 'y'){
+                		      html += "<td>포함</td>";
+                		      } else {
+                		    	  html += "<td>미포함</td>";
+                		      }
+                		      html += "<th>토탈샵</th>";
+                		      if(studio.SP_TOTAL_YN === 'y'){
+                		    	  html += "<td>포함</td>";
+                		      } else {
+                		    	  html += "<td>미포함</td>";
+                		      }
+                		      html += "</tr>" +
+                		    "<tr>" +
+                		      "<th>촬영장소(실내/외)</th>" +
+                		      "<td>" + studio.SP_SHOOT_TYPE + "</td>" +
+                		      "<th>갱신 날짜</th>" +
+                		      "<td>" + studio.UPDATEDATE + "</td>" +
+                		    "</tr>" +
+                		    "<tr>" +
+                		      "<th colspan='4'>상품 이미지</th>" +
+                		    "</tr>" +
+                		    "<tr>" +
+                		      "<td colspan='4'>" + studio.SP_IMAGE + "</td>" +
+                		    "</tr>" +
+                		  "</table>";
+              modal.find(".modal-body").html(html);
               modal.modal();
             },
-            error: function(){
-              modal.find(".modal-body").html(item + " example");
+            error: function(error){
+            	console.log(error);
+              modal.find(".modal-body").html(item + " error...");
               modal.modal();
             }
           });
+          
         } else if(item === "dress"){
           var param = {
               dp_no : no
@@ -268,6 +308,7 @@
               modal.modal();
             }
           });
+          
         } else if(item === "makeup"){
           var param = {
               mp_no : no
@@ -289,7 +330,6 @@
         }
       }
   </script>
-
   <%@include file="../../include/bottom.jsp"%>
 </body>
 </html>

@@ -210,36 +210,35 @@
           var sp_no = $(this).parent().prevAll(".studioNo").text().trim();
           console.log("sp_no : " + sp_no);
           params = {
-              sp_no : sp_no,
+        	  item : "studio",
+              item_no : parseInt(sp_no),
               no : no
           };
         } else if(btnName === "dAddBtn"){
           var dp_no = $(this).parent().prevAll(".dressNo").text().trim();
           console.log("dp_no : " + dp_no);
           params = {
-              dp_no : dp_no,
+              item : "dress",
+              item_no : parseInt(dp_no),
               no : no
           };
         } else if(btnName === "mAddBtn"){
           var mp_no = $(this).parent().prevAll(".makeupNo").text().trim();
           console.log("mp_no : " + mp_no);
           params = {
-              mp_no : mp_no,
+              item : "makeup",
+              item_no : parseInt(mp_no),
               no : no
           };
         }
       $.ajax({
           url: "/recommend/addToCart",
-          type: "post",
+          type: "get",
           dataType: "json",
-          contentType: "application/json; charset=UTF-8",
-          data: JSON.stringify(params),
+          contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+          data: params,
           success: function(){
             modal.find(".modal-body").html("상품이 등록되었습니다.");
-            modal.modal();
-          },
-          error: function(){
-            modal.find(".modal-body").html("이미 등록된 상품입니다.");
             modal.modal();
           }
         });
@@ -247,64 +246,178 @@
     }
     
     function showDetail(item, no){
-      var modal = $("#showDetail");
-      
-      if(item === "studio"){
-        var param = {
-            sp_no : no
-        };
-        $.ajax({
-          url: "/recommend/list/sdetail",
-          type: "get",
-          contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-          data: param,
-          success: function(){
-            modal.find(".modal-body").html(item + " example");
-            modal.modal();
-          },
-          error: function(){
-            modal.find(".modal-body").html(item + " example");
-            modal.modal();
-          }
-        });
-      } else if(item === "dress"){
-        var param = {
-            dp_no : no
-        };
-        $.ajax({
-          url: "/recommend/list/ddetail",
-          type: "get",
-          contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-          data: param,
-          success: function(){
-            modal.find(".modal-body").html(item + " example");
-            modal.modal();
-          },
-          error: function(){
-            modal.find(".modal-body").html(item + " example");
-            modal.modal();
-          }
-        });
-      } else if(item === "makeup"){
-        var param = {
-            mp_no : no
-        };
-        $.ajax({
-          url: "/recommend/list/mdetail",
-          type: "get",
-          contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-          data: param,
-          success: function(){
-            modal.find(".modal-body").html(item + " example");
-            modal.modal();
-          },
-          error: function(){
-            modal.find(".modal-body").html(item + " example");
-            modal.modal();
-          }
-        });
+        var modal = $("#showDetail");
+        
+        if(item === "studio"){
+          var param = {
+              sp_no : no
+          };
+          $.ajax({
+            url: "/recommend/list/sdetail",
+            type: "get",
+            async: false,
+            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+            dataType: "json",
+            data: param,
+            success: function(studio){
+            	var html = "<table style='width: 100%;'>" +
+                  		    "<tr>" +
+                		      "<th>상품명</th>" +
+                		      "<td colspan='3'>" + studio.SP_NM + "</td>" +
+                		    "</tr>" +
+                		    "<tr>" +
+                		      "<th>업체명</th>" +
+                		      "<td>" + studio.SC_NM + "</td>" +
+                		      "<th>가격</th>" +
+                		      "<td>" + studio.SP_PRICE + "</td>" +
+                		    "</tr>" +
+                		    "<tr>" +
+                		      "<th>앨범/액자/비디오</th>";
+                		      if(studio.SP_APV_YN === 'y'){
+                		      html += "<td>포함</td>";
+                		      } else {
+                		    	  html += "<td>미포함</td>";
+                		      }
+                		      html += "<th>토탈샵</th>";
+                		      if(studio.SP_TOTAL_YN === 'y'){
+                		    	  html += "<td>포함</td>";
+                		      } else {
+                		    	  html += "<td>미포함</td>";
+                		      }
+                		      html += "</tr>" +
+                		    "<tr>" +
+                		      "<th>촬영장소(실내/외)</th>" +
+                		      "<td>" + studio.SP_SHOOT_TYPE + "</td>" +
+                		      "<th>업데이트</th>" +
+                		      "<td>" + studio.UPDATEDATE + "</td>" +
+                		    "</tr>" +
+                		    "<tr>" +
+                		      "<th colspan='4'>상품 이미지</th>" +
+                		    "</tr>" +
+                		    "<tr>" +
+                		      "<td colspan='4'><img src='" + studio.SP_IMAGE + "' style='width: 100%;'></a></td>" +
+                		    "</tr>" +
+                		  "</table>";
+              modal.find(".modal-body").html(html);
+              modal.modal();
+            },
+            error: function(error){
+            	console.log(error);
+              modal.find(".modal-body").html(item + " error...");
+              modal.modal();
+            }
+          });
+          
+        } else if(item === "dress"){
+          var param = {
+              dp_no : no
+          };
+          $.ajax({
+              url: "/recommend/list/ddetail",
+              type: "get",
+              async: false,
+              contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+              dataType: "json",
+              data: param,
+              success: function(dress){
+              	var html = "<table style='width: 100%;'>" +
+                    		    "<tr>" +
+                  		      "<th>상품명</th>" +
+                  		      "<td colspan='3'>" + dress.DP_NM + "</td>" +
+                  		    "</tr>" +
+                  		    "<tr>" +
+                  		      "<th>업체명</th>" +
+                  		      "<td>" + dress.DC_NM + "</td>" +
+                  		      "<th>가격</th>" +
+                  		      "<td>" + dress.DP_PRICE + "</td>" +
+                  		    "</tr>" +
+                  		      "<th>드레스 스타일</th>" +
+                  		      "<td>" + dress.DP_STYLE + "</td>" +
+                  		      "<th>업데이트</th>" +
+                  		      "<td>" + dress.UPDATEDATE + "</td>" +
+                  		    "</tr>" +
+                  		    "<tr>" +
+                  		      "<th colspan='4'>상품 이미지</th>" +
+                  		    "</tr>" +
+                  		    "<tr>" +
+                  		      "<td colspan='4'><img src='" + dress.DP_IMAGE + "' style='width: 100%;'></a></td>" +
+                  		    "</tr>" +
+                  		  "</table>";
+                modal.find(".modal-body").html(html);
+                modal.modal();
+              },
+              error: function(error){
+              	console.log(error);
+                modal.find(".modal-body").html(item + " error...");
+                modal.modal();
+              }
+            });
+          
+        } else if(item === "makeup"){
+          var param = {
+              mp_no : no
+          };
+          $.ajax({
+              url: "/recommend/list/mdetail",
+              type: "get",
+              async: false,
+              contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+              dataType: "json",
+              data: param,
+              success: function(makeup){
+              	var html = "<table style='width: 100%;'>" +
+                    		    "<tr>" +
+                  		      "<th>상품명</th>" +
+                  		      "<td colspan='3'>" + makeup.MP_NM + "</td>" +
+                  		    "</tr>" +
+                  		    "<tr>" +
+                  		      "<th>업체명</th>" +
+                  		      "<td>" + makeup.MC_NM + "</td>" +
+                  		      "<th>가격</th>" +
+                  		      "<td>" + makeup.MP_PRICE + "</td>" +
+                  		    "</tr>" +
+                  		    "<tr>" +
+                  		      "<th>악세사리</th>";
+                  		      if(makeup.MP_ACC_YN=== 'y'){
+                  		      html += "<td>포함</td>";
+                  		      } else {
+                  		    	  html += "<td>미포함</td>";
+                  		      }
+                  		      html += "<th>가족 포함</th>";
+                  		      if(makeup.MP_FAMILY_YN === 'y'){
+                  		    	  html += "<td>포함</td>";
+                  		      } else {
+                  		    	  html += "<td>미포함</td>";
+                  		      }
+                  		      html += "</tr>" +
+                  		    "<tr>" +
+                  		      "<th>헤어 스타일링</th>";
+                  		      if(makeup.MP_FAMILY_YN === 'y'){
+                  		    	  html += "<td>포함</td>";
+                  		      } else {
+                  		    	  html += "<td>미포함</td>";
+                  		      }
+                  		      html += "<th>갱신 날짜</th>" +
+                  		      "<td>" + makeup.UPDATEDATE + "</td>" +
+                  		    "</tr>" +
+                  		    "<tr>" +
+                  		      "<th colspan='4'>상품 이미지</th>" +
+                  		    "</tr>" +
+                  		    "<tr>" +
+                  		      "<td colspan='4'><img src='" + makeup.MP_IMAGE + "' style='width: 100%;'></a></td>" +
+                  		    "</tr>" +
+                  		  "</table>";
+                modal.find(".modal-body").html(html);
+                modal.modal();
+              },
+              error: function(error){
+              	console.log(error);
+                modal.find(".modal-body").html(item + " error...");
+                modal.modal();
+              }
+            });
+        }
       }
-    }
   </script>
 
   <%@include file="../include/bottom.jsp"%>
