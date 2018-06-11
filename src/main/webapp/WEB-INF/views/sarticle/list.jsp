@@ -63,7 +63,7 @@
                  if(request.getParameter("board_no")!=null){
                  if(Integer.parseInt(request.getParameter("board_no"))!=3){
                 %>
-                <th style="width: 60px">조회수</th>
+                <th style="width: 80px">조회수</th>
                  <%
                  }}
                 %>
@@ -352,8 +352,7 @@
 		 
 		 function pagination(pageMaker) {
 			 console.log(pageMaker);
-			 var text2  = "<ul id = 'pagination_output'>";
-			 
+			 var text2  = "<ul class='pagination' id = 'pagination_output'>";
 			 	if (pageMaker.prev) {
     			 	text2 +=  "<li>"
     			 		+"<a href="
@@ -366,7 +365,7 @@
 			 	}
 			 	
 			 	for (var i=pageMaker.startPage; i<=pageMaker.endPage; i++){
-			 		text2 +=  "<li" + (pageMaker.page == i ? " class='active'>":'>');
+			 		text2 +=  "<li" + (pageMaker.page == i ? " class='active'>":">");
 			 		text2 +=  "  <a class='paging' href="
 			 		+"'list"
 			 		+"${pageMaker.makeSearch(i) }"
