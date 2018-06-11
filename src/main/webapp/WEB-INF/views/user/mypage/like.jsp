@@ -14,7 +14,6 @@
 	position: fixed;
 	top: 0px;
 	z-index: 999;
-	cursor:
 }
 
 #studioCart #dressCart #makeupCart {
@@ -50,9 +49,9 @@
                   <span class="proerty-price pull-right">${studio.SP_PRICE}원</span>
                 </div>
                 <div>
-                  <button name="sAddBtn" class="addCartBtn">
+                  <!-- <button name="sAddBtn" class="addCartBtn">
                     <i class="fa fa-cart-arrow-down"></i>
-                  </button>
+                  </button> -->
                 </div>
               </div>
             </div>
@@ -76,9 +75,9 @@
                   <span class="proerty-price pull-right">${dress.DP_PRICE}원</span>
                 </div>
                 <div>
-                  <button name="dAddBtn" class="addCartBtn">
+                  <!-- <button name="dAddBtn" class="addCartBtn">
                     <i class="fa fa-cart-arrow-down"></i>
-                  </button>
+                  </button> -->
                 </div>
               </div>
             </div>
@@ -102,9 +101,9 @@
                   <span class="proerty-price pull-right">${makeup.MP_PRICE}원</span>
                 </div>
                 <div>
-                  <button name="mAddBtn" class="addCartBtn">
+                  <!-- <button name="mAddBtn" class="addCartBtn">
                     <i class="fa fa-cart-arrow-down"></i>
-                  </button>
+                  </button> -->
                 </div>
               </div>
             </div>
@@ -142,7 +141,7 @@
               <h4 class="modal-title">상세정보</h4>
             </div>
             <div class="modal-body">
-              <p>상세정보...</p>
+              <p>상품이 등록되었습니다.</p>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -171,61 +170,6 @@
   		});
   	}
   	
-  	function addCart(){
-  		var btns = $(".addCartBtn");
-  		btns.on("click", function(){
-  				
-			var params = null;
-			var role = "${sessionScope['login'].role}";
-  			var no = "${sessionScope['login'].no}";
-  			var btnName = $(this).attr("name");
-  			
-  			console.log(no);
-  			console.log(role);
-  			
-  			if(role !== "users"){
-  				$(".modal-body").html("관심상품 추가가 제한된 사용자입니다.");
-  				$("#addStatus").modal();
-  				return false;
-  			}
-  			
-  			if(btnName === "sAddBtn"){
-  				var sp_no = $(this).parent().prevAll(".studioNo").text().trim();
-  				params = {
-  						sp_no : sp_no,
-  						no : no
-  				};
-  			} else if(btnName === "dAddBtn"){
-  				var dp_no = $(this).parent().prevAll(".dressNo").text().trim();
-  				params = {
-  						dp_no : dp_no,
-  						no : no
-  				};
-  			} else if(btnName === "mAddBtn"){
-  				var mp_no = $(this).parent().prevAll(".makeupNo").text().trim();
-  				params = {
-  						mp_no : mp_no,
-  						no : no
-  				};
-  			}
-			$.ajax({
-  				url: "/recommend/addToCart",
-  				type: "post",
-  				dataType: "json",
-  				contentType: "application/json; charset=UTF-8",
-  				data: JSON.stringify(params),
-  				success: function(){
-  					$(".modal-body").html("상품이 등록되었습니다.");
-  					$("#addStatus").modal();
-  				},
-  				error: function(){
-  					$(".modal-body").html("이미 등록된 상품입니다.");
-  					$("#addStatus").modal();
-  				}
-  			});
-		})
-  	}
-  	
   	function showDetail(item, no){
         var modal = $("#showDetail");
         
@@ -236,60 +180,17 @@
           $.ajax({
             url: "/recommend/list/sdetail",
             type: "get",
-            async: false,
             contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-            dataType: "json",
             data: param,
-            success: function(studio){
-            	console.log(studio);
-            	var html = "<table>" +
-                  		    "<tr>" +
-                		      "<th>상품명</th>" +
-                		      "<td colspan='3'>" + studio.SP_NM + "</td>" +
-                		    "</tr>" +
-                		    "<tr>" +
-                		      "<th>업체명</th>" +
-                		      "<td>" + studio.SC_NM + "</td>" +
-                		      "<th>가격</th>" +
-                		      "<td>" + studio.SP_PRICE + "</td>" +
-                		    "</tr>" +
-                		    "<tr>" +
-                		      "<th>앨범/액자/비디오</th>";
-                		      if(studio.SP_APV_YN === 'y'){
-                		      html += "<td>포함</td>";
-                		      } else {
-                		    	  html += "<td>미포함</td>";
-                		      }
-                		      html += "<th>토탈샵</th>";
-                		      if(studio.SP_TOTAL_YN === 'y'){
-                		    	  html += "<td>포함</td>";
-                		      } else {
-                		    	  html += "<td>미포함</td>";
-                		      }
-                		      html += "</tr>" +
-                		    "<tr>" +
-                		      "<th>촬영장소(실내/외)</th>" +
-                		      "<td>" + studio.SP_SHOOT_TYPE + "</td>" +
-                		      "<th>갱신 날짜</th>" +
-                		      "<td>" + studio.UPDATEDATE + "</td>" +
-                		    "</tr>" +
-                		    "<tr>" +
-                		      "<th colspan='4'>상품 이미지</th>" +
-                		    "</tr>" +
-                		    "<tr>" +
-                		      "<td colspan='4'>" + studio.SP_IMAGE + "</td>" +
-                		    "</tr>" +
-                		  "</table>";
-              modal.find(".modal-body").html(html);
+            success: function(){
+              modal.find(".modal-body").html(item + " example");
               modal.modal();
             },
-            error: function(error){
-            	console.log(error);
-              modal.find(".modal-body").html(item + " error...");
+            error: function(){
+              modal.find(".modal-body").html(item + " example");
               modal.modal();
             }
           });
-          
         } else if(item === "dress"){
           var param = {
               dp_no : no
@@ -308,7 +209,6 @@
               modal.modal();
             }
           });
-          
         } else if(item === "makeup"){
           var param = {
               mp_no : no
@@ -330,6 +230,7 @@
         }
       }
   </script>
+
   <%@include file="../../include/bottom.jsp"%>
 </body>
 </html>

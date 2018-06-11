@@ -7,9 +7,6 @@
 <%@include file="../include/top.jsp"%>
 
 <style>
-/* .cart {
-  background-color: #ffffdd;
-} */
 
 #itemMenu {
   background-color: white;
@@ -19,14 +16,7 @@
   position: fixed;
   top: 0px;
   z-index: 999;
-  cursor:
 }
-
-/* .bottomFix {
-  position: fixed;
-  bottom: 0px;
-  z-index: 999;
-} */
 
 #studioCart #dressCart #makeupCart {
   border-color: #eeeeee;
@@ -36,11 +26,6 @@
 <body>
   <div class="container">
     <h2 class="text-center">스드메 통합 추천 결과</h2>
-    <!-- <div style="background-color: #ffffdd;">
-      선택한 조건에 대한 결과입니다.<br>
-      예산~~~     /장소~~~<br>
-      스튜디오 + 드레스 + 메이크업/ 스튜디오 조건: ~~~ / 드레스 조건: ~~~~
-    </div> -->
 
     <!-- 패키지 list -->
       <ul id="itemMenu" class="nav nav-tabs">

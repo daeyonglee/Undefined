@@ -136,7 +136,7 @@ public class RecommendController {
 	}
 
 	@RequestMapping(value = "addToCart", method = RequestMethod.GET)
-	public String addToCart(String item, int item_no, int no) {
+	public String addToCart(@RequestParam("item") String item, @RequestParam("item_no") int item_no, @RequestParam("no") int no) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		if (item.equals("studio")) {
 			params.put("sp_no", item_no);
