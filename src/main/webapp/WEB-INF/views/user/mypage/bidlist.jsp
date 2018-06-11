@@ -9,19 +9,19 @@
  --><title>역경매 입찰서 리스트</title>
 <style type="text/css">
 body {
-   background: #F5F5F5;
+	background: #F5F5F5;
 }
 
 #count #newBtn #basic {
-   text-align: center;
+	text-align: center;
 }
 
 td, th {
-   text-align: center;
+	text-align: center;
 }
 
 .form-group {
-   margin: 15px auto;
+	margin: 15px auto;
 }
 </style>
 </head>
@@ -234,7 +234,7 @@ td, th {
  <script>
       $(document).ready(function() {
 
-         $("#list").on("click", function() {
+			$("#list").on("click", function() {
               self.location = "apply";
             });
 
@@ -242,19 +242,19 @@ td, th {
       
       
       function read(event){
-         
-         var tr = event.target.parentElement;
-         var inputs = tr.children;
-         
-         var type;
-         var name;
-         var productNm;
-         var price;
-         var discount;
-         var productImage;
-         var meetDate;
-         var tel;
-         var addr;
+    	  
+    	  var tr = event.target.parentElement;
+    	  var inputs = tr.children;
+    	  
+    	  var type;
+    	  var name;
+    	  var productNm;
+    	  var price;
+    	  var discount;
+    	  var productImage;
+    	  var meetDate;
+    	  var tel;
+    	  var addr;
           var apvYn;
           var totalYn;
           var shootType;
@@ -262,190 +262,185 @@ td, th {
           var accYn;
           var familyYn;
           var hairYn;
-            
-         for (var i in inputs) {
-            var nm = inputs[i].name;
-            var val = inputs[i].value;
-             
-            if (nm == 'name'){
-               name = val;
-            }
-            if (nm == 'productNm') {
-               productNm = val;
-            }
-            if (nm == 'price') {
-               price = val;
-            }
-            if (nm == 'productImage') {
-               productImage = val;
-            }
-            if (nm == 'meetDate') {
-               meetDate = val;
-            }
-            if (nm == 'tel') {
-               tel = val;
-            }
-            if (nm == 'apvYn') {
-               apvYn = val;
-            }
-            if (nm == 'totalYn') {
-               totalYn = val;
-            }
-            if (nm == 'shootType') {
-               shootType = val;
-            }
-            if (nm == 'style') {
-               style = val;
-            }
-            if (nm == 'accYn') {
-               accYn = val;
-            }
-            if (nm == 'familyYn') {
-               familyYn = val;
-            }
-            if (nm == 'hairYn') {
-               hairYn = val;
-            }
-            if (nm == 'addr') {
-               addr = val;
-            }
-            if (nm == 'discount') {
-               discount = val;
-            }
-            if (nm == 'type') {
-               type = val;
-            }
-         }
-         
-         if(type == 'studio'){
-            
-               /* $("#productImage").attr("src", "/user/mypage/imgview?imgview="productImage); */
-            
-              var html =  "<li>";
-                  html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>업체 이름</span>";
-                  html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + name + "</span>";    
-                  html += "</li>";
-                  html += "<li>";
-                  html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>입찰 상품</span>";
-                  html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+ productNm + "</span>";
-                  html += "</li>";
-                  html += "<li>";
-                  html +=  " <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>실제 가격 / 할인율 / 할인 가격</span>";
-                  html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + price +"원 ->" + discount +"% ->" + Math.round(price * (1- discount * 0.01)) + "원</span>";
-                  html += "</li>";
-                  html += "<li>";
-                  html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>실내 / 야외 여부</span>";
-                  html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+ shootType +"</span>";
-                  html += "</li>";
-                  html += "<li>";
-                  html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>토탈샵 여부</span>";
-                  html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+  totalYn +"</span>";
-                  html += "</li>";
-                  html += "<li>";
-                  html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>액자 / 앨범 / 비디오</span>";
-                  html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+  apvYn +"</span>";
-                  html += "</li>";
-                  html += "<li>";                 
-                  html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>상담 날짜</span>";                 
-                  html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + meetDate + "</span>";                 
-                  html += "</li>";
-                  html += "<li>";
-                  html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>업체 위치</span>";                 
-                  html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + addr + "</span>";                 
-                  html += "</li>";
-                  html += "<li>";
-                  html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>업체 전화번호</span>";                 
-                  html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + tel+ "</span>";                 
-                 
-                  
-                  $("#ul").html(html);
-                 
-          };
-          if (type == 'dress') {
-              
-         /*  $("#productImage").attr("src", "/user/mypage/imgview?imgview="productImage); */
-                      
-               var html =  "<li>";
-                   html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>업체 이름</span>";
-                   html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + name + "</span>";    
-                   html += "</li>";
-                   html += "<li>";
-                   html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>입찰 상품</span>";
-                   html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+ productNm + "</span>";
-                   html += "</li>";
-                   html += "<li>";
-                   html +=  " <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>실제 가격 / 할인율 / 할인 가격</span>";
-                   html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + price +"원 ->" + discount +"% ->" + Math.round(price * (1- discount * 0.01)) + "원</span>";
-                   html += "</li>";
-                   html += "<li>";
-                   html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>드레스 스타일</span>";
-                   html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+  style +"</span>";
-                   html += "</li>";
-                   html += "<li>";                 
-                   html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>상담 날짜</span>";                 
-                   html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + meetDate + "</span>";                 
-                   html += "</li>";
-                   html += "<li>";
-                   html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>업체 위치</span>";                 
-                   html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + addr + "</span>";                 
-                   html += "</li>";
-                   html += "<li>";
-                   html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>업체 전화번호</span>";                 
-                   html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + tel+ "</span>";                 
-                           
-                  $("#ul").html(html);
-                    
-        };
-        if (type == 'makeup') {
-           
-             /* $("#productImage").attr("src", "/user/mypage/imgview?imgview="productImage); */
-                 
-               var html =  "<li>";
-                   html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>업체 이름</span>";
-                   html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + name + "</span>";    
-                   html += "</li>";
-                   html += "<li>";
-                   html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>입찰 상품</span>";
-                   html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+ productNm + "</span>";
-                   html += "</li>";
-                   html += "<li>";
-                   html +=  " <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>실제 가격 / 할인율 / 할인 가격</span>";
-                   html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + price +"원 ->" + discount +"% ->" + Math.round(price * (1- discount * 0.01)) + "원</span>";
-                   html += "</li>";
-                   html += "<li>";
-                   html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>액세서리 대여 여부</span>";
-                   html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+  accYn +"</span>";
-                   html += "</li>";
-                   html += "<li>";
-                   html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>가족 메이크업 여부 </span>";
-                   html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+  familyYn +"</span>";
-                   html += "</li>";
-                   html += "<li>";
-                   html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>헤어 세팅 여부</span>";
-                   html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+  hairYn +"</span>";
-                   html += "</li>";
-                   html += "<li>";                 
-                   html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>상담 날짜</span>";                 
-                   html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + meetDate + "</span>";                 
-                   html += "</li>";
-                   html += "<li>";
-                   html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>업체 위치</span>";                 
-                   html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + addr + "</span>";                 
-                   html += "</li>";
-                   html += "<li>";
-                   html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>업체 전화번호</span>";                 
-                   html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + tel+ "</span>";                 
-                           
-                  $("#ul").html(html);
-        
-        };
-           
-           
-      }
-         console.log(tr.children);
-         
-         console.log(event);
-         console.log(event.target.parentElement);
+    		  
+    	  for (var i in inputs) {
+    		  var nm = inputs[i].name;
+    		  var val = inputs[i].value;
+  			  
+    		  if (nm == 'name'){
+    			  name = val;
+    		  }
+    		  if (nm == 'productNm') {
+    			  productNm = val;
+    		  }
+    		  if (nm == 'price') {
+    			  price = val;
+    		  }
+    		  if (nm == 'productImage') {
+    			  productImage = val;
+    		  }
+    		  if (nm == 'meetDate') {
+    			  meetDate = val;
+    		  }
+    		  if (nm == 'tel') {
+    			  tel = val;
+    		  }
+    		  if (nm == 'apvYn') {
+    			  apvYn = val;
+    		  }
+    		  if (nm == 'totalYn') {
+    			  totalYn = val;
+    		  }
+    		  if (nm == 'shootType') {
+    			  shootType = val;
+    		  }
+    		  if (nm == 'style') {
+    			  style = val;
+    		  }
+    		  if (nm == 'accYn') {
+    			  accYn = val;
+    		  }
+    		  if (nm == 'familyYn') {
+    			  familyYn = val;
+    		  }
+    		  if (nm == 'hairYn') {
+    			  hairYn = val;
+    		  }
+    		  if (nm == 'addr') {
+    			  addr = val;
+    		  }
+    		  if (nm == 'discount') {
+    			  discount = val;
+    		  }
+    		  if (nm == 'type') {
+    			  type = val;
+    		  }
+    	  }
+    	  
+    	  if(type == 'studio'){
+    		  
+    		  	$("#productImage").attr("src", "/user/mypage/imgview?imgview="+productImage);
+    		  
+    		    var html =  "<li>";
+    		        html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>업체 이름</span>";
+    		        html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + name + "</span>";    
+    		        html += "</li>";
+    		        html += "<li>";
+    		        html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>입찰 상품</span>";
+    		        html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+ productNm + "</span>";
+    		        html += "</li>";
+    		        html += "<li>";
+    		        html +=  " <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>실제 가격 / 할인율 / 할인 가격</span>";
+    		        html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + price +"원 ->" + discount +"% ->" + Math.round(price * (1- discount * 0.01)) + "원</span>";
+    		        html += "</li>";
+    		        html += "<li>";
+    		        html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>실내 / 야외 여부</span>";
+    		        html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+ shootType +"</span>";
+    		        html += "</li>";
+    		        html += "<li>";
+    		        html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>토탈샵 여부</span>";
+    		        html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+  totalYn +"</span>";
+    		        html += "</li>";
+    		        html += "<li>";
+    		        html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>액자 / 앨범 / 비디오</span>";
+    		        html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+  apvYn +"</span>";
+    		        html += "</li>";
+    		        html += "<li>";			        
+    		        html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>상담 날짜</span>";			        
+    		        html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + meetDate + "</span>";			        
+    		        html += "</li>";
+    		        html += "<li>";
+    		        html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>업체 위치</span>";			        
+    		        html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + addr + "</span>";			        
+    		        html += "</li>";
+    		        html += "<li>";
+    		        html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>업체 전화번호</span>";			        
+    		        html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + tel+ "</span>";			        
+    		       
+    		        
+    		        $("#ul").html(html);
+			        
+	       };
+	       if (type == 'dress') {
+	        	
+	    	$("#productImage").attr("src", "/user/mypage/imgview?imgview="+productImage);
+	           		  
+	            var html =  "<li>";
+	                html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>업체 이름</span>";
+	                html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + name + "</span>";    
+	                html += "</li>";
+	                html += "<li>";
+	                html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>입찰 상품</span>";
+	                html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+ productNm + "</span>";
+	                html += "</li>";
+	                html += "<li>";
+	                html +=  " <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>실제 가격 / 할인율 / 할인 가격</span>";
+	                html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + price +"원 ->" + discount +"% ->" + Math.round(price * (1- discount * 0.01)) + "원</span>";
+	                html += "</li>";
+	                html += "<li>";
+	                html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>드레스 스타일</span>";
+	                html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+  style +"</span>";
+	                html += "</li>";
+	                html += "<li>";			        
+	                html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>상담 날짜</span>";			        
+	                html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + meetDate + "</span>";			        
+	                html += "</li>";
+	                html += "<li>";
+	                html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>업체 위치</span>";			        
+	                html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + addr + "</span>";			        
+	                html += "</li>";
+	                html += "<li>";
+	                html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>업체 전화번호</span>";			        
+	                html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + tel+ "</span>";			        
+	           		       
+	    		     $("#ul").html(html);
+				        
+		  };
+		  if (type == 'makeup') {
+			  
+		    	$("#productImage").attr("src", "/user/mypage/imgview?imgview="+productImage);
+         		  
+	            var html =  "<li>";
+	                html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>업체 이름</span>";
+	                html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + name + "</span>";    
+	                html += "</li>";
+	                html += "<li>";
+	                html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>입찰 상품</span>";
+	                html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+ productNm + "</span>";
+	                html += "</li>";
+	                html += "<li>";
+	                html +=  " <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>실제 가격 / 할인율 / 할인 가격</span>";
+	                html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + price +"원 ->" + discount +"% ->" + Math.round(price * (1- discount * 0.01)) + "원</span>";
+	                html += "</li>";
+	                html += "<li>";
+	                html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>액세서리 대여 여부</span>";
+	                html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+  accYn +"</span>";
+	                html += "</li>";
+	                html += "<li>";
+	                html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>가족 메이크업 여부 </span>";
+	                html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+  familyYn +"</span>";
+	                html += "</li>";
+	                html += "<li>";
+	                html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>헤어 세팅 여부</span>";
+	                html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+  hairYn +"</span>";
+	                html += "</li>";
+	                html += "<li>";			        
+	                html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>상담 날짜</span>";			        
+	                html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + meetDate + "</span>";			        
+	                html += "</li>";
+	                html += "<li>";
+	                html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>업체 위치</span>";			        
+	                html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + addr + "</span>";			        
+	                html += "</li>";
+	                html += "<li>";
+	                html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>업체 전화번호</span>";			        
+	                html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + tel+ "</span>";			        
+	           		       
+	    		     $("#ul").html(html);
+		  
+		  };
+		     
+		}
     </script>
 
  

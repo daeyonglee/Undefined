@@ -237,62 +237,62 @@ CREATE SEQUENCE reply_seq;
 
 -- create table 
 
--- @@ìˆœì„œ@@
--- ì „ì²´ ìƒí’ˆ
--- ì „ì²´ ì—…ì²´
--- ê´€ì‹¬ ìƒí’ˆ
--- ê´€ì‹¬ ì—…ì²´
--- ê³ ê° ì—­ê²½ë§¤ ì‹ ì²­
--- ê³ ê° ì—­ê²½ë§¤ì— ëŒ€í•œ ì…ì°° ì—…ì²´
--- ì…ì°° ì—…ì²´ì˜ ìƒí’ˆ ëª©ë¡
--- ê²Œì‹œíŒ & ê²Œì‹œë¬¼
--- íšŒì›(ì¼ë°˜ì‚¬ìš©ì & ê´€ë¦¬ì)
--- í¬ì¸íŠ¸ ê´€ë ¨
--- ìª½ì§€ ì •ë³´
--- í›„ê¸° ì •ë³´
+-- @@¼ø¼­@@
+-- ÀüÃ¼ »óÇ°
+-- ÀüÃ¼ ¾÷Ã¼
+-- °ü½É »óÇ°
+-- °ü½É ¾÷Ã¼
+-- °í°´ ¿ª°æ¸Å ½ÅÃ»
+-- °í°´ ¿ª°æ¸Å¿¡ ´ëÇÑ ÀÔÂû ¾÷Ã¼
+-- ÀÔÂû ¾÷Ã¼ÀÇ »óÇ° ¸ñ·Ï
+-- °Ô½ÃÆÇ & °Ô½Ã¹°
+-- È¸¿ø(ÀÏ¹İ»ç¿ëÀÚ & °ü¸®ÀÚ)
+-- Æ÷ÀÎÆ® °ü·Ã
+-- ÂÊÁö Á¤º¸
+-- ÈÄ±â Á¤º¸
 
 
--- ì „ì²´ ìƒí’ˆ 
--- ì „ì²´ ìƒí’ˆ(ìŠ¤íŠœë””ì˜¤) 
+-- ÀüÃ¼ »óÇ° 
+-- ÀüÃ¼ »óÇ°(½ºÆ©µğ¿À) 
 CREATE TABLE studio_product 
   ( 
      sp_no         NUMBER(10) NOT NULL, 
      sc_no         NUMBER(10) NOT NULL, 
      sp_nm         VARCHAR2(100),
      sp_price      NUMBER(20) NOT NULL,  
-     sp_apv_yn     VARCHAR2(1) DEFAULT 'N' NOT NULL,  -- ì•¡ì/ì•¨ë²”/ë¹„ë””ì˜¤ ì—¬ë¶€
-     sp_total_yn   VARCHAR2(1) DEFAULT 'N' NOT NULL,  -- í† íƒˆìƒµ ì—¬ë¶€
-     sp_shoot_type VARCHAR2(10) NOT NULL, -- ì‹¤/ë‚´ì™¸ ì´¬ì˜
+     sp_apv_yn     VARCHAR2(1) DEFAULT 'N' NOT NULL,  -- ¾×ÀÚ/¾Ù¹ü/ºñµğ¿À ¿©ºÎ
+     sp_total_yn   VARCHAR2(1) DEFAULT 'N' NOT NULL,  -- ÅäÅ»¼¥ ¿©ºÎ
+     sp_shoot_type VARCHAR2(10) NOT NULL, -- ½Ç/³»¿Ü ÃÔ¿µ
      sp_image      VARCHAR2(300), 
      regdate       DATE DEFAULT SYSDATE NOT NULL, 
      updatedate    DATE DEFAULT SYSDATE NOT NULL, 
      PRIMARY KEY (sp_no, sc_no) 
   );
 
--- ì „ì²´ ìƒí’ˆ(ë“œë ˆìŠ¤) 
+-- ÀüÃ¼ »óÇ°(µå·¹½º) 
 CREATE TABLE dress_product 
   ( 
      dp_no      NUMBER(10) NOT NULL, 
      dc_no      NUMBER(10) NOT NULL,
      dp_nm      VARCHAR2(100),
      dp_price   NUMBER(20) DEFAULT 0 NOT NULL, 
-     dp_style   VARCHAR2(20) NOT NULL, -- ë“œë ˆìŠ¤ ìŠ¤íƒ€ì¼
+     dp_style   VARCHAR2(20) NOT NULL, -- µå·¹½º ½ºÅ¸ÀÏ
      dp_image   VARCHAR2(200), 
      regdate    DATE DEFAULT SYSDATE NOT NULL, 
      updatedate DATE DEFAULT SYSDATE NOT NULL, 
      PRIMARY KEY (dp_no, dc_no) 
   ); 
 
--- ì „ì²´ ìƒí’ˆ(ë©”ì´í¬ì—…) 
+-- ÀüÃ¼ »óÇ°(¸ŞÀÌÅ©¾÷) 
 CREATE TABLE makeup_product 
   ( 
      mp_no        NUMBER(10) NOT NULL, 
      mc_no        NUMBER(10) NOT NULL,
      mp_nm        VARCHAR2(100),
      mp_price     NUMBER(20) DEFAULT 0 NOT NULL, 
-     mp_acc_yn    VARCHAR2(1) DEFAULT 'N' NOT NULL, -- ì•…ì„¸ì‚¬ë¦¬ ì—¬ë¶€
-     mp_family_yn VARCHAR2(1) DEFAULT 'N' NOT NULL, -- ê°€ì¡± í¬í•¨ ì—¬ë¶€
-     mp_hair_yn   VARCHAR2(1) DEFAULT 'N' NOT NULL, -- í—¤ì–´ ì—¬ë¶€
+     mp_acc_yn    VARCHAR2(1) DEFAULT 'N' NOT NULL, -- ¾Ç¼¼»ç¸® ¿©ºÎ
+     mp_family_yn VARCHAR2(1) DEFAULT 'N' NOT NULL, -- °¡Á· Æ÷ÇÔ ¿©ºÎ
+     mp_hair_yn   VARCHAR2(1) DEFAULT 'N' NOT NULL, -- Çì¾î ¿©ºÎ
      mp_image     VARCHAR2(300),
      regdate      DATE DEFAULT SYSDATE NOT NULL, 
      updatedate   DATE DEFAULT SYSDATE NOT NULL, 
@@ -301,13 +301,13 @@ CREATE TABLE makeup_product
 
 
 
--- ì „ì²´ ì—…ì²´ 
--- ì „ì²´ ì—…ì²´(ìŠ¤íŠœë””ì˜¤) 
+-- ÀüÃ¼ ¾÷Ã¼ 
+-- ÀüÃ¼ ¾÷Ã¼(½ºÆ©µğ¿À) 
 CREATE TABLE studio_company 
   ( 
      sc_no         NUMBER(10) NOT NULL, 
      sc_nm         VARCHAR2(30) NOT NULL, 
-     sc_company_no NUMBER(20) NOT NULL,   -- ì‚¬ì—…ìë²ˆí˜¸
+     sc_company_no NUMBER(20) NOT NULL,   -- »ç¾÷ÀÚ¹øÈ£
      sc_main_nm    VARCHAR2(30) NOT NULL, 
      sc_addr       VARCHAR2(600) NOT NULL, 
      sc_main_image VARCHAR2(300) NOT NULL, 
@@ -323,7 +323,7 @@ CREATE TABLE studio_company
      PRIMARY KEY (sc_no) 
   ); 
 
--- ì „ì²´ ì—…ì²´(ë“œë ˆìŠ¤) 
+-- ÀüÃ¼ ¾÷Ã¼(µå·¹½º) 
 CREATE TABLE dress_company 
   ( 
      dc_no         NUMBER(10) NOT NULL, 
@@ -344,7 +344,7 @@ CREATE TABLE dress_company
      PRIMARY KEY (dc_no) 
   ); 
 
--- ì „ì²´ ì—…ì²´(ë©”ì´í¬ì—…) 
+-- ÀüÃ¼ ¾÷Ã¼(¸ŞÀÌÅ©¾÷) 
 CREATE TABLE makeup_company 
   ( 
      mc_no         NUMBER(10) NOT NULL, 
@@ -367,7 +367,7 @@ CREATE TABLE makeup_company
 
 
 
--- ê´€ì‹¬ ìƒí’ˆ(ìŠ¤íŠœë””ì˜¤) 
+-- °ü½É »óÇ°(½ºÆ©µğ¿À) 
 CREATE TABLE studio_interest_product 
   ( 
      sip_no     NUMBER(10) NOT NULL, 
@@ -379,7 +379,7 @@ CREATE TABLE studio_interest_product
      PRIMARY KEY (sip_no, user_no, sp_no, sc_no) 
   ); 
 
--- ê´€ì‹¬ ìƒí’ˆ(ë“œë ˆìŠ¤) 
+-- °ü½É »óÇ°(µå·¹½º) 
 CREATE TABLE dress_interest_product 
   ( 
      dip_no     NUMBER(10) NOT NULL, 
@@ -391,7 +391,7 @@ CREATE TABLE dress_interest_product
      PRIMARY KEY (dip_no, user_no, dp_no, dc_no) 
   ); 
 
--- ê´€ì‹¬ ìƒí’ˆ(ë©”ì´í¬ì—…) 
+-- °ü½É »óÇ°(¸ŞÀÌÅ©¾÷) 
 CREATE TABLE makeup_interest_product 
   ( 
      mip_no     NUMBER(10) NOT NULL, 
@@ -405,8 +405,8 @@ CREATE TABLE makeup_interest_product
 
 
 
--- ê´€ì‹¬ ì—…ì²´ 
--- ê´€ì‹¬ ì—…ì²´(ìŠ¤íŠœë””ì˜¤) 
+-- °ü½É ¾÷Ã¼ 
+-- °ü½É ¾÷Ã¼(½ºÆ©µğ¿À) 
 CREATE TABLE studio_interest_company 
   ( 
      sic_no     NUMBER(10) NOT NULL, 
@@ -417,7 +417,7 @@ CREATE TABLE studio_interest_company
      PRIMARY KEY (sic_no, user_no, sc_no) 
   ); 
 
--- ê´€ì‹­ ì—…ì²´(ë“œë ˆìŠ¤) 
+-- °ü½Ê ¾÷Ã¼(µå·¹½º) 
 CREATE TABLE dress_interest_company 
   ( 
      dic_no     NUMBER(10) NOT NULL, 
@@ -428,7 +428,7 @@ CREATE TABLE dress_interest_company
      PRIMARY KEY (dic_no, user_no, dc_no) 
   ); 
 
--- ê´€ì‹¬ ì—…ì²´(ë©”ì´í¬ì—…) 
+-- °ü½É ¾÷Ã¼(¸ŞÀÌÅ©¾÷) 
 CREATE TABLE makeup_interest_company 
   ( 
      mic_no     NUMBER(10) NOT NULL, 
@@ -441,8 +441,8 @@ CREATE TABLE makeup_interest_company
 
 
 
--- ê³ ê° ì—­ê²½ë§¤ ì‹ ì²­ 
--- ê³ ê° ì—­ê²½ë§¤ ì‹ ì²­(ìŠ¤íŠœë””ì˜¤) 
+-- °í°´ ¿ª°æ¸Å ½ÅÃ» 
+-- °í°´ ¿ª°æ¸Å ½ÅÃ»(½ºÆ©µğ¿À) 
 CREATE TABLE studio_auction_apply 
   ( 
      saa_no     NUMBER(10) NOT NULL, 
@@ -451,13 +451,13 @@ CREATE TABLE studio_auction_apply
      saa_date   DATE NOT NULL,
      saa_deadline DATE NOT NULL,
      saa_memo   VARCHAR2(3000),
-     saa_stat   VARCHAR2(20) DEFAULT 'ì…ì°°ì¤‘' NOT NULL,
+     saa_stat   VARCHAR2(20) DEFAULT 'ÀÔÂûÁß' NOT NULL,
      regdate    DATE DEFAULT SYSDATE NOT NULL, 
      updatedate DATE DEFAULT SYSDATE NOT NULL, 
      PRIMARY KEY (saa_no, user_no) 
   ); 
 
--- ê³ ê° ì—­ê²½ë§¤ ì‹ ì²­(ë“œë ˆìŠ¤) 
+-- °í°´ ¿ª°æ¸Å ½ÅÃ»(µå·¹½º) 
 CREATE TABLE dress_auction_apply 
   ( 
      daa_no     NUMBER(10) NOT NULL, 
@@ -466,13 +466,13 @@ CREATE TABLE dress_auction_apply
      daa_date   DATE NOT NULL,
      daa_deadline DATE NOT NULL,
      daa_memo   VARCHAR2(3000),
-     daa_stat   VARCHAR2(20) DEFAULT 'ì…ì°°ì¤‘' NOT NULL,
+     daa_stat   VARCHAR2(20) DEFAULT 'ÀÔÂûÁß' NOT NULL,
      regdate    DATE DEFAULT SYSDATE NOT NULL, 
      updatedate DATE NOT NULL, 
      PRIMARY KEY (daa_no, user_no) 
   ); 
 
--- ê³ ê° ì—­ê²½ë§¤ ì‹ ì²­(ë©”ì´í¬ì—…) 
+-- °í°´ ¿ª°æ¸Å ½ÅÃ»(¸ŞÀÌÅ©¾÷) 
 CREATE TABLE makeup_auction_apply 
   ( 
      maa_no     NUMBER(10) NOT NULL, 
@@ -481,7 +481,7 @@ CREATE TABLE makeup_auction_apply
      maa_date   DATE NOT NULL,
      maa_deadline DATE NOT NULL,
      maa_memo   VARCHAR2(3000),
-     maa_stat   VARCHAR2(20) DEFAULT 'ì…ì°°ì¤‘' NOT NULL,
+     maa_stat   VARCHAR2(20) DEFAULT 'ÀÔÂûÁß' NOT NULL,
      regdate    DATE DEFAULT SYSDATE NOT NULL, 
      updatedate DATE DEFAULT SYSDATE NOT NULL, 
      PRIMARY KEY (maa_no, user_no) 
@@ -489,8 +489,8 @@ CREATE TABLE makeup_auction_apply
 
 
 
--- ê³ ê° ì—­ê²½ë§¤ì— ëŒ€í•œ ì…ì°° ì—…ì²´ 
--- ê³ ê° ì—­ê²½ë§¤ì— ëŒ€í•œ ì…ì°° ì—…ì²´(ìŠ¤íŠœë””ì˜¤) 
+-- °í°´ ¿ª°æ¸Å¿¡ ´ëÇÑ ÀÔÂû ¾÷Ã¼ 
+-- °í°´ ¿ª°æ¸Å¿¡ ´ëÇÑ ÀÔÂû ¾÷Ã¼(½ºÆ©µğ¿À) 
 CREATE TABLE studio_bid 
   ( 
      sb_no      NUMBER(10) NOT NULL, 
@@ -502,7 +502,7 @@ CREATE TABLE studio_bid
      PRIMARY KEY (sb_no, saa_no, user_no, sc_no) 
   ); 
 
--- ê³ ê° ì—­ê²½ë§¤ì— ëŒ€í•œ ì…ì°° ì—…ì²´(ë“œë ˆìŠ¤) 
+-- °í°´ ¿ª°æ¸Å¿¡ ´ëÇÑ ÀÔÂû ¾÷Ã¼(µå·¹½º) 
 CREATE TABLE dress_bid 
   ( 
      db_no      NUMBER(10) NOT NULL, 
@@ -514,7 +514,7 @@ CREATE TABLE dress_bid
      PRIMARY KEY (db_no, user_no, daa_no, dc_no) 
   ); 
 
--- ê³ ê° ì—­ê²½ë§¤ì— ëŒ€í•œ ì…ì°° ì—…ì²´(ë©”ì´í¬ì—…) 
+-- °í°´ ¿ª°æ¸Å¿¡ ´ëÇÑ ÀÔÂû ¾÷Ã¼(¸ŞÀÌÅ©¾÷) 
 CREATE TABLE makeup_bid 
   ( 
      mb_no      NUMBER(10) NOT NULL, 
@@ -528,8 +528,8 @@ CREATE TABLE makeup_bid
 
 
 
--- ì…ì°° ì—…ì²´ì˜ ì…ì°° ìƒí’ˆ ëª©ë¡ 
--- ì…ì°° ì—…ì²´ì˜ ì…ì°° ìƒí’ˆ ëª©ë¡(ìŠ¤íŠœë””ì˜¤) 
+-- ÀÔÂû ¾÷Ã¼ÀÇ ÀÔÂû »óÇ° ¸ñ·Ï 
+-- ÀÔÂû ¾÷Ã¼ÀÇ ÀÔÂû »óÇ° ¸ñ·Ï(½ºÆ©µğ¿À) 
 CREATE TABLE studio_bid_product_list 
   ( 
      sbpl_no        NUMBER(10) NOT NULL, 
@@ -544,7 +544,7 @@ CREATE TABLE studio_bid_product_list
      updatedate     DATE DEFAULT SYSDATE NOT NULL 
   ); 
 
--- ì…ì°° ì—…ì²´ì˜ ì…ì°° ìƒí’ˆ ëª©ë¡(ë“œë ˆìŠ¤) 
+-- ÀÔÂû ¾÷Ã¼ÀÇ ÀÔÂû »óÇ° ¸ñ·Ï(µå·¹½º) 
 CREATE TABLE dress_bid_product_list 
   ( 
      dbpl_no        NUMBER(10) NOT NULL, 
@@ -559,7 +559,7 @@ CREATE TABLE dress_bid_product_list
      updatedate     DATE DEFAULT SYSDATE NOT NULL 
   ); 
 
--- ì…ì°° ì—…ì²´ì˜ ì…ì°° ìƒí’ˆ ëª©ë¡(ë©”ì´í¬ì—…) 
+-- ÀÔÂû ¾÷Ã¼ÀÇ ÀÔÂû »óÇ° ¸ñ·Ï(¸ŞÀÌÅ©¾÷) 
 CREATE TABLE makeup_bid_product_list 
   ( 
      mbpl_no        NUMBER(10) NOT NULL, 
@@ -576,8 +576,8 @@ CREATE TABLE makeup_bid_product_list
 
 
 
--- ê²Œì‹œíŒ & ê²Œì‹œë¬¼ 
--- ê²Œì‹œíŒ 
+-- °Ô½ÃÆÇ & °Ô½Ã¹° 
+-- °Ô½ÃÆÇ 
 CREATE TABLE board 
   ( 
      board_no   NUMBER(10) NOT NULL, 
@@ -587,13 +587,13 @@ CREATE TABLE board
      PRIMARY KEY (board_no) 
   ); 
 
--- ê²Œì‹œë¬¼ 
+-- °Ô½Ã¹° 
 CREATE TABLE article 
   ( 
      article_no      NUMBER(10) NOT NULL, 
      board_no        NUMBER(10) NOT NULL, 
      user_no         NUMBER(10) NOT NULL, 
-     article_head    VARCHAR2(50), -- kind ìŠ¤ë“œë©” ì¢…ë¥˜ nullí—ˆìš©ìœ¼ë¡œ ë°”ë€Œì–´ì•¼ ìª½ì§€í•¨, ê³µì§€ì‚¬í•­ ê°€ëŠ¥
+     article_head    VARCHAR2(50), -- kind ½ºµå¸Ş Á¾·ù nullÇã¿ëÀ¸·Î ¹Ù²î¾î¾ß ÂÊÁöÇÔ, °øÁö»çÇ× °¡´É
      article_title   VARCHAR2(100) NOT NULL, 
      article_content VARCHAR2(3000) NOT NULL, 
      hitcount        NUMBER(20) DEFAULT 0, 
@@ -614,8 +614,8 @@ create table reply(
 );
 
 
--- íšŒì› 
--- ì¼ë°˜ì‚¬ìš©ì 
+-- È¸¿ø 
+-- ÀÏ¹İ»ç¿ëÀÚ 
 CREATE TABLE users 
   ( 
      user_no       NUMBER(10) NOT NULL, 
@@ -633,7 +633,7 @@ CREATE TABLE users
      PRIMARY KEY (user_no) 
   );
   
--- ì¹´ì¹´ì˜¤ ì¼ë°˜ ì‚¬ìš©ì
+-- Ä«Ä«¿À ÀÏ¹İ »ç¿ëÀÚ
 CREATE TABLE kakao_users
   (
     id              NUMBER(10) NOT NULL,
@@ -645,7 +645,7 @@ CREATE TABLE kakao_users
     PRIMARY KEY (id, user_no)
   );
 
--- ê´€ë¦¬ì 
+-- °ü¸®ÀÚ 
 CREATE TABLE ADMIN 
   ( 
      admin_no    NUMBER(10) NOT NULL, 
@@ -659,8 +659,8 @@ CREATE TABLE ADMIN
 
 
 
--- í¬ì¸íŠ¸ ê´€ë ¨ 
--- í¬ì¸íŠ¸ìƒì  ìƒí’ˆ 
+-- Æ÷ÀÎÆ® °ü·Ã 
+-- Æ÷ÀÎÆ®»óÁ¡ »óÇ° 
 CREATE TABLE point_product 
   ( 
      pp_no      NUMBER(10) NOT NULL, 
@@ -672,7 +672,7 @@ CREATE TABLE point_product
      PRIMARY KEY (pp_no) 
   ); 
 
--- í¬ì¸íŠ¸ ì‚¬ìš©ë‚´ì—­ 
+-- Æ÷ÀÎÆ® »ç¿ë³»¿ª 
 CREATE TABLE point_use_hist 
   ( 
      pah_no     NUMBER(10) NOT NULL, 
@@ -683,7 +683,7 @@ CREATE TABLE point_use_hist
      PRIMARY KEY (pah_no, user_no, pp_no) 
   ); 
 
--- í¬ì¸íŠ¸ ì ë¦½ ë‚´ì—­ 
+-- Æ÷ÀÎÆ® Àû¸³ ³»¿ª 
 CREATE TABLE point_add_hist 
   ( 
      pah_no      NUMBER(10) NOT NULL, 
@@ -694,7 +694,7 @@ CREATE TABLE point_add_hist
      PRIMARY KEY (pah_no, user_no) 
   ); 
 
--- ì§ˆë¬¸ ë‚´ì—­ 
+-- Áú¹® ³»¿ª 
 CREATE TABLE question_hist 
   ( 
      qh_no      NUMBER(10) NOT NULL, 
@@ -707,8 +707,8 @@ CREATE TABLE question_hist
 
 
 
--- ìª½ì§€ ì •ë³´ 
--- ìŠ¤íŠœë””ì˜¤ì— ê´€í•œ ìª½ì§€ 
+-- ÂÊÁö Á¤º¸ 
+-- ½ºÆ©µğ¿À¿¡ °üÇÑ ÂÊÁö 
 CREATE TABLE studio_cvst_list 
   ( 
      mcl_no      NUMBER(10) NOT NULL, 
@@ -721,7 +721,7 @@ CREATE TABLE studio_cvst_list
      PRIMARY KEY (mcl_no, user_no, sc_no) 
   ); 
 
--- ë“œë ˆìŠ¤ì— ê´€í•œ ìª½ì§€ ì •ë³´ 
+-- µå·¹½º¿¡ °üÇÑ ÂÊÁö Á¤º¸ 
 CREATE TABLE dress_cvst_list 
   ( 
      dcl_no      NUMBER(10) NOT NULL, 
@@ -734,7 +734,7 @@ CREATE TABLE dress_cvst_list
      PRIMARY KEY (dcl_no, user_no, dc_no) 
   ); 
 
--- ë©”ì´í¬ì—…ì— ê´€í•œ ìª½ì§€ 
+-- ¸ŞÀÌÅ©¾÷¿¡ °üÇÑ ÂÊÁö 
 CREATE TABLE makeup_cvst_list 
   ( 
      mcl_no      NUMBER(10) NOT NULL, 
@@ -747,32 +747,39 @@ CREATE TABLE makeup_cvst_list
      PRIMARY KEY (mcl_no, user_no, mc_no) 
   ); 
 
---í›„ê¸° ì •ë³´
---í›„ê¸° ì •ë³´(ë“œë ˆìŠ¤)
+--ÈÄ±â Á¤º¸
+--ÈÄ±â Á¤º¸(µå·¹½º)
 CREATE TABLE dress_review 
   (
     dr_no number(10) NOT NULL,
     dc_no number(10) NOT NULL,
+    user_no number(10) NOT NULL,
+    dr_subject varchar2(1000),
     dr_content varchar2(3000) NOT NULL,
     dr_point number(3, 2) NOT NULL,
     regdate date DEFAULT sysdate NOT NULL,
-    updatedate date DEFAULT sysdate NOT NULL
+    updatedate date DEFAULT sysdate NOT NULL,
+    PRIMARY KEY (dr_no, dc_no, user_no)
   );
---í›„ê¸° ì •ë³´(ìŠ¤íŠœë””ì˜¤)
+--ÈÄ±â Á¤º¸(½ºÆ©µğ¿À)
 CREATE TABLE studio_review 
   (
-    sr_no number(10) NOT NULL,
-    sc_no number(10) NOT NULL,
+    sr_no   number(10) NOT NULL,
+    sc_no   number(10) NOT NULL,
+    user_no number(10) NOT NULL,
+    sr_subject varchar2(1000),
     sr_content varchar2(3000) NOT NULL,
     sr_point number(3, 2) NOT NULL,
     regdate date DEFAULT sysdate NOT NULL,
     updatedate date DEFAULT sysdate NOT NULL
   );
---í›„ê¸° ì •ë³´(ë©”ì´í¬ì—…)
+--ÈÄ±â Á¤º¸(¸ŞÀÌÅ©¾÷)
 CREATE TABLE makeup_review 
   (
     mr_no number(10) NOT NULL,
     mc_no number(10) NOT NULL,
+    user_no number(10) NOT NULL,
+    mr_subject varchar2(1000),
     mr_content varchar2(3000) NOT NULL,
     mr_point number(3, 2) NOT NULL,
     regdate date DEFAULT sysdate NOT NULL,
@@ -866,13 +873,13 @@ ALTER TABLE dress_cvst_list
   CONSTRAINT dcl_dp FOREIGN KEY (dp_no, dc_no) REFERENCES dress_product (dp_no, 
   dc_no));
   
-ALTER TABLE dress_review ADD PRIMARY KEY (dr_no, dc_no);
-ALTER TABLE studio_review ADD PRIMARY KEY (sr_no, sc_no);
-ALTER TABLE makeup_review ADD PRIMARY KEY (mr_no, mc_no);
-
 ALTER TABLE dress_review ADD CONSTRAINT dr_dc_fk FOREIGN KEY (dc_no) REFERENCES dress_company (dc_no);
 ALTER TABLE studio_review ADD CONSTRAINT sr_sc_fk FOREIGN KEY (sc_no) REFERENCES studio_company (sc_no);
 ALTER TABLE makeup_review ADD CONSTRAINT mr_mc_fk FOREIGN KEY (mc_no) REFERENCES makeup_company (mc_no);
+
+ALTER TABLE dress_review ADD CONSTRAINT dr_user_fk FOREIGN KEY (user_no) REFERENCES users (user_no);
+ALTER TABLE studio_review ADD CONSTRAINT sr_user_fk FOREIGN KEY (user_no) REFERENCES users (user_no);
+ALTER TABLE makeup_review ADD CONSTRAINT mr_user_fk FOREIGN KEY (user_no) REFERENCES users (user_no);
 
 ALTER TABLE article 
   ADD CONSTRAINT article_board_fk FOREIGN KEY (board_no) REFERENCES board ( 
@@ -893,7 +900,7 @@ INSERT INTO ADMIN
              admin_pw) 
 VALUES      (admin_seq.NEXTVAL, 
              'admin@undefined.com', 
-             'ê´€ë¦¬ì1', 
+             '°ü¸®ÀÚ1', 
              'q1w2e3r4'); 
 
 INSERT INTO ADMIN 
@@ -903,7 +910,7 @@ INSERT INTO ADMIN
              admin_pw) 
 VALUES      (admin_seq.NEXTVAL, 
              'admin2@undefined.com', 
-             'ê´€ë¦¬ì2', 
+             '°ü¸®ÀÚ2', 
              '1234'); 
 
 INSERT INTO ADMIN 
@@ -913,7 +920,7 @@ INSERT INTO ADMIN
              admin_pw) 
 VALUES      (admin_seq.NEXTVAL, 
              'admin3@undefined.com', 
-             'ê´€ë¦¬ì3', 
+             '°ü¸®ÀÚ3', 
              '1q2w3e4r'); 
 
 SELECT * 
@@ -928,13 +935,13 @@ INSERT INTO board
             (board_no, 
              board_nm) 
 VALUES      (board_seq.NEXTVAL, 
-             'ê³µì§€ì‚¬í•­'); 
+             '°øÁö»çÇ×'); 
 
 INSERT INTO board 
             (board_no, 
              board_nm) 
 VALUES      (board_seq.NEXTVAL, 
-             'ììœ ê²Œì‹œíŒ'); 
+             'ÀÚÀ¯°Ô½ÃÆÇ'); 
 
 SELECT * 
 FROM   board; 
