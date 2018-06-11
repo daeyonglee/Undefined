@@ -41,8 +41,8 @@ public class RecommendServiceImpl implements RecommendService {
 			if (params.containsKey("studioOption")) {
 				Map<String, Object> studioParams = new HashMap<String, Object>();
 				studioParams.put("location", location);
-				studioParams.put("minCost", minCost * 9 / 24);
-				studioParams.put("maxCost", maxCost * 9 / 24);
+				studioParams.put("minCost", minCost);
+				studioParams.put("maxCost", maxCost);
 				studioParams.put("studioOption", params.get("studioOption"));
 
 				List<Map<String, Object>> studioList = dao.recommendStudio(studioParams);
@@ -54,8 +54,8 @@ public class RecommendServiceImpl implements RecommendService {
 			if (params.containsKey("dressOption")) {
 				Map<String, Object> dressParams = new HashMap<String, Object>();
 				dressParams.put("location", location);
-				dressParams.put("minCost", minCost * 10 / 24);
-				dressParams.put("maxCost", maxCost * 10 / 24);
+				dressParams.put("minCost", minCost);
+				dressParams.put("maxCost", maxCost);
 				dressParams.put("dressOption", params.get("dressOption"));
 
 				List<Map<String, Object>> dressList = dao.recommendDress(dressParams);
@@ -67,8 +67,8 @@ public class RecommendServiceImpl implements RecommendService {
 			if (params.containsKey("makeupOption")) {
 				Map<String, Object> makeupParams = new HashMap<String, Object>();
 				makeupParams.put("location", location);
-				makeupParams.put("minCost", minCost * 5 / 24);
-				makeupParams.put("maxCost", maxCost * 5 / 24);
+				makeupParams.put("minCost", minCost);
+				makeupParams.put("maxCost", maxCost);
 				makeupParams.put("makeupOption", params.get("makeupOption"));
 
 				List<Map<String, Object>> makeupList = dao.recommendMakeup(makeupParams);
@@ -112,9 +112,37 @@ public class RecommendServiceImpl implements RecommendService {
 		return dao.getMakeup(mp_no);
 	}
 
+	/** 스튜디오 상품을 관심상품에 추가 */
 	@Override
-	public void addCart(Map<String, Object> cart) {
-		dao.createCart(cart);
+	public void addSToCart(Map<String, Object> params) {
+		dao.addSToCart(params);
+	}
+
+	/** 드레스 상품을 관심상품에 추가 */
+	@Override
+	public void addDToCart(Map<String, Object> params) {
+		dao.addDToCart(params);
+	}
+
+	/** 메이크업 상품을 관심상품에 추가 */
+	@Override
+	public void addMToCart(Map<String, Object> params) {
+		dao.addMToCart(params);
+	}
+
+	@Override
+	public Map<String, Object> studioDetail(int sp_no) {
+		return dao.readStudio(sp_no);
+	}
+
+	@Override
+	public Map<String, Object> dressDetail(int dp_no) {
+		return dao.readDress(dp_no);
+	}
+
+	@Override
+	public Map<String, Object> makeupDetail(int mp_no) {
+		return dao.readMakeup(mp_no);
 	}
 
 }

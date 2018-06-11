@@ -7,46 +7,29 @@
 <%@include file="../include/top.jsp"%>
 
 <style>
-.cart {
-   background-color: #ffffdd;
-}
+/* .cart {
+  background-color: #ffffdd;
+} */
 
 #itemMenu {
-   background-color: white;
+  background-color: white;
 }
 
 .topFix {
-<<<<<<< HEAD
-	position: fixed;
-	top: 0px;
-	z-index: 999;
-	cursor:
+  position: fixed;
+  top: 0px;
+  z-index: 999;
+  cursor:
 }
 
-.bottomFix {
-	position: fixed;
-	bottom: 0px;
-	z-index: 999;
-=======
-   position: fixed;
-   top: 0px;
-   z-index: 999;
-   cursor:
-}
-
-.bottomFix {
-   position: fixed;
-   bottom: 0px;
-   z-index: 999;
->>>>>>> dev
-}
+/* .bottomFix {
+  position: fixed;
+  bottom: 0px;
+  z-index: 999;
+} */
 
 #studioCart #dressCart #makeupCart {
-   border-color: #eeeeee;
-}
-
-.addCartBtn{
-    float: right;
+  border-color: #eeeeee;
 }
 </style>
 </head>
@@ -68,408 +51,373 @@
 
     <div class="tab-content">
       <div id="studioTab" class="tab-pane fade in active">
-          <c:forEach var="studio" items="${studioList}">
-      <%-- <ul class="list-inline">
-            <li class="studioItem">
-              <div class="studioNo" hidden="hidden">${studio.SP_NO}</div>
-              <div>${studio.SP_IMAGE}</div>
-              <div>${studio.SP_NM}</div>
-              <div>${studio.SC_NM}</div>
-              <div>${studio.SP_PRICE}원</div>
-            </li>
-        </ul> --%>
-        <div class="proerty-th">
-          <div class="col-sm-6 col-md-3 p0">
-            <div class="box-two proerty-item">
-              <div class="item-thumb">
-                  <a href=""><img src="/resources/assets/img/demo/property-4.jpg"></a>
-        
-              </div>
-              <div class="item-entry overflow">
-                  <h5><a href="property-1.html">${studio.SP_NM} </a></h5>
+        <c:forEach var="studio" items="${studioList}">
+          <div class="proerty-th studioItem">
+            <div class="col-sm-6 col-md-3 p0">
+              <div class="box-two proerty-item">
+                <div class="item-thumb">
+                  <a href="javascript:void(0);" onclick="showDetail('studio', ${studio.SP_NO})"><img src="/resources/assets/img/demo/property-4.jpg"></a>
+                </div>
+                <div class="studioNo" hidden="hidden">${studio.SP_NO}</div>
+                <div class="item-entry overflow">
+                  <h5><a href="javascript:void(0);" onclick="showDetail('studio', ${studio.SP_NO})">${studio.SP_NM} </a></h5>
                   <div class="dot-hr"></div>
                   <span class="pull-left"><b>${studio.SC_NM}</b> </span>
                   <span class="proerty-price pull-right">${studio.SP_PRICE}원</span>
+                </div>
+                <div>
+                  <button name="sAddBtn" class="addCartBtn">
+                    <i class="fa fa-cart-arrow-down"></i>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-          </c:forEach>
+        </c:forEach>
       </div>
-      <div id="dressTab" class="tab-pane fade">
-        <ul class="list-inline">
-          <c:forEach var="dress" items="${dressList}">
-            <li class="dressItem">
-              <div class="dressNo" hidden="hidden">${dress.DP_NO}</div>
-              <div>${dress.DP_IMAGE}</div>
-              <div>${dress.DP_NM}</div>
-              <div>${dress.DC_NM}</div>
-              <div>${dress.DP_PRICE}원</div>
-            </li>
-          </c:forEach>
-        </ul>
-      </div>
-      <div id="makeupTab" class="tab-pane fade">
-        <ul class="list-inline">
-          <c:forEach var="makeup" items="${makeupList}">
-            <li class="makeupItem">
-              <div class="makeupNo" hidden="hidden">${makeup.MP_NO}</div>
-              <div>${makeup.MP_IMAGE}</div>
-              <div>${makeup.MP_NM}</div>
-              <div>${makeup.MC_NM}</div>
-              <div>${makeup.MP_PRICE}원</div>
-            </li>
-          </c:forEach>
-        </ul>
-      </div>
-    </div>
-    <div id="cart" class="cart">
-      <ul id="cartMenu" class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#studioCartTab">스튜디오</a></li>
-        <li><a data-toggle="tab" href="#dressCartTab">드레스</a></li>
-        <li><a data-toggle="tab" href="#makeupCartTab">메이크업</a></li>
-      </ul>
       
-      <div class="tab-content">
-        <div id="studioCartTab" class="tab-pane fade in active">
-          <ul class="list-inline" id="studioCart">
-          
-          </ul>
+      <div id="dressTab" class="tab-pane fade">
+        <c:forEach var="dress" items="${dressList}">
+          <div class="proerty-th dressItem">
+            <div class="col-sm-6 col-md-3 p0">
+              <div class="box-two proerty-item">
+                <div class="item-thumb">
+                  <a href="javascript:void(0);" onclick="showDetail('dress', ${dress.DP_NO})"><img src="/resources/assets/img/demo/property-4.jpg"></a>
+                </div>
+                <div class="dressNo" hidden="hidden">${dress.DP_NO}</div>
+                <div class="item-entry overflow">
+                  <h5><a href="javascript:void(0);" onclick="showDetail('dress', ${dress.DP_NO})">${dress.DP_NM} </a></h5>
+                  <div class="dot-hr"></div>
+                  <span class="pull-left"><b>${dress.DC_NM}</b> </span>
+                  <span class="proerty-price pull-right">${dress.DP_PRICE}원</span>
+                </div>
+                <div>
+                  <button name="dAddBtn" class="addCartBtn">
+                    <i class="fa fa-cart-arrow-down"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </c:forEach>
+      </div>
+      
+      <div id="makeupTab" class="tab-pane fade">
+        <c:forEach var="makeup" items="${makeupList}">
+          <div class="proerty-th makeupItem">
+            <div class="col-sm-6 col-md-3 p0">
+              <div class="box-two proerty-item">
+                <div class="item-thumb">
+                  <a href="javascript:void(0);" onclick="showDetail('makeup', ${makeup.MP_NO})"><img src="/resources/assets/img/demo/property-4.jpg"></a>
+                </div>
+                <div class="makeupNo" hidden="hidden">${makeup.MP_NO}</div>
+                <div class="item-entry overflow">
+                  <h5><a href="javascript:void(0);" onclick="showDetail('makeup', ${makeup.MP_NO})">${makeup.MP_NM} </a></h5>
+                  <div class="dot-hr"></div>
+                  <span class="pull-left"><b>${makeup.MC_NM}</b> </span>
+                  <span class="proerty-price pull-right">${makeup.MP_PRICE}원</span>
+                </div>
+                <div>
+                  <button name="mAddBtn" class="addCartBtn">
+                    <i class="fa fa-cart-arrow-down"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </c:forEach>
+      </div>
+      
+    <!-- div tab-content close -->
+    </div>
+    <!-- addCart Modal -->
+    <div class="modal fade" id="addStatus" role="dialog">
+      <div class="modal-dialog">
+      
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">관심상품 등록</h4>
+          </div>
+          <div class="modal-body">
+            <p>상품이 등록되었습니다.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
         </div>
-        <div id="dressCartTab" class="tab-pane fade">
-          <ul class="list-inline" id="dressCart">
-          
-          </ul>
-        </div>   
-        <div id="makeupCartTab" class="tab-pane fade">
-          <ul class="list-inline" id="makeupCart">
-          
-          </ul>
-        </div>   
-        <button id="addCartBtn" class="addCartBtn">관심상품에 추가</button>
       </div>
     </div>
+    
+    <!-- itemDetail Modal -->
+    <div class="modal fade" id="showDetail" role="dialog">
+      <div class="modal-dialog">
+      
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">상세정보</h4>
+          </div>
+          <div class="modal-body">
+            <p>상품이 등록되었습니다.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <!-- div container close -->
   </div>
   <script>
-<<<<<<< HEAD
-  	$(document).ready(function() {
-  		topFix();
-  		bottomFix();
-  		addItem();
-  		removeItem();
-  		addCart();
-  	});
-  	
-  	/** 스튜디오, 드레스, 메이크업 네비바가 브라우저 상단에 고정되는 스크롤 이벤트*/
-  	function topFix(){
-  		var itemMenuOffset = $('#itemMenu').offset();
-  		$(window).on("scroll", function() {
-  			if ($(document).scrollTop() > itemMenuOffset.top) {
-  				$('#itemMenu').addClass('topFix');
-  			} else {
-  				$('#itemMenu').removeClass('topFix');
-  			}
-  		});
-  	}
-  	
-  	/** 장바구니가 브라우저 하단에 고정되는 스크롤 이벤트 */
-  	function bottomFix(){
-  		var containerOffset = $(".container").offset();
-  		$(window).on("scroll", function() {
-  			if($(document).scrollTop() + $(window).height() <= $("#cart").offset().top + parseInt($("#cart").css("height"))){
-    			$("#cart").addClass('bottomFix');
-    			$("#cart").css("width", $(".container").css("width"));
-  			} else {
-  				$("#cart").removeClass("bottomFix");
-  			}
-  		});
-  	}
-  	
-  	/** 각 상품을 장바구니 리스트에 추가하는 클릭 이벤트 */
-  	function addItem(){
-  		$(".studioItem").on("click", function(){
-  			var sp_no = $(this).find(".studioNo").text().trim();
-  			var param = {
-  					sp_no : sp_no
-  			};
-  			$.ajax({
-  				url: "/recommend/addItem",
-  				type: "post",
-  				dataType: "json",
-  				contentType: "application/json; charset=UTF-8",
-  				data: JSON.stringify(param),
-  				success: function(studio){
-  					$("#studioCart").append(
-  							"<li class='cartItem'>" +
-  							"<div class='itemNo' hidden='hidden'>" + studio.sp_no + "</div>" + 
-  							"<div>" + studio.sp_image + "</div>" + 
-  							"</li>"
-  							);
-  				}
-  			});
-  		});
-  		
-  		$(".dressItem").on("click", function(){
-  			var dp_no = $(this).find(".dressNo").text().trim();
-  			var param = {
-  					dp_no : dp_no
-  			};
-  			$.ajax({
-  				url: "/recommend/addItem",
-  				type: "post",
-  				dataType: "json",
-  				contentType: "application/json; charset=UTF-8",
-  				data: JSON.stringify(param),
-  				success: function(dress){
-  					$("#dressCart").append(
-  							"<li class='cartItem'>" +
-  							"<div class='itemNo' hidden='hidden'>" + dress.dp_no + "</div>" + 
-  							"<div>" + dress.dp_image + "</div>" + 
-  							"</li>"
-  							);
-  				}
-  			});
-  		});
-  		
-  		$(".makeupItem").on("click", function(){
-  			var mp_no = $(this).find(".makeupNo").text().trim();
-  			var param = {
-  					mp_no : mp_no
-  			};
-  			$.ajax({
-  				url: "/recommend/addItem",
-  				type: "post",
-  				dataType: "json",
-  				contentType: "application/json; charset=UTF-8",
-  				data: JSON.stringify(param),
-  				success: function(makeup){
-  					$("#makeupCart").append(
-  							"<li class='cartItem'>" +
-  							"<div class='itemNo' hidden='hidden'>" + makeup.mp_no + "</div>" + 
-  							"<div>" + makeup.mp_image + "</div>" + 
-  							"</li>"
-  							);
-  				}
-  			});
-  		});
-  	}
-  	
-  	/** 장바구니의 아이템을 클릭하면 삭제되는 클릭 이벤트 */
-  	function removeItem(){
-  		$(".cart").on("click", function(){
-  			$(this).find(".cartItem").on("click", function(){
-  				$(this).remove();
-  			});
-  		})
-  	}
-  	
-  	function addCart(){
-  		$("#addCartBtn").on("click", function(){
-  			var sp_no = $("#studioCart").find(".itemNo");
-  			var dp_no = $("#dressCart").find(".itemNo");
-  			var mp_no = $("#makeupCart").find(".itemNo");
-  			
-  			console.log(sp_no);
-  			console.log(dp_no);
-  			console.log(mp_no);
-  			
-  			var sp_list = [];
-  			var dp_list = [];
-  			var mp_list = [];
-  			
-  			sp_no.each(function(){
-  				sp_list.push($(this).text().trim());
-  			})
-  			
-  			dp_no.each(function(){
-  				dp_list.push($(this).text().trim());
-  			})
-  			
-  			mp_no.each(function(){
-  				mp_list.push($(this).text().trim());
-  			})
-  			
-  			var params = {
-  					sp_no : sp_list,
-  					dp_no : dp_list,
-  					mp_no : mp_list
-  			}
-  			
-  			console.log(params);
-  			
-			$.ajax({
-  				url: "/recommend/addCart",
-  				type: "post",
-  				dataType: "json",
-  				contentType: "application/json; charset=UTF-8",
-  				data: JSON.stringify(params),
-  				success: function(){
-  					
-  				}
-  			});
-  		});
-  	}
-  	
-=======
-     $(document).ready(function() {
-        topFix();
-        bottomFix();
-        addItem();
-        removeItem();
-        addCart();
-     });
-     
-     /** 스튜디오, 드레스, 메이크업 네비바가 브라우저 상단에 고정되는 스크롤 이벤트*/
-     function topFix(){
-        var itemMenuOffset = $('#itemMenu').offset();
-        $(window).on("scroll", function() {
-           if ($(document).scrollTop() > itemMenuOffset.top) {
-              $('#itemMenu').addClass('topFix');
-           } else {
-              $('#itemMenu').removeClass('topFix');
-           }
-        });
-     }
-     
-     /** 장바구니가 브라우저 하단에 고정되는 스크롤 이벤트 */
-     function bottomFix(){
-        var containerOffset = $(".container").offset();
-        $(window).on("scroll", function() {
-           if($(document).scrollTop() + $(window).height() <= $("#cart").offset().top + parseInt($("#cart").css("height"))){
-             $("#cart").addClass('bottomFix');
-             $("#cart").css("width", $(".container").css("width"));
-           } else {
-              $("#cart").removeClass("bottomFix");
-           }
-        });
-     }
-     
-     /** 각 상품을 장바구니 리스트에 추가하는 클릭 이벤트 */
-     function addItem(){
-        $(".studioItem").on("click", function(){
-           var sp_no = $(this).find(".studioNo").text().trim();
-           var param = {
-                 sp_no : sp_no
-           };
-           $.ajax({
-              url: "/recommend/addItem",
-              type: "post",
-              dataType: "json",
-              contentType: "application/json; charset=UTF-8",
-              data: JSON.stringify(param),
-              success: function(studio){
-                 $("#studioCart").append(
-                       "<li class='cartItem'>" +
-                       "<div class='itemNo' hidden='hidden'>" + studio.sp_no + "</div>" + 
-                       "<div>" + studio.sp_image + "</div>" + 
-                       "</li>"
-                       );
-              }
-           });
-        });
+    $(document).ready(function() {
+      topFix();
+      addCart();
+    });
+    
+    /** 스튜디오, 드레스, 메이크업 네비바가 브라우저 상단에 고정되는 스크롤 이벤트*/
+    function topFix(){
+      var itemMenuOffset = $('#itemMenu').offset();
+      $(window).on("scroll", function() {
+        if ($(document).scrollTop() > itemMenuOffset.top) {
+          $('#itemMenu').addClass('topFix');
+        } else {
+          $('#itemMenu').removeClass('topFix');
+        }
+      });
+    }
+    
+    function addCart(){
+      var btns = $(".addCartBtn");
+      btns.on("click", function(){
         
-        $(".dressItem").on("click", function(){
-           var dp_no = $(this).find(".dressNo").text().trim();
-           var param = {
-                 dp_no : dp_no
-           };
-           $.ajax({
-              url: "/recommend/addItem",
-              type: "post",
+        var modal = $("#addStatus");
+        
+      var params = null;
+      var role = "${sessionScope['login'].role}";
+        var no = "${sessionScope['login'].no}";
+        var btnName = $(this).attr("name");
+        
+        if(role !== "users"){
+          modal.find(".modal-body").html("관심상품 추가가 제한된 사용자입니다.");
+          modal.modal();
+          return false;
+        }
+        
+        if(btnName === "sAddBtn"){
+          var sp_no = $(this).parent().prevAll(".studioNo").text().trim();
+          console.log("sp_no : " + sp_no);
+          params = {
+        	  item : "studio",
+              item_no : parseInt(sp_no),
+              no : no
+          };
+        } else if(btnName === "dAddBtn"){
+          var dp_no = $(this).parent().prevAll(".dressNo").text().trim();
+          console.log("dp_no : " + dp_no);
+          params = {
+              item : "dress",
+              item_no : parseInt(dp_no),
+              no : no
+          };
+        } else if(btnName === "mAddBtn"){
+          var mp_no = $(this).parent().prevAll(".makeupNo").text().trim();
+          console.log("mp_no : " + mp_no);
+          params = {
+              item : "makeup",
+              item_no : parseInt(mp_no),
+              no : no
+          };
+        }
+      $.ajax({
+          url: "/recommend/addToCart",
+          type: "get",
+          dataType: "json",
+          contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+          data: params,
+          success: function(){
+            modal.find(".modal-body").html("상품이 등록되었습니다.");
+            modal.modal();
+          }
+        });
+    })
+    }
+    
+    function showDetail(item, no){
+        var modal = $("#showDetail");
+        
+        if(item === "studio"){
+          var param = {
+              sp_no : no
+          };
+          $.ajax({
+            url: "/recommend/list/sdetail",
+            type: "get",
+            async: false,
+            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+            dataType: "json",
+            data: param,
+            success: function(studio){
+            	var html = "<table style='width: 100%;'>" +
+                  		    "<tr>" +
+                		      "<th>상품명</th>" +
+                		      "<td colspan='3'>" + studio.SP_NM + "</td>" +
+                		    "</tr>" +
+                		    "<tr>" +
+                		      "<th>업체명</th>" +
+                		      "<td>" + studio.SC_NM + "</td>" +
+                		      "<th>가격</th>" +
+                		      "<td>" + studio.SP_PRICE + "</td>" +
+                		    "</tr>" +
+                		    "<tr>" +
+                		      "<th>앨범/액자/비디오</th>";
+                		      if(studio.SP_APV_YN === 'y'){
+                		      html += "<td>포함</td>";
+                		      } else {
+                		    	  html += "<td>미포함</td>";
+                		      }
+                		      html += "<th>토탈샵</th>";
+                		      if(studio.SP_TOTAL_YN === 'y'){
+                		    	  html += "<td>포함</td>";
+                		      } else {
+                		    	  html += "<td>미포함</td>";
+                		      }
+                		      html += "</tr>" +
+                		    "<tr>" +
+                		      "<th>촬영장소(실내/외)</th>" +
+                		      "<td>" + studio.SP_SHOOT_TYPE + "</td>" +
+                		      "<th>업데이트</th>" +
+                		      "<td>" + studio.UPDATEDATE + "</td>" +
+                		    "</tr>" +
+                		    "<tr>" +
+                		      "<th colspan='4'>상품 이미지</th>" +
+                		    "</tr>" +
+                		    "<tr>" +
+                		      "<td colspan='4'><img src='" + studio.SP_IMAGE + "' style='width: 100%;'></a></td>" +
+                		    "</tr>" +
+                		  "</table>";
+              modal.find(".modal-body").html(html);
+              modal.modal();
+            },
+            error: function(error){
+            	console.log(error);
+              modal.find(".modal-body").html(item + " error...");
+              modal.modal();
+            }
+          });
+          
+        } else if(item === "dress"){
+          var param = {
+              dp_no : no
+          };
+          $.ajax({
+              url: "/recommend/list/ddetail",
+              type: "get",
+              async: false,
+              contentType: "application/x-www-form-urlencoded; charset=UTF-8",
               dataType: "json",
-              contentType: "application/json; charset=UTF-8",
-              data: JSON.stringify(param),
+              data: param,
               success: function(dress){
-                 $("#dressCart").append(
-                       "<li class='cartItem'>" +
-                       "<div class='itemNo' hidden='hidden'>" + dress.dp_no + "</div>" + 
-                       "<div>" + dress.dp_image + "</div>" + 
-                       "</li>"
-                       );
+              	var html = "<table style='width: 100%;'>" +
+                    		    "<tr>" +
+                  		      "<th>상품명</th>" +
+                  		      "<td colspan='3'>" + dress.DP_NM + "</td>" +
+                  		    "</tr>" +
+                  		    "<tr>" +
+                  		      "<th>업체명</th>" +
+                  		      "<td>" + dress.DC_NM + "</td>" +
+                  		      "<th>가격</th>" +
+                  		      "<td>" + dress.DP_PRICE + "</td>" +
+                  		    "</tr>" +
+                  		      "<th>드레스 스타일</th>" +
+                  		      "<td>" + dress.DP_STYLE + "</td>" +
+                  		      "<th>업데이트</th>" +
+                  		      "<td>" + dress.UPDATEDATE + "</td>" +
+                  		    "</tr>" +
+                  		    "<tr>" +
+                  		      "<th colspan='4'>상품 이미지</th>" +
+                  		    "</tr>" +
+                  		    "<tr>" +
+                  		      "<td colspan='4'><img src='" + dress.DP_IMAGE + "' style='width: 100%;'></a></td>" +
+                  		    "</tr>" +
+                  		  "</table>";
+                modal.find(".modal-body").html(html);
+                modal.modal();
+              },
+              error: function(error){
+              	console.log(error);
+                modal.find(".modal-body").html(item + " error...");
+                modal.modal();
               }
-           });
-        });
-        
-        $(".makeupItem").on("click", function(){
-           var mp_no = $(this).find(".makeupNo").text().trim();
-           var param = {
-                 mp_no : mp_no
-           };
-           $.ajax({
-              url: "/recommend/addItem",
-              type: "post",
+            });
+          
+        } else if(item === "makeup"){
+          var param = {
+              mp_no : no
+          };
+          $.ajax({
+              url: "/recommend/list/mdetail",
+              type: "get",
+              async: false,
+              contentType: "application/x-www-form-urlencoded; charset=UTF-8",
               dataType: "json",
-              contentType: "application/json; charset=UTF-8",
-              data: JSON.stringify(param),
+              data: param,
               success: function(makeup){
-                 $("#makeupCart").append(
-                       "<li class='cartItem'>" +
-                       "<div class='itemNo' hidden='hidden'>" + makeup.mp_no + "</div>" + 
-                       "<div>" + makeup.mp_image + "</div>" + 
-                       "</li>"
-                       );
+              	var html = "<table style='width: 100%;'>" +
+                    		    "<tr>" +
+                  		      "<th>상품명</th>" +
+                  		      "<td colspan='3'>" + makeup.MP_NM + "</td>" +
+                  		    "</tr>" +
+                  		    "<tr>" +
+                  		      "<th>업체명</th>" +
+                  		      "<td>" + makeup.MC_NM + "</td>" +
+                  		      "<th>가격</th>" +
+                  		      "<td>" + makeup.MP_PRICE + "</td>" +
+                  		    "</tr>" +
+                  		    "<tr>" +
+                  		      "<th>악세사리</th>";
+                  		      if(makeup.MP_ACC_YN=== 'y'){
+                  		      html += "<td>포함</td>";
+                  		      } else {
+                  		    	  html += "<td>미포함</td>";
+                  		      }
+                  		      html += "<th>가족 포함</th>";
+                  		      if(makeup.MP_FAMILY_YN === 'y'){
+                  		    	  html += "<td>포함</td>";
+                  		      } else {
+                  		    	  html += "<td>미포함</td>";
+                  		      }
+                  		      html += "</tr>" +
+                  		    "<tr>" +
+                  		      "<th>헤어 스타일링</th>";
+                  		      if(makeup.MP_FAMILY_YN === 'y'){
+                  		    	  html += "<td>포함</td>";
+                  		      } else {
+                  		    	  html += "<td>미포함</td>";
+                  		      }
+                  		      html += "<th>갱신 날짜</th>" +
+                  		      "<td>" + makeup.UPDATEDATE + "</td>" +
+                  		    "</tr>" +
+                  		    "<tr>" +
+                  		      "<th colspan='4'>상품 이미지</th>" +
+                  		    "</tr>" +
+                  		    "<tr>" +
+                  		      "<td colspan='4'><img src='" + makeup.MP_IMAGE + "' style='width: 100%;'></a></td>" +
+                  		    "</tr>" +
+                  		  "</table>";
+                modal.find(".modal-body").html(html);
+                modal.modal();
+              },
+              error: function(error){
+              	console.log(error);
+                modal.find(".modal-body").html(item + " error...");
+                modal.modal();
               }
-           });
-        });
-     }
-     
-     /** 장바구니의 아이템을 클릭하면 삭제되는 클릭 이벤트 */
-     function removeItem(){
-        $(".cart").on("click", function(){
-           $(this).find(".cartItem").on("click", function(){
-              $(this).remove();
-           });
-        })
-     }
-     
-     function addCart(){
-        $("#addCartBtn").on("click", function(){
-           var sp_no = $("#studioCart").find(".itemNo");
-           var dp_no = $("#dressCart").find(".itemNo");
-           var mp_no = $("#makeupCart").find(".itemNo");
-           
-           console.log(sp_no);
-           console.log(dp_no);
-           console.log(mp_no);
-           
-           var sp_list = [];
-           var dp_list = [];
-           var mp_list = [];
-           
-           sp_no.each(function(){
-              sp_list.push($(this).text().trim());
-           })
-           
-           dp_no.each(function(){
-              dp_list.push($(this).text().trim());
-           })
-           
-           mp_no.each(function(){
-              mp_list.push($(this).text().trim());
-           })
-           
-           var params = {
-                 sp_no : sp_list,
-                 dp_no : dp_list,
-                 mp_no : mp_list
-           }
-           
-           console.log(params);
-           
-         $.ajax({
-              url: "/recommend/addCart",
-              type: "post",
-              dataType: "json",
-              contentType: "application/json; charset=UTF-8",
-              data: JSON.stringify(params),
-              success: function(){
-                 
-              }
-           });
-        });
-     }
-     
->>>>>>> dev
+            });
+        }
+      }
   </script>
 
   <%@include file="../include/bottom.jsp"%>

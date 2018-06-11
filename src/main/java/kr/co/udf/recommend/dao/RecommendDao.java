@@ -33,5 +33,18 @@ public interface RecommendDao {
 	/** 상품번호로 메이크업 받아오기 */
 	public MakeupProduct getMakeup(int mp_no);
 	
-	public void createCart(Map<String, Object> cart);
+	/** 스튜디오 상품을 관심상품에 추가 */
+	public void addSToCart(Map<String, Object> params);
+	
+	/** 드레스 상품을 관심상품에 추가 */
+	public void addDToCart(Map<String, Object> params);
+	
+	/** 메이크업 상품을 관심상품에 추가 */
+	public void addMToCart(Map<String, Object> params);
+	
+	public Map<String, Object> readStudio(int sp_no);
+	
+	public Map<String, Object> readDress(int dp_no);
+	
+	public Map<String, Object> readMakeup(int mp_no);
 }

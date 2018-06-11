@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -134,29 +133,44 @@ public class RecommendController {
 		}
 	}
 
-	@ResponseBody
-	@RequestMapping(value = "addItem", method = RequestMethod.POST)
-	public Object addItem(@RequestBody Map<String, Object> param) {
-		int item_no = 0;
-		Object result = null;
-		if (param.containsKey("sp_no")) {
-			item_no = Integer.parseInt((String) param.get("sp_no"));
-			result = service.addStudio(item_no);
-		} else if (param.containsKey("dp_no")) {
-			item_no = Integer.parseInt((String) param.get("dp_no"));
-			result = service.addDress(item_no);
-		} else {
-			item_no = Integer.parseInt((String) param.get("mp_no"));
-			result = service.addMakeup(item_no);
+	@RequestMapping(value = "addToCart", method = RequestMethod.GET)
+	public String addToCart(String item, int item_no, int no) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		if (item.equals("studio")) {
+			params.put("sp_no", item_no);
+			params.put("no", no);
+			service.addSToCart(params);
+		} else if (item.equals("dress")) {
+			params.put("dp_no", item_no);
+			params.put("no", no);
+			service.addDToCart(params);
+		} else if (item.equals("makeup")) {
+			params.put("mp_no", item_no);
+			params.put("no", no);
+			service.addMToCart(params);
 		}
-		return result;
+		
+		return "success";
 	}
-	
+
 	@ResponseBody
-	@RequestMapping(value="addCart", method=RequestMethod.POST)
-	public void addCart(@RequestBody Map<String, Object> cart) {
-		//service.addCart(cart);
-		logger.info(cart.toString());
+	@RequestMapping(value = "list/sdetail", method = RequestMethod.GET)
+	public Map<String, Object> studioDetail(int sp_no) {
+		logger.info("sp_no : " + sp_no);
+		logger.info("service.studioDetail(sp_no) : " + service.studioDetail(sp_no));
+		return service.studioDetail(sp_no);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "list/ddetail", method = RequestMethod.GET)
+	public Map<String, Object> dressDetail(int dp_no) {
+		return service.dressDetail(dp_no);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "list/mdetail", method = RequestMethod.GET)
+	public Map<String, Object> makeupDetail(int mp_no) {
+		return service.makeupDetail(mp_no);
 	}
 
 }
