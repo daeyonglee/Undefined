@@ -71,8 +71,38 @@ public class MybatisRecommendDao implements RecommendDao {
 		return session.selectOne(namespace + ".getMakeup", mp_no);
 	}
 
+	/** 스튜디오 상품을 관심상품에 추가 */
 	@Override
-	public void createCart(Map<String, Object> cart) {
-		session.insert(namespace + ".createCart", cart);
+	public void addSToCart(Map<String, Object> params) {
+		session.insert(namespace + ".addSToCart", params);
 	}
+
+	/** 드레스 상품을 관심상품에 추가 */
+	@Override
+	public void addDToCart(Map<String, Object> params) {
+		session.insert(namespace + ".addDToCart", params);
+	}
+
+	/** 메이크업 상품을 관심상품에 추가 */
+	@Override
+	public void addMToCart(Map<String, Object> params) {
+		session.insert(namespace + ".addMToCart", params);
+	}
+
+	@Override
+	public Map<String, Object> readStudio(int sp_no) {
+		return session.selectOne(namespace + ".readStudio", sp_no);
+	}
+
+	@Override
+	public Map<String, Object> readDress(int dp_no) {
+		return session.selectOne(namespace + ".readDress", dp_no);
+	}
+
+	@Override
+	public Map<String, Object> readMakeup(int mp_no) {
+		return session.selectOne(namespace + ".readMakeup", mp_no);
+	}
+	
+	
 }

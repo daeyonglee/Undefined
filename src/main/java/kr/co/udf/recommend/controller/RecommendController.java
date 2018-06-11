@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.udf.recommend.service.RecommendService;
@@ -135,29 +136,33 @@ public class RecommendController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "addItem", method = RequestMethod.POST)
-	public Object addItem(@RequestBody Map<String, Object> param) {
-		int item_no = 0;
-		Object result = null;
-		if (param.containsKey("sp_no")) {
-			item_no = Integer.parseInt((String) param.get("sp_no"));
-			result = service.addStudio(item_no);
-		} else if (param.containsKey("dp_no")) {
-			item_no = Integer.parseInt((String) param.get("dp_no"));
-			result = service.addDress(item_no);
+	@RequestMapping(value = "addToCart", method = RequestMethod.POST)
+	public void addToCart(@RequestBody Map<String, Object> params) {
+		if (params.containsKey("sp_no")) {
+			service.addSToCart(params);
+		} else if (params.containsKey("dp_no")) {
+			service.addDToCart(params);
 		} else {
-			item_no = Integer.parseInt((String) param.get("mp_no"));
-			result = service.addMakeup(item_no);
+			service.addMToCart(params);
 		}
-		return result;
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="addCart", method=RequestMethod.POST)
-	public String addCart(@RequestBody Map<String, Object> cart) {
-		service.addCart(cart);
-		
-		return "success";
+	@RequestMapping(value="list/sdetail", method = RequestMethod.GET)
+	public Map<String, Object> studioDetail(int sp_no) {
+		return service.studioDetail(sp_no);
 	}
 
+	@ResponseBody
+	@RequestMapping(value="list/ddetail", method = RequestMethod.GET)
+	public Map<String, Object> dressDetail(int dp_no) {
+		return service.dressDetail(dp_no);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="list/mdetail", method = RequestMethod.GET)
+	public Map<String, Object> makeupDetail(int mp_no) {
+		return service.makeupDetail(mp_no);
+	}
+	
 }

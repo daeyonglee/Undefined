@@ -112,9 +112,37 @@ public class RecommendServiceImpl implements RecommendService {
 		return dao.getMakeup(mp_no);
 	}
 
+	/** 스튜디오 상품을 관심상품에 추가 */
 	@Override
-	public void addCart(Map<String, Object> cart) {
-		dao.createCart(cart);
+	public void addSToCart(Map<String, Object> params) {
+		dao.addSToCart(params);
+	}
+
+	/** 드레스 상품을 관심상품에 추가 */
+	@Override
+	public void addDToCart(Map<String, Object> params) {
+		dao.addDToCart(params);
+	}
+
+	/** 메이크업 상품을 관심상품에 추가 */
+	@Override
+	public void addMToCart(Map<String, Object> params) {
+		dao.addMToCart(params);
+	}
+
+	@Override
+	public Map<String, Object> studioDetail(int sp_no) {
+		return dao.readStudio(sp_no);
+	}
+
+	@Override
+	public Map<String, Object> dressDetail(int dp_no) {
+		return dao.readDress(dp_no);
+	}
+
+	@Override
+	public Map<String, Object> makeupDetail(int mp_no) {
+		return dao.readMakeup(mp_no);
 	}
 
 }

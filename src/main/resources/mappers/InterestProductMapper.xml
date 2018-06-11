@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.udf.recommend.dao.InterestProductDao">
+
+	<select id="getSIPList" resultType="map">
+		SELECT sp.sp_no,
+		       sp.sp_nm,
+		       sp.sp_price,
+		       sp.sp_image,
+		       sp.sc_nm
+		FROM   (SELECT sp.sp_no    sp_no, 
+		               sp.sp_nm    sp_nm, 
+		               sp.sp_price sp_price, 
+		               sp.sp_image sp_image, 
+		               sc.sc_nm    sc_nm
+		        FROM   studio_product sp 
+		               JOIN studio_company sc 
+		                 ON sp.sc_no = sc.sc_no) sp 
+		       JOIN studio_interest_product sip 
+		         ON sip.sp_no = sp.sp_no
+	</select>
+	
+	<select id="getDIPList" resultType="map">
+		SELECT dp.dp_no,
+		       dp.dp_nm,
+		       dp.dp_price,
+		       dp.dp_image,
+		       dp.dc_nm
+		FROM   (SELECT dp.dp_no    dp_no, 
+		               dp.dp_nm    dp_nm, 
+		               dp.dp_price dp_price, 
+		               dp.dp_image dp_image, 
+		               dc.dc_nm    dc_nm
+		        FROM   dress_product dp 
+		               JOIN dress_company dc 
+		                 ON dp.dc_no = dc.dc_no) dp 
+		       JOIN dress_interest_product dip 
+		         ON dip.dp_no = dp.dp_no 
+	</select>
+	
+	<select id="getMIPList" resultType="map">
+		SELECT mp.mp_no,
+		       mp.mp_nm,
+		       mp.mp_price,
+		       mp.mp_image, 
+		       mp.mc_nm
+		FROM   (SELECT mp.mp_no    mp_no, 
+		               mp.mp_nm    mp_nm, 
+		               mp.mp_price mp_price, 
+		               mp.mp_image mp_image, 
+		               mc.mc_nm    mc_nm
+		        FROM   makeup_product mp 
+		               JOIN makeup_company mc 
+		                 ON mp.mc_no = mc.mc_no) mp 
+		       JOIN makeup_interest_product mip 
+		         ON mip.mp_no = mp.mp_no 
+	</select>
+
+</mapper>
