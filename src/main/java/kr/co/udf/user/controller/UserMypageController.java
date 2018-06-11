@@ -272,6 +272,23 @@ public class UserMypageController {
 		return "/user/mypage/bidlist";
 	}
 	
+	
+	/** 마이페이지 - 낙찰하기 */
+	@RequestMapping(value="/bidlist", method=RequestMethod.POST)
+	public String bidListPOST(AuctionBid bid) {
+		
+		logger.debug(bid);
+		
+		/*
+			데이터의 type이 dress, makeup, studio에 따라
+			해당 auction_apply의 상태값을 낙찰으로 변경하고 => update
+			해당 auction_apply의 select된 bid를 넣어 준다. => update
+		*/
+		
+		mypageBidService.bidSelect(bid);
+		
+		return "redirect:/user/mypage/apply";
+	}
    /** 마이페이지 - 입찰중 or 낙찰대기중인 신청서 상세 조회 */
    /*
     * @RequestMapping(value = "/bid/read", method = RequestMethod.GET) public

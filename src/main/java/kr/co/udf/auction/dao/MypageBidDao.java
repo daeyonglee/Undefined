@@ -37,6 +37,9 @@ public interface MypageBidDao {
 	public int countStudioBid(int userNo, int applyNo) throws Exception;
 	public int countMakeupBid(int userNo, int applyNo) throws Exception;
 	public int countDressBid(int userNo, int applyNo) throws Exception;
+	
+	// 입찰서에 대한 낙철 상태 변경
+	public void bidSelect(AuctionBid bid);
 
 	
 }

@@ -155,32 +155,81 @@ FROM   (SELECT E.*,
 </select>
 
 
-<!--  신청서 별 입찰서 리스트 조회(makeup) -->
-<select id="makeupBidListByUser" resultType="AuctionBid">
-SELECT C.*, D.*
-  FROM (SELECT A.*, B.mc_no
-          FROM makeup_auction_apply A
-         INNER JOIN makeup_bid B
-            ON A.maa_no = B.maa_no
-           AND A.user_no = B.user_no
-        ) C
-INNER JOIN makeup_company D
-   ON C.mc_no = D.mc_no
-WHERE user_no = #{userNo} AND maa_no = #{applyNo}
-</select>
-
 <!--  신청서 별 입찰서 리스트 조회(dress) -->
 <select id="dressBidListByUser" resultType="AuctionBid">
-SELECT C.*, D.*
-  FROM (SELECT A.*, B.dc_no
-          FROM dress_auction_apply A
-         INNER JOIN dress_bid B
-            ON A.daa_no = B.daa_no
-           AND A.user_no = B.user_no
-        ) C
-INNER JOIN dress_company D
-   ON C.dc_no = D.dc_no
-WHERE user_no = 2 AND daa_no = 22
+SELECT G.*, 
+       H.dp_nm           productNm, 
+       H.dp_price        price,
+       H.dp_style        style,
+       H.dp_image        productImage 
+FROM   (SELECT E.*, 
+               F.dp_no          productNo, 
+               F.dbpl_discount  discount, 
+               F.dbpl_meet_date meetDate 
+        FROM   (SELECT C.*, 
+                       D.dc_nm        name, 
+                       D.dc_addr      addr, 
+                       D.dc_email     email, 
+                       D.dc_tel       tel, 
+                       D.dc_smy_intro introduce 
+                FROM   (SELECT A.daa_no       applyNo, 
+                               A.daa_loc      loc, 
+                               A.daa_deadline deadline, 
+                               A.user_no      userNo, 
+                               A.daa_stat     stat, 
+                               'dress'       TYPE, 
+                               B.dc_no        companyNo, 
+                               B.db_no        bidNo 
+                        FROM   dress_auction_apply A 
+                               inner join dress_bid B 
+                                       ON A.daa_no = B.daa_no 
+                                          AND A.user_no = B.user_no) C 
+                       inner join dress_company D 
+                               ON C.companyno = D.dc_no) E 
+               inner join dress_bid_product_list F 
+                       ON E.bidno = F.db_no) G 
+       inner join dress_product H 
+               ON G.productno = H.dp_no 
+ WHERE userNo = #{userNo} AND applyNo = #{applyNo}
+</select>
+
+<!--  신청서 별 입찰서 리스트 조회(makeup) -->
+<select id="makeupBidListByUser" resultType="AuctionBid">
+ SELECT G.*, 
+       H.mp_nm           productNm, 
+       H.mp_price        price,
+       H.mp_acc_yn       accYn,
+       H.mp_family_yn    familyYn,
+       H.mp_hair_yn      hairYn,
+       H.mp_image        productImage 
+FROM   (SELECT E.*, 
+               F.mp_no          productNo, 
+               F.mbpl_discount  discount, 
+               F.mbpl_meet_date meetDate 
+        FROM   (SELECT C.*, 
+                       D.mc_nm        name, 
+                       D.mc_addr      addr, 
+                       D.mc_email     email, 
+                       D.mc_tel       tel, 
+                       D.mc_smy_intro introduce 
+                FROM   (SELECT A.maa_no       applyNo, 
+                               A.maa_loc      loc, 
+                               A.maa_deadline deadline, 
+                               A.user_no      userNo, 
+                               A.maa_stat     stat, 
+                               'makeup'       TYPE, 
+                               B.mc_no        companyNo, 
+                               B.mb_no        bidNo 
+                        FROM   makeup_auction_apply A 
+                               inner join makeup_bid B 
+                                       ON A.maa_no = B.maa_no 
+                                          AND A.user_no = B.user_no) C 
+                       inner join makeup_company D 
+                               ON C.companyno = D.mc_no) E 
+               inner join makeup_bid_product_list F 
+                       ON E.bidno = F.mb_no) G 
+       inner join makeup_product H 
+               ON G.productno = H.mp_no
 </select>
 
 <!--  스드메 상태값 업데이트(studio) -->
@@ -266,4 +315,26 @@ SELECT COUNT(*)
 FROM dress_bid
 WHERE user_no = #{userNo} AND daa_no = #{applyNo}
 </select>
+
+<update id="dressBidSelect">
+	UPDATE dress_auction_apply
+	   SET daa_stat = '낙찰'
+	     , daa_select_db_no = #{bidNo}
+	 WHERE daa_no = #{applyNo}
+	   AND user_no = #{userNo}
+</update>
+<update id="makeupBidSelect">
+	UPDATE makeup_auction_apply
+	   SET maa_stat = '낙찰'
+	     , maa_select_mb_no = #{bidNo}
+	 WHERE maa_no = #{applyNo}
+	   AND user_no = #{userNo}
+</update>
+<update id="studioBidSelect">
+	UPDATE studio_auction_apply
+	   SET saa_stat = '낙찰'
+	     , saa_select_sb_no = #{bidNo}
+	 WHERE saa_no = #{applyNo}
+	   AND user_no = #{userNo}
+</update>
 </mapper>

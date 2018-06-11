@@ -36,4 +36,7 @@ public interface MypageBidService {
 	public int countStudioBid(int userNo, int applyNo) throws Exception;
 	public int countMakeupBid(int userNo, int applyNo) throws Exception;
 	public int countDressBid(int userNo, int applyNo) throws Exception;
+	
+	// 입찰서에 대한 낙찰 상태 업데이트
+	public void bidSelect(AuctionBid bid);
 }

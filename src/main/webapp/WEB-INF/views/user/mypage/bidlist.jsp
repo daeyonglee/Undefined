@@ -58,7 +58,7 @@ td, th {
                   <c:forEach items="${bidList}" var="bid" varStatus="status">
                     <c:if test="${bid.type eq 'studio'}">
                       <tr id = "visible">
-                        <td><input type="radio"></td>
+                        <td><input type="checkbox" class="chkBid"></td> 
                         <td>${bid.name }</td>
                         <td>${bid.addr}</td>
                         <td>${bid.productNm }</td>
@@ -77,12 +77,16 @@ td, th {
                           <input type="hidden" name="addr"         value="${bid.addr}">
                           <input type="hidden" name="productNm"    value="${bid.productNm}">
                           <input type="hidden" name="discount"     value="${bid.discount}">
+                          <input type="hidden" name="bidNo"        value="${bid.bidNo}">
+                          <input type="hidden" name="companyNo"    value="${bid.companyNo}">
+                          <input type="hidden" name="applyNo"      value="${bid.applyNo}">
+                          <input type="hidden" name="userNo"       value="${bid.userNo}">
                         </td>
                       </tr>
                     </c:if>
                     <c:if test="${bid.type eq 'dress'}">
                        <tr id = "visible">
-                        <td><input type="radio"></td>
+                        <td><input type="checkbox" class="chkBid"></td>
                         <td>${bid.name }</td>
                         <td>${bid.addr}</td>
                         <td>${bid.productNm }</td>
@@ -99,12 +103,16 @@ td, th {
                           <input type="hidden" name="addr"         value="${bid.addr}">
                           <input type="hidden" name="productNm"    value="${bid.productNm}">
                           <input type="hidden" name="discount"     value="${bid.discount}">
+                          <input type="hidden" name="bidNo"        value="${bid.bidNo}">
+                          <input type="hidden" name="companyNo"    value="${bid.companyNo}">
+                          <input type="hidden" name="applyNo"      value="${bid.applyNo}">
+                          <input type="hidden" name="userNo"       value="${bid.userNo}">
                         </td>
                       </tr>
                     </c:if>
                     <c:if test="${bid.type eq 'makeup'}">
                        <tr id = "visible">
-                        <td><input type="radio"></td>
+                        <td><input type="checkbox" class="chkBid"></td>
                         <td>${bid.name }</td>
                         <td>${bid.addr}</td>
                         <td>${bid.productNm }</td>
@@ -123,6 +131,10 @@ td, th {
                           <input type="hidden" name="addr"         value="${bid.addr}">
                           <input type="hidden" name="productNm"    value="${bid.productNm}">
                           <input type="hidden" name="discount"     value="${bid.discount}">
+                          <input type="hidden" name="bidNo"        value="${bid.bidNo}">
+                          <input type="hidden" name="companyNo"    value="${bid.companyNo}">
+                          <input type="hidden" name="applyNo"      value="${bid.applyNo}">
+                          <input type="hidden" name="userNo"       value="${bid.userNo}">
                         </td>
                       </tr>
                     </c:if>
@@ -230,217 +242,259 @@ td, th {
   <input type='hidden' name="page" value="${pageMaker.params.page}" >
   <input type='hidden' name="perPageNum" value="${pageMaker.params.perPageNum}" >
  </form>
-
+ 
+ 
+<form id="frmBid" action="/user/mypage/bidlist" method="post">
+  <input type="hidden" value="" name="companyNo">
+  <input type="hidden" value="" name="applyNo">       
+  <input type="hidden" value="" name="bidNo">           
+  <input type="hidden" value="" name="userNo">         
+  <input type="hidden" value="" name="type">            
+</form>
  <script>
       $(document).ready(function() {
-
 			$("#list").on("click", function() {
               self.location = "apply";
             });
+			
+			$("#bid").on('click', function(e){
+				var event = $(".chkBid:checked").parent().parent().parent().children().last()[0];
+				read(event, 1);
+			});
 
       });
       
+      /*
+      	flag 값이 1이면 낙찰하기 버튼에 의한 함수 홏
+      */
       
-      function read(event){
+      function read(event, flag){
     	  
-    	  var tr = event.target.parentElement;
-    	  var inputs = tr.children;
+    	  var tr;
+    	  var inputs;
     	  
-    	  var type;
-    	  var name;
-    	  var productNm;
-    	  var price;
-    	  var discount;
-    	  var productImage;
-    	  var meetDate;
-    	  var tel;
-    	  var addr;
-          var apvYn;
-          var totalYn;
-          var shootType;
-          var style;
-          var accYn;
-          var familyYn;
-          var hairYn;
-    		  
+    	  if (flag == 1) {
+    		inputs = event.children;  
+    	  } else {
+    		  tr = event.target.parentElement;
+    		  inputs = tr.children;
+    	  }
+    	  
+    	  var obj = {};
+    	  
     	  for (var i in inputs) {
     		  var nm = inputs[i].name;
     		  var val = inputs[i].value;
-  			  
+    		  
     		  if (nm == 'name'){
-    			  name = val;
+    			  obj.name = val;
     		  }
     		  if (nm == 'productNm') {
-    			  productNm = val;
+    			  obj.productNm = val;
     		  }
     		  if (nm == 'price') {
-    			  price = val;
+    			  obj.price = val;
     		  }
     		  if (nm == 'productImage') {
-    			  productImage = val;
+    			  obj.productImage = val;
     		  }
     		  if (nm == 'meetDate') {
-    			  meetDate = val;
+    			  obj.meetDate = val;
     		  }
     		  if (nm == 'tel') {
-    			  tel = val;
+    			  obj.tel = val;
     		  }
     		  if (nm == 'apvYn') {
-    			  apvYn = val;
+    			  obj.apvYn = val;
     		  }
     		  if (nm == 'totalYn') {
-    			  totalYn = val;
+    			  obj.totalYn = val;
     		  }
     		  if (nm == 'shootType') {
-    			  shootType = val;
+    			  obj.shootType = val;
     		  }
     		  if (nm == 'style') {
-    			  style = val;
+    			  obj.style = val;
     		  }
     		  if (nm == 'accYn') {
-    			  accYn = val;
+    			  obj.accYn = val;
     		  }
     		  if (nm == 'familyYn') {
-    			  familyYn = val;
+    			  obj.familyYn = val;
     		  }
     		  if (nm == 'hairYn') {
-    			  hairYn = val;
+    			  obj.hairYn = val;
     		  }
     		  if (nm == 'addr') {
-    			  addr = val;
+    			  obj.addr = val;
     		  }
     		  if (nm == 'discount') {
-    			  discount = val;
+    			  obj.discount = val;
     		  }
     		  if (nm == 'type') {
-    			  type = val;
+    			  obj.type = val;
+    		  }
+    		  if (nm == 'bidNo') {
+    			  obj.bidNo = val;
+    		  }
+    		  if (nm == 'companyNo') {
+    			  obj.companyNo = val;
+    		  }
+    		  if (nm == 'applyNo') {
+    			  obj.applyNo = val;
+    		  }
+    		  if (nm == 'userNo') {
+    			  obj.userNo = val;
     		  }
     	  }
     	  
+    	  if (flag == 1) {
+    		  frmBid(obj);
+    	  } else {
+        	  modalUl(obj)
+    	  }
+    	  
+    	  
+		     
+		}
+      function frmBid(obj){
+    	
+    	  $("#frmBid > input[name='companyNo']").val(obj.companyNo);
+    	  $("#frmBid > input[name='applyNo']").val(obj.applyNo);
+    	  $("#frmBid > input[name='bidNo']").val(obj.bidNo);
+    	  $("#frmBid > input[name='userNo']").val(obj.userNo);
+    	  $("#frmBid > input[name='type']").val(obj.type);
+    	  
+    	  var frm = $("#frmBid");
+    	  
+    	  frm.submit();
+    	  
+      };
+      
+      function modalUl(){
     	  if(type == 'studio'){
     		  
-    		  	$("#productImage").attr("src", "/user/mypage/imgview?imgview="+productImage);
-    		  
-    		    var html =  "<li>";
-    		        html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>업체 이름</span>";
-    		        html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + name + "</span>";    
-    		        html += "</li>";
-    		        html += "<li>";
-    		        html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>입찰 상품</span>";
-    		        html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+ productNm + "</span>";
-    		        html += "</li>";
-    		        html += "<li>";
-    		        html +=  " <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>실제 가격 / 할인율 / 할인 가격</span>";
-    		        html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + price +"원 ->" + discount +"% ->" + Math.round(price * (1- discount * 0.01)) + "원</span>";
-    		        html += "</li>";
-    		        html += "<li>";
-    		        html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>실내 / 야외 여부</span>";
-    		        html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+ shootType +"</span>";
-    		        html += "</li>";
-    		        html += "<li>";
-    		        html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>토탈샵 여부</span>";
-    		        html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+  totalYn +"</span>";
-    		        html += "</li>";
-    		        html += "<li>";
-    		        html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>액자 / 앨범 / 비디오</span>";
-    		        html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+  apvYn +"</span>";
-    		        html += "</li>";
-    		        html += "<li>";			        
-    		        html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>상담 날짜</span>";			        
-    		        html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + meetDate + "</span>";			        
-    		        html += "</li>";
-    		        html += "<li>";
-    		        html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>업체 위치</span>";			        
-    		        html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + addr + "</span>";			        
-    		        html += "</li>";
-    		        html += "<li>";
-    		        html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>업체 전화번호</span>";			        
-    		        html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + tel+ "</span>";			        
-    		       
-    		        
-    		        $("#ul").html(html);
+  		  	$("#productImage").attr("src", "/user/mypage/imgview?imgview="+obj.productImage);
+  		  
+  		    var html =  "<li>";
+  		        html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>업체 이름</span>";
+  		        html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + obj.name + "</span>";    
+  		        html += "</li>";
+  		        html += "<li>";
+  		        html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>입찰 상품</span>";
+  		        html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+ obj.productNm + "</span>";
+  		        html += "</li>";
+  		        html += "<li>";
+  		        html +=  " <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>실제 가격 / 할인율 / 할인 가격</span>";
+  		        html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + obj.price +"원 ->" + obj.discount +"% ->" + Math.round(obj.price * (1- obj.discount * 0.01)) + "원</span>";
+  		        html += "</li>";
+  		        html += "<li>";
+  		        html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>실내 / 야외 여부</span>";
+  		        html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+ obj.shootType +"</span>";
+  		        html += "</li>";
+  		        html += "<li>";
+  		        html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>토탈샵 여부</span>";
+  		        html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+  obj.totalYn +"</span>";
+  		        html += "</li>";
+  		        html += "<li>";
+  		        html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>액자 / 앨범 / 비디오</span>";
+  		        html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+  obj.apvYn +"</span>";
+  		        html += "</li>";
+  		        html += "<li>";			        
+  		        html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>상담 날짜</span>";			        
+  		        html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + obj.meetDate + "</span>";			        
+  		        html += "</li>";
+  		        html += "<li>";
+  		        html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>업체 위치</span>";			        
+  		        html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + obj.addr + "</span>";			        
+  		        html += "</li>";
+  		        html += "<li>";
+  		        html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>업체 전화번호</span>";			        
+  		        html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + obj.tel+ "</span>";			        
+  		       
+  		        
+  		        $("#ul").html(html);
 			        
 	       };
 	       if (type == 'dress') {
 	        	
-	    	$("#productImage").attr("src", "/user/mypage/imgview?imgview="+productImage);
+	    	$("#productImage").attr("src", "/user/mypage/imgview?imgview="+obj.productImage);
 	           		  
 	            var html =  "<li>";
 	                html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>업체 이름</span>";
-	                html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + name + "</span>";    
+	                html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + obj.name + "</span>";    
 	                html += "</li>";
 	                html += "<li>";
 	                html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>입찰 상품</span>";
-	                html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+ productNm + "</span>";
+	                html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+ obj.productNm + "</span>";
 	                html += "</li>";
 	                html += "<li>";
 	                html +=  " <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>실제 가격 / 할인율 / 할인 가격</span>";
-	                html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + price +"원 ->" + discount +"% ->" + Math.round(price * (1- discount * 0.01)) + "원</span>";
+	                html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + obj.price +"원 ->" + obj.discount +"% ->" + Math.round(obj.price * (1- obj.discount * 0.01)) + "원</span>";
 	                html += "</li>";
 	                html += "<li>";
 	                html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>드레스 스타일</span>";
-	                html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+  style +"</span>";
+	                html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+  obj.style +"</span>";
 	                html += "</li>";
 	                html += "<li>";			        
 	                html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>상담 날짜</span>";			        
-	                html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + meetDate + "</span>";			        
+	                html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + obj.meetDate + "</span>";			        
 	                html += "</li>";
 	                html += "<li>";
 	                html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>업체 위치</span>";			        
-	                html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + addr + "</span>";			        
+	                html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + obj.addr + "</span>";			        
 	                html += "</li>";
 	                html += "<li>";
 	                html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>업체 전화번호</span>";			        
-	                html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + tel+ "</span>";			        
+	                html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + obj.tel+ "</span>";			        
 	           		       
 	    		     $("#ul").html(html);
 				        
 		  };
 		  if (type == 'makeup') {
 			  
-		    	$("#productImage").attr("src", "/user/mypage/imgview?imgview="+productImage);
-         		  
+		    	$("#productImage").attr("src", "/user/mypage/imgview?imgview="+obj.productImage);
+       		  
 	            var html =  "<li>";
 	                html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>업체 이름</span>";
-	                html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + name + "</span>";    
+	                html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + obj.name + "</span>";    
 	                html += "</li>";
 	                html += "<li>";
 	                html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>입찰 상품</span>";
-	                html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+ productNm + "</span>";
+	                html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+ obj.productNm + "</span>";
 	                html += "</li>";
 	                html += "<li>";
 	                html +=  " <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>실제 가격 / 할인율 / 할인 가격</span>";
-	                html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + price +"원 ->" + discount +"% ->" + Math.round(price * (1- discount * 0.01)) + "원</span>";
+	                html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + obj.price +"원 ->" + obj.discount +"% ->" + Math.round(obj.price * (1- obj.discount * 0.01)) + "원</span>";
 	                html += "</li>";
 	                html += "<li>";
 	                html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>액세서리 대여 여부</span>";
-	                html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+  accYn +"</span>";
+	                html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+  obj.accYn +"</span>";
 	                html += "</li>";
 	                html += "<li>";
 	                html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>가족 메이크업 여부 </span>";
-	                html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+  familyYn +"</span>";
+	                html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+  obj.familyYn +"</span>";
 	                html += "</li>";
 	                html += "<li>";
 	                html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>헤어 세팅 여부</span>";
-	                html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+  hairYn +"</span>";
+	                html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+  obj.hairYn +"</span>";
 	                html += "</li>";
 	                html += "<li>";			        
 	                html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>상담 날짜</span>";			        
-	                html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + meetDate + "</span>";			        
+	                html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + obj.meetDate + "</span>";			        
 	                html += "</li>";
 	                html += "<li>";
 	                html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>업체 위치</span>";			        
-	                html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + addr + "</span>";			        
+	                html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + obj.addr + "</span>";			        
 	                html += "</li>";
 	                html += "<li>";
 	                html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>업체 전화번호</span>";			        
-	                html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + tel+ "</span>";			        
+	                html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + obj.tel+ "</span>";			        
 	           		       
 	    		     $("#ul").html(html);
 		  
 		  };
-		     
-		}
+      }
     </script>
 
  

@@ -129,4 +129,17 @@ public class MyBatisMypageBidDao implements MypageBidDao {
 		return session.selectOne(NAMESPACE + ".countDressBid", paramMap);
 	}
 
+	@Override
+	public void bidSelect(AuctionBid bid) {
+		
+		if (bid.getType().equals("dress")) {
+			session.update(NAMESPACE+".dressBidSelect", bid);
+		}
+		if (bid.getType().equals("makeup")) {
+			session.update(NAMESPACE+".makeupBidSelect", bid);
+		}
+		if (bid.getType().equals("studio")) {
+			session.update(NAMESPACE+".studioBidSelect", bid);
+		}
+	}
 }

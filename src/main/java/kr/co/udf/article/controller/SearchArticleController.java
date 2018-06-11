@@ -143,7 +143,7 @@ public class SearchArticleController {
 	    
 	    rttr.addFlashAttribute("msg", "success");
 	
-	    return "redirect:/sarticle/list";
+		return "redirect:/sarticle/list?board_no="+cri.getBoard_no();
 	}
     
 	@RequestMapping(value = "/modifyPage", method = RequestMethod.GET)
@@ -165,7 +165,7 @@ public class SearchArticleController {
 		
 		rttr.addFlashAttribute("msg","success");
 		
-		return "redirect:/sarticle/list";
+		return "redirect:/sarticle/list?board_no="+cri.getBoard_no();
 	}
     
 //    @RequestMapping(value = "/listCri", method = RequestMethod.GET)

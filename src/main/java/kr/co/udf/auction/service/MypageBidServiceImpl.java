@@ -96,6 +96,11 @@ public class MypageBidServiceImpl implements MypageBidService {
 		return dao.countDressBid(userNo, applyNo);
 	}
 
+	@Override
+	public void bidSelect(AuctionBid bid) {
+		dao.bidSelect(bid);
+	}
+
 
 
 }
