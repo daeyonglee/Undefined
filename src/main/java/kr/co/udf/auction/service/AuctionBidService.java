@@ -39,6 +39,8 @@ public interface AuctionBidService {
 	
 	// 입찰서 상품 리스트 등록
 	public void createStudioProd(AuctionBid bid) throws Exception;
+	public void createDressProd(AuctionBid bid) throws Exception;
+	public void createMakeupProd(AuctionBid bid) throws Exception;
 	
 	/** 단일 상품 정보 상세 조회 */
 	public StudioProduct readStudioProduct(int productNo, int companyNo) throws Exception;

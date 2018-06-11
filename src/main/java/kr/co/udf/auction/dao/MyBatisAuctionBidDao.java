@@ -103,6 +103,7 @@ public class MyBatisAuctionBidDao implements AuctionBidDao {
 
 	@Override
 	public void createDressProd(AuctionBid bid) throws Exception {
+		session.insert(NAMESPACE + ".createDressProd", bid);
 		
 	}
 
@@ -113,12 +114,13 @@ public class MyBatisAuctionBidDao implements AuctionBidDao {
 
 	@Override
 	public void createMakeupProd(AuctionBid bid) throws Exception {
+		session.insert(NAMESPACE + ".createMakeupProd" , bid);
 		
 	}
 
 	@Override
 	public List<MakeupProduct> searchMakeupProduct(int companyNo) throws Exception {
-		return null;
+		return session.selectList(NAMESPACE + ".searchMakeupProduct", companyNo);
 	}
 
 	@Override
@@ -128,7 +130,7 @@ public class MyBatisAuctionBidDao implements AuctionBidDao {
 
 	@Override
 	public List<DressProduct> searchDressProduct(int companyNo) throws Exception {
-		return null;
+		return session.selectList(NAMESPACE + ".searchDressProduct", companyNo);
 	}
 
 	@Override

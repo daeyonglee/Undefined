@@ -25,6 +25,8 @@ import kr.co.udf.auction.domain.Auction;
 import kr.co.udf.auction.domain.AuctionBid;
 import kr.co.udf.auction.domain.AuctionCount;
 import kr.co.udf.auction.domain.DayCount;
+import kr.co.udf.auction.product.domain.DressProduct;
+import kr.co.udf.auction.product.domain.MakeupProduct;
 import kr.co.udf.auction.product.domain.StudioProduct;
 import kr.co.udf.auction.service.AuctionApplyService;
 import kr.co.udf.auction.service.AuctionBidService;
@@ -247,12 +249,19 @@ public class AuctionController {
 			MakeupCompany company = bidService.searchMakeupCompany(loginNo);
 			logger.info(company);
 			model.addAttribute("Company", company);
-
+			List<MakeupProduct> makeupProduct = bidService.searchMakeupProduct(loginNo);
+			logger.info("메이크업 상품들 : " + makeupProduct);
+			model.addAttribute("products", makeupProduct);
+			
 		} else if (role.equals("dc")) {
 			logger.info("[dress] 업체입니다...");
 			DressCompany company = bidService.searchDressCompany(loginNo);
 			logger.info(company);
 			model.addAttribute("Company", company);
+			List<DressProduct> dressProduct = bidService.searchDressProduct(loginNo);
+			logger.info("드레스 상품들 : " + dressProduct);
+			model.addAttribute("products", dressProduct);
+
 
 		} else if (role.equals("sc")) {
 			logger.info("[studio] 업체입니다...");
@@ -261,7 +270,7 @@ public class AuctionController {
 			model.addAttribute("Company", company);
 			List<StudioProduct> studioProduct = bidService.searchStudioProduct(loginNo);
 			logger.info(studioProduct);
-			model.addAttribute("studioProd", studioProduct);
+			model.addAttribute("products", studioProduct);
 
 		}
 
@@ -301,11 +310,13 @@ public class AuctionController {
 
 		if (type.equals("dress")) {
 			bidService.createDressBid(bid);
+			bidService.createDressProd(bid);
 			logger.info("[dress] 입찰서 제출합니다");
 			logger.info(bid);
 
 		} else if (type.equals("makeup")) {
 			bidService.createMakeupBid(bid);
+			bidService.createMakeupProd(bid);
 			logger.info("[makeup] 입찰서 제출합니다");
 			logger.info(bid);
 

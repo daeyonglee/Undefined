@@ -45,8 +45,8 @@ public class AuctionBidServiceImpl implements AuctionBidService {
 	public DressCompany searchDressCompany(int no) throws Exception {
 		DressCompany company = dao.searchDressCompany(no);
 		
-/*		String arr[] = company.getAddr().split("\\^\\^");
-		company.setAddr(arr[1] + " " + arr[2]);*/
+		String arr[] = company.getAddr().split("\\^\\^");
+		company.setAddr(arr[1] + " " + arr[2]);
 		
 		return company;
 	}
@@ -83,6 +83,18 @@ public class AuctionBidServiceImpl implements AuctionBidService {
 	public void createStudioProd(AuctionBid bid) throws Exception {
 		dao.createStudioProd(bid);
 	}
+	
+	@Override
+	public void createDressProd(AuctionBid bid) throws Exception {
+		dao.createDressProd(bid);
+		
+	}
+
+	@Override
+	public void createMakeupProd(AuctionBid bid) throws Exception {
+		dao.createMakeupProd(bid);
+		
+	}
 
 	@Override
 	public List<MakeupProduct> searchMakeupProduct(int companyNo) throws Exception {
@@ -103,4 +115,6 @@ public class AuctionBidServiceImpl implements AuctionBidService {
 	public StudioProduct readStudioProduct(int productNo, int companyNo) throws Exception {
 		return dao.readStudioProduct(productNo, companyNo);
 	}
+
+
 }
