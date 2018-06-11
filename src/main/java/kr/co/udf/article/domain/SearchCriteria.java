@@ -1,18 +1,9 @@
 package kr.co.udf.article.domain;
 
-public class SearchCriteria extends Criteria {
+public class SearchCriteria extends Criteria{
 
 	private String searchType;
 	private String keyword;
-	
-	public SearchCriteria() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public SearchCriteria(int page, int perPageNum,int board_no) {
-		super(page, perPageNum, board_no);
-		// TODO Auto-generated constructor stub
-	}
 	
 	public String getSearchType() {
 		return searchType;
@@ -26,10 +17,11 @@ public class SearchCriteria extends Criteria {
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
-	
 	@Override
 	public String toString() {
-		return "SearchCriteria [searchType=" + searchType + ", keyword=" + keyword + "]";
+		return super.toString() + " SearchCriteria [searchType=" + searchType + ", keyword="
+				+ keyword + "]";
 	}
-	
 }
+
+

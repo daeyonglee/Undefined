@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 
 <%@ page session="true"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -93,7 +93,7 @@
           </div>
         </div>
       </div>
-      
+    <!--자유게시판에서만 댓글이 보이도록 하기 위한 조건문  -->
     <%
      if(request.getParameter("board_no")!=null){
      if(Integer.parseInt(request.getParameter("board_no"))==2){
@@ -101,8 +101,10 @@
 
   <div class="row">
     <div class="col-md-12">
-    <!--자유게시판에서만 댓글이 보이도록 하기 위한 조건문  -->
+    
     <!--로그인 한 사람에게만 댓글 쓰는 폼이 출력  -->
+	<c:choose>
+      <c:when test="${null ne sessionScope.login || null ne cookie.loginCookie.value}">
           <!-- 댓글 등록에 필요한 div -->
           <div class="box box-success">
             <div class="box-header">
@@ -110,8 +112,8 @@
             </div>
             <div class="box-body">
               <label for="exampleInputEmail1">작성자</label> 
-              <input class="form-control" type="text" placeholder="작성자"
-                id="newReplyWriter"> 
+              <input class="form-control" type="text" placeholder="${sessionScope.login.nm}"
+                id="newReplyWriter" value="${sessionScope.login.nm}" readonly="readonly">
                <label for="exampleInputEmail1">댓글 내용</label> 
                <input class="form-control" type="text"
                 placeholder="댓글 내용" id="newReplyText">
@@ -121,7 +123,8 @@
               <button type="button" class="btn btn-primary" id="replyAddBtn">댓글 쓰기</button>
             </div>
           </div>
-          
+        </c:when>   
+      </c:choose>    
       <!-- 댓글의 목록과 페이징 처리에 필요한 div-->
       <!-- The time line -->
       <ul class="timeline">
@@ -136,7 +139,7 @@
       </div> -->
 
   <%
-    }}
+	 }}
  %>
       <!-- 추가 파라미터 처리를 위함 -->
       <form role="form" action="modifyPage" method="post">
@@ -153,7 +156,7 @@
     </div>
   </div>
   
-   <!-- 댓글 수정과 삭제를 위한 Modal창 -->
+	<!-- 댓글 수정과 삭제를 위한 Modal창 -->
       <!-- Modal -->
     <div id="modifyModal" class="modal modal-primary fade" role="dialog">
       <div class="modal-dialog">
@@ -188,11 +191,11 @@
 /* 댓글목록 리스트버튼 클릭 시 댓글 보여주기/숨기기 */
 $("#repliesDiv").on("click", function() {
    if ($(".timeline li").size() > 1) {
-     //alert("if");
-     $(".replyLi").remove();
+	  //alert("if");
+	  $(".replyLi").remove();
   }else{
-     //alert("else");
-     getPage("/replies/" + article_no + "/1");
+	  //alert("else");
+	  getPage("/replies/" + article_no + "/1");
   } 
 });
 
@@ -217,7 +220,7 @@ $("#replyAddBtn").on("click",function(){
         alert("등록 되었습니다.");
         replyPage = 1;
         getPage("/replies/"+article_no+"/"+replyPage );
-        user_nmObj.val("");
+        //user_nmObj.val("");
         reply_contentObj.val("");
       }
   }});
@@ -237,7 +240,7 @@ $(".timeline").on("click", ".replyLi", function(event){
 $("#replyModBtn").on("click",function(){
     var reply_no = $(".modal-title").html();
     var reply_content = $("#reply_content").val();
-   alert("reply_no"+$(".modal-title").html());
+	//alert("reply_no"+$(".modal-title").html());
     $.ajax({
       type:'put',
       url:'/replies/'+reply_no,
@@ -270,7 +273,7 @@ $("#replyDelBtn").on("click",function(){
       success:function(result){
         console.log("result: " + result);
         if(result == 'success'){
-          alert("삭제 되었습니다.");
+    	   alert("삭제 되었습니다.");
            getPage("/replies/"+article_no+"/"+replyPage );
         }
     }});
@@ -285,7 +288,7 @@ function getPage(pageInfo) {
   $.getJSON(pageInfo, function(data) {
     printData(data.list, $("#repliesDiv"), $('#template'));
     printPaging(data.pageMaker, $(".pagination"));
-   
+	
     $("#modifyModal").modal('hide');
   });
 }
@@ -332,7 +335,7 @@ var printPaging = function(pageMaker, target) {
 <script id="template" type="text/x-handlebars-template">
 {{#each .}}
 <li class="replyLi" data-reply_no={{reply_no}}>
-<i class="fa fa-comments bg-yellow    "></i>
+<i class="fa fa-comments bg-yellow 	"></i>
  <div class="timeline-item" >
   <span class="time">
   <h6 class="timeline-header"> 작성자: {{user_nm}}</h6>
@@ -365,7 +368,6 @@ var printPaging = function(pageMaker, target) {
       });
       
       $(".modifyBtn").on("click", function(){
-         //alert();
         formObj.attr("action", "/sarticle/modifyPage");
         formObj.attr("method","get");
         formObj.submit();

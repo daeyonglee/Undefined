@@ -1,12 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page session="true"%>
 <%@include file="../include/top.jsp"%>
 
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-</head>
   
 <!-- 게시글 출력하기 -->
 <div class="container">
@@ -26,6 +23,14 @@
         }else if(Integer.parseInt(request.getParameter("board_no"))==2){
         %>
             <h3 class="box-article_title">자유게시판</h3>
+              <label for="article_no">머리글</label> 
+              <select class="selectpicker"
+                id="search_article_head" name="search_article_head">
+                <option value="${read.article_head}" selected="selected">${read.article_head}</option>
+                <option value="스튜디오">스튜디오</option>
+                <option value="드레스">드레스</option>
+                <option value="메이크업">메이크업</option>
+               </select>
         <%
         }else{
         %>
@@ -69,7 +74,7 @@
     
           <!-- 리스트 보여주기  -->
           <c:forEach items="${list}" var="article">
-            <tr>
+            <tr id = "table_output">
             <!--게시글 번호 내림차순 출력하는 계산식 (전체 글 수-(선택한 페이지 *페이지에 출력되는 article수)+페이지에 출력되는 article수)- i%> -->
               <td><c:out value="${(TotalCount-(Page*PageSize)+PageSize)-i}"/></td>
               <!--자유게시판일 경우에만 Article_head를 보여주기 위한 코드  -->
@@ -85,8 +90,7 @@
             %>
                  <td><a
                  href='/sarticle/readPage${pageMaker.makeSearch(pageMaker.cri.page) }&article_no=${article.ARTICLE_NO}&board_no=<%=request.getParameter("board_no")%>'>
-                   [${article.ARTICLE_HEAD}] ${article.ARTICLE_TITLE}</a></td>
-                   
+                    <font color="orange">[${article.ARTICLE_HEAD}]</font> ${article.ARTICLE_TITLE} <font color="yellow">[${article.REPLY_COUNT}]</font></a></td>
               <%
              }}
               %>
@@ -123,7 +127,7 @@
           
             <!--페이지 네이션  -->
           <div class="text-center">
-            <ul class="pagination">
+            <ul class="pagination" id="pagination_output">
               <c:if test="${pageMaker.prev }">
                 <li><a
                   href="list${pageMaker.makeSearch(pageMaker.startPage-1) }&board_no=<%=request.getParameter("board_no")%>">&laquo;</a></li>
@@ -149,7 +153,7 @@
               <div class="col-xs-6 col-xs-offset-2">
                 <div class="input-group">
                   <div class="input-group-btn search-panel">
-                    <select name="searchType" class="selectpicker">
+                    <select name="searchType" class="selectpicker" id="searchType">
                       <option value="n"
                         <c:out value="${cri.searchType==null?'selected':'' }"/>>
                         검색유형선택</option>
@@ -212,7 +216,7 @@
 			self.location = "list"
 				+ '${pageMaker.makeQuery(1)}'
 				+ "&searchType="
-				+ $("select option:selected").val()
+				+ $("#searchType").val()
 				+ "&keyword="
 				+ encodeURIComponent($('#keywordInput')
 						.val()) + "&board_no="
@@ -229,8 +233,66 @@
 			+<%=request.getParameter("board_no")%>
 			;
 		});
+		
+		//ajax부분
+		$('#search_article_head').change(function () {
+			 var type = $('#search_article_head').val();
+			 var keyWord=$('#search_article_head').val();
+			 var url;
+			 
+			 console.log(type);
+			 
+			 if (type == '스튜디오') {
+				 url = "list/studio?board_no=2&searchType=studio";
+
+			 } else if (type == '드레스'){
+				 url = "list/dress?board_no=2";
+	
+			 } else if (type == '메이크업'){
+				 url = "list/makeup?board_no=2";
+
+			 }
+			 
+	  		 $.ajax({
+				 type : 'get',
+				 url : url,
+				 dataType : "json",
+				 data : {searchType : type,keyword: keyWord},
+				 success:function(search_article_head){
+					 $(".table.table-bordered tr#table_output").remove();
+					 $(".pagination ul#pagination_output").remove();
+	                 				 
+					 var text = "";
+					 
+					 console.log(search_article_head);
+					 for ( var i in search_article_head.list) {
+						 text += "<tr>";
+						 text += "<td>" +search_article_head.list[i].ARTICLE_NO+"</td>";
+<%-- 						 text += "<td> <a href = 'read?article_no="+search_article_head.list[i].ARTICLE_NO+"&board_no="+<%=request.getParameter("board_no")%>+"<font color='orange'>["+${article.ARTICLE_HEAD}+"]</font>"+${article.ARTICLE_TITLE}+"<font color='yellow'>["+${article.REPLY_COUNT}+"]</font></a></td>";
+ --%>						
+ 						 text += "<td> <a href = 'readPage?article_no="
+ 							  +search_article_head.list[i].ARTICLE_NO+"&board_no="+<%=request.getParameter("board_no")%>+"'><font color='orange'>["
+ 						      +search_article_head.list[i].ARTICLE_HEAD+"] </font>"+search_article_head.list[i].ARTICLE_TITLE+"<font color='yellow'>["+search_article_head.list[i].REPLY_COUNT+"]</font></a></td>";
+						 text += "<td>" +search_article_head.list[i].USER_NM+"</td>";
+						 text += "<td>" +search_article_head.list[i].REGDATE + "</td>";
+						 text += "<td>" +search_article_head.list[i].HITCOUNT + "</td>";
+						 text += "</tr>";
+					}
+					$(".table.table-bordered > tbody").html(text); 
+					
+					pagination(search_article_head.pageMaker);
+					
+					totalCount(search_article_head.pageMaker.totalCount);
+				 },
+		         error:function(){
+		            console.log("오류");
+		         }
+			 }); 
+		 }); 
+		
+		
 	});
 
 </script>
 <%@include file="../include/bottom.jsp"%>
-  </html>
+

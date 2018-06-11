@@ -109,12 +109,12 @@
 		SELECT article_no, 
 		       article_head, 
 		       article_title, 
-		       article_content article_content, 
-		       regdate regdate,
-		       hitcount hitcount, 
-		       board_no board_no, 
-		       board_nm board_nm,  
-		       user_nm user_nm
+		       article_content, 
+		       regdate,
+		       hitcount, 
+		       board_no, 
+		       board_nm,  
+		       user_nm
 		FROM   (SELECT Ceil(rownum / #{perPageNum}) page, 
 		               article_no, 
 		               article_head, 
@@ -151,6 +151,7 @@
 	</select>
 		
 	<select id="listSearch" resultType="map">
+	<![CDATA[
 		SELECT article_no, 
 		       article_head, 
 		       article_title, 
@@ -159,7 +160,8 @@
 		       hitcount, 
 		       board_no, 
 		       board_nm,  
-		       user_nm
+		       user_nm,
+		       reply_count
 		FROM   (SELECT Ceil(rownum / #{perPageNum}) page, 
 		               article_no, 
 		               article_head, 
@@ -169,7 +171,8 @@
 		               regdate,
 		               board_no, 
 		               board_nm, 
-		               user_nm 
+		               user_nm,
+		               reply_count
 		        FROM   (SELECT article_no, 
 		                       article_head, 
 		                       article_title, 
@@ -182,43 +185,63 @@
 		                        WHERE  board_no = article.board_no)   board_nm, 
 		                       (SELECT user_nm 
 		                        FROM   users 
-		                        WHERE  user_no = article.user_no)  user_nm 
-		                FROM   article 
-		                ORDER  BY article_no DESC)
-		                WHERE  board_no= #{board_no}) 
-		WHERE  page = #{page}
-		<include refid="search"></include>
+		                        WHERE  user_no = article.user_no)  user_nm,
+	                           (SELECT COUNT(article_no) 
+	                           FROM   reply 
+	                           WHERE  article_no = article.article_no) reply_count  
+		                FROM   article]]>
+		                <include refid="search"></include>
+		                <![CDATA[ORDER  BY article_no DESC)) 
+		WHERE  page = #{page}]]>
 	</select>
 	
 	<sql id="search">
 		<if test="searchType !=null">
 			<if test="searchType == 't'.toString()">
-				and article_title like
+				WHERE article_title like
 				'%'||#{keyword}||'%'
+				and board_no= #{board_no}
 			</if>
 			<if test="searchType == 'c'.toString()">
-				and article_content like
+				WHERE article_content like
 				'%'||#{keyword}||'%'
+				and board_no= #{board_no}
 			</if>
 			<if test="searchType == 'w'.toString()">
-				and user_nm like
+				WHERE user_nm like
 				'%'||#{keyword}||'%'
+				and board_no= #{board_no}
 			</if>
 			<if test="searchType == 'tc'.toString()">
-				and (article_title like
+				WHERE (article_title like
 				'%'||#{keyword}||'%' Or article_content like 
 				'%'||#{keyword}||'%')
+				and board_no= #{board_no}
 			</if>
 			<if test="searchType== 'cw'.toString()" >
-				and (article_content like
+				WHERE (article_content like
 				'%'||#{keyword}||'%' Or user_nm like 
 				'%'||#{keyword}||'%')
+				and board_no= #{board_no}
 			</if>
 			<if test="searchType== 'tcw'.toString()" >
-				and (article_title like '%'||#{keyword}||'%' 
+				WHERE (article_title like '%'||#{keyword}||'%' 
 					Or article_content like '%'||#{keyword}||'%'
 					Or user_nm like '%'||#{keyword}||'%')
+				and board_no= #{board_no}
 			</if>
+			<if test="searchType== 'studio'.toString()" >
+				WHERE article_head like '%'||#{keyword}||'%'
+				and board_no= 2
+			</if>
+			<if test="searchType== 'dress'.toString()" >
+				WHERE article_head like '%'||#{keyword}||'%'
+				and board_no= 2
+			</if>
+			<if test="searchType== 'makeup'.toString()" >
+				WHERE article_head like '%'||#{keyword}||'%'
+				and board_no= 2
+			</if>						
 		</if>
 	</sql>
 
@@ -228,7 +251,6 @@
 			       JOIN users u 
 			         ON a.user_no = u.user_no 
 			WHERE  a.article_no > 0 
-			       AND board_no = ${board_no} 
 		<include refid="search"></include>
 	</select>  
 
@@ -237,8 +259,6 @@
 			SET  HITCOUNT = HITCOUNT + 1
 			WHERE article_no = #{article_no}
 	</update>
-
-
 
 </mapper>	
 
