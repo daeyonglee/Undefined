@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.udf.common.company.domain.MakeupCompany;
 import kr.co.udf.company.domain.Criteria;
+import kr.co.udf.company.domain.MakeupReview;
 import kr.co.udf.company.domain.SearchCriteria;
 
 @Repository
@@ -48,5 +49,35 @@ public class MybatisMakeupDao implements MakeupDao {
 	@Override
 	public int MakeupSearchCount(SearchCriteria cri) throws Exception {
 		return session.selectOne(namespace+".MakeupSearchCount", cri);
+	}
+	
+	/** 메이크업 업체 상세정보 조회 */
+	@Override
+	public MakeupCompany detailMakeup(int mc_no) {
+		return session.selectOne(namespace + ".detailMakeup", mc_no);
+	}
+	
+	/** 메이크업 업체 리뷰 추가 */
+	@Override
+	public void addReview(MakeupReview makeupReview) {
+		session.insert(namespace + ".addReview", makeupReview);
+	}
+	
+	/** 메이크업 업체 리뷰 출력 */
+	@Override
+	public List<MakeupReview> reviewMakeup(int mc_no) {
+		return session.selectList(namespace + ".reviewMakeup", mc_no);
+	}
+	
+	/** 메이크업 업체 평균 별점 */
+	@Override
+	public double avgPoint(int mc_no) {
+		return session.selectOne(namespace + ".avgPoint", mc_no);
+	} 
+	
+	/** 메이크업 업체 리뷰 갯수 */
+	@Override
+	public int countReview(int mc_no) throws Exception {
+		return session.selectOne(namespace + ".countReview", mc_no);
 	}
 }

@@ -2,10 +2,10 @@ package kr.co.udf.company.domain;
 
 public class DressReview {
 	
-	private int drNo;
-	private int dcNo;
-	private String content;
-	private String point;
+	private int dr_no;
+	private int dc_no;
+	private String dr_content;
+	private String dr_point;
 	private String regdate;
 	private String updatedate;
 	
@@ -14,37 +14,36 @@ public class DressReview {
 		super();
 	}
 
-	/** Getter & Setter */
-	public int getDrNo() {
-		return drNo;
+	public int getDr_no() {
+		return dr_no;
 	}
 
-	public void setDrNo(int drNo) {
-		this.drNo = drNo;
+	public void setDr_no(int dr_no) {
+		this.dr_no = dr_no;
 	}
 
-	public int getDcNo() {
-		return dcNo;
+	public int getDc_no() {
+		return dc_no;
 	}
 
-	public void setDcNo(int dcNo) {
-		this.dcNo = dcNo;
+	public void setDc_no(int dc_no) {
+		this.dc_no = dc_no;
 	}
 
-	public String getContent() {
-		return content;
+	public String getDr_content() {
+		return dr_content;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
+	public void setDr_content(String dr_content) {
+		this.dr_content = dr_content;
 	}
 
-	public String getPoint() {
-		return point;
+	public String getDr_point() {
+		return dr_point;
 	}
 
-	public void setPoint(String point) {
-		this.point = point;
+	public void setDr_point(String dr_point) {
+		this.dr_point = dr_point;
 	}
 
 	public String getRegdate() {
@@ -63,11 +62,12 @@ public class DressReview {
 		this.updatedate = updatedate;
 	}
 
-	/** toString */
 	@Override
 	public String toString() {
-		return "DressReview [drNo=" + drNo + ", dcNo=" + dcNo + ", content=" + content + ", point=" + point
-				+ ", regdate=" + regdate + ", updatedate=" + updatedate + "]";
+		return "DressReview [dr_no=" + dr_no + ", dc_no=" + dc_no + ", dr_content=" + dr_content + ", dr_point="
+				+ dr_point + ", regdate=" + regdate + ", updatedate=" + updatedate + "]";
 	}
+
+
 
 }

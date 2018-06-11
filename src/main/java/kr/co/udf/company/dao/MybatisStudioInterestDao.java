@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import kr.co.udf.common.company.domain.StudioCompany;
 import kr.co.udf.company.domain.StudioInterest;
 
 @Repository
@@ -21,22 +20,22 @@ public class MybatisStudioInterestDao implements StudioInterestDao {
 	/** 관심업체 추가 */
 	@Override
 	public void create(StudioInterest studioInterest) throws Exception {
-		session.insert("cart.insertCart", studioInterest);
+		session.insert(NAMESPACE + ".create", studioInterest);
 	}
 
 	@Override
-	public List<StudioInterest> read(int userNo) throws Exception {
-		return session.selectList("cart.insertCart", userNo);
+	public List<StudioInterest> read(int user_no) throws Exception {
+		return session.selectList(NAMESPACE + ".read", user_no);
 	}
 
 	@Override
 	public void update(StudioInterest studioInterest) throws Exception {
-		session.update("cart.insertCart", studioInterest);
+		session.update(NAMESPACE + ".update", studioInterest);
 	}
 
 	@Override
-	public void delete(int sicNo) throws Exception {
-		session.delete("cart.insertCart", sicNo);
+	public void delete(int sic_no) throws Exception {
+		session.delete(NAMESPACE + ".delete", sic_no);
 	}
 
 }

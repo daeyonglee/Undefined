@@ -126,12 +126,24 @@
 
 <!-- 인포윈도우 스타일 -->
 <style type="text/css">
-  .hall_box{overflow:hidden}
-.hall_box img{float:left;width:170px;height:139px;margin-right:13px}
-.hall_box .hall_detail{float:left;height:100%}
+.gm-style-iw {
+  overflow: auto !important;
+  max-width:200px;
+  max-height:200px;
+}
+.gm-style-iw > div {
+  overflow: auto !important;
+  max-width:200px;
+  max-height:200px;
+  }
+  .hall_box{overflow:hidden;max-width:200px;max-height:200px;}
+  
+.hall_box img{float:left;width:80px;height:80px;margin-right:13px}
+.hall_box .hall_detail{float:left;max-width:150x}
 .hall_box .hall_detail dl{margin-bottom:25px;font-size:15px;color:#515151;font-weight:bold;}
 .hall_box .hall_detail dl dt a{font-size:10px;color:#2a2a2a;font-weight:bold}
-.hall_box .hall_detail dl dd{color:#FF7268;font-size:11px;margin-top:-15px}
+.hall_box .hall_detail dl dd{color:#FF7268;font-size:12px;margin-top:-15px}
+.hall_box .hall_detail dt{color:#515151;font-size:11px;margin-top:-25px}
 .hall_box .hall_detail li{color:#515151;font-size:11px;max-width:150px;margin-top:-10px}
 .hall_box .hall_detail li span{float:right}
   .load{position:relative}
@@ -141,6 +153,22 @@
   <style type="text/css">
   .search{margin-bottom:20px;}
   </style>
+
+<!-- 별 스타일  -->
+<style>
+span.star-prototype, span.star-prototype>* {
+	height: 16px;
+	background: url(http://i.imgur.com/YsyS5y8.png) 0 -16px repeat-x;
+	width: 80px;
+	display: inline-block;
+}
+
+span.star-prototype>* {
+	background-position: 0 0;
+	max-width: 80px;
+}
+</style>
+
 
 <body onload="initialize()">
 
@@ -158,109 +186,83 @@
       <div class="container">
         <div class="row">
 
-<script type="text/javascript">
-</script>
+        <script type="text/javascript">
+        </script>
 
           <!-- 컨텐츠 시작 -->
+           <!-- 스드메 버튼 -->
           <div class="col-md-9 padding-top-40 properties-page">
             <div class="section clear">
               <div class="col-xs-10 page-subheader sorting pl0">
                   <a href="slist"> <button type="button">STUDIO</button>  </a>   
                  <button type="button" disabled>DRESS</button>
                  <a href="makeup"><button type="button">MAKEUP</button></a>   
-                
-          <script type="text/javascript">
-//          $(document).ready(function() {
- //    			 $("button").click(function() {
- //    			   $("#result").load("dress #session01");  
-//      })
- //   })
-          </script>
-
-               
-              
               </div>
-
+            <!-- 그리드 스위치 부분 -->
+              <div class="col-xs-2 layout-switcher">
+                <a class="layout-grid active" href="javascript:void(0);"> <i class="fa fa-th"></i> </a>     
+                <a class="layout-list" href="javascript:void(0);"> <i class="fa fa-th-list"></i>  </a>                     
+             </div>
   
             </div>
             <!-- 왼쪽 컨테이너 -->
             <div class="section clear">
               <div id="list-type" class="proerty-th">
 
-         <c:forEach items="${dresslist}" var="dress" varStatus="status">
-
-                  <div class="col-sm-6 col-md-4 p0">
-                    <div class="box-two proerty-item">
-                      <div class="item-thumb">
-
-
-                
-                        <div id="myCarousel" class="carousel slide"
-                          data-ride="carousel">
-                          <ol class="carousel-indicators">
-                            <li data-target="#myCarousel"
-                              data-slide-to="0" class="active"></li>
-                            <li data-target="#myCarousel"
-                              data-slide-to="1"></li>
-                            <li data-target="#myCarousel"
-                              data-slide-to="2"></li>
-                          </ol>
-
-                          <div class="carousel-inner">
-                            <div class="item active">
-                              <img
-                                src="http://iwedding.co.kr/center/website/brandplus/6285/721-N153_141014032549_1.jpg"
-                                alt="Los Angeles" style="width: 100%;">
-                            </div>
-
-                            <div class="item">
-                              <img src="chicago.jpg" alt="Chicago"
-                                style="width: 100%;">
-                            </div>
-
-                            <div class="item">
-                              <img src="ny.jpg" alt="New york"
-                                style="width: 100%;">
-                            </div>
-                          </div>
-
-                          <a class="left carousel-control"
-                            href="#myCarousel" data-slide="prev"> <span
-                            class="glyphicon glyphicon-chevron-left"></span>
-                            <span class="sr-only">Previous</span>
-                          </a> <a class="right carousel-control"
-                            href="#myCarousel" data-slide="next"> <span
-                            class="glyphicon glyphicon-chevron-right"></span>
-                            <span class="sr-only">Next</span>
-                          </a>
-                        </div>
-                      </div>
-                      <div class="item-entry overflow">
-                        <h5>
-                          <a
-                            href="/company/compare?companyNo=${dress.dc_no}">
-                            ${dress.dc_nm} </a>
-                        </h5>
-
-                        <div class="dot-hr"></div>
-                        <span class="proerty-price pull-left">
-                          ★★★ </span> 3.0/5.0 (20명) <br>
+            <!-- 별 생성 스크립트 -->
+            <script>
             
-          <c:choose>
-           <c:when test="${fn:length(dress.dc_introduce) > 40}">
-                        <div class=""><c:out value="${fn:substring(dress.dc_introduce,0,39)}"/> ... </div>
-                          </c:when>
+            $.fn.generateStars = function() {
+                return this.each(function(i,e){$(e).html($('<span/>').width($(e).text()*16));});
+            };
+            </script>
+            
+            <script>
+            $(function(){
+            $('.star-prototype').generateStars();
+            });
+            </script>
+    
+            <!-- 업체 리스트 박스 -->
+            <div class="col-md-12 clear"> 
+          	<div id="list-type" class="proerty-th">
+      
+            <c:forEach items="${dresslist}" var="dress" varStatus="status">
+        		<div class="col-sm-6 col-md-4 p0">
+            
+				<div class="box-two proerty-item">
+					<div class="item-thumb">
+						<a href="/company/dress/dressDetail?dc_no=${dress.dc_no}"><img src="${dress.dc_main_image}"></a>
+					</div>
+
+					<div class="item-entry overflow">
+						<h5><a href="/company/dress/dressDetail?dc_no=${dress.dc_no}"> ${dress.dc_nm} </a></h5>
+						<div class="dot-hr"></div>
+						  <span class="pull-left">
+                            <span class="star-prototype">${dress.avg }</span>
+                            ${dress.avg } 점 (${dress.count}명) </span> <br>
+                           
+                           <span class="pull-left">
+                             <c:choose>
+                               <c:when test="${fn:length(dress.dc_smy_intro) < 1}">
+                               <div class=""> 등록된 소개말이 없습니다. </div> 
+                              </c:when>
                              <c:otherwise>
-                              <c:out value="${dress.dc_introduce}"/>
+                              <div class=""><c:out value="${dress.dc_smy_intro}"/> </div>
                                </c:otherwise> 
-                                    </c:choose>   
-                      </div>
+                               </c:choose>   
+                             </span>
+						  <p style="display: none;">${dress.dc_introduce }</p>
                     </div>
-                  </div>
-            
-</c:forEach>
-              </div>
-            </div>
+
+				</div>
+        
+			</div> 
+
+        </c:forEach>
+	</div>
+  
+</div>
 
           <!-- 페이징 처리 -->
             <div class="section">
@@ -268,7 +270,7 @@
                 <div class="pagination">
                   <ul>
                 	<c:if test="${pageMaker.prev}">
-						<li><a href="${pageMaker.startPage - 1}">&laquo;</a></li>
+						<li><a href="dress?page=${pageMaker.startPage - 1}">&laquo;</a></li>
 					</c:if>
 
 					<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
@@ -281,7 +283,7 @@
 
 							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 								<li><a
-									href="${pageMaker.endPage +1}">&raquo;</a></li>
+									href="dress?page=${pageMaker.endPage +1}">&raquo;</a></li>
 							</c:if>
                   </ul>
                 </div>
@@ -326,27 +328,27 @@
                                 </div>
                                 
                                 
-  <script>
-  $(document).ready(
-      function() {
-
-        $('#searchBtn').on(
-            "click",
-            function(event) {
-              self.location = "dress"
-          + '${pageMaker.makeQuery(1)}'
-          + "&searchType=" + $("select option:selected").val()
-          + "&keyword=" + $('#keywordInput').val();
-            });
-        });
-
-</script>                              
+                  <script>
+                  $(document).ready(
+                      function() {
+                
+                        $('#searchBtn').on(
+                            "click",
+                            function(event) {
+                              self.location = "dress"
+                          + '${pageMaker.makeQuery(1)}'
+                          + "&searchType=" + $("select option:selected").val()
+                          + "&keyword=" + $('#keywordInput').val();
+                            });
+                        });
+                
+                </script>                              
                                           
                                 
                                 
                                 
                                 
-         <!-- 지도시작 -->
+  <!-- 지도시작 -->
 
                 <div id="map" style="width: 100%; height: 650px;"></div>
 
@@ -371,152 +373,298 @@
 					scaleControl:false,
 				};
 				
-				
 				var map = new google.maps.Map(document.getElementById("map"),
 						myOptions);
 
 				var geocoder = new google.maps.Geocoder();
+
 				var bounds = new google.maps.LatLngBounds();
 
-				var region = document.getElementById("mapList").value.split(",");
-				var name = document.getElementById("nameList").value.split(",");
+				var region = document.getElementById("mapList").value.split("/");
+				var name = document.getElementById("nameList").value.split("/");
+				var num = document.getElementById("numList").value.split("/");
+				var avg = document.getElementById("avgList").value.split("/");
+				var count = document.getElementById("countList").value.split("/");
+				var list = document.getElementById("list").value.split("/");
+
+				console.info('지역 : ' + region);
 				
-				var list = document.getElementById("list").value.split(",");
-				//console.log(list);
+				
 				/*
 					info : {region:name, region:name}
 				*/
 				//var myLatlng1 = new google.maps.LatLngBounds(37.4837121, 127.0324112);
 				//console.log(myLatlng1);
 				var currentInfoWindow = null;
-
+				
 				//마커를 올릴 지역을 가져온다.
 				if (region.length > 0) {
 					for (var i = 0; i < region.length; i++) {
 						geocoder.geocode({'address' : region[i]},
-										function (results, status) {
-											if (status == google.maps.GeocoderStatus.OK) {
-												for (var j = 0; j < results.length; j++) {
-													// 좌표값 받아오기
-													
-													var lat = results[j].geometry.location.lat();
-													var lng = results[j].geometry.location.lng();
-
-													// 마커 속성 설정하기
-													var marker = new google.maps.Marker(				
-															{
-																position : results[j].geometry.location,
-																title : results[j].formatted_address,
-																map : map,
-																bounds: true,
-																maxZoom: 17
-																//center : {lat: -34, lng: 151}
-																//icon : iconBase
-															});
-														
-														bounds.extend(marker.position);
-														map.fitBounds(bounds);
-														
-													//var address = region;
-													//console.log(name[n]);
-													
-													// 마커 클릭 이벤트
-													
-													//console.log('이름 : ' + marker.name);
-													//console.log('위치 : ' + marker.title);
-													
-													google.maps.event.addListener(marker,'click',function(e) {
-														
-														console.log(marker);
-														var infowin = searchName(marker);
-														var infoWindow = new google.maps.InfoWindow({ content: infowin });
-														
-														if(currentInfoWindow !=null){
-															currentInfoWindow.close();
-														}
-														//infoWindow.close();
-														infoWindow.setContent(infowin);
-														infoWindow.open(map,marker);
-														console.log(marker);
-														currentInfoWindow = infoWindow;
-													});
-											}
-												
-											} else {
-												alert("검색결과가 없습니다");
-											}
+						function (results, status) {
+							if (status == google.maps.GeocoderStatus.OK) {
+								for (var j = 0; j < results.length; j++) {
+									// 좌표값 받아오기
+									
+									var lat = results[j].geometry.location.lat();
+									var lng = results[j].geometry.location.lng();
+									
+									
+									// 마커 한개 표시 될 때 최대 줌 방지
+									google.maps.event.addListener(map, 'zoom_changed', function() {
+										zoomChangeBoundsListener = google.maps.event.addListener(map, 'bounds_changed', function(event) {
+											if (this.getZoom() > 12) 
+											this.setZoom(12);
+											google.maps.event.removeListener(zoomChangeBoundsListener);
 										});
+										
+									});
+
+									// 마커 속성 설정하기
+									var marker = new google.maps.Marker(				
+											{
+												position : results[j].geometry.location,
+												title : results[j].formatted_address,
+												map : map,
+												bounds: true,
+												maxZoom: 17,
+												//name : name[j].trim()
+												//num : num[j].trim(),
+												//avg : avg[j].trim(),
+												//count : count[j].trim()
+												//center : {lat: -34, lng: 151}
+												//icon : iconBase
+											});
+										
+										bounds.extend(marker.position);
+										map.fitBounds(bounds);
+										
+									//var address = region;
+									//console.log(name[n]);
+									
+									// 마커 클릭 이벤트
+									
+									//console.log('이름 : ' + marker.name);
+									
+									google.maps.event.addListener(marker,'click',function(e) {
+										
+										var infowin = searchName(marker);
+										var infoWindow = new google.maps.InfoWindow({ content: infowin });
+										
+										if(currentInfoWindow !=null){
+											currentInfoWindow.close();
+										}
+										//infoWindow.close();
+										infoWindow.setContent(infowin);
+										infoWindow.open(map,marker);
+										console.log(marker);
+										currentInfoWindow = infoWindow;
+									});
+							}
+								
+							} else {
+								alert("검색결과가 없습니다");
+							}
+						});
 					};
 					
 				}
 				
 				function searchName(marker) {
 					
-					var title = marker.title.replace("대한민국", "").trim();
+					var title = marker.title.replace("대한민국", "").replace("서울특별시","서울").replace("경기도","경기").trim();
+					var num = marker.num;
 					var infowin = '';
 					var image = '';
 					//인포윈도우 만들기 
 					infowin += '<div class="hall_box">';
 					//infowin += '<img src = "http://iwedding.co.kr/center/website/brandplus/6285/721-N153_141014032549_1.jpg">'
 					infowin += '<div class="hall_detail">';
+						
 					
 					$.each(list, function(index, value) {
 						
 						var arr = value.split(":");
-						var arrNo = arr[2].trim();
-						var arrTitle = arr[1].trim();
 						var arrName = arr[0].trim();
+						var arrTitle = arr[1].trim();
+						var arrNo = arr[2].trim();
+						var arrAvg = arr[3].trim();
+						var arrCount = arr[4].trim();
 						
-						if (title == arrTitle) {
-							infowin += '<dl><a href="/company/compare?dc_company_no='+arrNo+'">'+arrName+'</a></dl>';
+						console.log('title : ' + title);
+						console.log('arrTitle : ' + arrTitle);
+						if ( title == arrTitle) {
+							 infowin += '<dl><a href="/company/dress/dressDetail?dc_no='+arrNo+'">'+arrName+'</a></dl>';
+							 infowin += '<dl><dd><i class="pe-7s-map-marker strong"></i> ' +title+'</dd></dl>';
+							 infowin += '<dt> 평점 : ' +arrAvg+'점 ('+arrCount+'명)</dt>';
+							 
 						}
 						
 					});
+					//infowin += '<dl><a href="/company/compare?sc_no='+marker.num+'">'+marker.name+'</a></dl>';
 					
-					infowin += '<dl><dd>' +title+'</dd></dl>';
+					//infowin += '<dt> 평점 : ' +marker.avg+'점 ('+marker.count+'명)</dt>';
 					infowin += '</div></div>';
 					
 					return infowin;
 				}
+				
 			}
 		</script>
-    
+      
     <!-- 마커 장소 찍기 -->
-    
+          
     <!-- studio.sc_addr:studio.sc_nm, -->
-    
-           <input type="hidden" id="mapList"
+                            
+                            <c:forEach items="${dresslist}" var="dress" varStatus="index">
+                              <c:set value="${dress.dc_addr}" var="split1"/>
+  <!--  원본  -->             ${split1 }    
+ <!--  자르기 -->            <c:set value="${fn:substringAfter(split1,'^^')}" var="split2"/>
+ <!--  자르기2 결과 -->         ${split2 }
+ <!--  자르기3 -->            <c:set value="${fn:replace(split2,'^^',' ')}" var="split3"/>
+ <!--  자르기3 결과 -->        ${split3 }
+ 
+ 
+ <!--  자르기4 -->           <c:set value="${fn:substringBefore(split2,'^^').trim() }" var="split4"/>
+ <!--  자르기4 결과 -->        ${split4 }
+                                <c:choose>
+                                  <c:when test="${fn:contains(split4, '(')}" >
+  <!--  자르기5 -->                 <c:set value="${fn:substringBefore(split4,'(').trim() }" var="split5"/>
+  <!--  자르기5 결과 -->              ${split5 }
+                                  </c:when>
+                                     <c:otherwise>
+  <!-- other -->            	       ${split4 }
+                                     </c:otherwise>
+                                 </c:choose>
+                              </c:forEach>
+                              
+                              
+                              
+                              
+                              
+                   <!-- <input type="hidden" id="list"
+             value= "
+               <c:forEach items="${list}" var="studio" varStatus="index">
+                  <c:choose>
+                    <c:when test="${index.last}">${studio.sc_nm}:${studio.sc_addr}:${studio.sc_no }</c:when>
+                    <c:otherwise>${studio.sc_nm}:${studio.sc_addr}:${studio.sc_no }/</c:otherwise>
+                  </c:choose>
+               </c:forEach>
+             " /> -->
+         
+          
+          <!-- 위치랑 이름이랑 연결해서 찍어주는애 -->
+              <input type="hidden" id="list"
                value= "
                  <c:forEach items="${dresslist}" var="dress" varStatus="index">
-                    <c:choose>
-                      <c:when test="${index.last}">${dress.dc_addr}</c:when>
-                      <c:otherwise>${dress.dc_addr},</c:otherwise>
+                 
+                    <c:set value="${dress.dc_addr}" var="split1"/>
+                    <c:set value="${fn:substringAfter(split1,'^^')}" var="split2"/>
+                    <c:set value="${fn:substringBefore(split2,'^^').trim()}" var="split4"/>
+                    <c:set value="${fn:substringBefore(split4,'(').trim()}" var="split5"/>
+                    
+                       <c:choose>
+                         <c:when test="${fn:contains(split4, '(')}" >
+                             <c:choose>
+                               <c:when test="${index.last}">${dress.dc_nm}:${split5}:${dress.dc_no }:${dress.avg}:${dress.count}</c:when>
+                                 <c:otherwise>${dress.dc_nm}:${split5}:${dress.dc_no}:${dress.avg}:${dress.count}/</c:otherwise>
+                               </c:choose>
+                          </c:when>
+                    
+                     <c:otherwise>
+                       <c:choose>
+                          <c:when test="${index.last}">${dress.dc_nm}:${split4}:${dress.dc_no}:${dress.avg}:${dress.count}</c:when>
+                           <c:otherwise>${dress.dc_nm}:${split4}:${dress.dc_no}:${dress.avg}:${dress.count}/</c:otherwise>
                     </c:choose>
+                     </c:otherwise>
+                    
+                    </c:choose>
+                    
+                    
                  </c:forEach>
                " />
                
-          <input type="hidden" id="list"
-             value= "
-               <c:forEach items="${dresslist}" var="dress" varStatus="index">
-                  <c:choose>
-                    <c:when test="${index.last}">${dress.dc_nm}:${dress.dc_addr}:${dress.dc_no }</c:when>
-                    <c:otherwise>${dress.dc_nm}:${dress.dc_addr}:${dress.dc_no },</c:otherwise>
-                  </c:choose>
-               </c:forEach>
-             " />
+               
+         
+          <!-- 지도 마커 위치 -->
+              <input type="hidden" id="mapList"
+               value= "
+                 <c:forEach items="${dresslist}" var="dress" varStatus="index">
+                 
+                    <c:set value="${dress.dc_addr}" var="split1"/>
+                    <c:set value="${fn:substringAfter(split1,'^^')}" var="split2"/>
+                    <c:set value="${fn:substringBefore(split2,'^^').trim()}" var="split4"/>
+                    <c:set value="${fn:substringBefore(split4,'(').trim()}" var="split5"/>
+                    
+                       <c:choose>
+                         <c:when test="${fn:contains(split4, '(')}" >
+                             <c:choose>
+                               <c:when test="${index.last}">${split5}</c:when>
+                                 <c:otherwise>${split5}/</c:otherwise>
+                               </c:choose>
+                          </c:when>
+                    
+                     <c:otherwise>
+                       <c:choose>
+                          <c:when test="${index.last}">${split4}</c:when>
+                           <c:otherwise>${split4}/</c:otherwise>
+                    </c:choose>
+                     </c:otherwise>
+                    
+                    </c:choose>
+                    
+                    
+                 </c:forEach>
+               " />
+               
              
-   
+          <!-- 업체이름  -->   
            <input type="hidden" id="nameList"
                value= "
                  <c:forEach items="${dresslist}" var="dress" varStatus="index">
                     <c:choose>
                       <c:when test="${index.last}">${dress.dc_nm}</c:when>
-                      <c:otherwise>${dress.dc_nm},</c:otherwise>
+                      <c:otherwise>${dress.dc_nm}/</c:otherwise>
                     </c:choose>
                  </c:forEach>
                " />
-
-
+               
+               
+           <!-- 업체번호  -->   
+           <input type="hidden" id="numList"
+               value= "
+                 <c:forEach items="${dresslist}" var="dress" varStatus="index">
+                    <c:choose>
+                      <c:when test="${index.last}">${dress.dc_no}</c:when>
+                      <c:otherwise>${dress.dc_no}/</c:otherwise>
+                    </c:choose>
+                 </c:forEach>
+               " />
+               
+            <!-- 업체평점  -->   
+           <input type="hidden" id="avgList"
+               value= "
+                 <c:forEach items="${dresslist}" var="dress" varStatus="index">
+                    <c:choose>
+                      <c:when test="${index.last}">${dress.avg}</c:when>
+                      <c:otherwise>${dress.avg}/</c:otherwise>
+                    </c:choose>
+                 </c:forEach>
+               " />  
+               
+                            
+          <!-- 업체평점 카운트  -->   
+           <input type="hidden" id="countList"
+               value= "
+                 <c:forEach items="${dresslist}" var="dress" varStatus="index">
+                    <c:choose>
+                      <c:when test="${index.last}">${dress.count}</c:when>
+                      <c:otherwise>${dress.count}/</c:otherwise>
+                    </c:choose>
+                 </c:forEach>
+               " />                                                      
+                         
+               
                 <!-- 구글맵 key -->
                 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEd3UEpvjDZcH8FLF2eO4SJvDAdp2IByY"></script>
 
@@ -528,6 +676,8 @@
         <!-- 지도 끝 -->
       </div>
     </div>
+  </div>
+  </div>
   </div>
   
 </body>

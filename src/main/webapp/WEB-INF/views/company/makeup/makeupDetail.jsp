@@ -236,18 +236,18 @@ span.star-prototype > * {
 </head>
 <body onload="initialize()">
 
-  <jsp:include page="../include/top.jsp" />
+  <jsp:include page="../../include/top.jsp" />
 
   <form role="form" method="post">
     <input type='hidden' name='companyNo'
-      value="${StuidoCompany.sc_no}">
+      value="${MakeupCompany.mc_no}">
   </form>
 
   <div class="page-head">
     <div class="container">
       <div class="row">
         <div class="page-head-content">
-          <h1 class="page-title" align="center">${studioCompany.sc_nm}</h1>
+          <h1 class="page-title" align="center">${makeupCompany.mc_nm}</h1>
         </div>
       </div>
     </div>
@@ -271,7 +271,7 @@ function compInterest() {
   <div class="content-area single-property"
     style="background-color: #FCFCFC;">
     <div class="container">
-      <a href="slist" class="btn-primary">
+      <a href="../makeup" class="btn-primary">
           <span class="glyphicon glyphicon-arrow-left"></span> 업체목록
       </a>
       <div class="clearfix padding-top-40">
@@ -279,8 +279,8 @@ function compInterest() {
           <div class="row">
             <div class="light-slide-item">
               <div class="clearfix">   
-               <form method="post" action="/company/interest" id="interest">
-               <input type='hidden' name='sc_no' value ="${studioCompany.sc_no}">
+               <form method="post" action="/company/makeup/interest" id="interest">
+               <input type='hidden' name='mc_no' value ="${makeupCompany.mc_no}">
                 <div class="favorite-and-print">
                   <a class="add-to-fav" href="#login-modal" data-toggle="modal" onclick="addInterest();"><i id="favorite" class="fa fa-star-o"></i>
                   </a> <a class="printer-icon"
@@ -319,7 +319,7 @@ function compInterest() {
 <script>
   var locked = 0;
   
-  function show(sr_point) {
+  function show(mr_point) {
     if (locked)
       return;
     var i;
@@ -328,13 +328,13 @@ function compInterest() {
     var e = document.getElementById('startext');
     var stateMsg;
     
-    for (i=1; i<=sr_point; i++) {
+    for (i=1; i<=mr_point; i++) {
       image = 'image' + i;
       el = document.getElementById(image);
       el.src = "/resources/images/fullStar.png";
     }
     
-    switch (sr_point) {
+    switch (mr_point) {
     case 1:
       stateMsg = "진짜 별로네요";
       break;
@@ -356,28 +356,28 @@ function compInterest() {
     e.innerHTML = stateMsg;
   }
   
-  function noshow(sr_point) {
+  function noshow(mr_point) {
     if (locked)
       return;
     var i;
     var image;
     var el;
     
-    for (i=1; i<=sr_point; i++) {
+    for (i=1; i<=mr_point; i++) {
       image = 'image' + i;
       el = document.getElementById(image);
       el.src = "/resources/images/emptyStar.png";
     }
   }
   
-  function lock(sr_point) {
-    show(sr_point);
+  function lock(mr_point) {
+    show(mr_point);
     locked = 1;
   }
   
-  function mark(sr_point) {
-    lock(sr_point);
-    document.starting.sr_point.value=sr_point;
+  function mark(mr_point) {
+    lock(mr_point);
+    document.starting.mr_point.value=mr_point;
   }
 </script>
 
@@ -395,10 +395,9 @@ $('.star-prototype').generateStars();
 });
 </script>
 
-
           <div class="single-property-wrapper">
             <div class="single-property-header">
-              <h1 class="property-title pull-left">"${studioCompany.sc_smy_intro}"</h1>
+              <h1 class="property-title pull-left">"${makeupCompany.mc_smy_intro}"</h1>
             </div>
          
             <div class="section">
@@ -411,11 +410,7 @@ $('.star-prototype').generateStars();
               </c:if>
                 <c:if test="${not empty list}"><p>이 업체는 등록된 후기 <b>${count}</b>개 중에서 <strong>${avg}</strong>의 평균별점을 받았습니다.</p></c:if>
                 <hr style="border: 3px solid #f1f1f1">
-
-
                 <br/>
-                
-
                 
                 <!-- 리뷰테이블 시작 -->
                 <div style="width:100%; height:200px; overflow:auto">
@@ -431,13 +426,13 @@ $('.star-prototype').generateStars();
                   <tbody>
                   <c:choose>
                   <c:when test="${not empty list}">
-                    <c:set var="num" value="${fn:length(list)}"/>
-                    <c:forEach items="${list}" var="studioReview">
+                                      <c:set var="num" value="${fn:length(list)}"/>
+                    <c:forEach items="${list}" var="makeupReview">
                       <tr>
                         <td>${num}</td>
-                        <td>${studioReview.sr_content}</td>
-                        <td><span class="star-prototype">${studioReview.sr_point}</span></td>
-                        <td>${studioReview.regdate}</td>
+                        <td>${makeupReview.mr_content}</td>
+                        <td><span class="star-prototype">${makeupReview.mr_point}</span></td>
+                        <td>${makeupReview.regdate}</td>
                       </tr>
                       <c:set var="num" value="${num-1}"/>
                      </c:forEach>
@@ -457,9 +452,9 @@ $('.star-prototype').generateStars();
             <!-- End description area  -->
 
 <h4 class="s-property-title">후기등록</h4>
-            <form action="/company/review" method="post" id="addReview" name="starting" onclick="checkForm();return false">
-                <input type='hidden' name='sc_no' value="${studioCompany.sc_no}">
-                <input type="hidden" name="sr_point"/>  
+            <form action="/company/makeup/review" method="post" id="addReview" name="starting">
+                <input type='hidden' name='mc_no' value="${makeupCompany.mc_no}">
+                <input type="hidden" name="mr_point"/>  
              
                 <div class="col-sm-12 text-center">
                   <img id=image1 onmouseover=show(1) onclick=mark(1) onmouseout=noshow(1) src="/resources/images/emptyStar.png"> 
@@ -474,22 +469,22 @@ $('.star-prototype').generateStars();
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="firstname">이 름</label> <input type="text"
-                    class="form-control" id="firstname" name="user_nm" value="${user_nm}" disabled>
-                    <input type="hidden" name="user_nm" value="${user_nm}">
+                    class="form-control" id="firstname" value="${user_nm}" disabled>
+                    
                 </div>
               </div>
 
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="subject">제 목</label> <input type="text"
-                    class="form-control" id="subject" name="sr_subject">
+                    class="form-control" id="subject" >
                 </div>
             </div>
 
               <div class="col-sm-12">
                 <div class="form-group">
                   <label for="message">내 용</label>
-                  <textarea name="sr_content" id="message"
+                  <textarea name="mr_content" id="message"
                     class="form-control" placeholder="이곳에 후기를 남겨주세요.."></textarea>
                 </div>
               </div>
@@ -513,14 +508,14 @@ $('.star-prototype').generateStars();
                   <div class="clear">
                     <div class="col-xs-4 col-sm-4 dealer-face">
                       <a href=""> <img
-                        src="/resources/images/studio.jpg"
+                        src="/resources/images/makeup.jpg"
                         class="img-circle">
                       </a>
                     </div>
                     <div class="col-xs-8 col-sm-8 ">
                       <h3 class="dealer-name">
-                        <a href="">대표: ${studioCompany.sc_main_nm}</a><br>
-                        <span>사업자 : ${studioCompany.sc_company_no}</span>
+                        <a href="">대표: ${makeupCompany.mc_main_nm}</a><br>
+                        <span>사업자 : ${makeupCompany.mc_company_no}</span>
                       </h3>
                       <div class="dealer-social-media">
                         <a class="twitter" target="_blank" href="">
@@ -569,7 +564,7 @@ function minComp() {
 </script>
 
 <!-- 주소 자르기(split) -->
-<c:set value="${studioCompany.sc_addr}" var="addr"/>
+<c:set value="${makeupCompany.mc_addr}" var="addr"/>
 <c:set value="${fn:substringAfter(addr,'^^')}" var="addr2"/>
 <c:set value="${fn:replace(addr2,'^^',' ')}" var="keywordArr"/>
 
@@ -580,35 +575,32 @@ function minComp() {
                            ${word} 
                         </c:forEach>
                       </li>
-                      <li><i class="pe-7s-mail strong"> </i>${studioCompany.sc_email}</li>
-                      <li><i class="pe-7s-call strong"> </i>${studioCompany.sc_tel}</li>
+                      <li><i class="pe-7s-mail strong"> </i>${makeupCompany.mc_email}</li>
+                      <li><i class="pe-7s-call strong"> </i>${makeupCompany.mc_tel}</li>
                     </ul>
-                    <p style="color: black">${studioCompany.sc_introduce}</p>
+                    <p style="color: black">${makeupCompany.mc_introduce}</p>
 
-                      <form method="post" action="/company/add" name="frm">
-                      <input type='hidden' name='sc_no' value="${studioCompany.sc_no}"> 
-                      <input type='hidden' name='sc_nm' value="${studioCompany.sc_nm}">
-                      <c:if test="${not empty list}">
-                         <input type='hidden' name='avg' value="${avg}">
-                         <input type='hidden' name='count' value="${count}">
-                      </c:if>
-                      <input type='hidden' name='sc_addr' value="<c:forEach var='word' items='${keywordArr}'>
+                      <form method="post" action="/company/makeup/add" name="frm">
+                      <input type='hidden' name='mc_no' value="${makeupCompany.mc_no}"> 
+                      <input type='hidden' name='mc_nm' value="${makeupCompany.mc_nm}">
+                      <input type='hidden' name='avg' value="${avg}">
+                      <input type='hidden' name='mc_addr' value="<c:forEach var='word' items='${keywordArr}'>
                            ${word} 
                       </c:forEach>">
                     
-                      <c:set value="${studioCompany.sc_no}" var="comp"/>
-                      <c:if test="${empty cart}">
+                      <c:set value="${makeupCompany.mc_no}" var="comp"/>
+                      <c:if test="${empty cart3}">
                        <input type='submit' id='jqueryComp' class='btn btn-next btn-primary' name='next' value='비교업체 등록'/>
                       </c:if>
 
                       <c:set var="flag" value="false" />
-                      <c:if test="${not empty cart}">
+                      <c:if test="${not empty cart3}">
                         <c:choose>  
-                          <c:when test="${fn:length(cart) gt '2'}"><input type='button' class='btn btn-next btn-primary' value='비교업체 등록' onclick='maxComp();'/></c:when>
+                          <c:when test="${fn:length(cart3) gt '2'}"><input type='button' class='btn btn-next btn-primary' value='비교업체 등록' onclick='maxComp();'/></c:when>
                           <c:otherwise>
                             <c:if test="${not flag}">
-                              <c:forEach items="${cart}" var="dto">
-                                <c:if test="${comp eq dto.sc_no}">
+                              <c:forEach items="${cart3}" var="dto">
+                                <c:if test="${comp eq dto.mc_no}">
                                   <input type='submit' id='jqueryComp' class='btn btn-next btn-primary' name='next' value='비교업체 등록' disabled='disabled'/>
                                   <c:set var="flag" value="true" />
                                 </c:if>
@@ -660,7 +652,7 @@ function minComp() {
                                                     new google.maps.Size(size_x, size_y));
          
         // Geocoding *****************************************************
-        var address = '${studioCompany.sc_addr}'; // DB에서 주소 가져와서 검색하거나 왼쪽과 같이 주소를 바로 코딩.
+        var address = '${makeupCompany.mc_addr}'; // DB에서 주소 가져와서 검색하거나 왼쪽과 같이 주소를 바로 코딩.
         var marker = null;
         var geocoder = new google.maps.Geocoder();
         geocoder.geocode( { 'address': address}, function(results, status) {
@@ -669,11 +661,11 @@ function minComp() {
                 marker = new google.maps.Marker({
                                 map: map,
                                 icon: image, // 마커로 사용할 이미지(변수)
-                                title: '${studioCompany.sc_nm}', // 마커에 마우스 포인트를 갖다댔을 때 뜨는 타이틀
+                                title: '${makeupCompany.mc_nm}', // 마커에 마우스 포인트를 갖다댔을 때 뜨는 타이틀
                                 position: results[0].geometry.location
                             });
  
-                var content = "<b>${studioCompany.sc_nm}</b><br/><br/>Tel: ${studioCompany.sc_tel}"; // 말풍선 안에 들어갈 내용
+                var content = "<b>${makeupCompany.mc_nm}</b><br/><br/>Tel: ${makeupCompany.mc_tel}"; // 말풍선 안에 들어갈 내용
              
                 // 마커를 클릭했을 때의 이벤트. 말풍선 뿅~
                 var infowindow = new google.maps.InfoWindow({ content: content});
@@ -736,7 +728,7 @@ function removeComp() {
   <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <c:choose>
-    <c:when test="${empty cart}">
+    <c:when test="${empty cart3}">
       <center><h3>등록된 비교업체가 없습니다......!!</h3></center>
     </c:when>
     
@@ -747,23 +739,22 @@ function removeComp() {
     <a style="color: white">비교업체 리스트</a>
     <br/>
  
-     <c:forEach items="${cart}" var="compList">
-      <form method="post" action="/company/remove" id="remove">
-      <input type='hidden' name='sc_no' value="${studioCompany.sc_no}">
-      <input type='hidden' name='companyNo' value="${compList.sc_no}"> 
-      <input type='hidden' name='sc_nm' value="${compList.sc_nm}"> 
-    
+     <c:forEach items="${cart3}" var="compList">
+      <form method="post" action="/company/makeup/remove" id="remove">
+      <input type='hidden' name='mc_no' value="${makeupCompany.mc_no}">
+      <input type='hidden' name='companyNo' value="${compList.mc_no}"> 
+      <input type='hidden' name='mc_nm' value="${compList.mc_nm}"> 
       <img src="/resources/assets/img/property-1/property1.jpg" id="imgBorder" class="img-responsive" width="90%" alt="">
       <input type="submit" value="삭제"></input>
     <!--    <span class="glyphicon glyphicon-remove-sign" onclick="removeComp()"></span>-->
-      <h4 align="center" style="color: white">${compList.sc_nm}</h4>
+      <h4 align="center" style="color: white">${compList.mc_nm}</h4>
       <br/>
       </form>
     </c:forEach>
     
     <center>
     <c:choose>  
-     <c:when test="${fn:length(cart) lt '3'}">
+     <c:when test="${fn:length(cart3) lt '3'}">
        <button type="button" class="btn btn-primary btn-lg" data-target="#myModal" onclick='minComp();'>비교하기</button>
      </c:when>
      <c:otherwise> 
@@ -778,7 +769,7 @@ function removeComp() {
 
   <p>
   <c:choose>
-  <c:when test="${empty cart}">
+  <c:when test="${empty cart3}">
       <span id="floatdiv" class="glyphicon glyphicon-chevron-left"
       style="font-size: 30px; cursor: pointer; left: 60em"
       onclick="openNav()"></span>
@@ -832,7 +823,7 @@ function removeComp() {
                            
                            
                           
-                          <c:forEach items="${cart}" var="cartComp">
+                          <c:forEach items="${cart3}" var="cartComp">
                           
                            <div class="col-sm-6 col-md-4 p0">
                              <div class="box-two proerty-item">
@@ -841,27 +832,24 @@ function removeComp() {
                                  <div id="myCarousel" class="carousel slide">
                                    <div class="carousel-inner">
                                      <div class="item active">
-                                       <img src= ${cartComp.sc_main_image } style="width: 100%;">
+                                       <img src= ${cartComp.mc_main_image } style="width: 100%;">
                                      </div>
                                    </div>
                                  </div>
                                </div>
 
                                <div id="choice">
-                                 <h6><span style='color: black'>업체명 : </span><span>${cartComp.sc_nm}</span></h6>
-                                 <h6><span style='color: black'>위치  : </span><span>${cartComp.sc_addr}</span></h6>
-                                 <h6><span style='color: black'>평점  : </span><span>${cartComp.avg}</span></h6>
-                                 <h6><span style='color: black'>후기수  : </span><span>${cartComp.count}</span></h6>
-                                 <h6><span style='color: black'>상품수  : </span><span>${cartComp.avg}</span></h6>
-                                 <h6><span style='color: black'>평균가  : </span><span>${cartComp.avg}</span></h6>
+                                 <h6><span style='color: black'>업체명 : </span><span>${cartComp.mc_nm}</span></h6>
+                                 <h6><span style='color: black'>위치  : </span><span>${cartComp.mc_addr} </span></h6>
+                                 <h6>평점  : <span></span></h6>
                                </div>
                                
-                            <form method="post" action="/company/compInterest" id="compInterest">
+                            <form method="post" action="/company/makeup/compInterest" id="compInterest">
                                   
                             <input type='hidden' name='compNo'
-                              value="${studioCompany.sc_no}"> 
-                            <input type='hidden' name='sc_no'
-                              value="${cartComp.sc_no}">   
+                              value="${makeupCompany.mc_no}"> 
+                            <input type='hidden' name='mc_no'
+                              value="${cartComp.mc_no}">   
                               
                             <input type="submit" value="관심업체 추가"></input>
                      
@@ -885,8 +873,7 @@ function removeComp() {
                       </div>
                      </div>
 
-  <jsp:include page="../include/bottom.jsp" />
-
-
+ <jsp:include page="../../include/bottom.jsp" />
+ 
 </body>
 </html>

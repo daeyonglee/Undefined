@@ -2,10 +2,10 @@ package kr.co.udf.company.domain;
 
 public class MakeupReview {
 	
-	private int mrNo;
-	private int mcNo;
-	private String content;
-	private String point;
+	private int mr_no;
+	private int mc_no;
+	private String mr_content;
+	private String mr_point;
 	private String regdate;
 	private String updatedate;
 	
@@ -14,37 +14,36 @@ public class MakeupReview {
 		super();
 	}
 
-	/** Getter & Setter */
-	public int getMrNo() {
-		return mrNo;
+	public int getMr_no() {
+		return mr_no;
 	}
 
-	public void setMrNo(int mrNo) {
-		this.mrNo = mrNo;
+	public void setMr_no(int mr_no) {
+		this.mr_no = mr_no;
 	}
 
-	public int getMcNo() {
-		return mcNo;
+	public int getMc_no() {
+		return mc_no;
 	}
 
-	public void setMcNo(int mcNo) {
-		this.mcNo = mcNo;
+	public void setMc_no(int mc_no) {
+		this.mc_no = mc_no;
 	}
 
-	public String getContent() {
-		return content;
+	public String getMr_content() {
+		return mr_content;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
+	public void setMr_content(String mr_content) {
+		this.mr_content = mr_content;
 	}
 
-	public String getPoint() {
-		return point;
+	public String getMr_point() {
+		return mr_point;
 	}
 
-	public void setPoint(String point) {
-		this.point = point;
+	public void setMr_point(String mr_point) {
+		this.mr_point = mr_point;
 	}
 
 	public String getRegdate() {
@@ -63,11 +62,11 @@ public class MakeupReview {
 		this.updatedate = updatedate;
 	}
 
-	/** toString */
 	@Override
 	public String toString() {
-		return "MakeupReview [mrNo=" + mrNo + ", mcNo=" + mcNo + ", content=" + content + ", point=" + point
-				+ ", regdate=" + regdate + ", updatedate=" + updatedate + "]";
+		return "MakeupReview [mr_no=" + mr_no + ", mc_no=" + mc_no + ", mr_content=" + mr_content + ", mr_point="
+				+ mr_point + ", regdate=" + regdate + ", updatedate=" + updatedate + "]";
 	}
 
+	
 }

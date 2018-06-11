@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                          "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace = "kr.co.udf.company.dao.DressInterestDao">
+	
+	<select id="read" resultType="kr.co.udf.company.domain.DressInterest">
+	select s.dic_no, u.user_no, c.dc_nm, c.dc_main_image, c.dc_addr ,c.dc_email, c.dc_tel, s.dc_no
+	from dress_company c JOIN dress_interest_company s
+      on c.dc_no = s.dc_no
+      join users u
+      on s.user_no = u.user_no
+      where u.user_no =  #{user_no}
+	</select>
+	
+	<insert id="create">
+	INSERT INTO dress_interest_company (dic_no, user_no, dc_no, regdate, updatedate)
+	VALUES (dress_interest_company_seq.nextval, #{user_no}, #{dc_no}, sysdate, sysdate)
+	</insert>
+	
+	<delete id="delete" >
+	DELETE FROM dress_interest_company
+	WHERE dic_no = #{dic_no}
+	</delete>
+	
+	
+	</mapper>

@@ -7,11 +7,10 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import kr.co.udf.common.company.domain.DressCompany;
-import kr.co.udf.common.company.domain.StudioCompany;
 import kr.co.udf.company.dao.DressDao;
-import kr.co.udf.company.dao.StudioDao;
 import kr.co.udf.company.domain.Criteria;
 import kr.co.udf.company.domain.SearchCriteria;
+import kr.co.udf.company.domain.DressReview;
 
 @Service
 public class DressServiceImpl implements DressService {
@@ -48,4 +47,29 @@ public class DressServiceImpl implements DressService {
 	public int DressSearchCount(SearchCriteria cri) throws Exception {
 		return dao.DressSearchCount(cri);
 	} 
+	
+	@Override
+	public DressCompany detailDress(int dc_no) throws Exception {
+		return dao.detailDress(dc_no);
+	}
+	
+	@Override
+	public void addReview(DressReview dressReview) throws Exception {
+		dao.addReview(dressReview);
+	}
+	
+	@Override
+	public List<DressReview> reviewDress(int dc_no) throws Exception {
+		return dao.reviewDress(dc_no);
+	}
+
+	@Override
+	public double avgPoint(int dc_no) throws Exception {
+		return dao.avgPoint(dc_no);
+	}
+	
+	@Override
+	public int countReview(int dc_no) throws Exception {
+		return dao.countReview(dc_no);
+	}
 }
