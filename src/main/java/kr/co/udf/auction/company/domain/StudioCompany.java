@@ -1,173 +1,196 @@
 package kr.co.udf.auction.company.domain;
 
+import java.math.BigDecimal;
+
 public class StudioCompany {
 
-	private int companyNo;
-	private String nm;
-	private int regNo; // ÏÇ¨ÏóÖÏûêÎ≤àÌò∏
-	private String headName; // ÌöåÏÇ¨ÎåÄÌëú Ïù¥Î¶Ñ
-	private String addr;
-	private String mainImage;
-	private String email;
-	private String pw;
-	private int tel;
-	private String introduce;
-	private String sessionKey;
-	private String sessionLimit;
-	private String regdate;
-	private String updatedate;
-	
-	
-	public StudioCompany() {}
+   private int companyNo;
+   private String nm;
+   private int regNo; // ªÁæ˜¿⁄π¯»£
+   private String headName; // »∏ªÁ¥Î«• ¿Ã∏ß
+   private String addr;
+   private String mainImage;
+   private String email;
+   private String pw;
+   private BigDecimal tel;
+   private String introduce;
+   private String sessionKey;
+   private String sessionLimit;
+   private String regdate;
+   private String updatedate;
+   
+   
+   public StudioCompany() {}
 
 
-	public int getCompanyNo() {
-		return companyNo;
-	}
+   public StudioCompany(int companyNo, String nm, int regNo, String headName, String addr, String mainImage,
+         String email, String pw, BigDecimal tel, String introduce, String sessionKey, String sessionLimit,
+         String regdate, String updatedate) {
+      super();
+      this.companyNo = companyNo;
+      this.nm = nm;
+      this.regNo = regNo;
+      this.headName = headName;
+      this.addr = addr;
+      this.mainImage = mainImage;
+      this.email = email;
+      this.pw = pw;
+      this.tel = tel;
+      this.introduce = introduce;
+      this.sessionKey = sessionKey;
+      this.sessionLimit = sessionLimit;
+      this.regdate = regdate;
+      this.updatedate = updatedate;
+   }
 
 
-	public void setCompanyNo(int companyNo) {
-		this.companyNo = companyNo;
-	}
+   public int getCompanyNo() {
+      return companyNo;
+   }
 
 
-	public String getNm() {
-		return nm;
-	}
+   public void setCompanyNo(int companyNo) {
+      this.companyNo = companyNo;
+   }
 
 
-	public void setNm(String nm) {
-		this.nm = nm;
-	}
+   public String getNm() {
+      return nm;
+   }
 
 
-	public int getRegNo() {
-		return regNo;
-	}
+   public void setNm(String nm) {
+      this.nm = nm;
+   }
 
 
-	public void setRegNo(int regNo) {
-		this.regNo = regNo;
-	}
+   public int getRegNo() {
+      return regNo;
+   }
 
 
-	public String getHeadName() {
-		return headName;
-	}
+   public void setRegNo(int regNo) {
+      this.regNo = regNo;
+   }
 
 
-	public void setHeadName(String headName) {
-		this.headName = headName;
-	}
+   public String getHeadName() {
+      return headName;
+   }
 
 
-	public String getAddr() {
-		return addr;
-	}
+   public void setHeadName(String headName) {
+      this.headName = headName;
+   }
 
 
-	public void setAddr(String addr) {
-		this.addr = addr;
-	}
+   public String getAddr() {
+      return addr;
+   }
 
 
-	public String getMainImage() {
-		return mainImage;
-	}
+   public void setAddr(String addr) {
+      this.addr = addr;
+   }
 
 
-	public void setMainImage(String mainImage) {
-		this.mainImage = mainImage;
-	}
+   public String getMainImage() {
+      return mainImage;
+   }
 
 
-	public String getEmail() {
-		return email;
-	}
+   public void setMainImage(String mainImage) {
+      this.mainImage = mainImage;
+   }
 
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+   public String getEmail() {
+      return email;
+   }
 
 
-	public String getPw() {
-		return pw;
-	}
+   public void setEmail(String email) {
+      this.email = email;
+   }
 
 
-	public void setPw(String pw) {
-		this.pw = pw;
-	}
+   public String getPw() {
+      return pw;
+   }
 
 
-	public int getTel() {
-		return tel;
-	}
+   public void setPw(String pw) {
+      this.pw = pw;
+   }
 
 
-	public void setTel(int tel) {
-		this.tel = tel;
-	}
+   public BigDecimal getTel() {
+      return tel;
+   }
 
 
-	public String getIntroduce() {
-		return introduce;
-	}
+   public void setTel(BigDecimal tel) {
+      this.tel = tel;
+   }
 
 
-	public void setIntroduce(String introduce) {
-		this.introduce = introduce;
-	}
+   public String getIntroduce() {
+      return introduce;
+   }
 
 
-	public String getSessionKey() {
-		return sessionKey;
-	}
+   public void setIntroduce(String introduce) {
+      this.introduce = introduce;
+   }
 
 
-	public void setSessionKey(String sessionKey) {
-		this.sessionKey = sessionKey;
-	}
+   public String getSessionKey() {
+      return sessionKey;
+   }
 
 
-	public String getSessionLimit() {
-		return sessionLimit;
-	}
+   public void setSessionKey(String sessionKey) {
+      this.sessionKey = sessionKey;
+   }
 
 
-	public void setSessionLimit(String sessionLimit) {
-		this.sessionLimit = sessionLimit;
-	}
+   public String getSessionLimit() {
+      return sessionLimit;
+   }
 
 
-	public String getRegdate() {
-		return regdate;
-	}
+   public void setSessionLimit(String sessionLimit) {
+      this.sessionLimit = sessionLimit;
+   }
 
 
-	public void setRegdate(String regdate) {
-		this.regdate = regdate;
-	}
+   public String getRegdate() {
+      return regdate;
+   }
 
 
-	public String getUpdatedate() {
-		return updatedate;
-	}
+   public void setRegdate(String regdate) {
+      this.regdate = regdate;
+   }
 
 
-	public void setUpdatedate(String updatedate) {
-		this.updatedate = updatedate;
-	}
+   public String getUpdatedate() {
+      return updatedate;
+   }
 
 
-	@Override
-	public String toString() {
-		return "DressCompany [companyNo=" + companyNo + ", nm=" + nm + ", regNo=" + regNo + ", headName=" + headName
-				+ ", addr=" + addr + ", mainImage=" + mainImage + ", email=" + email + ", pw=" + pw + ", tel=" + tel
-				+ ", introduce=" + introduce + ", sessionKey=" + sessionKey + ", sessionLimit=" + sessionLimit
-				+ ", regdate=" + regdate + ", updatedate=" + updatedate + "]";
-	}
-	
-	
+   public void setUpdatedate(String updatedate) {
+      this.updatedate = updatedate;
+   }
+
+
+   @Override
+   public String toString() {
+      return "StudioCompany [companyNo=" + companyNo + ", nm=" + nm + ", regNo=" + regNo + ", headName=" + headName
+            + ", addr=" + addr + ", mainImage=" + mainImage + ", email=" + email + ", pw=" + pw + ", tel=" + tel
+            + ", introduce=" + introduce + ", sessionKey=" + sessionKey + ", sessionLimit=" + sessionLimit
+            + ", regdate=" + regdate + ", updatedate=" + updatedate + "]";
+   }
+
+   
 }

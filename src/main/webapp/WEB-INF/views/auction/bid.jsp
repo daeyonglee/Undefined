@@ -42,16 +42,16 @@
  </script>
 <style type="text/css">
 #col {
-	padding-top: 5px;
-	padding-bottom: 5px;
+   padding-top: 5px;
+   padding-bottom: 5px;
 }
 
 #wizardProperty {
-	height: 80%;
+   height: 80%;
 }
 
 #button {
-	width: 20%;
+   width: 20%;
 }
 </style>
 </head>
@@ -164,7 +164,7 @@
                               <div class="section clear" style="overflow: scroll; height: 500px; padding: 10px">
                               <div id="list-type" class="proerty-th">
                           
-                          <c:forEach items="${studioProd}" var="prod">
+                          <c:forEach items="${products}" var="prod">
                 
                            <div class="col-sm-6 col-md-4 p0">
                              <div class="box-two proerty-item">
@@ -174,7 +174,7 @@
                                    <div class="carousel-inner">
                                    <div class='box-two proerty-item'>
                                      <div class="item active">
-                                       <img src= ${prod.productImage } alt="Los Angeles" style="width: 100%;">
+                                       <img src= "/user/mypage/imgview?imgview=${prod.productImage }"style="width: 100%;">
                                      </div>
                                    </div>
                                  </div>
@@ -185,7 +185,7 @@
                                  <div class='dot-hr'></div>
                                  <h6 style="text-align: right"><span>${prod.price}</span> 원</h6>
                                  <h6><input class="form-control" style="width: 90px; text-align: right; float: right;" type="text" placeholder="할인율(%)"></h6>
-                                 <input type="hidden" value="${prod.productImage}"  />
+                                 <input type="hidden" value="${prod.productImage}"/>
                                  <input type="hidden" value="${prod.productNo}"/>
                                </div>
                              </div>
@@ -247,37 +247,37 @@
           formObj.submit();
         });
         $("#cancelbtn").on("click", function() {
-          self.location = "list";	
+          self.location = "list";   
         });
         
         
         $("#select").on("click", function(e){
-        	// 선택된 값을 부모폼으로 보낸다.
-        	// 그에 해당하는 아이들은 
-        	var choice = $("#check:checked").parent().parent().parent();
-        	console.log(choice);
-        	
-        	var productNm    = choice.children().eq(0).children().text();
-        	var price        = choice.children().eq(2).children().text();
-        	var discount     = choice.children().eq(3).children().val();
-        	var productImage = choice.children().eq(4).val();
-        	var productNo    = choice.children().eq(5).val();
-        	
-        	console.log(productNm);
-        	console.log(price);
-        	console.log(discount);
-        	console.log(productImage);
-        	console.log(productNo);
-        	
-        	// 사진
-        	// 상품명
-        	// 실제 가격
-        	// 할인된 가격
-        	// 할인율
-        	// 상품 번호
-        	var html =  "<div class='col-sm-6 col-md-4 p0' style='margin-left: 25px;'>";
-        	    html += "  <div class='box-two proerty-item'>";
-        	    html += "    <div class='item-thumb'>";
+           // 선택된 값을 부모폼으로 보낸다.
+           // 그에 해당하는 아이들은 
+           var choice = $("#check:checked").parent().parent().parent();
+           console.log(choice);
+           
+           var productNm    = choice.children().eq(0).children().text();
+           var price        = choice.children().eq(2).children().text();
+           var discount     = choice.children().eq(3).children().val();
+           var productImage = choice.children().eq(4).val();
+           var productNo    = choice.children().eq(5).val();
+           
+           console.log(productNm);
+           console.log(price);
+           console.log(discount);
+           console.log(productImage);
+           console.log(productNo);
+           
+           // 사진
+           // 상품명
+           // 실제 가격
+           // 할인된 가격
+           // 할인율
+           // 상품 번호
+           var html =  "<div class='col-sm-6 col-md-4 p0' style='margin-left: 25px;'>";
+               html += "  <div class='box-two proerty-item'>";
+               html += "    <div class='item-thumb'>";
                 html += "      <img src='"+ productImage +"' style='width: 100%;'>";
                 html += "    </div>";
                 html += "    <div class='item-entry overflow' style='padding: 10px'>";
