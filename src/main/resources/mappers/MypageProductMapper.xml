@@ -122,7 +122,7 @@
 		            , #{product.mpPrice}
 		            , #{product.mpAccYn}
 		            , #{product.mpFamilyYn}
-		            , #{product.mpHairYns}
+		            , #{product.mpHairYn}
 		            , #{fileName}
 		            , sysdate
 		            , sysdate
