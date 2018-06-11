@@ -319,7 +319,7 @@ td, th {
          
          if(type == 'studio'){
             
-               $("#productImage").attr("src", "/user/mypage/imgview?imgview="productImage);
+               /* $("#productImage").attr("src", "/user/mypage/imgview?imgview="productImage); */
             
               var html =  "<li>";
                   html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>업체 이름</span>";
@@ -363,7 +363,7 @@ td, th {
           };
           if (type == 'dress') {
               
-          $("#productImage").attr("src", "/user/mypage/imgview?imgview="productImage);
+         /*  $("#productImage").attr("src", "/user/mypage/imgview?imgview="productImage); */
                       
                var html =  "<li>";
                    html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>업체 이름</span>";
@@ -398,7 +398,7 @@ td, th {
         };
         if (type == 'makeup') {
            
-             $("#productImage").attr("src", "/user/mypage/imgview?imgview="productImage);
+             /* $("#productImage").attr("src", "/user/mypage/imgview?imgview="productImage); */
                  
                var html =  "<li>";
                    html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>업체 이름</span>";

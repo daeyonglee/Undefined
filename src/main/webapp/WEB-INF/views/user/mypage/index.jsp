@@ -45,6 +45,10 @@
   	$("#like").on('click', function(e){
   		self.location = '/user/mypage/like';
   	});
+  	
+  	$("#interest").on('click', function(e){
+  		self.location = '/user/mypage/myinterest';
+  	});
 	});
 
 </script>
@@ -100,7 +104,7 @@
             <div class="welcome-icon">
               <i class="pe-7s-wallet pe-4x"></i>
             </div>
-            <h4><strong>나의 상품보기</strong></h4>
+            <h4><strong>관심상품</strong></h4>
           </div>
         </div>
         </c:if>
