@@ -11,21 +11,23 @@ import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import kr.co.udf.auction.company.domain.DressCompany;
+import kr.co.udf.auction.company.domain.MakeupCompany;
+import kr.co.udf.auction.company.domain.StudioCompany;
 import kr.co.udf.auction.domain.Auction;
 import kr.co.udf.auction.domain.AuctionBid;
 import kr.co.udf.auction.domain.AuctionCount;
+import kr.co.udf.auction.product.domain.StudioProduct;
 import kr.co.udf.auction.service.AuctionApplyService;
 import kr.co.udf.auction.service.AuctionBidService;
 import kr.co.udf.auction.service.AuctionCountService;
-import kr.co.udf.common.company.domain.DressCompany;
-import kr.co.udf.common.company.domain.MakeupCompany;
-import kr.co.udf.common.company.domain.StudioCompany;
 import kr.co.udf.common.web.PageMaker;
 import kr.co.udf.common.web.SearchParams;
 import kr.co.udf.user.domain.Login;
@@ -34,10 +36,6 @@ import kr.co.udf.user.domain.User;
 @Controller
 @RequestMapping("/auction/*")
 public class AuctionController {
-   
-   
-   
-   
    
 
    Logger logger = Logger.getLogger(AuctionController.class);
@@ -78,8 +76,6 @@ public class AuctionController {
       model.addAttribute("Auction",bidService.winread(no,type));            
       
    }
-   
-   
    
    /** 삭제 */
    @RequestMapping(value = "/remove", method = RequestMethod.POST)
@@ -212,38 +208,43 @@ public class AuctionController {
       @RequestMapping(value = "/bid", method = RequestMethod.GET)
       public void bidForm(int no, String type, HttpSession session, Model model) throws Exception{
          
+    	  // 회사 정보  + 상품 정보 얻어오기
          logger.info("bidForm 진입");
-         User user = (User)session.getAttribute("login");
+         Login login = (Login)session.getAttribute("login");
          String role = (String)session.getAttribute("role");
          
-         logger.info("회사 타입은?" + role);
-         logger.info("회사의 정체는?" + user);
+         int loginNo = (login.getNo()).intValue();
          
-         logger.info((user.getNo()).intValue());
+         logger.info("회사 타입은?" + role);
+         logger.info("회사의 정체는?" + login);
          
          if (role.equals("mc")) {
-            logger.info("[makeup] 업체입니다..");
-            MakeupCompany company =  bidService.searchMakeupCompany((user.getNo()).intValue());
+            logger.info("[makeup] 업체입니다...");
+            MakeupCompany company =  bidService.searchMakeupCompany(loginNo);
             logger.info(company);
             model.addAttribute("Company", company);
 
 
          } else if (role.equals("dc")) {
             logger.info("[dress] 업체입니다...");
-            DressCompany company = bidService.searchDressCompany((user.getNo()).intValue());
+            DressCompany company = bidService.searchDressCompany(loginNo);
             logger.info(company);
             model.addAttribute("Company", company);
 
 
          } else if (role.equals("sc")) {
             logger.info("[studio] 업체입니다...");
-            StudioCompany company = bidService.searchStudioCompany((user.getNo()).intValue());
+            StudioCompany company = bidService.searchStudioCompany(loginNo);
             logger.info(company);
             model.addAttribute("Company", company);
+            List<StudioProduct> studioProduct = bidService.searchStudioProduct(loginNo);
+            logger.info(studioProduct);
+            model.addAttribute("studioProd", studioProduct);
             
          }
          
-         // 이 no는 신청서번호
+         
+         // 신청서 게시글 정보 얻어오기
          logger.info(no);
          logger.info(type);
          Auction auction = new Auction();
@@ -261,18 +262,20 @@ public class AuctionController {
          
       }
 
+      @Transactional
       @RequestMapping(value = "/bid", method = RequestMethod.POST)
       public String winPost(@RequestParam("type") String type, @RequestParam("no") int no, AuctionBid bid, HttpSession session, RedirectAttributes rttr) throws Exception {
          
-         User user = (User)session.getAttribute("login");
+         Login login = (Login)session.getAttribute("login");
          Auction auction = service.read(no, type);
          
          bid.setApplyNo(no);
-         bid.setCompanyNo(user.getNo().intValue());
+         bid.setCompanyNo(login.getNo().intValue());
          bid.setUserNo(auction.getUserNo().intValue());
          
-         logger.info("회사의 정체는?" + user);
+         logger.info("회사의 정체는?" + login);
          logger.info("입찰서 내용은?" + auction);
+         logger.info(bid);
          
          if(type.equals("dress")) {
             bidService.createDressBid(bid);
@@ -286,10 +289,12 @@ public class AuctionController {
             
          } else if (type.equals("studio")) {
             bidService.createStudioBid(bid);
-            logger.info("[makeup] 입찰서 제출합니다");
+            bidService.createStudioProd(bid);
+            logger.info("[studio] 입찰서 제출합니다");
             logger.info(bid);
 
          }
+         
 
          rttr.addFlashAttribute("msg", "SUCCESS");
          return "redirect:/auction/list";
@@ -304,6 +309,8 @@ public class AuctionController {
          logger.info(user);
          
          bid.setUserNo(userNo);
+         bid.getName();
+         
          model.addAttribute("bidList", bidService.listByUser(userNo));
 
    /*      PageMaker pageMaker = new PageMaker();

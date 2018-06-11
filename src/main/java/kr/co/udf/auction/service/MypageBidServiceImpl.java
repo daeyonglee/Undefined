@@ -20,11 +20,22 @@ public class MypageBidServiceImpl implements MypageBidService {
 	public List<Auction> applyListByUser(int userNo) throws Exception {
 		return dao.applyListByUser(userNo);
 	}
+	
+	@Override
+	public List<AuctionBid> studioBidListByUser(int userNo, int applyNo) throws Exception {
+		return dao.studioBidListByUser(userNo, applyNo);
+	}
 
 
 	@Override
-	public List<AuctionBid> bidListByUser(int userNo, int applyNo, String type) throws Exception {
-		return dao.bidListByUser(userNo, applyNo, type);
+	public List<AuctionBid> dressBidListByUser(int userNo, int applyNo) throws Exception {
+		return dao.dressBidListByUser(userNo, applyNo);
+	}
+
+
+	@Override
+	public List<AuctionBid> makeupBidListByUser(int userNo, int applyNo) throws Exception {
+		return dao.makeupBidListByUser(userNo, applyNo);
 	}
 
 
@@ -33,11 +44,6 @@ public class MypageBidServiceImpl implements MypageBidService {
 		return dao.winListByUser(userNo);
 	}
 
-
-	@Override
-	public AuctionBid readBid(int userNo, int applyNo, String type) throws Exception {
-		return dao.readBid(userNo, applyNo, type);
-	}
 
 
 	@Override
@@ -59,4 +65,37 @@ public class MypageBidServiceImpl implements MypageBidService {
 		dao.updateMakeupStat(userNo, applyNo, stat);
 		
 	}
+
+	@Override
+	public AuctionBid readStudioBid(int userNo, int applyNo, int bidNo) throws Exception {
+		return dao.readStudioBid(userNo, applyNo, bidNo);
+	}
+
+	@Override
+	public AuctionBid readMakeupBid(int userNo, int applyNo, int bidNo) throws Exception {
+		return null;
+	}
+
+	@Override
+	public AuctionBid readDressBid(int userNo, int applyNo, int bidNo) throws Exception {
+		return null;
+	}
+
+	@Override
+	public int countStudioBid(int userNo, int applyNo) throws Exception {
+		return dao.countStudioBid(userNo, applyNo);
+	}
+
+	@Override
+	public int countMakeupBid(int userNo, int applyNo) throws Exception {
+		return dao.countMakeupBid(userNo, applyNo);
+	}
+
+	@Override
+	public int countDressBid(int userNo, int applyNo) throws Exception {
+		return dao.countDressBid(userNo, applyNo);
+	}
+
+
+
 }

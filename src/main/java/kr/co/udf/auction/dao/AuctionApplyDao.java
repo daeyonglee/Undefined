@@ -72,4 +72,6 @@ public interface AuctionApplyDao {
 
 	// 메이크업 낙찰 실시간 화면 조회
 	public List<Auction> makeupwinrealtimelist() throws Exception;
+	
+	// 
 }

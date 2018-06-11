@@ -49,7 +49,8 @@ $(document).ready(function() {
 <script>
   $( function() {
       $( ".datepicker" ).datepicker({
-         dateFormat: 'yy-mm-dd'
+         dateFormat: 'yy-mm-dd',
+         minDate : 0
       });
        
       
@@ -162,43 +163,17 @@ $(document).ready(function() {
                     </div>
 
                     <div class="col-lg-2" id="col">
-                      <label>예식 희망 일자 (1지망)</label>
+                      <label>예식 희망 일자</label>
                     </div>                   
                     <div class="col-lg-10" id="col">
                       <div class="col-lg-3">
-                        <input class='form-control datepicker' type="text" name="dayFirst" placeholder='ex. 1지망 날짜(필수)'>
+                        <input class='form-control datepicker' type="text" name="dayFirst" placeholder='ex. 날짜(필수)'>
                       </div>
                       <div class="col-lg-3">
-                        <input class='form-control timepicker' type="text" name="timeFirst" placeholder='ex. 1지망 시간(필수)'>
+                        <input class='form-control timepicker' type="text" name="timeFirst" placeholder='ex. 시간(필수)'>
                       </div>
                      </div>
-                     
-                     <div class="col-lg-2" id="col">
-                     <label>예식 희망 일자 (2지망)</label>
-                    </div>
-                     
-                     <div class="col-lg-10" id="col">
-                     <div class="col-lg-3">
-                        <input class='form-control datepicker' type="text" name="daySecond" placeholder='ex. 2지망 날짜(필수)'>
-                      </div>
-                      <div class="col-lg-3">
-                        <input class='form-control timepicker' type="text" name="timeSecond" placeholder='ex. 2지망 시간(필수)'>
-                      </div>
-                      </div>
-                      
-                      <div class="col-lg-2" id="col">
-                      <label>예식 희망 일자 (3지망)</label>
-                      </div>                      
-                     
-                      <div class="col-lg-10" id="col">                     
-                      <div class="col-lg-3">
-                        <input class='form-control datepicker' type="text" name="dayThird" placeholder='ex. 3지망 날짜(필수)'>
-                      </div>
-                      <div class="col-lg-3">
-                        <input class='form-control timepicker' type="text" name="timeThird" placeholder='ex. 3지망 시간(필수)'>
-                      </div>
-                      </div>
-                                        
+         
                      <div class="col-lg-2" id="col">
                       <label>입찰 마감일</label>
                     </div>

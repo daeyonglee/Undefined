@@ -61,7 +61,7 @@ public class MypageBidController {
 		return "/mypage/win";
 	}
 	
-	/** 마이페이지 - 입찰중 or 낙찰대기중인 신청서의 입찰서 리스트 조회 */
+/*	*//** 마이페이지 - 입찰중 or 낙찰대기중인 신청서의 입찰서 리스트 조회 *//*
 	@RequestMapping(value="/bidlist", method=RequestMethod.GET)
 	public String bidList(@RequestParam("applyNo") int applyNo, @RequestParam("type") String type, HttpSession session, Model model) throws Exception{
 		
@@ -75,10 +75,10 @@ public class MypageBidController {
 		model.addAttribute("bidList", bid);
 		
 		return "/mypage/bidlist";
-	}
+	}*/
 	
 	/** 마이페이지 - 입찰중 or 낙찰대기중인 신청서 상세 조회 */
-	@RequestMapping(value="/bid/read", method=RequestMethod.GET)
+/*	@RequestMapping(value="/bid/read", method=RequestMethod.GET)
 	public String readBid(@RequestParam("applyNo") int applyNo, @RequestParam("type") String type, HttpSession session, Model model) throws Exception {
 		
 		Login login = (Login)session.getAttribute("login");
@@ -92,5 +92,5 @@ public class MypageBidController {
 		
 		return "/mypage/bidread";
 	}
-
+*/
 }

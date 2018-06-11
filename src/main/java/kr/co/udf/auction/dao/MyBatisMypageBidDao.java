@@ -26,12 +26,30 @@ public class MyBatisMypageBidDao implements MypageBidDao {
 	}
 
 	@Override
-	public List<AuctionBid> bidListByUser(int userNo, int applyNo, String type) throws Exception {
+	public List<AuctionBid> studioBidListByUser(int userNo, int applyNo) throws Exception {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
+
 		paramMap.put("userNo", userNo);
 		paramMap.put("applyNo", applyNo);
-		paramMap.put("type", type);
-		return session.selectList(NAMESPACE + ".bidListByUser", paramMap);
+		return session.selectList(NAMESPACE + ".studioBidListByUser", paramMap);
+	}
+
+	@Override
+	public List<AuctionBid> dressBidListByUser(int userNo, int applyNo) throws Exception {
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+
+		paramMap.put("userNo", userNo);
+		paramMap.put("applyNo", applyNo);
+		return session.selectList(NAMESPACE + ".dressBidListByUser", paramMap);
+	}
+
+	@Override
+	public List<AuctionBid> makeupBidListByUser(int userNo, int applyNo) throws Exception {
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+
+		paramMap.put("userNo", userNo);
+		paramMap.put("applyNo", applyNo);
+		return session.selectList(NAMESPACE + ".makeupBidListByUser", paramMap);
 	}
 
 	@Override
@@ -40,13 +58,25 @@ public class MyBatisMypageBidDao implements MypageBidDao {
 	}
 
 	@Override
-	public AuctionBid readBid(int userNo, int applyNo, String type) throws Exception {
+	public AuctionBid readStudioBid(int userNo, int applyNo, int bidNo) throws Exception {
 		Map<String, Object> paramMap = new HashMap<>();
 		paramMap.put("userNo", userNo);
 		paramMap.put("applyNo", applyNo);
-		paramMap.put("type", type);
-		return session.selectOne(NAMESPACE + ".readBid", paramMap);
+		paramMap.put("bidNo", bidNo);
+		return session.selectOne(NAMESPACE + ".readStudioBid", paramMap);
 	}
+	
+	@Override
+	public AuctionBid readMakeupBid(int userNo, int applyNo, int bidNo) throws Exception {
+		return null;
+	}
+
+	@Override
+	public AuctionBid readDressBid(int userNo, int applyNo, int bidNo) throws Exception {
+		return null;
+	}
+
+
 
 	@Override
 	public void updateDressStat(int userNo, int applyNo, String stat) throws Exception {
@@ -75,5 +105,28 @@ public class MyBatisMypageBidDao implements MypageBidDao {
 		session.update(NAMESPACE + ".updateMakeupStat", paramMap);
 	}
 
+	@Override
+	public int countStudioBid(int userNo, int applyNo) throws Exception {
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("userNo", userNo);
+		paramMap.put("applyNo", applyNo);
+		return session.selectOne(NAMESPACE + ".countStudioBid", paramMap);
+	}
+
+	@Override
+	public int countMakeupBid(int userNo, int applyNo) throws Exception {
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("userNo", userNo);
+		paramMap.put("applyNo", applyNo);
+		return session.selectOne(NAMESPACE + ".countMakeupBid", paramMap);
+	}
+
+	@Override
+	public int countDressBid(int userNo, int applyNo) throws Exception {
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("userNo", userNo);
+		paramMap.put("applyNo", applyNo);
+		return session.selectOne(NAMESPACE + ".countDressBid", paramMap);
+	}
 
 }

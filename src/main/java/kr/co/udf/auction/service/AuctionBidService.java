@@ -2,10 +2,13 @@ package kr.co.udf.auction.service;
 
 import java.util.List;
 
+import kr.co.udf.auction.company.domain.DressCompany;
+import kr.co.udf.auction.company.domain.MakeupCompany;
+import kr.co.udf.auction.company.domain.StudioCompany;
 import kr.co.udf.auction.domain.AuctionBid;
-import kr.co.udf.common.company.domain.DressCompany;
-import kr.co.udf.common.company.domain.MakeupCompany;
-import kr.co.udf.common.company.domain.StudioCompany;
+import kr.co.udf.auction.product.domain.DressProduct;
+import kr.co.udf.auction.product.domain.MakeupProduct;
+import kr.co.udf.auction.product.domain.StudioProduct;
 
 public interface AuctionBidService {
 
@@ -23,9 +26,22 @@ public interface AuctionBidService {
 
 	public void createDressBid(AuctionBid bid) throws Exception;
 
+	/** 타입 별 상품 정보 조회*/
+	public List<MakeupProduct> searchMakeupProduct(int companyNo) throws Exception;
+	public List<StudioProduct> searchStudioProduct(int companyNo) throws Exception;
+	public List<DressProduct> searchDressProduct(int companyNo) throws Exception;
+	
 	/** 사용자 별 입찰서 내역 조회 */
 	public List<AuctionBid> listByUser(int userNo) throws Exception;
 
 	// 게시물 낙찰상세조회
 	public AuctionBid winread(int no, String type) throws Exception;
+	
+	// 입찰서 상품 리스트 등록
+	public void createStudioProd(AuctionBid bid) throws Exception;
+	
+	/** 단일 상품 정보 상세 조회 */
+	public StudioProduct readStudioProduct(int productNo, int companyNo) throws Exception;
+
+
 }

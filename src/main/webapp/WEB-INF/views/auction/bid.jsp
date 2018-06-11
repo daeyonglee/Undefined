@@ -16,8 +16,12 @@
 <link rel="stylesheet" href="/resources/assets/css/wizard.css">
 <link rel="stylesheet" href="/resources/assets/css/user/join.css">
 
+<!--  datepicker 관련 소스들 -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script type="text/javascript" src="/resources/assets/js/user/join.js"></script>
+<script type="text/javascript" src="/resources/js/user/join.js"></script>
 
 <script>
       var result = '${msg}';
@@ -26,6 +30,16 @@
         alert("처리가 완료되었습니다.");
       }
 </script>
+<script>
+  $( function() {
+      $( ".datepicker" ).datepicker({
+         dateFormat: 'yy-mm-dd',
+         minDate : 0
+      });
+      
+      
+  });
+ </script>
 <style type="text/css">
 #col {
 	padding-top: 5px;
@@ -33,7 +47,7 @@
 }
 
 #wizardProperty {
-	height: 600px;
+	height: 80%;
 }
 
 #button {
@@ -107,67 +121,112 @@
                       <label>업체 주소</label>
                     </div>
                     <div class="col-lg-10" id="col">
-                      <div class="col-lg-6">
+                      <div class="col-lg-8">
                         <input class='form-control' type="text" name="locFirst" id="locFirst" value="${Company.addr }" readonly="readonly">
                       </div>
                     </div>                    
-                    
-                    <div class="col-lg-2" id="col">
-                      <label>상품 명</label>
-                    </div>
-                     <div class="col-lg-10" id="col">
-                      <div class="col-lg-6">
-                        <input class='form-control' type="text" name="locFirst" id="locFirst" value="" readonly="readonly">
-                      </div>
-                    </div>
-                    
-                     <div class="col-lg-2" id="col">
-                      <label>상품 가격</label>
-                    </div>
-                     <div class="col-lg-10" id="col">
-                      <div class="col-lg-6">
-                        <input class='form-control' type="text" name="locFirst" id="locFirst" value="" readonly="readonly">
-                      </div>
-                    </div>
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    <div class="col-lg-2" id="col">
+
+                   <div class="col-lg-2" id="col">
                       <label>상담 날짜</label>
                     </div>
-                    <div class="col-lg-10" id="col" style="height: 55px">
+                    <div class="col-lg-10" id="col">
                       <div class="col-lg-3">
-                        <input class='form-control' type="checkbox" name="locFirst" id="locFirst">${Auction.day }
+                        <input class='form-control datepicker' type="text" name="meetDate" placeholder='1지망(필수)'>
                       </div>
-                      <div class="col-lg-3">
-                        <input class='form-control' type="checkbox" name="locSecond" id="locSecond"> 2018-06-02
-                      </div>
-                      <div class="col-lg-3">
-                        <input class='form-control' type="checkbox" name="locThird" id="locThird"> 2018-06-03
-                      </div>
-                      <div class="col-lg-3">
-                        <input class='form-control' type="date" name="locThird" id="locThird">  
-                      </div>                    
+                   </div>
+ 
+                    <!-- 상품 + 가격 정보 뿌려주기 -->
+                      <div class="col-lg-2" id="col">
+                      <label>상품 리스트</label>
+                       </div>
+                       
+                       <!-- 모달 -->
+                       <!-- Trigger the modal with a button -->
+                     <div class="col-lg-10" id="col">
+                     <p id="result"></p>
+                     <button type="button" data-toggle="modal" data-target="#myModal" data-title="Test Title" style="margin-left: 15px">상품 선택하기</button>
+                     <div id = "modalValue"></div>
                      </div>
-                                   
-                    
+                       
+                       <!-- Modal -->
+                      <div class="col-lg-10" id="col">
+                      <div class="col-lg-3">
+                       <div class="modal fade" id="myModal" role="dialog">
+                        <div class="modal-dialog modal-lg">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                              <h4 class="modal-title">상품 선택하기</h4>
+                            </div>
+                            <div class="modal-body">
+                              <p>할인율을 입력한 후 하나의 상품을 선택하세요.</p>
+                              <!-- contents -->
+                              <div class="section clear" style="overflow: scroll; height: 500px; padding: 10px">
+                              <div id="list-type" class="proerty-th">
+                          
+                          <c:forEach items="${studioProd}" var="prod">
+                
+                           <div class="col-sm-6 col-md-4 p0">
+                             <div class="box-two proerty-item">
+                               <div class="item-thumb">
+                         
+                                 <div id="myCarousel" class="carousel slide">
+                                   <div class="carousel-inner">
+                                   <div class='box-two proerty-item'>
+                                     <div class="item active">
+                                       <img src= ${prod.productImage } alt="Los Angeles" style="width: 100%;">
+                                     </div>
+                                   </div>
+                                 </div>
+                               </div>
+                
+                               <div class='item-entry overflow' id="choice">
+                                 <h6 style='text-align:center;'><input type="checkbox" class='btn-primary' id="check"><span>${prod.productNm}</span></h6>
+                                 <div class='dot-hr'></div>
+                                 <h6 style="text-align: right"><span>${prod.price}</span> 원</h6>
+                                 <h6><input class="form-control" style="width: 90px; text-align: right; float: right;" type="text" placeholder="할인율(%)"></h6>
+                                 <input type="hidden" value="${prod.productImage}"  />
+                                 <input type="hidden" value="${prod.productNo}"/>
+                               </div>
+                             </div>
+                             </div>
+                           </div>
+                         </c:forEach>
+                         
+                       </div>
+                     </div> 
+                              <!--  content end -->
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default" id="select" data-dismiss="modal">선택</button>
+                              <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      </div>
+                     </div>
+                </div>
+                
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-10" id="selectedItem" style="margin-bottom: 10px"></div>
                     <div class="col-lg-2" id="col">
                       <label>기타 희망 사항</label>
                     </div>
                     <div class="col-lg-10" id="col">
-                      <textarea class='form-control' name="memo" maxlength='1000'></textarea>
-                    </div>
+                     <div class="col-lg-10" id="col">
+                      <textarea class='form-control' name="memo" maxlength='1000' style="margin-left: 10px"></textarea>
+                    </div></div>
+                
                   </div>
-                </div>
                 <div class="col-lg-4"></div>
               </div>
+                
             </form>
-          </div>
+            
+          </div>   
+                 
+  
 
           <!--  submit 버튼   -->
           <div class="form-group text-center">
@@ -190,9 +249,55 @@
         $("#cancelbtn").on("click", function() {
           self.location = "list";	
         });
+        
+        
+        $("#select").on("click", function(e){
+        	// 선택된 값을 부모폼으로 보낸다.
+        	// 그에 해당하는 아이들은 
+        	var choice = $("#check:checked").parent().parent().parent();
+        	console.log(choice);
+        	
+        	var productNm    = choice.children().eq(0).children().text();
+        	var price        = choice.children().eq(2).children().text();
+        	var discount     = choice.children().eq(3).children().val();
+        	var productImage = choice.children().eq(4).val();
+        	var productNo    = choice.children().eq(5).val();
+        	
+        	console.log(productNm);
+        	console.log(price);
+        	console.log(discount);
+        	console.log(productImage);
+        	console.log(productNo);
+        	
+        	// 사진
+        	// 상품명
+        	// 실제 가격
+        	// 할인된 가격
+        	// 할인율
+        	// 상품 번호
+        	var html =  "<div class='col-sm-6 col-md-4 p0' style='margin-left: 25px;'>";
+        	    html += "  <div class='box-two proerty-item'>";
+        	    html += "    <div class='item-thumb'>";
+                html += "      <img src='"+ productImage +"' style='width: 100%;'>";
+                html += "    </div>";
+                html += "    <div class='item-entry overflow' style='padding: 10px'>";
+                html += "       <input type='hidden' name='productNo' value='" + productNo + "'>";
+                html += "       <input type='hidden' name='discount' value='" + discount + "' >";
+                html += "       <h5 style='text-align:center;' name='productNm'><b>" + productNm + "</b></h5>"
+                html += "       <div class='dot-hr'></div>";
+                html += "       <h6><span class='pull-left'><b>할인율 :</b>" + discount + "%" + "</span></h6>";
+                html += "       <h6><span class='proerty-price pull-right' name='discountPrice'><b>할인가격 :</b>" + Math.round((price * (1-(discount / 100)))) + "원"+ "</span></h6>";
+                html += "    </div>";
+                html += "  </div>";
+                html += "</div>";
+            $("#selectedItem").html(html);
+             
+
+        });
+        
 
       });
-    </script>
+</script>
 
 
   <!-- End submit form -->

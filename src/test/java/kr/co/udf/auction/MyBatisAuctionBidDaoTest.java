@@ -22,9 +22,6 @@ public class MyBatisAuctionBidDaoTest {
 	private AuctionBidDao dao;
 	
 	@Inject
-	private AuctionBidService service;
-	
-	@Inject
 	private MypageBidDao myDao;
 
 	private Logger logger = Logger.getLogger(MyBatisAuctionBidDaoTest.class);
@@ -65,14 +62,6 @@ public class MyBatisAuctionBidDaoTest {
 		logger.info("신규 등록된 [dress] 낙찰서 : " + bid);
 	}
 	
-	//@Test
-	public void searchCompanyTest() throws Exception{
-		int companyNo = 42;
-//		logger.info(dao.searchMakeupCompany(companyNo));
-//		logger.info(null);
-		logger.info(service.searchMakeupCompany(42));
-
-	}
 	
 	//@Test
 	public void listAllTest() throws Exception{
@@ -105,7 +94,7 @@ public class MyBatisAuctionBidDaoTest {
 		int applyNo = 2;
 		int userNo = 1;
 		String type = "makeup";
-		logger.info(myDao.bidListByUser(userNo, applyNo, type));
+		//logger.info(myDao.bidListByUser(userNo, applyNo, type));
 	}
 	
 	//@Test
@@ -114,7 +103,7 @@ public class MyBatisAuctionBidDaoTest {
 		int userNo = 1;
 		String type = "makeup";
 		
-		logger.info(myDao.readBid(userNo, applyNo, type));
+		//logger.info(myDao.readBid(userNo, applyNo, type));
 		
 	}
 
@@ -125,8 +114,35 @@ public class MyBatisAuctionBidDaoTest {
 		String stat = "낙찰대기중";
 		
 		myDao.updateMakeupStat(userNo, applyNo, stat);
-
+	}
+	
+	//@Test
+	public void createStudioProd() throws Exception{
+		AuctionBid bid = new AuctionBid();
+		bid.setBidNo(1);
+		bid.setUserNo(2);
+		bid.setApplyNo(13);
+		bid.setCompanyNo(1);
+		bid.setProductNo(2);
+		bid.setDiscount(5);
+		bid.setMeetDate("2018-06-21");
+		
+		dao.createStudioProd(bid);
+		logger.info(bid);
 		
 	}
+
+	@Test
+	public void SearchStudioProd() throws Exception{
+		int companyNo = 1;
+		logger.info(dao.searchStudioProduct(companyNo));
+		
+		
+	}
+	
+	
+	
+	
+
 }
  
