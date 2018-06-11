@@ -353,7 +353,7 @@ var printPaging = function(pageMaker, target) {
   </span>
   <div class="timeline-body">{{reply_content}} </div>
     <div class="timeline-footer">
-	<c:if test="${read.user_nm eq sessionScope.login.nm}">
+	<c:if test="${'관리자' eq sessionScope.login.nm }">
      <a class="btn btn-primary btn-xs" 
       data-toggle="modal" data-target="#modifyModal">댓글 수정</a>
 	</c:if>	
