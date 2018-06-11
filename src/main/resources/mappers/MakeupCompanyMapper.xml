@@ -37,7 +37,6 @@ FROM (SELECT CEIL (rownum / 10) page,
 	sc.mc_email, 
 	sc.mc_pw, 
 	sc.mc_tel, 
-	sc.mc_smy_intro, 
 	sc.mc_introduce, 
 	sc.sessionkey, 
 	sc.regdate, 
@@ -66,7 +65,6 @@ WHERE page = #{page}
 	sc.mc_email, 
 	sc.mc_pw, 
 	sc.mc_tel, 
-	sc.mc_smy_intro, 
 	sc.mc_introduce, 
 	sc.sessionkey, 
 	sc.regdate, 
@@ -116,7 +114,6 @@ WHERE page = #{page}
 	sc.mc_email, 
 	sc.mc_pw, 
 	sc.mc_tel, 
-	sc.mc_smy_intro, 
 	sc.mc_introduce, 
 	sc.sessionkey, 
 	sc.regdate, 
@@ -165,8 +162,8 @@ WHERE page = #{page}
 	</select>	
 	
 	<insert id="addReview">
-	INSERT INTO makeup_review (mr_no, mc_no, mr_content, mr_point, regdate, updatedate)
-	VALUES (makeup_review_seq.nextval, #{mc_no}, #{mr_content}, #{mr_point}, sysdate, sysdate) 
+	INSERT INTO makeup_review (mr_no, mc_no, user_no, mr_content, mr_point, regdate, updatedate)
+	VALUES (makeup_review_seq.nextval, #{mc_no}, #{user_no}, #{mr_content}, #{mr_point}, sysdate, sysdate) 
 	</insert>
 	
 	<select id="reviewMakeup" resultType="kr.co.udf.company.domain.MakeupReview">

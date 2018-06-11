@@ -27,8 +27,6 @@
   function checkForm() {
     if (addReview.startext.value=="별점주기") {
     	addReview.startext.focus();
-    } else if (addReview.sr_subject.value=="") {
-      	addReview.sr_subject.focus();  	
     } else if (addReview.sr_content.value=="") {
     	addReview.sr_content.focus();
     } else {
@@ -36,7 +34,7 @@
     return true;
     }
   }
-  </script>
+</script>
 <style>
 body {
    font-family: "Lato", sans-serif;
@@ -254,12 +252,13 @@ span.star-prototype > * {
   </div>
   <!-- End page header -->
 
-<!-- 즐겨찾기 추가 스크립트 -->
+<!-- 비교업체 추가 스크립트 -->
 <script>
 function addInterest() {
    document.getElementById("interest").submit();
 }
 </script>
+
 <!-- 비교업체에서 즐겨찾기 추가 스크립트 -->
 <script>
 function compInterest() {
@@ -281,9 +280,10 @@ function compInterest() {
               <div class="clearfix">   
                <form method="post" action="/company/interest" id="interest">
                <input type='hidden' name='sc_no' value ="${studioCompany.sc_no}">
-                <div class="favorite-and-print">
-                  <a class="add-to-fav" href="#login-modal" data-toggle="modal" onclick="addInterest();"><i id="favorite" class="fa fa-star-o"></i>
-                  </a> <a class="printer-icon"
+                <div class="favorite-and-print">  
+                   <a class="add-to-fav" href="#login-modal" data-toggle="modal" onclick="addInterest();"><i id="favorite" class="fa fa-star-o"></i>
+                   </a>
+                  <a class="printer-icon"
                     href="javascript:window.print()"><i class="fa fa-print"></i>
                   </a>
                 </div>
@@ -293,8 +293,8 @@ function compInterest() {
                   class="gallery list-unstyled cS-hidden">
                   <li
                     data-thumb="/resources/assets/img/property-1/property1.jpg">
-                    <img
-                    src="/resources/assets/img/property-1/property1.jpg" />
+                    <img src="/user/mypage/imgview?imgview=${studioCompany.sc_main_image}"class="picture-src" id='wizardPicturePreview' title=''/>
+                   
                   </li>
                   <li
                     data-thumb="/resources/assets/img/property-1/property4.jpg">
@@ -415,14 +415,18 @@ $('.star-prototype').generateStars();
 
                 <br/>
                 
-
+   <script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip(); 
+    });
+  </script>
                 
                 <!-- 리뷰테이블 시작 -->
                 <div style="width:100%; height:200px; overflow:auto">
                 <table class="table table-hover">
                   <thead>
                     <tr>
-                      <th>글번호</th>
+                      <th>번호</th>
                       <th>상품평</th>
                       <th>별점</th>
                       <th>등록일</th>
@@ -435,7 +439,17 @@ $('.star-prototype').generateStars();
                     <c:forEach items="${list}" var="studioReview">
                       <tr>
                         <td>${num}</td>
-                        <td>${studioReview.sr_content}</td>
+                         <c:choose>
+                        <c:when test="${fn:length(studioReview.sr_content) > 30}">
+                       <td><a class="button" data-toggle="tooltip" title="<c:out value="${studioReview.sr_content }"/>"><c:out value="${fn:substring(studioReview.sr_content,0,29) }"/> ...</a>
+                       </td>
+                       </c:when>
+                       
+                       <c:otherwise>
+                        <td><c:out value="${studioReview.sr_content }"/></td>
+                        </c:otherwise>
+                       </c:choose> 
+                       
                         <td><span class="star-prototype">${studioReview.sr_point}</span></td>
                         <td>${studioReview.regdate}</td>
                       </tr>
@@ -470,21 +484,15 @@ $('.star-prototype').generateStars();
                           <div id="startext">별점주기</div>
                 </div>
                 
-                
+             
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="firstname">이 름</label> <input type="text"
                     class="form-control" id="firstname" name="user_nm" value="${user_nm}" disabled>
-                    <input type="hidden" name="user_nm" value="${user_nm}">
+             
                 </div>
               </div>
-
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="subject">제 목</label> <input type="text"
-                    class="form-control" id="subject" name="sr_subject">
-                </div>
-            </div>
+             >
 
               <div class="col-sm-12">
                 <div class="form-group">
@@ -752,6 +760,9 @@ function removeComp() {
       <input type='hidden' name='sc_no' value="${studioCompany.sc_no}">
       <input type='hidden' name='companyNo' value="${compList.sc_no}"> 
       <input type='hidden' name='sc_nm' value="${compList.sc_nm}"> 
+      <c:if test="${not empty list}">
+      <input type='hidden' name='sc_nm' value="${compList.sc_nm}"> 
+      </c:if>
     
       <img src="/resources/assets/img/property-1/property1.jpg" id="imgBorder" class="img-responsive" width="90%" alt="">
       <input type="submit" value="삭제"></input>
@@ -802,11 +813,16 @@ function removeComp() {
             document.getElementById("mySidenav").style.width = "0";
          }
   </script>
+  
+  <script>
+  
+  </script>  
       
   <script>
   function confirm()
   {
-      msg = "실행하시겠습니까?";
+      alert()
+	  msg = "실행하시겠습니까?";
       if (confirm(msg)!=0) {
         	   네
       } else {

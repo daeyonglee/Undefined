@@ -158,8 +158,8 @@ WHERE page = #{page}
 	</select>	
 	
 	<insert id="addReview">
-	INSERT INTO studio_review (sr_no, sc_no, user_nm, sr_subject, sr_content, sr_point, regdate, updatedate)
-	VALUES (studio_review_seq.nextval, #{sc_no}, #{user_nm}, #{sr_subject}, #{sr_content}, #{sr_point}, sysdate, sysdate) 
+	INSERT INTO studio_review (sr_no, sc_no, user_no, sr_content, sr_point, regdate, updatedate)
+	VALUES (studio_review_seq.nextval, #{sc_no}, #{user_no}, #{sr_content}, #{sr_point}, sysdate, sysdate) 
 	</insert>
 	
 	<select id="reviewStudio" resultType="kr.co.udf.company.domain.StudioReview">

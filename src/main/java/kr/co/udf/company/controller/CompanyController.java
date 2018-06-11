@@ -1,10 +1,12 @@
 package kr.co.udf.company.controller;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -74,22 +76,39 @@ public class CompanyController {
 
 	@RequestMapping(value="/review", method=RequestMethod.POST)
 	public String addReview(StudioReview studioReview, @RequestParam("sc_no") int sc_no, HttpSession session) throws Exception {
+		Login login = (Login) session.getAttribute("login");
+		int user_no = login.getNo().intValue();
+		studioReview.setUser_no(user_no);
 		
 		service.addReview(studioReview);
 		return "redirect:/company/compare?sc_no="+ sc_no;
 	}
 	
 	@RequestMapping(value = "/interest", method = RequestMethod.POST)
-	public String registPOST(StudioInterest interest, RedirectAttributes rttr, HttpSession session,
-	@RequestParam("sc_no") int sc_no) throws Exception {
+	public String registPOST(StudioInterest interest, RedirectAttributes rttr, HttpSession session, HttpServletResponse response,
+	@RequestParam("sc_no") int sc_no, Model model) throws Exception {
 
 		Login login = (Login) session.getAttribute("login");
 		int user_no = login.getNo().intValue();
 		interest.setUser_no(user_no);
 		
-		si.create(interest);
+		boolean result = true;
+				
+		List<StudioInterest> studioInterest = si.read(user_no);
+		Iterator<StudioInterest> it = studioInterest.iterator();
+		while(it.hasNext()) {
+			StudioInterest stuInt = it.next();
+			if(stuInt.getSc_no() == sc_no) {
+				result = false; 
+			} 
+		} 
+		
+		if (result == true) {
+			si.create(interest);
+		}
 
 		return "redirect:/company/compare?sc_no=" + sc_no;
+		
 	}
 	
 	@RequestMapping(value = "/compInterest", method=RequestMethod.POST)

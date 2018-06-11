@@ -4,6 +4,7 @@ public class DressReview {
 	
 	private int dr_no;
 	private int dc_no;
+	private int user_no;
 	private String dr_content;
 	private String dr_point;
 	private String regdate;
@@ -28,6 +29,14 @@ public class DressReview {
 
 	public void setDc_no(int dc_no) {
 		this.dc_no = dc_no;
+	}
+	
+	public int getUser_no() {
+		return user_no;
+	}
+
+	public void setUser_no(int user_no) {
+		this.user_no = user_no;
 	}
 
 	public String getDr_content() {
@@ -64,10 +73,8 @@ public class DressReview {
 
 	@Override
 	public String toString() {
-		return "DressReview [dr_no=" + dr_no + ", dc_no=" + dc_no + ", dr_content=" + dr_content + ", dr_point="
-				+ dr_point + ", regdate=" + regdate + ", updatedate=" + updatedate + "]";
+		return "DressReview [dr_no=" + dr_no + ", dc_no=" + dc_no + ", user_no=" + user_no + ", dr_content="
+				+ dr_content + ", dr_point=" + dr_point + ", regdate=" + regdate + ", updatedate=" + updatedate + "]";
 	}
-
-
 
 }

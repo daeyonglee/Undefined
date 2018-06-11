@@ -27,10 +27,8 @@
   function checkForm() {
     if (addReview.startext.value=="별점주기") {
     	addReview.startext.focus();
-    } else if (addReview.sr_subject.value=="") {
-      	addReview.sr_subject.focus();  	
-    } else if (addReview.sr_content.value=="") {
-    	addReview.sr_content.focus();
+    } else if (addReview.dr_content.value=="") {
+    	addReview.dr_content.focus();
     } else {
     document.addReview.submit();
     return true;
@@ -293,23 +291,19 @@ function compInterest() {
                   class="gallery list-unstyled cS-hidden">
                   <li
                     data-thumb="/resources/assets/img/property-1/property1.jpg">
-                    <img
-                    src="/resources/assets/img/property-1/property1.jpg" />
+                    <img src="/user/mypage/imgview?imgview=${dressCompany.dc_main_image}" class="picture-src" id='wizardPicturePreview' title=''/>
                   </li>
                   <li
                     data-thumb="/resources/assets/img/property-1/property4.jpg">
-                    <img
-                    src="/resources/assets/img/property-1/property4.jpg" />
+                    <img src="/user/mypage/imgview?imgview=${dressCompany.dc_main_image}"/>
                   </li>
                   <li
                     data-thumb="/resources/assets/img/property-1/property3.jpg">
-                    <img
-                    src="/resources/assets/img/property-1/property3.jpg" />
+                    <img src="/user/mypage/imgview?imgview=${dressCompany.dc_main_image}"/>
                   </li>
                   <li
                     data-thumb="/resources/assets/img/property-1/property4.jpg">
-                    <img
-                    src="/resources/assets/img/property-1/property4.jpg" />
+                  <img src="/user/mypage/imgview?imgview=${dressCompany.dc_main_image}"/>
                   </li>
                 </ul>
               </div>
@@ -417,7 +411,7 @@ $('.star-prototype').generateStars();
                 <table class="table table-hover">
                   <thead>
                     <tr>
-                      <th>글번호</th>
+                      <th>번호</th>
                       <th>상품평</th>
                       <th>별점</th>
                       <th>등록일</th>
@@ -430,9 +424,19 @@ $('.star-prototype').generateStars();
                     <c:forEach items="${list}" var="dressReview">
                       <tr>
                         <td>${num}</td>
-                        <td>${dressReview.dr_content}</td>
-                        <td><span class="star-prototype">${dressReview.dr_point}</span></td>
-                        <td>${dressReview.regdate}</td>
+                         <c:choose>
+                        <c:when test="${fn:length(studioReview.sr_content) > 30}">
+                       <td><a class="button" data-toggle="tooltip" title="<c:out value="${studioReview.sr_content }"/>"><c:out value="${fn:substring(studioReview.sr_content,0,29) }"/> ...</a>
+                       </td>
+                       </c:when>
+                       
+                       <c:otherwise>
+                        <td><c:out value="${studioReview.sr_content }"/></td>
+                        </c:otherwise>
+                       </c:choose> 
+                       
+                        <td><span class="star-prototype">${studioReview.sr_point}</span></td>
+                        <td>${studioReview.regdate}</td>
                       </tr>
                       <c:set var="num" value="${num-1}"/>
                      </c:forEach>
@@ -452,7 +456,7 @@ $('.star-prototype').generateStars();
             <!-- End description area  -->
 
 <h4 class="s-property-title">후기등록</h4>
-            <form action="/company/dress/review" method="post" id="addReview" name="starting">
+            <form action="/company/dress/review" method="post" id="addReview" name="starting" onclick="checkForm();return false">
                 <input type='hidden' name='dc_no' value="${dressCompany.dc_no}">
                 <input type="hidden" name="dr_point"/>  
              
@@ -582,7 +586,10 @@ function minComp() {
                       <form method="post" action="/company/dress/add" name="frm">
                       <input type='hidden' name='dc_no' value="${dressCompany.dc_no}"> 
                       <input type='hidden' name='dc_nm' value="${dressCompany.dc_nm}">
-                      <input type='hidden' name='avg' value="${avg}">
+                      <c:if test="${not empty list}">
+                        <input type='hidden' name='avg' value="${avg}">
+                        <input type='hidden' name='count' value="${count}">
+                      </c:if>
                       <input type='hidden' name='dc_addr' value="<c:forEach var='word' items='${keywordArr}'>
                            ${word} 
                       </c:forEach>">
@@ -838,7 +845,7 @@ function removeComp() {
                                </div>
 
                                <div id="choice">
-                                 <h6><span style='color: black'>업체명 : </span><span>${cartComp.dc_nm}</span></h6>
+                                 <h6><span style='color: black'>업체명 : </span><span>${cartCop.dc_nm}</span></h6>
                                  <h6><span style='color: black'>위치  : </span><span>${cartComp.dc_addr} </span></h6>
                                  <h6>평점  : <span></span></h6>
                                </div>

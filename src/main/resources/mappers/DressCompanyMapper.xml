@@ -36,7 +36,6 @@ FROM (SELECT CEIL (rownum / 10) page,
 	sc.dc_email, 
 	sc.dc_pw, 
 	sc.dc_tel, 
-	sc.dc_smy_intro, 
 	sc.dc_introduce, 
 	sc.sessionkey, 
 	sc.regdate, 
@@ -68,7 +67,6 @@ FROM (SELECT *
 	sc.dc_email, 
 	sc.dc_pw, 
 	sc.dc_tel, 
-	sc.dc_smy_intro, 
 	sc.dc_introduce, 
 	sc.sessionkey, 
 	sc.regdate, 
@@ -118,7 +116,6 @@ FROM (SELECT *
 	sc.dc_email, 
 	sc.dc_pw, 
 	sc.dc_tel, 
-	sc.dc_smy_intro, 
 	sc.dc_introduce, 
 	sc.sessionkey, 
 	sc.regdate, 
@@ -168,8 +165,8 @@ FROM (SELECT *
 	</select>	
 	
 	<insert id="addReview">
-	INSERT INTO dress_review (dr_no, dc_no, dr_content, dr_point, regdate, updatedate)
-	VALUES (dress_review_seq.nextval, #{dc_no}, #{dr_content}, #{dr_point}, sysdate, sysdate) 
+	INSERT INTO dress_review (dr_no, dc_no, user_no, dr_content, dr_point, regdate, updatedate)
+	VALUES (dress_review_seq.nextval, #{dc_no}, #{user_no}, #{dr_content}, #{dr_point}, sysdate, sysdate) 
 	</insert>
 	
 	<select id="reviewDress" resultType="kr.co.udf.company.domain.DressReview">

@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import kr.co.udf.common.company.domain.MakeupCompany;
 import kr.co.udf.company.domain.MakeupInterest;
 import kr.co.udf.company.domain.MakeupReview;
+import kr.co.udf.company.domain.StudioInterest;
 import kr.co.udf.company.service.MakeupInterestService;
 import kr.co.udf.company.service.MakeupService;
 import kr.co.udf.user.domain.Login;
@@ -77,7 +78,11 @@ public class MakeupController {
 	}
 
 	@RequestMapping(value="/review", method=RequestMethod.POST)
-	public String addReview(MakeupReview makeupReview, @RequestParam("mc_no") int mc_no) throws Exception {
+	public String addReview(MakeupReview makeupReview, @RequestParam("mc_no") int mc_no, HttpSession session) throws Exception {
+		Login login = (Login) session.getAttribute("login");
+		int user_no = login.getNo().intValue();
+		makeupReview.setUser_no(user_no);
+		
 		service.addReview(makeupReview);
 		return "redirect:/company/makeup/makeupDetail?mc_no="+ mc_no;
 	}
@@ -90,7 +95,21 @@ public class MakeupController {
 		int user_no = login.getNo().intValue();
 		interest.setUser_no(user_no);
 		
-		mi.create(interest);
+		boolean result = true;
+		
+		List<MakeupInterest> makeupInterest = mi.read(user_no);
+		Iterator<MakeupInterest> it = makeupInterest.iterator();
+		while(it.hasNext()) {
+			MakeupInterest stuInt = it.next();
+			if(stuInt.getMc_no() == mc_no) {
+				result = false; 
+			} 
+		} 
+		
+		if (result == true) {
+			mi.create(interest);
+		}
+		
 
 		return "redirect:/company/makeup/makeupDetail?mc_no=" + mc_no;
 	}

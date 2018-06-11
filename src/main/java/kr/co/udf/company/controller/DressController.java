@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import kr.co.udf.common.company.domain.DressCompany;
 import kr.co.udf.company.domain.DressInterest;
 import kr.co.udf.company.domain.DressReview;
+import kr.co.udf.company.domain.StudioInterest;
 import kr.co.udf.company.service.DressInterestService;
 import kr.co.udf.company.service.DressService;
 import kr.co.udf.user.domain.Login;
@@ -74,7 +75,11 @@ public class DressController {
 	}
 
 	@RequestMapping(value="/review", method=RequestMethod.POST)
-	public String addReview(DressReview dressReview, @RequestParam("dc_no") int dc_no) throws Exception {
+	public String addReview(DressReview dressReview, @RequestParam("dc_no") int dc_no, HttpSession session) throws Exception {
+		Login login = (Login) session.getAttribute("login");
+		int user_no = login.getNo().intValue();
+		dressReview.setUser_no(user_no);
+		
 		service.addReview(dressReview);
 		return "redirect:/company/dress/dressDetail?dc_no="+ dc_no;
 	}
@@ -87,7 +92,20 @@ public class DressController {
 		int user_no = login.getNo().intValue();
 		interest.setUser_no(user_no);
 		
-		di.create(interest);
+		boolean result = true;
+		
+		List<DressInterest> dressInterest = di.read(user_no);
+		Iterator<DressInterest> it = dressInterest.iterator();
+		while(it.hasNext()) {
+			DressInterest stuInt = it.next();
+			if(stuInt.getDc_no() == dc_no) {
+				result = false; 
+			} 
+		} 
+		
+		if (result == true) {
+			di.create(interest);
+		}
 
 		return "redirect:/company/dress/dressDetail?dc_no=" + dc_no;
 	}

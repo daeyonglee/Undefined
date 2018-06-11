@@ -99,7 +99,7 @@ margin-top : 10px;
               <div class="box-two proerty-item">
                 <div class="item-thumb">
                   <a href="/company/compare?mc_no=${makeup.mc_no }"><img
-                    src="${makeup.mc_main_image}"></a>
+                    src="/user/mypage/imgview?imgview=${makeup.mc_main_image}"></a>
                 </div>
                 <div class="item-entry overflow">
                   <h4>${makeup.mc_nm }</h4>
@@ -191,6 +191,17 @@ margin-top : 10px;
                   var lat = results[j].geometry.location.lat();
                   var lng = results[j].geometry.location.lng();
 
+  				// 마커 한개 표시 될 때 최대 줌 방지
+					google.maps.event.addListener(map, 'zoom_changed', function() {
+						zoomChangeBoundsListener = google.maps.event.addListener(map, 'bounds_changed', function(event) {
+							if (this.getZoom() > 12) 
+							this.setZoom(12);
+							google.maps.event.removeListener(zoomChangeBoundsListener);
+						});
+						
+					});
+
+  				
                   // 마커 속성 설정하기
                   var marker = new google.maps.Marker(        
                       {
@@ -198,7 +209,7 @@ margin-top : 10px;
                         title : results[j].formatted_address,
                         map : map,
                         bounds: true,
-                        maxZoom: 17,
+                        //maxZoom: 17,
                         //name : name[j].trim()
                         //num : num[j].trim(),
                         //avg : avg[j].trim(),
@@ -249,7 +260,6 @@ margin-top : 10px;
           var image = '';
           //인포윈도우 만들기 
           infowin += '<div class="hall_box">';
-          //infowin += '<img src = "http://iwedding.co.kr/center/website/brandplus/6285/721-N153_141014032549_1.jpg">'
           infowin += '<div class="hall_detail">';
             
           

@@ -27,10 +27,8 @@
   function checkForm() {
     if (addReview.startext.value=="별점주기") {
     	addReview.startext.focus();
-    } else if (addReview.sr_subject.value=="") {
-      	addReview.sr_subject.focus();  	
-    } else if (addReview.sr_content.value=="") {
-    	addReview.sr_content.focus();
+    } else if (addReview.mr_content.value=="") {
+    	addReview.mr_content.focus();
     } else {
     document.addReview.submit();
     return true;
@@ -247,7 +245,7 @@ span.star-prototype > * {
     <div class="container">
       <div class="row">
         <div class="page-head-content">
-          <h1 class="page-title" align="center">${makeupCompany.mc_nm}</h1>
+          <h1 class="page-title" align="center">${makeupCompany.mc_nm}${makeupCompany.countProduct}</h1>
         </div>
       </div>
     </div>
@@ -293,23 +291,19 @@ function compInterest() {
                   class="gallery list-unstyled cS-hidden">
                   <li
                     data-thumb="/resources/assets/img/property-1/property1.jpg">
-                    <img
-                    src="/resources/assets/img/property-1/property1.jpg" />
+                   <img src="/user/mypage/imgview?imgview=${makeupCompany.mc_main_image}" class="picture-src" id='wizardPicturePreview' title=''/>
                   </li>
                   <li
                     data-thumb="/resources/assets/img/property-1/property4.jpg">
-                    <img
-                    src="/resources/assets/img/property-1/property4.jpg" />
+                    <img src="/user/mypage/imgview?imgview=${makeupCompany.mc_main_image}"/>
                   </li>
                   <li
                     data-thumb="/resources/assets/img/property-1/property3.jpg">
-                    <img
-                    src="/resources/assets/img/property-1/property3.jpg" />
+                   <img src="/user/mypage/imgview?imgview=${makeupCompany.mc_main_image}"/>
                   </li>
                   <li
                     data-thumb="/resources/assets/img/property-1/property4.jpg">
-                    <img
-                    src="/resources/assets/img/property-1/property4.jpg" />
+                    <img src="/user/mypage/imgview?imgview=${makeupCompany.mc_main_image}"/>
                   </li>
                 </ul>
               </div>
@@ -411,13 +405,13 @@ $('.star-prototype').generateStars();
                 <c:if test="${not empty list}"><p>이 업체는 등록된 후기 <b>${count}</b>개 중에서 <strong>${avg}</strong>의 평균별점을 받았습니다.</p></c:if>
                 <hr style="border: 3px solid #f1f1f1">
                 <br/>
-                
+                ${countProduct}
                 <!-- 리뷰테이블 시작 -->
                 <div style="width:100%; height:200px; overflow:auto">
                 <table class="table table-hover">
                   <thead>
                     <tr>
-                      <th>글번호</th>
+                      <th>번호</th>
                       <th>상품평</th>
                       <th>별점</th>
                       <th>등록일</th>
@@ -429,10 +423,20 @@ $('.star-prototype').generateStars();
                                       <c:set var="num" value="${fn:length(list)}"/>
                     <c:forEach items="${list}" var="makeupReview">
                       <tr>
-                        <td>${num}</td>
-                        <td>${makeupReview.mr_content}</td>
-                        <td><span class="star-prototype">${makeupReview.mr_point}</span></td>
-                        <td>${makeupReview.regdate}</td>
+                      <td>${num}</td>
+                         <c:choose>
+                        <c:when test="${fn:length(studioReview.sr_content) > 30}">
+                       <td><a class="button" data-toggle="tooltip" title="<c:out value="${studioReview.sr_content }"/>"><c:out value="${fn:substring(studioReview.sr_content,0,29) }"/> ...</a>
+                       </td>
+                       </c:when>
+                       
+                       <c:otherwise>
+                        <td><c:out value="${studioReview.sr_content }"/></td>
+                        </c:otherwise>
+                       </c:choose> 
+                       
+                        <td><span class="star-prototype">${studioReview.sr_point}</span></td>
+                        <td>${studioReview.regdate}</td>
                       </tr>
                       <c:set var="num" value="${num-1}"/>
                      </c:forEach>
@@ -452,7 +456,7 @@ $('.star-prototype').generateStars();
             <!-- End description area  -->
 
 <h4 class="s-property-title">후기등록</h4>
-            <form action="/company/makeup/review" method="post" id="addReview" name="starting">
+            <form action="/company/makeup/review" method="post" id="addReview" name="starting" onclick="checkForm();return false">
                 <input type='hidden' name='mc_no' value="${makeupCompany.mc_no}">
                 <input type="hidden" name="mr_point"/>  
              
@@ -473,13 +477,6 @@ $('.star-prototype').generateStars();
                     
                 </div>
               </div>
-
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="subject">제 목</label> <input type="text"
-                    class="form-control" id="subject" >
-                </div>
-            </div>
 
               <div class="col-sm-12">
                 <div class="form-group">
@@ -583,7 +580,10 @@ function minComp() {
                       <form method="post" action="/company/makeup/add" name="frm">
                       <input type='hidden' name='mc_no' value="${makeupCompany.mc_no}"> 
                       <input type='hidden' name='mc_nm' value="${makeupCompany.mc_nm}">
-                      <input type='hidden' name='avg' value="${avg}">
+                      <c:if test="${not empty list}">
+                        <input type='hidden' name='avg' value="${avg}">
+                        <input type='hidden' name='count' value="${count}">
+                      </c:if>
                       <input type='hidden' name='mc_addr' value="<c:forEach var='word' items='${keywordArr}'>
                            ${word} 
                       </c:forEach>">
