@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import kr.co.udf.auction.domain.Auction;
 import kr.co.udf.auction.domain.AuctionBid;
 import kr.co.udf.auction.service.MypageBidService;
 import kr.co.udf.common.product.domain.DressProduct;
@@ -271,21 +272,23 @@ public class UserMypageController {
 		return "/user/mypage/bidlist";
 	}
 	
-	/** 마이페이지 - 입찰중 or 낙찰대기중인 신청서 상세 조회 */
-	@RequestMapping(value="/bid/read", method=RequestMethod.GET)
-	public String readBid(@RequestParam("applyNo") int applyNo, @RequestParam("type") String type, HttpSession session, Model model) throws Exception {
-		
-		Login login = (Login)session.getAttribute("login");
-		int userNo = login.getNo().intValue();
-		logger.info(userNo);
-		
-		AuctionBid bid = mypageBidService.readBid(userNo, applyNo, type);
-		logger.info(bid);
-		
-		model.addAttribute("bid", bid);
-		
-		return "/user/mypage/bidread";
-	}
+   /** 마이페이지 - 입찰중 or 낙찰대기중인 신청서 상세 조회 */
+   /*
+    * @RequestMapping(value = "/bid/read", method = RequestMethod.GET) public
+    * String readBid(@RequestParam("applyNo") int applyNo, @RequestParam("type")
+    * String type, HttpSession session, Model model) throws Exception {
+    * 
+    * Login login = (Login) session.getAttribute("login"); int userNo =
+    * login.getNo().intValue(); logger.info(userNo);
+    * 
+    * //AuctionBid bid = mypageBidService.readBid(userNo, applyNo, type);
+    * logger.info(bid);
+    * 
+    * model.addAttribute("bid", bid);
+    * 
+    * return "/user/mypage/bidread"; }
+    */
+   /**
 	
 	/**
 	 * 마이페이지 >> 관심업체
