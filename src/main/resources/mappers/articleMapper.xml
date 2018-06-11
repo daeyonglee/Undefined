@@ -150,6 +150,57 @@
 		WHERE  article_no > 0 and board_no= #{board_no}  
 	</select>
 		
+	<sql id="search">
+		<if test="searchType !=null">
+			<if test="searchType == 't'.toString()">
+				WHERE article_title like
+				'%'||#{keyword}||'%'
+				and board_no= #{board_no}
+			</if>
+			<if test="searchType == 'c'.toString()">
+				WHERE article_content like
+				'%'||#{keyword}||'%'
+				and board_no= #{board_no}
+			</if>
+			<if test="searchType == 'w'.toString()">
+				WHERE user_nm like
+				'%'||#{keyword}||'%'
+				and board_no= #{board_no}
+			</if>
+			<if test="searchType == 'tc'.toString()">
+				WHERE (article_title like
+				'%'||#{keyword}||'%' Or article_content like 
+				'%'||#{keyword}||'%')
+				and board_no= #{board_no}
+			</if>
+			<if test="searchType== 'cw'.toString()" >
+				WHERE (article_content like
+				'%'||#{keyword}||'%' Or user_nm like 
+				'%'||#{keyword}||'%')
+				and board_no= #{board_no}
+			</if>
+			<if test="searchType== 'tcw'.toString()" >
+				WHERE (article_title like '%'||#{keyword}||'%' 
+					Or article_content like '%'||#{keyword}||'%'
+					Or user_nm like '%'||#{keyword}||'%')
+				and board_no= #{board_no}
+			</if>
+			<if test="searchType.equals('studio'.toString())" >
+				WHERE article_head like '%'||#{keyword}||'%'
+				and board_no= 2
+			</if>
+			<if test="searchType.equals('dress'.toString())" >
+				WHERE article_head like '%'||#{keyword}||'%'
+				and board_no= 2
+			</if>
+			<if test="searchType.equals('makeup'.toString())" >
+				WHERE article_head like '%'||#{keyword}||'%'
+				and board_no= 2
+			</if>		
+		</if>
+	</sql>
+		
+	
 	<select id="listSearch" resultType="map">
 	<![CDATA[
 		SELECT article_no, 
@@ -191,66 +242,15 @@
 	                           WHERE  article_no = article.article_no) reply_count  
 		                FROM   article]]>
 		                <include refid="search"></include>
-		                <![CDATA[ORDER  BY article_no DESC)) 
+						<![CDATA[ORDER  BY article_no DESC)) 
 		WHERE  page = #{page}]]>
 	</select>
 	
-	<sql id="search">
-		<if test="searchType !=null">
-			<if test="searchType == 't'.toString()">
-				WHERE article_title like
-				'%'||#{keyword}||'%'
-				and board_no= #{board_no}
-			</if>
-			<if test="searchType == 'c'.toString()">
-				WHERE article_content like
-				'%'||#{keyword}||'%'
-				and board_no= #{board_no}
-			</if>
-			<if test="searchType == 'w'.toString()">
-				WHERE user_nm like
-				'%'||#{keyword}||'%'
-				and board_no= #{board_no}
-			</if>
-			<if test="searchType == 'tc'.toString()">
-				WHERE (article_title like
-				'%'||#{keyword}||'%' Or article_content like 
-				'%'||#{keyword}||'%')
-				and board_no= #{board_no}
-			</if>
-			<if test="searchType== 'cw'.toString()" >
-				WHERE (article_content like
-				'%'||#{keyword}||'%' Or user_nm like 
-				'%'||#{keyword}||'%')
-				and board_no= #{board_no}
-			</if>
-			<if test="searchType== 'tcw'.toString()" >
-				WHERE (article_title like '%'||#{keyword}||'%' 
-					Or article_content like '%'||#{keyword}||'%'
-					Or user_nm like '%'||#{keyword}||'%')
-				and board_no= #{board_no}
-			</if>
-			<if test="searchType== 'studio'.toString()" >
-				WHERE article_head like '%'||#{keyword}||'%'
-				and board_no= 2
-			</if>
-			<if test="searchType== 'dress'.toString()" >
-				WHERE article_head like '%'||#{keyword}||'%'
-				and board_no= 2
-			</if>
-			<if test="searchType== 'makeup'.toString()" >
-				WHERE article_head like '%'||#{keyword}||'%'
-				and board_no= 2
-			</if>						
-		</if>
-	</sql>
-
 	<select id="listSearchCount" resultType="int">
 			SELECT Count(article_no) 
 			FROM   article a 
 			       JOIN users u 
 			         ON a.user_no = u.user_no 
-			WHERE  a.article_no > 0 
 		<include refid="search"></include>
 	</select>  
 

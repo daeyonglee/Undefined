@@ -171,8 +171,8 @@
             <p><input type="text" id="reply_content" class="form-control"></p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-warning" id="replyModBtn">수정</button>
-            <button type="button" class="btn btn-danger" id="replyDelBtn">삭제</button>
+            <button type="button" class="btn btn-warning" id="replyModBtn" data-dismiss="modal">수정</button>
+            <button type="button" class="btn btn-danger" id="replyDelBtn" data-dismiss="modal">삭제</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
           </div>
         </div>
@@ -289,7 +289,7 @@ function getPage(pageInfo) {
     printData(data.list, $("#repliesDiv"), $('#template'));
     printPaging(data.pageMaker, $(".pagination"));
 	
-    $("#modifyModal").modal('hide');
+    //$("#modifyModal").modal('hide');
   });
 }
 

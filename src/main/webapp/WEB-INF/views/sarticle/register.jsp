@@ -68,7 +68,7 @@
              <!--로그인 시 로그인한 user_nm이 화면에 출력되도록 하여아 한다.  -->
             <!--글을 등록할 경우 작성자는 user_no가 들어간다. -->
             <div class="form-group">
-              <input type="hidden" name ="user_no" id ="user_no" value='1'></input> 
+              <input type="hidden" name ="user_no" id ="user_no" value='${sessionScope.login.no}'></input> 
             </div>
             
             <div class="form-group">
