@@ -131,7 +131,7 @@
                     </div>
                     <div class="col-lg-10" id="col">
                       <div class="col-lg-3">
-                        <input class='form-control datepicker' type="text" name="meetDate" placeholder='1지망(필수)'>
+                        <input class='form-control datepicker' type="text" name="meetDate" placeholder='날짜를 선택하세요'>
                       </div>
                    </div>
  
@@ -278,7 +278,7 @@
            var html =  "<div class='col-sm-6 col-md-4 p0' style='margin-left: 25px;'>";
                html += "  <div class='box-two proerty-item'>";
                html += "    <div class='item-thumb'>";
-                html += "      <img src='"+ productImage +"' style='width: 100%;'>";
+                html += "      <img src='/user/mypage/imgview?imgview="+ productImage +"' style='width: 100%;'>";
                 html += "    </div>";
                 html += "    <div class='item-entry overflow' style='padding: 10px'>";
                 html += "       <input type='hidden' name='productNo' value='" + productNo + "'>";

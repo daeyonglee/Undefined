@@ -9,19 +9,19 @@
  --><title>역경매 입찰서 리스트</title>
 <style type="text/css">
 body {
-	background: #F5F5F5;
+   background: #F5F5F5;
 }
 
 #count #newBtn #basic {
-	text-align: center;
+   text-align: center;
 }
 
 td, th {
-	text-align: center;
+   text-align: center;
 }
 
 .form-group {
-	margin: 15px auto;
+   margin: 15px auto;
 }
 </style>
 </head>
@@ -48,9 +48,6 @@ td, th {
               <div class="box-body">
                 <table class="table table-bordered">
                   <tr>
-                    <td colspan="6">입찰 신청 건수 : ******* 건</td>
-                  </tr>
-                  <tr>
                     <th style="width: 100px"></th>
                     <th style="text-align: center; width: 100px">입찰 업체</th>
                     <th style="text-align: center; width: 300px">업체 위치</th>
@@ -59,22 +56,76 @@ td, th {
                     <th style="text-align: center; width: 100px">비고</th>
                   </tr>
                   <c:forEach items="${bidList}" var="bid" varStatus="status">
-                    <tr id = "visible">
-                      <td><input type="radio"></td>
-                      <td>${bid.name }</td>
-                      <td>${bid.addr}</td>
-                      <td>${bid.productNm }</td>
-                      <td>${bid.discount }%</td>
-                      <td><input type="button" data-toggle="modal" data-target="#myModal" data-title="Test Title" id="read" value="자세히 보기"></td>
-                      <input type="hidden" value="${bid.productImage }">
-                      <input type="hidden" value="${bid.price}">
-                      <input type="hidden" value="${bid.meetDate}">
-                      <input type="hidden" value="${bid.tel}">
-                      <input type="hidden" value="${bid.type }">
-                      <input type="hidden" value="${bid.apvYn}">
-                      <input type="hidden" value="${bid.totalYn}">
-                      <input type="hidden" value="${bid.shootType}">
-                    </tr>
+                    <c:if test="${bid.type eq 'studio'}">
+                      <tr id = "visible">
+                        <td><input type="radio"></td>
+                        <td>${bid.name }</td>
+                        <td>${bid.addr}</td>
+                        <td>${bid.productNm }</td>
+                        <td>${bid.discount }%</td>
+                        <td>
+                          <input type="button" data-toggle="modal" data-target="#myModal" data-title="Test Title" id="read" onclick="read(event)" value="자세히 보기">
+                          <input type="hidden" name="type"         value="${bid.type }">
+                          <input type="hidden" name="productImage" value="${bid.productImage }">
+                          <input type="hidden" name="price"        value="${bid.price}">
+                          <input type="hidden" name="meetDate"     value="${bid.meetDate}">
+                          <input type="hidden" name="tel"          value="${bid.tel}">
+                          <input type="hidden" name="apvYn"        value="${bid.apvYn}">
+                          <input type="hidden" name="totalYn"      value="${bid.totalYn}">
+                          <input type="hidden" name="shootType"    value="${bid.shootType}">
+                          <input type="hidden" name="name"         value="${bid.name}">
+                          <input type="hidden" name="addr"         value="${bid.addr}">
+                          <input type="hidden" name="productNm"    value="${bid.productNm}">
+                          <input type="hidden" name="discount"     value="${bid.discount}">
+                        </td>
+                      </tr>
+                    </c:if>
+                    <c:if test="${bid.type eq 'dress'}">
+                       <tr id = "visible">
+                        <td><input type="radio"></td>
+                        <td>${bid.name }</td>
+                        <td>${bid.addr}</td>
+                        <td>${bid.productNm }</td>
+                        <td>${bid.discount }%</td>
+                        <td>
+                          <input type="button" data-toggle="modal" data-target="#myModal" data-title="Test Title" id="read" onclick="read(event)" value="자세히 보기">
+                          <input type="hidden" name="type"         value="${bid.type }">
+                          <input type="hidden" name="productImage" value="${bid.productImage }">
+                          <input type="hidden" name="price"        value="${bid.price}">
+                          <input type="hidden" name="meetDate"     value="${bid.meetDate}">
+                          <input type="hidden" name="tel"          value="${bid.tel}">
+                          <input type="hidden" name="shootType"    value="${bid.style}">
+                          <input type="hidden" name="name"         value="${bid.name}">
+                          <input type="hidden" name="addr"         value="${bid.addr}">
+                          <input type="hidden" name="productNm"    value="${bid.productNm}">
+                          <input type="hidden" name="discount"     value="${bid.discount}">
+                        </td>
+                      </tr>
+                    </c:if>
+                    <c:if test="${bid.type eq 'makeup'}">
+                       <tr id = "visible">
+                        <td><input type="radio"></td>
+                        <td>${bid.name }</td>
+                        <td>${bid.addr}</td>
+                        <td>${bid.productNm }</td>
+                        <td>${bid.discount }%</td>
+                        <td>
+                          <input type="button" data-toggle="modal" data-target="#myModal" data-title="Test Title" id="read" onclick="read(event)" value="자세히 보기">
+                          <input type="hidden" name="type"         value="${bid.type }">
+                          <input type="hidden" name="productImage" value="${bid.productImage }">
+                          <input type="hidden" name="price"        value="${bid.price}">
+                          <input type="hidden" name="meetDate"     value="${bid.meetDate}">
+                          <input type="hidden" name="tel"          value="${bid.tel}">
+                          <input type="hidden" name="shootType"    value="${bid.accYn}">
+                          <input type="hidden" name="shootType"    value="${bid.familyYn}">
+                          <input type="hidden" name="shootType"    value="${bid.hairYn}">
+                          <input type="hidden" name="name"         value="${bid.name}">
+                          <input type="hidden" name="addr"         value="${bid.addr}">
+                          <input type="hidden" name="productNm"    value="${bid.productNm}">
+                          <input type="hidden" name="discount"     value="${bid.discount}">
+                        </td>
+                      </tr>
+                    </c:if>
                   </c:forEach>
                </table>
                </div>
@@ -120,7 +171,7 @@ td, th {
                               
                                                                <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
                                                                    <li style="padding-bottom: 20px" data-thumb="/resources/assets/img/demo/property-4.jpg"> 
-                                                                       <img src="${bid.productImage} " />
+                                                                       <img id="productImage" />
                                                                    </li>                                         
                                                                </ul>
                                                            </div>
@@ -132,35 +183,18 @@ td, th {
                                                        <!-- End description area  -->
                               
                                                         <div class="section additional-details">
-                                                        <div class="section">
+                                                        <div class="clearfix"></div>
+<%--                                                         <div class="section">
                                                            <h4 class="s-property-title">업체 소개</h4>
                                                            <div class="s-property-content">
                                                                <p>${myCompany.introduce } </p>
-                                                           </div>
+                                                           </div> --%>
                                                        </div>     
                               
                                                            <ul class="additional-details-list clearfix" id="ul">
- 
-
                                                             
                                                            </ul>
                                                        </div>  
-                              
-<!--                                                        <div class="section property-features">      
-                              
-                                                           <h4 class="s-property-title"></h4>                            
-                                                           <ul>
-                                                               <li><a href="properties.html">Swimming Pool</a></li>   
-                                                               <li><a href="properties.html">3 Stories</a></li>
-                                                               <li><a href="properties.html">Central Cooling</a></li>
-                                                               <li><a href="properties.html">Jog Path 2</a></li>
-                                                               <li><a href="properties.html">2 Lawn</a></li>
-                                                               <li><a href="properties.html">Bike Path</a></li>
-                                                           </ul>
-                              
-                                                       </div> -->
-                                                       <!-- End features area  -->
-                                                
                                                    </div>
                                                </div>
                                            </div>
@@ -200,115 +234,218 @@ td, th {
  <script>
       $(document).ready(function() {
 
-			$("#list").on("click", function() {
+         $("#list").on("click", function() {
               self.location = "apply";
             });
-			
-			$("#read").on("click", function() {
-				alert("메롱");
-				var radio = $("#Visible");
-				console.log(radio);
-				
-				
-				var name          = radio.children().eq(1).text();
-				var addr          = radio.children().eq(2).text();
-				var productNm     = radio.children().eq(3).text();
-				var discount      = radio.children().eq(4).text();
-				var productImage  = radio.children().eq(6).val();
-				var price         = radio.children().eq(7).val();
-				var meetDate      = radio.children().eq(8).val();
-				var tel           = radio.children().eq(9).val();
-				var type          = radio.children().eq(10).val();
-				
-				console.log(name);
-				console.log(addr);
-				console.log(productNm);
-				console.log(discount);
-				console.log(productImage);
-				console.log(price);
-				console.log(meetDate);
-				console.log(tel);
-				
-				var studio = "studio";
-			    
- 			    if(type == studio){
-			    var html =  "<li>";
-			        html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>업체 이름</span>";
-			        html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + name + "</span>";    
-			        html += "</li>";
-			        html += "<li>";
-			        html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>입찰 상품</span>";
-			        html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+ productNm + "</span>";
-			        html += "</li>";
-			        html += "<li>";
-			        html +=  " <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>실제 가격 / 할인율 / 할인 가격</span>";
-			        html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + price +"원 ->" + discount +"% -> 18000원</span>";
-			        html += "</li>";
-			        html += "<li>";
-			        html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>실내 / 야외 여부</span>";
-			        html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+ ${product.shootType } +"</span>";
-			        html += "</li>";
-			        html += "<li>";
-			        html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>토탈샵 여부</span>";
-			        html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+  ${product.totalYn } +"</span>";
-			        html += "</li>";
-			        html += "<li>";
-			        html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>액자 / 앨범 / 비디오</span>";
-			        html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+  ${product.apvYn } +"</span>";
-			        $("#ul").html(html);
-      
-			    }
- 
 
-
-	/* 			                                                              <li>
-                                                                   <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">업체 이름</span>
-                                                                   <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">${bid.name }</span>
-                                                               </li>
-                              
-                                                               <li>
-                                                                   <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">입찰 상품</span>
-                                                                   <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">${bid.bidNo }</span>
-                                                               </li>
-                                                               
-                                                               <li>
-                                                                <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">실제 가격 / 할인율 / 할인 가격</span>
-                                                                 <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">${product.price }원 -> ${myBid.discount }% -> 18000원</span>
-                                                               </li>
-                              
-                                                               <li>
-                                                                   <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">실내 / 토탈샵 / 비디오</span>
-                                                                   <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry"> ${product.shootType }  / ${product.totalYn } / ${product.apvYn } </span>
-                                                               </li> 
-                                                               
-                                                               <li>
-                                                                   <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">상담 날짜</span>
-                                                                   <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">${bid.meetDate }</span>
-                                                               </li>                        
-                                                               <li>
-                                                                   <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">업체 위치</span>
-                                                                   <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">${bid.addr }</span>
-                                                               </li>
-                              
-                                                               <li>
-                                                                   <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">업체 전화번호</span>
-                                                                   <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">${bid.tel }</span>
-                                                               </li> 
-                                 
-                     
-
-
-
-                     
-                    </ul>
-                </div>  
-
-                <!-- End features area  -->
-
-            </div> */
-				 
-			});
       });
+      
+      
+      function read(event){
+         
+         var tr = event.target.parentElement;
+         var inputs = tr.children;
+         
+         var type;
+         var name;
+         var productNm;
+         var price;
+         var discount;
+         var productImage;
+         var meetDate;
+         var tel;
+         var addr;
+          var apvYn;
+          var totalYn;
+          var shootType;
+          var style;
+          var accYn;
+          var familyYn;
+          var hairYn;
+            
+         for (var i in inputs) {
+            var nm = inputs[i].name;
+            var val = inputs[i].value;
+             
+            if (nm == 'name'){
+               name = val;
+            }
+            if (nm == 'productNm') {
+               productNm = val;
+            }
+            if (nm == 'price') {
+               price = val;
+            }
+            if (nm == 'productImage') {
+               productImage = val;
+            }
+            if (nm == 'meetDate') {
+               meetDate = val;
+            }
+            if (nm == 'tel') {
+               tel = val;
+            }
+            if (nm == 'apvYn') {
+               apvYn = val;
+            }
+            if (nm == 'totalYn') {
+               totalYn = val;
+            }
+            if (nm == 'shootType') {
+               shootType = val;
+            }
+            if (nm == 'style') {
+               style = val;
+            }
+            if (nm == 'accYn') {
+               accYn = val;
+            }
+            if (nm == 'familyYn') {
+               familyYn = val;
+            }
+            if (nm == 'hairYn') {
+               hairYn = val;
+            }
+            if (nm == 'addr') {
+               addr = val;
+            }
+            if (nm == 'discount') {
+               discount = val;
+            }
+            if (nm == 'type') {
+               type = val;
+            }
+         }
+         
+         if(type == 'studio'){
+            
+               $("#productImage").attr("src", "/user/mypage/imgview?imgview="productImage);
+            
+              var html =  "<li>";
+                  html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>업체 이름</span>";
+                  html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + name + "</span>";    
+                  html += "</li>";
+                  html += "<li>";
+                  html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>입찰 상품</span>";
+                  html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+ productNm + "</span>";
+                  html += "</li>";
+                  html += "<li>";
+                  html +=  " <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>실제 가격 / 할인율 / 할인 가격</span>";
+                  html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + price +"원 ->" + discount +"% ->" + Math.round(price * (1- discount * 0.01)) + "원</span>";
+                  html += "</li>";
+                  html += "<li>";
+                  html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>실내 / 야외 여부</span>";
+                  html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+ shootType +"</span>";
+                  html += "</li>";
+                  html += "<li>";
+                  html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>토탈샵 여부</span>";
+                  html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+  totalYn +"</span>";
+                  html += "</li>";
+                  html += "<li>";
+                  html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>액자 / 앨범 / 비디오</span>";
+                  html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+  apvYn +"</span>";
+                  html += "</li>";
+                  html += "<li>";                 
+                  html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>상담 날짜</span>";                 
+                  html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + meetDate + "</span>";                 
+                  html += "</li>";
+                  html += "<li>";
+                  html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>업체 위치</span>";                 
+                  html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + addr + "</span>";                 
+                  html += "</li>";
+                  html += "<li>";
+                  html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>업체 전화번호</span>";                 
+                  html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + tel+ "</span>";                 
+                 
+                  
+                  $("#ul").html(html);
+                 
+          };
+          if (type == 'dress') {
+              
+          $("#productImage").attr("src", "/user/mypage/imgview?imgview="productImage);
+                      
+               var html =  "<li>";
+                   html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>업체 이름</span>";
+                   html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + name + "</span>";    
+                   html += "</li>";
+                   html += "<li>";
+                   html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>입찰 상품</span>";
+                   html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+ productNm + "</span>";
+                   html += "</li>";
+                   html += "<li>";
+                   html +=  " <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>실제 가격 / 할인율 / 할인 가격</span>";
+                   html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + price +"원 ->" + discount +"% ->" + Math.round(price * (1- discount * 0.01)) + "원</span>";
+                   html += "</li>";
+                   html += "<li>";
+                   html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>드레스 스타일</span>";
+                   html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+  style +"</span>";
+                   html += "</li>";
+                   html += "<li>";                 
+                   html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>상담 날짜</span>";                 
+                   html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + meetDate + "</span>";                 
+                   html += "</li>";
+                   html += "<li>";
+                   html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>업체 위치</span>";                 
+                   html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + addr + "</span>";                 
+                   html += "</li>";
+                   html += "<li>";
+                   html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>업체 전화번호</span>";                 
+                   html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + tel+ "</span>";                 
+                           
+                  $("#ul").html(html);
+                    
+        };
+        if (type == 'makeup') {
+           
+             $("#productImage").attr("src", "/user/mypage/imgview?imgview="productImage);
+                 
+               var html =  "<li>";
+                   html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>업체 이름</span>";
+                   html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + name + "</span>";    
+                   html += "</li>";
+                   html += "<li>";
+                   html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>입찰 상품</span>";
+                   html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+ productNm + "</span>";
+                   html += "</li>";
+                   html += "<li>";
+                   html +=  " <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>실제 가격 / 할인율 / 할인 가격</span>";
+                   html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + price +"원 ->" + discount +"% ->" + Math.round(price * (1- discount * 0.01)) + "원</span>";
+                   html += "</li>";
+                   html += "<li>";
+                   html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>액세서리 대여 여부</span>";
+                   html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+  accYn +"</span>";
+                   html += "</li>";
+                   html += "<li>";
+                   html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>가족 메이크업 여부 </span>";
+                   html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+  familyYn +"</span>";
+                   html += "</li>";
+                   html += "<li>";
+                   html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>헤어 세팅 여부</span>";
+                   html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>"+  hairYn +"</span>";
+                   html += "</li>";
+                   html += "<li>";                 
+                   html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>상담 날짜</span>";                 
+                   html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + meetDate + "</span>";                 
+                   html += "</li>";
+                   html += "<li>";
+                   html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>업체 위치</span>";                 
+                   html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + addr + "</span>";                 
+                   html += "</li>";
+                   html += "<li>";
+                   html += "  <span class='col-xs-6 col-sm-4 col-md-4 add-d-title'>업체 전화번호</span>";                 
+                   html += "  <span class='col-xs-6 col-sm-8 col-md-8 add-d-entry'>" + tel+ "</span>";                 
+                           
+                  $("#ul").html(html);
+        
+        };
+           
+           
+      }
+         console.log(tr.children);
+         
+         console.log(event);
+         console.log(event.target.parentElement);
     </script>
 
  

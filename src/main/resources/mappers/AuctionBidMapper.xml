@@ -108,7 +108,7 @@ VALUES (dress_bid_product_list_seq.NEXTVAL
 </insert>
 
 <insert id="createMakeupProd" parameterType="AuctionBid">
-INSERT INTO dress_bid_product_list 
+INSERT INTO makeup_bid_product_list 
       (mbpl_no
      , mb_no
      , user_no
