@@ -28,22 +28,24 @@
 	 <![CDATA[
 SELECT *
 FROM (SELECT CEIL (rownum / 10) page,
-	mc_no, 
-	mc_nm, 
-	mc_company_no, 
-	mc_main_nm, 
-	mc_addr, 
-	mc_main_image, 
-	mc_email, 
-	mc_pw, 
-	mc_tel, 
-	mc_introduce, 
-	sessionkey, 
-	regdate, 
-	updatedate
+	sc.mc_no, 
+	sc.mc_nm, 
+	sc.mc_company_no, 
+	sc.mc_main_nm, 
+	sc.mc_addr, 
+	sc.mc_main_image, 
+	sc.mc_email, 
+	sc.mc_pw, 
+	sc.mc_tel, 
+	sc.mc_introduce, 
+	sc.sessionkey, 
+	sc.regdate, 
+	sc.updatedate
+   ROUND((SELECT AVG(sr.mr_point) FROM makeup.review sr WHERE sr.mc_no = sc.mc_no), 1) avg,
+   (SELECT count(*) FROM makeup_review sr WHERE sr.mc_no = sc.mc_no) count
 FROM (SELECT *
-	FROM makeup_company order by mc_no desc))
-	WHERE page = #{page}
+   FROM studio_company order by mc_no desc) sc)
+WHERE page = #{page}
  	]]>
 	</select>
 	
@@ -54,23 +56,25 @@ FROM (SELECT *
 	FROM
  	 (
  	SELECT rownum rn,
-    mc_no, 
-	mc_nm, 
-	mc_company_no, 
-	mc_main_nm, 
-	mc_addr, 
-	mc_main_image, 
-	mc_email, 
-	mc_pw, 
-	mc_tel, 
-	mc_introduce, 
-	sessionkey, 
-	regdate, 
-	updatedate
- 	FROM makeup_company
+	sc.mc_no, 
+	sc.mc_nm, 
+	sc.mc_company_no, 
+	sc.mc_main_nm, 
+	sc.mc_addr, 
+	sc.mc_main_image, 
+	sc.mc_email, 
+	sc.mc_pw, 
+	sc.mc_tel, 
+	sc.mc_introduce, 
+	sc.sessionkey, 
+	sc.regdate, 
+	sc.updatedate
+	  ROUND((SELECT AVG(sr.mr_point) FROM makeup.review sr WHERE sr.mc_no = sc.mc_no), 1) avg,
+   (SELECT count(*) FROM makeup_review sr WHERE sr.mc_no = sc.mc_no) count
+ 	FROM makeup_company sc
  	WHERE rownum <= #{page} * #{perPageNum}
- 	 and mc_no > 0
- 	  order by mc_no DESC
+ 	 and sc.mc_no > 0
+ 	  order by sc.mc_no DESC
  	 )
 	where rn > (#{page} -1) * #{perPageNum}
  	]]>
@@ -101,20 +105,22 @@ FROM (SELECT *
 	from
  	 (
  	SELECT rownum rn,
-    mc_no, 
-	mc_nm, 
-	mc_company_no, 
-	mc_main_nm, 
-	mc_addr, 
-	mc_main_image, 
-	mc_email, 
-	mc_pw, 
-	mc_tel, 
-	mc_introduce, 
-	sessionkey, 
-	regdate, 
-	updatedate
- 	FROM makeup_company
+    sc.mc_no, 
+	sc.mc_nm, 
+	sc.mc_company_no, 
+	sc.mc_main_nm, 
+	sc.mc_addr, 
+	sc.mc_main_image, 
+	sc.mc_email, 
+	sc.mc_pw, 
+	sc.mc_tel, 
+	sc.mc_introduce, 
+	sc.sessionkey, 
+	sc.regdate, 
+	sc.updatedate,
+	  ROUND((SELECT AVG(sr.mr_point) FROM makeup_review sr WHERE sr.mc_no = sc.mc_no), 1) avg,
+   (SELECT count(*) FROM makeup_review sr WHERE sr.mc_no = sc.mc_no) count
+    FROM makeup_company sc
  	 where 1=1
  	 ]]>
  	   <include refid="searchMakeup"></include>
@@ -135,5 +141,61 @@ FROM (SELECT *
 	where mc_no > 0
 	]]>
 	   <include refid="searchMakeup"></include>
+	</select>
+	
+	<select id="detailMakeup" resultType="kr.co.udf.common.company.domain.MakeupCompany">
+	<![CDATA[
+	SELECT
+		mc_no,
+		mc_nm,
+		mc_company_no,
+		mc_main_nm, 
+		mc_addr, 
+		mc_main_image,
+		mc_email,
+		mc_tel,
+		mc_introduce,
+		mc_smy_intro
+	FROM makeup_company
+	WHERE mc_no = #{mc_no}
+	]]> 
 	</select>	
+	
+	<insert id="addReview">
+	INSERT INTO makeup_review (mr_no, mc_no, mr_content, mr_point, regdate, updatedate)
+	VALUES (makeup_review_seq.nextval, #{mc_no}, #{mr_content}, #{mr_point}, sysdate, sysdate) 
+	</insert>
+	
+	<select id="reviewMakeup" resultType="kr.co.udf.company.domain.MakeupReview">
+	<![CDATA[
+	SELECT
+		mr_no, 
+		mc_no,
+		mr_content,  	
+		mr_point, 
+		TO_CHAR(regdate, 'YY-MM-DD') AS regdate,
+	    updatedate
+	FROM makeup_review 	
+	WHERE mc_no = #{mc_no}
+	ORDER BY mr_no DESC
+	]]>
+	</select>
+	
+	<select id="avgPoint" resultType="double">
+	<![CDATA[
+	SELECT
+		ROUND(AVG(mr_point), 1) AS avg	 
+	FROM makeup_review 	
+	WHERE mc_no = #{mc_no}
+	]]>
+	</select> 
+	
+	<select id="countReview" resultType="int">
+	<![CDATA[
+	SELECT
+		COUNT(*) AS count	 
+	FROM makeup_review 	
+	WHERE mc_no = #{mc_no}
+	]]>
+	</select>
 </mapper>

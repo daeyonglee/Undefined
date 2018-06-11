@@ -6,14 +6,11 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import kr.co.udf.common.company.domain.DressCompany;
 import kr.co.udf.common.company.domain.MakeupCompany;
-import kr.co.udf.common.company.domain.StudioCompany;
-import kr.co.udf.company.dao.DressDao;
 import kr.co.udf.company.dao.MakeupDao;
-import kr.co.udf.company.dao.StudioDao;
 import kr.co.udf.company.domain.Criteria;
 import kr.co.udf.company.domain.SearchCriteria;
+import kr.co.udf.company.domain.MakeupReview;
 
 @Service
 public class MakeupServiceImpl implements MakeupService {
@@ -49,5 +46,30 @@ public class MakeupServiceImpl implements MakeupService {
 	@Override
 	public int MakeupSearchCount(SearchCriteria cri) throws Exception {
 		return dao.MakeupSearchCount(cri);
+	}
+	
+	@Override
+	public MakeupCompany detailMakeup(int mc_no) throws Exception {
+		return dao.detailMakeup(mc_no);
+	}
+	
+	@Override
+	public void addReview(MakeupReview makeupReview) throws Exception {
+		dao.addReview(makeupReview);
+	}
+	
+	@Override
+	public List<MakeupReview> reviewMakeup(int mc_no) throws Exception {
+		return dao.reviewMakeup(mc_no);
+	}
+
+	@Override
+	public double avgPoint(int mc_no) throws Exception {
+		return dao.avgPoint(mc_no);
+	}
+	
+	@Override
+	public int countReview(int mc_no) throws Exception {
+		return dao.countReview(mc_no);
 	}
 }

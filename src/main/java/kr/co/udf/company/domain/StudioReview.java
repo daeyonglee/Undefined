@@ -4,6 +4,8 @@ public class StudioReview {
 	
 	private int sr_no;
 	private int sc_no;
+	private String user_nm;
+	private String sr_subject;
 	private String sr_content;
 	private String sr_point;
 	private String regdate;
@@ -29,6 +31,22 @@ public class StudioReview {
 
 	public void setSc_no(int sc_no) {
 		this.sc_no = sc_no;
+	}
+	
+	public String getUser_nm() {
+		return user_nm;
+	}
+
+	public void setUser_nm(String user_nm) {
+		this.user_nm = user_nm;
+	}
+	
+	public String getSr_subject() {
+		return sr_subject;
+	}
+
+	public void setSr_subject(String sr_subject) {
+		this.sr_subject = sr_subject;
 	}
 
 	public String getSr_content() {
@@ -67,7 +85,7 @@ public class StudioReview {
 	
 	@Override
 	public String toString() {
-		return "StudioReview [sr_no=" + sr_no + ", sc_no=" + sc_no + ", sr_content=" + sr_content + ", sr_point="
+		return "StudioReview [sr_no=" + sr_no + ", sc_no=" + sc_no + ", user_nm=" + user_nm + ", sr_subject=" + sr_subject + ", sr_content=" + sr_content + ", sr_point="
 				+ sr_point + ", regdate=" + regdate + ", updatedate=" + updatedate + "]";
 	}
 }

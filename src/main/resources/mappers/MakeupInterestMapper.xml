@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                          "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace = "kr.co.udf.company.dao.MakeupInterestDao">
+	
+	<select id="read" resultType="kr.co.udf.company.domain.MakeupInterest">
+	select s.mic_no, u.user_no, c.mc_nm, c.mc_main_image, c.mc_addr ,c.mc_email, c.mc_tel, s.mc_no
+	from makeup_company c JOIN makeup_interest_company s
+      on c.mc_no = s.mc_no
+      join users u
+      on s.user_no = u.user_no
+      where u.user_no =  #{user_no}
+      order by s.mic_no desc
+	</select>
+	
+	<insert id="create">
+	INSERT INTO makeup_interest_company (mic_no, user_no, mc_no, regdate, updatedate)
+	VALUES (makeup_interest_company_seq.nextval, #{user_no}, #{mc_no}, sysdate, sysdate)
+	</insert>
+	
+	<delete id="delete" >
+	DELETE FROM makeup_interest_company
+	WHERE mic_no = #{mic_no}
+	</delete>
+	
+	
+	</mapper>

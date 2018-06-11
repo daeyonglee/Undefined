@@ -1,10 +1,11 @@
-package kr.co.udf.company.dao;
+package kr.co.udf.company.service;
 
 import java.util.List;
 
+import kr.co.udf.auction.domain.Auction;
 import kr.co.udf.company.domain.StudioInterest;
 
-public interface StudioInterestDao {
+public interface StudioInterestService {
 	
 	/** 관심업체 추가 */
 	public void create(StudioInterest studioInterest) throws Exception;

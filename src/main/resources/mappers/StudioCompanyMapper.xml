@@ -22,60 +22,66 @@
 	]]> 
 	</select>
 	
-	<select id="listPage" resultType="kr.co.udf.common.company.domain.StudioCompany">
-	 <![CDATA[
+  <select id="listPage" resultType="kr.co.udf.common.company.domain.StudioCompany">
+    <![CDATA[
 SELECT *
 FROM (SELECT CEIL (rownum / 12) page,
-	sc_no, 
-	sc_nm, 
-	sc_main_nm, 
-	sc_addr, 
-	sc_main_image, 
-	sc_email, 
-	sc_smy_intro, 
-	sc_introduce, 
-	sessionkey, 
-	regdate, 
-	updatedate
+   sc.sc_no, 
+   sc.sc_nm, 
+   sc.sc_main_nm, 
+   sc.sc_addr, 
+   sc.sc_main_image, 
+   sc.sc_email, 
+   sc.sc_smy_intro, 
+   sc.sc_introduce, 
+   sc.sessionkey, 
+   sc.regdate, 
+   sc.updatedate,
+   ROUND((SELECT AVG(sr.sr_point) FROM studio_review sr WHERE sr.sc_no = sc.sc_no), 1) avg,
+   (SELECT count(*) FROM studio_review sr WHERE sr.sc_no = sc.sc_no) count
 FROM (SELECT *
-	FROM studio_company order by sc_no desc))
-	WHERE page = #{page}
- 	]]>
-	</select>
+   FROM studio_company order by sc_no desc) sc)
+WHERE page = #{page}
+    ]]>
+   </select>
 	
-	<select id="listCriteria" resultType="kr.co.udf.common.company.domain.StudioCompany">
-	 <![CDATA[
-	SELECT
-  	*
-	FROM
- 	 (
- 	SELECT rownum rn,
-    sc_no, 
-	sc_nm, 
-	sc_main_nm, 
-	sc_addr, 
-	sc_main_image, 
-	sc_email, 
-	sc_introduce,
-	sessionkey, 
-	regdate, 
-	updatedate
- 	FROM studio_company
- 	WHERE rownum <= #{page} * #{perPageNum}
- 	 and sc_no > 0
- 	  order by sc_no DESC
- 	 )
-	where rn > (#{page} -1) * #{perPageNum}
- 	]]>
-	</select>
-	
-	<select id="countPaging" resultType="int">
-	 <![CDATA[
-	SELECT count(sc_no)
-	FROM studio_company
-	WHERE sc_no > 0
-	]]>
-	</select>
+   <select id="listCriteria" resultType="kr.co.udf.common.company.domain.StudioCompany">
+    <![CDATA[
+   SELECT
+     *
+   FROM
+     (
+    SELECT rownum rn,
+   sc.sc_no, 
+   sc.sc_nm, 
+   sc.sc_main_nm, 
+   sc.sc_addr, 
+   sc.sc_main_image, 
+   sc.sc_email, 
+   sc.sc_smy_intro, 
+   sc.sc_introduce,
+   sc.sessionkey, 
+   sc.regdate, 
+   sc.updatedate,
+   ROUND((SELECT AVG(sr.sr_point) FROM studio_review sr WHERE sr.sc_no = sc.sc_no), 1) avg,
+   (SELECT count(*) FROM studio_review sr WHERE sr.sc_no = sc.sc_no) count
+    FROM studio_company sc
+    WHERE rownum <= #{page} * #{perPageNum}
+     and sc.sc_no > 0
+      order by sc.sc_no DESC
+     )
+   where rn > (#{page} -1) * #{perPageNum}
+    ]]>
+   </select>
+   
+    <select id="countPaging" resultType="int">
+    <![CDATA[
+   SELECT count(sc_no)
+   FROM studio_company
+   WHERE sc_no > 0
+   ]]>
+   </select>
+   
 	
 <sql id="search">
    <if test="searchType == 'name'.toString()">
@@ -87,48 +93,53 @@ FROM (SELECT *
 </sql>
 
 	
-	<select id="listSearch" resultType="kr.co.udf.common.company.domain.StudioCompany">
+    <select id="listSearch" resultType="kr.co.udf.common.company.domain.StudioCompany">
 <![CDATA[
-	select *
-	from
- 	 (
- 	SELECT rownum rn,
- 	sc_no, 
-	sc_nm, 
-	sc_main_nm, 
-	sc_addr, 
-	sc_main_image, 
-	sc_email, 
-	sc_pw, 
-	sc_introduce,
-	sessionkey, 
-	regdate, 
-	updatedate
- 	FROM studio_company
- 	 where 1=1
- 	 ]]>
- 	   <include refid="search"></include>
+   select *
+   from
+     (
+    SELECT rownum rn,
+   sc.sc_no, 
+   sc.sc_nm, 
+   sc.sc_main_nm, 
+   sc.sc_addr, 
+   sc.sc_main_image, 
+   sc.sc_email, 
+   sc.sc_smy_intro, 
+   sc.sc_pw, 
+   sc.sc_introduce,
+   sc.sessionkey, 
+   sc.regdate, 
+   sc.updatedate,
+   ROUND((SELECT AVG(sr.sr_point) FROM studio_review sr WHERE sr.sc_no = sc.sc_no), 1) avg,
+   (SELECT count(*) FROM studio_review sr WHERE sr.sc_no = sc.sc_no) count
+    FROM studio_company sc
+     where 1=1
+     ]]>
+       <include refid="search"></include>
 <![CDATA[ 
- 	 and rownum <= #{page} * #{perPageNum}
- 	 and sc_no > 0
-     order by sc_no DESC
- 	 )
-	where rn > (#{page} -1) * #{perPageNum}
- 	]]>
- 		
-	</select>
- 	
- 		<select id="listSearchCount" resultType="int">
-	 <![CDATA[
-	select count(sc_no)
-	from studio_company
-	where sc_no > 0
-	]]>
-	   <include refid="search"></include>
-	</select>	
+     and rownum <= #{page} * #{perPageNum}
+     and sc.sc_no > 0
+     order by sc.sc_no DESC
+     )
+   where rn > (#{page} -1) * #{perPageNum}
+    ]]>
+       
+   </select>
+   
+   
+  
+       <select id="listSearchCount" resultType="int">
+    <![CDATA[
+   select count(sc_no)
+   from studio_company
+   where sc_no > 0
+   ]]>
+      <include refid="search"></include>
+   </select>   
 	
 	<!-- 페이지 리드, 리뷰  -->
-		<select id="detailStudio" resultType="kr.co.udf.common.company.domain.StudioCompany">
+	<select id="detailStudio" resultType="kr.co.udf.common.company.domain.StudioCompany">
 	<![CDATA[
 	SELECT
 		sc_no,
@@ -139,15 +150,16 @@ FROM (SELECT *
 		sc_main_image,
 		sc_email,
 		sc_tel,
-		sc_introduce
+		sc_introduce,
+		sc_smy_intro
 	FROM studio_company
 	WHERE sc_no = #{sc_no}
 	]]> 
 	</select>	
 	
 	<insert id="addReview">
-	INSERT INTO studio_review (sr_no, sc_no, sr_content, sr_point, regdate, updatedate)
-	VALUES (studio_review_seq.nextval, #{sc_no}, #{sr_content}, #{sr_point}, sysdate, sysdate) 
+	INSERT INTO studio_review (sr_no, sc_no, user_nm, sr_subject, sr_content, sr_point, regdate, updatedate)
+	VALUES (studio_review_seq.nextval, #{sc_no}, #{user_nm}, #{sr_subject}, #{sr_content}, #{sr_point}, sysdate, sysdate) 
 	</insert>
 	
 	<select id="reviewStudio" resultType="kr.co.udf.company.domain.StudioReview">
@@ -157,7 +169,7 @@ FROM (SELECT *
 		sc_no,
 		sr_content,  	
 		sr_point, 
-		regdate,
+		TO_CHAR(regdate, 'YY-MM-DD') AS regdate,
 	    updatedate
 	FROM studio_review 	
 	WHERE sc_no = #{sc_no}

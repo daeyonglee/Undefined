@@ -3,7 +3,6 @@
                         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-
 <mapper namespace="kr.co.udf.company.dao.DressDao"> 
 	<select id="listDress" resultType="kr.co.udf.common.company.domain.DressCompany">
 	<![CDATA[
@@ -28,19 +27,24 @@
 	 <![CDATA[
 SELECT *
 FROM (SELECT CEIL (rownum / 10) page,
-	dc_no, 
-	dc_nm, 
-	dc_company_no, 
-	dc_main_nm, 
-	dc_addr, 
-	dc_main_image, 
-	dc_email, 
-	dc_pw, 
-	dc_tel, 
-	dc_introduce, 
-	sessionkey, 
-	regdate, 
-	updatedate
+	sc.dc_no, 
+	sc.dc_nm, 
+	sc.dc_company_no, 
+	sc.dc_main_nm, 
+	sc.dc_addr, 
+	sc.dc_main_image, 
+	sc.dc_email, 
+	sc.dc_pw, 
+	sc.dc_tel, 
+	sc.dc_introduce, 
+	sc.sessionkey, 
+	sc.regdate, 
+	sc.updatedate
+	   ROUND((SELECT AVG(sr.dr_point) FROM dress_review sr WHERE sr.dc_no = sc.dc_no), 1) avg,
+   (SELECT count(*) FROM dress_review sr WHERE sr.dc_no = sc.dc_no) count
+FROM (SELECT *
+   FROM dress_company order by dc_no desc) sc)
+WHERE page = #{page}
 FROM (SELECT *
 	FROM dress_company order by dc_no desc))
 	WHERE page = #{page}
@@ -54,23 +58,25 @@ FROM (SELECT *
 	FROM
  	 (
  	SELECT rownum rn,
-    dc_no, 
-	dc_nm, 
-	dc_company_no, 
-	dc_main_nm, 
-	dc_addr, 
-	dc_main_image, 
-	dc_email, 
-	dc_pw, 
-	dc_tel, 
-	dc_introduce, 
-	sessionkey, 
-	regdate, 
-	updatedate
- 	FROM dress_company
+	sc.dc_no, 
+	sc.dc_nm, 
+	sc.dc_company_no, 
+	sc.dc_main_nm, 
+	sc.dc_addr, 
+	sc.dc_main_image, 
+	sc.dc_email, 
+	sc.dc_pw, 
+	sc.dc_tel, 
+	sc.dc_introduce, 
+	sc.sessionkey, 
+	sc.regdate, 
+	sc.updatedate
+	   ROUND((SELECT AVG(sr.dr_point) FROM dress_review sr WHERE sr.dc_no = sc.dc_no), 1) avg,
+   (SELECT count(*) FROM dress_review sr WHERE sr.dc_no = sc.dc_no) count
+ 	FROM dress_company sc
  	WHERE rownum <= #{page} * #{perPageNum}
- 	 and dc_no > 0
- 	  order by dc_no desc
+ 	 and sc.dc_no > 0
+ 	  order by sc.dc_no desc
  	 )
 	where rn > (#{page} -1) * #{perPageNum}
  	]]>
@@ -101,20 +107,22 @@ FROM (SELECT *
 	from
  	 (
  	SELECT rownum rn,
- 	dc_no, 
-	dc_nm, 
-	dc_company_no, 
-	dc_main_nm, 
-	dc_addr, 
-	dc_main_image, 
-	dc_email, 
-	dc_pw, 
-	dc_tel, 
-	dc_introduce, 
-	sessionkey, 
-	regdate, 
-	updatedate
- 	FROM dress_company
+ 	sc.dc_no, 
+	sc.dc_nm, 
+	sc.dc_company_no, 
+	sc.dc_main_nm, 
+	sc.dc_addr, 
+	sc.dc_main_image, 
+	sc.dc_email, 
+	sc.dc_pw, 
+	sc.dc_tel, 
+	sc.dc_introduce, 
+	sc.sessionkey, 
+	sc.regdate, 
+	sc.updatedate,
+  ROUND((SELECT AVG(sr.dr_point) FROM dress_review sr WHERE sr.dc_no = sc.dc_no), 1) avg,
+   (SELECT count(*) FROM dress_review sr WHERE sr.dc_no = sc.dc_no) count
+    FROM dress_company sc
  	 where 1=1
  	 ]]>
  	   <include refid="searchDress"></include>
@@ -135,6 +143,63 @@ FROM (SELECT *
 	where dc_no > 0
 	]]>
 	   <include refid="searchDress"></include>
+	</select>	
+	
+	<!-- 페이지 리드, 리뷰  -->
+	<select id="detailDress" resultType="kr.co.udf.common.company.domain.DressCompany">
+	<![CDATA[
+	SELECT
+		dc_no,
+		dc_nm,
+		dc_company_no,
+		dc_main_nm, 
+		dc_addr, 
+		dc_main_image,
+		dc_email,
+		dc_tel,
+		dc_introduce,
+		dc_smy_intro
+	FROM dress_company
+	WHERE dc_no = #{dc_no}
+	]]> 
+	</select>	
+	
+	<insert id="addReview">
+	INSERT INTO dress_review (dr_no, dc_no, dr_content, dr_point, regdate, updatedate)
+	VALUES (dress_review_seq.nextval, #{dc_no}, #{dr_content}, #{dr_point}, sysdate, sysdate) 
+	</insert>
+	
+	<select id="reviewDress" resultType="kr.co.udf.company.domain.DressReview">
+	<![CDATA[
+	SELECT
+		dr_no, 
+		dc_no,
+		dr_content,  	
+		dr_point, 
+		TO_CHAR(regdate, 'YY-MM-DD') AS regdate,
+	    updatedate
+	FROM dress_review 	
+	WHERE dc_no = #{dc_no}
+	ORDER BY dr_no DESC
+	]]>
+	</select>
+	
+	<select id="avgPoint" resultType="double">
+	<![CDATA[
+	SELECT
+		ROUND(AVG(dr_point), 1) AS avg	 
+	FROM dress_review 	
+	WHERE dc_no = #{dc_no}
+	]]>
+	</select> 
+	
+	<select id="countReview" resultType="int">
+	<![CDATA[
+	SELECT
+		COUNT(*) AS count	 
+	FROM dress_review 	
+	WHERE dc_no = #{dc_no}
+	]]>
 	</select>	
 
 </mapper>

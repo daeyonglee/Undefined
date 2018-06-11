@@ -2,10 +2,9 @@ package kr.co.udf.company.service;
 
 import java.util.List;
 
-import kr.co.udf.common.company.domain.DressCompany;
 import kr.co.udf.common.company.domain.MakeupCompany;
-import kr.co.udf.common.company.domain.StudioCompany;
 import kr.co.udf.company.domain.Criteria;
+import kr.co.udf.company.domain.MakeupReview;
 import kr.co.udf.company.domain.SearchCriteria;
 
 public interface MakeupService {
@@ -21,4 +20,19 @@ public interface MakeupService {
 	public List<MakeupCompany> MakeupSearch(SearchCriteria cri) throws Exception;
 
 	public int MakeupSearchCount(SearchCriteria cri) throws Exception;
+	
+	/** 메이크업 업체 상세정보 조회 */
+	public MakeupCompany detailMakeup(int mc_no) throws Exception;
+	
+	/** 메이크업 업체 리뷰 추가 */
+	public void addReview(MakeupReview dressReview) throws Exception;
+	
+	/** 메이크업 업체 리뷰 출력 */
+	public List<MakeupReview> reviewMakeup(int mc_no) throws Exception;
+	
+	/** 메이크업 업체 평균 별점 */
+	public double avgPoint(int mc_no) throws Exception; 
+	
+	/** 메이크업 업체 리뷰 갯수 */
+	public int countReview(int mc_no) throws Exception;
 }
