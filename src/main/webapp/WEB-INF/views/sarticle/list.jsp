@@ -124,10 +124,11 @@
           test="${null ne sessionScope.login || null ne cookie.loginCookie.value}">
        <%
        if(request.getParameter("board_no")!=null){
-         /*공지사항일 경우 글쓰기는 관리자 계쩡만 쓸 수 있게 하는 조건 */
+         /*공지사항일 경우 글쓰기는 관리자 계정만 쓸 수 있게 하는 조건 */
        if(Integer.parseInt(request.getParameter("board_no"))==1){
        %>
-          <c:if test="${sessionScope.login.role eq 'admin'}">
+           <!--user_no 가 20인 이름만 관리자인 user가 글쓸수 있게 하기 위한 임시조건  -->
+          <c:if test="${sessionScope.login.role eq 'admin' || sessionScope.login.no eq '20'}">
             <div class="text-right">
               <button id='newBtn' class="btn btn-primary btn-sm">글쓰기</button>
             </div>
