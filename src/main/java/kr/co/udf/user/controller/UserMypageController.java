@@ -188,13 +188,33 @@ public class UserMypageController {
 	/** 마이페이지 - 나의 신청서 리스트 조회 */
 	@RequestMapping(value = "/apply", method = RequestMethod.GET)
 	public String applyList(SearchParams params, HttpSession session, Model model) throws Exception {
-		
-		Login login = (Login)session.getAttribute("login");
+
+		Login login = (Login) session.getAttribute("login");
 		int userNo = login.getNo().intValue();
 		logger.info(userNo);
-		
-		model.addAttribute("applyList", mypageBidService.applyListByUser(userNo));
-		
+
+		int count = 0;
+		List<Auction> applyList = mypageBidService.applyListByUser(userNo);
+
+		/*
+		 * for (Auction auction : applyList) { String type = auction.getType(); int
+		 * applyNo = auction.getNo().intValue(); if (type.equals("studio")) { count =
+		 * mypageBidService.countStudioBid(userNo, applyNo);
+		 * 
+		 * } else if (type.equals("makeup")) { count =
+		 * mypageBidService.countMakeupBid(userNo, applyNo);
+		 * 
+		 * } else if (type.equals("dress")) { count =
+		 * mypageBidService.countDressBid(userNo, applyNo);
+		 * 
+		 * }
+		 * 
+		 * }
+		 * 
+		 * model.addAttribute("count", count);
+		 */
+		model.addAttribute("applyList", applyList);
+
 		return "/user/mypage/apply";
 
 	}
@@ -213,18 +233,41 @@ public class UserMypageController {
 	}
 	
 	/** 마이페이지 - 입찰중 or 낙찰대기중인 신청서의 입찰서 리스트 조회 */
-	@RequestMapping(value="/bidlist", method=RequestMethod.GET)
-	public String bidList(@RequestParam("applyNo") int applyNo, @RequestParam("type") String type, HttpSession session, Model model) throws Exception{
-		
-		Login login = (Login)session.getAttribute("login");
+	@RequestMapping(value = "/bidlist", method = RequestMethod.GET)
+	public String bidList(@RequestParam("applyNo") int applyNo, @RequestParam("type") String type, HttpSession session,
+			Model model) throws Exception {
+
+		Login login = (Login) session.getAttribute("login");
 		int userNo = login.getNo().intValue();
 		logger.info(userNo);
-		
-		List<AuctionBid> bid = mypageBidService.bidListByUser(userNo, applyNo, type);
-		logger.info(bid);
-		
-		model.addAttribute("bidList", bid);
-		
+
+		List<AuctionBid> bidList = null;
+		AuctionBid myBid = null;
+
+		if (type.equals("dress")) {
+			bidList = mypageBidService.dressBidListByUser(userNo, applyNo);
+
+		} else if (type.equals("makeup")) {
+			bidList = mypageBidService.makeupBidListByUser(userNo, applyNo);
+
+		} else if (type.equals("studio")) {
+			bidList = mypageBidService.studioBidListByUser(userNo, applyNo);
+			//myBid = mypageBidService.readStudioBid(userNo, applyNo, bidNo);
+/*			logger.info("myBid 값:	" + myBid);
+			int companyNo = myBid.getCompanyNo();
+
+			StudioCompany myCompany = bidService.searchStudioCompany(companyNo);
+			StudioProduct product = bidService.readStudioProduct(myBid.getProductNo(), myBid.getCompanyNo());
+			model.addAttribute("product", product); // 스드메 이름 통일
+			model.addAttribute("myCompany", myCompany); // 회사 변수 이름 통일
+*/		}
+		for (AuctionBid bid : bidList) {
+			String[] arr = bid.getAddr().split("\\^\\^");
+			bid.setAddr(arr[1] + " " + arr[2]);
+		}
+		//model.addAttribute("myBid", myBid);
+		model.addAttribute("bidList", bidList);
+
 		return "/user/mypage/bidlist";
 	}
 	

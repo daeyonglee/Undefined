@@ -34,7 +34,7 @@ td, th {
       <div class="container">
         <div class="row">
           <div
-            class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
+            class="col-sm-12 text-center page-title">
 
             <!-- general form elements -->
             <div class="box" style="text-align: center;">
@@ -45,14 +45,15 @@ td, th {
                   <li><a href="win">낙찰 완료된 역경매</a></li>
                 </ul>
               </div>
-              <div class="form-group">
+              <div class="clearfix" style="height: 20px"></div>
+<!--               <div class="form-group">
                 <select name="searchType" id="searchType" class="selectpicker show-tick form-control">
                   <option value="" selected="selected">종류를 선택하세요</option>
                   <option value="studio">스튜디오</option>
                   <option value="dress">드레스</option>
                   <option value="makeup">메이크업</option>
                 </select>
-              </div>
+              </div> -->
 
               <div class="box-body">
                 <table class="table table-bordered">
@@ -60,21 +61,21 @@ td, th {
                     <td colspan="6">입찰 신청 건수 : ******* 건</td>
                   </tr>
                   <tr>
-                    <th style="width: 100px">번호</th>
-                    <th style="width: 100px">종류</th>
-                    <th style="width: 100px">예식희망지역</th>
-                    <th style="width: 200px">예식희망일자</th>
-                    <th style="width: 100px">입찰마감일</th>
-                    <th style="width: 200px">상태</th>
+                    <th style="text-align : center; width: 50x">번호</th>
+                    <th style="text-align : center; width: 100px">종류</th>
+                    <th style="text-align : center; width: 400px">예식희망지역</th>
+                    <th style="text-align : center; width: 200px">예식희망일자</th>
+                    <th style="text-align : center; width: 150px">입찰마감일</th>
+                    <th style="text-align : center; width: 200px">상태(입찰 건수)</th>
                   </tr>
                   <c:forEach items="${applyList}" var="apply">
                     <tr id = "visible">
                       <td>1</td>
-                      <td>${apply.type }</td>
+                      <td><b>${apply.type }</b></td>
                       <td>${apply.loc }</td>
                       <td>${apply.day}</td>
                       <td>${apply.deadline }</td>
-                      <td><a href= "bidlist?applyNo=${apply.no}&type=${apply.type } ">${apply.stat }</a></td>
+                      <td><a href= "bidlist?applyNo=${apply.no}&type=${apply.type } ">${apply.stat }(2)</a></td>
                     </tr>
                   </c:forEach>
                </table>

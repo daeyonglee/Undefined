@@ -80,7 +80,7 @@ td {
                       <td>${win.regdate }</td>
                       <td>${win.day }</td>
                       <td><a href = "winread?no=${win.no}&type=${win.type}">${win.writer }</a></td>
-                      <td>${win.loc}</td>
+                      <td>${win.locFirst} 외 2곳</td>
                       <td>${win.deadline }</td>
                       <td><fmt:formatNumber value ="${win.price * (win.discount*0.01)}" pattern="0"/>원</td> 
                     </tr>
@@ -184,12 +184,14 @@ td {
          var text = "";
          
          for ( var i in searchList.list) {
+        	 
+           var arrLoc = searchList.list[i].loc.split("||")
            
            text += "<tr>";
            text += "<td>" +searchList.list[i].regdate+"</td>";
            text += "<td>" +searchList.list[i].day+"</td>";
            text += "<td> <a href = 'winread?no="+searchList.list[i].no+"&type="+searchList.list[i].type+"'>"+searchList.list[i].writer+"</a></td>";
-           text += "<td>" +searchList.list[i].loc+"</td>";
+           text += "<td>" +arrLoc[0]+"</td>";
            text += "<td>" +searchList.list[i].deadline + "</td>";
            text += "<td>할인율</td>";
            text += "</tr>";

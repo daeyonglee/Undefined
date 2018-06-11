@@ -3,6 +3,7 @@ package kr.co.udf.auction.dao;
 import java.util.List;
 
 import kr.co.udf.auction.domain.Auction;
+import kr.co.udf.auction.domain.DayCount;
 import kr.co.udf.common.web.SearchParams;
 
 public interface AuctionApplyDao {
@@ -72,4 +73,8 @@ public interface AuctionApplyDao {
 
 	// 메이크업 낙찰 실시간 화면 조회
 	public List<Auction> makeupwinrealtimelist() throws Exception;
+	
+	// d-day
+	public DayCount daycount(int no, String type) throws Exception;
+	
 }

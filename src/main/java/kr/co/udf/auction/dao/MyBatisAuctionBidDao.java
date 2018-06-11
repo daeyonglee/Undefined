@@ -9,10 +9,13 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import kr.co.udf.auction.company.domain.DressCompany;
+import kr.co.udf.auction.company.domain.MakeupCompany;
+import kr.co.udf.auction.company.domain.StudioCompany;
 import kr.co.udf.auction.domain.AuctionBid;
-import kr.co.udf.common.company.domain.DressCompany;
-import kr.co.udf.common.company.domain.MakeupCompany;
-import kr.co.udf.common.company.domain.StudioCompany;
+import kr.co.udf.auction.product.domain.DressProduct;
+import kr.co.udf.auction.product.domain.MakeupProduct;
+import kr.co.udf.auction.product.domain.StudioProduct;
 
 @Repository
 public class MyBatisAuctionBidDao implements AuctionBidDao {
@@ -96,5 +99,45 @@ public class MyBatisAuctionBidDao implements AuctionBidDao {
 	@Override
 	public List<AuctionBid> listByApplyNo(AuctionBid bid) throws Exception {
 		return session.selectList(NAMESPACE + ".listByApplyNo", bid);
+	}
+
+	@Override
+	public void createDressProd(AuctionBid bid) throws Exception {
+		
+	}
+
+	@Override
+	public void createStudioProd(AuctionBid bid) throws Exception {
+		session.insert(NAMESPACE + ".createStudioProd", bid);
+	}
+
+	@Override
+	public void createMakeupProd(AuctionBid bid) throws Exception {
+		
+	}
+
+	@Override
+	public List<MakeupProduct> searchMakeupProduct(int companyNo) throws Exception {
+		return null;
+	}
+
+	@Override
+	public List<StudioProduct> searchStudioProduct(int companyNo) throws Exception {
+		return session.selectList(NAMESPACE + ".searchStudioProduct", companyNo);
+	}
+
+	@Override
+	public List<DressProduct> searchDressProduct(int companyNo) throws Exception {
+		return null;
+	}
+
+	@Override
+	public StudioProduct readStudioProduct(int productNo, int companyNo) throws Exception {
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("productNo", productNo);
+		map.put("companyNo", companyNo);
+		
+		return session.selectOne(NAMESPACE +".readStudioProduct" , map);
 	}
 }

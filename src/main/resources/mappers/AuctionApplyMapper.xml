@@ -352,7 +352,7 @@ FROM   (       SELECT Ceil(ROWNUM / 10) page ,
                                               WHERE  s.saa_stat = '낙찰' 
                                               ) s 
                               ORDER BY regdate DESC ) m ) a
-              WHERE  1 = 1 and page = #{page}              
+              WHERE page = #{page}              
              </select>
              
 
@@ -799,5 +799,44 @@ SELECT M.*
                 where stat = '낙찰'
 ]]>
 </select>
+
+<!-- 디 데이 !  -->
+<select id="daycount"  parameterType="map" resultType="kr.co.udf.auction.domain.DayCount">
+<![CDATA[
+SELECT c.day   
+     , TRUNC(MOD(c.SI, 24)+3) AS SI,TRUNC(MOD(c.MIN, 60)) AS MIN, TRUNC(MOD(c.sec, 60)) AS sec
+  FROM (SELECT b.COL*24*60 AS min
+             , b.COL*24 AS si
+             , b.COL*24*60*60 AS sec
+             , TRUNC(b.COL) AS DAY          
+          FROM (SELECT TO_DATE(to_char(deadline,'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') - TO_DATE(to_char(sysdate, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') COL
+                  FROM (SELECT M.no
+                             , M.deadline
+                             , M.type
+	  		 		      FROM ( 
+                				SELECT d.daa_no no
+                     				 , d.daa_deadline deadline
+				                     , 'dress' type
+				                  FROM dress_auction_apply d
+				                UNION
+				                SELECT s.saa_no no
+				                     , s.saa_deadline deadline
+				                     , 'studio' type
+				                  FROM studio_auction_apply s
+				                UNION
+				                SELECT m.maa_no no
+				                     , m.maa_deadline deadline
+				                     , 'makeup' type
+				                  FROM makeup_auction_apply m
+				               ) M
+				         WHERE M.no = #{no}
+				           AND M.type = #{type}
+				           AND M.deadline > sysdate
+				       ) a
+ 				) b
+		) c
+]]>
+</select>
+
 
 </mapper>

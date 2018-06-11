@@ -26,7 +26,7 @@ $.fn.extend({
     });
 
     return this;
-  },	
+  },
 });
 
 $(document).ready(function(){
@@ -97,6 +97,7 @@ $(document).ready(function(){
 			var arrLoc = data[i].loc.split("||");
 			var locCnt;
 			
+			console.log(arrLoc);
 			
 			if (arrLoc.length > 1) {
 				var locCnt = arrLoc.length-1;
@@ -104,8 +105,8 @@ $(document).ready(function(){
 			
 			
 			html += "<tr class=" + arr[i] + " style='position: relative;'>";
-			html += "<td style = 'width : 150px; height : 37px; table-layout:fixed;' >입찰중</td>";
-			html += "<td style = 'width : 100px; height : 37px; table-layout:fixed;'>" + data[i].writer + "</td>";
+			html += "<td>입찰중</td>";
+			html += "<td>" + data[i].writer + "</td>";
 			
 			if (arrLoc.length > 1) {
 				html += "<td style = 'width : 200px; height : 37px; table-layout:fixed;'>" + arrLoc[0] +" 외 "+ locCnt +" 곳</td>";
@@ -114,8 +115,8 @@ $(document).ready(function(){
 			}
 			
 			
-			html += "<td style = 'width : 200px; height : 37px; table-layout:fixed;'>" + data[i].deadline + "</td>";
-			html += "<td style = 'width : 150px; height : 37px; table-layout:fixed;'>" + data[i].stat +"</td>";
+			html += "<td>" + data[i].deadline + "</td>";
+			html += "<td style = 'width : 86px; height : 37px; table-layout:fixed;'>" + data[i].stat +"</td>";
 			html += "</tr>";
 		}
 		
@@ -128,14 +129,12 @@ $(document).ready(function(){
 			$('#realtimelist > tbody:first > tr:first').animateCss('fadeOutUp', function() {
 				$('#realtimelist > tbody:first > tr:first').remove();
 				
-				var arrLoc = data[index].loc.split("||");
-				
 				var appendTag  = "<tr class='" + arr[classIndex] + "' style='position: relative;'>";
-			    appendTag += "<td style = 'width : 150px; height : 37px; table-layout:fixed;' >입찰중</td>";
-			    appendTag += "<td style = 'width : 100px; height : 37px; table-layout:fixed;'>" + data[index].writer + "</td>";
-			    appendTag += "<td style = 'width : 200px; height : 37px; table-layout:fixed;'>" + arrLoc[0] +" 외 2 곳</td>";
-			    appendTag += "<td style = 'width : 200px; height : 37px; table-layout:fixed;'>" + data[index].deadline + "</td>";
-			    appendTag += "<td style = 'width : 150px; height : 37px; table-layout:fixed;'>" + data[index].stat +"</td>";
+			    appendTag += "<td>입찰중</td>";
+			    appendTag += "<td>" + data[index].writer + "</td>";
+			    appendTag += "<td style = 'width : 200px; height : 37px; table-layout:fixed;'>" + data[index].loc +"</td>";
+			    appendTag += "<td>" + data[index].deadline + "</td>";
+			    appendTag += "<td style = 'width : 86px; height : 37px; table-layout:fixed;'>" + data[index].stat +"</td>";
 			
 			    $("#realtimelist > tbody:first").append(appendTag);
 			    $("#realtimelist > tbody:first > tr:last").animateCss('fadeInUp');
@@ -177,29 +176,13 @@ $(document).ready(function(){
 		var arr = ["success", "danger", "info", "warning", "active"];
 		var html = "";
 		
-		
-		
 		for (var i=0; i<5; i++) {
-			
-			
-			var arrLoc = data[i].loc.split("||");
-			var locCnt;
-			
-			
-			if (arrLoc.length > 1) {
-				var locCnt = arrLoc.length-1;
-			}
-			
 			html += "<tr class=" + arr[i] + " style='position: relative;'>";
-			html += "<td style = 'width : 150px; height : 37px; table-layout:fixed;'>" + data[i].stat +"</td>";
-			html += "<td style = 'width : 100px; height : 37px; table-layout:fixed;'>" + data[i].writer + "</td>";
-			if (arrLoc.length > 1) {
-				html += "<td style = 'width : 200px; height : 37px; table-layout:fixed;'>" + arrLoc[0] +" 외 "+ locCnt +" 곳</td>";
-			} else {
-				html += "<td style = 'width : 200px; height : 37px; table-layout:fixed;'>" + arrLoc[0] + "</td>";
-			}
-			html += "<td style = 'width : 200px; height : 37px; table-layout:fixed;'>" + data[i].deadline + "</td>";
-			html += "<td style = 'width : 150px; height : 37px; table-layout:fixed;'>할인율</td>";
+			html += "<td>" + data[i].stat +"</td>";
+			html += "<td>" + data[i].writer + "</td>";
+			html += "<td>" + data[i].loc +"</td>";
+			html += "<td>" + data[i].deadline + "</td>";
+			html += "<td style = 'width : 126px; height : 37px; table-layout:fixed;'>할인율</td>";
 			html += "</tr>";
 		}
 		
@@ -212,14 +195,12 @@ $(document).ready(function(){
 			$('#winrealtimelist > tbody:first > tr:first').animateCss('fadeOutUp', function() {
 				$('#winrealtimelist > tbody:first > tr:first').remove();
 				
-				var arrLoc = data[index].loc.split("||");
-				
 				var appendTag  = "<tr class='" + arr[classIndex] + "' style='position: relative;'>";
-			    appendTag += "<td style = 'width : 150px; height : 37px; table-layout:fixed;'>" + data[i].stat +"</td>";
-			    appendTag += "<td style = 'width : 100px; height : 37px; table-layout:fixed;'>" + data[index].writer + "</td>";
-			    appendTag += "<td style = 'width : 200px; height : 37px; table-layout:fixed;'>" + arrLoc[0] +" 외 2 곳</td>";
-			    appendTag += "<td style = 'width : 200px; height : 37px; table-layout:fixed;'>" + data[index].deadline + "</td>";
-			    appendTag += "<td style = 'width : 150px; height : 37px; table-layout:fixed;'>할인율</td>";
+			    appendTag += "<td>" + data[i].stat +"</td>";
+			    appendTag += "<td>" + data[index].writer + "</td>";
+			    appendTag += "<td>" + data[index].loc +"</td>";
+			    appendTag += "<td>" + data[index].deadline + "</td>";
+			    appendTag += "<td style = 'width : 126px; height : 37px; table-layout:fixed;'>할인율</td>";
 			
 			    $("#winrealtimelist > tbody:first").append(appendTag);
 			    $("#winrealtimelist > tbody:first > tr:last").animateCss('fadeInUp');
@@ -275,8 +256,8 @@ $(document).ready(function(){
 			
 			
 			html += "<tr class=" + arr[i] + " style='position: relative;'>";
-			html += "<td style = 'width : 150px; height : 37px; table-layout:fixed;' >입찰중</td>";
-			html += "<td style = 'width : 100px; height : 37px; table-layout:fixed;'>" + data[i].writer + "</td>";
+			html += "<td>입찰중</td>";
+			html += "<td>" + data[i].writer + "</td>";
 			
 			if (arrLoc.length > 1) {
 				html += "<td style = 'width : 200px; height : 37px; table-layout:fixed;'>" + arrLoc[0] +" 외 "+ locCnt +" 곳</td>";
@@ -285,8 +266,8 @@ $(document).ready(function(){
 			}
 			
 			
-			html += "<td style = 'width : 200px; height : 37px; table-layout:fixed;'>" + data[i].deadline + "</td>";
-			html += "<td style = 'width : 150px; height : 37px; table-layout:fixed;'>" + data[i].stat +"</td>";
+			html += "<td>" + data[i].deadline + "</td>";
+			html += "<td style = 'width : 86px; height : 37px; table-layout:fixed;'>" + data[i].stat +"</td>";
 			html += "</tr>";
 		}
 		
@@ -299,14 +280,12 @@ $(document).ready(function(){
 			$('#dressrealtimelist > tbody:first > tr:first').animateCss('fadeOutUp', function() {
 				$('#dressrealtimelist > tbody:first > tr:first').remove();
 				
-				var arrLoc = data[index].loc.split("||");
-				
 				var appendTag  = "<tr class='" + arr[classIndex] + "' style='position: relative;'>";
-			    appendTag += "<td style = 'width : 150px; height : 37px; table-layout:fixed;' >입찰중</td>";
-			    appendTag += "<td style = 'width : 100px; height : 37px; table-layout:fixed;'>" + data[index].writer + "</td>";
-			    appendTag += "<td style = 'width : 200px; height : 37px; table-layout:fixed;'>" + arrLoc[0] +" 외 2 곳</td>";
-			    appendTag += "<td style = 'width : 200px; height : 37px; table-layout:fixed;'>" + data[index].deadline + "</td>";
-			    appendTag += "<td style = 'width : 150px; height : 37px; table-layout:fixed;'>" + data[index].stat +"</td>";
+			    appendTag += "<td>입찰중</td>";
+			    appendTag += "<td>" + data[index].writer + "</td>";
+			    appendTag += "<td>" + data[index].loc +"</td>";
+			    appendTag += "<td>" + data[index].deadline + "</td>";
+			    appendTag += "<td style = 'width : 86px; height : 37px; table-layout:fixed;'>" + data[index].stat +"</td>";
 			
 			    $("#dressrealtimelist > tbody:first").append(appendTag);
 			    $("#dressrealtimelist > tbody:first > tr:last").animateCss('fadeInUp');
@@ -348,27 +327,13 @@ $(document).ready(function(){
 		var arr = ["success", "danger", "info", "warning", "active"];
 		var html = "";
 		
-			for (var i=0; i<5; i++) {
-			
-			
-			var arrLoc = data[i].loc.split("||");
-			var locCnt;
-			
-			
-			if (arrLoc.length > 1) {
-				var locCnt = arrLoc.length-1;
-			}
-			
+		for (var i=0; i<5; i++) {
 			html += "<tr class=" + arr[i] + " style='position: relative;'>";
-			html += "<td style = 'width : 150px; height : 37px; table-layout:fixed;'>" + data[i].stat +"</td>";
-			html += "<td style = 'width : 100px; height : 37px; table-layout:fixed;'>" + data[i].writer + "</td>";
-			if (arrLoc.length > 1) {
-				html += "<td style = 'width : 200px; height : 37px; table-layout:fixed;'>" + arrLoc[0] +" 외 "+ locCnt +" 곳</td>";
-			} else {
-				html += "<td style = 'width : 200px; height : 37px; table-layout:fixed;'>" + arrLoc[0] + "</td>";
-			}
-			html += "<td style = 'width : 200px; height : 37px; table-layout:fixed;'>" + data[i].deadline + "</td>";
-			html += "<td style = 'width : 150px; height : 37px; table-layout:fixed;'>할인율</td>";
+			html += "<td>" + data[i].stat +"</td>";
+			html += "<td>" + data[i].writer + "</td>";
+			html += "<td>" + data[i].loc +"</td>";
+			html += "<td>" + data[i].deadline + "</td>";
+			html += "<td style = 'width : 126px; height : 37px; table-layout:fixed;'>할인율</td>";
 			html += "</tr>";
 		}
 		
@@ -381,14 +346,12 @@ $(document).ready(function(){
 			$('#dresswinrealtimelist > tbody:first > tr:first').animateCss('fadeOutUp', function() {
 				$('#dresswinrealtimelist > tbody:first > tr:first').remove();
 				
-				var arrLoc = data[index].loc.split("||");
-				
 				var appendTag  = "<tr class='" + arr[classIndex] + "' style='position: relative;'>";
-			    appendTag += "<td style = 'width : 150px; height : 37px; table-layout:fixed;'>" + data[i].stat +"</td>";
-			    appendTag += "<td style = 'width : 100px; height : 37px; table-layout:fixed;'>" + data[index].writer + "</td>";
-			    appendTag += "<td style = 'width : 200px; height : 37px; table-layout:fixed;'>" + arrLoc[0] +" 외 2 곳</td>";
-			    appendTag += "<td style = 'width : 200px; height : 37px; table-layout:fixed;'>" + data[index].deadline + "</td>";
-			    appendTag += "<td style = 'width : 150px; height : 37px; table-layout:fixed;'>할인율</td>";
+			    appendTag += "<td>" + data[i].stat +"</td>";
+			    appendTag += "<td>" + data[index].writer + "</td>";
+			    appendTag += "<td>" + data[index].loc +"</td>";
+			    appendTag += "<td>" + data[index].deadline + "</td>";
+			    appendTag += "<td style = 'width : 126px; height : 37px; table-layout:fixed;'>할인율</td>";
 			
 			    $("#dresswinrealtimelist > tbody:first").append(appendTag);
 			    $("#dresswinrealtimelist > tbody:first > tr:last").animateCss('fadeInUp');
@@ -444,8 +407,8 @@ $(document).ready(function(){
 			
 			
 			html += "<tr class=" + arr[i] + " style='position: relative;'>";
-			html += "<td style = 'width : 150px; height : 37px; table-layout:fixed;' >입찰중</td>";
-			html += "<td style = 'width : 100px; height : 37px; table-layout:fixed;'>" + data[i].writer + "</td>";
+			html += "<td>입찰중</td>";
+			html += "<td>" + data[i].writer + "</td>";
 			
 			if (arrLoc.length > 1) {
 				html += "<td style = 'width : 200px; height : 37px; table-layout:fixed;'>" + arrLoc[0] +" 외 "+ locCnt +" 곳</td>";
@@ -454,8 +417,8 @@ $(document).ready(function(){
 			}
 			
 			
-			html += "<td style = 'width : 200px; height : 37px; table-layout:fixed;'>" + data[i].deadline + "</td>";
-			html += "<td style = 'width : 150px; height : 37px; table-layout:fixed;'>" + data[i].stat +"</td>";
+			html += "<td>" + data[i].deadline + "</td>";
+			html += "<td style = 'width : 86px; height : 37px; table-layout:fixed;'>" + data[i].stat +"</td>";
 			html += "</tr>";
 		}
 		
@@ -468,14 +431,12 @@ $(document).ready(function(){
 			$('#makeuprealtimelist > tbody:first > tr:first').animateCss('fadeOutUp', function() {
 				$('#makeuprealtimelist > tbody:first > tr:first').remove();
 				
-				var arrLoc = data[index].loc.split("||");
-				
 				var appendTag  = "<tr class='" + arr[classIndex] + "' style='position: relative;'>";
-			    appendTag += "<td style = 'width : 150px; height : 37px; table-layout:fixed;' >입찰중</td>";
-			    appendTag += "<td style = 'width : 100px; height : 37px; table-layout:fixed;'>" + data[index].writer + "</td>";
-			    appendTag += "<td style = 'width : 200px; height : 37px; table-layout:fixed;'>" + arrLoc[0] +" 외 2 곳</td>";
-			    appendTag += "<td style = 'width : 200px; height : 37px; table-layout:fixed;'>" + data[index].deadline + "</td>";
-			    appendTag += "<td style = 'width : 150px; height : 37px; table-layout:fixed;'>" + data[index].stat +"</td>";
+			    appendTag += "<td>입찰중</td>";
+			    appendTag += "<td>" + data[index].writer + "</td>";
+			    appendTag += "<td style = 'width : 126px; height : 37px; table-layout:fixed;'>" + data[index].loc +"</td>";
+			    appendTag += "<td>" + data[index].deadline + "</td>";
+			    appendTag += "<td style = 'width : 86px; height : 37px; table-layout:fixed;'>" + data[index].stat +"</td>";
 			
 			    $("#makeuprealtimelist > tbody:first").append(appendTag);
 			    $("#makeuprealtimelist > tbody:first > tr:last").animateCss('fadeInUp');
@@ -517,27 +478,13 @@ $(document).ready(function(){
 		var arr = ["success", "danger", "info", "warning", "active"];
 		var html = "";
 		
-			for (var i=0; i<5; i++) {
-			
-			
-			var arrLoc = data[i].loc.split("||");
-			var locCnt;
-			
-			
-			if (arrLoc.length > 1) {
-				var locCnt = arrLoc.length-1;
-			}
-			
+		for (var i=0; i<5; i++) {
 			html += "<tr class=" + arr[i] + " style='position: relative;'>";
-			html += "<td style = 'width : 150px; height : 37px; table-layout:fixed;'>" + data[i].stat +"</td>";
-			html += "<td style = 'width : 100px; height : 37px; table-layout:fixed;'>" + data[i].writer + "</td>";
-			if (arrLoc.length > 1) {
-				html += "<td style = 'width : 200px; height : 37px; table-layout:fixed;'>" + arrLoc[0] +" 외 "+ locCnt +" 곳</td>";
-			} else {
-				html += "<td style = 'width : 200px; height : 37px; table-layout:fixed;'>" + arrLoc[0] + "</td>";
-			}
-			html += "<td style = 'width : 200px; height : 37px; table-layout:fixed;'>" + data[i].deadline + "</td>";
-			html += "<td style = 'width : 150px; height : 37px; table-layout:fixed;'>할인율</td>";
+			html += "<td>" + data[i].stat +"</td>";
+			html += "<td>" + data[i].writer + "</td>";
+			html += "<td style = 'width : 126px; height : 37px; table-layout:fixed;'>" + data[i].loc +"</td>";
+			html += "<td>" + data[i].deadline + "</td>";
+			html += "<td style = 'width : 126px; height : 37px; table-layout:fixed;'>할인율</td>";
 			html += "</tr>";
 		}
 		
@@ -550,14 +497,12 @@ $(document).ready(function(){
 			$('#makeupwinrealtimelist > tbody:first > tr:first').animateCss('fadeOutUp', function() {
 				$('#makeupwinrealtimelist > tbody:first > tr:first').remove();
 				
-				var arrLoc = data[index].loc.split("||");
-				
 				var appendTag  = "<tr class='" + arr[classIndex] + "' style='position: relative;'>";
-			    appendTag += "<td style = 'width : 150px; height : 37px; table-layout:fixed;'>" + data[i].stat +"</td>";
-			    appendTag += "<td style = 'width : 100px; height : 37px; table-layout:fixed;'>" + data[index].writer + "</td>";
-			    appendTag += "<td style = 'width : 200px; height : 37px; table-layout:fixed;'>" + arrLoc[0] +" 외 2 곳</td>";
-			    appendTag += "<td style = 'width : 200px; height : 37px; table-layout:fixed;'>" + data[index].deadline + "</td>";
-			    appendTag += "<td style = 'width : 150px; height : 37px; table-layout:fixed;'>할인율</td>";
+			    appendTag += "<td>" + data[i].stat +"</td>";
+			    appendTag += "<td>" + data[index].writer + "</td>";
+			    appendTag += "<td style = 'width : 126px; height : 37px; table-layout:fixed;'>" + data[index].loc +"</td>";
+			    appendTag += "<td>" + data[index].deadline + "</td>";
+			    appendTag += "<td style = 'width : 126px; height : 37px; table-layout:fixed;'>할인율</td>";
 			
 			    $("#makeupwinrealtimelist > tbody:first").append(appendTag);
 			    $("#makeupwinrealtimelist > tbody:first > tr:last").animateCss('fadeInUp');

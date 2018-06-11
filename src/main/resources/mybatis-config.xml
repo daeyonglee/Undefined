@@ -9,9 +9,12 @@
 		<typeAlias type="kr.co.udf.auction.domain.Auction" alias="Auction"/>
 		<typeAlias type="kr.co.udf.auction.domain.AuctionBid" alias="AuctionBid"/>
 		<typeAlias type="kr.co.udf.common.web.SearchParams" alias="SearchParams"/>
-		<typeAlias type="kr.co.udf.common.company.domain.StudioCompany" alias="StudioCompany"/>
-		<typeAlias type="kr.co.udf.common.company.domain.MakeupCompany" alias="MakeupCompany"/>
-		<typeAlias type="kr.co.udf.common.company.domain.DressCompany" alias="DressCompany"/>
+		<typeAlias type="kr.co.udf.auction.company.domain.StudioCompany" alias="StudioCompany"/>
+		<typeAlias type="kr.co.udf.auction.company.domain.MakeupCompany" alias="MakeupCompany"/>
+		<typeAlias type="kr.co.udf.auction.company.domain.DressCompany" alias="DressCompany"/>
+		<typeAlias type="kr.co.udf.auction.product.domain.StudioProduct" alias="StudioProduct"/>
+		<typeAlias type="kr.co.udf.auction.product.domain.MakeupProduct" alias="MakeupProduct"/>
+		<typeAlias type="kr.co.udf.auction.product.domain.DressProduct" alias="DressProduct"/>
 	</typeAliases>
 
 </configuration>

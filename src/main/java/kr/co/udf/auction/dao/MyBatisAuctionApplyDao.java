@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
 import kr.co.udf.auction.domain.Auction;
+import kr.co.udf.auction.domain.DayCount;
 import kr.co.udf.common.web.SearchParams;
 
 @Repository
@@ -175,5 +176,15 @@ public class MyBatisAuctionApplyDao implements AuctionApplyDao {
 	@Override
 	public List<Auction> makeupwinrealtimelist() throws Exception {
 		return session.selectList(NAMESPACE+ ".makeupwinrealtimelist");
+	}
+	
+	@Override
+	public DayCount daycount(int no, String type) throws Exception {
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("no", no);
+		map.put("type", type);
+		
+		return session.selectOne(NAMESPACE+ ".daycount", map);
 	}
 }
