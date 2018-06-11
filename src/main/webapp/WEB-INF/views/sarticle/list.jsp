@@ -120,11 +120,30 @@
       <!-- 로그인 여부에 따라 글쓰기 버튼 생성 여부 -->
       <!-- admin계정의 경우에만 공지사항에 글쓰기가 가능하도록 하여야 함 -->
       <c:choose>
-        <c:when test="${null ne sessionScope.login || null ne cookie.loginCookie.value}">
+        <c:when
+          test="${null ne sessionScope.login || null ne cookie.loginCookie.value}">
+       <%
+       if(request.getParameter("board_no")!=null){
+         /*공지사항일 경우 글쓰기는 관리자 계쩡만 쓸 수 있게 하는 조건 */
+       if(Integer.parseInt(request.getParameter("board_no"))==1){
+       %>
+          <c:if test="${sessionScope.login.role eq 'admin'}">
+            <div class="text-right">
+              <button id='newBtn' class="btn btn-primary btn-sm">글쓰기</button>
+            </div>
+          </c:if>
+      <%
+         /*자유게시판은 로그인한 누구나 글쓰기 가능하도록 하는 조건  */
+       }else if(Integer.parseInt(request.getParameter("board_no"))==2){
+      %>
           <div class="text-right">
-             <button id = 'newBtn'  class="btn btn-primary btn-sm">글쓰기</button>
+            <button id='newBtn' class="btn btn-primary btn-sm">글쓰기</button>
           </div>
-        </c:when>
+      <%  
+       }
+       }
+      %>
+       </c:when>
         <c:otherwise>
         </c:otherwise>
       </c:choose>
