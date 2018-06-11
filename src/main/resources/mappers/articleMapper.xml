@@ -140,7 +140,7 @@
 		                        WHERE  user_no = article.user_no)  user_nm 
 		                FROM   article 
 		                ORDER  BY article_no DESC)
-		                WHERE board_no= #{board_no}  ) 
+		                WHERE board_no= #{board_no} ) 
 		WHERE  page = #{page}  
 	</select>
 	
@@ -153,24 +153,38 @@
 	<sql id="search">
 		<if test="searchType !=null">
 			<if test="searchType == 't'.toString()">
-				WHERE article_title like
+				and article_title like
 				'%'||#{keyword}||'%'
-				and board_no= #{board_no}
 			</if>
 			<if test="searchType == 'c'.toString()">
-				WHERE article_content like
+				and article_content like
 				'%'||#{keyword}||'%'
-				and board_no= #{board_no}
 			</if>
+			<if test="searchType == 'tc'.toString()">
+				and (article_title like
+				'%'||#{keyword}||'%' Or article_content like 
+				'%'||#{keyword}||'%')
+			</if>
+			<if test="searchType.equals('studio'.toString())" >
+				and article_head like '%'||#{keyword}||'%'
+				and board_no= 2
+			</if>
+			<if test="searchType.equals('dress'.toString())" >
+				and article_head like '%'||#{keyword}||'%'
+				and board_no= 2
+			</if>
+			<if test="searchType.equals('makeup'.toString())" >
+				and article_head like '%'||#{keyword}||'%'
+				and board_no= 2
+			</if>		
+		</if>
+	</sql>
+	
+	<sql id="searchWriter">
+		<if test="searchType !=null">
 			<if test="searchType == 'w'.toString()">
 				WHERE user_nm like
 				'%'||#{keyword}||'%'
-				and board_no= #{board_no}
-			</if>
-			<if test="searchType == 'tc'.toString()">
-				WHERE (article_title like
-				'%'||#{keyword}||'%' Or article_content like 
-				'%'||#{keyword}||'%')
 				and board_no= #{board_no}
 			</if>
 			<if test="searchType== 'cw'.toString()" >
@@ -185,21 +199,8 @@
 					Or user_nm like '%'||#{keyword}||'%')
 				and board_no= #{board_no}
 			</if>
-			<if test="searchType.equals('studio'.toString())" >
-				WHERE article_head like '%'||#{keyword}||'%'
-				and board_no= 2
-			</if>
-			<if test="searchType.equals('dress'.toString())" >
-				WHERE article_head like '%'||#{keyword}||'%'
-				and board_no= 2
-			</if>
-			<if test="searchType.equals('makeup'.toString())" >
-				WHERE article_head like '%'||#{keyword}||'%'
-				and board_no= 2
-			</if>		
 		</if>
-	</sql>
-		
+	</sql>	
 	
 	<select id="listSearch" resultType="map">
 	<![CDATA[
@@ -240,9 +241,14 @@
 	                           (SELECT COUNT(article_no) 
 	                           FROM   reply 
 	                           WHERE  article_no = article.article_no) reply_count  
-		                FROM   article]]>
+		                FROM   article
+		                WHERE board_no= #{board_no}
+		                ]]>
 		                <include refid="search"></include>
-						<![CDATA[ORDER  BY article_no DESC)) 
+						<![CDATA[ORDER  BY article_no DESC)
+						]]>
+						<include refid="searchWriter"></include>
+						<![CDATA[)
 		WHERE  page = #{page}]]>
 	</select>
 	
@@ -251,6 +257,7 @@
 			FROM   article a 
 			       JOIN users u 
 			         ON a.user_no = u.user_no 
+			WHERE board_no= #{board_no}         
 		<include refid="search"></include>
 	</select>  
 
