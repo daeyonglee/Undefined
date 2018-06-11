@@ -5,11 +5,10 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.udf.auction.dao.AuctionApplyDao;
 import kr.co.udf.auction.domain.Auction;
-import kr.co.udf.common.web.Params;
+import kr.co.udf.auction.domain.DayCount;
 import kr.co.udf.common.web.SearchParams;
 
 @Service
@@ -102,12 +101,33 @@ public class AuctionApplyServiceImpl implements AuctionApplyService {
 
 	@Override
 	public List<Auction> listParams(SearchParams params) throws Exception {
-		return dao.listParams(params);
+		List<Auction> auction = dao.listParams(params);
+		
+		for (Auction list : auction) {
+			
+		String[] arr = list.getLoc().split("\\|\\|");
+			list.setLocFirst(arr[0]);
+			list.setLocSecond(arr[1]);
+			list.setLocThird(arr[2]);
+			
+		}						
+		
+		return auction;
 	}
 	
 	@Override
 	public List<Auction> winlistParams(SearchParams params) throws Exception {
-		return dao.winlistParams(params);
+		List<Auction> auction = dao.winlistParams(params);
+		
+		for (Auction list : auction) {
+			
+			String[] arr = list.getLoc().split("\\|\\|");
+				list.setLocFirst(arr[0]);
+				list.setLocSecond(arr[1]);
+				list.setLocThird(arr[2]);
+				
+			}							
+		return auction;
 	}
 
 	@Override
@@ -153,5 +173,10 @@ public class AuctionApplyServiceImpl implements AuctionApplyService {
 	@Override
 	public int winlistByTypeCount(SearchParams params) throws Exception {
 		return dao.winlistByTypeCount(params);
+	}
+	
+	@Override
+	public DayCount daycount(int no, String type) throws Exception {
+		return dao.daycount(no, type);
 	}
 }

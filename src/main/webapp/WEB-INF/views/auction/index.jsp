@@ -72,50 +72,54 @@
   
   
     <div class="container" >
-    <table id="realtimelist" class="table" style="width: 513px; height : 221px; display: inline-block;  transition-duration: 0.2s; text-align: center; " >
+    
+    <div class="form-group text-center" >
+    
+    <table id="realtimelist" class="table" style="width: 800px; height : 221px; display: inline-block;  transition-duration: 0.2s; text-align: center ;   " >
     <thead><tr class = "active"><td colspan = "5" align = "center"><a href = "list">입찰중 역경매</a></td></tr></thead>
     <tbody></tbody>     
     </table>
     
-     &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
       
-    <table id="winrealtimelist" class="table" style="width: 513px; height : 221px; display: inline-block;  transition-duration: 0.2s; text-align: center; " >
+    <table id="winrealtimelist" class="table" style="width: 800px; height : 221px; display: inline-block;  transition-duration: 0.2s; text-align: center; " >
     <thead><tr class = "active"><td colspan = "5" align = "center"><a href = "win">낙찰된 역경매</a></td></tr></thead>
     <tbody></tbody>     
     </table>
+    
+    </div>
     
     <div class="container">
     <h4 align="center">드레스 실시간 입낙찰 현황</h4>
     </div>
     <br>
-    <table id="dressrealtimelist" class="table" style="width: 513px; height : 221px; display: inline-block;  transition-duration: 0.2s; text-align: center;" >
+    <div class="form-group text-center">
+    <table id="dressrealtimelist" class="table" style="width: 800px; height : 221px; display: inline-block;  transition-duration: 0.2s; text-align: center;" >
     <thead><tr class = "active"><td colspan = "5" align = "center"><a href = "list">입찰중 역경매</a></td></tr></thead>
     <tbody></tbody>     
     </table>
     
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
     
-    <table id="dresswinrealtimelist" class="table" style="width: 513px; height : 221px; display: inline-block;  transition-duration: 0.2s; text-align: center; " >
+    <table id="dresswinrealtimelist" class="table" style="width: 800px; height : 221px; display: inline-block;  transition-duration: 0.2s; text-align: center; " >
     <thead><tr class = "active"><td colspan = "5" align = "center"><a href = "win">낙찰된 역경매</a></td></tr></thead>
     <tbody></tbody>     
     </table>
-    
+    </div>
     <div class="container">
     <h4 align="center">메이크업 실시간 입낙찰 현황</h4>
     </div>
     <br>
-    <table id="makeuprealtimelist" class="table" style="width: 513px; height : 221px; display: inline-block;  transition-duration: 0.2s; text-align: center; " >
+    <div class="form-group text-center">
+    <table id="makeuprealtimelist" class="table" style="width: 800px; height : 221px; display: inline-block;  transition-duration: 0.2s; text-align: center; " >
     <thead><tr class = "active"><td colspan = "5" align = "center"><a href = "list">입찰중 역경매</a></td></tr></thead>
     <tbody></tbody>     
     </table>
     
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-    
        
-    <table id="makeupwinrealtimelist" class="table" style="width: 513px; height : 221px; display: inline-block;  transition-duration: 0.2s; text-align: center; " >
+    <table id="makeupwinrealtimelist" class="table" style="width: 800px; height : 221px; display: inline-block;  transition-duration: 0.2s; text-align: center; " >
     <thead><tr class = "active"><td colspan = "5" align = "center"><a href = "win">낙찰된 역경매</a></td></tr></thead>
     <tbody></tbody>     
     </table>           
+    </div>
     
       <div class="form-group text-center">
            <a href="apply" class="btn btn-primary">역경매 신청하기<i class="fa fa-check spaceLeft"></i></a>

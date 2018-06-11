@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ page session="false"%>
 
 <!DOCTYPE html>
 <html>
@@ -81,7 +80,7 @@ td {
                       <td>${bid.regdate }</td>
                       <td>${bid.day }</td>
                       <td><a href = "read?no=${bid.no}&type=${bid.type}">${bid.writer }</a></td>
-                      <td>${bid.loc}</td>
+                      <td>${bid.locFirst} 외 2곳</td>
                       <td>${bid.deadline }</td>
                       <td>미공개</td>
                     </tr>
@@ -183,11 +182,15 @@ td {
 				 
 				 for ( var i in searchList.list) {
 					 
+					 var arrLoc = searchList.list[i].loc.split("||")
+					 
+					 console.log(arrLoc);
+					 
 					 text += "<tr>";
 					 text += "<td>" +searchList.list[i].regdate+"</td>";
 					 text += "<td>" +searchList.list[i].day+"</td>";
 					 text += "<td> <a href = 'read?no="+searchList.list[i].no+"&type="+searchList.list[i].type+"'>"+searchList.list[i].writer+"</a></td>";
-					 text += "<td>" +searchList.list[i].loc+"</td>";
+					 text += "<td>" +arrLoc[0]+" 외 2 곳"+"</td>";
 					 text += "<td>" +searchList.list[i].deadline + "</td>";
 					 text += "<td>미공개</td>";
 					 text += "</tr>";

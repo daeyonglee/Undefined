@@ -45,8 +45,8 @@ public class AuctionBidServiceImpl implements AuctionBidService {
 	public DressCompany searchDressCompany(int no) throws Exception {
 		DressCompany company = dao.searchDressCompany(no);
 		
-		String arr[] = company.getAddr().split("\\^\\^");
-		company.setAddr(arr[1] + " " + arr[2]);
+/*		String arr[] = company.getAddr().split("\\^\\^");
+		company.setAddr(arr[1] + " " + arr[2]);*/
 		
 		return company;
 	}
