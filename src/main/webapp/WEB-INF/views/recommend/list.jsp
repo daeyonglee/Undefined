@@ -56,7 +56,7 @@
             <div class="col-sm-6 col-md-3 p0">
               <div class="box-two proerty-item">
                 <div class="item-thumb">
-                  <a href="javascript:void(0);" onclick="showDetail('studio', ${studio.SP_NO})"><img src="/resources/assets/img/demo/property-4.jpg"></a>
+                  <a href="javascript:void(0);" onclick="showDetail('studio', ${studio.SP_NO})"><img src="${studio.SP_IMAGE}"></a>
                 </div>
                 <div class="studioNo" hidden="hidden">${studio.SP_NO}</div>
                 <div class="item-entry overflow">
@@ -82,7 +82,7 @@
             <div class="col-sm-6 col-md-3 p0">
               <div class="box-two proerty-item">
                 <div class="item-thumb">
-                  <a href="javascript:void(0);" onclick="showDetail('dress', ${dress.DP_NO})"><img src="/resources/assets/img/demo/property-4.jpg"></a>
+                  <a href="javascript:void(0);" onclick="showDetail('dress', ${dress.DP_NO})"><img src="${dress.DP_IMAGE}"></a>
                 </div>
                 <div class="dressNo" hidden="hidden">${dress.DP_NO}</div>
                 <div class="item-entry overflow">
@@ -108,7 +108,7 @@
             <div class="col-sm-6 col-md-3 p0">
               <div class="box-two proerty-item">
                 <div class="item-thumb">
-                  <a href="javascript:void(0);" onclick="showDetail('makeup', ${makeup.MP_NO})"><img src="/resources/assets/img/demo/property-4.jpg"></a>
+                  <a href="javascript:void(0);" onclick="showDetail('makeup', ${makeup.MP_NO})"><img src="${makeup.MP_IMAGE}"></a>
                 </div>
                 <div class="makeupNo" hidden="hidden">${makeup.MP_NO}</div>
                 <div class="item-entry overflow">
