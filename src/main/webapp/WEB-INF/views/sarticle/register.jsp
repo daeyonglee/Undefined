@@ -48,6 +48,14 @@
                 <option value="메이크업">메이크업</option>
               </select>
             </div>
+            
+            <!--로그인 시 로그인한 user_nm이 화면에 출력되도록 하여아 한다.  -->
+            <!--글을 등록할 경우 작성자는 user_no가 들어간다. -->
+            <div class="form-group">
+              <input type="hidden" name ="user_no" id ="user_no" value='${sessionScope.login.no}'></input> 
+            </div>
+            
+            
         <%    
             }else if(Integer.parseInt(request.getParameter("board_no"))==1){
         %>
@@ -55,6 +63,10 @@
               <input type="hidden" name="article_head" class="form-control"
                 id="article_head" value="공지사항">
               </div>
+              <!--본래는 공지사항에 admin_no가 들어가야 맞지만 편의상 user_no가 20인 이름만 관리자인 user를 사용  -->
+            <div class="form-group">
+              <input type="hidden" name ="user_no" id ="user_no" value='20'></input> 
+            </div>
         <%
             }else{
         %>     
@@ -62,14 +74,16 @@
               <input type="hidden" name="article_head" class="form-control"
                 id="article_head" value="쪽지">
               </div>        
-        <%
-            }
-        %>
-             <!--로그인 시 로그인한 user_nm이 화면에 출력되도록 하여아 한다.  -->
+              
+            <!--로그인 시 로그인한 user_nm이 화면에 출력되도록 하여아 한다.  -->
             <!--글을 등록할 경우 작성자는 user_no가 들어간다. -->
             <div class="form-group">
               <input type="hidden" name ="user_no" id ="user_no" value='${sessionScope.login.no}'></input> 
             </div>
+        <%
+            }
+        %>
+
             
             <div class="form-group">
               <label for="title">제목</label> 

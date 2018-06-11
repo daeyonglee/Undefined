@@ -87,10 +87,17 @@
       <div class="text-center">
         <div class="col-md-12">
           <div class="box-footer">
-            <button type="submit" class="btn btn-warning modifyBtn">수정</button>
-            <button type="submit" class="btn btn-danger removeBtn">삭제</button>
-            <button type="submit" class="btn btn-primary goListBtn">전체목록</button>
-          </div>
+              <c:choose>
+                <c:when
+                  test="${read.user_nm eq sessionScope.login.nm}">
+                  <button type="submit"
+                    class="btn btn-warning modifyBtn">수정</button>
+                  <button type="submit" class="btn btn-danger removeBtn">삭제</button>
+                </c:when>
+              </c:choose>
+              <button type="submit"
+                    class="btn btn-primary goListBtn">전체목록</button>
+            </div>
         </div>
       </div>
     <!--자유게시판에서만 댓글이 보이도록 하기 위한 조건문  -->
@@ -163,9 +170,11 @@
         <!-- Modal content-->
         <div class="modal-content">
           <div class="modal-header">
-            <label><font color="fdc600">댓글 수정하기</font></label>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <label class="modal-title"></label>        
+          <!--댓글 작성자일 경우에만 수정 버튼 보이기 위한 조건  -->
+              <label><font color="fdc600">댓글 수정하기</font></label>
+              <button type="button" class="close"
+                data-dismiss="modal">&times;</button>
+              <label class="modal-title"></label>
           </div>
           <div class="modal-body" data-reply_no>
             <p><input type="text" id="reply_content" class="form-control"></p>
@@ -334,6 +343,7 @@ var printPaging = function(pageMaker, target) {
 <!--댓글 디자인을 위한 템플릿 코드  -->
 <script id="template" type="text/x-handlebars-template">
 {{#each .}}
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <li class="replyLi" data-reply_no={{reply_no}}>
 <i class="fa fa-comments bg-yellow 	"></i>
  <div class="timeline-item" >
@@ -343,8 +353,10 @@ var printPaging = function(pageMaker, target) {
   </span>
   <div class="timeline-body">{{reply_content}} </div>
     <div class="timeline-footer">
+	<c:if test="${read.user_nm eq sessionScope.login.nm}">
      <a class="btn btn-primary btn-xs" 
       data-toggle="modal" data-target="#modifyModal">댓글 수정</a>
+	</c:if>	
     </div>
   </div>      
 </li>
