@@ -27,9 +27,9 @@
               <select class="selectpicker"
                 id="search_article_head" name="search_article_head">
                 <option value="${read.article_head}" selected="selected">${read.article_head}</option>
-                <option value="스튜디오">스튜디오</option>
-                <option value="드레스">드레스</option>
-                <option value="메이크업">메이크업</option>
+                <option value="studio">스튜디오</option>
+                <option value="dress">드레스</option>
+                <option value="makeup">메이크업</option>
                </select>
         <%
         }else{
@@ -43,15 +43,17 @@
         }
         %>
         </div>
-   
-        <!-- 총게시글수 보여주기  -->
-        <div class="text-right">
-        <label>총게시글수: ${pageMaker.getTotalCount()}</label>
-        </div>
   
         <div class="text-center">
           <table class="table table-bordered" align="center">
-            <tr align="center">
+           <thead>
+              <!-- 총게시글수 보여주기  -->
+              <tr class="text-right">
+                <td colspan='6'>총 게시글 수: ${pageMaker.getTotalCount()}</td>
+              </tr>
+              
+              <!--테이블 컬럼 명 -->
+              <tr align="center">
               <th style="width: 60px" align="center">번호</th>
               <th align="center">제목</th>
               <th style="width: 140px" align="center" >작성자</th>
@@ -66,6 +68,8 @@
                  }}
                 %>
             </tr>
+          </thead>
+            
           <!--게시글 번호 내림차순 출력하기 위한 변수 처리-->
           <c:set var="i" value="0" />
           <c:set var="TotalCount" value="${pageMaker.totalCount}" />
@@ -235,22 +239,29 @@
 		});
 		
 		//ajax부분
-		$('#search_article_head').change(function () {
+		var keyWord;
+		$('#search_article_head').change(function (e) {
 			 var type = $('#search_article_head').val();
-			 var keyWord=$('#search_article_head').val();
+			 
+			 if(type=="studio"){
+				 keyWord="스튜디오";
+			 }else if(type=="dress"){
+				 keyWord="드레스";
+			 }else if(type=="makeup"){
+				 keyWord="메이크업";
+			 }
+			 
 			 var url;
 			 
 			 console.log(type);
 			 
-			 if (type == '스튜디오') {
-				 url = "list/studio?board_no=2&searchType=studio";
-
-			 } else if (type == '드레스'){
+			 if (type == 'studio') {
+				 url = "list/studio?board_no=2";
+			 } else if (type == 'dress'){
 				 url = "list/dress?board_no=2";
 	
-			 } else if (type == '메이크업'){
+			 } else if (type == 'makeup'){
 				 url = "list/makeup?board_no=2";
-
 			 }
 			 
 	  		 $.ajax({
@@ -265,11 +276,15 @@
 					 var text = "";
 					 
 					 console.log(search_article_head);
+					 
+					 /*번호 붙이기를 위한 변수들   */
+					 var totalCnt= search_article_head.pageMaker.totalCount;
+					 var Page=${cri.page};
+					 var PageSize=${cri.perPageNum};
 					 for ( var i in search_article_head.list) {
 						 text += "<tr>";
-						 text += "<td>" +search_article_head.list[i].ARTICLE_NO+"</td>";
-<%-- 						 text += "<td> <a href = 'read?article_no="+search_article_head.list[i].ARTICLE_NO+"&board_no="+<%=request.getParameter("board_no")%>+"<font color='orange'>["+${article.ARTICLE_HEAD}+"]</font>"+${article.ARTICLE_TITLE}+"<font color='yellow'>["+${article.REPLY_COUNT}+"]</font></a></td>";
- --%>						
+						 /*번호 계산식 :  ${(TotalCount-(Page*PageSize)+PageSize)-i}  */
+						 text += "<td>" +((totalCnt-(Page*PageSize)+PageSize)-i)+"</td>";
  						 text += "<td> <a href = 'readPage?article_no="
  							  +search_article_head.list[i].ARTICLE_NO+"&board_no="+<%=request.getParameter("board_no")%>+"'><font color='orange'>["
  						      +search_article_head.list[i].ARTICLE_HEAD+"] </font>"+search_article_head.list[i].ARTICLE_TITLE+"<font color='yellow'>["+search_article_head.list[i].REPLY_COUNT+"]</font></a></td>";
@@ -290,7 +305,84 @@
 			 }); 
 		 }); 
 		
-		
+		/* ajax 페이지네이션 function  */
+		$(document).on('click', 'a.paging', function(e){
+	 		e.preventDefault();
+			 
+			 var perPageNum = ${cri.perPageNum};
+			 var searchType = $("#searchType").val();
+			 var url;
+			 
+             var type = $('#search_article_head').val();
+            			 
+  			 if(type=="studio"){
+  				 keyWord="스튜디오";
+  			 }else if(type=="dress"){
+  				 keyWord="드레스";
+  			 }else if(type=="makeup"){
+  				 keyWord="메이크업";
+  			 }
+			 
+			 if (searchType == null || searchType == undefined || searchType == "" ||type == "") {
+				 url = "/sarticle/list?page="+e.target.innerHTML+"&perPageNum="+perPageNum+"&board_no="+2;
+			 } else {
+				 url = "/sarticle/list?page="+e.target.innerHTML+"&perPageNum="+perPageNum+"&searchType="+type+"&keyword="+keyWord+"&board_no="+2;
+			 }
+			 self.location.href=url;
+		 });
+		 
+		 function pagination(pageMaker) {
+			 console.log(pageMaker);
+			 var text2  = "<ul id = 'pagination_output'>";
+			 
+			 	if (pageMaker.prev) {
+    			 	text2 +=  "<li>"
+    			 		+"<a href="
+    			 		+"'list"
+    			 		+"${pageMaker.makeSearch(pageMaker.startPage-1) }"
+     					+"&board_no="+<%=request.getParameter("board_no")%>
+    			 		+"'>"
+    			 		+"&laquo;"
+    			 		+"</a></li>";
+			 	}
+			 	
+			 	for (var i=pageMaker.startPage; i<=pageMaker.endPage; i++){
+			 		text2 +=  "<li" + (pageMaker.page == i ? " class='active'>":'>');
+			 		text2 +=  "  <a class='paging' href="
+			 		+"'list"
+			 		+"${pageMaker.makeSearch(i) }"
+			 		+"&board_no="+<%=request.getParameter("board_no")%>
+			 		+"'>" + i + "</a>";
+			 		text2 +=  "</li>";
+			 	}
+			 	
+			 	if (pageMaker.next && pageMaker.endPage > 0) {
+			 		text2 +=  "<li><a href='"
+		 			+"'list"
+  			 		+"${pageMaker.makeSearch(pageMaker.endPage+1) }"
+   					+"&board_no="+<%=request.getParameter("board_no")%>
+  			 		+"'>"
+  			 		+"&laquo;"
+			 		+"'>&raquo;</a></li>";	
+			 	}
+	  		text2 += "</ul>";
+	  		
+	  		$(".pagination").html(text2); 
+	  		 
+	  		console.log(text2);
+		 }
+		 
+		 /*전체 article수  */
+		 function totalCount(totalCount) {
+			 $(".table.table-bordered > thead > tr:first > td:first").remove();
+			 
+			 if (totalCount > 0) {
+				 var text2 = "<td colspan='6'>총 게시글 수 : " + totalCount + "</td>";
+				 
+				 $(".table.table-bordered > thead > tr:first").html(text2);
+			 }
+		 }
+		 
 	});
 
 </script>

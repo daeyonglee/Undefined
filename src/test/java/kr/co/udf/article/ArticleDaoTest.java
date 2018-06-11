@@ -126,7 +126,7 @@ public class ArticleDaoTest {
 	}
   }
 
-//  @Test
+ // @Test
   public void testListCriteria() throws Exception {
     Criteria cri = new Criteria();
     cri.setPage(2);
@@ -224,5 +224,28 @@ public class ArticleDaoTest {
 //  		
 //  		logger.info(CountArticles);
 //  	}
+
+  	
+    @Test
+    public void testListCriteria2() throws Exception {
+      Criteria cri = new Criteria();
+      cri.setPage(2);
+      cri.setPerPageNum(20);
+      cri.setBoard_no(1);
+
+      List<Map<String, Object>> list = dao.listCriteria(cri);
+
+      for (Map<String, Object> row : list) {
+  		// 숫자형은 BigDecimal로 받음
+  		BigDecimal article_no = (BigDecimal) row.get("ARTICLE_NO");
+  		String article_head = (String) row.get("ARTICLE_HEAD");
+  		String article_title = (String) row.get("ARTICLE_TITLE");
+  		String article_content = (String) row.get("ARTICLE_CONTENT");
+  		String user_nm = (String) row.get("USER_NM");
+  		String regdate = (String) row.get("REGIDATE");
+  		BigDecimal hitcount = (BigDecimal) row.get("HITCOUNT");
+  		logger.debug(article_no + "\t" + article_head + "\t" + article_title +  "\t" + article_content+ "\t" + user_nm+ "\t" + hitcount);
+  	}
+    }
 
 }

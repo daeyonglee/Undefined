@@ -50,7 +50,8 @@ public class SearchArticleController {
 	   @RequestMapping(value="/list/studio", method=RequestMethod.GET)
 	   public ResponseEntity<List<Map<String,Object>>> listStudio(SearchCriteria cri) throws Exception{
 	      ResponseEntity<List<Map<String,Object>>> entity = null;
-
+	      logger.debug(cri);
+	      
 	      List<Map<String,Object>> list = service.listSearchCriteria(cri);
 	      
 	      cri.setSearchType("studio");
@@ -62,6 +63,9 @@ public class SearchArticleController {
 	      Map<String, Object> map = new HashMap<>();
 	      map.put("list", list);
 	      map.put("pageMaker", pageMaker);
+	    
+	      
+	      logger.debug(map);
 	      
 	      try {
 	         entity = new ResponseEntity(map, HttpStatus.OK);
