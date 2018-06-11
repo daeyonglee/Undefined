@@ -1,10 +1,15 @@
 package kr.co.udf.article.controller;
 
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.inject.Inject;
-import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -41,6 +46,82 @@ public class SearchArticleController {
 	    model.addAttribute("pageMaker", pageMaker);
 	    
 	}
+	
+	   @RequestMapping(value="/list/studio", method=RequestMethod.GET)
+	   public ResponseEntity<List<Map<String,Object>>> listStudio(SearchCriteria cri) throws Exception{
+	      ResponseEntity<List<Map<String,Object>>> entity = null;
+
+	      List<Map<String,Object>> list = service.listSearchCriteria(cri);
+	      
+	      cri.setSearchType("studio");
+	      
+	      PageMaker pageMaker = new PageMaker();
+	      pageMaker.setCri(cri);
+	      pageMaker.setTotalCount(service.listSearchCount(cri));
+	      
+	      Map<String, Object> map = new HashMap<>();
+	      map.put("list", list);
+	      map.put("pageMaker", pageMaker);
+	      
+	      try {
+	         entity = new ResponseEntity(map, HttpStatus.OK);
+	      } catch(Exception e) {
+	         e.printStackTrace();
+	         entity = new ResponseEntity(HttpStatus.BAD_REQUEST);
+	      }
+	      return entity;
+	   }
+	   
+	   @RequestMapping(value="/list/dress", method=RequestMethod.GET)
+	   public ResponseEntity<List<Map<String,Object>>> listDress(SearchCriteria cri) throws Exception{
+	      ResponseEntity<List<Map<String,Object>>> entity = null;
+
+	      List<Map<String,Object>> list = service.listSearchCriteria(cri);
+	      
+	      cri.setSearchType("dress");
+	      
+	      PageMaker pageMaker = new PageMaker();
+	      pageMaker.setCri(cri);
+	      pageMaker.setTotalCount(service.listSearchCount(cri));
+	      
+	      Map<String, Object> map = new HashMap<>();
+	      map.put("list", list);
+	      map.put("pageMaker", pageMaker);
+	      
+	      try {
+	         entity = new ResponseEntity(map, HttpStatus.OK);
+	      } catch(Exception e) {
+	         e.printStackTrace();
+	         entity = new ResponseEntity(HttpStatus.BAD_REQUEST);
+	      }
+	      return entity;
+	   }
+	   
+	   @RequestMapping(value="/list/makeup", method=RequestMethod.GET)
+	   public ResponseEntity<List<Map<String,Object>>> listMakeup(SearchCriteria cri) throws Exception{
+	      ResponseEntity<List<Map<String,Object>>> entity = null;
+
+	      List<Map<String,Object>> list = service.listSearchCriteria(cri);
+	      
+	      cri.setSearchType("makeup");
+	      
+	      PageMaker pageMaker = new PageMaker();
+	      pageMaker.setCri(cri);
+	      pageMaker.setTotalCount(service.listSearchCount(cri));
+	      
+	      Map<String, Object> map = new HashMap<>();
+	      map.put("list", list);
+	      map.put("pageMaker", pageMaker);
+	      
+	      try {
+	         entity = new ResponseEntity(map, HttpStatus.OK);
+	      } catch(Exception e) {
+	         e.printStackTrace();
+	         entity = new ResponseEntity(HttpStatus.BAD_REQUEST);
+	      }
+	      return entity;
+	   }
+	
 	
 	@RequestMapping(value = "/readPage", method = RequestMethod.GET)
 	public void read(@RequestParam("article_no") int article_no, @ModelAttribute("cri") Criteria cri, Model model) throws Exception {
