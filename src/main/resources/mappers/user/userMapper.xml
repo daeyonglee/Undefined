@@ -128,4 +128,14 @@
 		 WHERE email = #{email}
 		   AND pw    = #{pw}
 	</select>
+	
+	<select id="kakaocheck" parameterType="kr.co.udf.user.domain.Kakao" resultType="kr.co.udf.user.domain.Kakao">
+		SELECT id id
+		     , user_no userNo
+		     , nickname nickname
+		     , profile_image profileImage
+		     , thumbnail_image thumbnailImage
+		  FROM kakao_users
+		 WHERE id = #{id}
+	</select>
 </mapper>

@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import kr.co.udf.user.dao.UserDao;
+import kr.co.udf.user.domain.Kakao;
 import kr.co.udf.user.domain.Login;
 
 @Service
@@ -35,5 +36,10 @@ public class UserLoginServiceImpl implements UserLoginService {
 	@Override
 	public Login logincheck(Login dto) {
 		return dao.logincheck(dto);
+	}
+
+	@Override
+	public Kakao kakaocheck(Kakao k) {
+		return dao.kakaocheck(k);
 	}
 }

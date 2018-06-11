@@ -55,6 +55,8 @@ DROP SEQUENCE reply_seq;
 
 DROP SEQUENCE users_seq; 
 
+DROP SEQUENCE kakao_users_seq;
+
 DROP SEQUENCE admin_seq; 
 
 DROP SEQUENCE point_product_seq; 
@@ -114,7 +116,9 @@ DROP TABLE dress_bid CASCADE CONSTRAINTS;
 
 DROP TABLE makeup_bid CASCADE CONSTRAINTS; 
 
-DROP TABLE users CASCADE CONSTRAINTS; 
+DROP TABLE users CASCADE CONSTRAINTS;
+
+DROP TABLE kakao_users CASCADE CONSTRAINTS;
 
 DROP TABLE ADMIN CASCADE CONSTRAINTS; 
 
@@ -203,7 +207,9 @@ CREATE SEQUENCE board_seq;
 
 CREATE SEQUENCE article_seq; 
 
-CREATE SEQUENCE users_seq; 
+CREATE SEQUENCE users_seq;
+
+CREATE SEQUENCE kakao_users_seq;
 
 CREATE SEQUENCE admin_seq; 
 
@@ -625,7 +631,19 @@ CREATE TABLE users
      regdate       DATE DEFAULT SYSDATE NOT NULL, 
      updatedate    DATE DEFAULT SYSDATE NOT NULL, 
      PRIMARY KEY (user_no) 
-  ); 
+  );
+  
+-- 카카오 일반 사용자
+CREATE TABLE kakao_users
+  (
+    id              NUMBER(10) NOT NULL,
+    user_no         NUMBER(10) NOT NULL,
+    profile_image   VARCHAR2(300) NOT NULL,
+    thumbnail_image VARCHAR2(300) NOT NULL,
+    regdate        DATE DEFAULT SYSDATE NOT NULL,
+    updatedate     DATE DEFAULT SYSDATE NOT NULL,
+    PRIMARY KEY (id, user_no)
+  );
 
 -- 관리자 
 CREATE TABLE ADMIN 
@@ -863,7 +881,8 @@ ALTER TABLE article
 ALTER TABLE article ADD CONSTRAINT article_users_fk FOREIGN KEY (user_no) REFERENCES users (user_no); 
   
 ALTER TABLE reply ADD CONSTRAINT reply_article_fk FOREIGN KEY (article_no) REFERENCES article(article_no);
- 
+
+ALTER TABLE kakao_users ADD CONSTRAINT kakao_users_fk FOREIGN KEY (user_no) REFERENCES users (user_no);
 -- insert data 
 -- admin 
 desc ADMIN; 

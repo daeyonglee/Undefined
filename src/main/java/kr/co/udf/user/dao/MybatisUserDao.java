@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import kr.co.udf.user.domain.Kakao;
 import kr.co.udf.user.domain.Login;
 import kr.co.udf.user.domain.User;
 
@@ -45,5 +46,10 @@ public class MybatisUserDao implements UserDao {
 	@Override
 	public Login logincheck(Login dto) {
 		return sqlSession.selectOne(NAMESPACE+".logincheck", dto);
+	}
+
+	@Override
+	public Kakao kakaocheck(Kakao k) {
+		return sqlSession.selectOne(NAMESPACE+".kakaocheck", k);
 	}
 }

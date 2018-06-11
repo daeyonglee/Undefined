@@ -124,13 +124,13 @@
 						success: function(authObj) {
 							// 로그인 성공시, API를 호출합니다.
 		        	Kakao.API.request({
-		          url: '/v1/user/me',
-		          success: function(res) {
-		            alert(JSON.stringify(res));
-		          	},
-		          fail: function(error) {
-		            alert(JSON.stringify(error));
-		          	}
+  		          url: '/v1/user/me',
+  		          success: function(res) {
+  		            checkUser(res);
+  		          },
+  		          fail: function(error) {
+  		            alert(JSON.stringify(error));
+  		          }
 		        	});
 						},
 						fail: function(err) {
@@ -145,6 +145,33 @@
         radioClass: 'iradio_square-blue',
         increaseArea: '20%' // optional
       });
+  		
+  		// 가입한 회원인지 체크
+  		function checkUser(data) {
+  			console.log(data);
+  			var param = $.param(data);
+  			// 데이터 체크
+  			for ( var i in data) {
+					console.log("key : " + i);
+					console.log("val : " + data[i]);
+				}
+  			
+  			$.ajax({
+  				type : "get",
+  				url : "/user/kakaocheck",
+  				data : {id:data.id, nickname:data.properties.nickname, profileImage: data.properties.profile_image, thumbnailImage: data.properties.thumbnail_image},
+  				success: function(data){
+  					console.log(data);
+  					if (data.result == 'success') {
+  						// 로그인 처리
+  					}
+  					if (data.result == 'fail') {
+  						// 회원가입 화면으로 이동
+  						self.location = "/user/join/kakao?"+param;
+  					}
+  				}
+  			});
+  		}
   	});
   </script>
   

@@ -3,6 +3,7 @@ package kr.co.udf.user.controller;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.Cookie;
@@ -17,11 +18,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.WebUtils;
 
+import kr.co.udf.user.domain.Kakao;
 import kr.co.udf.user.domain.Login;
-import kr.co.udf.user.domain.User;
 import kr.co.udf.user.service.UserLoginService;
 
 @Controller
@@ -130,5 +130,41 @@ public class UserLoginController {
 		
 		return responseEntity;
 		
+	}
+	
+	@RequestMapping(value="/user/kakaocheck", method=RequestMethod.GET)
+	public ResponseEntity<Map<String, Object>> kakaocheck(Kakao k) {
+		
+		logger.debug(k);
+		
+		ResponseEntity<Map<String, Object>> entity = null;
+		
+		Kakao kakao = loginService.kakaocheck(k);
+		logger.debug(kakao);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("info", k);
+		
+		try {
+			if (kakao != null) {
+				map.put("result", "success");
+			} else {
+				map.put("result", "fail");
+			}
+			entity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+		} catch(Exception e) {
+			entity = new ResponseEntity<Map<String, Object>>(HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
+	}
+	
+	@RequestMapping(value="/join/kakao", method=RequestMethod.GET)
+	public String kakaojoin(Model model, Kakao kakao) {
+		logger.debug(kakao);
+		
+		model.addAttribute("kakako", kakao);
+		
+		return "/user/join";
 	}
 }
