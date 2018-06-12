@@ -212,4 +212,12 @@ WHERE page = #{page}
 	]]>
 	</select>
 	
+	<select id="productImg" resultType="String">
+	<![CDATA[
+	SELECT sp_image AS productImg 
+	FROM studio_product JOIN studio_company USING(sc_no)
+	WHERE sc_no = #{sc_no}
+	]]>
+	</select>
+	
 </mapper>

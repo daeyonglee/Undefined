@@ -392,7 +392,6 @@ span.star-prototype>* {
 					info : {region:name, region:name}
 				*/
 				//var myLatlng1 = new google.maps.LatLngBounds(37.4837121, 127.0324112);
-				//console.log(myLatlng1);
 				var currentInfoWindow = null;
 				
 				//마커를 올릴 지역을 가져온다.
@@ -437,12 +436,6 @@ span.star-prototype>* {
 										bounds.extend(marker.position);
 										map.fitBounds(bounds);
 										
-									//var address = region;
-									//console.log(name[n]);
-									
-									// 마커 클릭 이벤트
-									
-									//console.log('이름 : ' + marker.name);
 									
 									google.maps.event.addListener(marker,'click',function(e) {
 										
@@ -455,7 +448,6 @@ span.star-prototype>* {
 										//infoWindow.close();
 										infoWindow.setContent(infowin);
 										infoWindow.open(map,marker);
-										console.log(marker);
 										currentInfoWindow = infoWindow;
 									});
 							}
@@ -470,7 +462,10 @@ span.star-prototype>* {
 				
 				function searchName(marker) {
 					
-					var title = marker.title.replace("대한민국", "").replace("서울특별시","서울").replace("경기도","경기").trim();
+					var title = marker.title.replace("대한민국", "").replace("서울특별시","서울").replace("경기도","경기")
+					.replace("인천광역시","인천").replace("부산광역시","부산").replace("대구광역시","대구").replace("강원도","강원")
+					.replace("광주광역시","광주").replace("대전광역시","대전").replace("울산광역시","울산").replace("충청북도","충북")
+					.replace("충청남도","충남").replace("전라북도","전북").replace("전라남도","전남").trim();
 					var num = marker.num;
 					var infowin = '';
 					var image = '';
@@ -489,8 +484,6 @@ span.star-prototype>* {
 						var arrAvg = arr[3].trim();
 						var arrCount = arr[4].trim();
 						
-						console.log('title : ' + title);
-						console.log('arrTitle : ' + arrTitle);
 						if ( title == arrTitle) {
 							 infowin += '<dl><a href="/company/dress/dressDetail?dc_no='+arrNo+'">'+arrName+'</a></dl>';
 							 infowin += '<dl><dd><i class="pe-7s-map-marker strong"></i> ' +title+'</dd></dl>';
@@ -513,43 +506,6 @@ span.star-prototype>* {
     <!-- 마커 장소 찍기 -->
           
     <!-- studio.sc_addr:studio.sc_nm, -->
-                            
-                            <c:forEach items="${dresslist}" var="dress" varStatus="index">
-                              <c:set value="${dress.dc_addr}" var="split1"/>
-  <!--  원본  -->             ${split1 }    
- <!--  자르기 -->            <c:set value="${fn:substringAfter(split1,'^^')}" var="split2"/>
- <!--  자르기2 결과 -->         ${split2 }
- <!--  자르기3 -->            <c:set value="${fn:replace(split2,'^^',' ')}" var="split3"/>
- <!--  자르기3 결과 -->        ${split3 }
- 
- 
- <!--  자르기4 -->           <c:set value="${fn:substringBefore(split2,'^^').trim() }" var="split4"/>
- <!--  자르기4 결과 -->        ${split4 }
-                                <c:choose>
-                                  <c:when test="${fn:contains(split4, '(')}" >
-  <!--  자르기5 -->                 <c:set value="${fn:substringBefore(split4,'(').trim() }" var="split5"/>
-  <!--  자르기5 결과 -->              ${split5 }
-                                  </c:when>
-                                     <c:otherwise>
-  <!-- other -->            	       ${split4 }
-                                     </c:otherwise>
-                                 </c:choose>
-                              </c:forEach>
-                              
-                              
-                              
-                              
-                              
-                   <!-- <input type="hidden" id="list"
-             value= "
-               <c:forEach items="${list}" var="studio" varStatus="index">
-                  <c:choose>
-                    <c:when test="${index.last}">${studio.sc_nm}:${studio.sc_addr}:${studio.sc_no }</c:when>
-                    <c:otherwise>${studio.sc_nm}:${studio.sc_addr}:${studio.sc_no }/</c:otherwise>
-                  </c:choose>
-               </c:forEach>
-             " /> -->
-         
           
           <!-- 위치랑 이름이랑 연결해서 찍어주는애 -->
               <input type="hidden" id="list"

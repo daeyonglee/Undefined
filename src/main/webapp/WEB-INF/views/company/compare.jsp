@@ -296,21 +296,13 @@ function compInterest() {
                     <img src="/user/mypage/imgview?imgview=${studioCompany.sc_main_image}"class="picture-src" id='wizardPicturePreview' title=''/>
                    
                   </li>
+                   <c:forEach items="${pmg}" var="studioCompany">
                   <li
-                    data-thumb="/user/mypage/imgview?imgview=${studioCompany.sc_main_image}">
+                    data-thumb="/user/mypage/imgview?imgview=${studioCompany.productImg}">
                     <img
-                    src="/user/mypage/imgview?imgview=${studioCompany.sc_main_image}" />
+                    src="/user/mypage/imgview?imgview=${studioCompany.productImg}" />
                   </li>
-                  <li
-                    data-thumb="/resources/assets/img/property-1/property3.jpg">
-                    <img
-                    src="/resources/assets/img/property-1/property3.jpg" />
-                  </li>
-                  <li
-                    data-thumb="/resources/assets/img/property-1/property4.jpg">
-                    <img
-                    src="/resources/assets/img/property-1/property4.jpg" />
-                  </li>
+                  </c:forEach>
                 </ul>
               </div>
             </div>
@@ -596,6 +588,7 @@ function minComp() {
                       <form method="post" action="/company/add" name="frm">
                       <input type='hidden' name='sc_no' value="${studioCompany.sc_no}"> 
                       <input type='hidden' name='sc_nm' value="${studioCompany.sc_nm}">
+                      <input type='hidden' name='sc_main_image' value="${studioCompany.sc_main_image}">
                       <c:if test="${countProduct gt '0'}">
                         <input type='hidden' name='countProduct' value="${countProduct}">
                         <input type='hidden' name='avgPrice' value="${avgPrice}">
@@ -768,10 +761,12 @@ function removeComp() {
       <input type='hidden' name='sc_nm' value="${compList.sc_nm}"> 
       </c:if>
     
-      <img src="/resources/assets/img/property-1/property1.jpg" id="imgBorder" class="img-responsive" width="90%" alt="">
-      <input type="submit" value="삭제"></input>
-    <!--    <span class="glyphicon glyphicon-remove-sign" onclick="removeComp()"></span>-->
+      <img src="/user/mypage/imgview?imgview=${compList.sc_main_image}" id="imgBorder" class="img-responsive" width="90%" alt="" />
+       <input type="submit" value="삭제"></input>
       <h4 align="center" style="color: white">${compList.sc_nm}</h4>
+     
+    <!--    <span class="glyphicon glyphicon-remove-sign" onclick="removeComp()"></span>-->
+      
       <br/>
       </form>
     </c:forEach>
@@ -861,7 +856,7 @@ function removeComp() {
                                  <div id="myCarousel" class="carousel slide">
                                    <div class="carousel-inner">
                                      <div class="item active">
-                                       <img src= ${cartComp.sc_main_image } style="width: 100%;">
+                                        <img src="/user/mypage/imgview?imgview=${cartComp.sc_main_image}" style="width: 100%;"/>
                                      </div>
                                    </div>
                                  </div>

@@ -40,6 +40,7 @@ public class MakeupController {
 	@RequestMapping(value="/makeupDetail", method=RequestMethod.GET)
 	public void detailMakeup(@RequestParam("mc_no") int mc_no, Model model, HttpSession session) throws Exception {
 		model.addAttribute(service.detailMakeup(mc_no));
+		model.addAttribute("pmg", service.productImg(mc_no));
 		model.addAttribute("count", service.countReview(mc_no));
 		if (0 < service.countReview(mc_no)) {
 			model.addAttribute("list", service.reviewMakeup(mc_no));

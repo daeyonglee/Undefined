@@ -1,5 +1,9 @@
 package kr.co.udf.common.company.domain;
 
+import java.util.ArrayList;
+
+
+
 public class StudioCompany {
 
 	private int sc_no;
@@ -22,6 +26,7 @@ public class StudioCompany {
 	private int count;
 	private int countProduct;
 	private long avgPrice;
+	private ArrayList<String> productImg;
 
 	/** 생성자 */
 	public StudioCompany() {
@@ -184,9 +189,17 @@ public class StudioCompany {
 	public long getAvgPrice() {
 		return avgPrice;
 	}
-
+	
 	public void setAvgPrice(long avgPrice) {
 		this.avgPrice = avgPrice;
+	}
+
+	public ArrayList<String> getProductImg() {
+		return productImg;
+	}
+
+	public void setProductImg(ArrayList<String> productImg) {
+		this.productImg = productImg;
 	}
 
 	@Override
@@ -197,7 +210,7 @@ public class StudioCompany {
 				+ sc_smy_intro + ", sc_introduce=" + sc_introduce + ", sessionKey=" + sessionKey + ", sessionLimit="
 				+ sessionLimit + ", regdate=" + regdate + ", updatedate=" + updatedate + ", sr_point=" + sr_point
 				+ ", avg=" + avg + ", count=" + count + ", countProduct=" + countProduct + ", avgPrice=" + avgPrice
-				+ "]";
+				+ ", productImg=" + productImg + "]";
 	}
 
 }

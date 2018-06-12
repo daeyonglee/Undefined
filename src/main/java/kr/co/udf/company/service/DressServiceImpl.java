@@ -82,4 +82,9 @@ public class DressServiceImpl implements DressService {
 	public long avgPrice(int dc_no) throws Exception {
 		return dao.avgPrice(dc_no);
 	}
+	
+	@Override
+	public List<String> productImg(int dc_no) throws Exception {
+		return dao.productImg(dc_no);
+	}
 }

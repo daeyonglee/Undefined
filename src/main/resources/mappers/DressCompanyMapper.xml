@@ -36,6 +36,7 @@ FROM (SELECT CEIL (rownum / 10) page,
 	sc.dc_email, 
 	sc.dc_pw, 
 	sc.dc_tel, 
+	sc.dc_smy_intro, 
 	sc.dc_introduce, 
 	sc.sessionkey, 
 	sc.regdate, 
@@ -67,6 +68,7 @@ FROM (SELECT *
 	sc.dc_email, 
 	sc.dc_pw, 
 	sc.dc_tel, 
+	sc.dc_smy_intro, 
 	sc.dc_introduce, 
 	sc.sessionkey, 
 	sc.regdate, 
@@ -116,6 +118,7 @@ FROM (SELECT *
 	sc.dc_email, 
 	sc.dc_pw, 
 	sc.dc_tel, 
+	sc.dc_smy_intro, 
 	sc.dc_introduce, 
 	sc.sessionkey, 
 	sc.regdate, 
@@ -144,7 +147,6 @@ FROM (SELECT *
 	]]>
 	   <include refid="searchDress"></include>
 	</select>	
-	
 	<!-- 페이지 리드, 리뷰  -->
 	<select id="detailDress" resultType="kr.co.udf.common.company.domain.DressCompany">
 	<![CDATA[
@@ -214,6 +216,14 @@ FROM (SELECT *
 	<select id="avgPrice" resultType="long">
 	<![CDATA[
 	SELECT ROUND(AVG(dp_price), 0) AS avgPrice	 
+	FROM dress_product JOIN dress_company USING(dc_no)
+	WHERE dc_no = #{dc_no}
+	]]>
+	</select>
+	
+	<select id="productImg" resultType="String">
+	<![CDATA[
+	SELECT dp_image AS productImg 
 	FROM dress_product JOIN dress_company USING(dc_no)
 	WHERE dc_no = #{dc_no}
 	]]>

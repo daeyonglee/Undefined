@@ -40,6 +40,7 @@ public class DressController {
 	@RequestMapping(value="/dressDetail", method=RequestMethod.GET)
 	public void detailStudio(@RequestParam("dc_no") int dc_no, Model model, HttpSession session) throws Exception {
 		model.addAttribute(service.detailDress(dc_no));
+		model.addAttribute("pmg", service.productImg(dc_no));
 		model.addAttribute("count", service.countReview(dc_no));
 		if (0 < service.countReview(dc_no)) {
 			model.addAttribute("list", service.reviewDress(dc_no));

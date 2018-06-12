@@ -41,4 +41,7 @@ public interface MakeupDao {
 	
 	/** 메이크업 업체 상품 평균가 */
 	public long avgPrice(int mc_no) throws Exception;
+
+	/** 메이크업 업체 상품 이미지 */
+	public List<String> productImg(int mc_no) throws Exception;
 }

@@ -82,5 +82,10 @@ public class MakeupServiceImpl implements MakeupService {
 	public long avgPrice(int mc_no) throws Exception {
 		return dao.avgPrice(mc_no);
 	}
+	
+	@Override
+	public List<String> productImg(int mc_no) throws Exception {
+		return dao.productImg(mc_no);
+	}
 
 }

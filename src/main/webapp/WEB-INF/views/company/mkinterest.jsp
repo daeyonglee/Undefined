@@ -98,7 +98,7 @@ margin-top : 10px;
             <div class="col-md-4 p0">
               <div class="box-two proerty-item">
                 <div class="item-thumb">
-                  <a href="/company/compare?mc_no=${makeup.mc_no }"><img
+                  <a href="/company/makeup/makeupDetail?mc_no=${makeup.mc_no} "><img
                     src="/user/mypage/imgview?imgview=${makeup.mc_main_image}"></a>
                 </div>
                 <div class="item-entry overflow">
@@ -254,7 +254,10 @@ margin-top : 10px;
         
         function searchName(marker) {
           
-          var title = marker.title.replace("대한민국", "").replace("서울특별시","서울").replace("경기도","경기").trim();
+			var title = marker.title.replace("대한민국", "").replace("서울특별시","서울").replace("경기도","경기")
+			.replace("인천광역시","인천").replace("부산광역시","부산").replace("대구광역시","대구").replace("강원도","강원")
+			.replace("광주광역시","광주").replace("대전광역시","대전").replace("울산광역시","울산").replace("충청북도","충북")
+			.replace("충청남도","충남").replace("전라북도","전북").replace("전라남도","전남").trim();
           var num = marker.num;
           var infowin = '';
           var image = '';
@@ -269,9 +272,8 @@ margin-top : 10px;
             var arrName = arr[0].trim();
             var arrTitle = arr[1].trim();
             var arrNo = arr[2].trim();
-            
             if ( title == arrTitle) {
-               infowin += '<dl><a href="/company/compare?mc_no='+arrNo+'">'+arrName+'</a></dl>';
+               infowin += '<dl><a href="/company/makeup/makeupDetail?mc_no='+arrNo+'">'+arrName+'</a></dl>';
                infowin += '<dl><dd><i class="pe-7s-map-marker strong"></i> ' +title+'</dd></dl>';
             }
           });

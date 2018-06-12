@@ -40,6 +40,7 @@ public class CompanyController {
 	@RequestMapping(value="/compare", method=RequestMethod.GET)
 	public void detailStudio(@RequestParam("sc_no") int sc_no, Model model, HttpSession session) throws Exception {
 		model.addAttribute(service.detailStudio(sc_no));
+		model.addAttribute("pmg", service.productImg(sc_no));
 		model.addAttribute("count", service.countReview(sc_no));
 		if (0 < service.countReview(sc_no)) {
 			model.addAttribute("list", service.reviewStudio(sc_no));

@@ -37,6 +37,7 @@ FROM (SELECT CEIL (rownum / 10) page,
 	sc.mc_email, 
 	sc.mc_pw, 
 	sc.mc_tel, 
+	sc.mc_smy_intro, 
 	sc.mc_introduce, 
 	sc.sessionkey, 
 	sc.regdate, 
@@ -65,6 +66,7 @@ WHERE page = #{page}
 	sc.mc_email, 
 	sc.mc_pw, 
 	sc.mc_tel, 
+	sc.mc_smy_intro, 
 	sc.mc_introduce, 
 	sc.sessionkey, 
 	sc.regdate, 
@@ -114,6 +116,7 @@ WHERE page = #{page}
 	sc.mc_email, 
 	sc.mc_pw, 
 	sc.mc_tel, 
+	sc.mc_smy_intro, 
 	sc.mc_introduce, 
 	sc.sessionkey, 
 	sc.regdate, 
@@ -212,6 +215,14 @@ WHERE page = #{page}
 	<![CDATA[
 	SELECT
 		ROUND(AVG(mp_price), 0) AS avgPrice	 
+	FROM makeup_product JOIN makeup_company USING(mc_no)
+	WHERE mc_no = #{mc_no}
+	]]>
+	</select>
+	
+	<select id="productImg" resultType="String">
+	<![CDATA[
+	SELECT mp_image AS productImg 
 	FROM makeup_product JOIN makeup_company USING(mc_no)
 	WHERE mc_no = #{mc_no}
 	]]>

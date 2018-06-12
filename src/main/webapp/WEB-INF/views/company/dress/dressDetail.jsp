@@ -290,21 +290,16 @@ function compInterest() {
                 <ul id="image-gallery"
                   class="gallery list-unstyled cS-hidden">
                   <li
-                    data-thumb="/resources/assets/img/property-1/property1.jpg">
+                    data-thumb="/user/mypage/imgview?imgview=${dressCompany.dc_main_image}">
                     <img src="/user/mypage/imgview?imgview=${dressCompany.dc_main_image}" class="picture-src" id='wizardPicturePreview' title=''/>
                   </li>
+                  <c:forEach items="${pmg}" var="dressCompany">
                   <li
-                    data-thumb="/resources/assets/img/property-1/property4.jpg">
-                    <img src="/user/mypage/imgview?imgview=${dressCompany.dc_main_image}"/>
+                    data-thumb="/user/mypage/imgview?imgview=${dressCompany.productImg}">
+                    <img
+                    src="/user/mypage/imgview?imgview=${dressCompany.productImg}" />
                   </li>
-                  <li
-                    data-thumb="/resources/assets/img/property-1/property3.jpg">
-                    <img src="/user/mypage/imgview?imgview=${dressCompany.dc_main_image}"/>
-                  </li>
-                  <li
-                    data-thumb="/resources/assets/img/property-1/property4.jpg">
-                  <img src="/user/mypage/imgview?imgview=${dressCompany.dc_main_image}"/>
-                  </li>
+                  </c:forEach>
                 </ul>
               </div>
             </div>
@@ -431,18 +426,18 @@ $('.star-prototype').generateStars();
                       <tr>
                         <td>${num}</td>
                          <c:choose>
-                        <c:when test="${fn:length(studioReview.sr_content) > 30}">
-                       <td><a class="button" data-toggle="tooltip" title="<c:out value="${studioReview.sr_content }"/>"><c:out value="${fn:substring(studioReview.sr_content,0,29) }"/> ...</a>
+                        <c:when test="${fn:length(dressReview.dr_content) > 30}">
+                       <td><a class="button" data-toggle="tooltip" title="<c:out value="${dressReview.dr_content }"/>"><c:out value="${fn:substring(dressReview.dr_content,0,29) }"/> ...</a>
                        </td>
                        </c:when>
                        
                        <c:otherwise>
-                        <td><c:out value="${studioReview.sr_content }"/></td>
+                        <td><c:out value="${dressReview.dr_content }"/></td>
                         </c:otherwise>
                        </c:choose> 
                        
-                        <td><span class="star-prototype">${studioReview.sr_point}</span></td>
-                        <td>${studioReview.regdate}</td>
+                        <td><span class="star-prototype">${dressReview.dr_point}</span></td>
+                        <td>${dressReview.regdate}</td>
                       </tr>
                       <c:set var="num" value="${num-1}"/>
                      </c:forEach>
@@ -592,6 +587,7 @@ function minComp() {
                       <form method="post" action="/company/dress/add" name="frm">
                       <input type='hidden' name='dc_no' value="${dressCompany.dc_no}"> 
                       <input type='hidden' name='dc_nm' value="${dressCompany.dc_nm}">
+                      <input type='hidden' name='dc_main_image' value="${dressCompany.dc_main_image}">
                       <c:if test="${countProduct gt '0'}">
                         <input type='hidden' name='countProduct' value="${countProduct}">
                         <input type='hidden' name='avgPrice' value="${avgPrice}">
@@ -760,7 +756,7 @@ function removeComp() {
       <input type='hidden' name='dc_no' value="${dressCompany.dc_no}">
       <input type='hidden' name='companyNo' value="${compList.dc_no}"> 
       <input type='hidden' name='dc_nm' value="${compList.dc_nm}"> 
-      <img src="/resources/assets/img/property-1/property1.jpg" id="imgBorder" class="img-responsive" width="90%" alt="">
+      <img src="/user/mypage/imgview?imgview=${compList.dc_main_image}" id="imgBorder" class="img-responsive" width="90%" alt="" />
       <input type="submit" value="삭제"></input>
     <!--    <span class="glyphicon glyphicon-remove-sign" onclick="removeComp()"></span>-->
       <h4 align="center" style="color: white">${compList.dc_nm}</h4>
@@ -848,7 +844,7 @@ function removeComp() {
                                  <div id="myCarousel" class="carousel slide">
                                    <div class="carousel-inner">
                                      <div class="item active">
-                                       <img src= ${cartComp.dc_main_image } style="width: 100%;">
+                                       <img src="/user/mypage/imgview?imgview=${cartComp.dc_main_image}" style="width: 100%;"/>
                                      </div>
                                    </div>
                                  </div>

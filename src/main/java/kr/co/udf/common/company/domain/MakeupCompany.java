@@ -1,5 +1,7 @@
 package kr.co.udf.common.company.domain;
 
+import java.util.ArrayList;
+
 public class MakeupCompany {
 
 	private int mc_no;
@@ -22,6 +24,7 @@ public class MakeupCompany {
 	private int count;
 	private int countProduct;
 	private long avgPrice;
+	private ArrayList<String> productImg;
 
 	/** 생성자 */
 	public MakeupCompany() {
@@ -187,6 +190,14 @@ public class MakeupCompany {
 	public void setAvgPrice(long avgPrice) {
 		this.avgPrice = avgPrice;
 	}
+	
+	public ArrayList<String> getProductImg() {
+		return productImg;
+	}
+
+	public void setProductImg(ArrayList<String> productImg) {
+		this.productImg = productImg;
+	}
 
 	@Override
 	public String toString() {
@@ -196,7 +207,7 @@ public class MakeupCompany {
 				+ mc_smy_intro + ", mc_introduce=" + mc_introduce + ", sessionKey=" + sessionKey + ", sessionLimit="
 				+ sessionLimit + ", regdate=" + regdate + ", updatedate=" + updatedate + ", mr_point=" + mr_point
 				+ ", avg=" + avg + ", count=" + count + ", countProduct=" + countProduct + ", avgPrice=" + avgPrice
-				+ "]";
+				+ ", productImg=" + productImg + "]";
 	}
-	
+
 }

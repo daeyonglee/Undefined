@@ -41,4 +41,8 @@ public interface StudioDao {
 
 	/** 스튜디오 업체 상품 평균가 */
 	public long avgPrice(int sc_no) throws Exception;
+	
+	/** 스튜디오 업체 상품 이미지 */
+	public List<String> productImg(int sc_no) throws Exception;
+	
 }

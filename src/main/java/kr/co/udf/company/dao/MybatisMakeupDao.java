@@ -92,4 +92,10 @@ public class MybatisMakeupDao implements MakeupDao {
 	public long avgPrice(int mc_no) throws Exception {
 		return session.selectOne(namespace + ".avgPrice", mc_no);
 	}
+	
+	/** 메이크업 업체 상품 이미지 */
+	@Override
+	public List<String> productImg(int mc_no) throws Exception  {
+		return session.selectList(namespace + ".productImg", mc_no);
+	}
 }

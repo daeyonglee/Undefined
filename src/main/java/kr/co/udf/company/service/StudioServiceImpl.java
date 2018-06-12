@@ -82,4 +82,9 @@ public class StudioServiceImpl implements StudioService {
 	public long avgPrice(int sc_no) throws Exception {
 		return dao.avgPrice(sc_no);
 	}
+	
+	@Override
+	public List<String> productImg(int sc_no) throws Exception {
+		return dao.productImg(sc_no);
+	}
 }

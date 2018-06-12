@@ -91,4 +91,10 @@ public class MybatisDressDao implements DressDao {
 	public long avgPrice(int dc_no) throws Exception {
 		return session.selectOne(namespace + ".avgPrice", dc_no);
 	}
+	
+	/** 드레스 업체 상품 이미지 */
+	@Override
+	public List<String> productImg(int dc_no) throws Exception  {
+		return session.selectList(namespace + ".productImg", dc_no);
+	}
 }

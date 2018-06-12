@@ -41,4 +41,7 @@ public interface DressDao {
 
 	/** 드레스 업체 상품 평균가 */
 	public long avgPrice(int dc_no) throws Exception;
+
+	/** 드레스 업체 상품 이미지 */
+	public List<String> productImg(int dc_no) throws Exception;
 }

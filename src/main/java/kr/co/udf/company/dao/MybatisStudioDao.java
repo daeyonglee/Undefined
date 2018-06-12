@@ -91,4 +91,10 @@ public class MybatisStudioDao implements StudioDao {
 	public long avgPrice(int sc_no) throws Exception {
 		return session.selectOne(namespace + ".avgPrice", sc_no);
 	}
+	
+	/** 스튜디오 업체 상품 이미지 */
+	@Override
+	public List<String> productImg(int sc_no) throws Exception  {
+		return session.selectList(namespace + ".productImg", sc_no);
+	}
 }
