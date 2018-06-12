@@ -58,24 +58,21 @@ td, th {
               <div class="box-body">
                 <table class="table table-bordered">
                   <tr>
-                    <td colspan="6">입찰 신청 건수 : ******* 건</td>
-                  </tr>
-                  <tr>
                     <th style="text-align : center; width: 50x">번호</th>
                     <th style="text-align : center; width: 100px">종류</th>
                     <th style="text-align : center; width: 400px">예식희망지역</th>
                     <th style="text-align : center; width: 200px">예식희망일자</th>
                     <th style="text-align : center; width: 150px">입찰마감일</th>
-                    <th style="text-align : center; width: 200px">상태(입찰 건수)</th>
+                    <th style="text-align : center; width: 200px">상태</th>
                   </tr>
-                  <c:forEach items="${applyList}" var="apply">
+                  <c:forEach items="${applyList}" var="apply" varStatus="status">
                     <tr id = "visible">
-                      <td>1</td>
+                      <td>${status.count }</td>
                       <td><b>${apply.type }</b></td>
-                      <td>${apply.loc }</td>
+                      <td>${apply.locFirst } 외 2곳</td>
                       <td>${apply.day}</td>
                       <td>${apply.deadline }</td>
-                      <td><a href= "bidlist?applyNo=${apply.no}&type=${apply.type } ">${apply.stat }(2)</a></td>
+                      <td><a href= "bidlist?applyNo=${apply.no}&type=${apply.type } ">${apply.stat }</a></td>
                     </tr>
                   </c:forEach>
                </table>

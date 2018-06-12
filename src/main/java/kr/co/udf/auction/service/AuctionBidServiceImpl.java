@@ -17,50 +17,50 @@ import kr.co.udf.auction.product.domain.StudioProduct;
 
 @Service
 public class AuctionBidServiceImpl implements AuctionBidService {
-	
+
 	@Inject
 	private AuctionBidDao dao;
 
 	@Override
 	public MakeupCompany searchMakeupCompany(int no) throws Exception {
 		MakeupCompany company = dao.searchMakeupCompany(no);
-		
+
 		String arr[] = company.getAddr().split("\\^\\^");
 		company.setAddr(arr[1] + " " + arr[2]);
-		
+
 		return company;
 	}
 
 	@Override
 	public StudioCompany searchStudioCompany(int no) throws Exception {
 		StudioCompany company = dao.searchStudioCompany(no);
-		
+
 		String arr[] = company.getAddr().split("\\^\\^");
 		company.setAddr(arr[1] + " " + arr[2]);
-		
+
 		return company;
 	}
 
 	@Override
 	public DressCompany searchDressCompany(int no) throws Exception {
 		DressCompany company = dao.searchDressCompany(no);
-		
+
 		String arr[] = company.getAddr().split("\\^\\^");
 		company.setAddr(arr[1] + " " + arr[2]);
-		
+
 		return company;
 	}
 
 	@Override
 	public void createMakeupBid(AuctionBid bid) throws Exception {
 		dao.createMakeupBid(bid);
-		
+
 	}
 
 	@Override
 	public void createStudioBid(AuctionBid bid) throws Exception {
 		dao.createStudioBid(bid);
-		
+
 	}
 
 	@Override
@@ -71,29 +71,37 @@ public class AuctionBidServiceImpl implements AuctionBidService {
 	@Override
 	public List<AuctionBid> listByUser(int userNo) throws Exception {
 		return dao.listByUser(userNo);
-		
+
 	}
-	
+
 	@Override
 	public AuctionBid winread(int no, String type) throws Exception {
-		return dao.winread(no, type);
+
+		AuctionBid auction = dao.winread(no, type);
+
+		String[] arr = auction.getLoc().split("\\|\\|");
+		auction.setLocFirst(arr[0]);
+		auction.setLocSecond(arr[1]);
+		auction.setLocThird(arr[2]);
+
+		return auction;
 	}
 
 	@Override
 	public void createStudioProd(AuctionBid bid) throws Exception {
 		dao.createStudioProd(bid);
 	}
-	
+
 	@Override
 	public void createDressProd(AuctionBid bid) throws Exception {
 		dao.createDressProd(bid);
-		
+
 	}
 
 	@Override
 	public void createMakeupProd(AuctionBid bid) throws Exception {
 		dao.createMakeupProd(bid);
-		
+
 	}
 
 	@Override
@@ -115,6 +123,5 @@ public class AuctionBidServiceImpl implements AuctionBidService {
 	public StudioProduct readStudioProduct(int productNo, int companyNo) throws Exception {
 		return dao.readStudioProduct(productNo, companyNo);
 	}
-
 
 }

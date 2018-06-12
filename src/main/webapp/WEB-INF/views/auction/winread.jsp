@@ -11,8 +11,17 @@
 <link rel="stylesheet" href="/resources/assets/css/user/join.css">
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script type="text/javascript" src="/resources/assets/js/user/join.js"></script>
+<script type="text/javascript" src="/resources/js/user/join.js"></script>
+<style type="text/css">
+#col {
+   padding-top: 5px;
+   padding-bottom: 5px;
+}
 
+#wizardProperty {
+   height: 650px;
+}
+</style>
 </head>
 <body>
   <div class="page-head">
@@ -115,7 +124,7 @@
                         <div class="col-lg-3">
                           <input class='form-control' type="text"
                             name="loc" readonly="readonly"
-                            value="${Auction.loc}">
+                            value="${Auction.locFirst}">
                         </div>
                       </div>
 
@@ -159,7 +168,7 @@
                       </div>
                       <div class="col-lg-10" id="col">
                         <textarea class='form-control' maxlength='1000'
-                          name="memo" readonly="readonly">${Auction.memo}</textarea>
+                          name="memo" readonly="readonly" style="margin-left: 15px">${Auction.memo}</textarea>
                       </div>
 
 
@@ -183,15 +192,15 @@
 
 
   <script>
-			$(document).ready(function() {
-				var formObj = $("form[role='form']");
+         $(document).ready(function() {
+            var formObj = $("form[role='form']");
 
 
-				$(".btn-primary").on("click", function() {
-					self.location = "win";
-				});
-			});
-		</script>
+            $(".btn-primary").on("click", function() {
+               self.location = "win";
+            });
+         });
+      </script>
 
 
 

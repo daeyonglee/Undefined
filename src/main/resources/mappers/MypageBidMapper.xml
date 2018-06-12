@@ -62,55 +62,111 @@ ORDER BY regdate DESC
 <!--  사용자별 낙찰 역경매 리스트 조회 -->
 <select id="winListByUser" parameterType="int" resultType="Auction">
 SELECT m.*
-FROM (SELECT  d.daa_no  no
-      , u.user_no userNo
-      , u.user_nm writer
-      , d.daa_loc loc
-      , SUBSTR(to_char(d.daa_date, 'YYYY-MM-DD HH24:MI'),0,10) day
-      , SUBSTR(to_char(d.daa_date, 'YYYY-MM-DD HH24:MI'),12,7) time
-      , TO_CHAR(d.daa_deadline, 'YYYY-MM-DD') deadline
-      , d.daa_memo memo
-      , d.daa_stat stat
-      , TO_CHAR(d.regdate, 'YYYY-MM-DD') regdate
-      ,'dress' type
-FROM   dress_auction_apply d
-       JOIN users u 
-         ON d.user_no = u.user_no
-WHERE d.daa_stat = '낙찰'
-UNION
-SELECT m.maa_no  no
-     , u.user_no userNo
-     , u.user_nm writer   
-     , m.maa_loc loc
-     , SUBSTR(to_char(m.maa_date, 'YYYY-MM-DD HH24:MI'),0,10) day
-     , SUBSTR(to_char(m.maa_date, 'YYYY-MM-DD HH24:MI'),12,7) time
-     , SUBSTR(TO_CHAR(m.maa_deadline, 'YYYY-MM-DD HH24:MI'),0,10) deadline
-     , m.maa_memo memo
-     , m.maa_stat stat
-     , TO_CHAR(m.regdate, 'YYYY-MM-DD') regdate
-     ,'makeup' type
-  FROM makeup_auction_apply m
-       JOIN users u 
-         ON m.user_no = u.user_no
-WHERE m.maa_stat = '낙찰'
-UNION
-SELECT s.saa_no  no
-     , u.user_no userNo
-     , u.user_nm writer
-     , s.saa_loc loc
-     , SUBSTR(to_char(s.saa_date, 'YYYY-MM-DD HH24:MI'),0,10) day
-     , SUBSTR(to_char(s.saa_date, 'YYYY-MM-DD HH24:MI'),12,7) time
-     , SUBSTR(TO_CHAR(s.saa_deadline, 'YYYY-MM-DD HH24:MI'),0,10) deadline
-     , s.saa_memo memo
-     , s.saa_stat stat
-     , TO_CHAR(s.regdate, 'YYYY-MM-DD') regdate
-     , 'studio' type
-  FROM studio_auction_apply s
-       JOIN users u
-         ON s.user_no = u.user_no
-WHERE s.saa_stat = '낙찰') m
+FROM ( select     i.*, 
+                                           j.mc_nm  companyNm, 
+                                           j.mc_tel tel 
+                                FROM       ( 
+                                                      SELECT     g.*, 
+                                                                 h.mp_nm    productNm, 
+                                                                 h.mp_price price 
+                                                      FROM       ( 
+                                                                            SELECT     e.*, 
+                                                                                       f.mbpl_discount  discount,
+                                                                                       f.mbpl_meet_date meetdate,
+                                                                                       f.mp_no          productNo
+                                                                            FROM       ( 
+                                                                                                  SELECT     c.*,
+                                                                                                             d.mb_no bidNo,
+                                                                                                             d.mc_no companyNo
+                                                                                                  FROM       (
+                                                                                                                        SELECT     a.maa_no           applyNo,
+                                                                                                                                   a.maa_select_mb_no,
+                                                                                                                                   'makeup'           type,
+                                                                                                                                   b.user_no          userNo,
+                                                                                                                                   b.user_nm          writer
+                                                                                                                        FROM       makeup_auction_apply a
+                                                                                                                        inner join users b
+                                                                                                                        ON         a.user_no = b.user_no) c
+                                                                                                  inner join makeup_bid d
+                                                                                                  ON         c.applyno = d.maa_no
+                                                                                                  AND        c.maa_select_mb_no = d.mb_no) e
+                                                                            inner join makeup_bid_product_list f
+                                                                            ON         e.bidno = f.mb_no) g
+                                                      inner join makeup_product h 
+                                                      ON         g.productno = h.mp_no) i 
+                                inner join makeup_company j 
+                                ON         i.companyno = j.mc_no 
+                                UNION 
+                                SELECT     i.*, 
+                                           j.dc_nm  companyNm, 
+                                           j.dc_tel tel 
+                                FROM       ( 
+                                                      SELECT     g.*, 
+                                                                 h.dp_nm    productNm, 
+                                                                 h.dp_price price 
+                                                      FROM       ( 
+                                                                            SELECT     e.*, 
+                                                                                       f.dbpl_discount  discount,
+                                                                                       f.dbpl_meet_date meetDate,
+                                                                                       f.dp_no          productNo
+                                                                            FROM       ( 
+                                                                                                  SELECT     c.*,
+                                                                                                             d.db_no bidNo,
+                                                                                                             d.dc_no companyNo
+                                                                                                  FROM       (
+                                                                                                                        SELECT     a.daa_no           applyNo,
+                                                                                                                                   a.daa_select_db_no,
+                                                                                                                                   'dress'            type,
+                                                                                                                                   b.user_no          userNo,
+                                                                                                                                   b.user_nm          writer
+                                                                                                                        FROM       dress_auction_apply a
+                                                                                                                        inner join users b
+                                                                                                                        ON         a.user_no = b.user_no) c
+                                                                                                  inner join dress_bid d
+                                                                                                  ON         c.applyno = d.daa_no
+                                                                                                  AND        c.daa_select_db_no = d.db_no) e
+                                                                            inner join dress_bid_product_list f
+                                                                            ON         e.bidno = f.db_no) g
+                                                      inner join dress_product h 
+                                                      ON         g.productno = h.dp_no) i 
+                                inner join dress_company j 
+                                ON         i.companyno = j.dc_no 
+                                UNION 
+                                SELECT     i.*, 
+                                           j.sc_nm  companyNm, 
+                                           j.sc_tel tel 
+                                FROM       ( 
+                                                      SELECT     g.*, 
+                                                                 h.sp_nm    productNm, 
+                                                                 h.sp_price price 
+                                                      FROM       ( 
+                                                                            SELECT     e.*, 
+                                                                                       f.sbpl_discount  discount,
+                                                                                       f.sbpl_meet_date meetDate,
+                                                                                       f.sp_no          productNo
+                                                                            FROM       ( 
+                                                                                                  SELECT     c.*,
+                                                                                                             d.sb_no bidNo,
+                                                                                                             d.sc_no companyNo
+                                                                                                  FROM       (
+                                                                                                                        SELECT     a.saa_no           applyNo,
+                                                                                                                                   a.saa_select_sb_no,
+                                                                                                                                   'studio'           type,
+                                                                                                                                   b.user_no          userNo,
+                                                                                                                                   b.user_nm          writer
+                                                                                                                        FROM       studio_auction_apply a
+                                                                                                                        inner join users b
+                                                                                                                        ON         a.user_no = b.user_no) c
+                                                                                                  inner join studio_bid d
+                                                                                                  ON         c.applyno = d.saa_no
+                                                                                                  AND        c.saa_select_sb_no = d.sb_no) e
+                                                                            inner join studio_bid_product_list f
+                                                                            ON         e.bidno = f.sb_no) g
+                                                      inner join studio_product h 
+                                                      ON         g.productno = h.sp_no) i 
+                                inner join studio_company j 
+                                ON         i.companyno = j.sc_no) m
 WHERE userNo = #{userNo}
-ORDER BY regdate DESC
 
 </select>
 

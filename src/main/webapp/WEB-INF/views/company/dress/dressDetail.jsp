@@ -293,13 +293,15 @@ function compInterest() {
                     data-thumb="/user/mypage/imgview?imgview=${dressCompany.dc_main_image}">
                     <img src="/user/mypage/imgview?imgview=${dressCompany.dc_main_image}" class="picture-src" id='wizardPicturePreview' title=''/>
                   </li>
-                  <c:forEach items="${pmg}" var="dressCompany">
+                  <c:if test="${not empty pmg}">
+                  <c:forEach items="${pmg}" var="productImg">
                   <li
-                    data-thumb="/user/mypage/imgview?imgview=${dressCompany.productImg}">
+                    data-thumb="/user/mypage/imgview?imgview=${productImg}">
                     <img
-                    src="/user/mypage/imgview?imgview=${dressCompany.productImg}" />
+                    src="/user/mypage/imgview?imgview=${productImg}" />
                   </li>
                   </c:forEach>
+                  </c:if>
                 </ul>
               </div>
             </div>

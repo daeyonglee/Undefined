@@ -69,8 +69,12 @@ public class MypageProductServiceImpl implements MypageProductService{
 		if (product.getSpTotalYn() == null) {
 			product.setSpTotalYn("N");
 		}
-		if (product.getSpShootType().equalsIgnoreCase("INDOOR,OUTDOOR")) {
-			product.setSpShootType("ALL");
+		if (product.getSpShootType() != null) {
+			if (product.getSpShootType().equalsIgnoreCase("INDOOR,OUTDOOR")) {
+				product.setSpShootType("ALL");
+			}
+		} else {
+			product.setSpShootType("N");
 		}
 		
 		if(product.getSpImage().isEmpty() == false){

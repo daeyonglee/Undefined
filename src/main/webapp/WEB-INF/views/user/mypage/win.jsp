@@ -44,45 +44,35 @@ td {
             <div class="box" style="text-align: center;">
               <div class="box-header with-border">
                 <h3 class="box-title">스드메 역경매</h3>
-                <a href="apply" style="float: right">>> 역경매 신청하기</a>
                 <ul class="nav nav-tabs nav-justified">
                   <li><a href="apply">입찰 중인 경매</a></li>
                   <li class="active"><a href="win">낙찰된 경매</a></li>
                 </ul>
               </div>
-              <div class="form-group">
-                <select name="searchType" id="searchType" class="selectpicker show-tick form-control">
-                  <option value="" selected="selected">종류를 선택하세요</option>
-                  <option value="studio">스튜디오</option>
-                  <option value="dress">드레스</option>
-                  <option value="makeup">메이크업</option>
-                </select>
+              <div class="clearfix" style="height: 15px">
               </div>
 
               <div class="box-body" >
                 <table class="table table-bordered">
                 <thead>
                   <tr>
-                    <td colspan="6">낙찰 된 역경매 신청 건수 : ******** 건</td>
-                  </tr>
-                  <tr>
-                    <th style="width: 100px">신청일시</th>
-                    <th style="width: 100px">예식일자</th>
-                    <th style="width: 200px">희망지역</th>
-                    <th style="width: 200px">선택 상품</th>
-                    <th style="width: 100px">할인율</th>
-                    <th style="width: 200px">상태</th>
+                    <th style="width: 100px">번호</th>
+                    <th style="width: 100px">타입</th>
+                    <th style="width: 200px">낙찰업체</th>
+                    <th style="width: 200px">낙찰상품</th>
+                    <th style="width: 100px">업체번호</th>
+                    <th style="width: 200px">할인율</th>
                   </tr>
                  </thead>
 
-                  <c:forEach items="${winList}" var="win">
+                  <c:forEach items="${winList}" var="win" varStatus="status">
                     <tr id = "visible">
-                      <td>${win.regdate }</td>
-                      <td>${win.day }</td>
-                      <td>${win.loc}</td>
-                      <td>상품sssssss</td>
-                      <td>할인율</td>
-                      <td><a href="read?no=${win.no}&type=${win.type}">${win.stat }</a></td>
+                      <td>${status.count }</td>
+                      <td>${win.type}</td>
+                      <td>${win.companyNm}</td>
+                      <td>${win.productNm }</td>
+                      <td>${win.tel }</td>
+                      <td><fmt:formatNumber value ="${win.price * (win.discount * 0.01)}" pattern="0"/>원</td>
                     </tr>
                   </c:forEach>
                 </table>
@@ -91,7 +81,7 @@ td {
             <!-- /.box-body -->
 
 
-            <div class="box-footer">
+<%--             <div class="box-footer">
 
               <div class="col-md-12">
                 <div class="pull-center">
@@ -119,7 +109,7 @@ td {
                 </div>
               </div>
               <!-- /.box-footer-->
-            </div>
+            </div> --%>
           </div>
           <!--/.col (left) -->
 

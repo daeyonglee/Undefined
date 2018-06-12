@@ -111,12 +111,11 @@ $(document).ready(function () {
     	var type = $(":input:radio[name=type]:checked").val();
     	var id = $("input[name='id']").val();
     	var form = document.forms[0];
-    	
     	if (type == 'users') {
-    		if (id != null) {
-    			form.action = '/user/kakaojoin';
-    		} else {
+    		if (id == null || id == "" || id == undefined) {
     			form.action = '/user/userjoin';
+    		} else {
+    			form.action = '/user/kakaojoin';
     		}
     	}
     	if (type == 'company') {

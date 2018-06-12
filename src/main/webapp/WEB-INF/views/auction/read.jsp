@@ -11,7 +11,6 @@
 <!--<![endif]-->
 <head>
 
-
 <link rel="stylesheet" href="/resources/assets/css/wizard.css">
 <link rel="stylesheet" href="/resources/assets/css/user/join.css">
 
@@ -23,13 +22,18 @@ color : deeppink;
 margin-bottom: 30; 
 
 }
-#col {
-   padding-top: 5px;
-   padding-bottom: 5px;
+
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control, textarea{
+   background-color:white;
+   cursor:default !important;
 }
+#col {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
 #wizardProperty {
-   height: 650px;
-   margin-bottom: 20px;
+  height: 80%;
 }
 
 </style>
@@ -41,7 +45,7 @@ margin-bottom: 30;
       <div class="row">
         <div class="page-head-content">
           <h1 class="page-title">
-            <span>역경매 신청서 상세조회</span>
+            <span>역경매 신청서</span>
           </h1>
         </div>
       </div>
@@ -57,7 +61,8 @@ margin-bottom: 30;
   
 
 
-    <div >
+    <div class="content-area submit-property"
+      style="background-color: #FCFCFC;">
       &nbsp;
       <div class="container">
         <div class="clearfix">
@@ -172,7 +177,7 @@ margin-bottom: 30;
                       </div>
                       <div class="col-lg-10" id="col">
                         <textarea class='form-control' maxlength='1000'
-                          name="memo" readonly="readonly" style="margin-left: 15px">${Auction.memo}</textarea>
+                          name="memo" readonly="readonly">${Auction.memo}</textarea>
                       </div>
 
 
@@ -198,7 +203,7 @@ margin-bottom: 30;
                         <a href="bid?no=${Auction.no}&type=${Auction.type}"><input type="button" class="btn-primary" id="bid"  name="bid" value="입찰서 제출" style="width: 140px; padding-top: 5px; padding-bottom: 5px; float: right;"></a>
               </span>
             </div>
-            <div class="clearfix" style="height: 15px"></div>
+            <div class="clearfix"></div>
 
 
           </div>
@@ -206,6 +211,8 @@ margin-bottom: 30;
       </div>
     </div>
     
+
+
 
   </article>
 

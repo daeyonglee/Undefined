@@ -49,9 +49,9 @@
             <label style="float: left;">스튜디오 옵션</label>
             <label class="checkbox-inline" id="shoot"><input type="checkbox" name="studio"> 실내/외 촬영</label>
             <select name="studio" disabled="disabled">
-              <option value="실내">실내</option>
-              <option value="실외">실외</option>
-              <option value="모두">모두</option>
+              <option value="INDOOR">실내</option>
+              <option value="OUTDOOR">실외</option>
+              <option value="ALL">모두</option>
             </select>
             <label class="checkbox-inline"><input type="checkbox" name="studio" value="sp_total_yn"> 토탈샵(메이크업 + 드레스 제공)</label>
             <label class="checkbox-inline"><input type="checkbox" name="studio" value="sp_apv_yn"> 액자/앨범/비디오</label>
@@ -93,81 +93,81 @@
   
 <script>
     $(document).ready(
-    	function(){
-        	numOnly();
-      		toggleForm();
-      		shootTypeSwitch();
-      		searchBtnEvent();
-  	})
-  	
-  	function numOnly(){
-    	$("input:text[name='minCost']").keyup(function () {
-    	    this.value = this.value.replace(/[^0-9]/g,'');
-    	});
-    	$("input:text[name='maxCost']").keyup(function () {
-    	    this.value = this.value.replace(/[^0-9]/g,'');
-    	});
+       function(){
+           numOnly();
+            toggleForm();
+            shootTypeSwitch();
+            searchBtnEvent();
+     })
+     
+     function numOnly(){
+       $("input:text[name='minCost']").keyup(function () {
+           this.value = this.value.replace(/[^0-9]/g,'');
+       });
+       $("input:text[name='maxCost']").keyup(function () {
+           this.value = this.value.replace(/[^0-9]/g,'');
+       });
     }
     
-  	function toggleStudio(){
-		$('.studioForm').toggle("slow");
-	}
-  	
-  	function toggleDress(){
-		$('.dressForm').toggle("slow");
-	}
-  	
-  	function toggleMakeup(){
-		$('.makeupForm').toggle("slow");
-	}
-  	
+     function toggleStudio(){
+      $('.studioForm').toggle("slow");
+   }
+     
+     function toggleDress(){
+      $('.dressForm').toggle("slow");
+   }
+     
+     function toggleMakeup(){
+      $('.makeupForm').toggle("slow");
+   }
+     
     function toggleForm(){
-    	
-    	$('#studio').on("click", toggleStudio);
-    	 
-    	$('#dress').on("click", toggleDress);
-    	
-    	$('#makeup').on("click", toggleMakeup);
-    	
-    	$(".checkbox-inline").on("click", function(){
-    		var xor = [];
-    		$("input:checkbox[name='item']").each(function(index){
-    			var isItemChecked = $("input:checkbox[value=" + $(this).val() + "]").is(":checked");
-    			var isOptionChecked = $("input:checkbox[name=" + $(this).val() + "]").is(":checked");
-    			xor[index] = isOptionChecked || (!isItemChecked && !isOptionChecked);
-    		});
-    		
-    		if(xor[0] && xor[1] && xor[2] && $("input:checkbox[name='item']").is(":checked")){
-				$(".searchBtn").show("slow");
-			} else {
-				$(".searchBtn").hide("slow");
-			}
-    	});
+       
+       $('#studio').on("click", toggleStudio);
+        
+       $('#dress').on("click", toggleDress);
+       
+       $('#makeup').on("click", toggleMakeup);
+       
+       $(".checkbox-inline").on("click", function(){
+          var xor = [];
+          $("input:checkbox[name='item']").each(function(index){
+             var isItemChecked = $("input:checkbox[value=" + $(this).val() + "]").is(":checked");
+             var isOptionChecked = $("input:checkbox[name=" + $(this).val() + "]").is(":checked");
+             xor[index] = isOptionChecked || (!isItemChecked && !isOptionChecked);
+          });
+          
+          if(xor[0] && xor[1] && xor[2] && $("input:checkbox[name='item']").is(":checked")){
+            $(".searchBtn").show("slow");
+         } else {
+            $(".searchBtn").hide("slow");
+         }
+       });
     }
     
     function shootTypeSwitch(){
-    	$("#shoot").on("click", function(){
-    		if($(this).find("input:checkbox").is(":checked")){
-    			$("select[name='studio']").attr("disabled", false);
-    		} else {
-    			$("select[name='studio']").attr("disabled", true);
-    		}
-    	});
+       $("#shoot").on("click", function(){
+          if($(this).find("input:checkbox").is(":checked")){
+             $("select[name='studio']").attr("disabled", false);
+          } else {
+             $("select[name='studio']").attr("disabled", true);
+          }
+       });
     }
     
     function searchBtnEvent(){
-    	$('.message').css('color', 'red');
-    	$(".searchBtn").on("click", function(){
-    		if($("select[name='location']").val() == "선택"){
-    			$(".message").html("지역을 선택해주세요...");
-    			return false;
-    		}
-    		
-    		if($("input:text[name='minCost']").val() == "" || $("input:text[name='maxCost']").val() == ""){
-    			$(".message").html("금액을 입력해주세요...");
-    			return false;
-    		}
-    	})
+       $('.message').css('color', 'red');
+       $(".searchBtn").on("click", function(){
+          if($("select[name='location']").val() == "선택"){
+             $(".message").html("지역을 선택해주세요...");
+             return false;
+          }
+          
+          if($("input:text[name='minCost']").val() == "" || $("input:text[name='maxCost']").val() == ""){
+             $(".message").html("금액을 입력해주세요...");
+             return false;
+          }
+       })
     }
     
 </script>

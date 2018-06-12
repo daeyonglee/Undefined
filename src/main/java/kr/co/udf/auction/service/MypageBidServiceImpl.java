@@ -18,7 +18,18 @@ public class MypageBidServiceImpl implements MypageBidService {
 
 	@Override
 	public List<Auction> applyListByUser(int userNo) throws Exception {
-		return dao.applyListByUser(userNo);
+		
+		List<Auction> auction = dao.applyListByUser(userNo);
+		
+		for (Auction list : auction) {
+			
+			String[] arr = list.getLoc().split("\\|\\|");
+				list.setLocFirst(arr[0]);
+				list.setLocSecond(arr[1]);
+				list.setLocThird(arr[2]);
+				
+			}							
+		return auction;
 	}
 	
 	@Override

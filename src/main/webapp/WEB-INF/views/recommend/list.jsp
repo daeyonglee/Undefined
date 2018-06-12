@@ -321,7 +321,7 @@
                   		      "<th colspan='4'>상품 이미지</th>" +
                   		    "</tr>" +
                   		    "<tr>" +
-                  		      "<td colspan='4'><img src='" + dress.DP_IMAGE + "' style='width: 100%;'></a></td>" +
+                  		      "<td colspan='4'><img src='/user/mypage/imgview?imgview=" + dress.DP_IMAGE + "' style='width: 100%;'></a></td>" +
                   		    "</tr>" +
                   		  "</table>";
                 modal.find(".modal-body").html(html);
@@ -384,7 +384,7 @@
                   		      "<th colspan='4'>상품 이미지</th>" +
                   		    "</tr>" +
                   		    "<tr>" +
-                  		      "<td colspan='4'><img src='" + makeup.MP_IMAGE + "' style='width: 100%;'></a></td>" +
+                  		      "<td colspan='4'><img src='/user/mypage/imgview?imgview=" + makeup.MP_IMAGE + "' style='width: 100%;'></a></td>" +
                   		    "</tr>" +
                   		  "</table>";
                 modal.find(".modal-body").html(html);

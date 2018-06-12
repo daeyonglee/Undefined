@@ -37,7 +37,7 @@
               AND
       <foreach collection="studioOption" item="option" separator=" AND ">
       <choose>
-         <when test='option.equals("실내") || option.equals("실외") || option.equals("모두")'>
+         <when test='option.equals("INDOOR") || option.equals("OUTDOOR") || option.equals("ALL")'>
                   sp_shoot_type = #{option}
          </when>
          <when test='option.equals("on")'>

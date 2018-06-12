@@ -282,8 +282,9 @@ where user_no = #{userNo} and applyNo = #{applyNo}
 </select>
 
 <!-- 게시물 조회 -->
+<!-- 게시물 조회 -->
 <select id="winread" resultType="AuctionBid">
-select d.*
+select a.*                              
 from (SELECT  d.daa_no  no
       , u.user_no userNo
       , u.user_nm writer
@@ -296,21 +297,23 @@ from (SELECT  d.daa_no  no
       , d.daa_stat stat
       , TO_CHAR(d.regdate, 'YYYY-MM-DD') regdate
       ,'dress' type
-      , b.dbpl_discount discount
-      , b.dBPL_MEET_DATE meetDate
+      , l.dbpl_discount discount
+      , l.dBPL_MEET_DATE meetDate
       , c.dc_NM cnm
-      , r.dp_NM pnm
+      , p.dp_NM pnm
       , c.dc_tel ctel
-      , r.dp_price price
-FROM   dress_auction_apply d
-       JOIN users u 
-         ON d.user_no = u.user_no
-       Join DRESS_BID_PRODUCT_LIST b
-         ON d.user_no = b.user_no
-       join dress_company c
-         on b.dc_no = c.dc_no
-       join dress_product r
-        on c.dc_no = r.dc_no
+      , p.dp_price price
+FROM   dress_auction_apply d 
+      JOIN users u 
+           ON d.user_no = u.user_no
+      join dress_bid b   
+           on d.daa_no = b.daa_no and d.user_no = b.user_no
+      join dress_bid_product_list l
+           on B.DAA_NO = L.DAA_NO and B.DB_NO = L.DB_NO and b.dc_no = l.dc_no and b.user_no = l.user_no
+      join dress_product p
+           on L.DP_NO = P.DP_NO and L.DC_NO  = P.DC_NO 
+      join dress_company c
+           on p.dc_no = c.dc_no
 UNION
 SELECT m.maa_no  no
      , u.user_no userNo
@@ -324,21 +327,23 @@ SELECT m.maa_no  no
      , m.maa_stat stat
      , TO_CHAR(m.regdate, 'YYYY-MM-DD') regdate
      ,'makeup' type
-     , b.mbpl_discount discount
-     , b.mBPL_MEET_DATE meetDate
+     , l.mbpl_discount discount
+     , l.mBPL_MEET_DATE meetDate
      , c.mc_NM cnm
-     , r.mp_NM pnm
+     , p.mp_NM pnm
      , c.mc_tel ctel
-     , r.mp_price price
-  FROM makeup_auction_apply m
+     , p.mp_price price
+  FROM makeup_auction_apply m                               
        JOIN users u 
-         ON m.user_no = u.user_no
-         Join makeup_BID_PRODUCT_LIST b
-         ON m.user_no = b.user_no
-       join makeup_company c
-         on b.mc_no = c.mc_no
-       join makeup_product r
-        on c.mc_no = r.mc_no
+           ON m.user_no = u.user_no
+      join makeup_bid b   
+           on m.maa_no = b.maa_no and m.user_no = b.user_no
+      join makeup_bid_product_list l
+           on B.mAA_NO = L.mAA_NO and B.mB_NO = L.mB_NO and b.mc_no = l.mc_no and b.user_no = l.user_no
+      join makeup_product p
+           on L.mP_NO = P.mP_NO and L.mC_NO  = P.mC_NO 
+      join makeup_company c
+           on p.mc_no = c.mc_no
 UNION
 SELECT s.saa_no  no
      , u.user_no userNo
@@ -352,24 +357,26 @@ SELECT s.saa_no  no
      , s.saa_stat stat
      , TO_CHAR(s.regdate, 'YYYY-MM-DD') regdate
      , 'studio' type
-     , b.sbpl_discount discount
-     , b.sBPL_MEET_DATE meetDate
+     , l.sbpl_discount discount
+     , l.sBPL_MEET_DATE meetDate
      , c.sc_NM cnm
-     , r.sp_NM pnm
+     , p.sp_NM pnm
      , c.sc_tel ctel
-     , r.sp_price price
+     , p.sp_price price
   FROM studio_auction_apply s
-       JOIN users u
-         ON s.user_no = u.user_no
-         Join studio_BID_PRODUCT_LIST b
-         ON s.user_no = b.user_no
-       join studio_company c
-         on b.sc_no = c.sc_no
-       join studio_product r
-        on c.sc_no = r.sc_no) d
+       JOIN users u 
+           ON s.user_no = u.user_no
+      join studio_bid b   
+           on s.saa_no = b.saa_no and s.user_no = b.user_no
+      join studio_bid_product_list l
+           on B.sAA_NO = L.sAA_NO and B.sB_NO = L.sB_NO and b.sc_no = l.sc_no and b.user_no = l.user_no
+      join studio_product p
+           on L.sP_NO = P.sP_NO and L.sC_NO  = P.sC_NO 
+      join studio_company c
+           on p.sc_no = c.sc_no) a
  WHERE no = #{no} and type = #{type}
    </select>   
-   
+	
 <select id="readStudioProduct" resultType="StudioProduct">
 SELECT   sp_no           productNo
        , sc_no           companyNo

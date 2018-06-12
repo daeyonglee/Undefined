@@ -42,6 +42,9 @@ public class Auction {
 	private Integer price;
 	private Integer discount;
 	private Integer discountPrice;
+	
+	private String companyNm;
+	private String productNm;
 
 	public Auction() {}
 
@@ -49,7 +52,8 @@ public class Auction {
 			String locThird, String date, String dateFirst, String dateSecond, String dateThird, String day,
 			String dayFirst, String daySecond, String dayThird, String time, String timeFirst, String timeSecond,
 			String timeThird, String memo, String type, String writer, String deadline, String stat, String regdate,
-			String updatedate, Integer price, Integer discount, Integer discountPrice) {
+			String updatedate, Integer price, Integer discount, Integer discountPrice, String companyNm,
+			String productNm) {
 		super();
 		this.no = no;
 		this.userNo = userNo;
@@ -80,6 +84,8 @@ public class Auction {
 		this.price = price;
 		this.discount = discount;
 		this.discountPrice = discountPrice;
+		this.companyNm = companyNm;
+		this.productNm = productNm;
 	}
 
 	public BigDecimal getNo() {
@@ -314,6 +320,22 @@ public class Auction {
 		this.discountPrice = discountPrice;
 	}
 
+	public String getCompanyNm() {
+		return companyNm;
+	}
+
+	public void setCompanyNm(String companyNm) {
+		this.companyNm = companyNm;
+	}
+
+	public String getProductNm() {
+		return productNm;
+	}
+
+	public void setProductNm(String productNm) {
+		this.productNm = productNm;
+	}
+
 	@Override
 	public String toString() {
 		return "Auction [no=" + no + ", userNo=" + userNo + ", tel=" + tel + ", loc=" + loc + ", locFirst=" + locFirst
@@ -323,6 +345,8 @@ public class Auction {
 				+ ", timeSecond=" + timeSecond + ", timeThird=" + timeThird + ", memo=" + memo + ", type=" + type
 				+ ", writer=" + writer + ", deadline=" + deadline + ", stat=" + stat + ", regdate=" + regdate
 				+ ", updatedate=" + updatedate + ", price=" + price + ", discount=" + discount + ", discountPrice="
-				+ discountPrice + "]";
+				+ discountPrice + ", companyNm=" + companyNm + ", productNm=" + productNm + "]";
 	}
+
+
 }

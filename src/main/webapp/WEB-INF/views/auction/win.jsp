@@ -8,11 +8,11 @@
 <title>낙찰 된 경매 리스트</title>
 <style type="text/css">
 body {
-	background: #F5F5F5;
+   background: #F5F5F5;
 }
 
 #count #newBtn #basic {
-	text-align: center;
+   text-align: center;
 }
 
 th{
@@ -20,11 +20,11 @@ th{
 }
 
 td {
-	text-align: center;
+   text-align: center;
 }
 
 .form-group {
-	margin: 15px auto;
+   margin: 15px auto;
 }
 </style>
 </head>
@@ -136,11 +136,11 @@ td {
 
 
   <script>
-			var result = '${msg}';
+         var result = '${msg}';
 
-			if (result == 'SUCCESS') {
-				alert("처리가 완료되었습니다.");
-			}
+         if (result == 'SUCCESS') {
+            alert("처리가 완료되었습니다.");
+         }
  </script>
  
   <script>
@@ -184,7 +184,7 @@ td {
          var text = "";
          
          for ( var i in searchList.list) {
-        	 
+            
            var arrLoc = searchList.list[i].loc.split("||")
            
            text += "<tr>";
@@ -201,8 +201,8 @@ td {
         $(".table.table-bordered > tbody").html(text); 
         
         pagination(searchList.pageMaker);
-		
-		totalCount(searchList.pageMaker.totalCount);
+      
+      totalCount(searchList.pageMaker.totalCount);
         
         
        },
@@ -231,42 +231,42 @@ td {
    });
    
    function pagination(pageMaker) {
-		 
-		 console.log(pageMaker);
-		 
-		 var text2  = "<ul id = 'visible2'>";
-		 
-		 	if (pageMaker.prev) {
-		 		text2 +=  "<li><a href='#'>&laquo;</a></li>";
-		 	}
-		 	
-		 	for (var i=pageMaker.startPage; i<=pageMaker.endPage; i++){
-		 		text2 +=  "<li" + (pageMaker.params.page == i ? " class='active'>":'>');
-		 		text2 +=  "  <a class='paging' href='#'>" + i + "</a>";
-		 		text2 +=  "</li>";
-		 	}
-		 	
-		 	if (pageMaker.next && pageMaker.endPage > 0) {
-		 		text2 +=  "<li><a href='#'>&raquo;</a></li>";	
-		 	}
-		text2 += "</ul>";
-		
-		$(".pagination").html(text2); 
-		 
-		console.log(text2);
-	 }
-	 
-	 function totalCount(totalCount) {
-		 
-		 $(".table.table-bordered > thead > tr:first > td:first").remove();
-		 
-		 if (totalCount > 0) {
-			 var text2 = "<td colspan='6'>역경매 신청 건수 : " + totalCount + " 건</td>";
-			 
-			 $(".table.table-bordered > thead > tr:first").html(text2);
-		 }
-		 
-	 }
+       
+       console.log(pageMaker);
+       
+       var text2  = "<ul id = 'visible2'>";
+       
+          if (pageMaker.prev) {
+             text2 +=  "<li><a href='#'>&laquo;</a></li>";
+          }
+          
+          for (var i=pageMaker.startPage; i<=pageMaker.endPage; i++){
+             text2 +=  "<li" + (pageMaker.params.page == i ? " class='active'>":'>');
+             text2 +=  "  <a class='paging' href='#'>" + i + "</a>";
+             text2 +=  "</li>";
+          }
+          
+          if (pageMaker.next && pageMaker.endPage > 0) {
+             text2 +=  "<li><a href='#'>&raquo;</a></li>";   
+          }
+      text2 += "</ul>";
+      
+      $(".pagination").html(text2); 
+       
+      console.log(text2);
+    }
+    
+    function totalCount(totalCount) {
+       
+       $(".table.table-bordered > thead > tr:first > td:first").remove();
+       
+       if (totalCount > 0) {
+          var text2 = "<td colspan='6'>역경매 신청 건수 : " + totalCount + " 건</td>";
+          
+          $(".table.table-bordered > thead > tr:first").html(text2);
+       }
+       
+    }
    
     
   });  

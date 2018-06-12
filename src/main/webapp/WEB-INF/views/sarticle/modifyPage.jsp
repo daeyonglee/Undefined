@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 
 <%@include file="../include/top.jsp"%>
 
+<!--ArticleLayout.css  -->
+<link href="/resources/bootstrap/css/ArticleLayout.css" rel="stylesheet" type="text/css" />
 
 <!-- Ionicons -->
 <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />

@@ -273,9 +273,10 @@ FROM   (       SELECT Ceil(ROWNUM / 10) page ,
               WHERE  1 = 1 and page = #{page}              
              </select>
              
+
 <!--  낙찰 전체 리스트 페이징 처리 -->
 <select id="winlistParams" parameterType="SearchParams" resultType="Auction">
-SELECT a.* 
+   SELECT a.* 
 FROM   (       SELECT Ceil(ROWNUM / 10) page , 
                      m.* 
               FROM   (        SELECT   s.* 
@@ -290,18 +291,18 @@ FROM   (       SELECT Ceil(ROWNUM / 10) page ,
                                                      d.daa_stat                                             stat ,
                                                      To_char(d.regdate, 'YYYY-MM-DD')                       regdate , 
                                                      'dress'                                                TYPE    ,
-                                                     b.dbpl_discount                                        discount,
-                                                     r.dp_price                                             price
+                                                     l.dbpl_discount                                        discount,
+                                                     p.dp_price                                             price
                                               FROM   dress_auction_apply d 
                                               JOIN users u 
                                                    ON d.user_no = u.user_no
-                                                     Join DRESS_BID_PRODUCT_LIST b
-                                                    ON d.user_no = b.user_no
-                                                     join dress_company c
-                                                    on b.dc_no = c.dc_no
-                                                     join dress_product r
-                                                    on c.dc_no = r.dc_no 
-                                              WHERE  d.daa_stat = '낙찰' 
+                                              join dress_bid b   
+                                                   on d.daa_no = b.daa_no and d.user_no = b.user_no
+                                              join dress_bid_product_list l
+                                                   on B.DAA_NO = L.DAA_NO and B.DB_NO = L.DB_NO and b.dc_no = l.dc_no and b.user_no = l.user_no
+                                              join dress_product p
+                                                   on L.DP_NO = P.DP_NO and L.DC_NO  = P.DC_NO 
+                                              WHERE  d.daa_stat = '낙찰'     
                                               UNION 
                                               SELECT m.maa_no                                                   no ,
                                                      u.user_no                                                  userno ,
@@ -314,18 +315,18 @@ FROM   (       SELECT Ceil(ROWNUM / 10) page ,
                                                      m.maa_stat                                                 stat ,
                                                      To_char(m.regdate, 'YYYY-MM-DD')                           regdate , 
                                                      'makeup'                                                   TYPE,
-                                                     b.mbpl_discount                                        discount,
-                                                     r.mp_price                                             price
+                                                     l.mbpl_discount                                        discount,
+                                                     p.mp_price                                             price
                                               FROM   makeup_auction_apply m 
                                               JOIN users u 
-                                                 ON m.user_no = u.user_no
-                                              Join makeup_BID_PRODUCT_LIST b
-                                                ON m.user_no = b.user_no
-                                              join makeup_company c
-                                                on b.mc_no = c.mc_no
-                                                join makeup_product r
-                                                 on c.mc_no = r.mc_no
-                                              WHERE  m.maa_stat = '낙찰' 
+                                                   ON m.user_no = u.user_no
+                                              join makeup_bid b   
+                                                   on m.maa_no = b.maa_no and m.user_no = b.user_no
+                                              join makeup_bid_product_list l
+                                                   on B.mAA_NO = L.mAA_NO and B.mB_NO = L.mB_NO and b.mc_no = l.mc_no and b.user_no = l.user_no
+                                              join makeup_product p
+                                                   on L.mP_NO = P.mP_NO and L.mC_NO  = P.mC_NO
+                                                   WHERE  m.maa_stat = '낙찰'
                                               UNION 
                                               SELECT s.saa_no                                                   no ,
                                                      u.user_no                                                  userno ,
@@ -338,21 +339,21 @@ FROM   (       SELECT Ceil(ROWNUM / 10) page ,
                                                      s.saa_stat                                                 stat ,
                                                      To_char(s.regdate, 'YYYY-MM-DD')                           regdate , 
                                                      'studio'                                                   TYPE,
-                                                     b.sbpl_discount                                        discount,
-                                                     r.sp_price                                             price
+                                                     l.sbpl_discount                                        discount,
+                                                     p.sp_price                                             price
                                               FROM   studio_auction_apply s 
-                                              JOIN users u
-                                              ON s.user_no = u.user_no
-                                              Join studio_BID_PRODUCT_LIST b
-                                              ON s.user_no = b.user_no
-                                              join studio_company c
-                                              on b.sc_no = c.sc_no
-                                              join studio_product r
-                                              on c.sc_no = r.sc_no 
-                                              WHERE  s.saa_stat = '낙찰' 
+                                              JOIN users u 
+                                                   ON s.user_no = u.user_no
+                                              join studio_bid b   
+                                                   on s.saa_no = b.saa_no and s.user_no = b.user_no
+                                              join studio_bid_product_list l
+                                                   on B.sAA_NO = L.sAA_NO and B.sB_NO = L.sB_NO and b.sc_no = l.sc_no and b.user_no = l.user_no
+                                              join studio_product p
+                                                   on L.sP_NO = P.sP_NO and L.sC_NO  = P.sC_NO 
+                                              WHERE  s.saa_stat = '낙찰'     
                                               ) s 
                               ORDER BY regdate DESC ) m ) a
-              WHERE page = #{page}              
+                        where page = #{page} 
              </select>
              
 
@@ -448,82 +449,119 @@ SELECT count(*)
 
 <!--  스드메 별 낙찰 리스트 조회 + 페이징 처리 -->
 <select id="winlistByDress" parameterType="SearchParams" resultType="Auction">
- SELECT M.*
-  FROM (SELECT CEIL(rownum / #{perPageNum}) page 
-             , S.*
-          FROM ( SELECT  d.daa_no  no
-                      , u.user_no userNo
-                      , u.user_nm writer
-                      , d.daa_loc loc
-                      , SUBSTR(to_char(d.daa_date, 'YYYY-MM-DD HH24:MI'),0,10) day
-                      , SUBSTR(to_char(d.daa_date, 'YYYY-MM-DD HH24:MI'),12,7) time
-                      , TO_CHAR(d.daa_deadline, 'YYYY-MM-DD') deadline
-                      , d.daa_memo memo
-                      , d.daa_stat stat
-                      , TO_CHAR(d.regdate, 'YYYY-MM-DD') regdate
-                      ,'dress' type
-                FROM   dress_auction_apply d
-                       JOIN users u 
-                       ON d.user_no = u.user_no
-               WHERE d.daa_stat = '낙찰') S
-        ) M
- WHERE page = #{page}
- ORDER BY regdate DESC
+select l.*
+from(select ceil(rownum/#{perPageNum}) page,
+     k.*
+from (SELECT     i.*, 
+           j.dc_nm    companyNm,
+           j.dc_tel   tel
+FROM      ( 
+                      SELECT     g.*, 
+                                 h.dp_nm       productNm,
+                                 h.dp_price  price
+                      FROM      ( 
+                                            SELECT     e.*, 
+                                                       f.dbpl_discount  discount,
+                                                       f.dbpl_meet_date meetDate,
+                                                       f.dp_no          productNo
+                                            FROM      ( 
+                                                                  SELECT     c.*, 
+                                                                             d.db_no bidNo,
+                                                                             d.dc_no companyNo
+                                                                  FROM       ( 
+                                                                                        SELECT     a.daa_no           applyno,
+                                                                                                   a.daa_select_db_no select,
+                                                                                                   b.user_no          userNo,
+                                                                                                   b.user_nm          writer
+                                                                                        FROM       dress_auction_apply a
+                                                                                        inner join users b
+                                                                                        ON         a.user_no = b.user_no) c
+                                                                  inner join dress_bid d 
+                                                                  ON         c.applyNo = d.daa_no and c.dsdn = d.db_no) e
+                                            inner join dress_bid_product_list f 
+                                            ON         e.bidNo = f.db_no ) g 
+                      inner join dress_product h 
+                      ON         g.productNo = h.dp_no) i 
+inner join dress_company j 
+ON         i.companyNo = j.dc_no ) k ) l
+where page = #{page}
 </select>
 <select id="winlistByMakeup" parameterType="SearchParams" resultType="Auction">
- SELECT M.*
-    FROM (SELECT CEIL(rownum / #{perPageNum}) page 
-             , S.*
-          FROM (SELECT m.maa_no  no
-                     , u.user_no userNo
-                     , u.user_nm writer   
-                     , m.maa_loc loc
-                     , SUBSTR(to_char(m.maa_date, 'YYYY-MM-DD HH24:MI'),0,10) day
-                     , SUBSTR(to_char(m.maa_date, 'YYYY-MM-DD HH24:MI'),12,7) time
-                     , SUBSTR(TO_CHAR(m.maa_deadline, 'YYYY-MM-DD HH24:MI'),0,10) deadline
-                     , m.maa_memo memo
-                     , m.maa_stat stat
-                     , TO_CHAR(m.regdate, 'YYYY-MM-DD') regdate
-                     ,'makeup' type
-                     , b.mbpl_discount discount
-                     , r.mp_price price
-                  FROM makeup_auction_apply m
-                       JOIN users u 
-				        ON m.user_no = u.user_no
-				        Join makeup_BID_PRODUCT_LIST b
-				        ON m.user_no = b.user_no
-				       join makeup_company c
-				        on b.mc_no = c.mc_no
-				       join makeup_product r
-				        on c.mc_no = r.mc_no
-                WHERE m.maa_stat = '낙찰') S
-        ) M
-  WHERE page = #{page}
-  ORDER BY regdate DESC
+select l.*
+from(select ceil(rownum/#{perPageNum}) page,
+     k.*
+from (SELECT     i.*, 
+           j.mc_nm    companyNm,
+           j.mc_tel   tel
+FROM      ( 
+                      SELECT     g.*, 
+                                 h.mp_nm       productNm,
+                                 h.mp_price  price
+                      FROM      ( 
+                                            SELECT     e.*, 
+                                                       f.mbpl_discount  discount,
+                                                       f.mbpl_meet_date meetDate,
+                                                       f.mp_no          productNo
+                                            FROM      ( 
+                                                                  SELECT     c.*, 
+                                                                             d.mb_no bidNo,
+                                                                             d.mc_no companyNo
+                                                                  FROM       ( 
+                                                                                        SELECT     a.maa_no           applyno,
+                                                                                                   a.maa_select_mb_no selectNo,
+                                                                                                   b.user_no          userNo,
+                                                                                                   b.user_nm          writer
+                                                                                        FROM       makeup_auction_apply a
+                                                                                        inner join users b
+                                                                                        ON         a.user_no = b.user_no) c
+                                                                  inner join makeup_bid d 
+                                                                  ON         c.applyNo = d.maa_no and c.selectNo = d.mb_no) e
+                                            inner join makeup_bid_product_list f 
+                                            ON         e.bidNo = f.mb_no ) g 
+                      inner join makeup_product h 
+                      ON         g.productNo = h.mp_no) i 
+inner join makeup_company j 
+ON         i.companyNo = j.mc_no ) k ) l
+where page = #{page}
         
 </select>
 <select id="winlistByStudio" parameterType="SearchParams" resultType="Auction">
- SELECT M.*
-  FROM (SELECT CEIL(rownum / #{perPageNum}) page 
-             , S.*
-          FROM ( SELECT  s.saa_no  no
-                      , u.user_no userNo
-                      , u.user_nm writer
-                      , s.saa_loc loc
-                      , SUBSTR(to_char(s.saa_date, 'YYYY-MM-DD HH24:MI'),0,10) day
-                      , SUBSTR(to_char(s.saa_date, 'YYYY-MM-DD HH24:MI'),12,7) time
-                      , TO_CHAR(s.saa_deadline, 'YYYY-MM-DD') deadline
-                      , s.saa_memo memo
-                      , s.saa_stat stat
-                      , TO_CHAR(s.regdate, 'YYYY-MM-DD') regdate
-                      ,'studio' type
-                FROM   studio_auction_apply s
-                       JOIN users u 
-                        ON s.user_no = u.user_no
-               WHERE s.saa_stat = '낙찰') S
-        ) M
- WHERE page = #{page}
- ORDER BY regdate DESC
+select l.*
+from(select ceil(rownum/#{perPageNum}) page,
+     k.*
+from (SELECT     i.*, 
+           j.sc_nm    companyNm,
+           j.sc_tel   tel
+FROM      ( 
+                      SELECT     g.*, 
+                                 h.sp_nm       productNm,
+                                 h.sp_price    price
+                      FROM      ( 
+                                            SELECT     e.*, 
+                                                       f.sbpl_discount  discount,
+                                                       f.sbpl_meet_date meetDate,
+                                                       f.sp_no          productNo
+                                            FROM      ( 
+                                                                  SELECT     c.*, 
+                                                                             d.sb_no bidNo,
+                                                                             d.sc_no companyNo
+                                                                  FROM       ( 
+                                                                                        SELECT     a.saa_no           applyNo,
+                                                                                                   a.saa_select_sb_no selectNo,
+                                                                                                   b.user_no          userNo,
+                                                                                                   b.user_nm          writer
+                                                                                        FROM       studio_auction_apply a
+                                                                                        inner join users b
+                                                                                        ON         a.user_no = b.user_no) c
+                                                                  inner join studio_bid d 
+                                                                  ON         c.applyNo = d.saa_no and c.selectNo = d.sb_no) e
+                                            inner join studio_bid_product_list f 
+                                            ON         e.bidNo = f.sb_no ) g 
+                      inner join studio_product h 
+                      ON         g.productNo = h.sp_no) i 
+inner join studio_company j 
+ON         i.companyNo = j.sc_no ) k ) l
+where page = #{page}
 
 </select>
 
