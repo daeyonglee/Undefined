@@ -277,7 +277,7 @@
                 		      "<th colspan='4'>상품 이미지</th>" +
                 		    "</tr>" +
                 		    "<tr>" +
-                		      "<td colspan='4'><img src='" + studio.SP_IMAGE + "' style='width: 100%;'></a></td>" +
+                		      "<td colspan='4'><img src='/user/mypage/imgview?imgview=" + studio.SP_IMAGE + "' style='width: 100%;'></a></td>" +
                 		    "</tr>" +
                 		  "</table>";
               modal.find(".modal-body").html(html);

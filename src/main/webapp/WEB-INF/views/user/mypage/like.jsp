@@ -155,7 +155,6 @@
   <script>
   	$(document).ready(function() {
   		topFix();
-  		addCart();
   	});
   	
   	/** 스튜디오, 드레스, 메이크업 네비바가 브라우저 상단에 고정되는 스크롤 이벤트*/

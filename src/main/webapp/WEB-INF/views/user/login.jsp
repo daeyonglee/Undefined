@@ -152,8 +152,6 @@
   		
   		// 가입한 회원인지 체크
   		function checkUser(data) {
-  			console.log(data);
-  			
   			var profileImage = data.properties.profile_image;
   			var thumbnailImage = data.properties.thumbnail_image;
   			
@@ -163,6 +161,9 @@
   			if (thumbnailImage == null || thumbnailImage == "" || thumbnailImage == undefined) {
   				thumbnailImage = "N";
   			}
+  			
+  			console.log(profileImage);
+  			console.log(thumbnailImage);
   			
   			var param = {
   					id:data.id,
