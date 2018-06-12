@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 public class Kakao {
 
 	private BigDecimal id;
-	private String userNo;
+	private BigDecimal userNo;
 	private String nickname;
 	private String profileImage;
 	private String thumbnailImage;
@@ -14,7 +14,7 @@ public class Kakao {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Kakao(BigDecimal id, String userNo, String nickname, String profileImage, String thumbnailImage) {
+	public Kakao(BigDecimal id, BigDecimal userNo, String nickname, String profileImage, String thumbnailImage) {
 		super();
 		this.id = id;
 		this.userNo = userNo;
@@ -31,11 +31,11 @@ public class Kakao {
 		this.id = id;
 	}
 
-	public String getUserNo() {
+	public BigDecimal getUserNo() {
 		return userNo;
 	}
 
-	public void setUserNo(String userNo) {
+	public void setUserNo(BigDecimal userNo) {
 		this.userNo = userNo;
 	}
 

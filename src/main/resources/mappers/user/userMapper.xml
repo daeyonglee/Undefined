@@ -138,4 +138,17 @@
 		  FROM kakao_users
 		 WHERE id = #{id}
 	</select>
+	
+	<select id="kakaologin" parameterType="java.math.BigDecimal" resultType="kr.co.udf.user.domain.User">
+		SELECT user_no no
+		     , user_email email
+		     , user_pw pw
+		     , user_nm nm
+		     , user_birthday birthday
+		     , user_addr addr
+		     , user_tel tel
+		     , user_point point
+		  FROM users
+		 WHERE user_no = #{value}
+	</select>
 </mapper>

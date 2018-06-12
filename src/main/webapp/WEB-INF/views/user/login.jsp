@@ -14,6 +14,10 @@
   </div>
   <!-- End page header -->
   
+  <form method="post" action="/user/kakaologin">
+  	<input type="hidden" value="" name="userNo">
+  </form>
+  
   <!-- register-area -->
 	<div class="register-area" style="background-color: rgb(249, 249, 249);">
 		<div class="container">
@@ -172,6 +176,10 @@
   					console.log(param);
   					if (data.result == 'success') {
   						// 로그인 처리
+  						$("input[name='userNo']").val(data.info.userNo);
+  						
+  						$("form[action='/user/kakaologin']").submit();
+  						
   					}
   					if (data.result == 'fail') {
   						// 회원가입 화면으로 이동

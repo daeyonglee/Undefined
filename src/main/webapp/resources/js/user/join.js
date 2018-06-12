@@ -109,11 +109,15 @@ $(document).ready(function () {
     $(document).on('click', 'input[name="finish"]', function(e){
     	
     	var type = $(":input:radio[name=type]:checked").val();
-    	var id = $("input[name='nickName']").val();
+    	var id = $("input[name='id']").val();
     	var form = document.forms[0];
     	
     	if (type == 'users') {
-    		form.action = '/user/userjoin';
+    		if (id != null) {
+    			form.action = '/user/kakaojoin';
+    		} else {
+    			form.action = '/user/userjoin';
+    		}
     	}
     	if (type == 'company') {
     		form.action = '/user/companyjoin';
@@ -358,7 +362,7 @@ function validateSecondStep() {
 	
 	var type = $(":input:radio[name=type]:checked").val();
 	var id = $("input[name='id']").val();
-	var nickName = $("input[name='nickName'").val();
+	var nickName = $("input[name='nickname'").val();
 	
 	if (type == "users") {
 		

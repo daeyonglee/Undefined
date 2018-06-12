@@ -10,7 +10,9 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
 import kr.co.udf.user.domain.CompanyDTO;
+import kr.co.udf.user.domain.Kakao;
 import kr.co.udf.user.domain.Login;
+import kr.co.udf.user.domain.User;
 import kr.co.udf.user.domain.UserDTO;
 
 @Repository
@@ -55,5 +57,15 @@ public class MybatisUserJoinDao implements UserJoinDao {
 	@Override
 	public Login emailcheck(Login login) {
 		return session.selectOne(NAMESPACE+".emailcheck", login);
+	}
+
+	@Override
+	public void kakaojoin(Kakao kakao) {
+		session.insert(NAMESPACE+".kakaojoin", kakao);
+	}
+
+	@Override
+	public User userSelect(UserDTO dto) {
+		return session.selectOne(NAMESPACE+".userSelect", dto);
 	}
 }

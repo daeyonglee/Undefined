@@ -72,4 +72,14 @@ public class StudioServiceImpl implements StudioService {
 	public int countReview(int sc_no) throws Exception {
 		return dao.countReview(sc_no);
 	}
+	
+	@Override
+	public int countProduct(int sc_no) throws Exception {
+		return dao.countProduct(sc_no);
+	}
+	
+	@Override
+	public long avgPrice(int sc_no) throws Exception {
+		return dao.avgPrice(sc_no);
+	}
 }

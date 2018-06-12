@@ -38,4 +38,7 @@ public interface MakeupService {
 	
 	/** 메이크업 업체 상품 갯수 */
 	public int countProduct(int mc_no) throws Exception;
+	
+	/** 메이크업 업체 리뷰 갯수 */
+	public long avgPrice(int mc_no) throws Exception;
 }

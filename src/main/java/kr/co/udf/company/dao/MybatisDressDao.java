@@ -79,4 +79,16 @@ public class MybatisDressDao implements DressDao {
 	public int countReview(int dc_no) throws Exception {
 		return session.selectOne(namespace + ".countReview", dc_no);
 	}
+	
+	/** 드레스 업체 상품 갯수 */
+	@Override
+	public int countProduct(int dc_no) throws Exception {
+		return session.selectOne(namespace + ".countProduct", dc_no);
+	}
+	
+	/** 드레스 업체 상품 평균가 */
+	@Override
+	public long avgPrice(int dc_no) throws Exception {
+		return session.selectOne(namespace + ".avgPrice", dc_no);
+	}
 }

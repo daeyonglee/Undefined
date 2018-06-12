@@ -20,6 +20,8 @@ public class StudioCompany {
 	private String sr_point;
 	private double avg;
 	private int count;
+	private int countProduct;
+	private long avgPrice;
 
 	/** 생성자 */
 	public StudioCompany() {
@@ -171,6 +173,22 @@ public class StudioCompany {
 		this.count = count;
 	}
 
+	public int getCountProduct() {
+		return countProduct;
+	}
+
+	public void setCountProduct(int countProduct) {
+		this.countProduct = countProduct;
+	}
+
+	public long getAvgPrice() {
+		return avgPrice;
+	}
+
+	public void setAvgPrice(long avgPrice) {
+		this.avgPrice = avgPrice;
+	}
+
 	@Override
 	public String toString() {
 		return "StudioCompany [sc_no=" + sc_no + ", sc_nm=" + sc_nm + ", sc_company_no=" + sc_company_no
@@ -178,7 +196,8 @@ public class StudioCompany {
 				+ ", sc_email=" + sc_email + ", sc_pw=" + sc_pw + ", sc_tel=" + sc_tel + ", sc_smy_intro="
 				+ sc_smy_intro + ", sc_introduce=" + sc_introduce + ", sessionKey=" + sessionKey + ", sessionLimit="
 				+ sessionLimit + ", regdate=" + regdate + ", updatedate=" + updatedate + ", sr_point=" + sr_point
-				+ ", avg=" + avg + ", count=" + count + "]";
+				+ ", avg=" + avg + ", count=" + count + ", countProduct=" + countProduct + ", avgPrice=" + avgPrice
+				+ "]";
 	}
 
 }

@@ -52,4 +52,9 @@ public class MybatisUserDao implements UserDao {
 	public Kakao kakaocheck(Kakao k) {
 		return sqlSession.selectOne(NAMESPACE+".kakaocheck", k);
 	}
+
+	@Override
+	public User kakaologin(BigDecimal userNo) {
+		return sqlSession.selectOne(NAMESPACE+".kakaologin", userNo);
+	}
 }

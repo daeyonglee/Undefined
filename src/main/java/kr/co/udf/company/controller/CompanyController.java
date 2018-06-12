@@ -1,6 +1,5 @@
 package kr.co.udf.company.controller;
 
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -45,6 +44,10 @@ public class CompanyController {
 		if (0 < service.countReview(sc_no)) {
 			model.addAttribute("list", service.reviewStudio(sc_no));
 			model.addAttribute("avg", service.avgPoint(sc_no));
+		}
+		if (0 < service.countProduct(sc_no)) {
+			model.addAttribute("countProduct", service.countProduct(sc_no));
+			model.addAttribute("avgPrice", service.avgPrice(sc_no));
 		}
 		if (!model.containsAttribute("cart")) {
 			model.addAttribute("cart", new ArrayList<StudioCompany>());
@@ -119,10 +122,24 @@ public class CompanyController {
 		int user_no = login.getNo().intValue();
 		interest.setUser_no(user_no);
 		
-		si.create(interest);
+		boolean result = true;
+		
+		List<StudioInterest> studioInterest = si.read(user_no);
+		Iterator<StudioInterest> it = studioInterest.iterator();
+		while(it.hasNext()) {
+			StudioInterest stuInt = it.next();
+			if(stuInt.getSc_no() == sc_no) {
+				result = false; 
+			} 
+		} 
+		
+		if (result == true) {
+			si.create(interest);
+		}
+		
 		model.addAttribute("interlist", si.read(user_no));
 				
-		return "redirect:/company/compare?sc_no="+ compNo;
+		return "redirect:/user/mypage/myinterest";
 	}
 
 }

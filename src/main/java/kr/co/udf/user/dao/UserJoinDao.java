@@ -1,7 +1,9 @@
 package kr.co.udf.user.dao;
 
 import kr.co.udf.user.domain.CompanyDTO;
+import kr.co.udf.user.domain.Kakao;
 import kr.co.udf.user.domain.Login;
+import kr.co.udf.user.domain.User;
 import kr.co.udf.user.domain.UserDTO;
 
 public interface UserJoinDao {
@@ -24,4 +26,7 @@ public interface UserJoinDao {
 	 * @return
 	 */
 	public Login emailcheck(Login login);
+	
+	public void kakaojoin(Kakao kakao);
+	public User userSelect(UserDTO dto);
 }

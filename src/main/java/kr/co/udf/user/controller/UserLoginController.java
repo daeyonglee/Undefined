@@ -18,10 +18,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.WebUtils;
 
 import kr.co.udf.user.domain.Kakao;
 import kr.co.udf.user.domain.Login;
+import kr.co.udf.user.domain.User;
 import kr.co.udf.user.service.UserLoginService;
 
 @Controller
@@ -38,7 +40,7 @@ public class UserLoginController {
 	}
 	
 	/**
-	 * 일반 사용자 login 처리
+	 * �씪諛� �궗�슜�옄 login 泥섎━
 	 * @param users
 	 * @param model 
 	 * @return
@@ -49,7 +51,7 @@ public class UserLoginController {
 		logger.info("##### loginPOST start #####");
 		logger.info(login);
 		
-		// 회원 여부 확인
+		// �쉶�썝 �뿬遺� �솗�씤
 		HashMap<String, Object> rMap = loginService.login(login);
 		
 		if (rMap == null || rMap.isEmpty()) {
@@ -80,6 +82,16 @@ public class UserLoginController {
 		
 		logger.info("##### loginPOST end #####");
 		
+	}
+	
+	@RequestMapping(value="kakaologin", method=RequestMethod.POST)
+	public void kakaologin(@RequestParam("userNo") String userNo, Model model, HttpSession session) {
+		logger.debug("kakaologin..........");
+		logger.debug(userNo);
+		User user = loginService.kakaologin(new BigDecimal(userNo));
+		Login login = new Login(user.getNo(), user.getEmail(), user.getPw(), user.getNm(), false, "users");
+		model.addAttribute("login", login);
+		model.addAttribute("role", "users");
 	}
 	
 	@RequestMapping(value="/logout", method=RequestMethod.GET)
@@ -132,6 +144,7 @@ public class UserLoginController {
 		
 	}
 	
+	@SuppressWarnings("unused")
 	@RequestMapping(value="/user/kakaocheck", method=RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> kakaocheck(Kakao k) {
 		
@@ -141,6 +154,10 @@ public class UserLoginController {
 		
 		Kakao kakao = loginService.kakaocheck(k);
 		logger.debug(kakao);
+		
+		if (kakao.getUserNo() != null) {
+			k.setUserNo(kakao.getUserNo());
+		}
 		
 		Map<String, Object> map = new HashMap<>();
 		map.put("info", k);
@@ -157,14 +174,5 @@ public class UserLoginController {
 		}
 		
 		return entity;
-	}
-	
-	@RequestMapping(value="/join/kakao", method=RequestMethod.GET)
-	public String kakaojoin(Model model, Kakao kakao) {
-		logger.debug(kakao);
-		
-		model.addAttribute("kakako", kakao);
-		
-		return "/user/join";
 	}
 }

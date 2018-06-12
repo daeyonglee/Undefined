@@ -195,4 +195,21 @@ WHERE page = #{page}
 	]]>
 	</select>
 	
+	<select id="countProduct" resultType="int">
+	<![CDATA[
+	SELECT
+		COUNT(*) AS countProduct	 
+	FROM studio_product JOIN studio_company USING(sc_no)
+	WHERE sc_no = #{sc_no}
+	]]>
+	</select>
+	
+	<select id="avgPrice" resultType="long">
+	<![CDATA[
+	SELECT ROUND(AVG(sp_price)) AS avgPrice 
+	FROM studio_product JOIN studio_company USING(sc_no)
+	WHERE sc_no = #{sc_no}
+	]]>
+	</select>
+	
 </mapper>

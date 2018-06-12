@@ -20,6 +20,8 @@ public class DressCompany {
 	private String sr_point;
 	private double avg;
 	private int count;
+	private int countProduct;
+	private long avgPrice;
 
 	/** 생성자 */
 	public DressCompany() {
@@ -169,6 +171,26 @@ public class DressCompany {
 	public void setCount(int count) {
 		this.count = count;
 	}
+	
+	public long getAvgPrice() {
+		return avgPrice;
+	}
+
+	public void setAvgPrice(long avgPrice) {
+		this.avgPrice = avgPrice;
+	}
+
+	public int getCountProduct() {
+		return countProduct;
+	}
+
+	public void setCountProduct(int countProduct) {
+		this.countProduct = countProduct;
+	}
+
+	public void setDc_smy_intro(String dc_smy_intro) {
+		this.dc_smy_intro = dc_smy_intro;
+	}
 
 	@Override
 	public String toString() {
@@ -177,8 +199,8 @@ public class DressCompany {
 				+ ", dc_email=" + dc_email + ", dc_pw=" + dc_pw + ", dc_tel=" + dc_tel + ", dc_smy_intro="
 				+ dc_smy_intro + ", dc_introduce=" + dc_introduce + ", sessionKey=" + sessionKey + ", sessionLimit="
 				+ sessionLimit + ", regdate=" + regdate + ", updatedate=" + updatedate + ", sr_point=" + sr_point
-				+ ", avg=" + avg + ", count=" + count + "]";
+				+ ", avg=" + avg + ", count=" + count + ", countProduct=" + countProduct + ", avgPrice=" + avgPrice
+				+ "]";
 	}
-
 
 }

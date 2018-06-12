@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import kr.co.udf.user.dao.UserDao;
 import kr.co.udf.user.domain.Kakao;
 import kr.co.udf.user.domain.Login;
+import kr.co.udf.user.domain.User;
 
 @Service
 public class UserLoginServiceImpl implements UserLoginService {
@@ -41,5 +42,10 @@ public class UserLoginServiceImpl implements UserLoginService {
 	@Override
 	public Kakao kakaocheck(Kakao k) {
 		return dao.kakaocheck(k);
+	}
+
+	@Override
+	public User kakaologin(BigDecimal userNo) {
+		return dao.kakaologin(userNo);
 	}
 }

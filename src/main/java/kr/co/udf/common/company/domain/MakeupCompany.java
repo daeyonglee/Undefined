@@ -20,6 +20,8 @@ public class MakeupCompany {
 	private String mr_point;
 	private double avg;
 	private int count;
+	private int countProduct;
+	private long avgPrice;
 
 	/** 생성자 */
 	public MakeupCompany() {
@@ -169,6 +171,22 @@ public class MakeupCompany {
 	public void setCount(int count) {
 		this.count = count;
 	}
+	
+	public int getCountProduct() {
+		return countProduct;
+	}
+
+	public void setCountProduct(int countProduct) {
+		this.countProduct = countProduct;
+	}
+	
+	public long getAvgPrice() {
+		return avgPrice;
+	}
+
+	public void setAvgPrice(long avgPrice) {
+		this.avgPrice = avgPrice;
+	}
 
 	@Override
 	public String toString() {
@@ -177,7 +195,8 @@ public class MakeupCompany {
 				+ ", mc_email=" + mc_email + ", mc_pw=" + mc_pw + ", mc_tel=" + mc_tel + ", mc_smy_intro="
 				+ mc_smy_intro + ", mc_introduce=" + mc_introduce + ", sessionKey=" + sessionKey + ", sessionLimit="
 				+ sessionLimit + ", regdate=" + regdate + ", updatedate=" + updatedate + ", mr_point=" + mr_point
-				+ ", avg=" + avg + ", count=" + count + "]";
+				+ ", avg=" + avg + ", count=" + count + ", countProduct=" + countProduct + ", avgPrice=" + avgPrice
+				+ "]";
 	}
-
+	
 }

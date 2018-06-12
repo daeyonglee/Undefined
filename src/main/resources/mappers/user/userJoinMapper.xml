@@ -162,4 +162,31 @@
 		 WHERE email = #{email}
 	</select>
 	
+	<insert id="kakaojoin">
+		INSERT INTO kakao_users 
+		          (
+					id
+				  , user_no
+				  , nickname
+				  , profile_image
+				  , thumbnail_image
+				  , regdate
+				  , updatedate 
+			      ) VALUES (
+			        #{id}
+			      , #{userNo}
+			      , #{nickname}
+			      , #{profileImage}
+			      , #{thumbnailImage}
+			      , sysdate
+			      , sysdate
+			      )      
+	</insert>
+	
+	<select id="userSelect" parameterType="kr.co.udf.user.domain.UserDTO" resultType="kr.co.udf.user.domain.User">
+		SELECT user_no no
+		  FROM users
+		 WHERE user_email = #{email}
+		   AND user_pw    = #{pw}
+	</select>
 </mapper>

@@ -20,8 +20,6 @@
       
     </head>
     <body>
-    	<input type="hidden" name="id" value="${kakao.id}">
-    	<input type="hidden" name="nickName" value="${kakao.nickName}">
         <div class="page-head"> 
             <div class="container">
                 <div class="row">
@@ -40,7 +38,11 @@
                     <div class="wizard-container"> 
 
                         <div class="wizard-card ct-wizard-orange" id="wizardProperty">
-                            <form id="form" action="" method="post">                        
+                            <form id="form" action="" method="post">
+                            	<input type="hidden" name="id" value="${kakao.id}">
+    							<input type="hidden" name="nickname" value="${kakao.nickname}">
+    							<input type="hidden" name="profileImage" value="${kakao.profileImage}">
+    							<input type="hidden" name="thumbnailImage" value="${kakao.thumbnailImage}">                   
                                 <div class="wizard-header">
                                     <!-- <h3>
                                         <b>약관 동의</b><br>

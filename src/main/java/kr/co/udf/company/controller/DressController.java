@@ -45,6 +45,10 @@ public class DressController {
 			model.addAttribute("list", service.reviewDress(dc_no));
 			model.addAttribute("avg", service.avgPoint(dc_no));
 		}
+		if (0 < service.countProduct(dc_no)) {
+			model.addAttribute("countProduct", service.countProduct(dc_no));
+			model.addAttribute("avgPrice", service.avgPrice(dc_no));
+		}
 		if (!model.containsAttribute("cart2")) {
 			model.addAttribute("cart2", new ArrayList<DressCompany>());
 		}
@@ -118,10 +122,24 @@ public class DressController {
 		int user_no = login.getNo().intValue();
 		interest.setUser_no(user_no);
 		
-		di.create(interest);
+		boolean result = true;
+		
+		List<DressInterest> dressInterest = di.read(user_no);
+		Iterator<DressInterest> it = dressInterest.iterator();
+		while(it.hasNext()) {
+			DressInterest stuInt = it.next();
+			if(stuInt.getDc_no() == dc_no) {
+				result = false; 
+			} 
+		} 
+		
+		if (result == true) {
+			di.create(interest);
+		}
+		
 		model.addAttribute("interlist", di.read(user_no));
 				
-		return "redirect:/company/dress/dressDetail?dc_no="+ compNo;
+		return "redirect:/user/mypage/dsinterest";
 	}
 
 }

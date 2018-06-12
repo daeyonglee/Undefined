@@ -79,4 +79,16 @@ public class MybatisStudioDao implements StudioDao {
 	public int countReview(int sc_no) throws Exception {
 		return session.selectOne(namespace + ".countReview", sc_no);
 	}
+	
+	/** 스튜디오 업체 상품 갯수 */
+	@Override
+	public int countProduct(int sc_no) throws Exception {
+		return session.selectOne(namespace + ".countProduct", sc_no);
+	}
+	
+	/** 스튜디오 업체 상품 평균가 */
+	@Override
+	public long avgPrice(int sc_no) throws Exception {
+		return session.selectOne(namespace + ".avgPrice", sc_no);
+	}
 }

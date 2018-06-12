@@ -35,4 +35,10 @@ public interface DressDao {
 	
 	/** 드레스 업체 리뷰 갯수 */
 	public int countReview(int dc_no) throws Exception;
+	
+	/** 드레스 업체 상품 갯수 */
+	public int countProduct(int dc_no) throws Exception;
+
+	/** 드레스 업체 상품 평균가 */
+	public long avgPrice(int dc_no) throws Exception;
 }

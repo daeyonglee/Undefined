@@ -72,4 +72,14 @@ public class DressServiceImpl implements DressService {
 	public int countReview(int dc_no) throws Exception {
 		return dao.countReview(dc_no);
 	}
+	
+	@Override
+	public int countProduct(int dc_no) throws Exception {
+		return dao.countProduct(dc_no);
+	}
+	
+	@Override
+	public long avgPrice(int dc_no) throws Exception {
+		return dao.avgPrice(dc_no);
+	}
 }

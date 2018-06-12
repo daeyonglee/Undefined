@@ -201,4 +201,21 @@ FROM (SELECT *
 	WHERE dc_no = #{dc_no}
 	]]>
 	</select>	
+	
+	<select id="countProduct" resultType="int">
+	<![CDATA[
+	SELECT
+		COUNT(*) AS countProduct	 
+	FROM dress_product JOIN dress_company USING(dc_no)
+	WHERE dc_no = #{dc_no}
+	]]>
+	</select>
+	
+	<select id="avgPrice" resultType="long">
+	<![CDATA[
+	SELECT ROUND(AVG(dp_price), 0) AS avgPrice	 
+	FROM dress_product JOIN dress_company USING(dc_no)
+	WHERE dc_no = #{dc_no}
+	]]>
+	</select>
 </mapper>

@@ -35,4 +35,10 @@ public interface StudioService {
 	
 	/** 스튜디오 업체 리뷰 갯수 */
 	public int countReview(int sc_no) throws Exception;
+	
+	/** 스튜디오 업체 상품 갯수 */
+	public int countProduct(int sc_no) throws Exception;
+	
+	/** 스튜디오 업체 리뷰 갯수 */
+	public long avgPrice(int sc_no) throws Exception;
 }

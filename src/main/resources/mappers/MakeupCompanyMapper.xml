@@ -207,4 +207,13 @@ WHERE page = #{page}
 	WHERE mc_no = #{mc_no}
 	]]>
 	</select>
+	
+	<select id="avgPrice" resultType="long">
+	<![CDATA[
+	SELECT
+		ROUND(AVG(mp_price), 0) AS avgPrice	 
+	FROM makeup_product JOIN makeup_company USING(mc_no)
+	WHERE mc_no = #{mc_no}
+	]]>
+	</select>
 </mapper>

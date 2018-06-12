@@ -19,4 +19,6 @@ public interface UserDao {
 	public Login logincheck(Login dto);
 	
 	public Kakao kakaocheck(Kakao k);
+	
+	public User kakaologin(BigDecimal userNo);
 }

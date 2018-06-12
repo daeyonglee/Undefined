@@ -47,6 +47,7 @@ public class MakeupController {
 		}
 		if (0 < service.countProduct(mc_no)) {
 			model.addAttribute("countProduct", service.countProduct(mc_no));
+			model.addAttribute("avgPrice", service.avgPrice(mc_no));
 		}
 		if (!model.containsAttribute("cart3")) {
 			model.addAttribute("cart3", new ArrayList<MakeupCompany>());
@@ -122,10 +123,24 @@ public class MakeupController {
 		int user_no = login.getNo().intValue();
 		interest.setUser_no(user_no);
 		
-		mi.create(interest);
+		boolean result = true;
+		
+		List<MakeupInterest> makeupInterest = mi.read(user_no);
+		Iterator<MakeupInterest> it = makeupInterest.iterator();
+		while(it.hasNext()) {
+			MakeupInterest stuInt = it.next();
+			if(stuInt.getMc_no() == mc_no) {
+				result = false; 
+			} 
+		} 
+		
+		if (result == true) {
+			mi.create(interest);
+		}
+		
 		model.addAttribute("interlist", mi.read(user_no));
 				
-		return "redirect:/company/makeup/makeupDetail?mc_no="+ compNo;
+		return "redirect:/user/mypage/mkinterest";
 	}
 
 }

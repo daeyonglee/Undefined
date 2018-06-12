@@ -292,14 +292,14 @@ function compInterest() {
                 <ul id="image-gallery"
                   class="gallery list-unstyled cS-hidden">
                   <li
-                    data-thumb="/resources/assets/img/property-1/property1.jpg">
+                    data-thumb="/user/mypage/imgview?imgview=${studioCompany.sc_main_image}">
                     <img src="/user/mypage/imgview?imgview=${studioCompany.sc_main_image}"class="picture-src" id='wizardPicturePreview' title=''/>
                    
                   </li>
                   <li
-                    data-thumb="/resources/assets/img/property-1/property4.jpg">
+                    data-thumb="/user/mypage/imgview?imgview=${studioCompany.sc_main_image}">
                     <img
-                    src="/resources/assets/img/property-1/property4.jpg" />
+                    src="/user/mypage/imgview?imgview=${studioCompany.sc_main_image}" />
                   </li>
                   <li
                     data-thumb="/resources/assets/img/property-1/property3.jpg">
@@ -596,6 +596,10 @@ function minComp() {
                       <form method="post" action="/company/add" name="frm">
                       <input type='hidden' name='sc_no' value="${studioCompany.sc_no}"> 
                       <input type='hidden' name='sc_nm' value="${studioCompany.sc_nm}">
+                      <c:if test="${countProduct gt '0'}">
+                        <input type='hidden' name='countProduct' value="${countProduct}">
+                        <input type='hidden' name='avgPrice' value="${avgPrice}">
+                      </c:if>
                       <c:if test="${not empty list}">
                          <input type='hidden' name='avg' value="${avg}">
                          <input type='hidden' name='count' value="${count}">
@@ -866,10 +870,10 @@ function removeComp() {
                                <div id="choice">
                                  <h6><span style='color: black'>업체명 : </span><span>${cartComp.sc_nm}</span></h6>
                                  <h6><span style='color: black'>위치  : </span><span>${cartComp.sc_addr}</span></h6>
-                                 <h6><span style='color: black'>평점  : </span><span>${cartComp.avg}</span></h6>
-                                 <h6><span style='color: black'>후기수  : </span><span>${cartComp.count}</span></h6>
-                                 <h6><span style='color: black'>상품수  : </span><span>${cartComp.avg}</span></h6>
-                                 <h6><span style='color: black'>평균가  : </span><span>${cartComp.avg}</span></h6>
+                                 <h6><span style='color: black'>평점  : </span><span>${cartComp.avg}점</span></h6>
+                                 <h6><span style='color: black'>후기수  : </span><span>${cartComp.count}개</span></h6>
+                                 <h6><span style='color: black'>상품수  : </span><span>${cartComp.countProduct}개</span></h6>
+                                 <h6><span style='color: black'>평균가  : </span><span>${cartComp.avgPrice}원</span></h6>
                                </div>
                                
                             <form method="post" action="/company/compInterest" id="compInterest">

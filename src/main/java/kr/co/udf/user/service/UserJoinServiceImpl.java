@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 import kr.co.udf.common.util.UploadFileUtils;
 import kr.co.udf.user.dao.UserJoinDao;
 import kr.co.udf.user.domain.CompanyDTO;
+import kr.co.udf.user.domain.Kakao;
 import kr.co.udf.user.domain.Login;
+import kr.co.udf.user.domain.User;
 import kr.co.udf.user.domain.UserDTO;
 
 @Service
@@ -57,5 +59,15 @@ public class UserJoinServiceImpl implements UserJoinService{
 	@Override
 	public Login emailcheck(Login login) {
 		return joinDao.emailcheck(login);
+	}
+
+	@Override
+	public void kakaojoin(Kakao kakao) {
+		joinDao.kakaojoin(kakao);
+	}
+
+	@Override
+	public User userSelect(UserDTO dto) {
+		return joinDao.userSelect(dto);
 	}
 }
