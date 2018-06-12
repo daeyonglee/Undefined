@@ -252,13 +252,63 @@
 		WHERE  page = #{page}]]>
 	</select>
 	
+		<sql id="searchCount">
+		<if test="searchType !=null">
+			<if test="searchType == 't'.toString()">
+				and article_title like
+				'%'||#{keyword}||'%'
+			</if>
+			<if test="searchType == 'c'.toString()">
+				and article_content like
+				'%'||#{keyword}||'%'
+			</if>
+			<if test="searchType == 'tc'.toString()">
+				and (article_title like
+				'%'||#{keyword}||'%' Or article_content like 
+				'%'||#{keyword}||'%')
+			</if>
+			<if test="searchType.equals('studio'.toString())" >
+				and article_head like '%'||#{keyword}||'%'
+				and board_no= 2
+			</if>
+			<if test="searchType.equals('dress'.toString())" >
+				and article_head like '%'||#{keyword}||'%'
+				and board_no= 2
+			</if>
+			<if test="searchType.equals('makeup'.toString())" >
+				and article_head like '%'||#{keyword}||'%'
+				and board_no= 2
+			</if>		
+						<if test="searchType == 'w'.toString()">
+				and user_nm like
+				'%'||#{keyword}||'%'
+			</if>
+			<if test="searchType== 'cw'.toString()" >
+				and (article_content like
+				'%'||#{keyword}||'%' Or user_nm like 
+				'%'||#{keyword}||'%')
+			</if>
+			<if test="searchType== 'tcw'.toString()" >
+				and (article_title like '%'||#{keyword}||'%' 
+					Or article_content like '%'||#{keyword}||'%'
+					Or user_nm like '%'||#{keyword}||'%')
+			</if>
+		</if>
+	</sql>
+	
+	
+	
+	
+	
+	
+	
 	<select id="listSearchCount" resultType="int">
 			SELECT Count(article_no) 
 			FROM   article a 
 			       JOIN users u 
 			         ON a.user_no = u.user_no 
 			WHERE board_no= #{board_no}         
-		<include refid="search"></include>
+		<include refid="searchCount"></include>
 	</select>  
 
 	<update id="hitCount">
