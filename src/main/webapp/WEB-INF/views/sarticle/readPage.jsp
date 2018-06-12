@@ -7,6 +7,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 
+<!--ArticleLayout.css  -->
+<link href="/resources/bootstrap/css/ArticleLayout.css" rel="stylesheet" type="text/css" />
+
 <!-- Ionicons -->
 <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
 <!-- Theme style -->
@@ -61,7 +64,8 @@
 
         <div class="form-group">
           <div class="col-sm-3">
-            <label for="hitcount">조회수</label> <input type="text"
+            <label for="hitcount">조회수</label> 
+            <input type="text"
               name="hitcount" class="form-control"
               value="${read.hitcount}" readonly="readonly">
           </div>
@@ -69,9 +73,10 @@
 
         <div class="form-group">
           <div class="col-md-12 ">
-            <label for="article_title">제목</label> <input type="text"
+            <label for="article_title">제목</label> 
+            <input type="text"
               name='article_title' class="form-control"
-              value="${read.article_title}" readonly="readonly">
+              value="${read.article_title}" readonly="readonly" >
           </div>
         </div>
 
