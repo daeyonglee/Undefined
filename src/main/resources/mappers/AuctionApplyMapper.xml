@@ -449,119 +449,74 @@ SELECT count(*)
 
 <!--  스드메 별 낙찰 리스트 조회 + 페이징 처리 -->
 <select id="winlistByDress" parameterType="SearchParams" resultType="Auction">
-select l.*
-from(select ceil(rownum/#{perPageNum}) page,
-     k.*
-from (SELECT     i.*, 
-           j.dc_nm    companyNm,
-           j.dc_tel   tel
-FROM      ( 
-                      SELECT     g.*, 
-                                 h.dp_nm       productNm,
-                                 h.dp_price  price
-                      FROM      ( 
-                                            SELECT     e.*, 
-                                                       f.dbpl_discount  discount,
-                                                       f.dbpl_meet_date meetDate,
-                                                       f.dp_no          productNo
-                                            FROM      ( 
-                                                                  SELECT     c.*, 
-                                                                             d.db_no bidNo,
-                                                                             d.dc_no companyNo
-                                                                  FROM       ( 
-                                                                                        SELECT     a.daa_no           applyno,
-                                                                                                   a.daa_select_db_no select,
-                                                                                                   b.user_no          userNo,
-                                                                                                   b.user_nm          writer
-                                                                                        FROM       dress_auction_apply a
-                                                                                        inner join users b
-                                                                                        ON         a.user_no = b.user_no) c
-                                                                  inner join dress_bid d 
-                                                                  ON         c.applyNo = d.daa_no and c.dsdn = d.db_no) e
-                                            inner join dress_bid_product_list f 
-                                            ON         e.bidNo = f.db_no ) g 
-                      inner join dress_product h 
-                      ON         g.productNo = h.dp_no) i 
-inner join dress_company j 
-ON         i.companyNo = j.dc_no ) k ) l
-where page = #{page}
+ SELECT M.*
+  FROM (SELECT CEIL(rownum / #{perPageNum}) page 
+             , S.*
+          FROM ( SELECT  d.daa_no  no
+                      , u.user_no userNo
+                      , u.user_nm writer
+                      , d.daa_loc loc
+                      , SUBSTR(to_char(d.daa_date, 'YYYY-MM-DD HH24:MI'),0,10) day
+                      , SUBSTR(to_char(d.daa_date, 'YYYY-MM-DD HH24:MI'),12,7) time
+                      , TO_CHAR(d.daa_deadline, 'YYYY-MM-DD') deadline
+                      , d.daa_memo memo
+                      , d.daa_stat stat
+                      , TO_CHAR(d.regdate, 'YYYY-MM-DD') regdate
+                      ,'dress' type
+                FROM   dress_auction_apply d
+                       JOIN users u 
+                       ON d.user_no = u.user_no
+               WHERE d.daa_stat = '낙찰') S
+        ) M
+ WHERE page = #{page}
+ ORDER BY regdate DESC
 </select>
 <select id="winlistByMakeup" parameterType="SearchParams" resultType="Auction">
-select l.*
-from(select ceil(rownum/#{perPageNum}) page,
-     k.*
-from (SELECT     i.*, 
-           j.mc_nm    companyNm,
-           j.mc_tel   tel
-FROM      ( 
-                      SELECT     g.*, 
-                                 h.mp_nm       productNm,
-                                 h.mp_price  price
-                      FROM      ( 
-                                            SELECT     e.*, 
-                                                       f.mbpl_discount  discount,
-                                                       f.mbpl_meet_date meetDate,
-                                                       f.mp_no          productNo
-                                            FROM      ( 
-                                                                  SELECT     c.*, 
-                                                                             d.mb_no bidNo,
-                                                                             d.mc_no companyNo
-                                                                  FROM       ( 
-                                                                                        SELECT     a.maa_no           applyno,
-                                                                                                   a.maa_select_mb_no selectNo,
-                                                                                                   b.user_no          userNo,
-                                                                                                   b.user_nm          writer
-                                                                                        FROM       makeup_auction_apply a
-                                                                                        inner join users b
-                                                                                        ON         a.user_no = b.user_no) c
-                                                                  inner join makeup_bid d 
-                                                                  ON         c.applyNo = d.maa_no and c.selectNo = d.mb_no) e
-                                            inner join makeup_bid_product_list f 
-                                            ON         e.bidNo = f.mb_no ) g 
-                      inner join makeup_product h 
-                      ON         g.productNo = h.mp_no) i 
-inner join makeup_company j 
-ON         i.companyNo = j.mc_no ) k ) l
-where page = #{page}
+ SELECT M.*
+    FROM (SELECT CEIL(rownum / #{perPageNum}) page 
+             , S.*
+          FROM (SELECT m.maa_no  no
+                     , u.user_no userNo
+                     , u.user_nm writer   
+                     , m.maa_loc loc
+                     , SUBSTR(to_char(m.maa_date, 'YYYY-MM-DD HH24:MI'),0,10) day
+                     , SUBSTR(to_char(m.maa_date, 'YYYY-MM-DD HH24:MI'),12,7) time
+                     , SUBSTR(TO_CHAR(m.maa_deadline, 'YYYY-MM-DD HH24:MI'),0,10) deadline
+                     , m.maa_memo memo
+                     , m.maa_stat stat
+                     , TO_CHAR(m.regdate, 'YYYY-MM-DD') regdate
+                     ,'makeup' type
+                  FROM makeup_auction_apply m
+                       JOIN users u 
+                    ON m.user_no = u.user_no
+                WHERE m.maa_stat = '낙찰') S
+        ) M
+  WHERE page = #{page}
+  ORDER BY regdate DESC
         
 </select>
 <select id="winlistByStudio" parameterType="SearchParams" resultType="Auction">
-select l.*
-from(select ceil(rownum/#{perPageNum}) page,
-     k.*
-from (SELECT     i.*, 
-           j.sc_nm    companyNm,
-           j.sc_tel   tel
-FROM      ( 
-                      SELECT     g.*, 
-                                 h.sp_nm       productNm,
-                                 h.sp_price    price
-                      FROM      ( 
-                                            SELECT     e.*, 
-                                                       f.sbpl_discount  discount,
-                                                       f.sbpl_meet_date meetDate,
-                                                       f.sp_no          productNo
-                                            FROM      ( 
-                                                                  SELECT     c.*, 
-                                                                             d.sb_no bidNo,
-                                                                             d.sc_no companyNo
-                                                                  FROM       ( 
-                                                                                        SELECT     a.saa_no           applyNo,
-                                                                                                   a.saa_select_sb_no selectNo,
-                                                                                                   b.user_no          userNo,
-                                                                                                   b.user_nm          writer
-                                                                                        FROM       studio_auction_apply a
-                                                                                        inner join users b
-                                                                                        ON         a.user_no = b.user_no) c
-                                                                  inner join studio_bid d 
-                                                                  ON         c.applyNo = d.saa_no and c.selectNo = d.sb_no) e
-                                            inner join studio_bid_product_list f 
-                                            ON         e.bidNo = f.sb_no ) g 
-                      inner join studio_product h 
-                      ON         g.productNo = h.sp_no) i 
-inner join studio_company j 
-ON         i.companyNo = j.sc_no ) k ) l
-where page = #{page}
+ SELECT M.*
+  FROM (SELECT CEIL(rownum / #{perPageNum}) page 
+             , S.*
+          FROM ( SELECT  s.saa_no  no
+                      , u.user_no userNo
+                      , u.user_nm writer
+                      , s.saa_loc loc
+                      , SUBSTR(to_char(s.saa_date, 'YYYY-MM-DD HH24:MI'),0,10) day
+                      , SUBSTR(to_char(s.saa_date, 'YYYY-MM-DD HH24:MI'),12,7) time
+                      , TO_CHAR(s.saa_deadline, 'YYYY-MM-DD') deadline
+                      , s.saa_memo memo
+                      , s.saa_stat stat
+                      , TO_CHAR(s.regdate, 'YYYY-MM-DD') regdate
+                      ,'studio' type
+                FROM   studio_auction_apply s
+                       JOIN users u 
+                        ON s.user_no = u.user_no
+               WHERE s.saa_stat = '낙찰') S
+        ) M
+ WHERE page = #{page}
+ ORDER BY regdate DESC
 
 </select>
 

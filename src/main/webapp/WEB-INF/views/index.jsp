@@ -27,8 +27,8 @@
                 <div class="row">
                     <div class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
                         <!-- /.feature title -->
-                        <h2>Top submitted property</h2>
-                        <p>Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium. Nullam sed arcu ultricies . </p>
+                        <h2>원터치 스드메에 오신 걸 환영합니다!</h2>
+                        <p>웨딩 플래너 없이도 한방에 스드메를 해결할 수 있는 공간은 원터치 스드메 뿐입니다. </p>
                     </div>
                 </div>
 

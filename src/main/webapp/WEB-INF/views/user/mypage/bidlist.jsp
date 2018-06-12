@@ -124,9 +124,9 @@ td, th {
                           <input type="hidden" name="price"        value="${bid.price}">
                           <input type="hidden" name="meetDate"     value="${bid.meetDate}">
                           <input type="hidden" name="tel"          value="${bid.tel}">
-                          <input type="hidden" name="shootType"    value="${bid.accYn}">
-                          <input type="hidden" name="shootType"    value="${bid.familyYn}">
-                          <input type="hidden" name="shootType"    value="${bid.hairYn}">
+                          <input type="hidden" name="accYn"        value="${bid.accYn}">
+                          <input type="hidden" name="familyYn"     value="${bid.familyYn}">
+                          <input type="hidden" name="hairYn"       value="${bid.hairYn}">
                           <input type="hidden" name="name"         value="${bid.name}">
                           <input type="hidden" name="addr"         value="${bid.addr}">
                           <input type="hidden" name="productNm"    value="${bid.productNm}">
