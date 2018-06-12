@@ -94,7 +94,7 @@
           <div class="box-footer">
               <c:choose>
                 <c:when
-                  test="${read.user_nm eq sessionScope.login.nm}">
+                  test="${read.user_nm eq sessionScope.login.nm || sessionScope.login.nm eq '관리자'}">
                   <button type="submit"
                     class="btn btn-warning modifyBtn">수정</button>
                   <button type="submit" class="btn btn-danger removeBtn">삭제</button>
