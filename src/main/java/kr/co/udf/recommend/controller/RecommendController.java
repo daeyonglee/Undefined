@@ -9,6 +9,8 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,7 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kr.co.udf.recommend.service.RecommendService;
 
 @Controller
-@RequestMapping("recommend")
+@RequestMapping("/recommend/*")
 public class RecommendController {
 
 	Logger logger = Logger.getLogger(RecommendController.class);
@@ -135,24 +137,35 @@ public class RecommendController {
 		}
 	}
 
+	@ResponseBody
 	@RequestMapping(value = "addToCart", method = RequestMethod.GET)
-	public String addToCart(@RequestParam("item") String item, @RequestParam("item_no") int item_no, @RequestParam("no") int no) {
-		Map<String, Object> params = new HashMap<String, Object>();
-		if (item.equals("studio")) {
-			params.put("sp_no", item_no);
-			params.put("no", no);
-			service.addSToCart(params);
-		} else if (item.equals("dress")) {
-			params.put("dp_no", item_no);
-			params.put("no", no);
-			service.addDToCart(params);
-		} else if (item.equals("makeup")) {
-			params.put("mp_no", item_no);
-			params.put("no", no);
-			service.addMToCart(params);
+	public ResponseEntity<Object> addToCart(@RequestParam("item") String item, @RequestParam("item_no") int item_no, @RequestParam("no") int no) {
+		
+		ResponseEntity<Object> entity = null;
+		
+		try {
+			Map<String, Object> params = new HashMap<String, Object>();
+			if (item.equals("studio")) {
+				params.put("sp_no", item_no);
+				params.put("no", no);
+				service.addSToCart(params);
+			} else if (item.equals("dress")) {
+				params.put("dp_no", item_no);
+				params.put("no", no);
+				service.addDToCart(params);
+			} else if (item.equals("makeup")) {
+				params.put("mp_no", item_no);
+				params.put("no", no);
+				service.addMToCart(params);
+			}
+			entity = new ResponseEntity<>("success",HttpStatus.OK);
+			
+		} catch (Exception e) {
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		
-		return "success";
+		
+		return entity;
 	}
 
 	@ResponseBody

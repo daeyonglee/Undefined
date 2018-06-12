@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
 
 <%@ page session="true"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -6,6 +6,9 @@
 <%@include file="../include/top.jsp"%>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+
+<!--ArticleLayout.css  -->
+<link href="/resources/bootstrap/css/ArticleLayout.css" rel="stylesheet" type="text/css" />
 
 <!-- Ionicons -->
 <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
@@ -61,7 +64,8 @@
 
         <div class="form-group">
           <div class="col-sm-3">
-            <label for="hitcount">조회수</label> <input type="text"
+            <label for="hitcount">조회수</label> 
+            <input type="text"
               name="hitcount" class="form-control"
               value="${read.hitcount}" readonly="readonly">
           </div>
@@ -69,9 +73,10 @@
 
         <div class="form-group">
           <div class="col-md-12 ">
-            <label for="article_title">제목</label> <input type="text"
+            <label for="article_title">제목</label> 
+            <input type="text"
               name='article_title' class="form-control"
-              value="${read.article_title}" readonly="readonly">
+              value="${read.article_title}" readonly="readonly" >
           </div>
         </div>
 
@@ -89,7 +94,7 @@
           <div class="box-footer">
               <c:choose>
                 <c:when
-                  test="${read.user_nm eq sessionScope.login.nm}">
+                  test="${read.user_nm eq sessionScope.login.nm || sessionScope.login.nm eq '관리자'}">
                   <button type="submit"
                     class="btn btn-warning modifyBtn">수정</button>
                   <button type="submit" class="btn btn-danger removeBtn">삭제</button>
@@ -110,7 +115,7 @@
     <div class="col-md-12">
     
     <!--로그인 한 사람에게만 댓글 쓰는 폼이 출력  -->
-	<c:choose>
+   <c:choose>
       <c:when test="${null ne sessionScope.login || null ne cookie.loginCookie.value}">
           <!-- 댓글 등록에 필요한 div -->
           <div class="box box-success">
@@ -146,7 +151,7 @@
       </div> -->
 
   <%
-	 }}
+    }}
  %>
       <!-- 추가 파라미터 처리를 위함 -->
       <form role="form" action="modifyPage" method="post">
@@ -163,7 +168,7 @@
     </div>
   </div>
   
-	<!-- 댓글 수정과 삭제를 위한 Modal창 -->
+   <!-- 댓글 수정과 삭제를 위한 Modal창 -->
       <!-- Modal -->
     <div id="modifyModal" class="modal modal-primary fade" role="dialog">
       <div class="modal-dialog">
@@ -200,11 +205,11 @@
 /* 댓글목록 리스트버튼 클릭 시 댓글 보여주기/숨기기 */
 $("#repliesDiv").on("click", function() {
    if ($(".timeline li").size() > 1) {
-	  //alert("if");
-	  $(".replyLi").remove();
+     //alert("if");
+     $(".replyLi").remove();
   }else{
-	  //alert("else");
-	  getPage("/replies/" + article_no + "/1");
+     //alert("else");
+     getPage("/replies/" + article_no + "/1");
   } 
 });
 
@@ -249,7 +254,7 @@ $(".timeline").on("click", ".replyLi", function(event){
 $("#replyModBtn").on("click",function(){
     var reply_no = $(".modal-title").html();
     var reply_content = $("#reply_content").val();
-	//alert("reply_no"+$(".modal-title").html());
+   //alert("reply_no"+$(".modal-title").html());
     $.ajax({
       type:'put',
       url:'/replies/'+reply_no,
@@ -282,7 +287,7 @@ $("#replyDelBtn").on("click",function(){
       success:function(result){
         console.log("result: " + result);
         if(result == 'success'){
-    	   alert("삭제 되었습니다.");
+          alert("삭제 되었습니다.");
            getPage("/replies/"+article_no+"/"+replyPage );
         }
     }});
@@ -297,7 +302,7 @@ function getPage(pageInfo) {
   $.getJSON(pageInfo, function(data) {
     printData(data.list, $("#repliesDiv"), $('#template'));
     printPaging(data.pageMaker, $(".pagination"));
-	
+   
     //$("#modifyModal").modal('hide');
   });
 }
@@ -345,7 +350,7 @@ var printPaging = function(pageMaker, target) {
 {{#each .}}
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <li class="replyLi" data-reply_no={{reply_no}}>
-<i class="fa fa-comments bg-yellow 	"></i>
+<i class="fa fa-comments bg-yellow    "></i>
  <div class="timeline-item" >
   <span class="time">
   <h6 class="timeline-header"> 작성자: {{user_nm}}</h6>
@@ -353,10 +358,10 @@ var printPaging = function(pageMaker, target) {
   </span>
   <div class="timeline-body">{{reply_content}} </div>
     <div class="timeline-footer">
-	<c:if test="${'관리자' eq sessionScope.login.nm }">
+   <c:if test="${'관리자' eq sessionScope.login.nm }">
      <a class="btn btn-primary btn-xs" 
       data-toggle="modal" data-target="#modifyModal">댓글 수정</a>
-	</c:if>	
+   </c:if>   
     </div>
   </div>      
 </li>

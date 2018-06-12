@@ -154,11 +154,21 @@
   		function checkUser(data) {
   			console.log(data);
   			
+  			var profileImage = data.properties.profile_image;
+  			var thumbnailImage = data.properties.thumbnail_image;
+  			
+  			if (profileImage == null || profileImage == "" || profileImage == undefined) {
+  				profileImage = "N";
+  			}
+  			if (thumbnailImage == null || thumbnailImage == "" || thumbnailImage == undefined) {
+  				thumbnailImage = "N";
+  			}
+  			
   			var param = {
   					id:data.id,
   					nickname:data.properties.nickname,
-  					profileImage: data.properties.profile_image,
-  					thumbnailImage: data.properties.thumbnail_image
+  					profileImage: profileImage,
+  					thumbnailImage: thumbnailImage
   					}
   			
   			// 데이터 체크

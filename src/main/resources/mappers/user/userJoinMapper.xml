@@ -22,7 +22,7 @@
 		       , #{user.email}
 		       , #{user.pw}
 		       , #{user.name}
-		       , to_date(#{user.birthday})
+		       , to_date(#{user.birthday}, 'YYYY-MM-DD')
 		       , #{addr}
 		       , #{tel}
 		       )

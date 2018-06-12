@@ -154,9 +154,10 @@ public class UserLoginController {
 		
 		Kakao kakao = loginService.kakaocheck(k);
 		logger.debug(kakao);
-		
-		if (kakao.getUserNo() != null) {
-			k.setUserNo(kakao.getUserNo());
+		if (kakao != null ) {
+			if (kakao.getUserNo() != null) {
+				k.setUserNo(kakao.getUserNo());
+			}
 		}
 		
 		Map<String, Object> map = new HashMap<>();

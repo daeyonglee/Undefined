@@ -1,11 +1,11 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@include file="../include/top.jsp"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <title></title>
-<%@include file="../include/top.jsp"%>
-
 <style>
 
 #itemMenu {
@@ -41,7 +41,7 @@
             <div class="col-sm-6 col-md-3 p0">
               <div class="box-two proerty-item">
                 <div class="item-thumb">
-                  <a href="javascript:void(0);" onclick="showDetail('studio', ${studio.SP_NO})"><img src="${studio.SP_IMAGE}"></a>
+                  <a href="javascript:void(0);" onclick="showDetail('studio', ${studio.SP_NO})"><img src="/user/mypage/imgview?imgview=${studio.SP_IMAGE}"></a>
                 </div>
                 <div class="studioNo" hidden="hidden">${studio.SP_NO}</div>
                 <div class="item-entry overflow">
@@ -67,7 +67,7 @@
             <div class="col-sm-6 col-md-3 p0">
               <div class="box-two proerty-item">
                 <div class="item-thumb">
-                  <a href="javascript:void(0);" onclick="showDetail('dress', ${dress.DP_NO})"><img src="${dress.DP_IMAGE}"></a>
+                  <a href="javascript:void(0);" onclick="showDetail('dress', ${dress.DP_NO})"><img src="/user/mypage/imgview?imgview=${dress.DP_IMAGE}"></a>
                 </div>
                 <div class="dressNo" hidden="hidden">${dress.DP_NO}</div>
                 <div class="item-entry overflow">
@@ -93,7 +93,7 @@
             <div class="col-sm-6 col-md-3 p0">
               <div class="box-two proerty-item">
                 <div class="item-thumb">
-                  <a href="javascript:void(0);" onclick="showDetail('makeup', ${makeup.MP_NO})"><img src="${makeup.MP_IMAGE}"></a>
+                  <a href="javascript:void(0);" onclick="showDetail('makeup', ${makeup.MP_NO})"><img src="/user/mypage/imgview?imgview=${makeup.MP_IMAGE}"></a>
                 </div>
                 <div class="makeupNo" hidden="hidden">${makeup.MP_NO}</div>
                 <div class="item-entry overflow">
@@ -178,7 +178,7 @@
       var btns = $(".addCartBtn");
       btns.on("click", function(){
         
-        var modal = $("#addStatus");
+      var modal = $("#addStatus");
         
       var params = null;
       var role = "${sessionScope['login'].role}";
@@ -193,36 +193,33 @@
         
         if(btnName === "sAddBtn"){
           var sp_no = $(this).parent().prevAll(".studioNo").text().trim();
-          console.log("sp_no : " + sp_no);
           params = {
         	  item : "studio",
-              item_no : parseInt(sp_no),
+              item_no : sp_no,
               no : no
           };
         } else if(btnName === "dAddBtn"){
           var dp_no = $(this).parent().prevAll(".dressNo").text().trim();
-          console.log("dp_no : " + dp_no);
           params = {
               item : "dress",
-              item_no : parseInt(dp_no),
+              item_no : dp_no,
               no : no
           };
         } else if(btnName === "mAddBtn"){
           var mp_no = $(this).parent().prevAll(".makeupNo").text().trim();
-          console.log("mp_no : " + mp_no);
           params = {
               item : "makeup",
-              item_no : parseInt(mp_no),
+              item_no : mp_no,
               no : no
           };
         }
       $.ajax({
           url: "/recommend/addToCart",
           type: "get",
-          dataType: "json",
-          contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+          dataType: "text",
+          contentType: "application/json",
           data: params,
-          success: function(){
+          success: function(data){
             modal.find(".modal-body").html("상품이 등록되었습니다.");
             modal.modal();
           }
@@ -287,7 +284,6 @@
               modal.modal();
             },
             error: function(error){
-            	console.log(error);
               modal.find(".modal-body").html(item + " error...");
               modal.modal();
             }
@@ -332,7 +328,6 @@
                 modal.modal();
               },
               error: function(error){
-              	console.log(error);
                 modal.find(".modal-body").html(item + " error...");
                 modal.modal();
               }
@@ -396,7 +391,6 @@
                 modal.modal();
               },
               error: function(error){
-              	console.log(error);
                 modal.find(".modal-body").html(item + " error...");
                 modal.modal();
               }
