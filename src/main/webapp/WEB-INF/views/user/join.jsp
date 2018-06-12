@@ -20,11 +20,13 @@
       
     </head>
     <body>
+    	<input type="hidden" name="id" value="${kakao.id}">
+    	<input type="hidden" name="nickName" value="${kakao.nickName}">
         <div class="page-head"> 
             <div class="container">
                 <div class="row">
                     <div class="page-head-content">
-                        <h1 class="page-title"><span>회원 가입</span></h1>               
+                        <h1 class="page-title"><span>회원 가입</span></h1>
                     </div>
                 </div>
             </div> 
@@ -65,12 +67,19 @@
                                           <div class="col-lg-4"></div>
                                           <div class="col-lg-4 chkbx-mg-lt">
                                             <div class="checkbox">
+                                            <c:if test="${kakao.id ne null}">
                                                 <label>
+                                                    <input type="radio" name="type" value="users" checked="checked" /> <strong>일반 사용자</strong>
+                                                </label>
+                                            </c:if>
+                                            <c:if test="${kakao.id eq null}">
+                                            	<label>
                                                     <input type="radio" name="type" value="users" checked="checked" /> <strong>일반 사용자</strong>
                                                 </label>
                                                 <label>
                                                     <input type="radio" name="type" value="company" /> <strong>업체</strong>
                                                 </label>
+                                            </c:if>
                                             </div>
                                           </div>
                                           <div class="col-lg-4"></div>

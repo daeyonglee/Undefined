@@ -109,6 +109,7 @@ $(document).ready(function () {
     $(document).on('click', 'input[name="finish"]', function(e){
     	
     	var type = $(":input:radio[name=type]:checked").val();
+    	var id = $("input[name='nickName']").val();
     	var form = document.forms[0];
     	
     	if (type == 'users') {
@@ -356,15 +357,22 @@ function validateFirstStep() {
 function validateSecondStep() {
 	
 	var type = $(":input:radio[name=type]:checked").val();
+	var id = $("input[name='id']").val();
+	var nickName = $("input[name='nickName'").val();
 	
 	if (type == "users") {
+		
 		var html  = "<div class='row'>";
 		    html += "  <div class='container-fluid'>";
 		    html += "  <div class='col-sm-3'></div>";
 		    html += "  <div class='col-sm-6'>";
 		    html += "    <div class='form-group'";
 		    html += "      <label>이름<small>(required)</small></label>";
-		    html += "      <input name='name' id='name' type='text' class='form-control' required>";
+		    if (id != null) {
+		    	html += "      <input name='name' id='name' type='text' class='form-control' value='" + nickName + "' required>";
+			} else {
+				html += "      <input name='name' id='name' type='text' class='form-control' required>";
+			}
 		    html += "    </div>";
 		    html += "    <div class='form-group'>";
 		    html += "      <label>휴대폰 번호<small>(required)</small></label>";

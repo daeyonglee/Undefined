@@ -7,7 +7,7 @@
       <div class="container">
           <div class="row">
               <div class="page-head-content">
-                  <h1 class="page-title">로그인</h1>               
+                  <h1 class="page-title">로그인</h1>
               </div>
           </div>
       </div>
@@ -149,7 +149,14 @@
   		// 가입한 회원인지 체크
   		function checkUser(data) {
   			console.log(data);
-  			var param = $.param(data);
+  			
+  			var param = {
+  					id:data.id,
+  					nickname:data.properties.nickname,
+  					profileImage: data.properties.profile_image,
+  					thumbnailImage: data.properties.thumbnail_image
+  					}
+  			
   			// 데이터 체크
   			for ( var i in data) {
 					console.log("key : " + i);
@@ -159,15 +166,16 @@
   			$.ajax({
   				type : "get",
   				url : "/user/kakaocheck",
-  				data : {id:data.id, nickname:data.properties.nickname, profileImage: data.properties.profile_image, thumbnailImage: data.properties.thumbnail_image},
+  				data : param,
   				success: function(data){
   					console.log(data);
+  					console.log(param);
   					if (data.result == 'success') {
   						// 로그인 처리
   					}
   					if (data.result == 'fail') {
   						// 회원가입 화면으로 이동
-  						self.location = "/user/join/kakao?"+param;
+  						self.location = "/user/join/kakao?"+$.param(param);
   					}
   				}
   			});
